@@ -1,0 +1,937 @@
+<div class="page" lang="pt-BR" data-estudo="corte">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="teal w">PVW</span><span class="red w">PGM</span></div>
+  <h1>Corte ao vivo e direção de imagem</h1>
+  <p class="lead">Um guia de estudo para operar o switcher, decidir quando cortar e para qual câmera, e conduzir a equipe de imagem com comandos claros, do ensaio até a gravação.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O que é o corte ao vivo</a></li>
+    <li><a href="#switcher">O switcher: program, preview e camadas</a></li>
+    <li><a href="#multiview">Multiview, tally e intercom</a></li>
+    <li><a href="#equipe">Equipe e linguagem de comando</a></li>
+    <li><a href="#quando">Quando cortar e para onde</a></li>
+    <li><a href="#culto">Cortar o culto, a mídia e a gravação</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O que é o corte ao vivo</h2>
+  <p>Quando um evento tem mais de uma câmera, alguém precisa escolher, a cada instante, qual imagem o público vai ver. Essa escolha, feita na hora e sem volta, é o <strong>corte ao vivo</strong>. O equipamento que faz a troca é o <strong>switcher</strong>, também chamado de mesa de corte ou mixer de vídeo. Ele pode ser um aparelho com botões ou um programa de computador, como o OBS.</p>
+  <p>Todo switcher trabalha com duas imagens. O <strong>program</strong> <span class="k red w">PGM</span> é a imagem que está no ar: a que vai para a transmissão, para o telão e para a gravação. O <strong>preview</strong> <span class="k teal w">PVW</span> é a próxima imagem: a que está preparada e que só a equipe vê. O trabalho inteiro do corte é este: preparar no preview, conferir e mandar para o program.</p>
+  <p>Pense em um teatro. O program é o palco: o que está ali, a plateia vê. O preview é a coxia: o próximo ator espera ali, pronto, e o diretor confere a roupa dele antes da entrada. Ninguém entra em cena sem passar pela coxia.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 252" role="img" aria-label="Caminho da imagem: câmeras 1, 2 e 3 e o computador da mídia entram no switcher. A fonte preparada no preview vai, pelo corte, ao program, que recebe por cima as camadas de gráfico. Do program saem a transmissão, o telão e a gravação. O multiview mostra todas as fontes à equipe.">
+    <defs><marker id="ct1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+    <rect class="bx" x="18" y="24" width="130" height="42"/>
+    <text class="b" x="83" y="42" font-size="12" text-anchor="middle">Câmera 1</text>
+    <text class="mu" x="83" y="57" font-size="10.5" text-anchor="middle">plano geral</text>
+    <rect class="bx" x="18" y="78" width="130" height="42"/>
+    <text class="b" x="83" y="96" font-size="12" text-anchor="middle">Câmera 2</text>
+    <text class="mu" x="83" y="111" font-size="10.5" text-anchor="middle">púlpito</text>
+    <rect class="bx" x="18" y="132" width="130" height="42"/>
+    <text class="b" x="83" y="150" font-size="12" text-anchor="middle">Câmera 3</text>
+    <text class="mu" x="83" y="165" font-size="10.5" text-anchor="middle">palco e congregação</text>
+    <rect class="bx" x="18" y="186" width="130" height="42"/>
+    <text class="b" x="83" y="204" font-size="12" text-anchor="middle">Computador</text>
+    <text class="mu" x="83" y="219" font-size="10.5" text-anchor="middle">vídeos, slides e letras</text>
+    <line class="ln" x1="150" y1="45" x2="226" y2="45" marker-end="url(#ct1)"/>
+    <line class="ln" x1="150" y1="99" x2="226" y2="99" marker-end="url(#ct1)"/>
+    <line class="ln" x1="150" y1="153" x2="226" y2="153" marker-end="url(#ct1)"/>
+    <line class="ln" x1="150" y1="207" x2="226" y2="207" marker-end="url(#ct1)"/>
+
+    <rect class="bx-out" x="230" y="18" width="300" height="216"/>
+    <text class="mono mu" x="246" y="38" font-size="10.5">SWITCHER</text>
+    <rect class="hd-teal" x="246" y="50" width="120" height="62"/>
+    <text class="on b" x="306" y="76" font-size="12.5" text-anchor="middle">Preview (PVW)</text>
+    <text class="on" x="306" y="94" font-size="10.5" text-anchor="middle">a próxima imagem</text>
+    <line class="ln" x1="368" y1="81" x2="392" y2="81" marker-end="url(#ct1)"/>
+    <text class="mu" x="380" y="72" font-size="10.5" text-anchor="middle">corte</text>
+    <rect class="hd-red" x="396" y="50" width="120" height="62"/>
+    <text class="on b" x="456" y="76" font-size="12.5" text-anchor="middle">Program (PGM)</text>
+    <text class="on" x="456" y="94" font-size="10.5" text-anchor="middle">o que está no ar</text>
+    <rect class="bx-amber" x="246" y="142" width="270" height="52"/>
+    <text class="b" x="381" y="164" font-size="12" text-anchor="middle">Camadas de gráfico (keys)</text>
+    <text class="mu" x="381" y="181" font-size="10.5" text-anchor="middle">legenda, letra e logo sobre a imagem</text>
+    <line class="ln" x1="456" y1="142" x2="456" y2="116" marker-end="url(#ct1)"/>
+    <text class="mu" x="246" y="220" font-size="10.5">multiview: todas as fontes em um monitor</text>
+
+    <path class="ln" d="M518 81 H590"/>
+    <circle class="f-ink" cx="590" cy="81" r="3.5"/>
+    <path class="ln" d="M590 81 V45 H636" marker-end="url(#ct1)"/>
+    <path class="ln" d="M590 81 V99 H636" marker-end="url(#ct1)"/>
+    <path class="ln" d="M590 99 V153 H636" marker-end="url(#ct1)"/>
+    <line class="ln dash" x1="532" y1="207" x2="636" y2="207" marker-end="url(#ct1)"/>
+    <rect class="bx-red" x="640" y="24" width="242" height="42"/>
+    <text class="b" x="761" y="42" font-size="12" text-anchor="middle">Transmissão</text>
+    <text class="mu" x="761" y="57" font-size="10.5" text-anchor="middle">pelo codificador, para a internet</text>
+    <rect class="bx-red" x="640" y="78" width="242" height="42"/>
+    <text class="b" x="761" y="96" font-size="12" text-anchor="middle">Telão da sala</text>
+    <text class="mu" x="761" y="111" font-size="10.5" text-anchor="middle">direto ou por saída auxiliar</text>
+    <rect class="bx-red" x="640" y="132" width="242" height="42"/>
+    <text class="b" x="761" y="150" font-size="12" text-anchor="middle">Gravação</text>
+    <text class="mu" x="761" y="165" font-size="10.5" text-anchor="middle">do programa e das câmeras</text>
+    <rect class="bx" x="640" y="186" width="242" height="42"/>
+    <text class="b" x="761" y="204" font-size="12" text-anchor="middle">Monitor da equipe</text>
+    <text class="mu" x="761" y="219" font-size="10.5" text-anchor="middle">multiview: só a equipe vê</text>
+    </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> As fontes entram no switcher. A equipe prepara a próxima imagem no preview e a leva ao program. O que está no program segue para a transmissão, para o telão e para a gravação.</figcaption>
+  </figure>
+
+  <p>Operar o switcher é a parte mecânica. A <strong>direção de imagem</strong> é a parte que pensa: decidir o que mostrar e quando, para que quem assiste veja o que veria do melhor lugar da plateia. O bom corte não chama a atenção para si.</p>
+
+<div class="note">
+    <h4>Regra prática</h4>
+    <p>Nada vai ao ar sem passar pelo preview. Câmera, vídeo, legenda ou letra: primeiro a equipe vê, confere e só então manda para o program.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="switcher">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>O switcher: program, preview e camadas</h2>
+  <p>Quase todo switcher segue o mesmo desenho: duas fileiras de botões, uma para cada imagem, e cada botão é uma fonte: uma câmera, o computador da mídia, uma tela preta, as barras de cor. Na fileira do <strong>program</strong> <span class="k red w">PGM</span>, o botão aceso mostra o que está no ar. Na fileira do <strong>preview</strong> <span class="k teal w">PVW</span>, o botão aceso mostra a fonte preparada. O program usa o vermelho, e o preview, o verde.</p>
+  <p>Ao lado das fileiras fica o bloco de transição. O botão <strong>CUT</strong> troca as duas imagens na hora. O botão <strong>AUTO</strong> faz a transição escolhida (em geral, uma fusão) no tempo marcado. A alavanca (<em>T-bar</em>) faz a mesma transição à mão. Terminada a transição, as fileiras trocam de lugar: a fonte que estava no ar passa para o preview. Por isso, voltar à câmera anterior é só apertar CUT de novo.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 264" role="img" aria-label="Painel de switcher em esquema: duas fileiras de oito fontes. No program, a câmera 2 acesa em vermelho, no ar. No preview, a câmera 1 acesa em verde, a próxima. À direita, CUT, AUTO, tempo de um segundo e a alavanca; a escolha entre fundo e key 1 e entre mix e wipe; o key final, DSK, e o botão FTB.">
+    <text class="mono mu" x="18" y="32" font-size="10.5">PROGRAM (PGM): O QUE ESTÁ NO AR</text>
+    <g font-size="10.5" text-anchor="middle">
+      <rect class="bx" x="18" y="42" width="52" height="40"/><text class="b" x="44" y="66">CAM 1</text>
+      <rect class="hd-red" x="78" y="42" width="52" height="40"/><text class="on b" x="104" y="66">CAM 2</text>
+      <rect class="bx" x="138" y="42" width="52" height="40"/><text class="b" x="164" y="66">CAM 3</text>
+      <rect class="bx" x="198" y="42" width="52" height="40"/><text class="b" x="224" y="66">CAM 4</text>
+      <rect class="bx" x="258" y="42" width="52" height="40"/><text class="b" x="284" y="66">MÍDIA</text>
+      <rect class="bx" x="318" y="42" width="52" height="40"/><text class="b" x="344" y="66">LETRA</text>
+      <rect class="bx" x="378" y="42" width="52" height="40"/><text class="b" x="404" y="66">PRETO</text>
+      <rect class="bx" x="438" y="42" width="52" height="40"/><text class="b" x="464" y="66">BARRAS</text>
+    </g>
+    <text class="mono mu" x="18" y="114" font-size="10.5">PREVIEW (PVW): A PRÓXIMA IMAGEM</text>
+    <g font-size="10.5" text-anchor="middle">
+      <rect class="hd-teal" x="18" y="124" width="52" height="40"/><text class="on b" x="44" y="148">CAM 1</text>
+      <rect class="bx" x="78" y="124" width="52" height="40"/><text class="b" x="104" y="148">CAM 2</text>
+      <rect class="bx" x="138" y="124" width="52" height="40"/><text class="b" x="164" y="148">CAM 3</text>
+      <rect class="bx" x="198" y="124" width="52" height="40"/><text class="b" x="224" y="148">CAM 4</text>
+      <rect class="bx" x="258" y="124" width="52" height="40"/><text class="b" x="284" y="148">MÍDIA</text>
+      <rect class="bx" x="318" y="124" width="52" height="40"/><text class="b" x="344" y="148">LETRA</text>
+      <rect class="bx" x="378" y="124" width="52" height="40"/><text class="b" x="404" y="148">PRETO</text>
+      <rect class="bx" x="438" y="124" width="52" height="40"/><text class="b" x="464" y="148">BARRAS</text>
+    </g>
+    <text x="18" y="192" font-size="11.5">Botão do preview: só prepara a fonte. Nada muda no ar.</text>
+    <text x="18" y="210" font-size="11.5">Botão do program: corta direto, sem conferência.</text>
+
+    <text class="mono mu" x="530" y="32" font-size="10.5">TRANSIÇÃO</text>
+    <rect class="bx-ink" x="530" y="42" width="70" height="40"/><text class="t-ground b" x="565" y="67" font-size="12" text-anchor="middle">CUT</text>
+    <rect class="bx" x="608" y="42" width="70" height="40"/><text class="b" x="643" y="67" font-size="12" text-anchor="middle">AUTO</text>
+    <rect class="f-sunk" x="686" y="42" width="96" height="40"/>
+    <text class="mu" x="734" y="58" font-size="10.5" text-anchor="middle">tempo</text>
+    <text class="b" x="734" y="74" font-size="12" text-anchor="middle">1:00</text>
+    <rect class="bx" x="838" y="42" width="10" height="122"/>
+    <rect class="hd-slate" x="820" y="50" width="46" height="16"/>
+    <text class="mu" x="843" y="182" font-size="10.5" text-anchor="middle">alavanca</text>
+
+    <text class="mono mu" x="530" y="114" font-size="10.5">PRÓXIMA TRANSIÇÃO</text>
+    <rect class="bx-ink" x="530" y="124" width="70" height="40"/><text class="t-ground b" x="565" y="148" font-size="10.5" text-anchor="middle">FUNDO</text>
+    <rect class="bx" x="608" y="124" width="70" height="40"/><text class="b" x="643" y="148" font-size="10.5" text-anchor="middle">KEY 1</text>
+    <rect class="bx-ink" x="686" y="124" width="44" height="40"/><text class="t-ground b" x="708" y="148" font-size="10.5" text-anchor="middle">MIX</text>
+    <rect class="bx" x="738" y="124" width="44" height="40"/><text class="b" x="760" y="148" font-size="10.5" text-anchor="middle">WIPE</text>
+
+    <text class="mono mu" x="530" y="196" font-size="10.5">KEY FINAL (DSK)</text>
+    <rect class="bx" x="530" y="206" width="70" height="40"/><text class="b" x="565" y="230" font-size="10.5" text-anchor="middle">TIE</text>
+    <rect class="bx" x="608" y="206" width="70" height="40"/><text class="b" x="643" y="230" font-size="10.5" text-anchor="middle">NO AR</text>
+    <rect class="bx" x="686" y="206" width="70" height="40"/><text class="b" x="721" y="230" font-size="10.5" text-anchor="middle">AUTO</text>
+    <rect class="bx-red" x="796" y="206" width="86" height="40"/><text class="t-red b" x="839" y="231" font-size="12" text-anchor="middle">FTB</text>
+
+    </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> O painel de um switcher, em esquema. Os nomes e a posição dos botões mudam de um modelo para outro; nos programas de computador, os mesmos comandos estão na tela. O FTB pisca enquanto está ativo.</figcaption>
+  </figure>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Alguns switchers pequenos, e alguns programas no modo padrão, não têm preview: apertar uma fonte já a põe no ar. No OBS, o preview aparece no “modo estúdio”. Sem preview, confira a fonte na janela dela, no multiview.</p>
+  </div>
+
+  <h3>Transições</h3>
+  <p>Há muitas transições no menu, e poucas servem para um evento. O corte seco faz quase todo o trabalho, a fusão marca mudanças suaves, e o resto distrai.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Transição</th><th style="width:30%">O que faz</th><th style="width:26%">Quando usar</th><th>Tempo para começar</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Corte seco</strong> (cut)</td><td>Troca de uma imagem para a outra de uma vez.</td><td>É o padrão: fala, música com andamento, entrevista, reação.</td><td>Instantâneo.</td></tr>
+        <tr><td><strong>Fusão</strong> (mix, dissolve)</td><td>Uma imagem some enquanto a outra aparece.</td><td>Música lenta, oração, passagem de um momento do evento para outro.</td><td>De 0,5 a 1 s entre câmeras; até 2 s entre momentos.</td></tr>
+        <tr><td><strong>Fade para preto</strong> (FTB)</td><td>Escurece tudo, inclusive os gráficos. Em alguns modelos, baixa também o áudio.</td><td>Só no começo e no fim do programa.</td><td>De 1 a 2 s.</td></tr>
+        <tr><td><strong>Cortina</strong> (wipe) e efeitos</td><td>Uma imagem empurra ou cobre a outra, com um desenho.</td><td>Quase nunca. Só em vinheta combinada com a direção do evento.</td><td>–</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O tempo da fusão é marcado no switcher em segundos e quadros, ou só em quadros. “1:00” quer dizer um segundo. Em um sistema de 30 quadros por segundo, 15 quadros são meio segundo. Os tempos da tabela são ponto de partida deste material: ajuste ao andamento da música e ao gosto da direção do evento.</p>
+
+  <h3>Keys: as camadas sobre a imagem</h3>
+  <p>Um <strong>key</strong> é uma camada que o switcher coloca por cima da imagem, deixando ver o fundo onde a camada é transparente. É assim que entram a legenda com o nome de quem fala (<em>lower third</em>, o terço de baixo da tela), a letra da música, o logotipo e a janela de uma imagem dentro da outra (<em>picture-in-picture</em>, ou PiP). O switcher precisa saber qual parte da camada é transparente, e há três formas de dizer isso a ele.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Tipo de key</th><th style="width:34%">Como recorta</th><th>Uso típico e cuidado</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Luma key</strong></td><td>Pelo brilho: o que é preto na fonte fica transparente.</td><td>Texto claro sobre fundo preto, vindo do computador. Partes escuras do desenho também somem, e sombras ficam fracas.</td></tr>
+        <tr><td><strong>Key linear</strong> (com alfa)</td><td>Por um segundo sinal, o recorte (alfa), que acompanha o preenchimento e diz, ponto a ponto, o que é transparente.</td><td>O recorte mais limpo, com bordas suaves e transparência parcial. Exige programa de gráficos e switcher que trabalhem com alfa.</td></tr>
+        <tr><td><strong>Chroma key</strong></td><td>Por uma cor: o que é verde (ou azul) na fonte fica transparente.</td><td>Pessoa diante de fundo verde. Pede luz uniforme no fundo e ajuste fino; pode sobrar borda da cor.</td></tr>
+        <tr><td><strong>Janela</strong> (PiP)</td><td>Não recorta: reduz a fonte e a posiciona em um canto.</td><td>Pregador em uma janela sobre o slide, intérprete de Libras, segunda câmera.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O switcher aplica as camadas em uma ordem fixa. Os keys da cena (<em>upstream keys</em>) ficam logo acima do fundo e podem entrar e sair junto com a transição. O key final (<em>downstream key</em>, ou DSK) fica acima de tudo e não depende do corte: uma vez no ar, continua ali enquanto as câmeras trocam por baixo. Por último vem o fade para preto. A forma de preparar a mídia, as letras e o sinal com alfa no computador está no estudo <a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 246" role="img" aria-label="Quatro quadros mostram a ordem das camadas: o fundo, que é a fonte do program; os keys da cena, como uma janela de PiP; o key final, com logo e legenda de nome; e, depois do FTB, a saída de programa. A saída limpa é tirada antes do key final.">
+    <defs><marker id="ct3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+    <text class="b" x="18" y="36" font-size="12.5">1. Fundo</text>
+    <rect class="bx" x="18" y="48" width="176" height="99"/>
+    <circle class="lv-slate" cx="88" cy="82" r="13"/>
+    <path class="lv-slate" d="M56 147 Q88 88 120 147 z"/>
+    <text class="mu" x="18" y="168" font-size="11">a câmera ou a mídia</text>
+    <text class="mu" x="18" y="184" font-size="11">que está no program</text>
+    <line class="ln" x1="198" y1="97" x2="246" y2="97" marker-end="url(#ct3)"/>
+
+    <text class="b" x="250" y="36" font-size="12.5">2. Keys da cena</text>
+    <rect class="bx" x="250" y="48" width="176" height="99"/>
+    <circle class="lv-slate" cx="320" cy="82" r="13"/>
+    <path class="lv-slate" d="M288 147 Q320 88 352 147 z"/>
+    <rect class="bx-blue" x="362" y="56" width="56" height="32"/>
+    <text class="mu" x="250" y="168" font-size="11">PiP e chroma key: entram</text>
+    <text class="mu" x="250" y="184" font-size="11">junto com a cena</text>
+    <line class="ln" x1="430" y1="97" x2="478" y2="97" marker-end="url(#ct3)"/>
+    <circle class="f-ink" cx="454" cy="97" r="3.5"/>
+    <line class="ln" x1="454" y1="97" x2="454" y2="208" marker-end="url(#ct3)"/>
+
+    <text class="b" x="482" y="36" font-size="12.5">3. Key final (DSK)</text>
+    <rect class="bx" x="482" y="48" width="176" height="99"/>
+    <circle class="lv-slate" cx="552" cy="82" r="13"/>
+    <path class="lv-slate" d="M520 147 Q552 88 584 147 z"/>
+    <rect class="bx-blue" x="594" y="56" width="56" height="32"/>
+    <rect class="hd-amber" x="492" y="56" width="22" height="14"/>
+    <rect class="bx-ink" x="492" y="118" width="100" height="20"/>
+    <text class="t-ground b" x="500" y="132" font-size="10.5">Nome</text>
+    <text class="mu" x="482" y="168" font-size="11">logo, legenda e letra:</text>
+    <text class="mu" x="482" y="184" font-size="11">por cima de tudo</text>
+    <line class="ln" x1="662" y1="97" x2="702" y2="97" marker-end="url(#ct3)"/>
+    <text class="mono mu" x="682" y="86" font-size="10.5" text-anchor="middle">FTB</text>
+
+    <text class="b" x="706" y="36" font-size="12.5">4. Saída de programa</text>
+    <rect class="bx" x="706" y="48" width="176" height="99"/>
+    <circle class="lv-slate" cx="776" cy="82" r="13"/>
+    <path class="lv-slate" d="M744 147 Q776 88 808 147 z"/>
+    <rect class="bx-blue" x="818" y="56" width="56" height="32"/>
+    <rect class="hd-amber" x="716" y="56" width="22" height="14"/>
+    <rect class="bx-ink" x="716" y="118" width="100" height="20"/>
+    <text class="t-ground b" x="724" y="132" font-size="10.5">Nome</text>
+    <rect class="s-red" stroke-width="3" x="706" y="48" width="176" height="99"/>
+    <text class="mu" x="706" y="168" font-size="11">o que vai ao ar, se o</text>
+    <text class="mu" x="706" y="184" font-size="11">FTB não estiver ativo</text>
+
+    <text x="454" y="230" font-size="11.5" text-anchor="middle">Saída limpa (clean feed): a imagem antes do key final, sem logo nem legenda. Útil para gravar.</text>
+    </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> A ordem das camadas. O key final e o fade para preto agem depois do corte: por isso uma legenda esquecida no DSK continua no ar em todas as câmeras, e um FTB esquecido deixa a tela preta mesmo com as fontes certas.</figcaption>
+  </figure>
+
+  <p>Muitos switchers têm também saídas auxiliares (<em>aux</em>), que levam a um destino uma fonte diferente da que está no ar. O uso delas no telão da sala está no módulo 6.</p>
+
+  <div class="note">
+    <h4>Todas as fontes no mesmo formato</h4>
+    <p>A maioria dos switchers trabalha em um único formato de vídeo, e só aceita fontes nesse formato. Câmera em outra resolução ou em outra taxa de quadros aparece preta, pisca ou trava. O formato do sistema, os cabos e os conversores estão no estudo <a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="multiview">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Multiview, tally e intercom</h2>
+  <p>O corte depende de três coisas que não aparecem no programa: a equipe ver todas as fontes (multiview), cada câmera saber se está no ar (tally) e todos ouvirem o diretor (intercom).</p>
+
+  <h3>Multiview: todas as fontes em uma tela</h3>
+  <p>O <strong>multiview</strong> é uma saída do switcher que mostra, em um só monitor, o preview, o program e todas as fontes em janelas menores. A janela da fonte que está no ar ganha borda vermelha. A da fonte que está no preview ganha borda verde. Muitos modelos mostram também um medidor de áudio e o estado da gravação.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 342" role="img" aria-label="Multiview em esquema: preview grande com borda verde mostrando a câmera 1, program grande com borda vermelha mostrando a câmera 2, e janelas pequenas das quatro câmeras, da mídia, das letras, do preto e do medidor de áudio. Vermelho é no ar, verde é a próxima, sem borda é livre.">
+    <rect class="bx" x="18" y="18" width="560" height="306"/>
+    <rect class="f-sunk" x="26" y="26" width="268" height="140"/>
+    <line class="ln-mu" stroke-width="1" x1="26" y1="122" x2="294" y2="122"/>
+    <circle class="lv-slate" cx="120" cy="92" r="6"/><rect class="lv-slate" x="115" y="100" width="10" height="22"/>
+    <circle class="lv-slate" cx="160" cy="88" r="6"/><rect class="lv-slate" x="155" y="96" width="10" height="26"/>
+    <circle class="lv-slate" cx="200" cy="92" r="6"/><rect class="lv-slate" x="195" y="100" width="10" height="22"/>
+    <rect class="s-teal" stroke-width="4" x="26" y="26" width="268" height="140"/>
+    <text class="mono b" x="38" y="156" font-size="10.5">PREVIEW · CAM 1</text>
+    <rect class="f-sunk" x="302" y="26" width="268" height="140"/>
+    <circle class="lv-slate" cx="436" cy="76" r="24"/>
+    <path class="lv-slate" d="M376 166 Q436 86 496 166 z"/>
+    <rect class="s-red" stroke-width="4" x="302" y="26" width="268" height="140"/>
+    <text class="mono b" x="314" y="156" font-size="10.5">PROGRAM · CAM 2</text>
+
+    <g font-size="10.5" text-anchor="middle">
+      <rect class="f-sunk" x="26" y="176" width="131" height="66"/><rect class="s-teal" stroke-width="3" x="26" y="176" width="131" height="66"/><text class="mono b" x="91" y="213">CAM 1</text>
+      <rect class="f-sunk" x="163" y="176" width="131" height="66"/><rect class="s-red" stroke-width="3" x="163" y="176" width="131" height="66"/><text class="mono b" x="228" y="213">CAM 2</text>
+      <rect class="f-sunk" x="302" y="176" width="131" height="66"/><text class="mono mu" x="367" y="213">CAM 3</text>
+      <rect class="f-sunk" x="439" y="176" width="131" height="66"/><text class="mono mu" x="504" y="213">CAM 4</text>
+      <rect class="f-sunk" x="26" y="250" width="131" height="66"/><text class="mono mu" x="91" y="287">MÍDIA</text>
+      <rect class="f-sunk" x="163" y="250" width="131" height="66"/><text class="mono mu" x="228" y="287">LETRAS</text>
+      <rect class="f-sunk" x="302" y="250" width="131" height="66"/><text class="mono mu" x="367" y="287">PRETO</text>
+      <rect class="f-sunk" x="439" y="250" width="131" height="66"/><text class="mono mu" x="520" y="287">ÁUDIO</text>
+    </g>
+    <rect class="f-teal" x="452" y="270" width="8" height="38"/><rect class="f-teal" x="464" y="278" width="8" height="30"/>
+    <rect class="lv-slate" x="452" y="258" width="8" height="12"/><rect class="lv-slate" x="464" y="258" width="8" height="20"/>
+
+    <rect class="s-red" stroke-width="3" x="602" y="30" width="18" height="13"/>
+    <text class="b" x="630" y="42" font-size="12">Vermelho: está no ar</text>
+    <text class="mu" x="630" y="59" font-size="11">é a imagem do program</text>
+    <rect class="s-teal" stroke-width="3" x="602" y="82" width="18" height="13"/>
+    <text class="b" x="630" y="94" font-size="12">Verde: é a próxima</text>
+    <text class="mu" x="630" y="111" font-size="11">está no preview, pronta</text>
+    <rect class="f-sunk" x="602" y="134" width="18" height="13"/>
+    <text class="b" x="630" y="146" font-size="12">Sem borda: disponível</text>
+    <text class="mu" x="630" y="163" font-size="11">a câmera está livre</text>
+    <text class="b" x="602" y="212" font-size="12">Antes de cortar, confira</text>
+    <text class="mu" x="602" y="229" font-size="11">no preview: foco, quadro,</text>
+    <text class="mu" x="602" y="245" font-size="11">exposição e cor.</text>
+    <text class="b" x="602" y="286" font-size="12">O medidor de áudio</text>
+    <text class="mu" x="602" y="303" font-size="11">mostra se o som chega</text>
+    <text class="mu" x="602" y="319" font-size="11">ao programa.</text>
+    </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> O multiview, em esquema. O diretor passa o tempo nas janelas pequenas, à procura do próximo plano, e confere o preview antes de cada corte.</figcaption>
+  </figure>
+
+  <p>Ponha o multiview diante de quem dirige e de quem corta, na altura dos olhos, e dê nome a cada janela. Janela sem nome, ou “câmera 3” mostrando a câmera 2, causa erro no primeiro comando.</p>
+
+  <h3>Tally: a luz que avisa quem está no ar</h3>
+  <p>O <strong>tally</strong> é uma luz na câmera, comandada pelo switcher, que avisa o operador, e quem está diante da câmera, da situação daquela fonte. As cores são as do multiview.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:18%">Luz</th><th style="width:26%">O que significa</th><th>O que o operador de câmera faz</th></tr></thead>
+      <tbody>
+        <tr><td class="red"><strong>Vermelha</strong></td><td>A câmera está no ar.</td><td>Segura o quadro. Só se move para acompanhar a pessoa, com suavidade, ou a pedido do diretor.</td></tr>
+        <tr><td class="teal"><strong>Verde</strong></td><td>A câmera está no preview: é a próxima.</td><td>Termina o ajuste e segura o quadro. O corte pode vir a qualquer instante.</td></tr>
+        <tr><td><strong>Apagada</strong></td><td>A câmera está livre.</td><td>Volta ao plano de base ou busca o plano pedido. É a hora de acertar foco e enquadramento.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Nem todo sistema tem tally, e alguns têm só a luz vermelha. Sem tally, o diretor faz esse papel pela voz: “2 no ar” depois do corte, “2 liberada” quando sai dela. Assim se evita o erro mais visível do corte ao vivo: a câmera que procura foco ou muda o quadro no ar.</p>
+
+  <h3>Intercom: a equipe ouve o diretor</h3>
+  <p>O <strong>intercom</strong> é o sistema de comunicação por fone e microfone entre o diretor e a equipe. O mais comum é a linha coletiva: todos ouvem todos, e cada um abre o próprio microfone por um botão. Há sistemas com fio, sem fio e os que usam o próprio cabo da câmera. Aplicativos de chamada em grupo no celular servem de improviso, mas têm atraso e dependem da rede: em um corte por comando de voz, meio segundo de atraso já aparece na tela.</p>
+  <ul>
+    <li>O microfone de cada operador fica fechado enquanto ele não fala. Microfone aberto leva o som da sala para o fone de todos.</li>
+    <li>Sem intercom, combinem sinais de mão e trabalhem com planos de base fixos, descritos no módulo 4. O corte passa a escolher entre o que as câmeras oferecem, sem pedir planos.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Segurança: volume do fone e cabos</h4>
+    <p>Comece com o volume do fone baixo e suba aos poucos: uma microfonia ou um grito na linha chegam direto ao ouvido. Cabos de intercom, de vídeo e de energia que cruzam corredores devem ser presos com fita ou passados por protetores, e os tripés ficam fora das rotas de saída. Os cuidados de montagem estão no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="equipe">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Equipe e linguagem de comando</h2>
+  <p>Há quem decide, quem executa a troca e quem oferece os planos. Em equipes pequenas, uma pessoa acumula funções, mas vale separar os papéis: quando o corte falha, quase sempre faltou uma função, e não um equipamento.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Função</th><th style="width:38%">O que faz</th><th>Para onde olha</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Diretor de imagem</strong></td><td>Decide o que vai ao ar e quando. Pede planos às câmeras e dá os comandos de corte, de gráfico e de mídia.</td><td>Para o multiview e para o palco. Pensa sempre no plano seguinte.</td></tr>
+        <tr><td><strong>Operador de corte</strong></td><td>Opera o switcher: prepara no preview, corta, funde, põe e tira os keys.</td><td>Para o preview e o program. Confere se o que foi ao ar é o que foi pedido.</td></tr>
+        <tr><td><strong>Operador de câmera</strong></td><td>Oferece o plano pedido, com quadro, foco e exposição certos, e segura esse plano enquanto está no ar.</td><td>Para o visor e para o tally. Ouve o diretor.</td></tr>
+        <tr><td><strong>Operador de gráficos e mídia</strong></td><td>Prepara e dispara legendas, letras, slides e vídeos, e avisa quanto falta para um vídeo acabar.</td><td>Para o roteiro e para a tela do computador da mídia.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>É comum o diretor operar o próprio corte. Funciona com até três câmeras e roteiro simples; acima disso, os olhos não dão conta do multiview e do painel ao mesmo tempo. O som que acompanha a imagem é responsabilidade de quem cuida do áudio da transmissão, assunto do estudo <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>.</p>
+
+  <h3>O ciclo do comando: prepara, confere, corta</h3>
+  <p>O comando de corte tem sempre duas partes. A primeira avisa: “prepara 2”. A segunda executa: “corta”. Entre as duas, o operador de corte põe a câmera no preview, o operador de câmera acerta o plano, e o diretor confere. Um comando só, como “vai na 2”, tira o tempo de todos: o corte atrasa, ou a câmera vai ao ar se ajustando.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="O ciclo do comando em quatro tempos para o diretor, o operador de corte e os operadores de câmera. Prepara: o diretor pede a câmera 2, o corte a põe no preview, a câmera acerta o quadro com tally verde. Confere: o diretor olha o preview. Corta: o operador aperta CUT, o tally da 2 fica vermelho. Libera: a câmera 1, agora livre, busca outro quadro.">
+    <defs><marker id="ct5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+    <g font-size="10.5">
+      <text class="mono mu" x="140" y="30">1. PREPARA</text><text class="mono mu" x="326" y="30">2. CONFERE</text>
+      <text class="mono mu" x="512" y="30">3. CORTA</text><text class="mono mu" x="698" y="30">4. LIBERA</text>
+    </g>
+    <text class="b" x="18" y="66" font-size="12">Diretor</text><text class="mu" x="18" y="82" font-size="11">de imagem</text>
+    <text class="b" x="18" y="136" font-size="12">Operador</text><text class="mu" x="18" y="152" font-size="11">de corte</text>
+    <text class="b" x="18" y="206" font-size="12">Operadores</text><text class="mu" x="18" y="222" font-size="11">de câmera</text>
+
+    <g font-size="11">
+      <rect class="bx-teal" x="140" y="42" width="176" height="60"/>
+      <text class="b" x="150" y="66">“Prepara 2, médio</text><text class="b" x="150" y="83">no pastor.”</text>
+      <rect class="bx-teal" x="326" y="42" width="176" height="60"/>
+      <text x="336" y="66">Olha o preview: foco,</text><text x="336" y="83">quadro e luz estão bons?</text>
+      <rect class="bx-red" x="512" y="42" width="176" height="60"/>
+      <text class="b" x="522" y="76">“Corta.”</text>
+      <rect class="bx" x="698" y="42" width="176" height="60"/>
+      <text class="b" x="708" y="66">“1, liberada.”</text><text x="708" y="83">Já pensa no próximo plano.</text>
+
+      <rect class="bx-teal" x="140" y="112" width="176" height="60"/>
+      <text x="150" y="136">Põe a câmera 2</text><text x="150" y="153">no preview.</text>
+      <rect class="bx-teal" x="326" y="112" width="176" height="60"/>
+      <text x="336" y="136">Dedo no CUT, olhos</text><text x="336" y="153">no preview.</text>
+      <rect class="bx-red" x="512" y="112" width="176" height="60"/>
+      <text x="522" y="136">Aperta CUT e confere</text><text x="522" y="153">o program.</text>
+      <rect class="bx" x="698" y="112" width="176" height="60"/>
+      <text x="708" y="136">A câmera 1 passou</text><text x="708" y="153">para o preview.</text>
+
+      <rect class="bx-teal" x="140" y="182" width="176" height="60"/>
+      <text x="150" y="206">Câmera 2: acha o quadro</text><text x="150" y="223">e o foco. Tally verde.</text>
+      <rect class="bx-teal" x="326" y="182" width="176" height="60"/>
+      <text x="336" y="206">Câmera 2: segura</text><text x="336" y="223">o quadro.</text>
+      <rect class="bx-red" x="512" y="182" width="176" height="60"/>
+      <text x="522" y="206">Câmera 2: tally vermelho.</text><text x="522" y="223">Não muda sem comando.</text>
+      <rect class="bx" x="698" y="182" width="176" height="60"/>
+      <text x="708" y="206">Câmera 1: tally apagado.</text><text x="708" y="223">Busca o novo quadro.</text>
+    </g>
+    <line class="ln" x1="140" y1="262" x2="872" y2="262" marker-end="url(#ct5)"/>
+    <text class="mu" x="140" y="284" font-size="11">Entre o “prepara” e o “corta” passam alguns segundos: o tempo de a câmera acertar o plano e de o diretor conferir.</text>
+    </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> O ciclo do comando. A palavra de preparo põe três pessoas para trabalhar. A palavra de execução só confirma o que já está pronto.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:28%">O diretor diz</th><th style="width:36%">O que acontece</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>“Prepara 2.” … “Corta.”</td><td>A câmera 2 vai ao preview e, no segundo comando, ao ar com corte seco.</td><td>Há equipes que dizem “atenção 2” e “vai”. O que importa é usar sempre as mesmas.</td></tr>
+        <tr><td>“Prepara fusão para a 1.” … “Funde.”</td><td>O operador de corte prepara a 1 e, no comando, usa AUTO ou a alavanca.</td><td>Avise que é fusão já no preparo: o operador muda de botão.</td></tr>
+        <tr><td>“Prepara legenda do pastor.” … “Entra legenda.” … “Sai legenda.”</td><td>O gráfico é conferido no preview, entra pelo key e sai.</td><td>Dizer “sai” faz parte do comando. Legenda sem ordem de saída fica esquecida no ar.</td></tr>
+        <tr><td>“Prepara vídeo de avisos.” … “Roda vídeo.”</td><td>A mídia vai ao preview, parada no primeiro quadro, e ao ar no comando.</td><td>A mídia responde “vídeo pronto” e avisa “dez segundos” antes do fim.</td></tr>
+        <tr><td>“3, congregação, plano aberto.”</td><td>A câmera 3, que está livre, busca o plano pedido.</td><td>Primeiro o número, depois o pedido. Sem o número, três câmeras se mexem.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Regras de quem fala no intercom</h3>
+  <ul>
+    <li>Chame a câmera pelo número, e não pelo nome da pessoa. O número é o mesmo no botão, no multiview e no roteiro.</li>
+    <li>Um comando por vez, com poucas palavras e em tom calmo. O tom do diretor vira o tom da equipe.</li>
+    <li>Prepare sempre antes de executar, mesmo com pressa. Com a equipe treinada, o preparo leva dois segundos.</li>
+    <li>A linha é do diretor. Os operadores respondem e avisam problemas em poucas palavras: “3 sem foco”, “bateria da 2 no fim”. Elogio e bronca ficam para a revisão.</li>
+  </ul>
+  <p>As palavras para pedir enquadramento e movimento (abre, fecha, sobe, corrige) fazem parte do estudo <a href="../Enquadramento-e-Movimento/treinamento-enquadramento-e-movimento.html">Enquadramento e movimento de câmera</a>.</p>
+
+  <h3>Plano de base</h3>
+  <p>Combine com cada operador um <strong>plano de base</strong>: o quadro ao qual a câmera volta sempre que está livre e não recebeu pedido. Por exemplo: câmera 1, geral do palco; câmera 2, plano médio de quem está no púlpito; câmera 3, plano de conjunto da banda. Com isso, o diretor sabe o que tem em cada janela sem precisar pedir, e a câmera geral funciona como <strong>plano de segurança</strong>: se tudo der errado, há sempre uma imagem boa para onde cortar.</p>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="quando">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Quando cortar e para onde</h2>
+  <p>Cada corte precisa de um motivo. O motivo é quase sempre uma mudança: mudou quem fala, mudou a frase da música, alguém fez algo que merece ser visto. Sem mudança, o corte só chama a atenção para si. A pergunta que o diretor repete o evento inteiro é: o que a pessoa em casa quer ver agora?</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Motivo do corte</th><th style="width:38%">Exemplo</th><th>Para onde cortar</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mudou quem fala</strong></td><td>O pastor chama alguém para dar um aviso. O entrevistado começa a responder.</td><td>Para quem vai falar, um instante antes de a fala começar.</td></tr>
+        <tr><td><strong>Mudou a música</strong></td><td>Virada de frase, entrada do refrão, começo de um solo.</td><td>Para quem conduz o trecho: a voz principal, o instrumento do solo, o coral.</td></tr>
+        <tr><td><strong>Ação</strong></td><td>O pregador sai do púlpito e caminha. Alguém sobe ao palco.</td><td>Para um plano mais aberto, que mostre o movimento inteiro.</td></tr>
+        <tr><td><strong>Reação</strong></td><td>A congregação canta de mãos levantadas. A plateia ri ou aplaude.</td><td>Para um plano da congregação, curto, voltando logo ao principal.</td></tr>
+        <tr><td><strong>Informação</strong></td><td>O pregador mostra um objeto ou aponta o telão.</td><td>Para o detalhe, o slide em tela cheia ou em janela.</td></tr>
+        <tr><td><strong>Respiro</strong></td><td>O mesmo plano está no ar há muito tempo, e nada mudou.</td><td>Para o geral, por alguns segundos, e de volta.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Na fala, corte nas pausas: no fim da frase, na respiração, na virada de assunto. Corte no meio de uma palavra parece engano. Na música, corte no tempo forte, na virada da frase. E procure chegar um instante antes: quem assiste deve ver a cantora abrir a boca, e não chegar com a frase pela metade.</p>
+
+  <h3>Ritmo</h3>
+  <p>O ritmo do corte acompanha o ritmo do que acontece no palco. Música rápida aceita planos curtos e corte seco. Música lenta pede planos longos e fusão. Pregação pede plano longo no pregador, com saídas raras e curtas. Um plano precisa ficar no ar o tempo suficiente para ser entendido: menos de dois ou três segundos, quase nunca dá.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 250" role="img" aria-label="Duas linhas do tempo de um minuto. No louvor rápido, doze planos de quatro a sete segundos, alternando as três câmeras, com cortes nas viradas da música. Na pregação, cinco planos: médio do pregador por 26 segundos, geral por 5, primeiro plano por 19, reação por 4 e de volta ao médio.">
+    <text class="b" x="18" y="54" font-size="12">Louvor rápido</text>
+    <text class="mu" x="18" y="70" font-size="10.5">12 planos em 1 minuto</text>
+    <g font-size="10.5" text-anchor="middle">
+      <rect class="bx-blue" x="150" y="38" width="60" height="36"/><text x="180" y="60">Geral</text>
+      <rect class="bx-amber" x="210" y="38" width="60" height="36"/><text x="240" y="60">Médio</text>
+      <rect class="bx-purple" x="270" y="38" width="48" height="36"/><text x="294" y="60">Banda</text>
+      <rect class="bx-amber" x="318" y="38" width="60" height="36"/><text x="348" y="60">Close</text>
+      <rect class="bx-blue" x="378" y="38" width="60" height="36"/><text x="408" y="60">Geral</text>
+      <rect class="bx-purple" x="438" y="38" width="48" height="36"/><text x="462" y="60">Congr.</text>
+      <rect class="bx-amber" x="486" y="38" width="72" height="36"/><text x="522" y="60">Médio</text>
+      <rect class="bx-purple" x="558" y="38" width="60" height="36"/><text x="588" y="60">Banda</text>
+      <rect class="bx-blue" x="618" y="38" width="60" height="36"/><text x="648" y="60">Geral</text>
+      <rect class="bx-amber" x="678" y="38" width="60" height="36"/><text x="708" y="60">Close</text>
+      <rect class="bx-purple" x="738" y="38" width="48" height="36"/><text x="762" y="60">Congr.</text>
+      <rect class="bx-amber" x="786" y="38" width="84" height="36"/><text x="828" y="60">Médio</text>
+    </g>
+    <text class="mu" x="150" y="92" font-size="10.5">cortes secos, nas viradas das frases da música</text>
+
+    <text class="b" x="18" y="134" font-size="12">Pregação</text>
+    <text class="mu" x="18" y="150" font-size="10.5">5 planos em 1 minuto</text>
+    <g font-size="10.5" text-anchor="middle">
+      <rect class="bx-amber" x="150" y="118" width="312" height="36"/><text x="306" y="140">Médio do pregador</text>
+      <rect class="bx-blue" x="462" y="118" width="60" height="36"/><text x="492" y="140">Geral</text>
+      <rect class="bx-amber" x="522" y="118" width="228" height="36"/><text x="636" y="140">Primeiro plano do pregador</text>
+      <rect class="bx-purple" x="750" y="118" width="48" height="36"/><text x="774" y="140">Reação</text>
+      <rect class="bx-amber" x="798" y="118" width="72" height="36"/><text x="834" y="140">Médio</text>
+    </g>
+    <text class="mu" x="150" y="172" font-size="10.5">plano longo no pregador, com saídas curtas para o geral e para a reação</text>
+
+    <line class="ln-mu" x1="150" y1="188" x2="870" y2="188"/>
+    <path class="ln-mu" stroke-width="1" d="M150 188 V194 M270 188 V194 M390 188 V194 M510 188 V194 M630 188 V194 M750 188 V194 M870 188 V194"/>
+    <g font-size="10.5" text-anchor="middle">
+      <text class="mu" x="150" y="208">0 s</text><text class="mu" x="270" y="208">10</text><text class="mu" x="390" y="208">20</text>
+      <text class="mu" x="510" y="208">30</text><text class="mu" x="630" y="208">40</text><text class="mu" x="750" y="208">50</text><text class="mu" x="866" y="208">60 s</text>
+    </g>
+    <rect class="bx-blue" x="150" y="222" width="16" height="14"/><text x="174" y="234" font-size="11">Câmera 1: geral</text>
+    <rect class="bx-amber" x="316" y="222" width="16" height="14"/><text x="340" y="234" font-size="11">Câmera 2: cantora ou pregador</text>
+    <rect class="bx-purple" x="566" y="222" width="16" height="14"/><text x="590" y="234" font-size="11">Câmera 3: banda e congregação</text>
+    </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> O mesmo minuto em dois momentos do culto. No louvor, o corte segue a música. Na pregação, o corte quase desaparece. Entre dois planos da mesma câmera há sempre um plano de outra: é nesse intervalo que a câmera muda o quadro, fora do ar.</figcaption>
+  </figure>
+
+  <p>Como ponto de partida deste material, e não norma: no louvor rápido, planos de 3 a 6 segundos, em corte seco no tempo da música; no louvor lento, de 6 a 12 segundos, com fusão de 0,5 a 1 s; na pregação, de 20 a 60 segundos ou mais no pregador, com saídas de 3 a 6 segundos para o geral e a reação; na oração, um plano aberto e estável, com poucos cortes ou nenhum. Cada igreja tem o seu estilo: assista à gravação com a equipe e ajuste.</p>
+
+  <h3>A sequência dos planos</h3>
+  <p>Os tipos de plano (geral, conjunto, médio, primeiro plano, close) estão no estudo <a href="../Enquadramento-e-Movimento/treinamento-enquadramento-e-movimento.html">Enquadramento e movimento de câmera</a>. No corte, importa a ordem. A sequência clássica vai do aberto para o fechado: o geral mostra onde estamos, o médio mostra quem fala ou canta, e o close mostra a expressão. Sempre que o lugar ou a formação mudar (a banda entra, o coral sobe, começa a ceia), volte ao geral para situar quem assiste.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 226" role="img" aria-label="À esquerda, a sequência geral, médio e close, em que cada plano muda bem de tamanho. À direita, o salto: dois planos médios quase iguais da mesma pessoa, que a fazem pular na tela.">
+    <defs><marker id="ct7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+    <text class="b" x="18" y="30" font-size="13">Sequência que funciona</text>
+    <rect class="bx" x="18" y="44" width="150" height="84"/>
+    <line class="ln-mu" stroke-width="1" x1="18" y1="104" x2="168" y2="104"/>
+    <circle class="lv-slate" cx="68" cy="78" r="5"/><rect class="lv-slate" x="64" y="85" width="8" height="19"/>
+    <circle class="lv-slate" cx="93" cy="75" r="5"/><rect class="lv-slate" x="89" y="82" width="8" height="22"/>
+    <circle class="lv-slate" cx="118" cy="78" r="5"/><rect class="lv-slate" x="114" y="85" width="8" height="19"/>
+    <g class="lv-slate"><circle cx="40" cy="120" r="4"/><circle cx="58" cy="120" r="4"/><circle cx="76" cy="120" r="4"/><circle cx="94" cy="120" r="4"/><circle cx="112" cy="120" r="4"/><circle cx="130" cy="120" r="4"/><circle cx="148" cy="120" r="4"/></g>
+    <text class="b" x="18" y="148" font-size="12">Geral</text>
+    <text class="mu" x="18" y="164" font-size="11">mostra onde estamos</text>
+    <line class="ln" x1="172" y1="86" x2="204" y2="86" marker-end="url(#ct7)"/>
+
+    <rect class="bx" x="208" y="44" width="150" height="84"/>
+    <circle class="lv-slate" cx="283" cy="72" r="12"/>
+    <path class="lv-slate" d="M253 128 Q283 76 313 128 z"/>
+    <text class="b" x="208" y="148" font-size="12">Médio</text>
+    <text class="mu" x="208" y="164" font-size="11">mostra quem fala ou canta</text>
+    <line class="ln" x1="362" y1="86" x2="394" y2="86" marker-end="url(#ct7)"/>
+
+    <rect class="bx" x="398" y="44" width="150" height="84"/>
+    <path class="lv-slate" d="M418 128 Q473 96 528 128 z"/>
+    <circle class="lv-slate" cx="473" cy="84" r="27"/>
+    <text class="b" x="398" y="148" font-size="12">Close</text>
+    <text class="mu" x="398" y="164" font-size="11">mostra a expressão</text>
+    <text x="18" y="196" font-size="11.5">Cada corte muda bem o tamanho do plano:</text>
+    <text x="18" y="212" font-size="11.5">o olho entende como uma nova informação.</text>
+
+    <line class="grid" x1="578" y1="18" x2="578" y2="214"/>
+    <text class="t-bad b" x="604" y="30" font-size="13">Salto: o que evitar</text>
+    <rect class="bx" x="604" y="44" width="130" height="73"/>
+    <circle class="lv-slate" cx="664" cy="70" r="10"/>
+    <path class="lv-slate" d="M640 117 Q664 74 688 117 z"/>
+    <rect class="bx" x="752" y="44" width="130" height="73"/>
+    <circle class="lv-slate" cx="822" cy="71" r="12"/>
+    <path class="lv-slate" d="M794 117 Q822 74 850 117 z"/>
+    <text x="604" y="140" font-size="11.5">Dois planos parecidos, do mesmo ângulo:</text>
+    <text x="604" y="156" font-size="11.5">a pessoa “pula” na tela.</text>
+    <text class="b" x="604" y="196" font-size="11.5">Para evitar:</text>
+    <text x="604" y="212" font-size="11.5">mude bem o tamanho do plano ou o ângulo.</text>
+    </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> Do aberto para o fechado, cada plano acrescenta informação. O salto acontece quando o novo plano é quase igual ao anterior: quem assiste não ganha nada e só vê a pessoa mudar de lugar no quadro.</figcaption>
+  </figure>
+
+  <h3>Continuidade: o que quebra a ilusão</h3>
+  <p>Continuidade é a sensação de que as imagens pertencem ao mesmo lugar e ao mesmo momento. Quatro erros a quebram.</p>
+  <ul>
+    <li><strong>Salto</strong> (<em>jump cut</em>). Corte entre dois planos parecidos da mesma pessoa. Como regra prática, o novo plano deve ter um tamanho bem diferente, ou vir de uma câmera com pelo menos uns 30 graus de diferença de ângulo.</li>
+    <li><strong>Eixo cruzado</strong>. Corte para uma câmera do outro lado da linha de ação, que inverte o lado para onde a pessoa olha.</li>
+    <li><strong>Corte em movimento sem intenção</strong>. Câmera que vai ao ar fazendo zoom, procurando foco ou corrigindo o quadro.</li>
+    <li><strong>Diferença de imagem entre câmeras</strong>. Uma câmera mais clara, ou mais amarelada, faz cada corte parecer um defeito. As câmeras são igualadas antes do evento, como mostram os estudos <a href="../Exposicao/treinamento-exposicao.html">Exposição</a> e <a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>.</li>
+  </ul>
+  <p>A regra do eixo (ou dos 180 graus), explicada no estudo de enquadramento, vira no corte uma decisão de posição: escolher um lado e manter. Em culto, a linha mais comum liga o pregador à congregação.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 340" role="img" aria-label="Vista de cima de uma igreja com o eixo entre o púlpito e a congregação. As câmeras 2 e 3 ficam do lado combinado, à esquerda, e mostram o pastor e a congregação frente a frente. A câmera 4, do outro lado, mostra a congregação olhando para o mesmo lado que o pastor. A câmera 1, sobre o eixo, é neutra.">
+    <defs>
+      <marker id="ct8a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah f-teal" d="M0 0 L10 5 L0 10 z"/></marker>
+      <marker id="ct8b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah f-red" d="M0 0 L10 5 L0 10 z"/></marker>
+    </defs>
+    <rect class="lv-teal" style="fill-opacity:.12" x="60" y="18" width="320" height="304"/>
+    <rect class="bx" x="200" y="24" width="360" height="56"/>
+    <text class="mu" x="214" y="46" font-size="11">Palco</text>
+    <circle class="f-ink" cx="380" cy="64" r="6"/>
+    <text class="b" x="392" y="60" font-size="11">púlpito</text>
+    <rect class="lv-slate" style="fill-opacity:.22" x="220" y="130" width="320" height="130"/>
+    <text class="mu" x="408" y="250" font-size="11">Congregação</text>
+    <line class="ln dash" x1="380" y1="72" x2="380" y2="290"/>
+    <text class="mu" x="388" y="112" font-size="10.5">eixo: a linha entre o pastor</text>
+    <text class="mu" x="388" y="126" font-size="10.5">e a congregação</text>
+
+    <line class="s-teal dash" x1="124" y1="292" x2="372" y2="72" marker-end="url(#ct8a)"/>
+    <line class="s-teal dash" x1="150" y1="110" x2="296" y2="176" marker-end="url(#ct8a)"/>
+    <line class="s-red dash" x1="610" y1="110" x2="464" y2="176" marker-end="url(#ct8b)"/>
+
+    <rect class="hd-blue" x="366" y="292" width="28" height="20"/><text class="on b" x="380" y="306" font-size="12" text-anchor="middle">1</text>
+    <rect class="hd-teal" x="96" y="292" width="28" height="20"/><text class="on b" x="110" y="306" font-size="12" text-anchor="middle">2</text>
+    <rect class="hd-teal" x="122" y="96" width="28" height="20"/><text class="on b" x="136" y="110" font-size="12" text-anchor="middle">3</text>
+    <rect class="hd-red" x="610" y="96" width="28" height="20"/><text class="on b" x="624" y="110" font-size="12" text-anchor="middle">4</text>
+    <text class="t-teal b" x="70" y="40" font-size="11">lado combinado</text>
+    <text class="t-teal b" x="70" y="55" font-size="11">para as câmeras</text>
+
+    <text class="b" x="668" y="150" font-size="12.5">O que cada câmera mostra</text>
+    <text class="t-teal b" x="668" y="174" font-size="11.5">Câmera 2</text>
+    <text x="668" y="190" font-size="11">O pastor olha para a direita da tela.</text>
+    <text class="t-teal b" x="668" y="212" font-size="11.5">Câmera 3</text>
+    <text x="668" y="228" font-size="11">A congregação olha para a</text>
+    <text x="668" y="243" font-size="11">esquerda: os dois se encaram.</text>
+    <text class="t-red b" x="668" y="265" font-size="11.5">Câmera 4</text>
+    <text x="668" y="281" font-size="11">A congregação olha para a direita,</text>
+    <text x="668" y="296" font-size="11">como o pastor: não se encaram.</text>
+    <text class="t-blue b" x="408" y="296" font-size="11.5">Câmera 1</text>
+    <text x="408" y="312" font-size="11">sobre o eixo: é neutra</text>
+    </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> O eixo no corte. Câmeras do mesmo lado da linha mantêm o pastor e a congregação frente a frente na tela. A câmera central, sobre o eixo, é neutra e pode vir antes ou depois de qualquer outra.</figcaption>
+  </figure>
+
+  <p>Com um orador sozinho e duas câmeras no fundo, uma de cada lado do corredor, o corte direto entre elas inverte o lado para onde ele olha. Não chega a confundir, mas fica mais suave passar pela câmera central. Em entrevista, diálogo ou encenação, o eixo é a linha entre as duas pessoas, e cruzá-lo confunde de verdade.</p>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="culto">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Cortar o culto, a mídia e a gravação</h2>
+  <p>Cada momento do culto pede um jeito de cortar. A tabela é um ponto de partida, e vale, com poucos ajustes, para palestra, formatura e apresentação musical.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%">Momento</th><th style="width:27%">Plano principal</th><th style="width:28%">Para onde sair</th><th>Gráfico e cuidado</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Louvor</strong></td><td>Médio de quem conduz a música.</td><td>Geral na abertura e nas viradas. Instrumento no solo. Congregação cantando.</td><td>Letra em legenda. Evite close em quem não canta nem toca naquele trecho.</td></tr>
+        <tr><td><strong>Pregação</strong></td><td>Médio ou primeiro plano do pregador.</td><td>Geral quando ele caminha ou para dar respiro. Reação, com parcimônia.</td><td>Nome no começo. Versículo e slide quando ele citar.</td></tr>
+        <tr><td><strong>Leitura bíblica</strong></td><td>Médio de quem lê.</td><td>Geral, se a congregação lê junto ou fica de pé.</td><td>Referência ou texto como gráfico, sem cobrir o rosto.</td></tr>
+        <tr><td><strong>Avisos</strong></td><td>Médio de quem fala.</td><td>Vídeo de avisos em tela cheia, se houver.</td><td>Nome e função de quem fala. Combine o som do vídeo com o operador de áudio.</td></tr>
+        <tr><td><strong>Oração</strong></td><td>Geral ou plano de conjunto.</td><td>Em geral, não sair.</td><td>Sem gráfico. Evite closes de pessoas orando ou emocionadas.</td></tr>
+        <tr><td><strong>Ceia, oferta, batismo</strong></td><td>Plano de conjunto da ação.</td><td>Detalhe das mãos e dos elementos. Geral.</td><td>Fusão lenta. Combine antes até onde a câmera pode chegar perto.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <h4>Imagem das pessoas</h4>
+    <p>A congregação não escolheu aparecer. Combine com a liderança o que pode ir ao ar: crianças, visitantes, pessoas em oração ou emocionadas. Na dúvida, plano aberto, em que ninguém é o assunto do quadro.</p>
+  </div>
+
+  <h3>Vídeos: entrar e sair sem buraco</h3>
+  <p>Um vídeo no meio do programa envolve três pessoas: quem dispara a mídia, quem corta e quem cuida do som. O que mais falha é a saída: o vídeo acaba, e a tela fica parada ou preta. A sequência segura:</p>
+  <ol>
+    <li>O vídeo é conferido no preview, parado no primeiro quadro. O operador de som é avisado de que vem mídia com áudio.</li>
+    <li>No comando, a mídia dispara o vídeo e o corte o põe no ar. O som entra pelo operador de áudio, ou sozinho, se o switcher tiver o áudio seguindo o vídeo (<em>audio follow video</em>).</li>
+    <li>A câmera de retorno, em geral a geral, fica no preview até o fim do vídeo.</li>
+    <li>O operador de mídia avisa “dez segundos” antes do fim. O diretor prepara a equipe.</li>
+    <li>No último quadro, corte ou fusão para a câmera. O som da mídia fecha, e o microfone de quem fala já está aberto.</li>
+  </ol>
+
+  <h3>Letras, legendas e janelas</h3>
+  <p>A legenda de nome fica no terço de baixo, dentro da <strong>área segura</strong>: uma margem de cerca de 5% a 10% de cada borda, porque há telas que cortam as beiradas da imagem. A letra da música vai na mesma região, com no máximo duas linhas. E toda legenda sai do ar: a de nome, depois do tempo de ler duas vezes, algo como 4 a 6 segundos; a de letra, quando a frase acaba.</p>
+
+  <p>Confira a grafia de cada nome antes do evento, com a lista na mão. A operação das letras no tempo da música e a tipografia estão no estudo <a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>.</p>
+
+  <h3>O telão da sala não é a transmissão</h3>
+  <p>Quem está na sala já vê o palco. No telão, essa pessoa precisa da letra grande, do slide inteiro e, em salas maiores, do close de quem fala. Quem está em casa precisa do contrário: ver o lugar, a banda, a congregação. Quando o switcher tem saída auxiliar, mande para o telão a fonte que serve à sala e deixe o program para a transmissão. Um cuidado: se o telão mostra o program, e a câmera geral enquadra o telão, a imagem aparece dentro dela mesma, repetida ao infinito, como dois espelhos frente a frente. Feche o quadro da geral para deixar o telão de fora, ou mande ao telão outra fonte.</p>
+
+  <h3>Gravação: programa e câmeras isoladas</h3>
+  <p>O corte ao vivo não tem volta, mas a gravação pode ter. Há três coisas para gravar.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">O que se grava</th><th style="width:34%">O que contém</th><th>Para que serve</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Programa</strong> (PGM)</td><td>O corte como foi ao ar, com gráficos e com o áudio do programa.</td><td>Arquivo pronto para publicar. É a gravação que não pode faltar.</td></tr>
+        <tr><td><strong>Programa limpo</strong> (clean feed)</td><td>O mesmo corte, sem o key final: sem logo, legenda nem letra.</td><td>Reedição com outros gráficos, trechos para redes sociais.</td></tr>
+        <tr><td><strong>Câmeras isoladas</strong> (ISO)</td><td>Cada câmera gravada inteira, do começo ao fim, no cartão dela, no switcher ou em um gravador.</td><td>Corrigir na edição um corte errado, e estudar o que cada câmera oferecia.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Para juntar as câmeras isoladas na edição, deixe cada uma gravar o som ambiente pelo próprio microfone: o programa de edição alinha os arquivos pelo áudio. Uma batida de palmas diante de todas, no começo, também serve. O áudio final da gravação vem da mesa de som, como explica o estudo <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>.</p>
+  <p>Antes de gravar, faça a conta do espaço. O que define o tamanho do arquivo é a taxa de dados da gravação, em megabits por segundo (Mbps), e o tempo:</p>
+  <p><code>espaço (GB) = taxa (Mbps) × minutos × 60 ÷ 8 ÷ 1000</code></p>
+  <p>Uma hora a 50 Mbps ocupa 22,5 GB. Um culto de duas horas, nessa taxa, não cabe em um cartão de 32 GB. A taxa depende do formato e da qualidade escolhidos no menu: de cerca de 10 a 50 Mbps em gravações comprimidas em 1080p, e muito mais em formatos de edição. Confira no manual do gravador ou da câmera, e deixe folga. A planilha de apoio faz essa conta.</p>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Algumas câmeras fotográficas param de gravar depois de um tempo fixo (perto de 30 minutos em muitos modelos) ou por aquecimento. Outras dividem a gravação em arquivos de até 4 GB, o que é normal. Faça um teste de gravação com a duração real do evento antes de contar com as câmeras isoladas.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>O corte de um evento começa antes da montagem, com o roteiro, e termina depois da desmontagem, com a revisão. Use esta ordem como base e adapte ao tamanho da equipe.</p>
+  <ol class="steps">
+    <li><h4>Monte o roteiro de corte</h4><p>Parta do roteiro técnico do evento, descrito no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>. Para cada momento, anote a fonte principal, as alternativas, o gráfico e a transição. Momento longo sem alternativa é sinal de alerta: não haverá para onde cortar.</p></li>
+    <li><h4>Faça a escala e combine as palavras</h4><p>Defina quem dirige, quem corta, quem opera cada câmera e quem cuida dos gráficos. Combine as palavras de preparo e de execução, e o plano de base de cada câmera.</p></li>
+    <li><h4>Confira as fontes no multiview</h4><p>Todas as câmeras e a mídia devem aparecer, no formato do sistema, com o nome certo em cada janela. Se uma fonte não aparece, siga o diagnóstico do estudo <a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>.</p></li>
+    <li><h4>Iguale as câmeras</h4><p>Aponte todas para a mesma pessoa, no palco, com a luz do evento. Ajuste exposição e balanço de branco até que o corte entre elas não mude o brilho nem a cor da pele.</p></li>
+    <li><h4>Teste o tally e o intercom</h4><p>Ponha cada câmera no preview e no program, e peça ao operador que confirme a luz. Fale com cada um pelo intercom e ouça a resposta.</p></li>
+    <li><h4>Teste os gráficos e a mídia</h4><p>Ponha no preview cada legenda, uma letra e cada vídeo. Confira a grafia dos nomes, o recorte do key e o som dos vídeos, junto com o operador de áudio.</p></li>
+    <li><h4>Ajuste o switcher para o início</h4><p>Tempo da fusão marcado, estilo da transição em mix, key final fora do ar, FTB como combinado para a abertura. Câmera geral no program, primeira fonte do roteiro no preview.</p></li>
+    <li><h4>Reúna a equipe por cinco minutos</h4><p>Passe o roteiro e diga o que é diferente neste evento: uma entrevista, um batismo, um convidado. Lembre o plano de segurança.</p></li>
+    <li><h4>Inicie as gravações <span class="k red w">PGM</span></h4><p>Comece a gravar alguns minutos antes. Confira em cada gravador se o contador anda e se o espaço livre cobre o evento com folga.</p></li>
+    <li><h4>Corte pelo ciclo: prepara, confere, corta <span class="k teal w">PVW</span></h4><p>Olhos no multiview, à procura do próximo plano. Depois de cada corte, libere a câmera que saiu e já peça o plano seguinte. Anote a hora dos erros em um papel, em duas palavras, sem parar de dirigir.</p></li>
+    <li><h4>Encerre e revise</h4><p>Fade para preto no fim, gravações paradas, arquivos conferidos e copiados. Na semana, assista a trechos com a equipe e registre os erros e as ações na planilha.</p></li>
+  </ol>
+
+  <h3>Se algo falhar no ar</h3>
+  <p>A primeira ação é sempre tirar o erro da tela. O conserto vem depois, com a fonte fora do ar.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:28%">O que aparece</th><th style="width:34%">Ação imediata</th><th>Depois, fora do ar</th></tr></thead>
+      <tbody>
+        <tr><td>A câmera no ar perde o foco, treme ou sai do quadro.</td><td>Corte para o plano de segurança, a câmera geral.</td><td>O diretor fala com o operador e só volta à câmera depois de conferir no preview.</td></tr>
+        <tr><td>Uma câmera fica preta ou congelada.</td><td>Corte para outra fonte. Não volte a ela.</td><td>Confira bateria, cabo e conversor, nessa ordem.</td></tr>
+        <tr><td>O vídeo não roda, ou roda sem som.</td><td>Volte à câmera. Quem está no palco segue o evento.</td><td>O vídeo só volta ao roteiro depois de testado no preview, com o som conferido.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. O primeiro está preenchido na planilha de apoio.</p>
+
+  <h3>Exemplo 1. O roteiro de corte de um culto com três câmeras</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, culto de domingo às 19 h, três câmeras com operador, mídia no computador, transmissão e gravação.</dd></div>
+    <div><dt>Sintoma</dt><dd>A equipe cortava “no improviso”: buracos depois dos vídeos e pregação inteira em uma câmera só.</dd></div>
+    <div><dt>Causa</dt><dd>Não havia roteiro de corte. Cada um descobria o próximo momento quando ele começava.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Roteiro com nove momentos, preenchido na planilha na quinta-feira, e revisão das pendências que ela apontou.</dd></div>
+    <div><dt>Resultado</dt><dd>Quatro pendências resolvidas antes do culto, e uma falta de espaço de gravação descoberta a tempo.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:24%">Momento</th><th class="n" style="width:9%">Duração</th><th style="width:12%">Principal</th><th style="width:20%">O que a planilha apontou</th><th>O que foi feito</th></tr></thead>
+      <tbody>
+        <tr><td>Avisos em vídeo</td><td class="num n">4 min</td><td>Mídia</td><td class="amber">Defina o áudio da mídia</td><td>O vídeo tem som. Marcado “Sim”, e o operador de áudio foi avisado.</td></tr>
+        <tr><td>Leitura bíblica</td><td class="num n">4 min</td><td>Câmera 2</td><td class="amber">Alternativa repetida</td><td>A alternativa também era a câmera 2. Trocada pela câmera 1, em plano geral.</td></tr>
+        <tr><td>Pregação</td><td class="num n">40 min</td><td>Câmera 2</td><td class="amber">Sem alternativa</td><td>Alternativas definidas: câmera 1, geral, e câmera 3, congregação.</td></tr>
+        <tr><td>Louvor final</td><td class="num n">5 min</td><td>Câmera 4</td><td class="amber">Câmera sem operador</td><td>A câmera 4 não tinha operador neste domingo. O momento passou para a câmera 3.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> O roteiro soma 84 minutos e termina às 20h24. A câmera 2 é a principal em 65 desses minutos, 77% do tempo: se ela falhar, o programa perde quase tudo. Por isso a equipe combinou que a câmera 1 consegue fazer um plano médio do púlpito, como plano B. Na gravação, com 30 minutos de margem, a câmera 2 gravando a 50 Mbps precisaria de 42,8 GB, e o cartão tinha 32 GB livres. O cartão foi trocado por um maior antes do culto.</p>
+
+  <h3>Exemplo 2. Cortes atrasados e câmera em movimento no ar</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Formatura no auditório de uma escola, três câmeras, equipe nova, intercom com fio e sem tally.</dd></div>
+    <div><dt>Sintoma</dt><dd>Na primeira metade, o corte chegava quando a pessoa já estava falando. Três vezes, uma câmera apareceu no ar fazendo zoom e procurando foco.</dd></div>
+    <div><dt>Causa</dt><dd>O diretor dizia “vai na 2” já querendo o corte, sem preparo. Sem tally, os operadores não sabiam quando estavam no ar.</dd></div>
+    <div><dt>O que foi feito</dt><dd>No intervalo, a equipe combinou o ciclo prepara, confere, corta. O diretor passou a dizer “2 no ar” e “2 liberada”. Cada câmera recebeu um plano de base.</dd></div>
+    <div><dt>Resultado</dt><dd>Na entrega dos diplomas, o corte chegou junto com cada nome, e nenhuma câmera se ajustou no ar.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> O equipamento era o mesmo; mudou a linguagem. A palavra de preparo deu ao operador de câmera os segundos de que ele precisava, e o aviso de “no ar” fez o papel do tally que faltava. Na entrega dos diplomas, o roteiro ajudou: a ordem dos nomes era conhecida, e o diretor preparava a câmera antes de cada chamada.</p>
+
+  <h3>Exemplo 3. A tela preta depois do vídeo de avisos</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Culto com transmissão. Vídeo de avisos de dois minutos, disparado do computador da mídia.</dd></div>
+    <div><dt>Sintoma</dt><dd>O vídeo entrou sem som na transmissão. Quando acabou, a tela ficou preta por seis segundos, até alguém cortar para uma câmera.</dd></div>
+    <div><dt>Causa</dt><dd>Ninguém avisou o operador de áudio. Durante o vídeo, o operador de corte usou o preview para conferir a letra da música seguinte, e ninguém acompanhava o tempo do vídeo.</dd></div>
+    <div><dt>O que foi feito</dt><dd>O roteiro passou a marcar o áudio da mídia. A câmera geral fica no preview desde a entrada do vídeo. O operador de mídia avisa “dez segundos”. Os gráficos são conferidos na janela da fonte, no multiview.</dd></div>
+    <div><dt>Resultado</dt><dd>Nos cultos seguintes, o vídeo entrou com som, e a volta para a câmera saiu no último quadro.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> Depois do corte para o vídeo, o switcher deixa no preview a fonte que estava no ar. Era só não mexer: a câmera já estava pronta para a volta. O erro foi ocupar o preview com outra coisa. Registrado com a causa “Roteiro”, o erro mostrou que faltou combinação entre as três funções, e não atenção de quem apertou o botão.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Cortar sem motivo</h4><p>O operador troca de câmera a cada poucos segundos, “para não ficar parado”, mesmo na pregação.</p><p class="fix"><b>Correção:</b> pergunte o que mudou no palco. Se nada mudou, segure o plano.</p></div>
+    <div><h4>Comando sem preparo</h4><p>O diretor diz “vai na 3”, e a câmera 3 vai ao ar no meio de um ajuste.</p><p class="fix"><b>Correção:</b> sempre duas partes: “prepara 3”, conferência no preview, “corta”.</p></div>
+    <div><h4>Mexer na câmera com o tally vermelho</h4><p>O operador de câmera aproveita para corrigir o foco ou buscar outro quadro enquanto está no ar.</p><p class="fix"><b>Correção:</b> luz vermelha, plano seguro. Ajuste só com a luz apagada ou a pedido do diretor.</p></div>
+    <div><h4>Chegar atrasado na fala</h4><p>O corte para quem vai falar ou cantar chega quando a frase já está pela metade.</p><p class="fix"><b>Correção:</b> siga o roteiro e a letra, e prepare a câmera antes da virada. O corte chega um instante antes.</p></div>
+    <div><h4>Cortar entre planos parecidos</h4><p>Dois planos médios da mesma pessoa, um depois do outro. A pessoa “pula” na tela.</p><p class="fix"><b>Correção:</b> mude bem o tamanho do plano ou o ângulo. Distribua planos de base diferentes entre as câmeras.</p></div>
+    <div><h4>Esquecer a legenda no ar</h4><p>O nome do pastor continua na tela durante o louvor, ou a letra fica depois de a música acabar.</p><p class="fix"><b>Correção:</b> todo “entra” tem um “sai”. Confira o key final no program depois de cada troca de momento.</p></div>
+    <div><h4>Deixar o FTB ativo</h4><p>Depois da abertura, a tela continua preta, e a equipe procura o defeito nas câmeras e nos cabos.</p><p class="fix"><b>Correção:</b> com tela preta e fontes normais no multiview, olhe primeiro o botão FTB.</p></div>
+    <div><h4>Não ter para onde voltar depois do vídeo</h4><p>O vídeo termina, e o preview está com um gráfico, com a própria mídia ou com uma câmera sem plano.</p><p class="fix"><b>Correção:</b> câmera geral no preview do começo ao fim do vídeo, e aviso de “dez segundos” do operador de mídia.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>O corte é o ponto em que tudo o que foi captado se encontra. Ele depende de câmeras bem operadas e de um sinal estável, e entrega o programa pronto para a transmissão, para o telão e para a gravação.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Enquadramento-e-Movimento/treinamento-enquadramento-e-movimento.html">Enquadramento e movimento de câmera</a>: os tipos de plano, a posição das câmeras, a regra do eixo e os pedidos de enquadramento.</li>
+        <li><a href="../Exposicao/treinamento-exposicao.html">Exposição</a>: câmeras com o mesmo brilho, para o corte não “piscar”.</li>
+        <li><a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>: foco confiável e balanço de branco igual em todas as câmeras.</li>
+        <li><a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>: luz que serve a todos os ângulos de câmera.</li>
+        <li><a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>: o formato único do sistema, os cabos e o diagnóstico de fonte sem sinal.</li>
+        <li><a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>: as letras, os slides e os vídeos que entram como fonte e como key.</li>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>: o roteiro técnico, do qual sai o roteiro de corte.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: o program é o que o codificador envia para a internet, junto com o áudio.</li>
+        <li><a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>: a imagem das câmeras que vai ao telão da sala, pelo program ou por saída auxiliar.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: os avisos de entrada de vídeo com som, combinados com o operador de áudio.</li>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>: o registro de erros, que alimenta a reunião de revisão.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira antes de o evento começar; o último item fica para o fim. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>O roteiro de corte está pronto, com fonte principal e alternativa em cada momento.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>Cada função da escala tem um nome, e todos conhecem as palavras de comando.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>Cada câmera tem um plano de base, e a câmera geral é o plano de segurança.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>Todas as fontes aparecem no multiview, no formato do sistema e com o nome certo.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>As câmeras foram igualadas em exposição e em cor, com a luz do evento.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>O tally e o intercom foram testados com cada operador de câmera.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>As legendas, as letras e os vídeos foram testados no preview, com a grafia dos nomes conferida.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>O som de cada vídeo foi combinado com o operador de áudio.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>O tempo da fusão está ajustado, e o FTB e o key final começam como combinado.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>O telão da sala e a transmissão recebem, cada um, a saída certa.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>As gravações foram iniciadas, com espaço conferido, e os contadores estão andando.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>Os erros do evento foram anotados com a hora, para a reunião de revisão.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. O que você faz agora?</h3>
+  <p>Cada frase descreve um instante do evento. Escolha a ação: <strong>C</strong>, corte seco; <strong>F</strong>, fusão; <strong>S</strong>, segurar o plano que está no ar; <strong>G</strong>, pôr um gráfico (legenda, texto ou letra).</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"C": "Corte seco", "F": "Fusão", "S": "Segurar o plano", "G": "Gráfico"},
+ "itens": [
+  {"t": "Louvor rápido. A cantora termina a frase, e o guitarrista começa o solo. A câmera 3 está pronta, no preview, com a guitarra.", "a": "C", "w": "Mudou quem conduz a música, e o andamento é rápido: corte seco, na virada."},
+  {"t": "Música lenta de adoração. Você quer passar do plano médio da cantora para o geral, com a congregação de mãos levantadas.", "a": "F", "w": "Momento suave e mudança de tamanho de plano: a fusão de meio a um segundo acompanha o clima."},
+  {"t": "O pastor está no meio de uma frase, e a câmera 3 oferece um bom plano da congregação.", "a": "S", "w": "Corte no meio da frase parece engano. Espere a pausa e, então, faça a saída curta para a reação."},
+  {"t": "Uma convidada começa a dar um testemunho. Quem assiste de casa não sabe quem ela é.", "a": "G", "w": "É hora da legenda de nome, no terço de baixo, por alguns segundos. A câmera continua nela."},
+  {"t": "A câmera 2 está no preview, ainda fazendo zoom e procurando o foco. O diretor quer esse plano.", "a": "S", "w": "Nada vai ao ar sem estar pronto no preview. Segure o plano atual até a câmera 2 parar."},
+  {"t": "Na pregação, o pastor diz: “Vamos ler juntos este versículo”. A transmissão mostra o plano médio dele.", "a": "G", "w": "O texto entra como gráfico, para quem está em casa acompanhar a leitura."},
+  {"t": "Entrevista no palco. A convidada termina a resposta, e o entrevistador começa uma nova pergunta.", "a": "C", "w": "Mudou quem fala: corte seco para ele, de preferência um instante antes da pergunta."},
+  {"t": "Fim do culto. Do plano geral da igreja, você vai para a tela de encerramento.", "a": "F", "w": "Passagem de um momento para outro, no encerramento: fusão, mais lenta do que entre câmeras."},
+  {"t": "A câmera no ar mostra bem o pregador. As outras duas estão mudando de quadro, a pedido do diretor. O plano já dura 20 segundos.", "a": "S", "w": "Na pregação, 20 segundos é pouco, e não há outro plano pronto. Segure."},
+  {"t": "Louvor rápido, entrada do refrão. A câmera 1 está no preview com o geral da banda e da congregação.", "a": "C", "w": "Virada da música com câmera pronta: corte seco, no tempo forte."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: dirija um minuto, grave e reveja</h3>
+  <p>Você vai precisar de um switcher com preview (pode ser o OBS no modo estúdio), duas ou três câmeras, ou celulares ligados como câmera, uma ou duas pessoas para operar, e a planilha de apoio. O assunto pode ser alguém lendo um texto e outra pessoa ouvindo, ou um ensaio da banda.</p>
+  <ol>
+    <li>Preencha um roteiro curto na aba “Roteiro de corte”, com três momentos: abertura, fala e encerramento. Dê um plano de base a cada câmera.</li>
+    <li>Confira as fontes no multiview. Ache no painel as duas fileiras, o CUT, o AUTO e o FTB. Marque a fusão em um segundo.</li>
+    <li>Sem gravar, faça dez cortes só com a voz: “prepara 2”, conferência no preview, “corta”. Quem opera a câmera só se mexe quando está livre.</li>
+    <li>Ponha uma legenda de nome no ar pelo key, deixe por cinco segundos e tire. Confira no program que ela saiu.</li>
+    <li>Inicie a gravação do programa e dirija os três momentos de verdade, por três a cinco minutos. Termine com fade para preto.</li>
+    <li>Assista à gravação com a equipe. Para cada erro, preencha uma linha da aba “Registro de erros”: a hora, o tipo, a causa e o que fazer na próxima vez.</li>
+    <li>Repita o passo 5 e compare. Conte quantos cortes chegaram atrasados na primeira e na segunda gravação.</li>
+  </ol>
+  <p>Sozinho, pratique com a gravação de um evento: diga em voz alta “prepara” e “corta” onde você cortaria, e compare com o corte que foi ao ar.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Corte-ao-Vivo-modelo.xlsx">Corte-ao-Vivo-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Roteiro de corte</strong></td><td>Até 20 momentos do evento, com fonte principal, alternativas, gráfico e transição; as seis câmeras com posição e operador; e os gravadores.</td><td>Hora de início de cada momento, ritmo sugerido, pendências de cada linha, minutos de cada câmera como principal e espaço necessário para gravar.</td></tr>
+        <tr><td><strong>Equipe</strong></td><td>A escala, com função, nome, posto, intercom e substituto, e as palavras de comando combinadas.</td><td>Situação de cada linha e se há quem dirija e quem corte.</td></tr>
+        <tr><td><strong>Registro de erros</strong></td><td>Os erros vistos na revisão: hora, tipo, fonte, causa, gravidade e ação para o próximo evento.</td><td>Contagem por tipo e por causa, o mais frequente de cada um e as ações em aberto.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Ritmo por tipo de momento, transições, linguagem de comando, tally e taxas de gravação.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Roteiro</strong></td><td>O roteiro do exemplo 1, como estava na quinta-feira, com as quatro pendências e a falta de espaço no cartão.</td><td>Os mesmos resultados da aba Roteiro de corte.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>No alto do roteiro ficam três parâmetros, regra prática deste material, que podem ser trocados: a duração que faz um momento sem alternativa receber alerta (5 min), a margem da gravação (30 min) e a parcela do tempo que faz uma câmera receber aviso de concentração (60%).</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Área segura</dt><dd>Região central do quadro, com margem de 5% a 10% das bordas, onde textos e gráficos não correm o risco de ser cortados pela tela.</dd></div>
+    <div><dt>Câmera isolada (ISO)</dt><dd>Gravação inteira de uma câmera, separada do programa, para corrigir o corte na edição.</dd></div>
+    <div><dt>Eixo</dt><dd>Linha de ação entre duas pessoas, ou entre quem fala e quem ouve. As câmeras ficam de um mesmo lado dela.</dd></div>
+    <div><dt>Fade para preto (FTB)</dt><dd>Escurecimento de toda a saída de programa, inclusive os gráficos.</dd></div>
+    <div><dt>Fusão (mix)</dt><dd>Transição em que uma imagem desaparece enquanto a outra aparece.</dd></div>
+    <div><dt>Intercom</dt><dd>Sistema de fones e microfones pelo qual o diretor fala com a equipe.</dd></div>
+    <div><dt>Key</dt><dd>Camada colocada sobre a imagem, transparente onde o fundo deve aparecer. O key final (DSK) fica acima de tudo.</dd></div>
+    <div><dt>Legenda (lower third)</dt><dd>Gráfico no terço de baixo da tela, com o nome de quem fala ou a letra da música.</dd></div>
+    <div><dt>Multiview</dt><dd>Tela que mostra o preview, o program e todas as fontes ao mesmo tempo.</dd></div>
+    <div><dt>PiP (picture-in-picture)</dt><dd>Uma imagem reduzida, em janela, sobre outra imagem.</dd></div>
+    <div><dt>Plano de base</dt><dd>Quadro combinado ao qual a câmera volta quando está livre. O da câmera geral serve de plano de segurança.</dd></div>
+    <div><dt>Preview (PVW)</dt><dd>A próxima imagem, preparada e conferida pela equipe antes de ir ao ar.</dd></div>
+    <div><dt>Program (PGM)</dt><dd>A imagem que está no ar: vai para a transmissão, para o telão e para a gravação.</dd></div>
+    <div><dt>Salto (jump cut)</dt><dd>Corte entre dois planos parecidos da mesma pessoa, que parece um defeito.</dd></div>
+    <div><dt>Switcher</dt><dd>Equipamento ou programa que escolhe a fonte que vai ao ar e aplica transições e gráficos.</dd></div>
+    <div><dt>Tally</dt><dd>Luz que avisa se a câmera está no ar (vermelha) ou no preview (verde).</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>

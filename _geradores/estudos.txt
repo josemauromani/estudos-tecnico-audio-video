@@ -1,0 +1,22 @@
+# nome | pasta | arquivo HTML | arquivo XLSX
+som|Som-e-Sinal|treinamento-som-e-sinal.html|Som-e-Sinal-modelo.xlsx
+cabos|Cabos-e-Conexoes|treinamento-cabos-e-conexoes.html|Cabos-e-Conexoes-modelo.xlsx
+mic|Microfones|treinamento-microfones.html|Microfones-modelo.xlsx
+caixas|Caixas-e-Amplificacao|treinamento-caixas-e-amplificacao.html|Caixas-e-Amplificacao-modelo.xlsx
+mesa|Mesa-de-Som|treinamento-mesa-de-som.html|Mesa-de-Som-modelo.xlsx
+ganho|Ganho-e-Fader|treinamento-ganho-e-fader.html|Ganho-e-Fader-modelo.xlsx
+eq|Equalizacao|treinamento-equalizacao.html|Equalizacao-modelo.xlsx
+din|Dinamica-e-Efeitos|treinamento-dinamica-e-efeitos.html|Dinamica-e-Efeitos-modelo.xlsx
+ret|Monitores-e-Retornos|treinamento-monitores-e-retornos.html|Monitores-e-Retornos-modelo.xlsx
+fb|Microfonia|treinamento-microfonia.html|Microfonia-modelo.xlsx
+semfio|Microfones-sem-Fio|treinamento-microfones-sem-fio.html|Microfones-sem-Fio-modelo.xlsx
+pass|Passagem-de-Som|treinamento-passagem-de-som.html|Passagem-de-Som-modelo.xlsx
+expo|Exposicao|treinamento-exposicao.html|Exposicao-modelo.xlsx
+lente|Lentes-Foco-e-Cor|treinamento-lentes-foco-e-cor.html|Lentes-Foco-e-Cor-modelo.xlsx
+quadro|Enquadramento-e-Movimento|treinamento-enquadramento-e-movimento.html|Enquadramento-e-Movimento-modelo.xlsx
+luz|Iluminacao|treinamento-iluminacao.html|Iluminacao-modelo.xlsx
+sinal|Sinais-de-Video|treinamento-sinais-de-video.html|Sinais-de-Video-modelo.xlsx
+corte|Corte-ao-Vivo|treinamento-corte-ao-vivo.html|Corte-ao-Vivo-modelo.xlsx
+live|Transmissao-ao-Vivo|treinamento-transmissao-ao-vivo.html|Transmissao-ao-Vivo-modelo.xlsx
+proj|Projecao-e-Midia|treinamento-projecao-e-midia.html|Projecao-e-Midia-modelo.xlsx
+oper|Operacao-do-Evento|treinamento-operacao-do-evento.html|Operacao-do-Evento-modelo.xlsx

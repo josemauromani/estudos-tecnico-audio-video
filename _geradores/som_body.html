@@ -1,0 +1,950 @@
+<div class="page" lang="pt-BR" data-estudo="som">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="blue w">Hz</span><span class="amber w">dB</span></div>
+  <h1>Som, frequência e decibel</h1>
+  <p class="lead">Um guia de estudo para entender o que é o som que você controla, como ele é medido em hertz e em decibéis, e o que a distância, a fase e o tempo de exposição fazem com ele.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O que é o som</a></li>
+    <li><a href="#frequencia">Frequência e faixas</a></li>
+    <li><a href="#decibel">Amplitude, volume e decibel</a></li>
+    <li><a href="#regras">Regras práticas e distância</a></li>
+    <li><a href="#fase">Fase e polaridade</a></li>
+    <li><a href="#audicao">Nível sonoro e audição</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O que é o som</h2>
+  <p>Som é uma vibração que viaja pelo ar. A prega vocal, a corda do violão, a pele do tambor e o cone do alto-falante vibram e empurram o ar em volta. O ar é comprimido, depois se expande, e essa variação de pressão passa adiante, de camada em camada, até chegar ao ouvido ou ao microfone. No ar, a 20 °C, ela anda a cerca de 343 metros por segundo.</p>
+  <p>Pense em uma pedra jogada em um lago. As ondas se afastam em círculos, mas a água não sai do lugar: uma folha na superfície só sobe e desce. Com o som é igual. O ar não viaja da caixa até o público. O que viaja é a onda de pressão.</p>
+  <p>Uma onda sonora tem duas medidas principais. A <strong>frequência</strong>, em hertz <span class="k blue w">Hz</span>, diz se o som é grave ou agudo. O <strong>nível</strong>, em decibéis <span class="k amber w">dB</span>, diz se ele é fraco ou forte. Quase tudo o que o operador faz mexe em uma das duas: o equalizador escolhe frequências; o ganho, os faders e o amplificador mudam o nível. Há uma terceira medida, que aparece quando dois sons se encontram: o <strong>tempo</strong> de chegada de cada um, de onde vêm a fase e a polaridade.</p>
+  <p>No sistema de som, a onda muda de forma: vira tensão no microfone, números na mesa digital, e volta a ser pressão na caixa. A frequência não muda no caminho. O nível é medido de um jeito diferente em cada trecho, e por isso existem vários “decibéis”.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 256" role="img" aria-label="A cadeia do som em sete blocos ligados por setas: a fonte, que é a voz ou o instrumento; o ar, onde o som é uma onda de pressão; o microfone, que transforma pressão em tensão; o sinal elétrico, uma tensão que varia; o sinal digital, feito de números; a caixa de som, que transforma tensão em pressão; e o ar até o ouvido, de novo uma onda de pressão. Abaixo, como se mede o nível em cada trecho: no ar, em dB SPL, a pressão sonora; no sinal elétrico, em dBu, a tensão; no sinal digital, em dBFS, o fundo de escala; e no ar de novo em dB SPL. Um quadro resume: a frequência, em hertz, é a mesma em toda a cadeia; o nível, em decibéis, muda de forma e de unidade em cada trecho.">
+        <defs><marker id="sm1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="bx" x="18" y="24" width="108" height="56"/>
+        <text class="b" x="72" y="48" font-size="12" text-anchor="middle">Fonte</text>
+        <text class="mu" x="72" y="66" font-size="10.5" text-anchor="middle">voz, instrumento</text>
+        <line class="ln" x1="128" y1="52" x2="141" y2="52" marker-end="url(#sm1)"/>
+        <rect class="bx-blue" x="144" y="24" width="108" height="56"/>
+        <text class="b" x="198" y="48" font-size="12" text-anchor="middle">Ar</text>
+        <text class="mu" x="198" y="66" font-size="10.5" text-anchor="middle">onda de pressão</text>
+        <line class="ln" x1="254" y1="52" x2="267" y2="52" marker-end="url(#sm1)"/>
+        <rect class="bx" x="270" y="24" width="108" height="56"/>
+        <text class="b" x="324" y="48" font-size="12" text-anchor="middle">Microfone</text>
+        <text class="mu" x="324" y="66" font-size="10.5" text-anchor="middle">pressão → tensão</text>
+        <line class="ln" x1="380" y1="52" x2="393" y2="52" marker-end="url(#sm1)"/>
+        <rect class="bx-amber" x="396" y="24" width="108" height="56"/>
+        <text class="b" x="450" y="48" font-size="12" text-anchor="middle">Sinal elétrico</text>
+        <text class="mu" x="450" y="66" font-size="10.5" text-anchor="middle">tensão que varia</text>
+        <line class="ln" x1="506" y1="52" x2="519" y2="52" marker-end="url(#sm1)"/>
+        <rect class="bx-teal" x="522" y="24" width="108" height="56"/>
+        <text class="b" x="576" y="48" font-size="12" text-anchor="middle">Sinal digital</text>
+        <text class="mu" x="576" y="66" font-size="10.5" text-anchor="middle">números</text>
+        <line class="ln" x1="632" y1="52" x2="645" y2="52" marker-end="url(#sm1)"/>
+        <rect class="bx" x="648" y="24" width="108" height="56"/>
+        <text class="b" x="702" y="48" font-size="12" text-anchor="middle">Caixa de som</text>
+        <text class="mu" x="702" y="66" font-size="10.5" text-anchor="middle">tensão → pressão</text>
+        <line class="ln" x1="758" y1="52" x2="771" y2="52" marker-end="url(#sm1)"/>
+        <rect class="bx-blue" x="774" y="24" width="108" height="56"/>
+        <text class="b" x="828" y="48" font-size="12" text-anchor="middle">Ar e ouvido</text>
+        <text class="mu" x="828" y="66" font-size="10.5" text-anchor="middle">onda de pressão</text>
+
+        <text class="mono mu" x="18" y="108" font-size="10.5">COMO SE MEDE O NÍVEL</text>
+        <line class="ref" x1="198" y1="84" x2="198" y2="122"/><line class="ref" x1="450" y1="84" x2="450" y2="122"/>
+        <line class="ref" x1="576" y1="84" x2="576" y2="122"/><line class="ref" x1="828" y1="84" x2="828" y2="122"/>
+        <text class="t-blue b" x="198" y="140" font-size="13" text-anchor="middle">dB SPL</text>
+        <text class="mu" x="198" y="157" font-size="10.5" text-anchor="middle">pressão sonora</text>
+        <text class="t-amber b" x="450" y="140" font-size="13" text-anchor="middle">dBu</text>
+        <text class="mu" x="450" y="157" font-size="10.5" text-anchor="middle">tensão</text>
+        <text class="t-teal b" x="576" y="140" font-size="13" text-anchor="middle">dBFS</text>
+        <text class="mu" x="576" y="157" font-size="10.5" text-anchor="middle">fundo de escala</text>
+        <text class="t-blue b" x="828" y="140" font-size="13" text-anchor="middle">dB SPL</text>
+        <text class="mu" x="828" y="157" font-size="10.5" text-anchor="middle">pressão sonora</text>
+
+        <rect class="bx" x="18" y="180" width="864" height="58"/>
+        <text x="32" y="204" font-size="12"><tspan class="b">Frequência (Hz):</tspan> é a mesma em toda a cadeia. Um lá de 440 Hz na voz é 440 Hz no ar, no cabo, na mesa e na caixa.</text>
+        <text x="32" y="224" font-size="12"><tspan class="b">Nível (dB):</tspan> muda de forma e de unidade em cada trecho. É ele que o ganho, os faders e o amplificador controlam.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> O som vira tensão, vira números e volta a ser som. A frequência não muda no caminho. O nível é medido com uma unidade diferente em cada trecho.</figcaption>
+  </figure>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>Antes de mexer em um botão, pergunte de que tipo é o problema: de frequência, de nível ou de tempo. Som embolado é assunto de frequência. Som fraco no fundo é assunto de nível e de distância. Grave que some quando duas caixas tocam juntas é assunto de tempo.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="frequencia">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>Frequência e faixas</h2>
+  <p>A onda sonora repete um ciclo: a pressão sobe, desce e volta ao ponto de partida. A <strong>frequência</strong> é o número de ciclos por segundo, medido em hertz (Hz). Mil hertz são um quilo-hertz (1 kHz). Poucos ciclos por segundo dão um som grave. Muitos ciclos dão um som agudo. O ouvido de um jovem percebe de 20 Hz a 20 kHz, mais ou menos. Com a idade e com a exposição a som forte, o limite de cima cai: muitos adultos não passam de 14 ou 16 kHz.</p>
+  <p>A <strong>amplitude</strong> é o tamanho da variação de pressão em cada ciclo. Ela tem a ver com a força do som, e não com a nota: uma nota pode ser tocada fraca ou forte sem mudar de frequência. Frequência e amplitude são independentes. Um grave de 100 Hz faz 100 ciclos por segundo, e cada ciclo dura 10 ms; um som duas oitavas acima, de 400 Hz, faz quatro vezes mais ciclos, com 2,5 ms cada um.</p>
+
+
+  <h3>O tamanho da onda</h3>
+  <p>Como o som anda sempre na mesma velocidade, cada ciclo ocupa um trecho de ar: é o <strong>comprimento de onda</strong>. Ele é a velocidade dividida pela frequência: <code>comprimento = 343 ÷ frequência</code>, em metros. Um grave de 50 Hz tem quase 7 metros. Um agudo de 10 kHz tem pouco mais de 3 centímetros.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Frequência</th><th class="n">20 Hz</th><th class="n">50 Hz</th><th class="n">100 Hz</th><th class="n">250 Hz</th><th class="n">1 kHz</th><th class="n">4 kHz</th><th class="n">10 kHz</th></tr></thead>
+      <tbody>
+        <tr><td>Duração de um ciclo</td><td class="num n">50 ms</td><td class="num n">20 ms</td><td class="num n">10 ms</td><td class="num n">4 ms</td><td class="num n">1 ms</td><td class="num n">0,25 ms</td><td class="num n">0,1 ms</td></tr>
+        <tr><td>Comprimento de onda</td><td class="num n">17 m</td><td class="num n">6,9 m</td><td class="num n">3,4 m</td><td class="num n">1,4 m</td><td class="num n">34 cm</td><td class="num n">8,6 cm</td><td class="num n">3,4 cm</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O tamanho da onda explica muito do que acontece na sala:</p>
+  <ul>
+    <li><strong>Os graves contornam os obstáculos.</strong> Uma onda de metros passa em volta de pessoas, colunas e da própria caixa. Por isso, atrás das caixas, ouve-se um som grave e sem definição.</li>
+    <li><strong>Os agudos andam em feixe.</strong> Uma onda de centímetros é barrada por qualquer coisa do tamanho dela. Quem não enxerga a corneta da caixa perde os agudos.</li>
+    <li><strong>Os graves dependem da sala.</strong> Quando o comprimento de onda se parece com as medidas da sala, há pontos com grave de sobra e pontos com grave de menos. Dois passos mudam o que se ouve.</li>
+  </ul>
+  <p>A cobertura e a posição das caixas estão no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>.</p>
+
+  <h3>Oitavas e harmônicos</h3>
+  <p>O ouvido percebe proporções, e não passos iguais de hertz. Cada vez que a frequência dobra, a nota sobe uma <strong>oitava</strong>: o lá de 220, o de 440 e o de 880 Hz soam como a mesma nota, cada vez mais aguda. De 20 Hz a 20 kHz cabem cerca de dez oitavas. Por isso equalizadores e analisadores usam uma escala em que 100 Hz, 1 kHz e 10 kHz ficam à mesma distância.</p>
+  <p>Uma nota quase nunca é uma frequência só. A corda que vibra em 110 Hz produz também 220, 330, 440 Hz e assim por diante. A mais grave é a <strong>fundamental</strong>, que define a nota. As outras são os <strong>harmônicos</strong>, que definem o timbre: é por eles que violão e teclado soam diferentes na mesma nota, e que um baixo ainda é ouvido em uma caixa pequena que mal reproduz a fundamental.</p>
+
+  <h3>As faixas: graves, médios e agudos</h3>
+  <p>Para conversar sobre som, a área divide o espectro em faixas. Os limites variam um pouco de um autor para outro. Os deste estudo são os da figura e da tabela a seguir.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 378" role="img" aria-label="Mapa do espectro audível, de 20 hertz a 20 quilo-hertz, em escala logarítmica. No alto, seis faixas: subgrave, de 20 a 60 hertz; grave, de 60 a 250; médio-grave, de 250 a 500; médio, de 500 a 2 mil; médio-agudo, de 2 mil a 6 mil; e agudo, de 6 mil a 20 mil hertz. Abaixo, uma barra para cada fonte, com a parte forte nas notas fundamentais e a parte clara nos harmônicos, consoantes, ataque e brilho. Voz falada: fundamentais de 85 a 255 hertz, consoantes até 8 mil. Voz cantada: de 80 a 1.050 hertz, harmônicos até 10 mil. Violão: de 82 a mil hertz, brilho até 10 mil. Guitarra: de 82 a 1.200 hertz, harmônicos até 6 mil. Baixo elétrico: de 41 a 400 hertz, harmônicos até 5 mil. Teclado e piano: de 27 a 4.200 hertz, harmônicos até 10 mil. Bumbo: de 50 a 100 hertz, ataque até 5 mil. Caixa da bateria: de 150 a 250 hertz, esteira até 10 mil. Pratos e chimbal: sem nota definida, com energia de 300 a 16 mil hertz.">
+        <rect class="bx-slate" x="190" y="16" width="108.2" height="34"/>
+        <text class="b" x="244" y="37" font-size="11" text-anchor="middle">Subgrave</text>
+        <rect class="bx-blue" x="298.2" y="16" width="140.4" height="34"/>
+        <text class="b" x="368" y="37" font-size="11" text-anchor="middle">Grave</text>
+        <rect class="bx-teal" x="438.6" y="16" width="68.3" height="34"/>
+        <text class="b" x="473" y="30" font-size="10.5" text-anchor="middle">Médio-</text>
+        <text class="b" x="473" y="43" font-size="10.5" text-anchor="middle">grave</text>
+        <rect class="bx-amber" x="506.9" y="16" width="136.4" height="34"/>
+        <text class="b" x="575" y="37" font-size="11" text-anchor="middle">Médio</text>
+        <rect class="bx-purple" x="643.3" y="16" width="108.2" height="34"/>
+        <text class="b" x="697" y="37" font-size="11" text-anchor="middle">Médio-agudo</text>
+        <rect class="bx-red" x="751.5" y="16" width="118.5" height="34"/>
+        <text class="b" x="811" y="37" font-size="11" text-anchor="middle">Agudo</text>
+        <g class="grid">
+          <line x1="190" y1="54" x2="190" y2="304"/><line x1="298.2" y1="54" x2="298.2" y2="304"/><line x1="438.6" y1="54" x2="438.6" y2="304"/>
+          <line x1="506.9" y1="54" x2="506.9" y2="304"/><line x1="643.3" y1="54" x2="643.3" y2="304"/><line x1="751.5" y1="54" x2="751.5" y2="304"/><line x1="870" y1="54" x2="870" y2="304"/>
+        </g>
+
+        <g font-size="12">
+          <text class="b" x="18" y="78">Voz falada</text><text class="b" x="18" y="104">Voz cantada</text><text class="b" x="18" y="130">Violão</text>
+          <text class="b" x="18" y="156">Guitarra</text><text class="b" x="18" y="182">Baixo elétrico</text><text class="b" x="18" y="208">Teclado e piano</text>
+          <text class="b" x="18" y="234">Bumbo</text><text class="b" x="18" y="260">Caixa da bateria</text><text class="b" x="18" y="286">Pratos e chimbal</text>
+        </g>
+        <rect class="lv-blue" x="332.4" y="68" width="447.4" height="12"/><rect class="f-blue" x="332.4" y="68" width="108.2" height="12"/>
+        <rect class="lv-blue" x="326.5" y="94" width="475.2" height="12"/><rect class="f-blue" x="326.5" y="94" width="253.4" height="12"/>
+        <rect class="lv-blue" x="328.9" y="120" width="472.8" height="12"/><rect class="f-blue" x="328.9" y="120" width="246.2" height="12"/>
+        <rect class="lv-blue" x="328.9" y="146" width="422.6" height="12"/><rect class="f-blue" x="328.9" y="146" width="264.2" height="12"/>
+        <rect class="lv-blue" x="260.7" y="172" width="472.8" height="12"/><rect class="f-blue" x="260.7" y="172" width="224.2" height="12"/>
+        <rect class="lv-blue" x="221.3" y="198" width="580.4" height="12"/><rect class="f-blue" x="221.3" y="198" width="494.8" height="12"/>
+        <rect class="lv-blue" x="280.2" y="224" width="453.3" height="12"/><rect class="f-blue" x="280.2" y="224" width="68.2" height="12"/>
+        <rect class="lv-blue" x="388.4" y="250" width="413.3" height="12"/><rect class="f-blue" x="388.4" y="250" width="50.2" height="12"/>
+        <rect class="lv-blue" x="456.6" y="276" width="391.4" height="12"/>
+
+        <line class="ln-mu" x1="190" y1="304" x2="870" y2="304"/>
+        <path class="ln-mu" stroke-width="1" d="M190 304 V310 M280.2 304 V310 M348.4 304 V310 M416.7 304 V310 M506.9 304 V310 M575.1 304 V310 M643.3 304 V310 M733.5 304 V310 M801.7 304 V310 M870 304 V310"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="190" y="324">20</text><text class="mu" x="280.2" y="324">50</text><text class="mu" x="348.4" y="324">100</text>
+          <text class="mu" x="416.7" y="324">200</text><text class="mu" x="506.9" y="324">500</text><text class="mu" x="575.1" y="324">1 k</text>
+          <text class="mu" x="643.3" y="324">2 k</text><text class="mu" x="733.5" y="324">5 k</text><text class="mu" x="801.7" y="324">10 k</text><text class="mu" x="866" y="324">20 k</text>
+        </g>
+        <text class="mu" x="530" y="344" font-size="11" text-anchor="middle">frequência, em Hz (cada dobro é uma oitava)</text>
+        <rect class="f-blue" x="190" y="356" width="16" height="12"/>
+        <text x="214" y="366" font-size="11">notas fundamentais</text>
+        <rect class="lv-blue" x="370" y="356" width="16" height="12"/>
+        <text x="394" y="366" font-size="11">harmônicos, consoantes, ataque e brilho</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> Onde cada fonte ocupa o espectro. As notas ficam quase todas abaixo de 1 kHz. O que faz a voz ser entendida e o instrumento ter definição fica acima disso. As faixas são típicas e variam com o instrumento e com quem toca.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%">Faixa</th><th style="width:16%">De … até</th><th style="width:33%">O que fica ali</th><th>Como se percebe</th></tr></thead>
+      <tbody>
+        <tr><td class="slate"><strong>Subgrave</strong></td><td class="num">20 a 60 Hz</td><td>O fundo do bumbo, as notas mais graves do baixo e do teclado.</td><td>Mais sentido no corpo do que ouvido.</td></tr>
+        <tr><td class="blue"><strong>Grave</strong></td><td class="num">60 a 250 Hz</td><td>Bumbo, baixo, as fundamentais da voz masculina, o zumbido da rede elétrica (60 Hz e múltiplos).</td><td>Peso. Em excesso, som pesado e sem contorno.</td></tr>
+        <tr><td class="teal"><strong>Médio-grave</strong></td><td class="num">250 a 500 Hz</td><td>O corpo das vozes, do violão, da caixa da bateria e do teclado.</td><td>Calor. Em excesso, som embolado.</td></tr>
+        <tr><td class="amber"><strong>Médio</strong></td><td class="num">500 Hz a 2 kHz</td><td>As vogais e os primeiros harmônicos de quase todos os instrumentos.</td><td>As fontes disputam espaço. Em excesso, som de telefone.</td></tr>
+        <tr><td class="purple"><strong>Médio-agudo</strong></td><td class="num">2 a 6 kHz</td><td>As consoantes, o ataque da palheta e do batedor do bumbo.</td><td>Clareza da palavra. O ouvido é mais sensível aqui.</td></tr>
+        <tr><td class="red"><strong>Agudo</strong></td><td class="num">6 a 20 kHz</td><td>Pratos, o brilho das cordas, o ar da voz e os sons de “s”.</td><td>Brilho. Em excesso, som áspero, que cansa.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:34%">Fonte</th><th style="width:26%">Notas fundamentais</th><th>Vai além com</th></tr></thead>
+      <tbody>
+        <tr><td>Voz falada de homem</td><td class="num">85 a 180 Hz</td><td>Consoantes, de 2 a 8 kHz: é por elas que a palavra é entendida</td></tr>
+        <tr><td>Voz falada de mulher</td><td class="num">165 a 255 Hz</td><td>Consoantes, de 2 a 8 kHz</td></tr>
+        <tr><td>Voz cantada, do baixo ao soprano</td><td class="num">80 a 1.050 Hz</td><td>Harmônicos e “s” até perto de 10 kHz</td></tr>
+        <tr><td>Violão</td><td class="num">82 a 1.000 Hz</td><td>Brilho das cordas até perto de 10 kHz</td></tr>
+        <tr><td>Guitarra</td><td class="num">82 a 1.200 Hz</td><td>Harmônicos até 5 ou 6 kHz</td></tr>
+        <tr><td>Baixo elétrico de 4 cordas (o de 5 desce a 31 Hz)</td><td class="num">41 a 400 Hz</td><td>Ataque e harmônicos até perto de 5 kHz</td></tr>
+        <tr><td>Teclado e piano</td><td class="num">27 a 4.200 Hz</td><td>Harmônicos até perto de 10 kHz</td></tr>
+        <tr><td>Bumbo</td><td class="num">50 a 100 Hz</td><td>Ataque do batedor, de 2 a 5 kHz</td></tr>
+        <tr><td>Caixa da bateria</td><td class="num">150 a 250 Hz</td><td>Esteira, de 3 a 10 kHz</td></tr>
+        <tr><td>Pratos e chimbal</td><td>Sem nota definida</td><td>Energia de 300 Hz a 16 kHz, mais forte acima de 6 kHz</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>As extensões são típicas: um cantor, um instrumento ou uma afinação diferente mudam os limites. Use os números para saber onde procurar, e confirme com o ouvido. O que cortar e o que realçar em cada faixa está no estudo <a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>, e a frequência de um apito, no estudo <a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="decibel">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Amplitude, volume e decibel</h2>
+  <p>A amplitude é uma grandeza física: o quanto a pressão do ar varia. O <strong>volume</strong> é a sensação de quem ouve. Os dois andam juntos, mas não são a mesma coisa. A sensação depende também da frequência, porque o ouvido é mais sensível entre 2 e 5 kHz e menos sensível aos graves, e da duração do som.</p>
+  <p>Medir a amplitude em unidades comuns seria pouco prático. Entre o som mais fraco que se ouve e o som que causa dor, a pressão cresce cerca de um milhão de vezes. O ouvido lida com isso porque responde a proporções: passar de 1 para 2 soa como o mesmo passo que passar de 100 para 200. O <strong>decibel</strong> (dB) é uma escala feita assim. Ele transforma multiplicações em somas e troca aquele milhão de vezes por uma régua de 0 a 120.</p>
+
+  <h3>O decibel é uma comparação</h3>
+  <p>Um decibel não é uma quantidade, como o metro ou o quilo. É o resultado de comparar dois valores. Dizer “+6 dB” é dizer “o dobro da tensão que havia antes”. Por isso toda leitura em dB pede a pergunta: em relação a quê?</p>
+  <div class="pair">
+    <div class="box">
+      <h4>dB sem letra: uma diferença</h4>
+      <ul>
+        <li>Compara o sinal com ele mesmo, antes e depois de um controle.</li>
+        <li>Fader em +5 dB: sai 5 dB mais forte do que entrou.</li>
+        <li>Ganho de 40 dB: o pré aumenta a tensão cem vezes.</li>
+        <li>0 dB quer dizer “não mudou nada”.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>dB com letra: um nível</h4>
+      <ul>
+        <li>Compara o sinal com uma referência fixa, indicada pelas letras depois de “dB”.</li>
+        <li>+4 dBu: uma tensão definida, de 1,23 volt.</li>
+        <li>−18 dBFS: 18 dB abaixo do máximo daquele sistema digital.</li>
+        <li>0 dB quer dizer “igual à referência”, e não “silêncio”.</li>
+      </ul>
+    </div>
+  </div>
+  <p>A conta tem dois multiplicadores. Para potência (watts): <code>dB = 10 × log(final ÷ inicial)</code>. Para tensão e pressão sonora: <code>dB = 20 × log(final ÷ inicial)</code>. A potência cresce com o quadrado da tensão: dobrar a tensão quadruplica a potência, e as duas contas dão os mesmos 6 dB. Não é preciso fazer a conta de cabeça: as regras práticas estão no módulo 4, e a calculadora, na planilha.</p>
+
+  <h3>Os três decibéis com referência</h3>
+  <p>No dia a dia do operador aparecem três escalas. Cada uma mede o nível em um trecho da cadeia da figura 1, e em cada uma o zero quer dizer uma coisa diferente.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Três réguas, uma para cada escala. A primeira é o dB SPL, o som no ar, de 0 a 140: o zero é o som mais fraco que se ouve; um quarto silencioso fica perto de 30; uma conversa a um metro, perto de 60; um culto com banda, perto de 90; o desconforto começa perto de 120. A segunda é o dBu, a tensão no cabo, de menos 60 a mais 30: o zero é uma tensão de 0,775 volt; o nível de microfone fica entre menos 60 e menos 30; o nível de linha profissional é mais 4; o clip da mesa fica perto de mais 20. A terceira é o dBFS, os números no digital, de menos 60 a zero: o zero é o teto, e acima dele há clip; o nível de trabalho fica perto de menos 18.">
+        <text class="b" x="18" y="62" font-size="13">dB SPL</text>
+        <text class="mu" x="18" y="79" font-size="11">o som no ar</text>
+        <line class="ln-mu" x1="200" y1="66" x2="860" y2="66"/>
+        <path class="ln-mu" stroke-width="1" d="M294.3 62 V70 M388.6 62 V70 M482.9 62 V70 M577.1 62 V70 M671.4 62 V70 M765.7 62 V70 M860 62 V70"/>
+        <line class="ln-bold" x1="200" y1="56" x2="200" y2="76"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="b" x="200" y="90">0</text><text class="mu" x="294.3" y="90">20</text><text class="mu" x="388.6" y="90">40</text><text class="mu" x="482.9" y="90">60</text>
+          <text class="mu" x="577.1" y="90">80</text><text class="mu" x="671.4" y="90">100</text><text class="mu" x="765.7" y="90">120</text><text class="mu" x="860" y="90">140</text>
+        </g>
+        <circle class="f-blue" cx="341.4" cy="66" r="4"/><circle class="f-blue" cx="482.9" cy="66" r="4"/><circle class="f-blue" cx="624.3" cy="66" r="4"/><circle class="f-blue" cx="765.7" cy="66" r="4"/>
+        <g font-size="11" text-anchor="middle">
+          <text x="341.4" y="48">quarto silencioso</text><text x="482.9" y="48">conversa a 1 m</text><text x="624.3" y="48">culto com banda</text><text x="765.7" y="48">desconforto</text>
+        </g>
+        <text class="t-blue b" x="200" y="108" font-size="11">o 0 é o som mais fraco que se ouve</text>
+
+        <text class="b" x="18" y="158" font-size="13">dBu</text>
+        <text class="mu" x="18" y="175" font-size="11">a tensão no cabo</text>
+        <line class="ln-mu" x1="200" y1="162" x2="860" y2="162"/>
+        <path class="ln-mu" stroke-width="1" d="M200 158 V166 M273.3 158 V166 M346.7 158 V166 M420 158 V166 M493.3 158 V166 M566.7 158 V166 M713.3 158 V166 M786.7 158 V166 M860 158 V166"/>
+        <line class="ln-bold" x1="640" y1="152" x2="640" y2="172"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="200" y="186">−60</text><text class="mu" x="273.3" y="186">−50</text><text class="mu" x="346.7" y="186">−40</text><text class="mu" x="420" y="186">−30</text>
+          <text class="mu" x="493.3" y="186">−20</text><text class="mu" x="566.7" y="186">−10</text><text class="b" x="640" y="186">0</text><text class="mu" x="713.3" y="186">+10</text>
+          <text class="mu" x="786.7" y="186">+20</text><text class="mu" x="860" y="186">+30</text>
+        </g>
+        <rect class="lv-amber" x="200" y="156" width="220" height="12"/>
+        <circle class="f-amber" cx="669.3" cy="162" r="4"/>
+        <rect class="lv-red" x="772" y="156" width="44" height="12"/>
+        <g font-size="11" text-anchor="middle">
+          <text x="310" y="144">nível de microfone</text><text x="669.3" y="144">linha: +4 dBu</text><text x="794" y="144">clip da mesa</text>
+        </g>
+        <text class="t-amber b" x="640" y="204" font-size="11" text-anchor="middle">o 0 é uma tensão de 0,775 V</text>
+
+        <text class="b" x="18" y="254" font-size="13">dBFS</text>
+        <text class="mu" x="18" y="271" font-size="11">os números no digital</text>
+        <line class="ln-mu" x1="200" y1="258" x2="860" y2="258"/>
+        <path class="ln-mu" stroke-width="1" d="M200 254 V262 M310 254 V262 M420 254 V262 M530 254 V262 M640 254 V262 M750 254 V262"/>
+        <line class="ln-bold" x1="860" y1="248" x2="860" y2="268"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="200" y="282">−60</text><text class="mu" x="310" y="282">−50</text><text class="mu" x="420" y="282">−40</text><text class="mu" x="530" y="282">−30</text>
+          <text class="mu" x="640" y="282">−20</text><text class="mu" x="750" y="282">−10</text><text class="b" x="860" y="282">0</text>
+        </g>
+        <circle class="f-teal" cx="662" cy="258" r="4"/>
+        <text x="662" y="240" font-size="11" text-anchor="middle">nível de trabalho: perto de −18</text>
+        <text class="t-teal b" x="860" y="240" font-size="11" text-anchor="end">o 0 é o teto</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> Três réguas, três zeros. No dB SPL, o zero é o limiar da audição, e as leituras são positivas. No dBu, o zero fica no meio da régua. No dBFS, o zero é o máximo, e as leituras são negativas. As réguas não estão alinhadas entre si. Os níveis marcados são típicos.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:12%">Escala</th><th style="width:30%">O zero é</th><th>Onde aparece e valores típicos</th></tr></thead>
+      <tbody>
+        <tr><td><strong>dB SPL</strong></td><td>O som mais fraco que um ouvido jovem percebe em 1 kHz (20 micropascals).</td><td>Medidor de nível sonoro, ficha técnica de caixas e microfones. Conversa: 60. Banda ao vivo: de 85 a 100.</td></tr>
+        <tr><td><strong>dBu</strong></td><td>Uma tensão de 0,775 volt.</td><td>Manuais e medidores analógicos. Microfone: de −60 a −30. Linha profissional: +4.</td></tr>
+        <tr><td><strong>dBV</strong></td><td>Uma tensão de 1 volt.</td><td>Aparelhos domésticos, com linha em −10 dBV, cerca de 12 dB abaixo da linha profissional.</td></tr>
+        <tr><td><strong>dBFS</strong></td><td>O maior valor que o sistema digital representa.</td><td>Mesa digital, gravador, programa de transmissão. Trabalho: perto de −18. Clip: 0.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Não existe conversão fixa entre as três réguas. Quantos dBFS correspondem a +4 dBu depende de como o fabricante alinhou o conversor da mesa: −18 e −20 dBFS são alinhamentos comuns. Quantos dB SPL saem na sala para um dado nível na mesa depende do amplificador, da caixa e da distância. Por isso o medidor da mesa não diz o volume da sala. Quem diz é o medidor de nível sonoro, no lugar do público. Os níveis de microfone, de instrumento e de linha estão no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>, e a leitura dos medidores da mesa, no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>.</p>
+
+  <h3>Analógico e digital em uma página</h3>
+  <p>O sinal <strong>analógico</strong> é uma tensão que sobe e desce como a pressão do ar: uma cópia elétrica da onda. O sinal <strong>digital</strong> é uma lista de números: o conversor mede a tensão milhares de vezes por segundo, e na saída outro conversor refaz a tensão a partir da lista.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 244" role="img" aria-label="Dois painéis. À esquerda, o sinal analógico: uma curva contínua, que é a tensão variando do mesmo jeito que a onda no ar. Uma seta marcada conversor A/D leva ao painel da direita, o sinal digital: a mesma curva aparece tracejada, e sobre ela há pontos a intervalos iguais, cada um ligado à linha de base por um traço. Cada ponto é uma medição guardada como número: 48 mil medições por segundo.">
+        <defs><marker id="sm5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="b" x="18" y="24" font-size="13">Sinal analógico</text>
+        <line class="grid" x1="18" y1="110" x2="418" y2="110"/>
+        <path class="s-amber" d="M18 97.9 L26 88.9 L34 82.2 L42 78.3 L50 77.1 L58 78.2 L66 81 L74 84.7 L82 88.6 L90 92 L98 94.5 L106 95.9 L114 96.3 L122 96 L130 95.6 L138 95.9 L146 97.3 L154 100.5 L162 105.6 L170 112.5 L178 120.9 L186 130.2 L194 139.3 L202 147.4 L210 153.5 L218 156.8 L226 156.8 L234 153.3 L242 146.7 L250 137.4 L258 126.4 L266 114.6 L274 103.2 L282 93.1 L290 85.2 L298 79.9 L306 77.4 L314 77.4 L322 79.4 L330 82.7 L338 86.7 L346 90.4 L354 93.4 L362 95.3 L370 96.2 L378 96.2 L386 95.8 L394 95.6 L402 96.4 L410 98.7 L418 102.8"/>
+        <text x="18" y="200" font-size="11.5">Uma tensão contínua, cópia elétrica da onda do ar.</text>
+        <text class="mu" x="18" y="218" font-size="11.5">O nível é medido em dBu.</text>
+
+        <line class="ln" x1="428" y1="110" x2="468" y2="110" marker-end="url(#sm5)"/>
+        <text class="mu" x="449" y="98" font-size="10.5" text-anchor="middle">A/D</text>
+
+        <text class="b" x="480" y="24" font-size="13">Sinal digital</text>
+        <line class="grid" x1="480" y1="110" x2="880" y2="110"/>
+        <path class="ln-mu dash" stroke-width="1" d="M480 97.9 L488 88.9 L496 82.2 L504 78.3 L512 77.1 L520 78.2 L528 81 L536 84.7 L544 88.6 L552 92 L560 94.5 L568 95.9 L576 96.3 L584 96 L592 95.6 L600 95.9 L608 97.3 L616 100.5 L624 105.6 L632 112.5 L640 120.9 L648 130.2 L656 139.3 L664 147.4 L672 153.5 L680 156.8 L688 156.8 L696 153.3 L704 146.7 L712 137.4 L720 126.4 L728 114.6 L736 103.2 L744 93.1 L752 85.2 L760 79.9 L768 77.4 L776 77.4 L784 79.4 L792 82.7 L800 86.7 L808 90.4 L816 93.4 L824 95.3 L832 96.2 L840 96.2 L848 95.8 L856 95.6 L864 96.4 L872 98.7 L880 102.8"/>
+        <path class="s-teal" stroke-width="1" d="M480 110 V97.9 M500 110 V79.9 M520 110 V78.2 M540 110 V86.7 M560 110 V94.5 M580 110 V96.2 M600 110 V95.9 M620 110 V102.8 M640 110 V120.9 M660 110 V143.5 M680 110 V156.8 M700 110 V150.4 M720 110 V126.4 M740 110 V97.9 M760 110 V79.9 M780 110 V78.2 M800 110 V86.7 M820 110 V94.5 M840 110 V96.2 M860 110 V95.9 M880 110 V102.8"/>
+        <g class="f-teal"><circle cx="480" cy="97.9" r="2.8"/><circle cx="500" cy="79.9" r="2.8"/><circle cx="520" cy="78.2" r="2.8"/><circle cx="540" cy="86.7" r="2.8"/><circle cx="560" cy="94.5" r="2.8"/><circle cx="580" cy="96.2" r="2.8"/><circle cx="600" cy="95.9" r="2.8"/><circle cx="620" cy="102.8" r="2.8"/><circle cx="640" cy="120.9" r="2.8"/><circle cx="660" cy="143.5" r="2.8"/><circle cx="680" cy="156.8" r="2.8"/><circle cx="700" cy="150.4" r="2.8"/><circle cx="720" cy="126.4" r="2.8"/><circle cx="740" cy="97.9" r="2.8"/><circle cx="760" cy="79.9" r="2.8"/><circle cx="780" cy="78.2" r="2.8"/><circle cx="800" cy="86.7" r="2.8"/><circle cx="820" cy="94.5" r="2.8"/><circle cx="840" cy="96.2" r="2.8"/><circle cx="860" cy="95.9" r="2.8"/><circle cx="880" cy="102.8" r="2.8"/></g>
+        <text x="480" y="200" font-size="11.5">48.000 medições por segundo, cada uma guardada como número.</text>
+        <text class="mu" x="480" y="218" font-size="11.5">O nível é medido em dBFS.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> O conversor analógico-digital (A/D) mede a tensão a intervalos iguais. O desenho é um esquema: na prática, as medições são tão próximas que a onda original é refeita na saída sem degraus.</figcaption>
+  </figure>
+
+  <ul>
+    <li><strong>Taxa de amostragem:</strong> quantas medições por segundo. As usuais são 44,1 kHz e 48 kHz. O sistema registra frequências até perto da metade da taxa: com 48 kHz, até cerca de 24 kHz, acima do que se ouve. Em som ao vivo e em vídeo, 48 kHz é o padrão mais comum.</li>
+    <li><strong>Profundidade de bits:</strong> quantos algarismos cada medida tem. Cada bit acrescenta cerca de 6 dB de distância entre o maior sinal e o ruído do sistema: perto de 96 dB com 16 bits. Com 24 bits, o limite real passa a ser o dos circuitos do conversor, em geral de 110 a 120 dB.</li>
+    <li><strong>Teto rígido:</strong> não existe número maior que o máximo. Em 0 dBFS a onda é cortada de uma vez.</li>
+    <li><strong>Latência e relógio:</strong> converter e processar leva poucos milissegundos, mais quando há computador ou rede no caminho. Equipamentos ligados por conexão digital precisam da mesma taxa e do mesmo relógio (clock); quando isso falha, aparecem estalos.</li>
+  </ul>
+  <p>Números são copiados, guardados e enviados por cabo de rede sem ganhar ruído. O cuidado é com o teto: no analógico a distorção chega aos poucos; no digital, de uma vez.</p>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="regras">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Regras práticas e distância</h2>
+  <p>Três números resolvem quase todas as contas do dia a dia: 3, 6 e 10. Vale a pena decorar o que cada um quer dizer.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 266" role="img" aria-label="Quatro linhas comparam uma mudança em decibéis com o que ela representa. Zero dB: potência vezes 1, tensão ou pressão vezes 1; é a referência. Mais 3 dB: potência vezes 2, tensão ou pressão vezes 1,4; ouve-se um pouco mais forte. Mais 6 dB: potência vezes 4, tensão ou pressão vezes 2; ouve-se claramente mais forte. Mais 10 dB: potência vezes 10, tensão ou pressão vezes 3,2; ouve-se como cerca do dobro do volume. As barras de potência crescem na mesma proporção: a de mais 10 dB é dez vezes maior que a de referência. Para menos, vale o inverso: menos 3 dB é metade da potência; menos 6 dB, metade da tensão; menos 10 dB, um décimo da potência.">
+        <text class="mono mu" x="18" y="24" font-size="10.5">MUDANÇA</text>
+        <text class="mono mu" x="150" y="24" font-size="10.5">POTÊNCIA</text>
+        <text class="mono mu" x="592" y="24" font-size="10.5">TENSÃO, PRESSÃO</text>
+        <text class="mono mu" x="730" y="24" font-size="10.5">COMO SE OUVE</text>
+        <line class="grid" x1="18" y1="34" x2="882" y2="34"/>
+
+        <text class="b" x="18" y="64" font-size="14">0 dB</text>
+        <rect class="bx-slate" x="150" y="46" width="38" height="26"/>
+        <text class="b" x="196" y="64" font-size="12">×1</text>
+        <text x="592" y="64" font-size="12">×1</text>
+        <text class="mu" x="730" y="64" font-size="11">referência</text>
+
+        <text class="b" x="18" y="112" font-size="14">+3 dB</text>
+        <rect class="lv-amber" x="150" y="94" width="76" height="26"/>
+        <text class="b" x="234" y="112" font-size="12">×2</text>
+        <text x="592" y="112" font-size="12">×1,4</text>
+        <text x="730" y="112" font-size="11">um pouco mais forte</text>
+
+        <text class="b" x="18" y="160" font-size="14">+6 dB</text>
+        <rect class="lv-amber" x="150" y="142" width="152" height="26"/>
+        <text class="b" x="310" y="160" font-size="12">×4</text>
+        <text class="b" x="592" y="160" font-size="12">×2</text>
+        <text x="730" y="160" font-size="11">claramente mais forte</text>
+
+        <text class="b" x="18" y="208" font-size="14">+10 dB</text>
+        <rect class="lv-amber" x="150" y="190" width="380" height="26"/>
+        <text class="b" x="538" y="208" font-size="12">×10</text>
+        <text x="592" y="208" font-size="12">×3,2</text>
+        <text class="b" x="730" y="208" font-size="11">cerca do dobro do volume</text>
+
+        <line class="grid" x1="18" y1="230" x2="882" y2="230"/>
+        <text class="mu" x="18" y="250" font-size="11">Para menos, vale o inverso: −3 dB é metade da potência; −6 dB, metade da tensão; −10 dB, um décimo da potência.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> O que cada passo em decibéis representa. A barra mostra a potência: para o som parecer duas vezes mais forte, é preciso dez vezes mais potência.</figcaption>
+  </figure>
+
+  <p>Onde você encontra cada um: <strong>+3 dB</strong> é trocar o amplificador por um de potência dobrada, ou somar duas fontes iguais e independentes. <strong>+6 dB</strong> é chegar à metade da distância da fonte, ou somar dois sinais idênticos e em fase. <strong>+10 dB</strong> é o passo que a maioria descreve como “o dobro do volume”. Dois vizinhos ajudam: <strong>1 dB</strong> é a menor diferença que se nota com atenção (em uma mistura ao vivo, 2 a 3 dB já são claros), e <strong>20 dB</strong> é dez vezes a tensão, o valor usual da chave de pad.</p>
+  <p>Os passos se somam. +13 dB é +10 e +3: vinte vezes a potência. +9 dB é +3, +3 e +3: oito vezes. −4 dB é −10 e +6: quatro décimos da potência. Com as três regras e uma soma, você estima qualquer caso.</p>
+
+  <h3>Somar fontes não é somar decibéis</h3>
+  <p>Duas fontes de 90 dB tocando juntas não dão 180 dB. O que se soma é a energia. Duas fontes iguais e independentes, como duas cantoras ou duas caixas com programas diferentes, dão o dobro da potência: 3 dB a mais, ou 93 dB. Quando uma fonte é bem mais fraca que a outra, ela quase não muda o total.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:38%">Diferença entre as duas fontes</th><th style="width:26%">Some à mais forte</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr><td>0 dB (iguais)</td><td class="num">+3,0 dB</td><td class="num">90 e 90 dão 93</td></tr>
+        <tr><td>1 dB</td><td class="num">+2,5 dB</td><td class="num">90 e 89 dão 92,5</td></tr>
+        <tr><td>3 dB</td><td class="num">+1,8 dB</td><td class="num">90 e 87 dão 91,8</td></tr>
+        <tr><td>6 dB</td><td class="num">+1,0 dB</td><td class="num">90 e 84 dão 91</td></tr>
+        <tr><td>10 dB ou mais</td><td class="num">+0,4 dB ou menos</td><td class="num">90 e 80 dão 90,4</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Duas consequências práticas. Primeira: para um som ser medido com segurança, ele precisa estar pelo menos 10 dB acima do ruído da sala, senão o ruído entra na leitura. Segunda: quando a bateria acústica já produz 95 dB na plateia sem amplificação, as caixas não conseguem baixar o volume da sala. Elas só podem somar.</p>
+  <p>Caso especial: o <em>mesmo</em> sinal em duas caixas iguais. Onde as duas ondas chegam juntas, as pressões se somam: +6 dB. Fora desse ponto, elas chegam em tempos diferentes e, em algumas frequências, se cancelam. Na média da sala, a segunda caixa acrescenta perto de 3 dB (módulo 5).</p>
+
+  <h3>A distância: dobrou, caiu 6 dB</h3>
+  <p>Ao se afastar da fonte, a mesma energia se espalha por uma área cada vez maior. Ao dobrar a distância, a área fica quatro vezes maior, e a pressão cai à metade: <strong>−6 dB a cada vez que a distância dobra</strong>. É a lei do inverso do quadrado. Ela vale para uma fonte pequena em espaço aberto, longe de superfícies que refletem o som.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 340" role="img" aria-label="Uma caixa de som à esquerda e um cone que se abre para a direita, com marcas a 1, 2, 4, 8 e 16 metros. Em cada marca, uma linha vertical mostra o tamanho da frente de onda, que cresce com a distância. Abaixo, três linhas de valores. Nível: 100 dB a 1 metro, 94 a 2 metros, 88 a 4 metros, 82 a 8 metros e 76 a 16 metros. Área pela qual a energia se espalha: 1, 4, 16, 64 e 256 vezes. A cada vez que a distância dobra, a área quadruplica e o nível cai 6 dB.">
+        <text class="b" x="18" y="26" font-size="13">Fonte pequena, ao ar livre: −6 dB a cada dobro da distância</text>
+        <text class="mu" x="18" y="46" font-size="11">A mesma energia se espalha por uma área quatro vezes maior.</text>
+        <path class="lv-blue" style="fill-opacity:.12" d="M60 150 L860 40 V260 Z"/>
+        <path class="ln-mu" stroke-width="1" d="M60 150 L860 40 M60 150 L860 260"/>
+        <line class="ref" x1="60" y1="150" x2="860" y2="150"/>
+        <rect class="bx-ink" x="28" y="128" width="32" height="44"/>
+        <g class="s-blue" stroke-width="3">
+          <line x1="110" y1="143.1" x2="110" y2="156.9"/><line x1="160" y1="136.2" x2="160" y2="163.8"/><line x1="260" y1="122.5" x2="260" y2="177.5"/>
+          <line x1="460" y1="95" x2="460" y2="205"/><line x1="860" y1="40" x2="860" y2="260"/>
+        </g>
+        <g font-size="11">
+          <text class="mono mu" x="18" y="288" font-size="10">NÍVEL</text><text class="mono mu" x="18" y="306" font-size="10">DISTÂNCIA</text><text class="mono mu" x="18" y="324" font-size="10">ÁREA</text>
+        </g>
+        <g font-size="12" text-anchor="middle">
+          <text class="b" x="110" y="288">100 dB</text><text class="b" x="160" y="288">94 dB</text><text class="b" x="260" y="288">88 dB</text><text class="b" x="460" y="288">82 dB</text><text class="b" x="856" y="288">76 dB</text>
+        </g>
+        <g font-size="11" text-anchor="middle">
+          <text class="mu" x="110" y="306">1 m</text><text class="mu" x="160" y="306">2 m</text><text class="mu" x="260" y="306">4 m</text><text class="mu" x="460" y="306">8 m</text><text class="mu" x="856" y="306">16 m</text>
+          <text class="mu" x="110" y="324">×1</text><text class="mu" x="160" y="324">×4</text><text class="mu" x="260" y="324">×16</text><text class="mu" x="460" y="324">×64</text><text class="mu" x="856" y="324">×256</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> A lei do inverso do quadrado. O que conta é a proporção entre as distâncias, e não os metros: de 1 para 2 m cai o mesmo que de 8 para 16 m.</figcaption>
+  </figure>
+
+  <p>A conta geral é <code>variação = −20 × log(distância nova ÷ distância antiga)</code>. Na prática, basta contar quantas vezes a distância dobrou.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:24%">A distância</th><th class="n" style="width:14%">O nível</th><th style="width:30%">No microfone</th><th>Na plateia</th></tr></thead>
+      <tbody>
+        <tr><td>Cai à metade</td><td class="num n">+6 dB</td><td>De 10 para 5 cm da boca.</td><td>Da fileira a 8 m para a fileira a 4 m.</td></tr>
+        <tr><td>Dobra</td><td class="num n">−6 dB</td><td>De um palmo para dois palmos.</td><td>De 4 para 8 m da caixa.</td></tr>
+        <tr><td>Fica 4 vezes maior</td><td class="num n">−12 dB</td><td>De 5 para 20 cm.</td><td>De 3 para 12 m.</td></tr>
+        <tr><td>Fica 10 vezes maior</td><td class="num n">−20 dB</td><td>De 5 para 50 cm.</td><td>De 2 para 20 m.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A lei tem dois efeitos que o operador sente todos os dias.</p>
+  <ul>
+    <li><strong>No microfone, centímetros valem muito.</strong> Um cantor que afasta o microfone de 5 para 20 cm entrega 12 dB a menos. O operador repõe esses 12 dB no ganho, e com eles sobem na mesma medida o som do palco, a sala e o risco de microfonia. A técnica de microfone está no estudo <a href="../Microfones/treinamento-microfones.html">Microfones</a>.</li>
+    <li><strong>Na plateia, quem está perto da caixa ouve muito mais.</strong> Com a caixa na altura da cabeça, a primeira fileira a 3 m e a última a 18 m, a diferença calculada passa de 15 dB. Subir e inclinar a caixa diminui a proporção entre as distâncias e tira a primeira fileira do eixo da corneta.</li>
+  </ul>
+
+  <h3>Em sala fechada</h3>
+  <p>Dentro de uma sala, o ouvinte recebe o som direto da caixa e o som refletido pelas paredes, pelo teto e pelo piso. Perto da caixa, o direto domina, e a regra dos 6 dB funciona bem. Longe dela, o refletido domina: o nível quase para de cair, mas as reflexões chegam atrasadas e misturam as sílabas. No fundo de uma sala com muito eco, o som pode estar forte e difícil de entender. Aumentar o volume sobe o direto e o refletido juntos, e não resolve. O que resolve é aproximar a fonte do ouvinte, com caixas de reforço.</p>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>A queda de 6 dB é a de uma caixa comum, vista de longe. Conjuntos altos de caixas em linha (line array) caem menos com a distância, perto de 3 dB a cada dobro dentro de certo alcance. As caixas de reforço e os tipos de sistema estão no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="fase">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Fase e polaridade</h2>
+  <p>Quando duas ondas se encontram, as pressões se somam ponto a ponto. Se as duas sobem e descem juntas, a soma é maior. Se uma sobe enquanto a outra desce, elas se anulam. O resultado depende de como os ciclos estão alinhados no tempo: é a <strong>fase</strong>. Ela só importa quando os dois sinais são o mesmo som, ou cópias dele: a mesma voz em dois microfones, o mesmo canal em duas caixas, o baixo por direct box e por microfone.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 304" role="img" aria-label="Três painéis, cada um com dois sinais iguais em cima e a soma deles embaixo. No primeiro, em fase, as duas ondas coincidem e a soma dobra de tamanho: mais 6 dB. No segundo, com a polaridade de um sinal invertida, uma onda sobe enquanto a outra desce, e a soma é uma linha reta: o som some. No terceiro, um sinal chega um quarto de ciclo depois do outro, e a soma cresce pouco: só 3 dB.">
+        <text class="b" x="18" y="24" font-size="13">Em fase</text>
+        <text class="mu" x="18" y="52" font-size="10.5">sinal 1 e sinal 2</text>
+        <line class="grid" x1="18" y1="92" x2="282" y2="92"/>
+        <path class="s-blue" d="M18 92 C36.7 65.3 43.3 65.3 62 92 S87.3 118.7 106 92 S131.3 65.3 150 92 S175.3 118.7 194 92 S219.3 65.3 238 92 S263.3 118.7 282 92"/><path class="s-amber dash" d="M18 92 C36.7 65.3 43.3 65.3 62 92 S87.3 118.7 106 92 S131.3 65.3 150 92 S175.3 118.7 194 92 S219.3 65.3 238 92 S263.3 118.7 282 92"/>
+        <text class="mu" x="18" y="150" font-size="10.5">soma</text>
+        <line class="grid" x1="18" y1="200" x2="282" y2="200"/>
+        <path class="ln-bold" d="M18 200 C36.7 146.7 43.3 146.7 62 200 S87.3 253.3 106 200 S131.3 146.7 150 200 S175.3 253.3 194 200 S219.3 146.7 238 200 S263.3 253.3 282 200"/>
+        <text x="18" y="270" font-size="11">As ondas coincidem, e a soma dobra.</text>
+        <text class="t-good b" x="18" y="288" font-size="11.5">Resultado: +6 dB.</text>
+
+        <text class="b" x="318" y="24" font-size="13">Polaridade invertida</text>
+        <text class="mu" x="318" y="52" font-size="10.5">sinal 1 e sinal 2</text>
+        <line class="grid" x1="318" y1="92" x2="582" y2="92"/>
+        <path class="s-blue" d="M318 92 C336.7 65.3 343.3 65.3 362 92 S387.3 118.7 406 92 S431.3 65.3 450 92 S475.3 118.7 494 92 S519.3 65.3 538 92 S563.3 118.7 582 92"/><path class="s-amber dash" d="M318 92 C336.7 118.7 343.3 118.7 362 92 S387.3 65.3 406 92 S431.3 118.7 450 92 S475.3 65.3 494 92 S519.3 118.7 538 92 S563.3 65.3 582 92"/>
+        <text class="mu" x="318" y="150" font-size="10.5">soma</text>
+        <line class="ln-bold" x1="318" y1="200" x2="582" y2="200"/>
+        <text x="318" y="270" font-size="11">Uma sobe enquanto a outra desce.</text>
+        <text class="t-bad b" x="318" y="288" font-size="11.5">Resultado: o som some.</text>
+
+        <text class="b" x="618" y="24" font-size="13">Atraso de um quarto de ciclo</text>
+        <text class="mu" x="618" y="52" font-size="10.5">sinal 1 e sinal 2</text>
+        <line class="grid" x1="618" y1="92" x2="882" y2="92"/>
+        <path class="s-blue" d="M618 92 C636.7 65.3 643.3 65.3 662 92 S687.3 118.7 706 92 S731.3 65.3 750 92 S775.3 118.7 794 92 S819.3 65.3 838 92 S863.3 118.7 882 92"/><path class="s-amber dash" d="M618 112 L622.4 111 L626.8 108.2 L631.2 103.8 L635.6 98.2 L640 92 L644.4 85.8 L648.8 80.2 L653.2 75.8 L657.6 73 L662 72 L666.4 73 L670.8 75.8 L675.2 80.2 L679.6 85.8 L684 92 L688.4 98.2 L692.8 103.8 L697.2 108.2 L701.6 111 L706 112 L710.4 111 L714.8 108.2 L719.2 103.8 L723.6 98.2 L728 92 L732.4 85.8 L736.8 80.2 L741.2 75.8 L745.6 73 L750 72 L754.4 73 L758.8 75.8 L763.2 80.2 L767.6 85.8 L772 92 L776.4 98.2 L780.8 103.8 L785.2 108.2 L789.6 111 L794 112 L798.4 111 L802.8 108.2 L807.2 103.8 L811.6 98.2 L816 92 L820.4 85.8 L824.8 80.2 L829.2 75.8 L833.6 73 L838 72 L842.4 73 L846.8 75.8 L851.2 80.2 L855.6 85.8 L860 92 L864.4 98.2 L868.8 103.8 L873.2 108.2 L877.6 111 L882 112"/>
+        <text class="mu" x="618" y="150" font-size="10.5">soma</text>
+        <line class="grid" x1="618" y1="200" x2="882" y2="200"/>
+        <path class="ln-bold" d="M618 220 L622.4 212.8 L626.8 204.4 L631.2 195.6 L635.6 187.2 L640 180 L644.4 174.8 L648.8 172.1 L653.2 172.1 L657.6 174.8 L662 180 L666.4 187.2 L670.8 195.6 L675.2 204.4 L679.6 212.8 L684 220 L688.4 225.2 L692.8 227.9 L697.2 227.9 L701.6 225.2 L706 220 L710.4 212.8 L714.8 204.4 L719.2 195.6 L723.6 187.2 L728 180 L732.4 174.8 L736.8 172.1 L741.2 172.1 L745.6 174.8 L750 180 L754.4 187.2 L758.8 195.6 L763.2 204.4 L767.6 212.8 L772 220 L776.4 225.2 L780.8 227.9 L785.2 227.9 L789.6 225.2 L794 220 L798.4 212.8 L802.8 204.4 L807.2 195.6 L811.6 187.2 L816 180 L820.4 174.8 L824.8 172.1 L829.2 172.1 L833.6 174.8 L838 180 L842.4 187.2 L846.8 195.6 L851.2 204.4 L855.6 212.8 L860 220 L864.4 225.2 L868.8 227.9 L873.2 227.9 L877.6 225.2 L882 220"/>
+        <text x="618" y="270" font-size="11">Uma chega um pouco depois da outra.</text>
+        <text class="b" x="618" y="288" font-size="11.5">Resultado: só +3 dB.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> A soma de dois sinais iguais depende do alinhamento entre eles. No mundo real, o cancelamento nunca é total, porque os dois sinais não chegam com o mesmo nível. Mas pode passar de 20 dB.</figcaption>
+  </figure>
+
+  <p>Há duas causas para o desalinhamento, e a correção de cada uma é diferente.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:16%"></th><th class="blue" style="width:42%">Polaridade</th><th class="amber">Fase (atraso)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>O que é</strong></td><td>A onda de cabeça para baixo: o positivo vira negativo.</td><td>A onda deslocada no tempo: chega um pouco depois.</td></tr>
+        <tr><td><strong>De onde vem</strong></td><td>Fios trocados em um cabo ou em um alto-falante. Dois microfones apontados um contra o outro, em lados opostos da mesma pele.</td><td>Distâncias diferentes entre a fonte e cada microfone, ou entre cada caixa e o ouvinte. Atraso de processamento digital.</td></tr>
+        <tr><td><strong>O que afeta</strong></td><td>Todas as frequências, do mesmo jeito.</td><td>Cada frequência de um jeito: cancela umas e reforça outras.</td></tr>
+        <tr><td><strong>Como soa</strong></td><td>Os dois sinais juntos perdem o grave e ficam finos.</td><td>Som oco, de “cano”, que muda quando a fonte ou o ouvinte se move.</td></tr>
+        <tr><td><strong>Como se corrige</strong></td><td>Com o botão de polaridade (Ø) do canal, ou consertando o cabo.</td><td>Mudando a posição do microfone ou da caixa, ou com o ajuste de atraso (delay).</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Atraso e filtro pente</h3>
+  <p>O som leva cerca de 3 milissegundos para andar 1 metro. Quando a mesma voz entra em dois microfones a distâncias diferentes, ou quando o som direto se mistura com uma cópia atrasada, o atraso é fixo, mas o efeito muda com a frequência. Na frequência em que o atraso vale meio ciclo, as ondas se cancelam. Onde vale um ciclo inteiro, se reforçam. O resultado é uma série de buracos e picos no espectro, espaçados por igual: o <strong>filtro pente</strong>.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="n" style="width:22%">Diferença de caminho</th><th class="n" style="width:16%">Atraso</th><th class="n" style="width:24%">Primeiro cancelamento</th><th>Os seguintes</th></tr></thead>
+      <tbody>
+        <tr><td class="num n">17 cm</td><td class="num n">0,5 ms</td><td class="num n">1 kHz</td><td class="num">3 kHz, 5 kHz, 7 kHz…</td></tr>
+        <tr><td class="num n">34 cm</td><td class="num n">1 ms</td><td class="num n">500 Hz</td><td class="num">1,5 kHz, 2,5 kHz, 3,5 kHz…</td></tr>
+        <tr><td class="num n">1,7 m</td><td class="num n">5 ms</td><td class="num n">100 Hz</td><td class="num">300 Hz, 500 Hz…</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A profundidade dos buracos depende da diferença de nível entre os dois sinais. Com níveis iguais, o cancelamento é quase total. Com o segundo sinal 10 dB abaixo do primeiro, a ondulação cai para cerca de 3 dB para cima e para baixo, e deixa de incomodar. É esse o princípio da regra de distância entre microfones (regra 3:1), explicada no estudo <a href="../Microfones/treinamento-microfones.html">Microfones</a>.</p>
+
+  <h3>Onde isso aparece no evento</h3>
+  <ul>
+    <li><strong>Cabo com os fios trocados.</strong> Um cabo balanceado com os dois condutores de sinal invertidos troca a polaridade. Sozinho, o canal soa normal: o defeito só aparece na soma com outro sinal igual, como em duas caixas que perdem o grave no meio da sala. O teste dos cabos está no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>.</li>
+    <li><strong>Dois microfones na mesma fonte.</strong> Na caixa da bateria captada por cima e por baixo, a pele se move em sentidos opostos para cada microfone: um dos dois costuma precisar da polaridade invertida.</li>
+    <li><strong>Direct box e microfone no mesmo instrumento.</strong> O som do microfone chega depois. Compare a soma com e sem o botão de polaridade, e fique com a que tem mais grave.</li>
+    <li><strong>Microfones abertos perto um do outro, ou perto de superfície dura.</strong> Púlpito com dois microfones, microfone sobre um tampo de mesa: a voz chega duas vezes, com atrasos diferentes, e soa oca.</li>
+  </ul>
+
+  <h3>O teste de polaridade pelo ouvido</h3>
+  <p>Ouça os dois sinais juntos, no mesmo nível, com um som que tenha grave: uma voz masculina, o bumbo, uma música conhecida. Aperte o botão de polaridade (Ø) de um deles. Na posição certa, o grave fica mais cheio. Na errada, ele some e o som fica fino. Para duas caixas, fique no meio, à mesma distância das duas, e compare uma caixa sozinha com as duas juntas: com a segunda caixa, o grave tem de crescer. Se diminuir, uma delas está invertida.</p>
+
+  <div class="note">
+    <h4>Equalizador não conserta cancelamento</h4>
+    <p>Se duas ondas se anulam em uma frequência, realçar essa frequência aumenta as duas na mesma medida, e elas continuam se anulando. O realce só consome folga do amplificador. Problema de tempo se resolve no tempo: polaridade, posição ou atraso.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="audicao">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Nível sonoro e audição</h2>
+  <p>O volume da sala é medido em dB SPL, com o medidor de nível sonoro, no lugar em que as pessoas estão. É a única medida que diz o que o público recebe. A tabela dá uma ideia da escala.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Nível</th><th>Situação típica</th></tr></thead>
+      <tbody>
+        <tr><td class="num">20 a 30 dB</td><td>Quarto silencioso à noite.</td></tr>
+        <tr><td class="num">40 a 50 dB</td><td>Salão vazio com o ar-condicionado ligado.</td></tr>
+        <tr><td class="num">60 a 65 dB</td><td>Conversa normal, a 1 metro.</td></tr>
+        <tr><td class="num">65 a 75 dB</td><td>Palestra ou pregação amplificada, na plateia.</td></tr>
+        <tr><td class="num">85 a 95 dB</td><td>Música ao vivo com banda, na plateia. Varia muito com o estilo e com a casa.</td></tr>
+        <tr><td class="num">95 a 105 dB</td><td>Bateria acústica, para quem toca. Plateia perto das caixas.</td></tr>
+        <tr><td class="num">120 dB</td><td>Limiar do desconforto.</td></tr>
+        <tr><td class="num">130 a 140 dB</td><td>Limiar da dor. Risco de dano imediato.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>O medidor: ponderação e resposta</h3>
+  <p>O medidor de nível sonoro tem dois ajustes que mudam a leitura. Anote sempre os dois junto do número: “88” sozinho não diz nada.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>Ponderação: A ou C</h4>
+      <ul>
+        <li><strong>A, ou dB(A):</strong> dá menos peso aos graves e aos agudos extremos, como o ouvido em volume moderado (em 100 Hz, desconta cerca de 19 dB). É a escala dos limites de exposição.</li>
+        <li><strong>C, ou dB(C):</strong> quase plana. Em música com muito grave, fica de 5 a 15 dB acima da leitura em A.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Resposta: lenta ou rápida</h4>
+      <ul>
+        <li><strong>Lenta (slow):</strong> média de cerca de 1 segundo. Número estável, fácil de ler.</li>
+        <li><strong>Rápida (fast):</strong> acompanha as variações e mostra os picos.</li>
+        <li><strong>Leq:</strong> a média de um período inteiro, como o culto todo. É a que se compara com os tempos de exposição.</li>
+      </ul>
+    </div>
+  </div>
+  <p>O aplicativo de celular não é calibrado: o erro pode passar de 5 dB, e muitos aparelhos param de subir em níveis altos. Ele serve para comparar pontos da sala com o mesmo aparelho, e não para afirmar um valor.</p>
+  <p>O ouvido também muda com o volume: em nível baixo, perde sensibilidade nos graves e nos agudos. A mesma mistura parece ter mais grave e mais brilho quando toca mais forte, e uma equalização feita em volume baixo pode sobrar grave no evento.</p>
+
+  <h3>Exposição: nível e tempo</h3>
+  <p>O risco para a audição depende de duas coisas: o nível e o tempo. A referência mais usada em saúde auditiva parte de 85 dB(A) durante 8 horas por dia. A cada 3 dB a mais, a energia dobra, e o tempo cai pela metade.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 286" role="img" aria-label="Gráfico de barras do tempo de referência de exposição por dia, conforme o nível médio em dB(A). 85 dB(A): 8 horas. 88: 4 horas. 91: 2 horas. 94: 1 hora. 97: 30 minutos. 100: 15 minutos. 103: 7 minutos e meio. Cada barra tem a metade do comprimento da anterior: a cada 3 dB a mais, o tempo cai pela metade. Acima de 100 dB(A), o tempo se conta em minutos; perto das caixas e da bateria é fácil chegar lá.">
+        <text class="b" x="18" y="24" font-size="13">Tempo de referência por dia: a cada +3 dB, metade do tempo</text>
+        <g font-size="12">
+          <text class="b" x="18" y="62">85 dB(A)</text><text class="b" x="18" y="92">88 dB(A)</text><text class="b" x="18" y="122">91 dB(A)</text><text class="b" x="18" y="152">94 dB(A)</text>
+          <text class="b" x="18" y="182">97 dB(A)</text><text class="b" x="18" y="212">100 dB(A)</text><text class="b" x="18" y="242">103 dB(A)</text>
+        </g>
+        <rect class="lv-teal" x="110" y="48" width="640" height="18"/>
+        <rect class="lv-teal" x="110" y="78" width="320" height="18"/>
+        <rect class="lv-amber" x="110" y="108" width="160" height="18"/>
+        <rect class="lv-amber" x="110" y="138" width="80" height="18"/>
+        <rect class="lv-amber" x="110" y="168" width="40" height="18"/>
+        <rect class="lv-red" x="110" y="198" width="20" height="18"/>
+        <rect class="lv-red" x="110" y="228" width="10" height="18"/>
+        <g font-size="12">
+          <text x="758" y="62">8 horas</text><text x="438" y="92">4 horas</text><text x="278" y="122">2 horas</text><text x="198" y="152">1 hora</text>
+          <text x="158" y="182">30 minutos</text><text x="138" y="212">15 minutos</text><text x="128" y="242">7 minutos e meio</text>
+        </g>
+        <text class="mu" x="420" y="206" font-size="11.5">Acima de 100 dB(A), o tempo se conta em minutos.</text>
+        <text class="mu" x="420" y="223" font-size="11.5">Perto das caixas e da bateria, é fácil chegar lá.</text>
+        <text class="mu" x="18" y="272" font-size="11">Vale para o nível médio do período, e não para picos isolados. O dia inclui ensaio, passagem de som e evento.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> Tempo de referência por dia pelo critério de energia igual: 85 dB(A) por 8 horas, e metade do tempo a cada 3 dB. São valores de referência para planejar, e não um limite legal.</figcaption>
+  </figure>
+
+  <p>Há critérios legais menos rigorosos, em que o tempo cai pela metade só a cada 5 dB, e as exigências mudam de um lugar para outro: para quem trabalha com som, consulte a regulamentação vigente. Para planejar, o critério dos 3 dB é o mais prudente. Faça a conta: duas horas de música a 91 dB(A) na média usam toda a referência do dia da plateia. O músico e o operador ainda somam ensaio e passagem, e quem fica perto da bateria ou do retorno recebe bem mais. A faixa de volume a combinar para cada tipo de evento está no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p>
+
+  <div class="pair">
+    <div class="box">
+      <h4>Sinais de que passou do ponto</h4>
+      <ul>
+        <li>Zumbido ou chiado no ouvido depois do evento.</li>
+        <li>Sensação de ouvido tampado, com as vozes abafadas.</li>
+        <li>Vontade de subir o volume ao longo do evento: o ouvido cansado pede mais.</li>
+        <li>Dificuldade para entender conversa em lugar barulhento, que vai aumentando com os anos.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Como proteger</h4>
+      <ul>
+        <li><strong>Baixe o nível na origem:</strong> volume de palco menor pede menos volume na frente.</li>
+        <li><strong>Aumente a distância:</strong> dobrar a distância até a caixa tira até 6 dB.</li>
+        <li><strong>Reduza o tempo:</strong> faça pausas em silêncio e não deixe música alta tocando no intervalo.</li>
+        <li><strong>Use protetor:</strong> o de espuma, bem colocado, atenua de 20 a 30 dB, mais nos agudos. O protetor para músicos, com filtro, atenua de 10 a 25 dB de forma mais equilibrada.</li>
+      </ul>
+    </div>
+  </div>
+  <p>O fone e o retorno intra-auricular (in-ear) podem proteger ou agredir, conforme o volume em que são usados. Os cuidados estão no estudo <a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>.</p>
+
+  <div class="note">
+    <h4>Segurança: volume alto</h4>
+    <p>A perda de audição por som forte é acumulada, não dói e não tem volta: as células do ouvido interno que morrem não se regeneram. O zumbido depois do evento é o aviso. Se ele aparecer, o nível ou o tempo foram excessivos: reduza no próximo evento e, se o zumbido persistir, procure um médico. Dê atenção às crianças e a quem se senta em frente às caixas. Nunca teste o sistema com alguém com o ouvido perto de uma caixa.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>O procedimento deste estudo é medir o nível sonoro da sala, ponto a ponto, antes do evento: quanto a frente recebe a mais do que a mesa, onde o som está fraco, se algum lugar passa do limite. Leva de 15 a 20 minutos e vale enquanto as caixas não mudarem de lugar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 400" role="img" aria-label="Planta de uma sala vista de cima. O palco fica no alto, com uma caixa de som em cada canto. Abaixo, onze fileiras de cadeiras. A mesa de som fica perto do fundo, no centro. Sete pontos de medição estão marcados: 1, primeira fileira, no centro; 2, primeira fileira, em frente à caixa; 3, meio da sala, na fileira 4; 4, fileira 8; 5, mesa de som, que é a referência; 6, última fileira, no centro; 7, última fileira, na lateral. Ao lado, a lembrança de incluir os lugares diferentes: sob a galeria, atrás de colunas, nas laterais.">
+        <rect class="bx" x="18" y="18" width="560" height="364"/>
+        <rect class="bx-slate" x="178" y="18" width="240" height="60"/>
+        <text class="b" x="298" y="52" font-size="12" text-anchor="middle">Palco</text>
+        <rect class="bx-ink" x="140" y="62" width="28" height="22"/>
+        <rect class="bx-ink" x="428" y="62" width="28" height="22"/>
+        <text class="mu" x="132" y="77" font-size="10.5" text-anchor="end">caixa</text>
+        <text class="mu" x="464" y="77" font-size="10.5">caixa</text>
+        <g class="grid">
+          <line x1="70" y1="120" x2="526" y2="120"/><line x1="70" y1="143" x2="526" y2="143"/><line x1="70" y1="166" x2="526" y2="166"/>
+          <line x1="70" y1="189" x2="526" y2="189"/><line x1="70" y1="212" x2="526" y2="212"/><line x1="70" y1="235" x2="526" y2="235"/>
+          <line x1="70" y1="258" x2="526" y2="258"/><line x1="70" y1="281" x2="526" y2="281"/><line x1="70" y1="304" x2="526" y2="304"/>
+          <line x1="70" y1="327" x2="526" y2="327"/><line x1="70" y1="350" x2="526" y2="350"/>
+        </g>
+        <rect class="bx-amber" x="246" y="292" width="68" height="24"/>
+        <text class="b" x="280" y="308" font-size="11" text-anchor="middle">Mesa</text>
+        <g>
+          <circle class="hd-blue" cx="298" cy="120" r="11"/><circle class="hd-blue" cx="154" cy="120" r="11"/><circle class="hd-blue" cx="298" cy="189" r="11"/>
+          <circle class="hd-blue" cx="298" cy="258" r="11"/><circle class="hd-blue" cx="338" cy="304" r="11"/><circle class="hd-blue" cx="298" cy="350" r="11"/><circle class="hd-blue" cx="500" cy="350" r="11"/>
+        </g>
+        <g font-size="11.5" text-anchor="middle">
+          <text class="on b" x="298" y="124">1</text><text class="on b" x="154" y="124">2</text><text class="on b" x="298" y="193">3</text>
+          <text class="on b" x="298" y="262">4</text><text class="on b" x="338" y="308">5</text><text class="on b" x="298" y="354">6</text><text class="on b" x="500" y="354">7</text>
+        </g>
+
+        <text class="b" x="604" y="36" font-size="13">Pontos de medição</text>
+        <g font-size="11.5">
+          <text x="604" y="62"><tspan class="b">1</tspan>  Primeira fileira, no centro</text>
+          <text x="604" y="84"><tspan class="b">2</tspan>  Primeira fileira, em frente à caixa</text>
+          <text x="604" y="106"><tspan class="b">3</tspan>  Meio da sala (fileira 4)</text>
+          <text x="604" y="128"><tspan class="b">4</tspan>  Fileira 8</text>
+          <text x="604" y="150"><tspan class="b">5</tspan>  Mesa de som (referência)</text>
+          <text x="604" y="172"><tspan class="b">6</tspan>  Última fileira, no centro</text>
+          <text x="604" y="194"><tspan class="b">7</tspan>  Última fileira, na lateral</text>
+        </g>
+        <line class="grid" x1="604" y1="214" x2="882" y2="214"/>
+        <text class="mu" x="604" y="240" font-size="11.5">Inclua os lugares diferentes: sob</text>
+        <text class="mu" x="604" y="257" font-size="11.5">a galeria, atrás de colunas, laterais.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 9.</b> Um plano de medição com sete pontos, o mesmo do exemplo 1. A mesa de som é o ponto de referência: é lá que o operador ouve e decide.</figcaption>
+  </figure>
+
+  <ol class="steps">
+    <li><h4>Prepare o medidor</h4><p>Ponderação A e resposta lenta (slow). Anote os dois ajustes e o aparelho. Se for celular, use sempre o mesmo, sem capa sobre o microfone.</p></li>
+    <li><h4>Escolha os pontos</h4><p>De seis a dez, como na figura 9, mais os lugares diferentes do resto: sob a galeria, atrás de uma coluna, o coro.</p></li>
+    <li><h4>Meça a distância de cada ponto</h4><p>Da caixa mais próxima até o ponto, com trena ou em passos largos (perto de 1 metro cada). A planilha usa a distância para o nível previsto.</p></li>
+    <li><h4>Meça o ruído de fundo</h4><p>Sistema ligado e mudo, ar-condicionado como no evento. O sinal de teste precisa ficar pelo menos 10 dB acima desse valor em todos os pontos.</p></li>
+    <li><h4>Toque um sinal estável</h4><p>Ruído rosa (pink noise), ou sempre o mesmo trecho de uma música gravada, em repetição. Avise quem está na sala e suba devagar até um nível moderado na mesa. Daí em diante, não mexa em nenhum controle.</p></li>
+    <li><h4>Meça ponto por ponto</h4><p>Medidor na altura do ouvido de quem está sentado, com o braço esticado, a mais de 1 metro das paredes, apontado como o manual indica. Espere uns 10 segundos e anote.</p></li>
+    <li><h4>Compare com a mesa <span class="k amber w">dB</span></h4><p>A planilha calcula a diferença de cada ponto para a mesa e para o previsto pela distância. Diferenças de até 6 dB entre os lugares são comuns em sistemas simples. Mais do que isso pede correção.</p></li>
+    <li><h4>Corrija a causa e meça de novo</h4><p>Frente forte demais se corrige com a altura e a direção das caixas. Fundo fraco, com direção ou com caixas de reforço. Buraco em um lugar só, com a posição da caixa ou do obstáculo. Mexer no volume muda todos os pontos juntos e não resolve a diferença.</p></li>
+    <li><h4>Guarde a diferença entre a frente e a mesa</h4><p>Se a primeira fileira recebe 5 dB a mais do que a mesa, um limite de 90 dB(A) na plateia quer dizer 85 dB(A) na mesa. Durante o evento, você mede só na mesa e sabe o que chega à frente.</p></li>
+    <li><h4>Meça no evento</h4><p>Confira o nível na mesa nos trechos mais fortes, anote a média e o máximo e compare com o combinado.</p></li>
+  </ol>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. O primeiro está preenchido na planilha de apoio.</p>
+
+  <h3>Exemplo 1. A frente reclama do volume, e o fundo não</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares. Duas caixas no palco, na altura da cabeça de quem está sentado. Mesa a 12 m.</dd></div>
+    <div><dt>Sintoma</dt><dd>As primeiras fileiras reclamam do volume. No fundo e na mesa, o som parece na medida.</dd></div>
+    <div><dt>Causa</dt><dd>A lei da distância. A primeira fileira está a 3 m das caixas e no eixo delas. O operador ajusta o volume pelo que ouve a 12 m.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Medição em sete pontos com música gravada. Caixas elevadas em tripés e apontadas para o terço final da sala. Master 2 dB abaixo.</dd></div>
+    <div><dt>Resultado</dt><dd>A diferença entre o ponto mais forte e o mais fraco caiu de 15 para 8 dB. Nenhum ponto ficou acima de 90 dB(A).</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:34%">Ponto</th><th class="n" style="width:12%">Distância</th><th class="n" style="width:13%">Antes</th><th class="n" style="width:15%">Diferença para a mesa</th><th class="n" style="width:13%">Depois</th><th>Situação antes</th></tr></thead>
+      <tbody>
+        <tr><td>1. Primeira fileira, no centro</td><td class="num n">3 m</td><td class="num n">96</td><td class="num n">+10</td><td class="num n">89</td><td class="red">Acima do limite</td></tr>
+        <tr><td>2. Primeira fileira, em frente à caixa</td><td class="num n">2,5 m</td><td class="num n">98</td><td class="num n">+12</td><td class="num n">90</td><td class="red">Acima do limite</td></tr>
+        <tr><td>3. Meio da sala (fileira 4)</td><td class="num n">6 m</td><td class="num n">91</td><td class="num n">+5</td><td class="num n">88</td><td class="red">Acima do limite</td></tr>
+        <tr><td>4. Fileira 8</td><td class="num n">9 m</td><td class="num n">88</td><td class="num n">+2</td><td class="num n">86</td><td>OK</td></tr>
+        <tr><td>5. Mesa de som (referência)</td><td class="num n">12 m</td><td class="num n">86</td><td class="num n">0</td><td class="num n">84</td><td>OK</td></tr>
+        <tr><td>6. Última fileira, no centro</td><td class="num n">16 m</td><td class="num n">84</td><td class="num n">−2</td><td class="num n">83</td><td>OK</td></tr>
+        <tr><td>7. Última fileira, na lateral</td><td class="num n">17 m</td><td class="num n">83</td><td class="num n">−3</td><td class="num n">82</td><td>OK</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> Leituras em dB(A), resposta lenta, com limite combinado de 90 dB(A). De 12 para 3 m são duas dobras: 12 dB previstos, 10 medidos. Com 86 na mesa, a frente recebia de 96 a 98, nível com tempo de referência de cerca de meia hora. Baixar o master até a frente chegar a 90 deixaria a mesa em 78 e o fundo fraco demais. A correção foi na geometria: com as caixas no alto, a frente saiu do eixo das cornetas e a proporção entre as distâncias diminuiu. O fundo perdeu só 1 dB, porque as caixas passaram a apontar para lá.</p>
+
+  <h3>Exemplo 2. “Queremos o dobro do volume”</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Auditório de escola, formatura. Duas caixas passivas no palco e um amplificador de 300 W por canal. A última fileira fica a 20 m.</dd></div>
+    <div><dt>Sintoma</dt><dd>No fundo, os discursos são ouvidos com esforço. A comissão propõe trocar o amplificador por um de 600 W, “para dobrar o volume”.</dd></div>
+    <div><dt>Causa</dt><dd>A distância: de 5 para 20 m, a conta dá 12 dB de queda.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Conta antes de comprar. No lugar do amplificador, um par de caixas de reforço, com atraso, a 5 m das últimas fileiras.</dd></div>
+    <div><dt>Resultado</dt><dd>Cerca de 10 dB a mais no fundo, com as caixas do palco no mesmo nível de antes.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> De 300 para 600 W, a potência dobra: +3 dB, e só se as caixas suportarem. O dobro do volume pediria +10 dB, dez vezes a potência, 3.000 W por canal, e esses 10 dB chegariam também à primeira fileira. Aproximar a fonte rende mais: de 20 para 5 m, a distância cai a um quarto, +12 dB pela conta. Na prática foram uns 10 dB, porque as caixas de reforço trabalham mais baixo. O ajuste do atraso está no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>.</p>
+
+  <h3>Exemplo 3. O grave que sumiu no meio do público</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Evento ao ar livre. Duas caixas ativas em tripés, a 8 m uma da outra, com o mesmo sinal.</dd></div>
+    <div><dt>Sintoma</dt><dd>No meio do público, o som é fino, sem grave. Perto de cada caixa, o grave aparece. O operador já tinha realçado 9 dB nos graves, sem resultado.</dd></div>
+    <div><dt>Causa</dt><dd>Um dos cabos de sinal, montado em casa, tinha os dois condutores trocados em um dos conectores. As caixas tocavam com polaridades opostas.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Teste pelo ouvido: no meio, uma caixa só tinha mais grave que as duas. Cabo trocado por um testado, equalizador plano.</dd></div>
+    <div><dt>Resultado</dt><dd>Grave cheio no meio do público, com menos esforço das caixas.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> No meio, as ondas das duas caixas chegam juntas: com polaridades iguais, somam 6 dB; com polaridades opostas, se anulam. O efeito é mais forte no grave, porque as ondas longas ficam alinhadas em uma área grande. No agudo, qualquer passo muda o alinhamento, e o defeito passa despercebido. O realce de 9 dB subia as duas ondas por igual, e elas continuavam se anulando: só gastava a folga das caixas. Sem outro cabo, o botão de polaridade de uma das saídas resolveria até o fim do evento.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Somar decibéis como números comuns</h4><p>“Duas caixas de 100 dB dão 200 dB.” Ou: “o ruído é 50 e a voz é 60, então o total é 110”.</p><p class="fix"><b>Correção:</b> duas fontes iguais somam 3 dB. Uma fonte 10 dB mais fraca quase não muda o total.</p></div>
+    <div><h4>Dobrar a potência para dobrar o volume</h4><p>Troca-se o amplificador por um de potência dobrada, e quase ninguém nota.</p><p class="fix"><b>Correção:</b> o dobro da potência dá +3 dB. O dobro do volume percebido pede +10 dB, ou a fonte mais perto do ouvinte.</p></div>
+    <div><h4>Ler “dB” sem saber a referência</h4><p>“A mesa está em −18, então a sala está baixa.” Ou tomar o 0 dB do fader pelo 0 dBFS do medidor.</p><p class="fix"><b>Correção:</b> pergunte sempre “dB de quê?”. Volume de sala é dB SPL, medido no lugar do público.</p></div>
+    <div><h4>Julgar o volume só da mesa</h4><p>O operador ajusta pelo que ouve no fundo, e a primeira fileira recebe 10 dB a mais.</p><p class="fix"><b>Correção:</b> meça os pontos da sala uma vez e guarde a diferença entre a frente e a mesa.</p></div>
+    <div><h4>Tratar o aplicativo como medidor calibrado</h4><p>Afirma-se que “o culto ficou em 87 dB” com um celular, sem dizer a ponderação nem o lugar.</p><p class="fix"><b>Correção:</b> anote ponderação, resposta e ponto. Use o celular para comparar, e um medidor calibrado para afirmar.</p></div>
+    <div><h4>Corrigir cancelamento com o equalizador</h4><p>O grave some com duas caixas ou com dois microfones, e o operador realça os graves.</p><p class="fix"><b>Correção:</b> teste a polaridade e reveja as posições. Equalizador não recupera o que foi anulado.</p></div>
+    <div><h4>Esquecer que o agudo anda em feixe</h4><p>Caixa atrás de uma coluna, abaixo da cabeça do público ou virada para o lado: o grave chega, e a palavra não.</p><p class="fix"><b>Correção:</b> o ouvinte precisa enxergar a corneta da caixa. Agudo não contorna obstáculo.</p></div>
+    <div><h4>Mixar com o ouvido cansado</h4><p>Depois de horas de ensaio em volume alto, o operador sobe o volume aos poucos, sem perceber.</p><p class="fix"><b>Correção:</b> faça pausas em silêncio, confira o nível no medidor e mantenha o volume combinado.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>Este é o estudo de entrada da série. Ele não depende de nenhum outro, e quase todos os outros usam o que está aqui: as faixas de frequência, as regras do decibel, a distância e a fase.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li>Não há pré-requisito. Basta saber ligar o sistema e ter curiosidade.</li>
+        <li><a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>: a posição das caixas, que define os pontos e as distâncias da medição da sala.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: a faixa de volume combinada para o evento, que entra como limite na planilha.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>: o dBu, para comparar os níveis de microfone, de instrumento e de linha.</li>
+        <li><a href="../Microfones/treinamento-microfones.html">Microfones</a>: a distância e a fase, que explicam a posição do microfone e a regra 3:1.</li>
+        <li><a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>: o dB SPL, o +3 dB por dobro de potência e o −6 dB por dobro de distância.</li>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>: o dBu e o dBFS dos medidores.</li>
+        <li><a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>: as faixas de frequência e a extensão de cada fonte.</li>
+        <li><a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>: o decibel, usado no ponto de atuação e na redução de ganho do compressor.</li>
+        <li><a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>: a frequência do apito e a margem em dB.</li>
+        <li><a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>: o volume de palco e a proteção da audição dos músicos.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: o dBFS e a taxa de amostragem do áudio enviado ao codificador.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira na montagem e na passagem de som. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>O medidor de nível sonoro está em ponderação A e resposta lenta, e os dois ajustes estão anotados.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>O ruído de fundo da sala foi medido com o sistema mudo e o ar-condicionado ligado.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>O nível foi medido na mesa e em pelo menos cinco outros pontos da plateia, com o mesmo sinal.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>A diferença entre a primeira fileira e a mesa de som é conhecida e está anotada.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>Nenhum ponto da plateia passa do limite de volume combinado para o evento.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>As caixas estão acima da cabeça do público e apontadas para ele, sem obstáculo na frente das cornetas.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>A polaridade das caixas foi conferida: com as duas tocando juntas, o grave cresce no meio da sala.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>As fontes captadas por dois sinais (dois microfones, ou microfone e direct box) foram ouvidas com e sem a inversão de polaridade.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>O operador sabe a escala de cada medidor do sistema: dBFS ou VU na mesa, dB SPL no medidor da sala.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>O nível na mesa é conferido com o medidor nos trechos mais fortes do evento, e o valor é anotado.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>Quem fica perto das caixas ou da bateria tem protetor auricular à mão.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>Ao final, a equipe conferiu se alguém ficou com zumbido ou com o ouvido abafado, e registrou.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Quantos decibéis muda?</h3>
+  <p>Cada frase descreve uma mudança. Escolha a variação de nível que ela produz, pelas regras práticas do módulo 4: <strong>+3</strong>, <strong>+6</strong>, <strong>+10</strong> ou <strong>−6</strong> dB.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"+3": "mais 3 dB", "+6": "mais 6 dB", "+10": "mais 10 dB", "−6": "menos 6 dB"},
+ "itens": [
+  {"t": "O amplificador de 300 W é trocado por um de 600 W, com as mesmas caixas e o mesmo ajuste.", "a": "+3", "w": "O dobro da potência dá 3 dB a mais. É uma diferença pequena."},
+  {"t": "Ao ar livre, uma pessoa que estava a 4 m da caixa anda até 8 m.", "a": "−6", "w": "A distância dobrou: a energia se espalha por uma área quatro vezes maior."},
+  {"t": "O pastor pede que o som pareça duas vezes mais forte para a plateia.", "a": "+10", "w": "A sensação de dobro do volume pede cerca de 10 dB, ou dez vezes a potência."},
+  {"t": "A tensão do sinal na saída da mesa passa de 0,6 V para 1,2 V.", "a": "+6", "w": "O dobro da tensão dá 6 dB. A potência fica quatro vezes maior."},
+  {"t": "Uma segunda cantora, com o mesmo nível da primeira, passa a cantar junto.", "a": "+3", "w": "Duas fontes iguais e independentes somam a energia: 3 dB a mais."},
+  {"t": "O cantor afasta o microfone de 5 cm para 10 cm da boca.", "a": "−6", "w": "A distância dobrou. Chega metade da pressão ao microfone."},
+  {"t": "Um sistema de 200 W é trocado por outro de 2.000 W, com caixas de mesma sensibilidade.", "a": "+10", "w": "Dez vezes a potência dá 10 dB: é o passo que soa como o dobro."},
+  {"t": "O mesmo sinal sai de duas caixas iguais, e o ouvinte está no meio, onde as duas ondas chegam juntas. Compare com uma caixa só.", "a": "+6", "w": "Sinais idênticos e em fase somam a pressão: o dobro, ou 6 dB."},
+  {"t": "Um coral passa de 1 para 10 vozes de mesmo nível.", "a": "+10", "w": "Dez fontes iguais e independentes dão dez vezes a energia: 10 dB."},
+  {"t": "Uma caixa de reforço igual à do palco, com o mesmo nível, fica a 5 m do ouvinte. Compare o som dela com o da caixa do palco, que está a 10 m.", "a": "+6", "w": "A distância é a metade: a caixa de reforço chega 6 dB mais forte para esse ouvinte."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: meça a distância, a soma e a polaridade</h3>
+  <p>Você vai precisar de uma caixa ativa ou de um sistema pequeno, de um medidor de nível sonoro ou de um aplicativo de celular, de uma trena e da planilha de apoio. Trabalhe em volume moderado, perto de 75 dB(A) a 2 metros, e avise quem estiver na sala.</p>
+  <ol>
+    <li>Toque ruído rosa em uma caixa só. Meça o nível a 1, 2, 4 e 8 metros, no eixo da caixa. Anote na aba “Medição da sala”, com o ponto de 1 metro como referência.</li>
+    <li>Compare a coluna do medido com a do previsto pela distância. Em sala fechada, os pontos mais distantes devem ficar acima do previsto. Por quê? A resposta está no módulo 4.</li>
+    <li>Ligue a segunda caixa com o mesmo sinal, ao lado da primeira. Meça de novo a 4 metros, à mesma distância das duas. Quanto subiu? Espere algo entre 3 e 6 dB.</li>
+    <li>Inverta a polaridade de uma das caixas, com o botão Ø da saída ou do canal. Ouça uma música conhecida e observe o grave. Volte à posição certa.</li>
+    <li>Na mesa, fale em um microfone a um palmo da boca e leia o medidor do canal. Afaste para dois palmos e fale igual. A leitura deve cair perto de 6 dB. Em sala com muito eco, cai um pouco menos.</li>
+    <li>Abra a aba “Calculadora de dB”. Calcule quantos dB separam um amplificador de 250 W de um de 1.000 W, e que nível chega a 12 metros de uma caixa que dá 100 dB a 1 metro. Confira com as regras do módulo 4.</li>
+  </ol>
+  <p>Guarde a planilha da medição. Na próxima vez que as caixas mudarem de lugar, repita os passos 1 e 2 e compare.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Som-e-Sinal-modelo.xlsx">Som-e-Sinal-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Calculadora de dB</strong></td><td>Sete contas do dia a dia: razão para dB, dB para razão, distância, soma de fontes, tensão e dBu, frequência e atraso.</td><td>A diferença em dB, a potência necessária, o nível previsto a outra distância, a soma de até quatro fontes, o comprimento de onda e a frequência do primeiro cancelamento.</td></tr>
+        <tr><td><strong>Medição da sala</strong></td><td>Registro do nível sonoro em até 16 pontos, com distância, ponderação, limite combinado e ponto de referência.</td><td>Diferença para a mesa, nível previsto pela distância, tempo de referência de exposição e situação de cada ponto (OK, Forte, Fraco, Acima do limite ou Ruído).</td></tr>
+        <tr><td><strong>Faixas por fonte</strong></td><td>As faixas de frequência e a extensão de cada fonte, com linhas para acrescentar as suas.</td><td>A faixa em que cai a nota mais grave de cada fonte.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Regras do decibel, as escalas, níveis típicos, tempos de exposição, soma de fontes e comprimentos de onda.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Medição</strong></td><td>Os sete pontos do exemplo 1, antes da correção, e as leituras depois dela.</td><td>Os mesmos resultados da aba Medição da sala.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O limite combinado, a tolerância entre os pontos e a velocidade do som ficam no alto das abas e podem ser trocados. Os valores iniciais são ponto de partida, e não norma.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Amplitude</dt><dd>Tamanho da variação de pressão (ou de tensão) em cada ciclo da onda. Tem a ver com a força do som.</dd></div>
+    <div><dt>Comprimento de onda</dt><dd>Espaço que um ciclo ocupa no ar: a velocidade do som dividida pela frequência.</dd></div>
+    <div><dt>dB SPL</dt><dd>Nível de pressão sonora. O 0 é o limiar da audição. É a medida do volume na sala.</dd></div>
+    <div><dt>dBFS</dt><dd>Decibéis em relação ao fundo de escala digital. O 0 é o máximo; as leituras são negativas.</dd></div>
+    <div><dt>dBu</dt><dd>Nível de tensão elétrica em relação a 0,775 volt. A linha profissional trabalha em +4 dBu.</dd></div>
+    <div><dt>Decibel (dB)</dt><dd>Escala que compara dois valores por proporção. Sem letra depois, indica uma diferença, e não um nível.</dd></div>
+    <div><dt>Fase</dt><dd>Posição de uma onda dentro do ciclo, em relação a outra. Muda com o atraso e com a frequência.</dd></div>
+    <div><dt>Filtro pente</dt><dd>Série de cancelamentos e reforços no espectro, quando um som se soma a uma cópia atrasada dele.</dd></div>
+    <div><dt>Frequência</dt><dd>Número de ciclos por segundo, em hertz (Hz). Define se o som é grave ou agudo.</dd></div>
+    <div><dt>Harmônico</dt><dd>Frequência múltipla da fundamental, produzida junto com ela. O conjunto dos harmônicos define o timbre.</dd></div>
+    <div><dt>Lei do inverso do quadrado</dt><dd>Em espaço aberto, o nível de uma fonte pequena cai 6 dB a cada vez que a distância dobra.</dd></div>
+    <div><dt>Oitava</dt><dd>Intervalo entre uma frequência e o dobro dela. O ouvido percebe de 20 Hz a 20 kHz, cerca de dez oitavas.</dd></div>
+    <div><dt>Polaridade</dt><dd>Sentido da onda: normal ou invertida, com o positivo no lugar do negativo. Corrige-se com o botão Ø.</dd></div>
+    <div><dt>Ponderação A</dt><dd>Ajuste do medidor de nível sonoro que dá menos peso aos graves, como o ouvido. A leitura é em dB(A).</dd></div>
+    <div><dt>Ruído rosa</dt><dd>Sinal de teste com a mesma energia em cada oitava. Soa como uma cachoeira.</dd></div>
+    <div><dt>Taxa de amostragem</dt><dd>Número de medições por segundo de um sinal digital. As usuais são 44,1 kHz e 48 kHz.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>

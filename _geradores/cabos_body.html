@@ -1,0 +1,1035 @@
+<div class="page" lang="pt-BR" data-estudo="cabos">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="blue w">XLR</span><span class="amber w">P10</span></div>
+  <h1>Cabos, conectores e níveis de sinal</h1>
+  <p class="lead">Um guia de estudo para saber que cabo liga o quê, por que cada nível de sinal tem a sua entrada e como achar a causa do ruído em um canal.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">Quatro níveis, quatro cabos</a></li>
+    <li><a href="#balanceado">Balanceado e desbalanceado</a></li>
+    <li><a href="#conectores">Conectores</a></li>
+    <li><a href="#di">Direct box e phantom power</a></li>
+    <li><a href="#multicabo">Multicabo e caixa de palco</a></li>
+    <li><a href="#ruido">Laço de terra e zumbido</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>Quatro níveis, quatro cabos</h2>
+  <p>Um sistema de som é uma corrente de equipamentos ligados por cabos. O som vira eletricidade no microfone ou no instrumento, passa pela mesa e pelo amplificador e volta a ser som na caixa. Em cada trecho, o sinal elétrico tem um tamanho diferente: é o <strong>nível de sinal</strong>.</p>
+  <p>São quatro níveis: de <strong>microfone</strong>, de <strong>instrumento</strong>, de <strong>linha</strong> e de <strong>alto-falante</strong>. O sinal que sai de um amplificador pode ser dezenas de milhares de vezes maior que o de um microfone. Por isso cada nível tem a sua entrada, o seu cabo e, quase sempre, o seu conector. Saber o nível de cada trecho responde a quase todas as dúvidas de ligação.</p>
+  <p>Pense na água: o conta-gotas e a mangueira dos bombeiros levam a mesma água, em quantidades que não se comparam. A mangueira ligada em um copo faz o copo voar, e o conta-gotas não enche a piscina. Com os sinais é igual: sinal grande em entrada sensível distorce ou queima, e sinal pequeno em entrada pouco sensível some no ruído.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 310" role="img" aria-label="Mapa de um sistema de som com o nível e o cabo de cada trecho. Microfone vai à mesa por XLR, em nível de microfone. Violão ou baixo sai por P10, em nível de instrumento, passa por uma direct box e segue por XLR. Teclado ou computador sai por P10 ou P2, em nível de linha, passa por direct box e segue por XLR. A mesa manda nível de linha, por XLR ou P10 TRS, à caixa ativa, e por XLR ao amplificador, que manda nível de alto-falante, por cabo com Speakon, à caixa passiva.">
+<defs>
+<marker id="ar1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path class="ah f-blue" d="M0 0 L10 5 L0 10 z"/></marker>
+<marker id="ar1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path class="ah f-amber" d="M0 0 L10 5 L0 10 z"/></marker>
+<marker id="ar1t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path class="ah f-teal" d="M0 0 L10 5 L0 10 z"/></marker>
+<marker id="ar1r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path class="ah f-red" d="M0 0 L10 5 L0 10 z"/></marker>
+</defs>
+<text class="mono mu" x="18" y="26" font-size="10.5">DA FONTE À CAIXA: CADA TRECHO TEM UM NÍVEL E UM CABO</text>
+
+<rect class="bx" x="18" y="46" width="130" height="44"/>
+<text class="b" x="83" y="65" font-size="12" text-anchor="middle">Microfone</text>
+<text class="mu" x="83" y="81" font-size="10.5" text-anchor="middle">voz, coral, bateria</text>
+<line class="s-blue" stroke-width="2.5" x1="150" y1="68" x2="446" y2="68" marker-end="url(#ar1b)"/>
+<text class="t-blue b" x="297" y="60" font-size="11" text-anchor="middle">cabo XLR</text>
+<text class="mu" x="297" y="84" font-size="10.5" text-anchor="middle">nível de microfone</text>
+
+<rect class="bx" x="18" y="126" width="130" height="44"/>
+<text class="b" x="83" y="145" font-size="12" text-anchor="middle">Violão ou baixo</text>
+<text class="mu" x="83" y="161" font-size="10.5" text-anchor="middle">com captador</text>
+<line class="s-amber" stroke-width="2.5" x1="150" y1="148" x2="262" y2="148" marker-end="url(#ar1a)"/>
+<text class="t-amber b" x="205" y="140" font-size="11" text-anchor="middle">cabo P10</text>
+<text class="mu" x="205" y="164" font-size="10.5" text-anchor="middle">instrumento</text>
+<rect class="bx-slate" x="266" y="128" width="60" height="40"/>
+<text class="b" x="296" y="153" font-size="12.5" text-anchor="middle">DI</text>
+<line class="s-blue" stroke-width="2.5" x1="328" y1="148" x2="446" y2="148" marker-end="url(#ar1b)"/>
+<text class="t-blue b" x="387" y="140" font-size="11" text-anchor="middle">cabo XLR</text>
+<text class="mu" x="387" y="164" font-size="10.5" text-anchor="middle">microfone</text>
+
+<rect class="bx" x="18" y="206" width="130" height="44"/>
+<text class="b" x="83" y="225" font-size="12" text-anchor="middle">Teclado</text>
+<text class="mu" x="83" y="241" font-size="10.5" text-anchor="middle">ou computador</text>
+<line class="s-teal" stroke-width="2.5" x1="150" y1="228" x2="262" y2="228" marker-end="url(#ar1t)"/>
+<text class="t-teal b" x="205" y="220" font-size="11" text-anchor="middle">P10 ou P2</text>
+<text class="mu" x="205" y="244" font-size="10.5" text-anchor="middle">linha</text>
+<rect class="bx-slate" x="266" y="208" width="60" height="40"/>
+<text class="b" x="296" y="233" font-size="12.5" text-anchor="middle">DI</text>
+<line class="s-blue" stroke-width="2.5" x1="328" y1="228" x2="446" y2="228" marker-end="url(#ar1b)"/>
+<text class="t-blue b" x="387" y="220" font-size="11" text-anchor="middle">cabo XLR</text>
+<text class="mu" x="387" y="244" font-size="10.5" text-anchor="middle">microfone</text>
+
+<rect class="bx-ink" x="450" y="46" width="110" height="204"/>
+<text class="t-ground b" x="505" y="144" font-size="13" text-anchor="middle">Mesa</text>
+<text class="t-ground" x="505" y="162" font-size="11" text-anchor="middle">de som</text>
+
+<line class="s-teal" stroke-width="2.5" x1="562" y1="88" x2="696" y2="88" marker-end="url(#ar1t)"/>
+<text class="t-teal b" x="629" y="80" font-size="11" text-anchor="middle">XLR ou P10 TRS</text>
+<text class="mu" x="629" y="104" font-size="10.5" text-anchor="middle">linha</text>
+<rect class="bx" x="700" y="66" width="182" height="44"/>
+<text class="b" x="791" y="85" font-size="12" text-anchor="middle">Caixa ativa</text>
+<text class="mu" x="791" y="101" font-size="10.5" text-anchor="middle">amplificador embutido</text>
+
+<line class="s-teal" stroke-width="2.5" x1="562" y1="208" x2="626" y2="208" marker-end="url(#ar1t)"/>
+<text class="t-teal b" x="594" y="200" font-size="11" text-anchor="middle">XLR</text>
+<text class="mu" x="594" y="224" font-size="10.5" text-anchor="middle">linha</text>
+<rect class="bx" x="630" y="186" width="110" height="44"/>
+<text class="b" x="685" y="212" font-size="12" text-anchor="middle">Amplificador</text>
+<line class="s-red" stroke-width="2.5" x1="742" y1="208" x2="796" y2="208" marker-end="url(#ar1r)"/>
+<text class="t-red b" x="769" y="200" font-size="10.5" text-anchor="middle">Speakon</text>
+<text class="mu" x="769" y="248" font-size="10.5" text-anchor="middle">alto-falante</text>
+<rect class="bx" x="800" y="186" width="82" height="44"/>
+<text class="b" x="841" y="205" font-size="12" text-anchor="middle">Caixa</text>
+<text class="mu" x="841" y="221" font-size="10.5" text-anchor="middle">passiva</text>
+
+<line class="s-blue" stroke-width="2.5" x1="18" y1="286" x2="44" y2="286"/>
+<text x="50" y="290" font-size="11">microfone (milivolts)</text>
+<line class="s-amber" stroke-width="2.5" x1="200" y1="286" x2="226" y2="286"/>
+<text x="232" y="290" font-size="11">instrumento (alta impedância)</text>
+<line class="s-teal" stroke-width="2.5" x1="430" y1="286" x2="456" y2="286"/>
+<text x="462" y="290" font-size="11">linha (perto de 1 volt)</text>
+<line class="s-red" stroke-width="2.5" x1="624" y1="286" x2="650" y2="286"/>
+<text x="656" y="290" font-size="11">alto-falante (dezenas de volts)</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> O mapa de um sistema pequeno. Cada cor é um nível de sinal. A direct box (DI), assunto do módulo 4, converte o sinal do instrumento e do teclado para viajar pelo mesmo tipo de cabo do microfone.</figcaption>
+  </figure>
+
+  <h3>Os quatro níveis</h3>
+  <p>O nível se mede em volts ou em dBu, uma escala de decibéis em que 0 dBu vale 0,775 volt (o decibel e o dBu estão no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>). Aqui basta a ordem de grandeza.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 296" role="img" aria-label="Os quatro níveis em uma régua de menos 70 a mais 50 dBu, com a tensão de 1 milivolt a 100 volts. Microfone: de menos 60 a menos 20 dBu. Instrumento: de menos 30 a menos 10 dBu, com alta impedância. Linha: de menos 10 dBV, doméstico, a mais 4 dBu, profissional. Alto-falante: de mais 20 a mais 40 dBu, só para caixa passiva.">
+<text class="b" x="18" y="53" font-size="12">Microfone</text>
+<text class="mu" x="18" y="68" font-size="10.5">cerca de 1 a 80 milivolts</text>
+<rect class="lv-blue" x="300" y="44" width="200" height="22"/>
+<text class="mu" x="508" y="59" font-size="10.5">o pré da mesa aumenta de 20 a 60 dB</text>
+
+<text class="b" x="18" y="101" font-size="12">Instrumento</text>
+<text class="mu" x="18" y="116" font-size="10.5">captador passivo, alta impedância</text>
+<rect class="lv-amber" x="450" y="92" width="100" height="22"/>
+<text class="mu" x="558" y="107" font-size="10.5">pede entrada de 1 megohm ou direct box</text>
+
+<text class="b" x="18" y="149" font-size="12">Linha</text>
+<text class="mu" x="18" y="164" font-size="10.5">de 0,3 a 1,2 volt</text>
+<rect class="lv-teal" x="550" y="140" width="70" height="22"/>
+<text class="mu" x="542" y="155" font-size="10.5" text-anchor="end">−10 dBV (doméstico)</text>
+<text class="mu" x="628" y="155" font-size="10.5">+4 dBu (profissional)</text>
+
+<text class="b" x="18" y="197" font-size="12">Alto-falante</text>
+<text class="mu" x="18" y="212" font-size="10.5">dezenas de volts, com ampères</text>
+<rect class="lv-red" x="700" y="188" width="100" height="22"/>
+<text class="mu" x="692" y="203" font-size="10.5" text-anchor="end">só para a caixa passiva, por cabo de caixa</text>
+
+<line class="ln-mu" x1="250" y1="232" x2="850" y2="232"/>
+<g class="ln-mu" stroke-width="1">
+<line x1="250" y1="232" x2="250" y2="238"/><line x1="300" y1="232" x2="300" y2="238"/><line x1="350" y1="232" x2="350" y2="238"/>
+<line x1="400" y1="232" x2="400" y2="238"/><line x1="450" y1="232" x2="450" y2="238"/><line x1="500" y1="232" x2="500" y2="238"/>
+<line x1="550" y1="232" x2="550" y2="238"/><line x1="600" y1="232" x2="600" y2="238"/><line x1="650" y1="232" x2="650" y2="238"/>
+<line x1="700" y1="232" x2="700" y2="238"/><line x1="750" y1="232" x2="750" y2="238"/><line x1="800" y1="232" x2="800" y2="238"/>
+<line x1="850" y1="232" x2="850" y2="238"/>
+</g>
+<text class="mu" x="226" y="252" font-size="10.5" text-anchor="end">dBu</text>
+<g font-size="10.5" text-anchor="middle">
+<text class="mu" x="250" y="252">−70</text><text class="mu" x="300" y="252">−60</text><text class="mu" x="350" y="252">−50</text>
+<text class="mu" x="400" y="252">−40</text><text class="mu" x="450" y="252">−30</text><text class="mu" x="500" y="252">−20</text>
+<text class="mu" x="550" y="252">−10</text><text class="b" x="600" y="252">0</text><text class="mu" x="650" y="252">+10</text>
+<text class="mu" x="700" y="252">+20</text><text class="mu" x="750" y="252">+30</text><text class="mu" x="800" y="252">+40</text>
+<text class="mu" x="850" y="252">+50</text>
+</g>
+<text class="mu" x="226" y="280" font-size="10.5" text-anchor="end">tensão</text>
+<g class="ln-mu" stroke-width="1">
+<line x1="311" y1="262" x2="311" y2="268"/><line x1="411" y1="262" x2="411" y2="268"/><line x1="511" y1="262" x2="511" y2="268"/>
+<line x1="611" y1="262" x2="611" y2="268"/><line x1="711" y1="262" x2="711" y2="268"/><line x1="811" y1="262" x2="811" y2="268"/>
+</g>
+<g font-size="10.5" text-anchor="middle">
+<text class="mu" x="311" y="282">1 mV</text><text class="mu" x="411" y="282">10 mV</text><text class="mu" x="511" y="282">100 mV</text>
+<text class="mu" x="611" y="282">1 V</text><text class="mu" x="711" y="282">10 V</text><text class="mu" x="811" y="282">100 V</text>
+</g>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> Os quatro níveis na mesma régua. Cada 20 dB para a direita é uma tensão dez vezes maior. As faixas são típicas: mudam com a fonte, com a força de quem toca e com a potência do amplificador.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%">Nível</th><th style="width:27%">Quem entrega</th><th style="width:27%">Onde entra</th><th>Cabo usual</th></tr></thead>
+      <tbody>
+        <tr><td class="blue"><strong>Microfone</strong></td><td>Microfones e a saída XLR da direct box.</td><td>Entrada de microfone (pré-amplificador).</td><td>Balanceado, com XLR.</td></tr>
+        <tr><td class="amber"><strong>Instrumento</strong></td><td>Guitarra, baixo e violão com captador, sem pré.</td><td>Entrada de instrumento (Hi-Z), amplificador do músico ou direct box.</td><td>Blindado desbalanceado, com P10, curto.</td></tr>
+        <tr><td class="teal"><strong>Linha</strong></td><td>Teclado, computador, receptor sem fio, saídas da mesa e de processadores.</td><td>Entrada de linha da mesa, da caixa ativa, do amplificador.</td><td>Balanceado (XLR, P10 TRS) no profissional; desbalanceado (P10, P2, RCA) no doméstico.</td></tr>
+        <tr><td class="red"><strong>Alto-falante</strong></td><td>Só a saída do amplificador de potência.</td><td>Só a caixa passiva.</td><td>Cabo de caixa: dois condutores grossos, sem malha, com Speakon.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O captador passivo de guitarra, baixo ou violão tem <strong>alta impedância</strong>: entrega tensão, mas quase nenhuma corrente. Para não perder agudos e volume, pede uma entrada de 1 megohm ou mais. As entradas de linha e de microfone da mesa não são assim, e por isso o instrumento passa por uma direct box ou por uma entrada marcada como instrumento ou Hi-Z.</p>
+
+  <h3>Por que os níveis não se misturam</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:34%">Ligação errada</th><th style="width:30%">O que acontece</th><th>O certo</th></tr></thead>
+      <tbody>
+        <tr><td>Linha (teclado, computador) na entrada de microfone</td><td>Distorção mesmo com o ganho no mínimo.</td><td>Entrada de linha, pad ou direct box.</td></tr>
+        <tr><td>Microfone na entrada de linha</td><td>Som fraco e com chiado: a entrada não tem ganho suficiente.</td><td>Entrada de microfone.</td></tr>
+        <tr><td>Instrumento passivo direto na entrada de linha ou de microfone</td><td>Som fraco, sem brilho e sem corpo.</td><td>Direct box ou entrada de instrumento (Hi-Z).</td></tr>
+        <tr><td>Saída de amplificador em qualquer entrada da mesa, da caixa ativa ou do multicabo</td><td>Queima a entrada. Pode danificar também o amplificador.</td><td>Saída de amplificador só vai para caixa passiva.</td></tr>
+        <tr><td>Cabo de instrumento ligando amplificador e caixa passiva</td><td>O condutor fino esquenta e desperdiça potência. O cabo pode derreter e entrar em curto.</td><td>Cabo de caixa, com a bitola certa.</td></tr>
+        <tr><td>Cabo de caixa ligando instrumento ou linha</td><td>Zumbido e interferência: o cabo não tem malha.</td><td>Cabo blindado.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <h4>Segurança: saída de amplificador</h4>
+    <p>A saída de um amplificador de potência tem tensão e corrente capazes de dar choque e de queimar equipamento. Ligue e desligue os cabos de caixa com o amplificador desligado, e nunca ligue essa saída em entrada de mesa, de caixa ativa, de direct box ou de multicabo. Impedância e bitola do cabo de caixa estão no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="balanceado">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>Balanceado e desbalanceado</h2>
+  <p>Todo cabo funciona também como antena: capta um pouco do campo elétrico e magnético da rede elétrica, dos dimmers, dos reatores e dos transmissores de rádio. Quanto mais longo o cabo e menor o sinal, mais esse ruído aparece. Há duas formas de construir a ligação.</p>
+  <p>Na ligação <strong>desbalanceada</strong> há um condutor de sinal e uma malha em volta. A malha blinda e, ao mesmo tempo, é o retorno do sinal. O ruído que entra se mistura ao sinal, e a entrada não tem como separar um do outro.</p>
+  <p>Na ligação <strong>balanceada</strong> há dois condutores de sinal, trançados, e a malha em volta, que só blinda. A entrada mede apenas a <em>diferença</em> entre os dois condutores. O ruído entra igual nos dois, e a diferença entre valores iguais é zero.</p>
+  <p>É como medir a diferença de altura entre duas pessoas no mesmo barco: a onda levanta e abaixa as duas juntas, e a diferença entre elas não muda.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 334" role="img" aria-label="Como a ligação balanceada cancela o ruído. Na saída, o mesmo sinal vai em dois fios, um com a polaridade invertida. No cabo, o mesmo ruído entra nos dois fios. Na entrada, o circuito mede a diferença: o sinal soma e o ruído se cancela. No cabo desbalanceado há um só fio de sinal, e o ruído segue junto com ele.">
+<defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+<text class="b" x="18" y="24" font-size="13">1. Na saída do equipamento</text>
+<text class="mu" x="18" y="42" font-size="11">O mesmo sinal vai em dois fios,</text>
+<text class="mu" x="18" y="57" font-size="11">em um deles com a polaridade invertida.</text>
+<rect class="bx" x="18" y="70" width="272" height="166"/>
+<line class="grid" x1="102" y1="120" x2="278" y2="120"/><line class="grid" x1="102" y1="198" x2="278" y2="198"/>
+<text class="t-blue b" x="30" y="124" font-size="11">quente (+)</text>
+<text class="t-amber b" x="30" y="202" font-size="11">frio (−)</text>
+<path class="s-blue" d="M102 120 q22 -40 44 0 t44 0 t44 0 t44 0"/>
+<path class="s-amber" d="M102 198 q22 40 44 0 t44 0 t44 0 t44 0"/>
+<line class="ln" x1="292" y1="153" x2="310" y2="153" marker-end="url(#ar3)"/>
+
+<text class="b" x="314" y="24" font-size="13">2. No cabo</text>
+<text class="mu" x="314" y="42" font-size="11">O ruído entra igual nos dois fios,</text>
+<text class="mu" x="314" y="57" font-size="11">no mesmo sentido.</text>
+<rect class="bx" x="314" y="70" width="272" height="166"/>
+<line class="grid" x1="398" y1="120" x2="574" y2="120"/><line class="grid" x1="398" y1="198" x2="574" y2="198"/>
+<text class="t-blue b" x="326" y="124" font-size="11">quente (+)</text>
+<text class="t-amber b" x="326" y="202" font-size="11">frio (−)</text>
+<path class="s-blue" d="M398 120 q22 -40 44 0 t44 0 t44 0 t44 0"/>
+<path class="s-amber" d="M398 198 q22 40 44 0 t44 0 t44 0 t44 0"/>
+<path class="s-red" stroke-width="2.5" d="M441 118.6 L446 104 L451 131.9 M519 105.9 L524 90 L529 118.6"/>
+<path class="s-red" stroke-width="2.5" d="M441 199.4 L446 178 L451 186.1 M519 212.1 L524 190 L529 199.4"/>
+<text class="t-red b" x="486" y="160" font-size="11" text-anchor="middle">o mesmo ruído nos dois</text>
+<line class="ln" x1="588" y1="153" x2="606" y2="153" marker-end="url(#ar3)"/>
+
+<text class="b" x="610" y="24" font-size="13">3. Na entrada da mesa</text>
+<text class="mu" x="610" y="42" font-size="11">A entrada mede a diferença entre os fios:</text>
+<text class="mu" x="610" y="57" font-size="11">o sinal soma, e o ruído se cancela.</text>
+<rect class="bx" x="610" y="70" width="272" height="166"/>
+<line class="grid" x1="694" y1="159" x2="870" y2="159"/>
+<text class="t-good b" x="622" y="156" font-size="11">sinal</text>
+<text class="t-good b" x="622" y="171" font-size="11">limpo</text>
+<path class="s-good" stroke-width="2.5" d="M694 159 q22 -80 44 0 t44 0 t44 0 t44 0"/>
+
+<rect class="bx-amber" x="18" y="254" width="864" height="62"/>
+<text class="b" x="34" y="278" font-size="12">No cabo desbalanceado</text>
+<text x="34" y="298" font-size="11.5">há um só fio de sinal, e a malha é o retorno. O ruído que entra segue junto com o sinal: a entrada não tem com o que comparar.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> Como a ligação balanceada cancela o ruído. O cancelamento depende de os dois fios serem iguais e andarem juntos: por isso eles são trançados um no outro.</figcaption>
+  </figure>
+
+  <div class="pair">
+    <div class="box">
+      <h4>Desbalanceado</h4>
+      <ul>
+        <li>Dois contatos: sinal e malha. Conectores P10 TS, P2, RCA.</li>
+        <li>Instrumentos, teclados, computadores, celulares, aparelhos domésticos.</li>
+        <li>Bom em trechos curtos: até uns 5 ou 6 metros, como ponto de partida.</li>
+        <li>Com captador passivo, o cabo longo também corta agudos.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Balanceado</h4>
+      <ul>
+        <li>Três contatos: positivo (quente), negativo (frio) e malha. Conectores XLR e P10 TRS.</li>
+        <li>Microfones, direct boxes, mesas, processadores, caixas ativas, amplificadores.</li>
+        <li>Leva sinal de microfone por dezenas de metros, como nos multicabos.</li>
+        <li>Só funciona se a saída, o cabo e a entrada forem balanceados.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>A ligação é tão balanceada quanto o seu ponto mais fraco</h3>
+  <p>O cabo, sozinho, não torna a ligação balanceada. Um cabo XLR ligado por adaptador a uma saída desbalanceada leva um sinal desbalanceado, e uma saída balanceada ligada com cabo P10 TS perde o balanceamento. Saída, cabo e entrada precisam ser balanceados. Quando a fonte é desbalanceada e a distância é grande, quem resolve é a direct box (módulo 4): ela fica perto da fonte e entrega um sinal balanceado para o trecho longo.</p>
+  
+
+  <div class="note">
+    <h4>Valores de referência</h4>
+    <p>Os comprimentos são ponto de partida. O que um cabo desbalanceado aguenta depende da malha, do nível do sinal e da interferência do local: 10 metros podem funcionar em uma sala e zumbir em outra, ao lado de um quadro de energia.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="conectores">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Conectores</h2>
+  <p>O conector dá uma pista do tipo de sinal, mas não é garantia: o mesmo P10 leva instrumento, linha ou alto-falante, e o mesmo XLR leva microfone ou linha. Leia o que está escrito ao lado do conector: <em>mic</em>, <em>line</em>, <em>inst</em> ou <em>Hi-Z</em>, <em>speaker output</em>. O que manda é o nível; o conector só diz que o plugue encaixa.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 398" role="img" aria-label="Esquema dos contatos de seis conectores. XLR: pino 1 malha, 2 positivo, 3 negativo. P10 TS: ponta sinal, luva malha. P10 TRS: ponta positivo, anel negativo, luva malha. P2: ponta esquerdo, anel direito, luva comum. RCA: pino central sinal, anel externo malha. Speakon: 1 mais e 1 menos, e 2 mais e 2 menos para a segunda via.">
+<text class="mono mu" x="18" y="22" font-size="10.5">OS CONTATOS DE CADA CONECTOR, EM ESQUEMA</text>
+
+<rect class="bx" x="18" y="34" width="280" height="168"/>
+<text class="b" x="32" y="58" font-size="13">XLR</text>
+<text class="mu" x="32" y="74" font-size="10.5">três pinos, com trava</text>
+<circle class="bx-slate" cx="82" cy="130" r="34"/>
+<circle class="f-slate" cx="68" cy="120" r="8"/><text class="on b" x="68" y="124" font-size="10.5" text-anchor="middle">1</text>
+<circle class="f-blue" cx="96" cy="120" r="8"/><text class="on b" x="96" y="124" font-size="10.5" text-anchor="middle">2</text>
+<circle class="f-amber" cx="82" cy="144" r="8"/><text class="on b" x="82" y="148" font-size="10.5" text-anchor="middle">3</text>
+<rect class="f-slate" x="146" y="104" width="12" height="12"/><text x="164" y="114" font-size="10.5">1: malha</text>
+<rect class="f-blue" x="146" y="124" width="12" height="12"/><text x="164" y="134" font-size="10.5">2: positivo (quente)</text>
+<rect class="f-amber" x="146" y="144" width="12" height="12"/><text x="164" y="154" font-size="10.5">3: negativo (frio)</text>
+<text class="mu" x="32" y="190" font-size="10.5">Microfone e linha balanceados</text>
+
+<rect class="bx" x="310" y="34" width="280" height="168"/>
+<text class="b" x="324" y="58" font-size="13">P10 TS</text>
+<text class="mu" x="324" y="74" font-size="10.5">6,35 mm, dois contatos (mono)</text>
+<rect class="bx-slate" x="324" y="118" width="36" height="24"/>
+<rect class="f-slate" x="360" y="125" width="42" height="10"/>
+<rect class="f-blue" x="405" y="125" width="17" height="10" rx="5"/>
+<rect class="f-ink" x="402" y="125" width="4" height="10"/>
+<rect class="f-blue" x="438" y="114" width="12" height="12"/><text x="456" y="124" font-size="10.5">ponta: sinal</text>
+<rect class="f-slate" x="438" y="134" width="12" height="12"/><text x="456" y="144" font-size="10.5">luva: malha</text>
+<text class="mu" x="324" y="190" font-size="10.5">Instrumento e linha desbalanceada</text>
+
+<rect class="bx" x="602" y="34" width="280" height="168"/>
+<text class="b" x="616" y="58" font-size="13">P10 TRS</text>
+<text class="mu" x="616" y="74" font-size="10.5">6,35 mm, três contatos</text>
+<rect class="bx-slate" x="616" y="118" width="36" height="24"/>
+<rect class="f-slate" x="652" y="125" width="30" height="10"/>
+<rect class="f-amber" x="685" y="125" width="9" height="10"/>
+<rect class="f-blue" x="697" y="125" width="17" height="10" rx="5"/>
+<rect class="f-ink" x="682" y="125" width="3" height="10"/><rect class="f-ink" x="694" y="125" width="4" height="10"/>
+<rect class="f-blue" x="730" y="104" width="12" height="12"/><text x="748" y="114" font-size="10.5">ponta: positivo</text>
+<rect class="f-amber" x="730" y="124" width="12" height="12"/><text x="748" y="134" font-size="10.5">anel: negativo</text>
+<rect class="f-slate" x="730" y="144" width="12" height="12"/><text x="748" y="154" font-size="10.5">luva: malha</text>
+<text class="mu" x="616" y="190" font-size="10.5">Linha balanceada, fone estéreo ou insert</text>
+
+<rect class="bx" x="18" y="212" width="280" height="168"/>
+<text class="b" x="32" y="236" font-size="13">P2</text>
+<text class="mu" x="32" y="252" font-size="10.5">3,5 mm, estéreo desbalanceado</text>
+<rect class="bx-slate" x="32" y="299" width="32" height="18"/>
+<rect class="f-slate" x="64" y="305" width="24" height="6"/>
+<rect class="f-amber" x="91" y="305" width="7" height="6"/>
+<rect class="f-blue" x="101" y="305" width="13" height="6" rx="3"/>
+<rect class="f-ink" x="88" y="305" width="3" height="6"/><rect class="f-ink" x="98" y="305" width="4" height="6"/>
+<rect class="f-blue" x="146" y="282" width="12" height="12"/><text x="164" y="292" font-size="10.5">ponta: esquerdo</text>
+<rect class="f-amber" x="146" y="302" width="12" height="12"/><text x="164" y="312" font-size="10.5">anel: direito</text>
+<rect class="f-slate" x="146" y="322" width="12" height="12"/><text x="164" y="332" font-size="10.5">luva: comum (malha)</text>
+<text class="mu" x="32" y="368" font-size="10.5">Computador, celular, tocador</text>
+
+<rect class="bx" x="310" y="212" width="280" height="168"/>
+<text class="b" x="324" y="236" font-size="13">RCA</text>
+<text class="mu" x="324" y="252" font-size="10.5">desbalanceado, em par estéreo</text>
+<circle class="f-slate" cx="374" cy="308" r="24"/>
+<circle class="f-surface" cx="374" cy="308" r="17"/>
+<circle class="f-blue" cx="374" cy="308" r="6"/>
+<rect class="f-blue" x="438" y="292" width="12" height="12"/><text x="456" y="302" font-size="10.5">pino central: sinal</text>
+<rect class="f-slate" x="438" y="312" width="12" height="12"/><text x="456" y="322" font-size="10.5">anel externo: malha</text>
+<text class="mu" x="324" y="368" font-size="10.5">Aparelhos domésticos: branco E, vermelho D</text>
+
+<rect class="bx" x="602" y="212" width="280" height="168"/>
+<text class="b" x="616" y="236" font-size="13">Speakon</text>
+<text class="mu" x="616" y="252" font-size="10.5">com trava, para alto-falante</text>
+<circle class="bx-slate" cx="666" cy="308" r="36"/>
+<circle class="f-blue" cx="652" cy="295" r="10"/><text class="on b" x="652" y="299" font-size="10.5" text-anchor="middle">1+</text>
+<circle class="f-amber" cx="680" cy="295" r="10"/><text class="on b" x="680" y="299" font-size="10.5" text-anchor="middle">1−</text>
+<circle class="f-slate" cx="652" cy="321" r="10"/><text class="on b" x="652" y="325" font-size="10.5" text-anchor="middle">2+</text>
+<circle class="f-slate" cx="680" cy="321" r="10"/><text class="on b" x="680" y="325" font-size="10.5" text-anchor="middle">2−</text>
+<rect class="f-blue" x="730" y="282" width="12" height="12"/><text x="748" y="292" font-size="10.5">1+: positivo</text>
+<rect class="f-amber" x="730" y="302" width="12" height="12"/><text x="748" y="312" font-size="10.5">1−: negativo</text>
+<rect class="f-slate" x="730" y="322" width="12" height="12"/><text x="748" y="332" font-size="10.5">2+ e 2−: segunda via</text>
+<text class="mu" x="616" y="368" font-size="10.5">Do amplificador à caixa passiva</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> Os contatos dos seis conectores mais comuns. Os desenhos são esquemas e não mostram a posição real dos pinos: no XLR e no Speakon, os números vêm gravados no próprio conector, ao lado de cada contato.</figcaption>
+  </figure>
+
+  <h3>XLR <span class="k blue w">XLR</span></h3>
+  <p>É o conector do áudio profissional: três pinos, trava e contato firme. Pino 1 malha, pino 2 positivo (quente), pino 3 negativo (frio). A convenção é que <strong>o sinal sai pelos pinos</strong>: saídas têm XLR macho, entradas têm XLR fêmea, e o cabo tem uma ponta de cada, para dois cabos se emendarem sem adaptador.</p>
+  <p>Os refletores de iluminação usam um conector parecido, de 3 ou 5 pinos, para o controle (DMX). É outro sinal e pede outro cabo: veja o estudo <a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>.</p>
+
+  <h3>P10 <span class="k amber w">P10</span>: TS e TRS</h3>
+  <p>P10 é o plugue de 6,35 mm. O <strong>TS</strong> tem um anel preto e dois contatos, ponta (<em>tip</em>) e luva (<em>sleeve</em>): é mono e desbalanceado, o cabo de guitarra, baixo, violão e teclado. O <strong>TRS</strong> tem dois anéis pretos e três contatos: ponta, anel (<em>ring</em>) e luva. O mesmo plugue serve a três usos:</p>
+  <ul>
+    <li><strong>Linha balanceada, mono:</strong> ponta positivo, anel negativo, luva malha. É o equivalente do XLR em saídas e entradas de linha.</li>
+    <li><strong>Estéreo desbalanceado:</strong> ponta esquerdo, anel direito, luva comum. É a saída de fone de ouvido.</li>
+    <li><strong>Insert:</strong> ida e volta de um processador externo no mesmo plugue (em geral a ponta envia e o anel recebe; confira o manual).</li>
+  </ul>
+  <p>Confundir os usos dá problema. Um cabo TRS comum entre uma saída de fone estéreo e uma entrada balanceada faz a entrada medir a diferença entre esquerdo e direito: o que está no centro da música, como a voz, some. Para ligar uma saída estéreo à mesa, use um cabo em Y (um plugue estéreo para dois TS) em dois canais, ou uma direct box estéreo.</p>
+
+  <h3>P2 e RCA</h3>
+  <p>O P2, de 3,5 mm, é o plugue de computadores, celulares e tocadores: estéreo, desbalanceado e sem trava. Prenda o cabo com fita perto do aparelho, para o peso não ficar no plugue. O RCA, dos aparelhos domésticos, vem em pares: branco esquerdo, vermelho direito. Os dois entregam linha doméstica (−10 dBV), que entra pela entrada de linha ou por direct box, nunca por adaptador na entrada de microfone.</p>
+
+  <h3>Speakon</h3>
+  <p>É o conector de alto-falante: encaixa, gira e trava, aguenta a corrente do amplificador e não tem contato exposto. O plugue de dois polos usa os contatos 1+ e 1−; o de quatro tem também 2+ e 2−, para caixas com duas vias amplificadas em separado. Algumas caixas esperam o sinal no par 2: se a caixa não toca, confira o manual.</p>
+  <p>Equipamentos mais antigos ou simples usam P10 na saída de alto-falante. O plugue é igual ao do instrumento, mas o cabo tem de ser cabo de caixa. Marque esses cabos de modo bem visível.</p>
+
+  <h3>Combo e adaptadores</h3>
+  <p>O conector <strong>combo</strong> aceita XLR e P10 no mesmo furo. Na maioria das mesas e caixas ativas, o XLR vai ao pré de microfone e o P10 entra como linha; em interfaces de áudio, o P10 costuma ser entrada de instrumento. Confira o manual.</p>
+  <p>Um adaptador muda o formato do plugue e mais nada: não muda o nível, não balanceia e não casa impedância. Se o plugue só encaixa com adaptador, a ligação provavelmente pede outra entrada ou uma direct box.</p>
+
+  
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Alguns equipamentos usam, para a energia, um conector redondo com trava parecido com o Speakon, que não encaixa na tomada de áudio. Plugue que não entra com facilidade não se força: leia o que está escrito ao lado do conector.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="di">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Direct box e phantom power</h2>
+  <p>A <strong>direct box</strong>, ou DI (de <em>direct injection</em>), fica no palco, ao lado do instrumento. Ela recebe um sinal desbalanceado, de instrumento ou de linha, e entrega um sinal balanceado, de baixa impedância e em nível de microfone. Na prática, faz o violão, o baixo, o teclado e o computador “parecerem um microfone”: o sinal segue por XLR e pelo multicabo, por dezenas de metros, até uma entrada de microfone comum.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Direct box. O instrumento entra por cabo P10 curto, de até uns 5 metros, na entrada de alta impedância e desbalanceada. A conversão é por transformador, na passiva, ou por circuito, na ativa. A saída, balanceada e de baixa impedância, segue por XLR, por dezenas de metros, até a entrada de microfone. Chaves de pad e ground lift, e saída link para o amplificador do músico.">
+<defs>
+<marker id="ar5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path class="ah f-amber" d="M0 0 L10 5 L0 10 z"/></marker>
+<marker id="ar5b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path class="ah f-blue" d="M0 0 L10 5 L0 10 z"/></marker>
+<marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker>
+</defs>
+<text class="mono mu" x="18" y="26" font-size="10.5">A DIRECT BOX FICA PERTO DA FONTE; O TRECHO LONGO VAI BALANCEADO</text>
+
+<rect class="bx" x="18" y="114" width="140" height="56"/>
+<text class="b" x="88" y="138" font-size="12" text-anchor="middle">Violão ou baixo</text>
+<text class="mu" x="88" y="155" font-size="10.5" text-anchor="middle">teclado, computador</text>
+<line class="s-amber" stroke-width="2.5" x1="160" y1="142" x2="236" y2="142" marker-end="url(#ar5a)"/>
+<text class="t-amber b" x="198" y="132" font-size="10.5" text-anchor="middle">P10, curto</text>
+<text class="mu" x="198" y="160" font-size="10.5" text-anchor="middle">até uns 5 m</text>
+
+<rect class="bx-out" x="240" y="56" width="350" height="174"/>
+<text class="b" x="256" y="80" font-size="13">Direct box (DI)</text>
+<rect class="bx-amber" x="256" y="94" width="100" height="78"/>
+<text class="b" x="306" y="114" font-size="11.5" text-anchor="middle">Entrada</text>
+<text x="306" y="132" font-size="10.5" text-anchor="middle">alta impedância,</text>
+<text x="306" y="147" font-size="10.5" text-anchor="middle">desbalanceada</text>
+<line class="ln" x1="358" y1="133" x2="362" y2="133" marker-end="url(#ar5)"/>
+<rect class="bx" x="366" y="94" width="100" height="78"/>
+<text class="b" x="416" y="114" font-size="11.5" text-anchor="middle">Conversão</text>
+<text x="416" y="132" font-size="10.5" text-anchor="middle">transformador</text>
+<text x="416" y="147" font-size="10.5" text-anchor="middle">(passiva) ou</text>
+<text x="416" y="162" font-size="10.5" text-anchor="middle">circuito (ativa)</text>
+<line class="ln" x1="468" y1="133" x2="472" y2="133" marker-end="url(#ar5)"/>
+<rect class="bx-blue" x="476" y="94" width="100" height="78"/>
+<text class="b" x="526" y="114" font-size="11.5" text-anchor="middle">Saída</text>
+<text x="526" y="132" font-size="10.5" text-anchor="middle">baixa impedância,</text>
+<text x="526" y="147" font-size="10.5" text-anchor="middle">balanceada</text>
+<rect class="bx-slate" x="256" y="186" width="80" height="26"/><text class="b" x="296" y="203" font-size="10.5" text-anchor="middle">LINK / THRU</text>
+<rect class="bx-slate" x="366" y="186" width="60" height="26"/><text class="b" x="396" y="203" font-size="10.5" text-anchor="middle">PAD</text>
+<rect class="bx-slate" x="476" y="186" width="100" height="26"/><text class="b" x="526" y="203" font-size="10.5" text-anchor="middle">GROUND LIFT</text>
+
+<line class="s-blue" stroke-width="2.5" x1="592" y1="142" x2="716" y2="142" marker-end="url(#ar5b)"/>
+<text class="t-blue b" x="654" y="132" font-size="10.5" text-anchor="middle">XLR, balanceado</text>
+<text class="mu" x="654" y="160" font-size="10.5" text-anchor="middle">dezenas de metros</text>
+<rect class="bx" x="720" y="106" width="162" height="72"/>
+<text class="b" x="801" y="130" font-size="12" text-anchor="middle">Caixa de palco ou mesa</text>
+<text class="mu" x="801" y="148" font-size="10.5" text-anchor="middle">entrada de microfone</text>
+<text class="mu" x="801" y="163" font-size="10.5" text-anchor="middle">nível de microfone</text>
+
+<path class="s-amber" stroke-width="2.5" d="M296 212 V266 H162" marker-end="url(#ar5a)"/>
+<rect class="bx" x="18" y="242" width="140" height="44"/>
+<text class="b" x="88" y="261" font-size="12" text-anchor="middle">Amplificador</text>
+<text class="mu" x="88" y="277" font-size="10.5" text-anchor="middle">do músico (se houver)</text>
+<text class="mu" x="310" y="258" font-size="10.5">link: cópia do sinal de entrada, por cabo P10, para o amplificador do músico</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> A direct box, por dentro e por fora. O cabo desbalanceado fica curto, entre o instrumento e a DI. O trecho longo, até a mesa, vai balanceado e em baixa impedância.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:18%"></th><th style="width:40%">DI passiva</th><th>DI ativa</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Como funciona</strong></td><td>Um transformador faz a conversão. Não precisa de energia.</td><td>Um circuito eletrônico faz a conversão. Precisa de energia: phantom da mesa ou bateria.</td></tr>
+                <tr><td><strong>Combina com</strong></td><td>Fontes ativas, de saída forte: teclado, computador, violão ou baixo com pré-amplificador a bateria.</td><td>Fontes passivas, de saída fraca: baixo e guitarra com captador passivo, violão com captador sem pré.</td></tr>
+        <tr><td><strong>Ponto forte</strong></td><td>O transformador isola a fonte da mesa: é a que melhor resolve zumbido de laço de terra.</td><td>Entrada de 1 megohm ou mais: não “carrega” o captador passivo.</td></tr>
+        <tr><td><strong>Ponto fraco</strong></td><td>Entrada de impedância mais baixa: com captador passivo, pode tirar brilho e volume.</td><td>Depende de energia. Fonte forte demais pode saturar o circuito: use o pad.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A regra prática é cruzada: <strong>fonte ativa, DI passiva; fonte passiva, DI ativa</strong>. Não é lei: uma boa DI ativa atende a quase tudo. Para fontes estéreo existe a DI estéreo, duas DI na mesma caixa.</p>
+
+  <h3>As chaves da direct box</h3>
+  <ul>
+    <li><strong>Pad</strong> (−20 dB, às vezes −40 dB): reduz o sinal na entrada da DI, para fontes fortes.</li>
+    <li><strong>Ground lift</strong>: desliga a malha do cabo XLR do terra da DI, para abrir o laço de terra (módulo 6). Use quando houver zumbido. Na DI ativa alimentada por phantom, o funcionamento varia: confira o manual.</li>
+    <li><strong>Link</strong> ou <strong>thru</strong>: uma segunda tomada P10, ligada em paralelo com a entrada. Leva o mesmo sinal ao amplificador do músico, sem passar pela conversão.</li>
+  </ul>
+  <p>Depois da DI, o canal é ajustado como um microfone, pelo medidor: veja o estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader: a estrutura de ganho</a>.</p>
+
+  <h3>Phantom power: a energia que vai pelo cabo do microfone</h3>
+  <p>O microfone dinâmico gera o próprio sinal. O condensador e a DI ativa têm circuitos que precisam de energia, e a mesa a manda pelo próprio cabo do microfone: é a alimentação <strong>phantom</strong> (“fantasma”), de <strong>+48 volts</strong> em corrente contínua, ligada pela chave <em>+48V</em> ou <em>phantom</em>. Os tipos de microfone estão no estudo <a href="../Microfones/treinamento-microfones.html">Microfones</a>.</p>
+  <p>A mesma tensão vai nos dois fios de sinal, os pinos 2 e 3, e volta pela malha, o pino 1. Como a diferença entre os pinos 2 e 3 continua sendo só o áudio, para o sinal a alimentação é invisível.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Alimentação phantom. A mesa aplica mais 48 volts aos pinos 2 e 3 do XLR, que também levam o áudio; o pino 1, a malha, é o retorno. O condensador usa essa tensão para o circuito interno. No dinâmico, a bobina fica entre os pinos 2 e 3, com a mesma tensão nos dois lados, e não passa corrente.">
+<text class="mono mu" x="18" y="26" font-size="10.5">A MESMA TENSÃO NOS DOIS FIOS DE SINAL</text>
+<rect class="bx-ink" x="18" y="56" width="172" height="168"/>
+<text class="t-ground b" x="104" y="84" font-size="13" text-anchor="middle">Mesa</text>
+<text class="t-ground" x="104" y="134" font-size="11" text-anchor="middle">chave +48V ligada</text>
+<text class="t-ground" x="104" y="152" font-size="11" text-anchor="middle">neste canal</text>
+
+<line class="s-blue" stroke-width="2.5" x1="190" y1="110" x2="548" y2="110"/>
+<text x="206" y="102" font-size="11">pino 2: áudio (+) e +48 V</text>
+<line class="s-amber" stroke-width="2.5" x1="190" y1="150" x2="548" y2="150"/>
+<text x="206" y="142" font-size="11">pino 3: áudio (−) e +48 V</text>
+<line class="s-slate" stroke-width="2.5" x1="190" y1="200" x2="548" y2="200"/>
+<text x="206" y="192" font-size="11">pino 1: malha, 0 V (retorno da alimentação)</text>
+<rect class="bx-slate" x="548" y="92" width="16" height="126"/>
+<text class="mono mu" x="556" y="84" font-size="10.5" text-anchor="middle">XLR</text>
+
+<rect class="bx-blue" x="584" y="56" width="298" height="76"/>
+<text class="b" x="598" y="80" font-size="12.5">Microfone condensador</text>
+<text x="598" y="99" font-size="10.5">Usa os 48 V entre os pinos 2 e 3 e o pino 1</text>
+<text x="598" y="115" font-size="10.5">para alimentar o circuito interno.</text>
+<rect class="bx" x="584" y="148" width="298" height="76"/>
+<text class="b" x="598" y="172" font-size="12.5">Microfone dinâmico</text>
+<text x="598" y="191" font-size="10.5">A bobina fica entre os pinos 2 e 3.</text>
+<text x="598" y="207" font-size="10.5">48 V − 48 V = 0 V: não passa corrente.</text>
+
+<text x="18" y="256" font-size="11.5">Entre os pinos 2 e 3 a diferença é zero. Por isso o phantom não atrapalha o áudio nem o microfone dinâmico,</text>
+<text x="18" y="273" font-size="11.5">desde que o cabo seja balanceado e esteja em bom estado.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> O phantom chega por igual aos pinos 2 e 3 e volta pelo pino 1. Um cabo com a malha partida não leva phantom: o microfone condensador fica mudo.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:34%">O que está ligado no canal</th><th class="n" style="width:14%">Phantom</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Microfone condensador com fio</td><td class="n blue">Ligado</td><td>Sem phantom, não funciona. Alguns modelos aceitam pilha interna.</td></tr>
+        <tr><td>Direct box ativa</td><td class="n blue">Ligado</td><td>Ou bateria interna, conforme o modelo.</td></tr>
+        <tr><td>Microfone dinâmico em cabo XLR; direct box passiva</td><td class="n">Tanto faz</td><td>Não precisam e não são prejudicados, se o cabo estiver bom. Prefira desligado.</td></tr>
+        <tr><td>Receptor sem fio; microfone de fita</td><td class="n amber">Desligado</td><td>Não precisam. O de fita passivo pode ser danificado se houver defeito no cabo.</td></tr>
+        <tr><td>Teclado, computador ou outro aparelho ligado por cabo adaptador até o XLR</td><td class="n red">Desligado</td><td>A tensão chega à saída do aparelho e pode danificá-la. Use direct box.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Cuidados com o phantom</h3>
+  <ul>
+    <li><strong>Canal em mute antes de mexer.</strong> Ligar ou desligar o phantom, ou conectar um microfone com ele ligado, dá um estalo forte. Espere alguns segundos para a tensão subir ou descer antes de abrir o canal.</li>
+    <li><strong>Ligue só onde precisa.</strong> Se a chave da mesa é geral ou por grupo de canais, garanta que tudo nesses canais esteja em cabo XLR balanceado ou passe por direct box.</li>
+    <li><strong>Anote no mapa.</strong> Canal de condensador mudo, com tudo ligado, quase sempre é phantom desligado.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Valores de referência</h4>
+    <p>Há equipamentos compactos que entregam menos de 48 volts (12 a 24 V), e nem todo microfone funciona bem assim. Os microfones de lapela e de cabeça dos sistemas sem fio usam outra alimentação, de poucos volts, dada pelo transmissor: não é phantom, e eles não se ligam direto na mesa sem adaptador próprio. Confira os manuais.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="multicabo">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Multicabo e caixa de palco</h2>
+  <p>Puxar dezesseis cabos soltos até a mesa, no fundo da sala, vira um emaranhado. O <strong>multicabo</strong> junta essas vias em um cabo só. No palco ele termina na <strong>caixa de palco</strong> (<em>stage box</em>, ou medusa), com os conectores numerados; na mesa, abre-se em um rabicho de plugues também numerados.</p>
+  <p>As <strong>entradas</strong> levam o palco para a mesa e têm XLR fêmea. Os <strong>retornos</strong> trazem sinais da mesa para caixas ativas, amplificadores e monitores, e têm XLR macho. Um multicabo “16 × 4” tem 16 entradas e 4 retornos.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Multicabo analógico e caixa de palco digital. No analógico, cada via é um par blindado que leva o sinal de microfone até os pré-amplificadores da mesa. No digital, os pré-amplificadores e os conversores ficam na caixa de palco, e um cabo de rede ou de fibra leva o áudio em números, nos dois sentidos, até a mesa.">
+<defs><marker id="ar7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+<text class="mono mu" x="18" y="30" font-size="10.5">ANALÓGICO</text>
+<rect class="bx" x="18" y="48" width="120" height="56"/>
+<text class="b" x="78" y="72" font-size="12" text-anchor="middle">Microfones</text>
+<text class="mu" x="78" y="89" font-size="10.5" text-anchor="middle">e direct boxes</text>
+<line class="ln" x1="140" y1="76" x2="176" y2="76" marker-end="url(#ar7)"/>
+<rect class="bx-blue" x="180" y="48" width="220" height="56"/>
+<text class="b" x="290" y="72" font-size="12.5" text-anchor="middle">Caixa de palco</text>
+<text x="290" y="89" font-size="10.5" text-anchor="middle">entradas e retornos em XLR</text>
+<g class="s-blue" stroke-width="1.5">
+<line x1="402" y1="68" x2="678" y2="68"/><line x1="402" y1="72" x2="678" y2="72"/><line x1="402" y1="76" x2="678" y2="76"/>
+<line x1="402" y1="80" x2="678" y2="80"/><line x1="402" y1="84" x2="678" y2="84"/>
+</g>
+<text class="t-blue b" x="540" y="58" font-size="11" text-anchor="middle">multicabo: um par blindado por via</text>
+<text class="mu" x="540" y="102" font-size="10.5" text-anchor="middle">áudio analógico, do palco até a mesa</text>
+<rect class="bx" x="680" y="48" width="202" height="56"/>
+<text class="b" x="781" y="72" font-size="12.5" text-anchor="middle">Mesa</text>
+<text class="mu" x="781" y="89" font-size="10.5" text-anchor="middle">os pré-amplificadores ficam aqui</text>
+<text x="180" y="130" font-size="11">O sinal de microfone, o menor de todos, percorre o cabo inteiro. O balanceamento é o que o protege.</text>
+
+<line class="grid" x1="18" y1="152" x2="882" y2="152"/>
+
+<text class="mono mu" x="18" y="180" font-size="10.5">DIGITAL</text>
+<rect class="bx" x="18" y="198" width="120" height="56"/>
+<text class="b" x="78" y="222" font-size="12" text-anchor="middle">Microfones</text>
+<text class="mu" x="78" y="239" font-size="10.5" text-anchor="middle">e direct boxes</text>
+<line class="ln" x1="140" y1="226" x2="176" y2="226" marker-end="url(#ar7)"/>
+<rect class="bx-teal" x="180" y="198" width="220" height="56"/>
+<text class="b" x="290" y="222" font-size="12.5" text-anchor="middle">Caixa de palco digital</text>
+<text x="290" y="239" font-size="10.5" text-anchor="middle">pré-amplificadores e conversores</text>
+<line class="s-teal" stroke-width="2.5" x1="402" y1="226" x2="678" y2="226"/>
+<text class="t-teal b" x="540" y="214" font-size="11" text-anchor="middle">um cabo de rede, ou de fibra</text>
+<text class="mu" x="540" y="246" font-size="10.5" text-anchor="middle">áudio em números, nos dois sentidos</text>
+<rect class="bx" x="680" y="198" width="202" height="56"/>
+<text class="b" x="781" y="222" font-size="12.5" text-anchor="middle">Mesa digital</text>
+<text class="mu" x="781" y="239" font-size="10.5" text-anchor="middle">comanda o ganho à distância</text>
+<text x="180" y="280" font-size="11">O sinal vira número logo no palco. Dali em diante, o cabo não acrescenta ruído nem perde agudos.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> Os dois tipos de caixa de palco. No analógico, cada via é um par de fios dentro do multicabo. No digital, todas as vias passam por um único cabo de dados.</figcaption>
+  </figure>
+
+  <div class="pair">
+    <div class="box">
+      <h4>Multicabo analógico</h4>
+      <ul>
+        <li>Cada via é um par balanceado com malha própria. Sem eletrônica: não precisa de energia nem de configuração.</li>
+        <li>Pré-amplificadores e phantom ficam na mesa; o phantom viaja pelo multicabo normalmente.</li>
+        <li>Via com defeito se resolve pulando para uma via reserva.</li>
+        <li>Os retornos levam só nível de linha. Nunca passe saída de amplificador pelo multicabo.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Caixa de palco digital</h4>
+      <ul>
+        <li>Pré-amplificadores e conversores ficam no palco; ganho e phantom são comandados da mesa.</li>
+        <li>Um cabo de rede leva todas as vias, nos dois sentidos, em geral por até cerca de 100 metros, conforme o sistema e o cabo.</li>
+        <li>Precisa de energia no palco e de configuração: o patch digital define que entrada vai para que canal.</li>
+        <li>O cabo é ponto único de falha: se solta, todos os canais caem. Tenha um reserva testado.</li>
+      </ul>
+    </div>
+  </div>
+  <p>Use o cabo que o fabricante indica, em geral cabo de rede blindado, com conector metálico e trava, próprio para palco. Cada fabricante tem o seu sistema de áudio em rede: caixa e mesa precisam falar o mesmo, e só passe o sinal por um comutador (<em>switch</em>) quando o manual disser que pode. O patch digital está no estudo <a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>.</p>
+
+  <h3>A numeração é o que evita o caos</h3>
+  <p>A via 7 da caixa de palco chega ao plugue 7 do rabicho, que entra no canal que o mapa indicar. Anote essa correspondência em um <strong>mapa de ligações</strong> (<em>patch</em>): fonte, cabo, via e canal. A aba “Mapa de ligações” da planilha serve para isso; a lista de canais completa (<em>input list</em>) está no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p>
+
+  <div class="note">
+    <h4>Segurança: cabos no caminho</h4>
+    <p>Passe os cabos junto às paredes sempre que der. Onde houver circulação, cubra com passa-cabos ou prenda com fita em toda a extensão. Nada de cabo esticado no ar nem laçada solta no chão: um tropeço machuca alguém e derruba o que estiver na outra ponta.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="ruido">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Laço de terra e zumbido</h2>
+  <p>O zumbido grave e contínuo, o “hummm” que aparece quando se liga o computador ou o teclado na mesa, quase sempre vem de um <strong>laço de terra</strong> (<em>ground loop</em>). A rede elétrica no Brasil trabalha em 60 hertz, e o zumbido tem essa frequência e os seus múltiplos.</p>
+  <p>Cada equipamento tem o seu fio terra, na tomada em que está ligado. Quando um cabo de áudio liga dois deles, a malha cria um segundo caminho entre os dois, e os caminhos fecham um anel. Os terras de tomadas diferentes nunca estão exatamente na mesma tensão, e o anel ainda capta o campo da rede elétrica. Circula então uma pequena corrente de 60 Hz pela malha. Na ligação desbalanceada, a malha faz parte do caminho do sinal, e essa corrente vira zumbido.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 310" role="img" aria-label="Laço de terra. Computador e mesa em tomadas diferentes, cada uma com o seu fio terra, unidos pela malha de um cabo de áudio desbalanceado. Malha, fios terra e terra do prédio fecham um anel por onde circula corrente de 60 hertz. Para abrir o laço: um só ponto de energia, ligação balanceada, direct box com ground lift. Nunca retire o pino de terra da tomada.">
+<text class="mono mu" x="18" y="26" font-size="10.5">DOIS CAMINHOS PARA O TERRA FECHAM UM ANEL</text>
+<path class="s-bad" stroke-width="2.5" d="M120 122 V200 M120 240 V270 H460 V240 M460 200 V122"/>
+<line class="s-bad" stroke-width="2.5" x1="200" y1="92" x2="380" y2="92"/>
+<rect class="bx" x="40" y="62" width="160" height="60"/>
+<text class="b" x="120" y="88" font-size="12" text-anchor="middle">Computador</text>
+<text class="mu" x="120" y="105" font-size="10.5" text-anchor="middle">ligado na fonte</text>
+<rect class="bx" x="380" y="62" width="160" height="60"/>
+<text class="b" x="460" y="88" font-size="12" text-anchor="middle">Mesa de som</text>
+<text class="mu" x="460" y="105" font-size="10.5" text-anchor="middle">entrada de linha</text>
+<text class="b" x="290" y="82" font-size="11" text-anchor="middle">cabo de áudio</text>
+<text class="mu" x="290" y="110" font-size="10.5" text-anchor="middle">a malha une os dois</text>
+<rect class="bx-slate" x="70" y="200" width="100" height="40"/>
+<text class="b" x="120" y="225" font-size="11.5" text-anchor="middle">Tomada A</text>
+<rect class="bx-slate" x="410" y="200" width="100" height="40"/>
+<text class="b" x="460" y="225" font-size="11.5" text-anchor="middle">Tomada B</text>
+<text class="mu" x="132" y="166" font-size="10.5">fio terra</text>
+<text class="mu" x="448" y="166" font-size="10.5" text-anchor="end">fio terra</text>
+<text class="t-red b" x="290" y="170" font-size="13" text-anchor="middle">laço de terra</text>
+<text class="t-red" x="290" y="188" font-size="11" text-anchor="middle">corrente de 60 Hz</text>
+<text class="t-red" x="290" y="204" font-size="11" text-anchor="middle">circula pelo anel</text>
+<text class="mu" x="290" y="292" font-size="10.5" text-anchor="middle">terra do prédio: as tomadas ficam em pontos diferentes</text>
+
+<rect class="bx" x="580" y="46" width="302" height="246"/>
+<text class="b" x="596" y="72" font-size="13">Como abrir o laço</text>
+<text class="b" x="596" y="100" font-size="11.5">1. Um só ponto de energia</text>
+<text x="596" y="117" font-size="11">Todo o áudio na mesma régua ou circuito.</text>
+<text class="b" x="596" y="146" font-size="11.5">2. Ligação balanceada</text>
+<text x="596" y="163" font-size="11">A malha deixa de levar o sinal.</text>
+<text class="b" x="596" y="192" font-size="11.5">3. Direct box com ground lift</text>
+<text x="596" y="209" font-size="11">O transformador isola a fonte, e a chave</text>
+<text x="596" y="225" font-size="11">abre a malha do cabo.</text>
+<text class="t-bad b" x="596" y="258" font-size="11.5">Nunca retire o pino de terra da tomada.</text>
+<text class="mu" x="596" y="275" font-size="10.5">Ele protege as pessoas contra choque.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> O laço de terra. O anel em vermelho é formado pela malha do cabo de áudio, pelos dois fios terra e pelo terra do prédio. As três medidas à direita abrem o anel, ou tiram o sinal de dentro dele, sem mexer no aterramento de segurança.</figcaption>
+  </figure>
+
+  <h3>As medidas, na ordem</h3>
+  <ol>
+    <li><strong>Um só ponto de energia para o áudio.</strong> Mesa, processadores, computador e equipamentos do palco na mesma régua, ou em réguas da mesma tomada, respeitando a carga do circuito. Energia e carga estão no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>.</li>
+    <li><strong>Ligação balanceada sempre que der.</strong> Nela a malha não leva o sinal, e a corrente do laço incomoda muito menos.</li>
+    <li><strong>Direct box com transformador e ground lift.</strong> Para a fonte desbalanceada que zumbe, a DI passiva isola a fonte da mesa, e o ground lift abre a malha do lado da DI. Para sinal de linha há também o isolador de linha, só com transformadores.</li>
+    <li><strong>Teste rápido com o computador.</strong> Tire o carregador da tomada por um instante. Se o zumbido sumir, é laço pela fonte: a solução é o item 3, e não deixar o computador sem carregar.</li>
+  </ol>
+
+  <div class="note">
+    <h4>Segurança: o terra não se desliga</h4>
+    <p>Nunca retire o pino de terra de um plugue, nem use adaptador que elimine o terra, para tirar o zumbido. Sem o terra, a carcaça de um equipamento com defeito, e tudo ligado a ela por cabo, inclusive o microfone na mão de alguém, pode ficar energizada. O ground lift da direct box abre só a malha do cabo de áudio; o aterramento de segurança continua intacto.</p>
+  </div>
+
+  <h3>Nem todo ruído é laço de terra</h3>
+  <p>Antes de procurar a causa, ache o canal: feche os canais um por um (mute) até o ruído sumir. Se ele continua com todos fechados, nasce depois da mesa, na ligação com o processador, o amplificador ou as caixas ativas. Depois, ouça o tipo de ruído: cada um aponta para um lugar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 270" role="img" aria-label="Quatro ruídos e onde procurar. Zumbido grave e contínuo: laço de terra. Zunido áspero que muda com a luz: interferência; afaste dos cabos de energia e dimmers. Estalos ou falhas ao mexer no cabo: mau contato; troque e marque o cabo. Chiado contínuo: nível baixo em alguma etapa.">
+<defs><marker id="ar9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+<text class="mono mu" x="18" y="22" font-size="10.5">O QUE SE OUVE, E ONDE PROCURAR</text>
+
+<rect class="bx" x="18" y="34" width="192" height="84"/>
+<text x="30" y="60" font-size="11.5">Zumbido grave e contínuo,</text>
+<text x="30" y="77" font-size="11.5">como um “hummm”.</text>
+<line class="ln" x1="114" y1="120" x2="114" y2="146" marker-end="url(#ar9)"/>
+<rect class="bx-red" x="18" y="150" width="192" height="102"/>
+<text class="b" x="30" y="174" font-size="12">Laço de terra</text>
+<text x="30" y="193" font-size="11.5">Mesma régua de energia,</text>
+<text x="30" y="210" font-size="11.5">ligação balanceada, DI</text>
+<text x="30" y="227" font-size="11.5">com ground lift.</text>
+
+<rect class="bx" x="238" y="34" width="192" height="84"/>
+<text x="250" y="60" font-size="11.5">Zunido áspero, que muda</text>
+<text x="250" y="77" font-size="11.5">com a intensidade da luz</text>
+<text x="250" y="94" font-size="11.5">do palco.</text>
+<line class="ln" x1="334" y1="120" x2="334" y2="146" marker-end="url(#ar9)"/>
+<rect class="bx-purple" x="238" y="150" width="192" height="102"/>
+<text class="b" x="250" y="174" font-size="12">Interferência</text>
+<text x="250" y="193" font-size="11.5">Afaste o áudio da energia</text>
+<text x="250" y="210" font-size="11.5">e dos dimmers. Cruze os</text>
+<text x="250" y="227" font-size="11.5">cabos em ângulo reto.</text>
+
+<rect class="bx" x="458" y="34" width="192" height="84"/>
+<text x="470" y="60" font-size="11.5">Estalos, ou som que some</text>
+<text x="470" y="77" font-size="11.5">e volta quando alguém</text>
+<text x="470" y="94" font-size="11.5">mexe no cabo.</text>
+<line class="ln" x1="554" y1="120" x2="554" y2="146" marker-end="url(#ar9)"/>
+<rect class="bx-amber" x="458" y="150" width="192" height="102"/>
+<text class="b" x="470" y="174" font-size="12">Mau contato</text>
+<text x="470" y="193" font-size="11.5">Troque o cabo. Marque o</text>
+<text x="470" y="210" font-size="11.5">defeituoso e tire de uso.</text>
+
+<rect class="bx" x="678" y="34" width="192" height="84"/>
+<text x="690" y="60" font-size="11.5">Chiado contínuo, como</text>
+<text x="690" y="77" font-size="11.5">ar escapando.</text>
+<line class="ln" x1="774" y1="120" x2="774" y2="146" marker-end="url(#ar9)"/>
+<rect class="bx-teal" x="678" y="150" width="192" height="102"/>
+<text class="b" x="690" y="174" font-size="12">Nível baixo demais</text>
+<text x="690" y="193" font-size="11.5">Entrada errada, pad</text>
+<text x="690" y="210" font-size="11.5">esquecido ou ganho baixo</text>
+<text x="690" y="227" font-size="11.5">em alguma etapa.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 9.</b> Quatro ruídos, quatro lugares para procurar. Feche os canais um a um para achar o canal. Depois, o tipo de ruído diz por onde começar.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:26%">Outros casos</th><th style="width:30%">Causa provável</th><th>O que fazer</th></tr></thead>
+      <tbody>
+        <tr><td>Zumbido em um canal de microfone, que muda quando se mexe no cabo</td><td>Malha partida ou mau contato em um dos fios do cabo.</td><td>Troque o cabo e teste o que saiu.</td></tr>
+        <tr><td>Ruído pulsado e rápido, de vez em quando</td><td>Celular perto de um cabo desbalanceado, de um microfone ou da mesa.</td><td>Afaste o aparelho. Use ligação balanceada.</td></tr>
+                <tr><td>Falhas e chiados só no microfone sem fio</td><td>Radiofrequência, e não cabo.</td><td>Veja o estudo <a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Microfones sem fio</a>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>O procedimento para ligar o sistema no dia do evento. Ele vem antes do ajuste de ganho: primeiro o sinal precisa chegar, limpo, à entrada certa.</p>
+  <ol class="steps">
+    <li><h4>Monte o mapa de ligações</h4><p>Antes do primeiro cabo, liste cada fonte: nível, direct box, cabo, via do multicabo e canal. A aba “Mapa de ligações” aponta nível na entrada errada, phantom faltando e cabo desbalanceado longo.</p></li>
+    <li><h4>Separe e confira os cabos</h4><p>Só cabos testados e com etiqueta, mais pelo menos um reserva de cada tipo.</p></li>
+    <li><h4>Comece com tudo desligado e fechado</h4><p>Amplificadores e caixas ativas desligados, master embaixo, canais em mute, phantom desligado. Nenhum estalo de conexão chega às caixas.</p></li>
+    <li><h4>Ligue a energia do áudio em um só ponto</h4><p>Mesa, processadores, computador e palco na mesma régua ou circuito, com o pino de terra em todos os plugues.</p></li>
+    <li><h4>Ligue as fontes, da fonte para a mesa</h4><p>Microfones <span class="k blue w">XLR</span> direto na caixa de palco. Instrumentos e teclados <span class="k amber w">P10</span> na direct box, com cabo curto, e dela à caixa de palco por XLR. Cada cabo na via anotada.</p></li>
+    <li><h4>Ligue as saídas</h4><p>Mesa às caixas ativas e aos amplificadores com cabo balanceado; amplificadores às caixas passivas com cabo de caixa. Confira que nenhuma saída de amplificador vai para o multicabo.</p></li>
+    <li><h4>Passe os cabos pelo caminho certo</h4><p>Áudio de um lado, energia e iluminação do outro; onde se cruzarem, em ângulo reto. Folga junto aos conectores, e fita ou passa-cabos onde alguém passa.</p></li>
+    <li><h4>Ligue o phantom onde precisa</h4><p>Com os canais em mute, só nos canais de condensador e de DI ativa. Espere alguns segundos.</p></li>
+    <li><h4>Ligue o sistema e ouça o silêncio</h4><p>Caixas e amplificadores por último. Abra o master e os canais, sem ninguém tocando: não deve haver zumbido nem estalos. Se houver, feche os canais um por um e use o módulo 6.</p></li>
+    <li><h4>Confira canal por canal</h4><p>Um som em cada fonte, na ordem do mapa, para ver se chega no canal certo (<em>line check</em>). Só então ajuste o ganho, no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader: a estrutura de ganho</a>.</p></li>
+  </ol>
+
+  <h3>Testar</h3>
+  <p>O testador de cabos tem tomadas dos vários conectores e uma luz por contato. Com as duas pontas ligadas, as luzes mostram se cada contato chega ao seu par, e só a ele. Um cabo bom passa em dois testes:</p>
+  <ul>
+    <li><strong>Continuidade:</strong> 1 com 1, 2 com 2, 3 com 3, sem contato aberto, sem curto e sem fios trocados.</li>
+    <li><strong>Movimento:</strong> com o cabo no testador, dobre e balance junto de cada conector e ao longo dele. Luz que pisca é fio partido que só falha com o cabo em movimento: o defeito mais comum, e o que mais engana.</li>
+  </ul>
+  <p>Sem testador, o multímetro na função de continuidade faz o primeiro teste. Um XLR com os pinos 2 e 3 trocados funciona, mas inverte a polaridade, e isso só aparece ao somar com outro microfone na mesma fonte (polaridade: estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>).</p>
+
+  <h3>Enrolar</h3>
+  <p>Enrolado sempre no mesmo sentido, ou no cotovelo, o cabo acumula torção a cada volta, cria nós e parte os fios internos. A técnica certa alterna o sentido: uma volta normal, e a seguinte invertida, girando o pulso para o outro lado (<em>over-under</em>). As torções se anulam, e o cabo se desenrola reto.</p>
+  <ul>
+    <li>Voltas largas, de 30 a 40 cm, na curva que o cabo aceita sem forçar. Prenda com tira de velcro, sem nó.</li>
+    <li>Solte o cabo pelo conector, e não pelo fio. No XLR, aperte a trava.</li>
+  </ul>
+
+  <h3>Identificar</h3>
+  <ul>
+    <li><strong>Etiqueta nas duas pontas</strong>, com o código que vai no inventário e no mapa.</li>
+    <li><strong>Cor por comprimento</strong>: uma fita de cor por medida evita desenrolar 20 m para ligar um microfone a 3 m.</li>
+    
+    <li><strong>Cabo com defeito sai de circulação na hora:</strong> fita vermelha ou nó perto do conector, defeito anotado, guardado em outro lugar.</li>
+  </ul>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. O primeiro e o terceiro estão preenchidos na planilha de apoio.</p>
+
+  <h3>Exemplo 1. O mapa de ligações de um culto</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, mesa digital no fundo da sala, multicabo analógico de 16 vias com 4 retornos, catorze ligações.</dd></div>
+    <div><dt>Sintoma</dt><dd>Teclado distorcido, violão fraco e sem brilho, coral mudo e um retorno de chão com som fraco e cabo quente.</dd></div>
+    <div><dt>Causa</dt><dd>As ligações foram feitas “com o cabo que encaixava”, sem olhar o nível de cada fonte.</dd></div>
+    <div><dt>O que foi feito</dt><dd>As catorze ligações foram lançadas no mapa da planilha, que apontou cinco problemas.</dd></div>
+    <div><dt>Resultado</dt><dd>Nove ligações estavam certas. As cinco foram corrigidas antes do ajuste de ganho.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:21%">Ligação</th><th style="width:27%">Como estava</th><th style="width:22%">O que o mapa apontou</th><th>O que foi feito</th></tr></thead>
+      <tbody>
+        <tr><td>Coral (microfone condensador suspenso)</td><td>Cabo XLR na via 3, phantom desligado.</td><td class="amber">Ligue o phantom deste canal.</td><td>Phantom ligado no canal 3, com o canal em mute.</td></tr>
+        <tr><td>Violão (captador sem pré)</td><td>Cabo P10–XLR de 9 m, direto na via 4.</td><td class="amber">Use direct box ou a entrada de instrumento.</td><td>DI ativa ao lado do músico (P10 de 3 m) e XLR até a via 4. Phantom ligado.</td></tr>
+        <tr><td>Teclado, lados E e D</td><td>Dois P10–XLR de 12 m nas vias 6 e 7, phantom ligado.</td><td class="red">Desligue o phantom ou passe a fonte por direct box.</td><td>Phantom desligado. DI estéreo passiva ao lado do teclado, e XLR até as vias.</td></tr>
+        <tr><td>Amplificador de retorno até o retorno de chão passivo</td><td>Cabo de instrumento P10 de 8 m.</td><td class="red">Use cabo de caixa: dois condutores grossos, sem malha.</td><td>Cabo de caixa de 2 × 2,5 mm².</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> Nenhum dos problemas se resolvia na mesa. O teclado chegava em nível de linha a uma entrada de microfone, e ainda recebia 48 volts na saída. O violão, de captador passivo, estava em entrada de baixa impedância por cabo desbalanceado longo. O coral só precisava do phantom. E o cabo fino do retorno desperdiçava em calor parte da potência. O mapa mostra um aviso por ligação: ao resolver um, confira se não aparece outro.</p>
+
+  <h3>Exemplo 2. O zumbido que chegou com o computador</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Palestra com vídeos em auditório de escola. Computador no púlpito, a 15 m da mesa, na tomada do palco.</dd></div>
+    <div><dt>Sintoma</dt><dd>Zumbido grave e contínuo nas caixas assim que o cabo do computador entra na mesa. Some quando o canal é fechado.</dd></div>
+    <div><dt>Causa</dt><dd>Laço de terra: computador e mesa em tomadas distantes, unidos pela malha de um cabo P2–P10 desbalanceado de 15 m.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Com o carregador fora da tomada, o zumbido sumiu. DI estéreo passiva ao lado do computador, ground lift acionado, dois XLR até a mesa.</dd></div>
+    <div><dt>Resultado</dt><dd>Silêncio com o canal aberto e o carregador ligado. O cabo P2 ficou com 1,5 m.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> O teste do carregador confirmou a causa em dez segundos, mas não é solução. A direct box resolveu dois problemas: o transformador abriu o laço, e o trecho longo passou a ser balanceado. Ninguém mexeu no pino de terra.</p>
+
+  <h3>Exemplo 3. O microfone que falhava só durante o evento</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Evento ao ar livre, dez cabos em uso. O microfone de mão do apresentador falha com estalos quando ele anda pelo palco.</dd></div>
+    <div><dt>Sintoma</dt><dd>Na passagem de som, com o microfone parado no pedestal, tudo funcionou.</dd></div>
+    <div><dt>Causa</dt><dd>Fio partido dentro do cabo, junto ao conector: só abre o contato quando o cabo se mexe.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Troca pelo cabo reserva. Depois do evento, todos os cabos passaram pelos dois testes e foram para o inventário.</dd></div>
+    <div><dt>Resultado</dt><dd>Dos dez cabos, seis liberados, três para reparo e um ainda por testar.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:12%">Cabo</th><th style="width:24%">Tipo</th><th class="n" style="width:14%">Continuidade</th><th class="n" style="width:14%">Movimento</th><th class="n" style="width:12%">Situação</th><th>Defeito encontrado</th></tr></thead>
+      <tbody>
+        <tr><td>M04</td><td>Microfone, XLR, 10 m</td><td class="n">OK</td><td class="n red">Falha</td><td class="n red">Reparar</td><td>Estalos ao dobrar junto ao XLR fêmea. Era o cabo do apresentador.</td></tr>
+        <tr><td>M07</td><td>Microfone, XLR, 5 m</td><td class="n red">Falha</td><td class="n">Não testado</td><td class="n red">Reparar</td><td>Pino 1 aberto: malha partida. Funcionava com microfone dinâmico, mas sem blindagem.</td></tr>
+        <tr><td>P02</td><td>Instrumento, P10, 3 m</td><td class="n">OK</td><td class="n">OK</td><td class="n red">Reparar</td><td>Capa rachada, com a malha à mostra. Estado físico ruim.</td></tr>
+        <tr><td>C02</td><td>Caixa, Speakon, 10 m</td><td class="n">Não testado</td><td class="n">Não testado</td><td class="n amber">Testar</td><td>Ficou montado no local. Testar na desmontagem.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> Só a continuidade teria liberado o M04: parado, ele funciona. O M07 é o contrário: com a malha partida, o microfone dinâmico ainda soava, sem blindagem. Com um condensador ele ficaria mudo, porque o phantom volta pela malha.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Escolher o cabo pelo plugue</h4><p>“Encaixou, então serve”: o teclado entra na entrada de microfone por adaptador e distorce.</p><p class="fix"><b>Correção:</b> escolha pelo nível. Leia o que está escrito na saída e na entrada, e use direct box quando os níveis não combinam.</p></div>
+    <div><h4>Cabo de instrumento na caixa passiva</h4><p>O plugue é igual, e o cabo fino vai do amplificador à caixa: som fraco e cabo quente.</p><p class="fix"><b>Correção:</b> cabo de caixa, com dois condutores grossos e sem malha, de preferência com Speakon.</p></div>
+    <div><h4>Cabo desbalanceado longo</h4><p>Um P10 de 15 m leva o violão até a mesa, com zumbido e perda de agudos.</p><p class="fix"><b>Correção:</b> cabo curto até uma direct box ao lado da fonte, e XLR balanceado no trecho longo.</p></div>
+    <div><h4>Tirar o pino de terra para acabar com o zumbido</h4><p>O zumbido some, e o equipamento fica sem proteção contra choque.</p><p class="fix"><b>Correção:</b> mesmo ponto de energia, ligação balanceada, direct box com ground lift. O terra de segurança não se desliga.</p></div>
+    <div><h4>Phantom ligado em tudo, ou esquecido</h4><p>A chave geral fica ligada com fontes desbalanceadas, ou o condensador fica mudo sem phantom.</p><p class="fix"><b>Correção:</b> anote no mapa quem precisa de phantom. Ligue só nesses canais, com o canal em mute.</p></div>
+    <div><h4>Cabo TRS comum em saída de fone estéreo</h4><p>A saída de fone do computador vai a uma entrada balanceada por cabo TRS, e a voz da música some.</p><p class="fix"><b>Correção:</b> cabo em Y (um plugue estéreo para dois plugues TS) e dois canais, ou uma direct box estéreo.</p></div>
+    <div><h4>Devolver o cabo ruim à caixa</h4><p>O cabo que falhou é guardado com os outros e volta ao palco no evento seguinte.</p><p class="fix"><b>Correção:</b> marque na hora, com fita ou com um nó, guarde em outro lugar e anote no inventário.</p></div>
+    <div><h4>Áudio e energia no mesmo feixe</h4><p>Cabos de microfone presos aos de energia e de iluminação por vários metros.</p><p class="fix"><b>Correção:</b> caminhos separados. Onde for preciso cruzar, cruze em ângulo reto.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>Este estudo recebe os conceitos de medida e entrega um sinal limpo, na entrada certa, para tudo o que vem depois.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>: o decibel, o dBu, a fase e a polaridade.</li>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento: roteiro, equipe e imprevistos</a>: a energia do evento, os circuitos, o aterramento e o inventário geral.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Microfones/treinamento-microfones.html">Microfones</a>: qual microfone precisa de phantom, e o cabo que o liga à mesa.</li>
+        <li><a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>: entradas, saídas e patch digital.</li>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader: a estrutura de ganho</a>: o ganho parte do sinal que chega pela entrada certa.</li>
+        <li><a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>: impedância e bitola do cabo de caixa.</li>
+        <li><a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>: os retornos do multicabo.</li>
+        <li><a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Microfones sem fio</a>: a saída do receptor, em nível de microfone ou de linha.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: o mapa alimenta a lista de canais e o line check.</li>
+        <li><a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>: os cabos e os conectores do vídeo, e o áudio embutido.</li>
+        <li><a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>: o cabo de DMX, que não se mistura com o de áudio.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: a ligação ao computador da transmissão, onde o laço de terra é frequente.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira na montagem, antes do ajuste de ganho. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>Cada cabo em uso passou nos testes de continuidade e de movimento e tem etiqueta nas duas pontas.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>Há cabos de reserva testados, pelo menos um de cada tipo.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>Cada fonte está na entrada do seu nível: microfone, instrumento ou linha.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>Instrumentos e teclados longe da mesa passam por direct box e seguem em cabo balanceado.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>Nenhum cabo desbalanceado tem mais de uns 6 metros.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>As caixas passivas estão ligadas com cabo de caixa, e nenhuma saída de amplificador vai para a mesa ou para o multicabo.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>O phantom está ligado só nos canais que precisam dele: microfone condensador e direct box ativa.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>O phantom foi ligado com os canais em mute, e nenhuma fonte desbalanceada recebe phantom.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>Todo o áudio está ligado no mesmo ponto de energia, com o pino de terra em todos os plugues.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>Os cabos de áudio passam longe dos cabos de energia e de iluminação, ou cruzam em ângulo reto.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>Com os canais abertos e sem ninguém tocando, não há zumbido nem estalos nas caixas.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>O mapa de ligações está preenchido e confere com as vias do multicabo, e os cabos no chão estão presos.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Que ligação usar?</h3>
+  <p>Cada frase descreve um trecho do sistema. Escolha a ligação certa: <strong>XLR</strong>, cabo balanceado direto; <strong>P10</strong>, cabo de instrumento, desbalanceado e curto; <strong>DI</strong>, direct box perto da fonte e cabo balanceado até a mesa; <strong>CAIXA</strong>, cabo de caixa, de dois condutores grossos.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"XLR": "Cabo balanceado com XLR", "P10": "Cabo de instrumento, P10", "DI": "Direct box e cabo balanceado", "CAIXA": "Cabo de caixa"},
+ "itens": [
+  {"t": "Microfone dinâmico de mão até a caixa de palco, a 10 metros.", "a": "XLR", "w": "Sinal de microfone, saída balanceada: cabo XLR direto."},
+  {"t": "Guitarra até o amplificador do próprio músico, a 3 metros.", "a": "P10", "w": "Trecho curto, entrada de instrumento no amplificador: o cabo P10 blindado é o certo."},
+  {"t": "Violão com captador até a mesa, que fica a 20 metros do palco.", "a": "DI", "w": "Fonte desbalanceada e trecho longo: direct box ao lado do músico, e XLR até a mesa."},
+  {"t": "Saída do amplificador de potência até a caixa passiva.", "a": "CAIXA", "w": "Nível de alto-falante só passa por cabo de caixa, de condutores grossos e sem malha."},
+  {"t": "Saída principal da mesa até a caixa ativa, a 15 metros.", "a": "XLR", "w": "Nível de linha, saída e entrada balanceadas: cabo XLR direto."},
+  {"t": "Teclado no palco, que precisa entrar no multicabo.", "a": "DI", "w": "O teclado entrega linha desbalanceada, e o multicabo leva sinal balanceado até entradas de microfone."},
+  {"t": "Computador que provoca zumbido quando é ligado direto à mesa.", "a": "DI", "w": "A direct box com transformador isola o computador, e o ground lift abre o laço de terra."},
+  {"t": "Microfone condensador do coral, que depende do phantom da mesa.", "a": "XLR", "w": "O phantom só chega por um cabo balanceado inteiro, com os três contatos."},
+  {"t": "Baixo até a entrada da direct box, a 2 metros.", "a": "P10", "w": "Do instrumento à direct box, o trecho é curto e desbalanceado: cabo P10."},
+  {"t": "Amplificador de retorno até a caixa de chão passiva.", "a": "CAIXA", "w": "É saída de amplificador: cabo de caixa, mesmo que o conector seja P10."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: teste, ouça e registre</h3>
+  <p>Você vai precisar de uma mesa, um fone, um microfone dinâmico, um testador de cabos (ou um multímetro), os cabos do seu acervo e a planilha de apoio. Deixe as caixas desligadas ou o master fechado, e o fone em volume baixo.</p>
+  <ol>
+    <li>Pegue dez cabos do acervo, etiquete as duas pontas e lance cada um na aba “Inventário de cabos”.</li>
+    <li>Faça os dois testes em cada cabo e anote. Separe e marque os que ficaram em “Reparar”.</li>
+    <li>Ligue o microfone a um canal por um XLR liberado, aperte o PFL, ajuste o ganho e ouça no fone.</li>
+    <li>Com o canal em mute, ligue o phantom, espere e abra o canal: o dinâmico deve soar igual. Feche o canal e desligue o phantom.</li>
+    <li>Ligue um teclado ou computador a uma entrada de linha por cabo desbalanceado. Aproxime o meio do cabo de um carregador e ouça o ruído; afaste e ouça sumir.</li>
+    <li>Se tiver uma direct box, repita com ela ao lado da fonte e XLR até a entrada de microfone. Compare, e teste o ground lift nas duas posições.</li>
+    <li>Preencha a aba “Mapa de ligações” com o seu sistema e confira no equipamento cada mensagem de “O que fazer”.</li>
+    <li>Enrole os cabos alternando o sentido das voltas. Solte um no chão, segurando uma ponta: ele deve se abrir reto.</li>
+  </ol>
+  
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Cabos-e-Conexoes-modelo.xlsx">Cabos-e-Conexoes-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Mapa de ligações</strong></td><td>Até 32 ligações, da origem ao destino: nível, direct box, tipo de cabo, phantom, comprimento, via do multicabo e entrada do destino.</td><td>O nível que chega ao destino, a situação de cada ligação (OK, Atenção ou Erro) e o que fazer.</td></tr>
+        <tr><td><strong>Inventário de cabos</strong></td><td>Até 40 cabos: etiqueta, tipo, conectores, comprimento, os dois testes e o estado físico.</td><td>A situação de cada cabo (Liberado, Reparar ou Testar), os totais e a conferência do estoque por tipo.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Níveis de sinal, conector por tipo de sinal, cabo por trecho, phantom e tipos de ruído.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Mapa</strong></td><td>As catorze ligações do exemplo 1, como estavam antes da correção, e o que foi feito.</td><td>Os mesmos resultados da aba Mapa de ligações.</td></tr>
+        <tr><td><strong>Exemplo - Inventário</strong></td><td>Os dez cabos do exemplo 3, com os resultados dos testes.</td><td>Os mesmos resultados da aba Inventário de cabos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O limite do cabo desbalanceado fica no alto da aba “Mapa de ligações” e pode ser trocado: os 6 metros iniciais são ponto de partida.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Balanceada (ligação)</dt><dd>Ligação com dois condutores de sinal e malha. A entrada mede a diferença entre os condutores, e o ruído captado no caminho se cancela.</dd></div>
+    <div><dt>Caixa de palco (stage box)</dt><dd>Caixa com os conectores do multicabo, no palco. Na versão digital, tem os pré-amplificadores e os conversores.</dd></div>
+    <div><dt>Desbalanceada (ligação)</dt><dd>Ligação com um condutor de sinal e a malha, que também é o retorno. Capta ruído em trechos longos.</dd></div>
+    <div><dt>Direct box (DI)</dt><dd>Aparelho que converte um sinal desbalanceado, de instrumento ou de linha, em sinal balanceado de nível de microfone.</dd></div>
+    <div><dt>Ground lift</dt><dd>Chave que desliga a malha do cabo de áudio em um dos lados, para abrir um laço de terra. Não mexe no terra de segurança.</dd></div>
+    <div><dt>Impedância</dt><dd>Oposição de um circuito à passagem do sinal, em ohms. Fonte de alta impedância pede entrada de impedância ainda mais alta.</dd></div>
+    <div><dt>Laço de terra (ground loop)</dt><dd>Anel formado por dois caminhos até o terra. Por ele circula uma corrente da rede elétrica, ouvida como zumbido.</dd></div>
+    <div><dt>Malha (blindagem)</dt><dd>Condutor trançado ou enrolado em volta dos fios de sinal, ligado ao terra, que barra parte da interferência.</dd></div>
+    <div><dt>Nível de linha</dt><dd>Nível de trabalho entre equipamentos: −10 dBV no padrão doméstico e +4 dBu no profissional.</dd></div>
+    <div><dt>Nível de microfone</dt><dd>O menor dos níveis, de milésimos de volt. Precisa do pré-amplificador da mesa.</dd></div>
+    <div><dt>P10 (TS e TRS)</dt><dd>Plugue de 6,35 mm. O TS tem dois contatos e é desbalanceado. O TRS tem três e serve a linha balanceada, estéreo ou insert.</dd></div>
+    <div><dt>Phantom power</dt><dd>Alimentação de +48 V enviada pela mesa, pelo cabo balanceado, a microfones condensadores e direct boxes ativas.</dd></div>
+    <div><dt>Speakon</dt><dd>Conector com trava para nível de alto-falante, entre o amplificador e a caixa passiva.</dd></div>
+    <div><dt>XLR</dt><dd>Conector de três pinos, com trava, das ligações balanceadas: pino 1 malha, pino 2 positivo, pino 3 negativo.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>

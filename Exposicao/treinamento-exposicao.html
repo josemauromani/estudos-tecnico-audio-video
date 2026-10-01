@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Exposição: íris, obturador e ganho</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --ground:#F3F6F7; --surface:#FFFFFF; --sunk:#E9EEF0; --ink:#16242E; --muted:#566672; --rule:#D3DBE0;
+  --accent:#2B5C8A;
+  --blue:#2B5C8A; --blue-tint:#DCE8F3;
+  --amber:#A96A12; --amber-tint:#F6E8CF;
+  --teal:#1E7B73; --teal-tint:#D9EEEB;
+  --purple:#7A4A9A; --purple-tint:#E9DEF1;
+  --red:#B0413E; --red-tint:#F5DEDC;
+  --slate:#5B6B76; --slate-tint:#E3E8EB;
+  --on-hue:#FFFFFF;
+  --good:#1F7A4D; --good-tint:#DDF1E5;
+  --bad:#B0413E; --bad-tint:#F5DEDC;
+  --display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+    --accent:#86B7E3;
+    --blue:#86B7E3; --blue-tint:#1B2F42;
+    --amber:#E2AC4F; --amber-tint:#3A2C12;
+    --teal:#5FC6BA; --teal-tint:#15332F;
+    --purple:#C09ADB; --purple-tint:#2E2139;
+    --red:#EC8E89; --red-tint:#3D1F1E;
+    --slate:#9BABB6; --slate-tint:#26333B;
+    --on-hue:#0F171C;
+    --good:#6FCF9B; --good-tint:#163326;
+    --bad:#EC8E89; --bad-tint:#3D1F1E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+  --accent:#86B7E3;
+  --blue:#86B7E3; --blue-tint:#1B2F42;
+  --amber:#E2AC4F; --amber-tint:#3A2C12;
+  --teal:#5FC6BA; --teal-tint:#15332F;
+  --purple:#C09ADB; --purple-tint:#2E2139;
+  --red:#EC8E89; --red-tint:#3D1F1E;
+  --slate:#9BABB6; --slate-tint:#26333B;
+  --on-hue:#0F171C;
+  --good:#6FCF9B; --good-tint:#163326;
+  --bad:#EC8E89; --bad-tint:#3D1F1E;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.65 var(--body);-webkit-text-size-adjust:100%}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.page{max-width:1180px;margin-inline:auto;padding-inline:20px;padding-block:36px 80px}
+
+/* Cabeçalho */
+.mast{display:flex;flex-direction:column;gap:18px;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+.tiles{display:flex;gap:6px}
+.tiles span{width:44px;height:44px;display:grid;place-items:center;font:700 24px/1 var(--display);color:var(--on-hue)}
+h1{font:700 clamp(2.3rem,6vw,3.6rem)/1.02 var(--display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.lead{font-size:1.15rem;line-height:1.55;max-width:62ch;margin:0;color:var(--ink)}
+.meta{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px 22px;font:400 .8rem/1.4 var(--mono);color:var(--muted);margin:0;padding:0;list-style:none}
+
+/* Estrutura */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;padding-top:32px}
+.toc{font-size:.92rem}
+.toc h2{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 20px;counter-reset:toc}
+.toc li{counter-increment:toc}
+.toc a{display:flex;gap:10px;padding:5px 0;color:var(--ink);text-decoration:none;line-height:1.35}
+.toc a::before{content:counter(toc,decimal-leading-zero);font:400 .75rem/1.7 var(--mono);color:var(--muted)}
+.toc a:hover{color:var(--accent);text-decoration:underline}
+@media (min-width:1020px){
+  .layout{grid-template-columns:200px minmax(0,1fr);gap:64px}
+  .toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start}
+  .toc ol{grid-template-columns:1fr}
+}
+main{display:flex;flex-direction:column;gap:72px;min-width:0}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
+.eyebrow{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+h2{font:700 clamp(1.7rem,4vw,2.2rem)/1.1 var(--display);margin:0;text-wrap:balance}
+h3{font:600 1.3rem/1.2 var(--display);margin:12px 0 0;text-wrap:balance}
+h4{font:600 .95rem/1.3 var(--body);margin:0}
+p{margin:0}
+section > p, section > ul, section > ol, section > h3{max-width:68ch}
+ul,ol{margin:0;padding-left:1.25em;display:flex;flex-direction:column;gap:6px}
+strong{font-weight:600}
+code{font:400 .88em var(--mono);background:var(--sunk);padding:1px 5px;border-radius:3px}
+
+/* Letras coloridas no texto */
+.k{display:inline-grid;place-items:center;width:1.45em;height:1.45em;font:700 .85em/1 var(--display);color:var(--on-hue);vertical-align:.05em}
+
+/* Figuras */
+figure{margin:0;display:flex;flex-direction:column;gap:10px;position:relative}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.scroll svg{display:block;width:100%;min-width:820px;height:auto;color:var(--ink)}
+figcaption{font-size:.86rem;line-height:1.5;color:var(--muted);max-width:72ch}
+figcaption b{color:var(--ink);font-weight:600}
+svg text{font-family:var(--body);fill:var(--ink)}
+svg .disp{font-family:var(--display);font-weight:700}
+svg .mono{font-family:var(--mono);letter-spacing:.08em}
+svg .on{fill:var(--on-hue)}
+svg .mu{fill:var(--muted)}
+svg .b{font-weight:600}
+svg .ln{stroke:var(--ink);stroke-width:1.5;fill:none}
+svg .ln-mu{stroke:var(--muted);stroke-width:1.5;fill:none}
+svg .ln-bold{stroke:var(--ink);stroke-width:3;fill:none;stroke-linejoin:round;stroke-linecap:round}
+svg .dash{stroke-dasharray:5 4}
+svg .ah{fill:var(--ink)} svg .ah-mu{fill:var(--muted)}
+svg .bx{fill:var(--surface);stroke:var(--rule);stroke-width:1.5}
+svg .bx-ink{fill:var(--ink);stroke:var(--ink)}
+svg .t-ground{fill:var(--ground)}
+svg .bx-out{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 4}
+svg .gap{stroke:var(--surface);stroke-width:4}
+svg .gap2{stroke:var(--surface);stroke-width:2}
+svg .hub{fill:var(--surface)}
+
+/* Gráfico */
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .hit{fill:transparent;cursor:crosshair;outline:none}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);padding:6px 10px;font-size:.78rem;line-height:1.4;transform:translate(-50%,calc(-100% - 14px));white-space:nowrap;z-index:2}
+.tip b{display:block;font:600 1.05rem/1.2 var(--body)}
+details.data{font-size:.88rem}
+details.data summary{cursor:pointer;font:400 .82rem var(--mono);color:var(--muted);padding:4px 0}
+details.data .tbl{margin-top:8px}
+details.data table{min-width:420px}
+
+/* Tabelas */
+.tbl{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:780px;font-size:.88rem;line-height:1.4}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+tr:last-child > td{border-bottom:0}
+thead th{font:600 .8rem/1.3 var(--body);background:var(--sunk)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--mono);font-size:.82rem}
+
+/* Cores: blue, amber, teal, purple, red, slate */
+.tiles .blue, .k.blue{background:var(--blue)} .tiles span.w, .k.w{width:auto;padding:0 8px}
+svg .bx-blue{fill:var(--blue-tint);stroke:var(--blue);stroke-width:1.5} svg .hd-blue, svg .f-blue{fill:var(--blue)} svg .lv-blue{fill:var(--blue);fill-opacity:.36} svg .s-blue{stroke:var(--blue);stroke-width:2;fill:none} svg .t-blue{fill:var(--blue)}
+th.blue{background:var(--blue);color:var(--on-hue)} td.blue{background:var(--blue-tint)}
+.tiles .amber, .k.amber{background:var(--amber)}
+svg .bx-amber{fill:var(--amber-tint);stroke:var(--amber);stroke-width:1.5} svg .hd-amber, svg .f-amber{fill:var(--amber)} svg .lv-amber{fill:var(--amber);fill-opacity:.36} svg .s-amber{stroke:var(--amber);stroke-width:2;fill:none} svg .t-amber{fill:var(--amber)}
+th.amber{background:var(--amber);color:var(--on-hue)} td.amber{background:var(--amber-tint)}
+.tiles .teal, .k.teal{background:var(--teal)}
+svg .bx-teal{fill:var(--teal-tint);stroke:var(--teal);stroke-width:1.5} svg .hd-teal, svg .f-teal{fill:var(--teal)} svg .lv-teal{fill:var(--teal);fill-opacity:.36} svg .s-teal{stroke:var(--teal);stroke-width:2;fill:none} svg .t-teal{fill:var(--teal)}
+th.teal{background:var(--teal);color:var(--on-hue)} td.teal{background:var(--teal-tint)}
+.tiles .purple, .k.purple{background:var(--purple)}
+svg .bx-purple{fill:var(--purple-tint);stroke:var(--purple);stroke-width:1.5} svg .hd-purple, svg .f-purple{fill:var(--purple)} svg .lv-purple{fill:var(--purple);fill-opacity:.36} svg .s-purple{stroke:var(--purple);stroke-width:2;fill:none} svg .t-purple{fill:var(--purple)}
+th.purple{background:var(--purple);color:var(--on-hue)} td.purple{background:var(--purple-tint)}
+.tiles .red, .k.red{background:var(--red)}
+svg .bx-red{fill:var(--red-tint);stroke:var(--red);stroke-width:1.5} svg .hd-red, svg .f-red{fill:var(--red)} svg .lv-red{fill:var(--red);fill-opacity:.36} svg .s-red{stroke:var(--red);stroke-width:2;fill:none} svg .t-red{fill:var(--red)}
+th.red{background:var(--red);color:var(--on-hue)} td.red{background:var(--red-tint)}
+.tiles .slate, .k.slate{background:var(--slate)}
+svg .bx-slate{fill:var(--slate-tint);stroke:var(--slate);stroke-width:1.5} svg .hd-slate, svg .f-slate{fill:var(--slate)} svg .lv-slate{fill:var(--slate);fill-opacity:.36} svg .s-slate{stroke:var(--slate);stroke-width:2;fill:none} svg .t-slate{fill:var(--slate)}
+th.slate{background:var(--slate);color:var(--on-hue)} td.slate{background:var(--slate-tint)}
+svg .bar{fill:var(--accent)}
+svg .ref{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3}
+svg .s-ink{stroke:var(--ink);stroke-width:2;fill:none}
+/* tela de projeção: sempre escura com letra clara, nos dois temas */
+svg .scr{fill:#0B1116;stroke:#0B1116} svg .scr-tx{fill:#F3F6F7}
+svg .f-sunk{fill:var(--sunk)} svg .f-surface{fill:var(--surface)} svg .f-ink{fill:var(--ink)}
+svg .t-good{fill:var(--good)} svg .t-bad{fill:var(--bad)}
+svg .f-good{fill:var(--good)} svg .f-bad{fill:var(--bad)} svg .s-good{stroke:var(--good);stroke-width:2;fill:none} svg .s-bad{stroke:var(--bad);stroke-width:2;fill:none}
+td.n, th.n{text-align:center}
+td small{display:block;color:var(--muted);font-size:.8rem}
+
+/* Vídeo do tutorial */
+.video{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);gap:20px;align-items:start;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.video video{width:100%;height:auto;display:block;background:#000}
+.video div{display:flex;flex-direction:column;gap:8px;font-size:.93rem}
+@media (max-width:640px){.video{grid-template-columns:1fr}}
+
+/* Voltar ao painel */
+.back{font:500 .78rem var(--mono);text-decoration:none;color:var(--muted)}
+.back:hover{color:var(--accent)}
+
+/* Ficha da matriz (acima de cada exemplo) */
+.ficha{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border:1px solid var(--rule);background:var(--surface)}
+.ficha div{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 -1px -1px 0}
+.ficha dt{font:500 .68rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ficha dd{margin:0;font-size:.9rem;line-height:1.4}
+dl{margin:0}
+
+/* Blocos */
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.box{background:var(--surface);border:1px solid var(--rule);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.box h4{font:600 1.1rem/1.2 var(--display)}
+.box ul{font-size:.93rem}
+.note{background:var(--sunk);padding:16px 20px;max-width:72ch;font-size:.94rem;display:flex;flex-direction:column;gap:6px}
+.note h4{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* Passo a passo */
+.steps{list-style:none;padding:0;counter-reset:st;gap:0;max-width:none;border-top:1px solid var(--rule)}
+.steps li{counter-increment:st;display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font:700 1.7rem/1 var(--display);color:var(--muted);grid-row:span 2}
+.steps h4{font:600 1.1rem/1.25 var(--display)}
+.steps p{font-size:.95rem;max-width:64ch;grid-column:2}
+
+/* Erros comuns */
+.errs{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.errs div{padding:16px 16px 16px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
+.errs h4{font:600 1.05rem/1.25 var(--display)}
+.errs p{font-size:.92rem}
+.errs .fix{color:var(--muted)}
+.errs .fix b{color:var(--ink);font-weight:600}
+
+/* Checklist */
+.check{list-style:none;padding:0;gap:0;max-width:none;border:1px solid var(--rule);background:var(--surface)}
+.check li{border-bottom:1px solid var(--rule)}
+.check li:last-child{border-bottom:0}
+.check label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:11px 16px;cursor:pointer;font-size:.94rem;align-items:start}
+.check input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--teal)}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font:400 .82rem var(--mono);color:var(--muted)}
+.bar b{color:var(--ink);font-weight:500}
+
+/* Exercício */
+.quiz{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);background:var(--surface)}
+.q{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:14px 16px;border-bottom:1px solid var(--rule)}
+.q:last-child{border-bottom:0}
+@media (min-width:720px){.q{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
+.q p{font-size:.95rem}
+.q .why{grid-column:1/-1;font-size:.86rem;color:var(--muted)}
+.q .why b{font-weight:600}
+.q .why.ok b{color:var(--good)} .q .why.no b{color:var(--bad)}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts button{min-width:40px;height:40px;padding:0 10px;border:1.5px solid var(--rule);background:var(--surface);color:var(--ink);font:700 1.1rem/1 var(--display);cursor:pointer;border-radius:0}
+.opts button:hover:not(:disabled){border-color:var(--ink)}
+.opts button:disabled{cursor:default;opacity:.45}
+.opts button.right{background:var(--good-tint);border-color:var(--good);color:var(--good);opacity:1}
+.opts button.wrong{background:var(--bad-tint);border-color:var(--bad);color:var(--bad);opacity:1}
+.btn{border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:500 .82rem var(--mono);padding:7px 14px;cursor:pointer;border-radius:0}
+.btn:hover{background:var(--ink);color:var(--ground)}
+
+/* Glossário */
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.gloss div{padding:12px 0;border-bottom:1px solid var(--rule)}
+.gloss dt{font:600 1.02rem/1.3 var(--display)}
+.gloss dd{margin:2px 0 0;font-size:.9rem;color:var(--muted)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:.84rem;color:var(--muted);max-width:72ch}
+</style>
+</head>
+<body>
+<div class="page" lang="pt-BR" data-estudo="expo">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="blue">f</span><span class="amber">S</span><span class="teal w">ISO</span></div>
+  <h1>Exposição: íris, obturador e ganho</h1>
+  <p class="lead">Um guia de estudo para deixar a imagem clara na medida, sem estourar nem escurecer, usando a íris, o obturador e o ISO pelo motivo certo, e para manter as câmeras iguais do começo ao fim do evento.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O que é exposição</a></li>
+    <li><a href="#abertura">Abertura: a íris e o número f</a></li>
+    <li><a href="#obturador">Obturador e cintilação</a></li>
+    <li><a href="#iso">ISO, ganho e filtro ND</a></li>
+    <li><a href="#ferramentas">Ferramentas de medição</a></li>
+    <li><a href="#palco">Palco, contraluz e câmeras iguais</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O que é exposição</h2>
+  <p>Exposição é a quantidade de luz que a câmera transforma em imagem. Com luz de menos, a imagem fica escura, e as sombras ganham ruído. Com luz demais, a imagem <strong>estoura</strong>: as partes claras viram um branco liso, e o detalhe não volta, nem na edição.</p>
+  <p>Três controles decidem a exposição. A <strong>abertura</strong> <span class="k blue">f</span>, ou íris, define quanta luz passa pela lente. O <strong>obturador</strong> <span class="k amber">S</span> (<em>shutter</em>) define por quanto tempo o sensor recebe essa luz em cada quadro. O <strong>ISO</strong> <span class="k teal w">ISO</span>, que nas filmadoras aparece como ganho (<em>gain</em>), define quanto a câmera amplifica o sinal que o sensor produziu. Os três juntos são chamados de triângulo de exposição.</p>
+  <p>Pense em encher um copo na torneira. A abertura é o quanto você abre a torneira; o obturador, o tempo em que o copo fica embaixo dela. Torneira mais aberta por menos tempo, ou menos aberta por mais tempo, enchem o copo do mesmo jeito. O ISO não põe mais água no copo: como o ganho do canal na mesa de som (estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>), ele aumenta o sinal já captado, e o ruído sobe junto.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 256" role="img" aria-label="O caminho da luz dentro da câmera: a luz da cena passa pela abertura (quanta luz passa) e pelo obturador (por quanto tempo), chega ao sensor, onde vira sinal, e o ISO ou ganho define quanto esse sinal é amplificado. O preço de cada controle: a abertura muda a profundidade de campo, o obturador muda o borrão do movimento, e o ISO muda o ruído.">
+        <defs><marker id="arE1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="28" font-size="10.5">O CAMINHO DA LUZ</text>
+        <rect class="bx" x="18" y="44" width="100" height="56"/>
+        <text class="b" x="68" y="68" font-size="12" text-anchor="middle">Luz da cena</text>
+        <text class="mu" x="68" y="86" font-size="11" text-anchor="middle">pouca ou muita</text>
+        <line class="ln" x1="120" y1="72" x2="142" y2="72" marker-end="url(#arE1)"/>
+        <rect class="hd-blue" x="146" y="44" width="140" height="56"/>
+        <text class="on b" x="216" y="68" font-size="12.5" text-anchor="middle">Abertura (íris)</text>
+        <text class="on" x="216" y="86" font-size="11" text-anchor="middle">quanta luz passa</text>
+        <line class="ln" x1="288" y1="72" x2="310" y2="72" marker-end="url(#arE1)"/>
+        <rect class="hd-amber" x="314" y="44" width="140" height="56"/>
+        <text class="on b" x="384" y="68" font-size="12.5" text-anchor="middle">Obturador</text>
+        <text class="on" x="384" y="86" font-size="11" text-anchor="middle">por quanto tempo</text>
+        <line class="ln" x1="456" y1="72" x2="478" y2="72" marker-end="url(#arE1)"/>
+        <rect class="bx" x="482" y="44" width="100" height="56"/>
+        <text class="b" x="532" y="68" font-size="12" text-anchor="middle">Sensor</text>
+        <text class="mu" x="532" y="86" font-size="11" text-anchor="middle">luz vira sinal</text>
+        <line class="ln" x1="584" y1="72" x2="606" y2="72" marker-end="url(#arE1)"/>
+        <rect class="hd-teal" x="610" y="44" width="140" height="56"/>
+        <text class="on b" x="680" y="68" font-size="12.5" text-anchor="middle">ISO ou ganho</text>
+        <text class="on" x="680" y="86" font-size="11" text-anchor="middle">quanto amplifica</text>
+        <line class="ln" x1="752" y1="72" x2="774" y2="72" marker-end="url(#arE1)"/>
+        <rect class="bx" x="778" y="44" width="104" height="56"/>
+        <text class="b" x="830" y="68" font-size="12" text-anchor="middle">Imagem</text>
+        <text class="mu" x="830" y="86" font-size="11" text-anchor="middle">clara na medida</text>
+
+        <text class="mono mu" x="18" y="176" font-size="10.5">O PREÇO DE</text>
+        <text class="mono mu" x="18" y="192" font-size="10.5">CADA CONTROLE</text>
+        <line class="ref" x1="216" y1="100" x2="216" y2="150"/>
+        <line class="ref" x1="384" y1="100" x2="384" y2="150"/>
+        <line class="ref" x1="680" y1="100" x2="680" y2="150"/>
+        <rect class="bx-blue" x="138" y="150" width="156" height="88"/>
+        <text class="b" x="216" y="174" font-size="12" text-anchor="middle">Profundidade de campo</text>
+        <text x="216" y="196" font-size="11" text-anchor="middle">aberta: fundo desfocado</text>
+        <text x="216" y="214" font-size="11" text-anchor="middle">fechada: tudo mais nítido</text>
+        <rect class="bx-amber" x="306" y="150" width="156" height="88"/>
+        <text class="b" x="384" y="174" font-size="12" text-anchor="middle">Movimento</text>
+        <text x="384" y="196" font-size="11" text-anchor="middle">lento: borrão</text>
+        <text x="384" y="214" font-size="11" text-anchor="middle">rápido: imagem picotada</text>
+        <rect class="bx-teal" x="602" y="150" width="156" height="88"/>
+        <text class="b" x="680" y="174" font-size="12" text-anchor="middle">Ruído</text>
+        <text x="680" y="196" font-size="11" text-anchor="middle">baixo: imagem limpa</text>
+        <text x="680" y="214" font-size="11" text-anchor="middle">alto: granulado</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> A luz passa pela íris e pelo obturador antes de chegar ao sensor. O ISO age depois, sobre o sinal. Os três controles clareiam ou escurecem a imagem, mas cada um muda também outra coisa.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%"></th><th class="blue" style="width:28%">Abertura (íris)</th><th class="amber" style="width:28%">Obturador</th><th class="teal">ISO ou ganho</th></tr></thead>
+      <tbody>
+        <tr><td><strong>O que decide</strong></td><td>Quanta luz passa pela lente.</td><td>Por quanto tempo cada quadro recebe luz.</td><td>Quanto o sinal do sensor é amplificado.</td></tr>
+        <tr><td><strong>Para clarear</strong></td><td>Número f menor.</td><td>Tempo maior: de 1/120 para 1/60.</td><td>Número maior.</td></tr>
+        <tr><td><strong>O preço</strong></td><td>Muda a profundidade de campo.</td><td>Muda o borrão do movimento e pode causar cintilação.</td><td>Aumenta o ruído.</td></tr>
+        <tr><td><strong>No evento ao vivo</strong></td><td>É o controle principal, o primeiro a mexer.</td><td>Fica fixo, definido pela taxa de quadros e pela rede elétrica.</td><td>O menor possível. Sobe só quando a íris acabou.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>O stop: a unidade da exposição</h3>
+  <p>Os três controles se comparam em uma unidade só: o <strong>stop</strong> (ou ponto). Subir 1 stop é dobrar a luz; descer 1 stop é ficar com a metade. As três escalas andam em stops, e por isso dá para trocar um controle pelo outro.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 244" role="img" aria-label="Quatro escalas alinhadas, em que cada casa para a direita vale 1 stop a mais de luz, o dobro. Abertura, em número f: f/22, f/16, f/11, f/8, f/5,6, f/4, f/2,8, f/2, f/1,4. Obturador: 1/8000, 1/4000, 1/2000, 1/1000, 1/500, 1/250, 1/125, 1/60, 1/30 de segundo. ISO: 100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600. Ganho em dB: 0, mais 6, mais 12, mais 18, mais 24, mais 30, mais 36.">
+        <defs><marker id="arE2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="b" x="550" y="26" font-size="12" text-anchor="middle">cada casa para a direita: 1 stop a mais, o dobro da luz ou do sinal</text>
+        <line class="ln" x1="218" y1="42" x2="880" y2="42" marker-end="url(#arE2)"/>
+        <text class="b" x="18" y="78" font-size="12.5">Abertura</text><text class="mu" x="18" y="93" font-size="10.5">número f</text>
+        <g class="bx-blue"><rect x="218" y="64" width="64" height="28"/><rect x="293" y="64" width="64" height="28"/><rect x="368" y="64" width="64" height="28"/><rect x="443" y="64" width="64" height="28"/><rect x="518" y="64" width="64" height="28"/><rect x="593" y="64" width="64" height="28"/><rect x="668" y="64" width="64" height="28"/><rect x="743" y="64" width="64" height="28"/><rect x="818" y="64" width="64" height="28"/></g>
+        <g class="b" font-size="11.5" text-anchor="middle"><text x="250" y="82">f/22</text><text x="325" y="82">f/16</text><text x="400" y="82">f/11</text><text x="475" y="82">f/8</text><text x="550" y="82">f/5,6</text><text x="625" y="82">f/4</text><text x="700" y="82">f/2,8</text><text x="775" y="82">f/2</text><text x="850" y="82">f/1,4</text></g>
+        <text class="b" x="18" y="122" font-size="12.5">Obturador</text><text class="mu" x="18" y="137" font-size="10.5">fração de segundo</text>
+        <g class="bx-amber"><rect x="218" y="108" width="64" height="28"/><rect x="293" y="108" width="64" height="28"/><rect x="368" y="108" width="64" height="28"/><rect x="443" y="108" width="64" height="28"/><rect x="518" y="108" width="64" height="28"/><rect x="593" y="108" width="64" height="28"/><rect x="668" y="108" width="64" height="28"/><rect x="743" y="108" width="64" height="28"/><rect x="818" y="108" width="64" height="28"/></g>
+        <g class="b" font-size="11.5" text-anchor="middle"><text x="250" y="126">1/8000</text><text x="325" y="126">1/4000</text><text x="400" y="126">1/2000</text><text x="475" y="126">1/1000</text><text x="550" y="126">1/500</text><text x="625" y="126">1/250</text><text x="700" y="126">1/125</text><text x="775" y="126">1/60</text><text x="850" y="126">1/30</text></g>
+        <text class="b" x="18" y="166" font-size="12.5">ISO</text><text class="mu" x="18" y="181" font-size="10.5">sensibilidade</text>
+        <g class="bx-teal"><rect x="218" y="152" width="64" height="28"/><rect x="293" y="152" width="64" height="28"/><rect x="368" y="152" width="64" height="28"/><rect x="443" y="152" width="64" height="28"/><rect x="518" y="152" width="64" height="28"/><rect x="593" y="152" width="64" height="28"/><rect x="668" y="152" width="64" height="28"/><rect x="743" y="152" width="64" height="28"/><rect x="818" y="152" width="64" height="28"/></g>
+        <g class="b" font-size="11.5" text-anchor="middle"><text x="250" y="170">100</text><text x="325" y="170">200</text><text x="400" y="170">400</text><text x="475" y="170">800</text><text x="550" y="170">1600</text><text x="625" y="170">3200</text><text x="700" y="170">6400</text><text x="775" y="170">12800</text><text x="850" y="170">25600</text></g>
+        <text class="b" x="18" y="210" font-size="12.5">Ganho</text><text class="mu" x="18" y="225" font-size="10.5">em dB, nas filmadoras</text>
+        <g class="bx-teal"><rect x="218" y="196" width="64" height="28"/><rect x="293" y="196" width="64" height="28"/><rect x="368" y="196" width="64" height="28"/><rect x="443" y="196" width="64" height="28"/><rect x="518" y="196" width="64" height="28"/><rect x="593" y="196" width="64" height="28"/><rect x="668" y="196" width="64" height="28"/></g>
+        <g class="b" font-size="11.5" text-anchor="middle"><text x="250" y="214">0</text><text x="325" y="214">+6</text><text x="400" y="214">+12</text><text x="475" y="214">+18</text><text x="550" y="214">+24</text><text x="625" y="214">+30</text><text x="700" y="214">+36</text></g>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> As escalas de stops. Os números f parecem estranhos porque cada passo multiplica o anterior por 1,4, e isso corta a área da abertura pela metade. As câmeras também andam em terços de stop: entre f/4 e f/5,6 existem f/4,5 e f/5; entre ISO 800 e 1600, existem 1000 e 1250.</figcaption>
+  </figure>
+
+  <p>Exposições equivalentes são combinações diferentes que dão o mesmo brilho. Estas três deixam a imagem igualmente clara:</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:16%">Abertura</th><th style="width:16%">Obturador</th><th style="width:14%">ISO</th><th>O que mudou em relação à primeira</th></tr></thead>
+      <tbody>
+        <tr><td class="num">f/4</td><td class="num">1/60</td><td class="num">1600</td><td>Ponto de partida.</td></tr>
+        <tr><td class="num">f/2,8</td><td class="num">1/60</td><td class="num">800</td><td>Íris 1 stop mais aberta, ISO 1 stop abaixo: menos ruído, fundo mais desfocado.</td></tr>
+        <tr><td class="num">f/4</td><td class="num">1/120</td><td class="num">3200</td><td>Obturador 1 stop mais rápido, ISO 1 stop acima: menos borrão, mais ruído.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O brilho é o mesmo, mas a imagem não é: expor bem é escolher qual dos três paga a conta. A planilha de apoio faz essa conta de stops.</p>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>Em evento ao vivo, o obturador fica fixo, a íris faz o ajuste e o ISO entra por último. Se você está mexendo no obturador para clarear ou escurecer a imagem, está usando o controle errado.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="abertura">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>Abertura: a íris e o número f</h2>
+  <p>Dentro da lente, um conjunto de lâminas forma um furo de tamanho ajustável: a íris, ou diafragma. Ela funciona como a pupila do olho: abre no escuro e fecha no claro.</p>
+  <p>O tamanho dessa abertura é indicado pelo <strong>número f</strong> <span class="k blue">f</span>, que é a distância focal da lente dividida pelo diâmetro da abertura. Como é uma divisão, a escala é invertida: <strong>número f menor quer dizer íris mais aberta</strong>. Uma lente em f/2 deixa passar o dobro da luz de f/2,8 e quatro vezes a luz de f/4. A câmera costuma mostrar o valor como “F2.8”.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 250" role="img" aria-label="Seis lentes vistas de frente, com a abertura da íris cada vez menor: f/2, f/2,8, f/4, f/5,6, f/8 e f/11. A cada passo para a direita passa metade da luz: 1, um meio, um quarto, um oitavo, um dezesseis avos e um trinta e dois avos. À esquerda, mais aberta: mais luz e fundo mais desfocado. À direita, mais fechada: menos luz e mais profundidade de campo.">
+        <text class="mono mu" x="18" y="28" font-size="10.5">CADA PASSO PARA A DIREITA DEIXA PASSAR METADE DA LUZ</text>
+        <circle class="f-sunk" cx="90" cy="110" r="46"/><circle class="ln-mu" cx="90" cy="110" r="46"/><circle class="f-blue" cx="90" cy="110" r="38"/>
+        <circle class="f-sunk" cx="234" cy="110" r="46"/><circle class="ln-mu" cx="234" cy="110" r="46"/><circle class="f-blue" cx="234" cy="110" r="27"/>
+        <circle class="f-sunk" cx="378" cy="110" r="46"/><circle class="ln-mu" cx="378" cy="110" r="46"/><circle class="f-blue" cx="378" cy="110" r="19"/>
+        <circle class="f-sunk" cx="522" cy="110" r="46"/><circle class="ln-mu" cx="522" cy="110" r="46"/><circle class="f-blue" cx="522" cy="110" r="13.5"/>
+        <circle class="f-sunk" cx="666" cy="110" r="46"/><circle class="ln-mu" cx="666" cy="110" r="46"/><circle class="f-blue" cx="666" cy="110" r="9.5"/>
+        <circle class="f-sunk" cx="810" cy="110" r="46"/><circle class="ln-mu" cx="810" cy="110" r="46"/><circle class="f-blue" cx="810" cy="110" r="6.8"/>
+        <g font-size="13" text-anchor="middle">
+          <text class="b" x="90" y="182">f/2</text><text class="b" x="234" y="182">f/2,8</text><text class="b" x="378" y="182">f/4</text>
+          <text class="b" x="522" y="182">f/5,6</text><text class="b" x="666" y="182">f/8</text><text class="b" x="810" y="182">f/11</text>
+        </g>
+        <g font-size="11" text-anchor="middle">
+          <text class="mu" x="90" y="200">luz: 1</text><text class="mu" x="234" y="200">luz: 1/2</text><text class="mu" x="378" y="200">luz: 1/4</text>
+          <text class="mu" x="522" y="200">luz: 1/8</text><text class="mu" x="666" y="200">luz: 1/16</text><text class="mu" x="810" y="200">luz: 1/32</text>
+        </g>
+        <text class="t-blue b" x="18" y="234" font-size="11.5">mais aberta: mais luz, fundo mais desfocado</text>
+        <text class="t-blue b" x="882" y="234" font-size="11.5" text-anchor="end">mais fechada: menos luz, mais profundidade de campo</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> A íris em seis posições, um stop de diferença entre cada uma. De f/2 a f/11 são cinco stops: a luz cai para 1/32.</figcaption>
+  </figure>
+
+  <h3>O preço da abertura: profundidade de campo</h3>
+  <p>A <strong>profundidade de campo</strong> é a faixa de distância, na frente e atrás do ponto de foco, em que as coisas parecem nítidas. Íris aberta estreita a faixa: rosto nítido e fundo desfocado, bonito no close do pregador, mas um passo à frente o tira de foco. Íris fechada alarga a faixa: um coral de três fileiras cabe inteiro em foco. A distância focal, a distância e o sensor também contam: veja o estudo <a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:16%">Abertura</th><th style="width:30%">Luz e profundidade de campo</th><th>Uso típico em evento</th></tr></thead>
+      <tbody>
+        <tr><td class="num">f/1,4 a f/2</td><td>Muita luz. Faixa de foco bem estreita.</td><td>Palco muito escuro, com pessoa parada. Exige atenção constante ao foco.</td></tr>
+        <tr><td class="num">f/2,8 a f/4</td><td>Boa luz. Fundo desfocado, com margem razoável de foco.</td><td>O ponto de trabalho mais comum em palco: pregador, cantor, plano médio.</td></tr>
+        <tr><td class="num">f/5,6 a f/8</td><td>Menos luz. Faixa de foco larga.</td><td>Coral, banda inteira, plano geral, pessoa que anda muito. É onde a maioria das lentes rende mais nitidez.</td></tr>
+        <tr><td class="num">f/11 a f/16</td><td>Pouca luz. Quase tudo em foco.</td><td>Só ao ar livre, com sol. Em sensores pequenos, a imagem já começa a perder nitidez.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>A lente zoom que escurece</h3>
+  <p>Muitas lentes zoom trazem dois números no nome, como “f/3,5–5,6”: a abertura máxima é f/3,5 no ângulo mais aberto e f/5,6 no mais fechado. Se você expõe com o zoom aberto e a íris no máximo, e depois fecha o zoom no rosto, a imagem escurece pouco mais de 1 stop. Filmadoras e câmeras PTZ costumam fazer o mesmo. Exponha já com o zoom fechado, a pior condição, ou use uma lente de abertura constante, assunto do estudo de lentes.</p>
+
+  <h3>Fechada demais também é problema</h3>
+  <p>Com a íris muito fechada, a luz se espalha ao passar pelo furo pequeno, e a imagem inteira perde nitidez. É a difração. Ela aparece perto de f/8 em filmadoras de sensor pequeno, e de f/11 a f/16 em sensores grandes. Se sobra luz a ponto de pedir f/16, a solução é o filtro ND (módulo 4).</p>
+
+  <div class="note">
+    <h4>Valores de referência</h4>
+    <p>As aberturas deste módulo são faixas típicas. A abertura máxima, os passos da íris e o ponto em que a nitidez cai mudam de uma lente para outra. Confira o manual da sua câmera e da sua lente. Câmeras de celular e algumas webcams têm abertura fixa: nelas, a exposição é só obturador e ISO.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="obturador">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Obturador e cintilação</h2>
+  <p>O vídeo é uma sequência de fotos: 30 ou 60 quadros por segundo, na maioria dos sistemas. O <strong>obturador</strong> <span class="k amber">S</span> define por quanto tempo o sensor recebe luz em cada quadro, mostrado como fração de segundo (1/60, 1/120) ou, em câmeras de cinema, como ângulo (180°). Em vídeo, quem liga e desliga a captação é o próprio sensor.</p>
+  <p>Tempo maior é mais luz: 1/60 deixa entrar o dobro de 1/120. Mas o obturador também decide como o movimento aparece. Com tempo longo, o que se mexe deixa um rastro borrado. Com tempo curto, o movimento parece picotado, porque falta o borrão que liga um quadro ao seguinte.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Linha do tempo de seis quadros em 30 quadros por segundo; cada quadro dura 1/30 de segundo. A parte colorida de cada quadro é o tempo em que o sensor recebe luz. Na primeira linha, obturador de 1/30 de segundo, 360 graus: o quadro inteiro recebe luz; borrão longo, movimento embaçado. Na segunda, 1/60 de segundo, 180 graus: metade do quadro; borrão natural, é o ponto de partida. Na terceira, 1/250 de segundo, 43 graus: uma fatia estreita; pouco borrão, movimento picotado.">
+        <text class="mono mu" x="270" y="30" font-size="10.5">A PARTE COLORIDA É O TEMPO EM QUE O SENSOR RECEBE LUZ</text>
+        <text class="b" x="18" y="74" font-size="12.5">1/30 s (360°)</text><text class="mu" x="18" y="90" font-size="10.5">borrão longo: movimento embaçado</text>
+        <g class="bx"><rect x="270" y="56" width="100" height="40"/><rect x="370" y="56" width="100" height="40"/><rect x="470" y="56" width="100" height="40"/><rect x="570" y="56" width="100" height="40"/><rect x="670" y="56" width="100" height="40"/><rect x="770" y="56" width="100" height="40"/></g>
+        <g class="lv-amber"><rect x="270" y="56" width="100" height="40"/><rect x="370" y="56" width="100" height="40"/><rect x="470" y="56" width="100" height="40"/><rect x="570" y="56" width="100" height="40"/><rect x="670" y="56" width="100" height="40"/><rect x="770" y="56" width="100" height="40"/></g>
+        <text class="b" x="18" y="144" font-size="12.5">1/60 s (180°)</text><text class="mu" x="18" y="160" font-size="10.5">borrão natural: ponto de partida</text>
+        <g class="bx"><rect x="270" y="126" width="100" height="40"/><rect x="370" y="126" width="100" height="40"/><rect x="470" y="126" width="100" height="40"/><rect x="570" y="126" width="100" height="40"/><rect x="670" y="126" width="100" height="40"/><rect x="770" y="126" width="100" height="40"/></g>
+        <g class="lv-amber"><rect x="270" y="126" width="50" height="40"/><rect x="370" y="126" width="50" height="40"/><rect x="470" y="126" width="50" height="40"/><rect x="570" y="126" width="50" height="40"/><rect x="670" y="126" width="50" height="40"/><rect x="770" y="126" width="50" height="40"/></g>
+        <text class="b" x="18" y="214" font-size="12.5">1/250 s (43°)</text><text class="mu" x="18" y="230" font-size="10.5">pouco borrão: movimento picotado</text>
+        <g class="bx"><rect x="270" y="196" width="100" height="40"/><rect x="370" y="196" width="100" height="40"/><rect x="470" y="196" width="100" height="40"/><rect x="570" y="196" width="100" height="40"/><rect x="670" y="196" width="100" height="40"/><rect x="770" y="196" width="100" height="40"/></g>
+        <g class="lv-amber"><rect x="270" y="196" width="12" height="40"/><rect x="370" y="196" width="12" height="40"/><rect x="470" y="196" width="12" height="40"/><rect x="570" y="196" width="12" height="40"/><rect x="670" y="196" width="12" height="40"/><rect x="770" y="196" width="12" height="40"/></g>
+        <g class="mu" font-size="10.5" text-anchor="middle"><text x="320" y="254">quadro 1</text><text x="420" y="254">quadro 2</text><text x="520" y="254">quadro 3</text><text x="620" y="254">quadro 4</text><text x="720" y="254">quadro 5</text><text x="820" y="254">quadro 6</text></g>
+        <text class="mu" x="570" y="274" font-size="11" text-anchor="middle">em 30 quadros por segundo, cada quadro dura 1/30 de segundo</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> O obturador dentro de cada quadro. O ângulo é só outra forma de dizer a mesma coisa: 360° é o quadro inteiro, e 180° é a metade dele.</figcaption>
+  </figure>
+
+  <h3>A regra dos 180°</h3>
+  <p>O borrão que parece natural ao olho acontece quando o obturador fica aberto durante metade do tempo de cada quadro. Daí a regra: <strong>o denominador do obturador é o dobro da taxa de quadros</strong>. O nome vem das câmeras de filme, em que o obturador era um disco giratório com metade aberta, ou 180°.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Taxa de quadros</th><th style="width:20%">Regra dos 180°</th><th style="width:22%">Mais lento que isso, não</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td class="num">24 fps</td><td class="num">1/48 ou 1/50</td><td class="num">1/24</td><td>Na rede elétrica de 60 Hz, prefira 1/60: veja a cintilação, abaixo.</td></tr>
+        <tr><td class="num">30 fps</td><td class="num">1/60</td><td class="num">1/30</td><td>O caso mais comum em culto e palestra. Coincide com o valor seguro em 60 Hz.</td></tr>
+        <tr><td class="num">60 fps</td><td class="num">1/120</td><td class="num">1/60</td><td>Algumas câmeras só oferecem 1/125, que serve. Com pouca luz, 1/60 dá 1 stop a mais.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A regra é ponto de partida. Com pouca luz e pouco movimento, como um pregador no púlpito, o obturador igual à taxa de quadros (1/60 em 60 fps) dá 1 stop a mais, com um pouco mais de borrão. Mais lento que um quadro, não: o movimento fica arrastado. As taxas 29,97 e 59,94 seguem a mesma regra. A taxa de quadros é decisão do sistema inteiro, tratada no estudo <a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>.</p>
+
+  <h3>Cintilação: a luz que pisca</h3>
+  <p>Muitas lâmpadas ligadas à rede elétrica não dão luz contínua. Elas pulsam com o dobro da frequência da rede: no Brasil, com rede de 60 Hz, são 120 pulsos por segundo. O olho não vê, mas a câmera vê. Se o tempo do obturador não cobre um número inteiro de pulsos, cada quadro pega uma quantidade diferente de luz. O resultado é a <strong>cintilação</strong> (<em>flicker</em>): a imagem pulsa, ou aparecem faixas escuras horizontais que sobem ou descem devagar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="No alto, a luz de uma lâmpada na rede de 60 Hz, como uma fila de 120 pulsos por segundo. Abaixo, a janela do obturador em dois quadros. Com 1/60 de segundo, cada janela cobre dois pulsos inteiros, e com 1/120, um pulso inteiro: a luz é igual em todo quadro. Com 1/100, a janela cobre um pulso e um pedaço de outro: cada quadro pega uma quantidade diferente de luz, e a imagem cintila.">
+        <text class="mu" x="200" y="24" font-size="11">luz de uma lâmpada na rede de 60 Hz: 120 pulsos por segundo</text>
+        <text class="b" x="18" y="96" font-size="12">Luz da lâmpada</text>
+        <path class="s-amber" d="M200 124 Q230 34 260 124 Q290 34 320 124 Q350 34 380 124 Q410 34 440 124 Q470 34 500 124 Q530 34 560 124 Q590 34 620 124 Q650 34 680 124 Q710 34 740 124 Q770 34 800 124 Q830 34 860 124"/>
+        <line class="ln-mu" x1="200" y1="124" x2="860" y2="124" stroke-width="1"/>
+        <path class="ln-mu" stroke-width="1" d="M200 132 V138 H260 V132"/>
+        <text class="mu" x="230" y="151" font-size="10.5" text-anchor="middle">1/120 s</text>
+
+        <text class="b" x="18" y="174" font-size="12.5">1/60 s</text>
+        <text class="mu" x="18" y="189" font-size="10.5">luz igual em todo quadro</text>
+        <rect class="lv-teal" x="230" y="164" width="120" height="26"/>
+        <text class="t-good b" x="358" y="181" font-size="11">2 pulsos inteiros</text>
+        <rect class="lv-teal" x="584" y="164" width="120" height="26"/>
+        <text class="t-good b" x="712" y="181" font-size="11">2 pulsos inteiros</text>
+
+        <text class="b" x="18" y="218" font-size="12.5">1/120 s</text>
+        <text class="mu" x="18" y="233" font-size="10.5">luz igual em todo quadro</text>
+        <rect class="lv-teal" x="230" y="208" width="60" height="26"/>
+        <text class="t-good b" x="298" y="225" font-size="11">1 pulso inteiro</text>
+        <rect class="lv-teal" x="584" y="208" width="60" height="26"/>
+        <text class="t-good b" x="652" y="225" font-size="11">1 pulso inteiro</text>
+
+        <text class="b" x="18" y="262" font-size="12.5">1/100 s</text>
+        <text class="t-bad" x="18" y="277" font-size="10.5">luz muda de quadro a quadro</text>
+        <rect class="lv-red" x="254" y="252" width="72" height="26"/>
+        <text class="t-bad b" x="334" y="269" font-size="11">pegou menos luz</text>
+        <rect class="lv-red" x="584" y="252" width="72" height="26"/>
+        <text class="t-bad b" x="664" y="269" font-size="11">pegou mais luz</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> Por que 1/60 e 1/120 são seguros na rede de 60 Hz. O desenho é um esquema: uma lâmpada de verdade não apaga por completo entre um pulso e outro, e a profundidade do pulso muda com o tipo de lâmpada.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:24%">Rede elétrica</th><th style="width:24%">Pulsos da luz</th><th style="width:26%">Obturadores seguros</th><th>Evite</th></tr></thead>
+      <tbody>
+        <tr><td><strong>60 Hz</strong> (Brasil)</td><td>120 por segundo</td><td class="num">1/60, 1/120</td><td>1/50, 1/100 e qualquer valor mais rápido que 1/120.</td></tr>
+        <tr><td><strong>50 Hz</strong> (boa parte de outros países)</td><td>100 por segundo</td><td class="num">1/50, 1/100</td><td>1/60, 1/120 e qualquer valor mais rápido que 1/100.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Em 60 Hz também são seguros 1/30 e 1/40 (quatro e três pulsos). O erro mais comum é copiar o 1/50 ou o 1/100 de um tutorial de país com rede de 50 Hz. A função de redução de cintilação da câmera, com opções 50 e 60 Hz, só escolhe o obturador por você.</p>
+  <p>Nem toda luz pulsa igual. Incandescentes e halógenas quase não cintilam, porque o filamento não esfria entre um pulso e outro. Fluorescentes antigas e lâmpadas de LED domésticas pulsam bastante. Refletores de LED profissionais costumam ser feitos para não cintilar na câmera, mas um LED com dimmer pode piscar em frequência própria, sem relação com a rede, mais ainda em intensidade baixa: aí só o teste resolve. Veja o estudo <a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>.</p>
+
+  <h3>Telão, TV e projetor no quadro</h3>
+  <p>Telas também redesenham a imagem muitas vezes por segundo. Quando uma delas aparece no quadro, o obturador precisa combinar com ela.</p>
+  <ul>
+    <li><strong>TV, monitor e projetor em 60 Hz.</strong> Use 1/60. Se sobrar uma faixa escura que anda devagar pela tela, use o ajuste fino do obturador, que algumas câmeras oferecem com nomes como <em>clear scan</em> ou <em>synchro scan</em>, até a faixa parar ou sumir.</li>
+    <li><strong>Painel de LED.</strong> O painel se redesenha centenas ou milhares de vezes por segundo. Os de taxa baixa, ou com o brilho muito reduzido, mostram linhas escuras, que pioram com obturador rápido. Fique em 1/60 e teste no brilho do evento.</li>
+    <li><strong>Projetor com disco de cores.</strong> Alguns projetores formam a cor em sequência, e o obturador rápido mostra faixas coloridas. Em 1/60 o efeito costuma sumir.</li>
+  </ul>
+  <p>As ondas coloridas que aparecem sobre um painel de LED filmado (moiré) são outro fenômeno: não mudam com o obturador, e sim com o foco, o zoom e a distância. A escolha e o ajuste do telão estão no estudo <a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>.</p>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Teste a cintilação com toda a luz do evento ligada, na intensidade do evento, e com o telão e o projetor no ar. Olhe um monitor grande por meio minuto: uma faixa lenta demora a atravessar a tela.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="iso">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>ISO, ganho e filtro ND</h2>
+  <p>O sensor transforma a luz que chegou em um sinal elétrico, e o <strong>ISO</strong> <span class="k teal w">ISO</span> define quanto esse sinal é amplificado antes de virar imagem. O nome vem da sensibilidade do filme fotográfico. Dobrar o ISO vale 1 stop: com a mesma luz, ISO 1600 dá uma imagem duas vezes mais clara que ISO 800.</p>
+  <p>Filmadoras e câmeras PTZ costumam mostrar a mesma coisa como <strong>ganho</strong> (<em>gain</em>), em decibéis. O 0 dB é a sensibilidade de base da câmera, sem amplificação extra. Cada <strong>6 dB valem 1 stop</strong>.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:16%">Ganho</th><th style="width:20%">Multiplica o sinal por</th><th style="width:14%">Stops</th><th style="width:24%">Se 0 dB equivale a ISO 800</th><th>Na imagem</th></tr></thead>
+      <tbody>
+        <tr><td class="num">0 dB</td><td class="num">1</td><td class="num">0</td><td class="num">ISO 800</td><td>O melhor que a câmera entrega.</td></tr>
+        <tr><td class="num">+6 dB</td><td class="num">2</td><td class="num">1</td><td class="num">ISO 1600</td><td>Em geral ainda limpa.</td></tr>
+        <tr><td class="num">+12 dB</td><td class="num">4</td><td class="num">2</td><td class="num">ISO 3200</td><td>Ruído começa a aparecer nas sombras em sensores pequenos.</td></tr>
+        <tr><td class="num">+18 dB</td><td class="num">8</td><td class="num">3</td><td class="num">ISO 6400</td><td>Ruído visível em sensores pequenos. Sensores grandes ainda aguentam.</td></tr>
+        <tr><td class="num">+24 dB</td><td class="num">16</td><td class="num">4</td><td class="num">ISO 12800</td><td>Ruído evidente na maioria das câmeras. Só em emergência.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A quarta e a quinta colunas são exemplos: o ISO de base e o ponto em que o ruído incomoda mudam com o sensor e a geração da câmera. Quem decide é o seu olho, em um monitor.</p>
+
+  <h3>O preço do ISO: ruído</h3>
+  <p>O ISO não aumenta a luz. Ele aumenta o sinal, e junto com ele o <strong>ruído</strong>: um granulado que ferve nas áreas escuras e lisas da imagem. Quanto menos luz chega ao sensor, mais fraco é o sinal, mais ganho ele pede e mais ruído aparece. É a mesma lógica do ganho de um microfone captado de longe.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Três colunas mostram o mesmo rosto levado ao mesmo brilho, 60 por cento, em três situações de luz. Com luz suficiente e ganho de 0 dB, o sinal já chega forte e o ruído fica escondido. Com um quarto da luz e ganho de mais 12 dB, o ganho multiplica por 4 o sinal e o ruído. Com um dezesseis avos da luz e ganho de mais 24 dB, o rosto tem o mesmo brilho, com muito mais ruído.">
+        <text class="b" x="60" y="26" font-size="13.5">Luz suficiente: 0 dB</text>
+        <rect class="bx" x="60" y="48" width="110" height="170"/>
+        <rect class="lv-teal" x="60" y="116" width="110" height="102"/>
+        <rect class="f-slate" x="60" y="214" width="110" height="4"/>
+        <line class="ref" x1="52" y1="116" x2="178" y2="116"/>
+        <text class="b" x="184" y="120" font-size="11">rosto em 60%</text>
+        <text class="mu" x="184" y="216" font-size="11">ruído</text>
+        <text x="24" y="246" font-size="11.5">O sinal já chega forte.</text>
+        <text x="24" y="262" font-size="11.5">O ruído fica escondido.</text>
+
+        <text class="b" x="350" y="26" font-size="13.5">Um quarto da luz: +12 dB</text>
+        <rect class="bx" x="350" y="48" width="110" height="170"/>
+        <rect class="lv-teal" x="350" y="116" width="110" height="102"/>
+        <rect class="f-slate" x="350" y="204" width="110" height="14"/>
+        <line class="ref" x1="342" y1="116" x2="468" y2="116"/>
+        <text class="b" x="474" y="120" font-size="11">rosto em 60%</text>
+        <text class="mu" x="474" y="214" font-size="11">ruído</text>
+        <text x="314" y="246" font-size="11.5">O ganho multiplica por 4</text>
+        <text x="314" y="262" font-size="11.5">o sinal e o ruído.</text>
+
+        <text class="b" x="640" y="26" font-size="13.5">1/16 da luz: +24 dB</text>
+        <rect class="bx" x="640" y="48" width="110" height="170"/>
+        <rect class="lv-teal" x="640" y="116" width="110" height="102"/>
+        <rect class="f-slate" x="640" y="174" width="110" height="44"/>
+        <line class="ref" x1="632" y1="116" x2="758" y2="116"/>
+        <text class="b" x="764" y="120" font-size="11">rosto em 60%</text>
+        <text class="mu" x="764" y="200" font-size="11">ruído</text>
+        <text x="604" y="246" font-size="11.5">Mesmo brilho no rosto,</text>
+        <text x="604" y="262" font-size="11.5">com muito mais ruído.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> O ganho leva o rosto ao mesmo brilho, mas não repõe a luz que faltou. O desenho é um esquema, sem escala: serve para mostrar o sentido, e não o tamanho do ruído.</figcaption>
+  </figure>
+
+  <ul>
+    <li><strong>Onde olhar.</strong> Nas áreas escuras e lisas (fundo do palco, terno preto, cortina), em um monitor grande.</li>
+    <li><strong>Quanto se aceita.</strong> Como faixa típica, filmadoras e PTZ de sensor pequeno ficam limpas até perto de +9 ou +12 dB. Câmeras de sensor grande costumam aguentar ISO 3200 a 6400, e algumas vão além. Teste a sua.</li>
+    <li><strong>O ruído custa na transmissão.</strong> O codificador gasta dados com o granulado, e a imagem sai em blocos. Veja o estudo <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>.</li>
+    <li><strong>O ISO mínimo pode ser alto.</strong> Em perfis log e em câmeras com duas sensibilidades de base, o menor ISO pode ser 800 ou mais. É normal.</li>
+  </ul>
+  <p>Com a íris toda aberta, o obturador no limite e o ISO alto, falta luz, e nenhum ajuste de câmera resolve bem. Um refletor a mais no rosto vale mais que uma câmera nova (estudo <a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>).</p>
+
+  <h3>Filtro ND: quando sobra luz</h3>
+  <p>Ao ar livre, com sol, sobra luz: com o ISO no mínimo e 1/60, a íris teria de fechar até f/16 ou f/22, e a nitidez cairia. O <strong>filtro ND</strong> (densidade neutra) é um vidro cinza que corta a luz por igual, sem mudar a cor: os óculos escuros da lente. Com ele, o obturador fica na regra e a íris, em uma abertura boa.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Nome pelo fator</th><th style="width:22%">Luz que passa</th><th style="width:22%">Nome pela densidade</th><th>Stops que corta</th></tr></thead>
+      <tbody>
+        <tr><td class="num">ND2</td><td class="num">1/2</td><td class="num">ND 0,3</td><td class="num">1</td></tr>
+        <tr><td class="num">ND4</td><td class="num">1/4</td><td class="num">ND 0,6</td><td class="num">2</td></tr>
+        <tr><td class="num">ND8</td><td class="num">1/8</td><td class="num">ND 0,9</td><td class="num">3</td></tr>
+        <tr><td class="num">ND16</td><td class="num">1/16</td><td class="num">ND 1,2</td><td class="num">4</td></tr>
+        <tr><td class="num">ND64</td><td class="num">1/64</td><td class="num">ND 1,8</td><td class="num">6</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Muitas filmadoras têm ND embutido, em uma chave com posições como 1/4, 1/16 e 1/64 (2, 4 e 6 stops). Em câmeras fotográficas, o ND é rosqueado na lente. O ND variável é prático, mas perto do máximo pode desenhar uma mancha em forma de X e puxar a cor: fique no meio da faixa. E não esqueça o ND ligado ao voltar para um lugar fechado.</p>
+
+  <div class="note">
+    <h4>Segurança: sol e laser</h4>
+    <p>Não aponte a câmera para o sol, e muito menos olhe para ele por um visor óptico: a lente concentra a luz e pode ferir o olho e queimar o sensor. Raios laser de shows também podem marcar o sensor de forma permanente quando atingem a lente de frente. Se o evento tiver laser, combine com quem opera a luz para que os feixes não passem pelas posições de câmera.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="ferramentas">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Ferramentas de medição</h2>
+  <p>A telinha da câmera não serve para julgar a exposição: o brilho dela é ajustável, e em sala escura qualquer imagem parece clara. Use as ferramentas que medem o sinal, em porcentagem de 0% (preto) a 100% (branco), escala que muitos equipamentos chamam de IRE.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Ferramenta</th><th style="width:44%">O que mostra</th><th>Boa para</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Zebra</strong></td><td>Listras sobre as partes da imagem que estão em um nível escolhido, ou acima dele.</td><td>Ver na hora o que estourou (100%) e conferir pele clara (70%).</td></tr>
+        <tr><td><strong>Histograma</strong></td><td>Gráfico de quanto da imagem está em cada brilho: sombras à esquerda, altas luzes à direita.</td><td>Ver se há algo encostado nas pontas.</td></tr>
+        <tr><td><strong>Forma de onda</strong> (<em>waveform</em>)</td><td>O brilho de cada ponto, na mesma posição horizontal em que ele está na imagem.</td><td>Ler o nível do rosto e comparar câmeras. É a mais completa.</td></tr>
+        <tr><td><strong>False color</strong></td><td>A imagem pintada com cores que representam faixas de brilho.</td><td>Ver de relance onde está o rosto e o que estourou.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Zebra</h3>
+  <p>A zebra desenha listras diagonais só no visor; elas não vão para a gravação nem para a saída limpa. Em <strong>100%</strong>, marcam o que estourou: nada importante deve ficar listrado. Em <strong>70%</strong>, marcam a faixa da parte mais iluminada de um rosto de pele clara: a exposição está certa quando as listras começam a aparecer na testa e nas maçãs do rosto. Um rosto de pele morena ou negra bem exposto fica abaixo de 70% e não mostra listras: use a forma de onda, o false color ou baixe o nível da zebra.</p>
+
+  <h3>Histograma</h3>
+  <p>O histograma empilha os pontos da imagem por brilho. Não há formato certo; o que importa são as pontas: pilha encostada na direita é estouro, e na esquerda, preto sem detalhe.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 240" role="img" aria-label="Três histogramas, com as sombras à esquerda e as altas luzes à direita. No primeiro, de uma imagem escura demais, tudo está encostado na esquerda: sombras sem detalhe e rosto escuro. No segundo, certo para um palco escuro, há muito escuro, que é o fundo, e um grupo à direita, que é o rosto, sem encostar na parede. No terceiro, de uma imagem estourada, há uma pilha encostada na direita: áreas claras viraram branco.">
+        <text class="b" x="30" y="30" font-size="13">Escura demais</text>
+        <rect class="bx" x="30" y="46" width="260" height="124"/>
+        <path class="lv-blue" d="M30 170 L30 66 L52 58 L84 100 L124 140 L174 162 L234 168 L290 170 Z"/>
+        <text class="mu" x="30" y="186" font-size="10.5">sombras</text><text class="mu" x="290" y="186" font-size="10.5" text-anchor="end">altas luzes</text>
+        <text x="30" y="208" font-size="11">Tudo encostado na esquerda:</text>
+        <text x="30" y="224" font-size="11">sombras sem detalhe, rosto escuro.</text>
+
+        <text class="b" x="320" y="30" font-size="13">Certa para um palco escuro</text>
+        <rect class="bx" x="320" y="46" width="260" height="124"/>
+        <path class="lv-blue" d="M320 170 L328 158 L366 84 L404 108 L444 142 L484 152 L512 124 L536 150 L562 168 L580 170 Z"/>
+        <text class="mu" x="320" y="186" font-size="10.5">sombras</text><text class="mu" x="580" y="186" font-size="10.5" text-anchor="end">altas luzes</text>
+        <text x="320" y="208" font-size="11">Muito escuro (o fundo) e um grupo</text>
+        <text x="320" y="224" font-size="11">à direita (o rosto), sem encostar.</text>
+
+        <text class="b" x="610" y="30" font-size="13">Estourada</text>
+        <rect class="bx" x="610" y="46" width="260" height="124"/>
+        <path class="lv-blue" d="M610 170 L650 160 L700 142 L760 122 L820 104 L850 84 L860 58 L870 58 L870 170 Z"/>
+        <rect class="lv-red" x="860" y="46" width="10" height="124"/>
+        <text class="mu" x="610" y="186" font-size="10.5">sombras</text><text class="mu" x="870" y="186" font-size="10.5" text-anchor="end">altas luzes</text>
+        <text x="610" y="208" font-size="11">Pilha encostada na direita:</text>
+        <text x="610" y="224" font-size="11">áreas claras viraram branco.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> Três histogramas. Em palco escuro, o histograma certo é pesado à esquerda. Quem tenta “centralizar” o gráfico clareia o fundo e estoura o rosto.</figcaption>
+  </figure>
+
+  <h3>Forma de onda</h3>
+  <p>A forma de onda é o medidor mais útil para evento. O eixo horizontal é o mesmo da imagem, e o vertical é o brilho, de 0 a 100%. Um rosto no centro do quadro aparece como uma mancha no centro do gráfico, na altura do brilho dele. É como o medidor de nível da mesa de som, para cada coluna da imagem.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 310" role="img" aria-label="Esquema de uma forma de onda, de 0 a 100 por cento na vertical. O fundo do palco fica perto de 5 a 10 por cento, o rosto entre 50 e 65, a camisa branca entre 80 e 90, e o telão, à direita, colado em 100: estourado. Ao lado, a leitura: 100 por cento ou mais é estouro; 80 a 90, branco com detalhe; o rosto, na parte mais iluminada, fica de 60 a 70 em pele clara, de 45 a 60 em pele morena e de 30 a 45 em pele negra; abaixo de 5, preto sem detalhe.">
+        <text class="mono mu" x="70" y="22" font-size="10.5">FORMA DE ONDA: A ALTURA É O BRILHO</text>
+        <rect class="bx" x="70" y="40" width="400" height="240"/>
+        <g class="grid"><line x1="70" y1="88" x2="470" y2="88"/><line x1="70" y1="136" x2="470" y2="136"/><line x1="70" y1="184" x2="470" y2="184"/><line x1="70" y1="232" x2="470" y2="232"/></g>
+        <g font-size="10.5" text-anchor="end">
+          <text class="mu" x="62" y="44">100</text><text class="mu" x="62" y="92">80</text><text class="mu" x="62" y="140">60</text>
+          <text class="mu" x="62" y="188">40</text><text class="mu" x="62" y="236">20</text><text class="mu" x="62" y="284">0</text>
+        </g>
+        <text class="mu" x="18" y="164" font-size="10.5">%</text>
+        <line class="ref" x1="70" y1="112" x2="470" y2="112"/>
+        <text class="mu" x="80" y="107" font-size="10.5">zebra de 70%</text>
+        <rect class="lv-slate" x="70" y="256" width="400" height="12"/>
+        <text class="mu" x="80" y="250" font-size="10.5">fundo do palco</text>
+        <rect class="lv-amber" x="230" y="124" width="60" height="36"/>
+        <text class="b" x="298" y="146" font-size="11">rosto</text>
+        <rect class="lv-blue" x="215" y="66" width="90" height="24"/>
+        <text class="b" x="313" y="82" font-size="11">camisa branca</text>
+        <rect class="lv-red" x="400" y="40" width="60" height="10"/>
+        <line class="s-bad" x1="400" y1="40" x2="460" y2="40"/>
+        <text class="t-red b" x="430" y="66" font-size="11" text-anchor="middle">telão</text>
+        <text class="mu" x="70" y="298" font-size="10.5">esquerda da imagem</text>
+        <text class="mu" x="470" y="298" font-size="10.5" text-anchor="end">direita da imagem</text>
+
+        <text class="t-red b" x="500" y="44" font-size="11.5">100% ou mais: estouro, sem detalhe</text>
+        <text class="mu" x="500" y="60" font-size="11">A zebra de 100% marca estas áreas.</text>
+        <text class="b" x="500" y="88" font-size="11.5">80 a 90%: branco com detalhe</text>
+        <text class="mu" x="500" y="104" font-size="11">camisa, papel, toalha da mesa</text>
+        <text class="b" x="500" y="134" font-size="11.5">Rosto, na parte mais iluminada</text>
+        <text x="500" y="151" font-size="11">pele clara: 60 a 70% (a zebra de 70% começa a riscar)</text>
+        <text x="500" y="168" font-size="11">pele morena: 45 a 60%</text>
+        <text x="500" y="185" font-size="11">pele negra: 30 a 45%</text>
+        <text class="b" x="500" y="262" font-size="11.5">Abaixo de 5%: preto, sem detalhe</text>
+        <text class="mu" x="500" y="278" font-size="11">normal no fundo de um palco escuro</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> Como ler a forma de onda de uma cena de palco. As faixas do rosto são pontos de partida no perfil de imagem padrão da câmera, medidos na parte mais iluminada da pele. Elas mudam de pessoa para pessoa.</figcaption>
+  </figure>
+
+  <h3>False color</h3>
+  <p>O false color troca as cores da imagem por um código: cada cor representa uma faixa de brilho. Em muitos monitores, vermelho é estouro, roxo ou azul é preto sem detalhe, e uma ou duas cores no meio da escala marcam a faixa da pele e do cinza médio. Como o código muda de um fabricante para outro, leia a legenda do seu monitor. Use como conferência rápida, liga e desliga.</p>
+
+  <div class="note">
+    <h4>Valores de referência</h4>
+    <p>Os níveis deste módulo valem para o perfil de imagem padrão. Em perfis log, feitos para correção de cor posterior, todos ficam mais baixos e mudam com o fabricante. Em transmissão ao vivo sem correção de cor, o perfil padrão é a escolha segura.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="palco">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Palco, contraluz e câmeras iguais</h2>
+  <p>Uma cena de palco tem diferenças enormes de luz: um fundo quase preto, um rosto iluminado por refletor, uma camisa branca, um telão aceso. A distância entre o ponto mais escuro e o mais claro em que a câmera ainda registra detalhe é a <strong>faixa dinâmica</strong> dela. O olho se adapta o tempo todo e dá conta de quase tudo. A câmera, não: no perfil padrão, ela registra uma janela de cerca de 6 a 9 stops, conforme o modelo. O que fica abaixo da janela vira preto. O que fica acima estoura.</p>
+  <p>Expor é decidir <strong>onde colocar essa janela</strong>. E, em evento, a resposta é quase sempre a mesma: no rosto de quem está falando ou cantando. O público perdoa um fundo preto e um telão estourado. Não perdoa um rosto branco sem feições, nem uma silhueta escura.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Régua com a luz dos elementos de um palco, em stops em relação ao rosto: fundo, menos 6; terno escuro, menos 3; rosto, zero; camisa branca, mais 2; telão, mais 4; refletor no quadro, mais 7. Abaixo, a janela de 7 stops da câmera em três posições. No automático com fundo escuro, a janela desce e o rosto estoura. No manual, exposto pelo rosto, o fundo fica preto e o telão estoura, o que é aceitável. No automático com o telão no quadro, a janela sobe e o rosto fica perto do preto.">
+        <g font-size="11" text-anchor="middle">
+          <text class="b" x="150" y="52">fundo do palco</text><text class="b" x="300" y="52">terno escuro</text><text class="b t-amber" x="450" y="52">rosto</text>
+          <text class="b" x="550" y="52">camisa branca</text><text class="b" x="650" y="52">telão de LED</text><text class="b" x="800" y="52">refletor no quadro</text>
+        </g>
+        <rect class="f-ink" x="144" y="62" width="12" height="12"/><rect class="f-ink" x="294" y="62" width="12" height="12"/><rect class="f-amber" x="444" y="62" width="12" height="12"/>
+        <rect class="f-ink" x="544" y="62" width="12" height="12"/><rect class="f-ink" x="644" y="62" width="12" height="12"/><rect class="f-ink" x="794" y="62" width="12" height="12"/>
+        <line class="ln-mu" x1="50" y1="96" x2="850" y2="96"/>
+        <path class="ln-mu" stroke-width="1" d="M50 92 V100 M100 92 V100 M150 92 V100 M200 92 V100 M250 92 V100 M300 92 V100 M350 92 V100 M400 92 V100 M450 92 V100 M500 92 V100 M550 92 V100 M600 92 V100 M650 92 V100 M700 92 V100 M750 92 V100 M800 92 V100 M850 92 V100"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="50" y="114">−8</text><text class="mu" x="150" y="114">−6</text><text class="mu" x="250" y="114">−4</text><text class="mu" x="350" y="114">−2</text>
+          <text class="b" x="438" y="114">0</text><text class="mu" x="550" y="114">+2</text><text class="mu" x="650" y="114">+4</text><text class="mu" x="750" y="114">+6</text><text class="mu" x="850" y="114">+8</text>
+        </g>
+        <text class="mu" x="18" y="134" font-size="10.5">luz de cada elemento, em stops em relação ao rosto</text>
+        <line class="ref" x1="450" y1="78" x2="450" y2="290"/>
+
+        <rect class="lv-red" x="75" y="150" width="350" height="30"/>
+        <text class="mu" x="81" y="169" font-size="10.5">preto</text><text class="mu" x="419" y="169" font-size="10.5" text-anchor="end">estouro</text>
+        <text class="b" x="470" y="163" font-size="11.5">Automático com fundo escuro</text>
+        <text class="t-bad" x="470" y="178" font-size="11">a média puxa a janela para as sombras: o rosto estoura</text>
+
+        <rect class="lv-teal" x="200" y="200" width="350" height="30"/>
+        <text class="mu" x="206" y="219" font-size="10.5">preto</text><text class="mu" x="544" y="219" font-size="10.5" text-anchor="end">estouro</text>
+        <text class="b" x="570" y="213" font-size="11.5">Manual, exposto pelo rosto</text>
+        <text class="t-good" x="570" y="228" font-size="11">fundo preto e telão estourado: aceitável</text>
+
+        <rect class="lv-red" x="325" y="250" width="350" height="30"/>
+        <text class="mu" x="331" y="269" font-size="10.5">preto</text><text class="mu" x="669" y="269" font-size="10.5" text-anchor="end">estouro</text>
+        <text class="b" x="310" y="263" font-size="11.5" text-anchor="end">Automático com o telão no quadro</text>
+        <text class="t-bad" x="310" y="278" font-size="11" text-anchor="end">o telão manda: o rosto fica perto do preto</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 9.</b> A cena é mais larga que a janela da câmera. No automático, a câmera põe a janela onde a média da imagem manda. No manual, você põe a janela onde está o rosto. Os valores são ilustrativos.</figcaption>
+  </figure>
+
+  <h3>Rosto em palco escuro</h3>
+  <p>O automático mede a imagem inteira e tenta levar a média a um cinza médio. Em palco escuro, o fundo preto domina o quadro: a câmera abre a íris, sobe o ganho, e o rosto, única coisa bem iluminada, estoura. Quanto mais aberto o plano, pior. O conserto é expor em manual, medindo só o rosto.</p>
+
+  <h3>Contraluz: janela, telão e projeção atrás da pessoa</h3>
+  <p>É o caso inverso: atrás da pessoa há algo muito mais claro, como uma janela de dia ou um telão. No automático, a câmera fecha a íris para segurar o fundo, e a pessoa vira silhueta. As saídas, em ordem:</p>
+  <ol>
+    <li><strong>Exponha pelo rosto, em manual.</strong> O fundo vai estourar em parte. Em geral, é aceitável.</li>
+    <li><strong>Ponha mais luz no rosto.</strong> É o que de fato diminui a diferença entre a pessoa e o fundo.</li>
+    <li><strong>Baixe o brilho do fundo.</strong> Painéis de LED costumam ter brilho de sobra para ambiente fechado. Feche a cortina da janela.</li>
+    <li><strong>Mude o quadro.</strong> Um plano mais fechado, ou uma câmera em outro ângulo, tira o fundo claro de trás da pessoa.</li>
+    <li><strong>Use os recursos da câmera.</strong> A função de joelho (<em>knee</em>) comprime as altas luzes e segura um pouco mais de detalhe antes do estouro. Ajuda, mas não faz milagre.</li>
+  </ol>
+
+  <h3>Automático ou manual</h3>
+  <div class="pair">
+    <div class="box">
+      <h4>Automático</h4>
+      <ul>
+        <li>A câmera decide a cada instante, pela média do quadro.</li>
+        <li>A imagem “respira”: clareia e escurece quando entra alguém de branco, quando o slide muda ou quando o zoom mexe.</li>
+        <li>Cada câmera decide sozinha, e os cortes mostram brilhos diferentes.</li>
+        <li>Serve para câmera sem operador ao ar livre, com obturador fixo e teto de ganho.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Manual</h4>
+      <ul>
+        <li>Você decide uma vez, pelo rosto, com a luz do evento.</li>
+        <li>A imagem fica estável, e as câmeras podem ser igualadas.</li>
+        <li>Pede atenção: se a luz mudar de verdade, alguém precisa corrigir a íris.</li>
+        <li>É o modo de trabalho em culto, palestra e show, com luz de palco controlada.</li>
+      </ul>
+    </div>
+  </div>
+  <p>Se a câmera precisa ficar em automático, use a <strong>compensação de exposição</strong> (desloca o alvo em frações de stop), o <strong>modo de palco</strong> ou <em>spotlight</em> (dá mais peso às áreas claras) e o <strong>limite de ganho</strong> (põe um teto no ganho). Os nomes mudam com o fabricante.</p>
+
+  <h3>Igualar as câmeras</h3>
+  <p>Com mais de uma câmera, o corte denuncia qualquer diferença de brilho no mesmo rosto. Igualar faz parte da preparação.</p>
+  <ol>
+    <li>Ponha todas as câmeras na mesma taxa de quadros, no mesmo obturador e no mesmo perfil de imagem. O balanço de branco e o perfil são do estudo <a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>.</li>
+    <li>Escolha a câmera de referência. Em geral, a do plano principal.</li>
+    <li>Peça a uma pessoa que fique no ponto principal do palco, com a luz do evento. Aponte todas as câmeras para ela, em planos parecidos.</li>
+    <li>Exponha a câmera de referência pelo rosto e anote o nível.</li>
+    <li>Ajuste a íris das outras até o rosto chegar ao mesmo nível na forma de onda. Sem forma de onda, use a zebra no mesmo nível em todas.</li>
+    <li>Compare lado a lado no multiview do switcher, tratado no estudo <a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>. O olho compara bem duas imagens vizinhas.</li>
+  </ol>
+  <p>Iguale pelo resultado, e não pelos números: câmeras e lentes diferentes raramente ficam iguais com o mesmo f e o mesmo ISO.</p>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>A exposição se ajusta na preparação, com a luz do evento ligada e alguém no palco. Os controles têm uma ordem: cada um é decidido por um motivo, e só o seguinte mexe no brilho que faltar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 244" role="img" aria-label="A ordem das decisões, em cinco blocos: 1, taxa de quadros, a do sistema, que não se muda para clarear; 2, obturador no dobro da taxa, seguro na rede de 60 Hz; 3, íris aberta até o rosto chegar ao nível, sem estouro; 4, ISO ou ganho, só o que faltar; 5, filtro ND, se sobrar luz com o ISO no mínimo. Durante o evento, mexa na íris.">
+        <defs><marker id="arE10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="24" font-size="10.5">A ORDEM DAS DECISÕES</text>
+
+        <rect class="bx" x="18" y="40" width="156" height="160"/><rect class="hd-slate" x="18" y="40" width="156" height="32"/>
+        <text class="on b" x="96" y="61" font-size="12" text-anchor="middle">1. Taxa de quadros</text>
+        <text x="30" y="98" font-size="11">a do sistema inteiro:</text><text x="30" y="116" font-size="11">30 ou 60 fps</text>
+        <text class="mu" x="30" y="146" font-size="11">não mexa nela para</text><text class="mu" x="30" y="164" font-size="11">clarear a imagem</text>
+        <line class="ln" x1="176" y1="120" x2="190" y2="120" marker-end="url(#arE10)"/>
+
+        <rect class="bx" x="194" y="40" width="156" height="160"/><rect class="hd-amber" x="194" y="40" width="156" height="32"/>
+        <text class="on b" x="272" y="61" font-size="12" text-anchor="middle">2. Obturador</text>
+        <text x="206" y="98" font-size="11">o dobro da taxa:</text><text x="206" y="116" font-size="11">1/60 em 30 fps</text><text x="206" y="134" font-size="11">1/120 ou 1/60 em 60 fps</text>
+        <text class="mu" x="206" y="164" font-size="11">seguro na rede de 60 Hz</text>
+        <line class="ln" x1="352" y1="120" x2="366" y2="120" marker-end="url(#arE10)"/>
+
+        <rect class="bx" x="370" y="40" width="156" height="160"/><rect class="hd-blue" x="370" y="40" width="156" height="32"/>
+        <text class="on b" x="448" y="61" font-size="12" text-anchor="middle">3. Íris</text>
+        <text x="382" y="98" font-size="11">abra até o rosto</text><text x="382" y="116" font-size="11">chegar ao nível</text>
+        <text class="mu" x="382" y="146" font-size="11">sem zebra de 100%</text><text class="mu" x="382" y="164" font-size="11">no que importa</text>
+        <line class="ln" x1="528" y1="120" x2="542" y2="120" marker-end="url(#arE10)"/>
+
+        <rect class="bx" x="546" y="40" width="156" height="160"/><rect class="hd-teal" x="546" y="40" width="156" height="32"/>
+        <text class="on b" x="624" y="61" font-size="12" text-anchor="middle">4. ISO ou ganho</text>
+        <text x="558" y="98" font-size="11">só o que faltar</text><text x="558" y="116" font-size="11">depois da íris</text>
+        <text class="mu" x="558" y="146" font-size="11">o mínimo possível</text>
+        <line class="ln" x1="704" y1="120" x2="718" y2="120" marker-end="url(#arE10)"/>
+
+        <rect class="bx" x="722" y="40" width="156" height="160"/><rect class="hd-purple" x="722" y="40" width="156" height="32"/>
+        <text class="on b" x="800" y="61" font-size="12" text-anchor="middle">5. Filtro ND</text>
+        <text x="734" y="98" font-size="11">se sobrar luz com</text><text x="734" y="116" font-size="11">o ISO no mínimo</text>
+        <text class="mu" x="734" y="146" font-size="11">em vez de fechar</text><text class="mu" x="734" y="164" font-size="11">além de f/11</text>
+
+        <text class="mu" x="18" y="228" font-size="11">Na dúvida, durante o evento: mexa na íris. A taxa de quadros e o obturador ficam como estão.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 10.</b> A ordem das decisões. Os dois primeiros blocos são definidos por motivos que não têm a ver com o brilho, e ficam fixos. A íris faz o ajuste. O ISO e o ND entram quando a íris chega ao fim do curso.</figcaption>
+  </figure>
+
+  <ol class="steps">
+    <li><h4>Confirme a taxa de quadros do sistema</h4><p>Todas as câmeras, o switcher e a transmissão usam a mesma taxa. Ela é definida no estudo <a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>. Não mude a taxa de uma câmera para ganhar luz.</p></li>
+    <li><h4>Passe a exposição para manual</h4><p>Íris, obturador e ISO ou ganho, os três. Desligue também o ISO automático, o ganho automático e o obturador lento automático, que costumam ficar escondidos no menu.</p></li>
+    <li><h4>Fixe o obturador <span class="k amber">S</span></h4><p>O dobro da taxa de quadros: 1/60 em 30 fps, 1/120 em 60 fps. Em ambiente escuro, com 60 fps, 1/60 é aceitável. Na rede de 60 Hz, fique em 1/60 ou 1/120.</p></li>
+    <li><h4>Peça a luz do evento e alguém no palco</h4><p>A luz de serviço da montagem não serve. Peça a cena de luz da pregação ou da música, o telão ligado, e uma pessoa no ponto principal do palco. Se puder, alguém com tom de pele parecido com o de quem vai falar.</p></li>
+    <li><h4>Abra a íris <span class="k blue">f</span> até o rosto chegar ao nível</h4><p>Comece com o ISO no mínimo (ganho em 0 dB). Abra a íris olhando a forma de onda ou a zebra, com o zoom fechado no rosto. Pele clara, de 60 a 70%; pele morena, de 45 a 60%; pele negra, de 30 a 45%, na parte mais iluminada.</p></li>
+    <li><h4>Se a íris acabou, suba o ISO <span class="k teal w">ISO</span></h4><p>Em passos pequenos, de um terço de stop ou de 3 dB, só até o rosto chegar ao nível. Confira o ruído em um monitor grande. Se passar do aceitável, o caminho é mais luz no rosto, e não mais ganho.</p></li>
+    <li><h4>Se sobra luz, use o filtro ND</h4><p>Ao ar livre: ISO no mínimo, ND ligado, íris entre f/4 e f/8. Não feche além de f/11 nem acelere o obturador para escurecer.</p></li>
+    <li><h4>Confira o estouro</h4><p>Ligue a zebra de 100%. Testa, camisa branca, papel na mão e toalha da mesa não devem ficar listrados. Refletores no quadro e o telão podem estourar.</p></li>
+    <li><h4>Confira a cintilação, o ruído e o zoom</h4><p>Olhe o monitor por meio minuto, com o telão no quadro. Depois vá com o zoom de uma ponta à outra: se a imagem escurece no zoom fechado, exponha nessa posição.</p></li>
+    <li><h4>Iguale as câmeras e anote</h4><p>Leve o rosto ao mesmo nível em todas, compare no multiview e registre os ajustes de cada câmera na planilha. Na semana seguinte, o ponto de partida já está pronto.</p></li>
+  </ol>
+
+  <h3>Se a luz mudar durante o evento</h3>
+  <p>Corrija na íris, em passos pequenos, de preferência com a câmera fora do ar; no ar, vá devagar, porque um salto de 1 stop aparece como um tranco. Uma cena de luz mais escura no louvor é decisão de quem ilumina: se o rosto continua legível, deixe a imagem escurecer junto.</p>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. Os dois primeiros estão preenchidos na planilha de apoio.</p>
+
+  <h3>Exemplo 1. Imagem granulada em um palco escuro</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, palco com pouca luz, uma câmera a 30 fps com lente que abre até f/2,8.</dd></div>
+    <div><dt>Sintoma</dt><dd>O rosto do pastor está no brilho certo, mas a imagem inteira ferve de granulado, e a transmissão mostra blocos.</dd></div>
+    <div><dt>Causa</dt><dd>Obturador em 1/250, “para ficar mais nítido”, e íris em f/4. Para compensar, o ISO foi a 12800.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Obturador de volta a 1/60 e íris aberta até f/2,8. A conta de stops mostrou que o ISO podia cair para 1600.</dd></div>
+    <div><dt>Resultado</dt><dd>Mesmo brilho no rosto, com o ISO 3 stops abaixo. O granulado sumiu das sombras.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Controle</th><th style="width:16%">Antes</th><th style="width:16%">Depois</th><th style="width:16%">Diferença</th><th>Efeito</th></tr></thead>
+      <tbody>
+        <tr><td><span class="k blue">f</span> Abertura</td><td class="num">f/4</td><td class="num">f/2,8</td><td class="num">+1,0 stop</td><td>Mais luz. Fundo um pouco mais desfocado.</td></tr>
+        <tr><td><span class="k amber">S</span> Obturador</td><td class="num">1/250</td><td class="num">1/60</td><td class="num">+2,1 stops</td><td>Mais luz. Borrão natural, e fim do risco de cintilação.</td></tr>
+        <tr><td><span class="k teal w">ISO</span> Sensibilidade</td><td class="num">12800</td><td class="num">1600</td><td class="num">−3,0 stops</td><td>Muito menos ruído.</td></tr>
+        <tr><td><strong>Total</strong></td><td></td><td></td><td class="num">+0,1 stop</td><td class="teal">Mesma exposição.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> O brilho estava certo, mas pago no controle mais caro. A íris e o obturador devolveram 3 stops de luz de verdade, e o ISO desceu os mesmos 3 stops. O obturador de 1/250 ainda deixava o movimento picotado e estava fora dos valores seguros para a rede de 60 Hz.</p>
+
+  <h3>Exemplo 2. Quatro câmeras que não combinam</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Formatura em auditório de escola, sistema em 30 fps, três câmeras com operador e uma PTZ no fundo.</dd></div>
+    <div><dt>Sintoma</dt><dd>A cada corte, o rosto do orador muda de brilho. Uma câmera mostra faixas que sobem pela imagem. Na PTZ, o rosto é uma mancha branca.</dd></div>
+    <div><dt>Causa</dt><dd>Cada câmera foi ajustada por uma pessoa, sem referência comum. Uma estava com obturador em 1/100, e a PTZ, no automático.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Ficha de ajuste preenchida com o orador no púlpito e a luz do evento. A câmera 1 virou a referência, com o rosto em 62%.</dd></div>
+    <div><dt>Resultado</dt><dd>Quatro câmeras com o rosto entre 61 e 63%, sem faixas. Os ajustes ficaram anotados.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:21%">Câmera</th><th style="width:19%">Ajuste encontrado</th><th class="n" style="width:8%">Rosto</th><th style="width:15%">Situação</th><th>O que foi feito</th></tr></thead>
+      <tbody>
+        <tr><td>1. Central, plano geral</td><td>1/60, f/4, ISO 1600</td><td class="num n">62%</td><td class="teal">OK (referência)</td><td>Nada. As outras foram igualadas a ela.</td></tr>
+        <tr><td>2. Lateral, close do orador</td><td>1/100, f/2,8, ISO 1600</td><td class="num n">60%</td><td class="red">Cintilação</td><td>Obturador para 1/60 e íris fechada um pouco, para f/3,5. Rosto em 61%, sem faixas.</td></tr>
+        <tr><td>3. PTZ no fundo</td><td>Automático: 1/60, f/2,8, ISO 6400</td><td class="num n">96%</td><td class="red">Estouro</td><td>Exposição em manual, ISO para 1600. Rosto em 63%.</td></tr>
+        <tr><td>4. Câmera móvel, zoom fechado</td><td>1/60, f/5,6, ISO 1600</td><td class="num n">48%</td><td class="amber">Igualar</td><td>A lente fecha para f/5,6 no fim do zoom. ISO para 3200. Rosto em 61%.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> A câmera 2 tinha o brilho certo e o defeito mais grave: 1/100 não cobre pulsos inteiros da luz em 60 Hz. Na PTZ, o automático media o fundo escuro e subia o ganho 2 stops além do necessário. A câmera 4 estava na faixa aceitável, mas 14 pontos abaixo da referência; foi a única em que o ISO subiu, porque a lente não tinha mais abertura.</p>
+
+  <h3>Exemplo 3. Movimento picotado em um evento ao ar livre</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Culto ao ar livre, em uma manhã de sol, com uma filmadora a 30 fps que tem filtro ND embutido.</dd></div>
+    <div><dt>Sintoma</dt><dd>Os gestos do pregador e as bandeiras ao vento aparecem aos saltos, como uma sequência de fotos.</dd></div>
+    <div><dt>Causa</dt><dd>Sobrava luz. Com o ISO no mínimo e a íris em f/5,6, o operador escureceu a imagem pelo obturador, até 1/2000.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Obturador de volta a 1/60, ND de 1/64 ligado, íris aberta de f/5,6 para f/4.</dd></div>
+    <div><dt>Resultado</dt><dd>Mesma exposição, com o borrão natural de volta ao movimento e o fundo um pouco mais desfocado.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> De 1/2000 para 1/60 são cerca de 5 stops a mais de luz. O ND de 1/64 tirou 6 stops, e a íris devolveu 1, de f/5,6 para f/4. A conta fecha: +5 − 6 + 1 = 0. Ao voltar para um ambiente fechado, o primeiro item a conferir é a chave do ND.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Deixar tudo no automático</h4><p>A imagem clareia e escurece sozinha a cada mudança no quadro, e o rosto estoura quando o plano abre para o palco escuro.</p><p class="fix"><b>Correção:</b> exposição em manual, medida no rosto, com a luz do evento.</p></div>
+    <div><h4>Clarear ou escurecer pelo obturador</h4><p>O operador vai a 1/30 para ganhar luz, ou a 1/1000 para perder. O movimento fica borrado ou picotado, e pode surgir cintilação.</p><p class="fix"><b>Correção:</b> obturador fixo no dobro da taxa de quadros. O brilho se ajusta na íris, no ISO e no ND.</p></div>
+    <div><h4>Subir o ISO antes de abrir a íris</h4><p>A imagem fica granulada com a lente em f/5,6, quando ela abriria até f/2,8.</p><p class="fix"><b>Correção:</b> ISO no mínimo primeiro. Ele sobe só depois que a íris chegou ao fim.</p></div>
+    <div><h4>Confiar na telinha da câmera</h4><p>No escuro do salão, a tela parece clara. Na transmissão, a imagem saiu escura.</p><p class="fix"><b>Correção:</b> meça com a zebra, o histograma ou a forma de onda. A tela serve para enquadrar.</p></div>
+    <div><h4>Centralizar o histograma em palco escuro</h4><p>O operador clareia até o gráfico ficar “no meio”: fundo cinza com ruído e rosto estourado.</p><p class="fix"><b>Correção:</b> o histograma de palco é pesado à esquerda. O que manda é o nível do rosto.</p></div>
+    <div><h4>Usar 1/50 ou 1/100 na rede de 60 Hz</h4><p>Ajuste copiado de tutorial de outro país: faixas sobem devagar pela imagem.</p><p class="fix"><b>Correção:</b> em 60 Hz, 1/60 ou 1/120. Teste com toda a luz do evento ligada.</p></div>
+    <div><h4>Ajustar com a luz de serviço</h4><p>A exposição foi feita na montagem, com o salão aceso. No evento, nada mais serve.</p><p class="fix"><b>Correção:</b> peça a cena de luz do evento e alguém no palco antes de expor.</p></div>
+    <div><h4>Igualar as câmeras pelos números</h4><p>Todas em f/4 e ISO 1600, e mesmo assim cada uma mostra um brilho.</p><p class="fix"><b>Correção:</b> iguale pelo nível do rosto na forma de onda e compare no multiview. Os números de cada câmera podem ficar diferentes.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>A exposição é o primeiro ajuste da imagem, como o ganho é o do som. Depende da luz do palco e prepara a imagem para o foco, a cor, o corte e a transmissão.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>: quanta luz chega ao rosto, a diferença entre o rosto e o fundo, e as lâmpadas que cintilam.</li>
+        <li><a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>: a taxa de quadros do sistema, que define o obturador.</li>
+        <li><a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>: o brilho do telão que aparece atrás das pessoas.</li>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader: a estrutura de ganho</a>: a mesma lógica de sinal, ruído e estouro, no som.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>: a abertura escolhida aqui define a margem de foco; o balanço de branco e o perfil vêm depois da exposição.</li>
+        <li><a href="../Enquadramento-e-Movimento/treinamento-enquadramento-e-movimento.html">Enquadramento e movimento de câmera</a>: abrir e fechar o plano muda o que a câmera mede e a abertura do zoom.</li>
+        <li><a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>: câmeras igualadas cortam sem saltos de brilho.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: imagem com pouco ruído comprime melhor.</li>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento: roteiro, equipe e imprevistos</a>: as mudanças de luz do roteiro avisam quando a íris vai precisar de correção.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira na preparação, com a luz do evento ligada e alguém no palco. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>Todas as câmeras estão na mesma taxa de quadros, a do sistema.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>A exposição está em manual: íris, obturador e ISO ou ganho, sem nenhum automático ligado.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>O obturador está no dobro da taxa de quadros (1/60 em 30 fps; 1/120 ou 1/60 em 60 fps).</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>Não há cintilação nem faixas na imagem, com a luz do evento, o telão e o projetor ligados.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>A íris foi ajustada com a luz do evento e uma pessoa no palco, e não com a luz de serviço.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>O ISO ou ganho é o menor que dá a exposição certa, e o ruído foi conferido em um monitor grande.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>Ao ar livre, o filtro ND está ligado e a íris não passa de f/11. Em local fechado, o ND está desligado.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>O rosto da pessoa principal está no nível certo na forma de onda ou na zebra.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>Nada importante estoura: não há zebra de 100% no rosto, na roupa clara nem no papel.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>A exposição foi conferida com o zoom nas duas pontas.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>O rosto tem o mesmo nível em todas as câmeras, comparadas lado a lado no multiview.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>Os ajustes de cada câmera estão anotados, e a equipe sabe que a correção durante o evento é na íris.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Qual controle resolve?</h3>
+  <p>Cada frase descreve uma situação na câmera. Escolha o controle em que você mexeria primeiro: <strong>f</strong>, abertura; <strong>S</strong>, obturador; <strong>ISO</strong>, ISO ou ganho; <strong>ND</strong>, filtro ND.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"f": "Abertura (íris)", "S": "Obturador", "ISO": "ISO ou ganho", "ND": "Filtro ND"},
+ "itens": [
+  {"t": "No auditório, faixas escuras sobem devagar pela imagem. A câmera está em 30 fps, 1/100, f/4, ISO 1600.", "a": "S", "w": "1/100 não cobre pulsos inteiros da luz na rede de 60 Hz. Vá para 1/60 e compense fechando um pouco a íris."},
+  {"t": "A imagem está no brilho certo, mas granulada. A câmera está em 1/60, f/5,6, ISO 6400, e a lente abre até f/2,8.", "a": "f", "w": "Há 2 stops de íris sobrando. Abra para f/2,8 e baixe o ISO na mesma medida, para 1600."},
+  {"t": "Evento ao ar livre, ao meio-dia. Com 1/60 e o ISO no mínimo, a imagem estoura mesmo com a íris em f/16.", "a": "ND", "w": "Sobra luz. O ND corta a luz antes da lente, sem mexer no obturador e sem fechar a íris além do que a nitidez aguenta."},
+  {"t": "Os gestos do pregador aparecem aos saltos, picotados. A câmera está em 30 fps, 1/1000.", "a": "S", "w": "Obturador rápido demais tira o borrão natural. Volte para 1/60 e compense na íris ou no ND."},
+  {"t": "A íris já está toda aberta, o obturador está em 1/60 a 30 fps, e o rosto ainda marca 35% onde deveria marcar 60%.", "a": "ISO", "w": "A íris acabou e o obturador está no lugar. Suba o ISO só o que faltar, e peça mais luz no rosto."},
+  {"t": "Em um coral de três fileiras, a primeira está nítida e a última, fora de foco. A lente está em f/2, e o ISO, no mínimo.", "a": "f", "w": "A profundidade de campo está estreita. Feche a íris para f/5,6 e compense no ISO."},
+  {"t": "Gravação externa com sol. O diretor quer o fundo desfocado, em f/2,8, com 1/60. O ISO já está no mínimo, e a imagem estoura.", "a": "ND", "w": "Para manter f/2,8 e 1/60 com sol, só tirando luz antes da lente: filtro ND."},
+  {"t": "As mãos do baterista viram um rastro longo e embaçado. A câmera está em 60 fps, 1/60, e há luz sobrando.", "a": "S", "w": "Em 60 fps, a regra dos 180° pede 1/120. Com luz sobrando, não há motivo para ficar em 1/60."},
+  {"t": "Local fechado, 1/60, ISO no mínimo. A zebra de 100% cobre a testa e a camisa do orador.", "a": "f", "w": "Há luz demais chegando ao sensor, e o ISO já não tem o que baixar. Feche a íris até as listras saírem."},
+  {"t": "Nas pausas, com o palco escuro, a imagem da PTZ clareia sozinha e se enche de granulado. A íris e o obturador estão fixos.", "a": "ISO", "w": "O ganho está em automático e sobe quando a cena escurece. Fixe o ganho em manual, ou ponha um limite nele."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: três caminhos para o mesmo brilho</h3>
+  <p>Você vai precisar de uma câmera com controles manuais, um tripé, uma pessoa sob uma luz fixa, um monitor e a planilha de apoio.</p>
+  <ol>
+    <li>Ponha a câmera em manual, em 30 fps, com o obturador em 1/60 e o ISO no mínimo. Ligue a zebra ou a forma de onda.</li>
+    <li>Abra a íris até o rosto chegar ao nível certo. Anote os três valores como “Ajuste atual (A)” na aba “Calculadora de stops”.</li>
+    <li>Feche a íris 2 stops (de f/2,8 para f/5,6, por exemplo). A imagem escurece. Digite o novo f no “Novo ajuste (B)” e veja, na planilha, o ISO que compensa. Ajuste na câmera e confira: o rosto volta ao mesmo nível?</li>
+    <li>Compare as duas imagens no monitor. Olhe o fundo, que ficou mais nítido, e as áreas escuras, que ganharam ruído.</li>
+    <li>Volte ao ajuste A. Agora mude o obturador para 1/250 e compense no ISO, com a ajuda da planilha. Balance a mão na frente da câmera e compare o movimento com o de 1/60.</li>
+    <li>Aponte a câmera para uma lâmpada de LED comum ou para um monitor ligado. Passe o obturador por 1/50, 1/60, 1/100 e 1/120 e anote em quais aparecem faixas.</li>
+    <li>Se tiver uma segunda câmera, aponte as duas para a mesma pessoa e preencha a aba “Ficha por câmera”. Iguale o nível do rosto e veja o que a planilha aponta.</li>
+  </ol>
+  <p>Depois, repita o passo 2 com uma pessoa de outro tom de pele e compare os níveis: é por isso que a zebra de 70% não serve para todos.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Exposicao-modelo.xlsx">Exposicao-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Calculadora de stops</strong></td><td>Comparar dois ajustes de f, obturador, ISO ou ganho e ND.</td><td>A diferença em stops de cada controle e do total, o valor de cada controle que compensa a mudança dos outros, o ângulo do obturador e o risco de cintilação. Tem também conversores de dB, ND e ângulo.</td></tr>
+        <tr><td><strong>Ficha por câmera</strong></td><td>Registro do ajuste de até 8 câmeras, com o nível do rosto medido em cada uma.</td><td>Ângulo do obturador, risco de cintilação, diferença do nível do rosto em relação à câmera 1, situação e o que fazer.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Obturador por taxa de quadros e por rede elétrica, escalas de stops, ganho em dB, filtros ND e níveis de medição.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Calculadora</strong></td><td>A conta do exemplo 1: de f/4, 1/250 e ISO 12800 para f/2,8, 1/60 e ISO 1600.</td><td>Os mesmos resultados da aba Calculadora de stops.</td></tr>
+        <tr><td><strong>Exemplo - Ficha</strong></td><td>As quatro câmeras do exemplo 2, como foram encontradas, e o que foi ajustado.</td><td>Os mesmos resultados da aba Ficha por câmera.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A taxa de quadros, a frequência da rede elétrica e a faixa de nível do rosto ficam no alto das abas de trabalho e podem ser trocadas. Os valores iniciais são 30 fps, 60 Hz e rosto entre 45 e 70%: ajuste a faixa ao tom de pele da pessoa principal do evento.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Abertura (íris)</dt><dd>Furo ajustável dentro da lente, que define quanta luz passa. É indicada pelo número f.</dd></div>
+    <div><dt>Ângulo do obturador</dt><dd>Tempo de exposição dito como parte do quadro: 360° é o quadro inteiro, e 180°, a metade.</dd></div>
+    <div><dt>Cintilação (flicker)</dt><dd>Pulsação ou faixas na imagem, quando o obturador não combina com a luz ou com a tela filmada.</dd></div>
+    <div><dt>Estouro</dt><dd>Área clara que passou do limite do sensor e virou branco sem detalhe. Não se recupera depois.</dd></div>
+    <div><dt>Exposição</dt><dd>Quantidade de luz que a câmera transforma em imagem, definida por abertura, obturador e ISO.</dd></div>
+    <div><dt>Faixa dinâmica</dt><dd>Distância, em stops, entre o mais escuro e o mais claro que a câmera registra com detalhe.</dd></div>
+    <div><dt>False color</dt><dd>Modo do monitor que pinta a imagem com cores que representam faixas de brilho.</dd></div>
+    <div><dt>Filtro ND</dt><dd>Filtro cinza, de densidade neutra, que corta a luz por igual sem mudar a cor.</dd></div>
+    <div><dt>Forma de onda (waveform)</dt><dd>Gráfico do brilho de cada ponto da imagem, de 0 a 100%, na posição horizontal em que ele aparece.</dd></div>
+    <div><dt>Ganho (gain)</dt><dd>Amplificação do sinal do sensor, em dB. Cada 6 dB valem 1 stop. O 0 dB é a sensibilidade de base.</dd></div>
+    <div><dt>Histograma</dt><dd>Gráfico de quanto da imagem está em cada brilho, das sombras, à esquerda, às altas luzes, à direita.</dd></div>
+    <div><dt>ISO</dt><dd>Número que indica a sensibilidade da câmera. Dobrar o ISO vale 1 stop, e aumenta o ruído.</dd></div>
+    <div><dt>Número f</dt><dd>Distância focal dividida pelo diâmetro da abertura. Quanto menor o número, mais aberta a íris.</dd></div>
+    <div><dt>Obturador (shutter)</dt><dd>Controle do tempo em que o sensor recebe luz em cada quadro: 1/60, 1/120 de segundo.</dd></div>
+    <div><dt>Stop</dt><dd>Unidade da exposição. Subir 1 stop dobra a luz; descer 1 stop corta a luz pela metade.</dd></div>
+    <div><dt>Zebra</dt><dd>Listras que o visor desenha sobre as áreas que estão em um nível de brilho escolhido, ou acima dele.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector('.page');
+  var NOME = page.getAttribute('data-estudo') || 'estudo';
+  function read(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { return null; } }
+  function write(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+
+  /* ---------- Checklist ---------- */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+  var count = document.getElementById('ck-count');
+  var total = document.getElementById('ck-total');
+  if (boxes.length && count) {
+    var CK = 'av-' + NOME + '-checklist';
+    var saved = read(CK) || {};
+    if (total) { total.textContent = boxes.length; }
+    var refreshChecks = function () {
+      var n = 0, state = {};
+      boxes.forEach(function (b, i) { if (b.checked) { n++; } state[b.id || i] = b.checked; });
+      count.textContent = n;
+      return state;
+    };
+    boxes.forEach(function (b, i) {
+      if (saved[b.id || i]) { b.checked = true; }
+      b.addEventListener('change', function () { write(CK, refreshChecks()); });
+    });
+    refreshChecks();
+    var ckReset = document.getElementById('ck-reset');
+    if (ckReset) {
+      ckReset.addEventListener('click', function () {
+        boxes.forEach(function (b) { b.checked = false; });
+        write(CK, refreshChecks());
+      });
+    }
+  }
+
+  /* ---------- Exercício ---------- */
+  /* Os dados vêm do bloco JSON de id quiz-data:
+     { "opcoes": {"A": "Nome da opção A", ...}, "itens": [ {"t": "frase", "a": "A", "w": "por quê"} ] } */
+  var quiz = document.getElementById('quiz');
+  var dataEl = document.getElementById('quiz-data');
+  if (quiz && dataEl) {
+    var data = JSON.parse(dataEl.textContent);
+    var NAMES = data.opcoes, ITEMS = data.itens, KEYS = Object.keys(NAMES);
+    var score = document.getElementById('qz-score');
+    var done = document.getElementById('qz-done');
+    document.getElementById('qz-total').textContent = ITEMS.length;
+    var hits = 0, answered = 0;
+    var render = function () {
+      hits = 0; answered = 0; score.textContent = 0; done.textContent = 0;
+      quiz.textContent = '';
+      ITEMS.forEach(function (item, idx) {
+        var row = document.createElement('div'); row.className = 'q';
+        var p = document.createElement('p'); p.textContent = (idx + 1) + '. ' + item.t;
+        var opts = document.createElement('div'); opts.className = 'opts';
+        opts.setAttribute('role', 'group'); opts.setAttribute('aria-label', 'Resposta do item ' + (idx + 1));
+        var why = document.createElement('p'); why.className = 'why'; why.hidden = true;
+        KEYS.forEach(function (k) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.textContent = k;
+          b.setAttribute('aria-label', NAMES[k]); b.title = NAMES[k];
+          b.addEventListener('click', function () {
+            var ok = k === item.a;
+            Array.prototype.forEach.call(opts.children, function (o) {
+              o.disabled = true;
+              if (o.textContent === item.a) { o.className = 'right'; }
+            });
+            if (!ok) { b.className = 'wrong'; }
+            var lead = document.createElement('b');
+            lead.textContent = (ok ? 'Certo. ' : 'A resposta é ' + item.a + (NAMES[item.a] !== item.a ? ', ' + NAMES[item.a] : '') + '. ');
+            why.textContent = ''; why.appendChild(lead); why.appendChild(document.createTextNode(item.w));
+            why.className = 'why ' + (ok ? 'ok' : 'no'); why.hidden = false;
+            answered++; if (ok) { hits++; }
+            score.textContent = hits; done.textContent = answered;
+          });
+          opts.appendChild(b);
+        });
+        row.appendChild(p); row.appendChild(opts); row.appendChild(why);
+        quiz.appendChild(row);
+      });
+    };
+    render();
+    document.getElementById('qz-reset').addEventListener('click', render);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,947 @@
+<div class="page" lang="pt-BR" data-estudo="caixas">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="blue">P</span><span class="amber">A</span></div>
+  <h1>Caixas, amplificação e PA</h1>
+  <p class="lead">Um guia de estudo para ligar amplificadores e caixas sem risco, estimar o volume que o sistema entrega e posicionar o PA para que a primeira fila e o fundo ouçam bem.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O que é o PA</a></li>
+    <li><a href="#caixa">Por dentro da caixa</a></li>
+    <li><a href="#amp">Amplificador, potência e impedância</a></li>
+    <li><a href="#spl">Sensibilidade e SPL</a></li>
+    <li><a href="#cobertura">Cobertura e posicionamento</a></li>
+    <li><a href="#sistema">Delay, front fill e processador</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O que é o PA</h2>
+  <p>PA vem do inglês <em>public address</em>, “dirigir-se ao público”. É o nome do conjunto que leva o som da mesa até a plateia: as caixas voltadas para o público, os amplificadores que as alimentam e o processador que as protege e ajusta. O PA é o “som da frente”. As caixas viradas para os músicos são outro sistema, o de retorno, assunto do estudo <a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>.</p>
+  <p>O trabalho do PA tem duas partes, e este estudo usa as duas letras como lembrete. <span class="k blue">P</span> de <strong>potência</strong>: o sistema precisa produzir som suficiente para a sala, com folga e sem distorcer. <span class="k amber">A</span> de <strong>alcance</strong>: esse som precisa chegar a todos os lugares com volume e clareza parecidos.</p>
+  <p>Pense em iluminar um salão. Uma lâmpada muito forte presa na parede da frente ofusca quem está perto e deixa o fundo na penumbra. O que resolve é pôr a luz no alto, apontar para as pessoas e, se o salão for comprido, acrescentar luminárias no meio. Com o som é igual: cada caixa “ilumina” uma área, e o som enfraquece com a distância.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 340" role="img" aria-label="Vista de cima de uma sala, com o palco à esquerda e a plateia à direita. No palco ficam os microfones e os retornos. Na frente do palco, uma de cada lado, ficam as caixas principais do PA, à frente dos microfones. Entre elas, no chão, fica o subwoofer, que reproduz os graves. Na borda do palco há duas caixas pequenas de front fill, para as primeiras filas. No meio da plateia há duas caixas de delay, que reforçam o som para o fundo, com atraso. A mesa de som fica na área do público, ao fundo.">
+        <defs><pattern id="pt1" width="30" height="28" patternUnits="userSpaceOnUse"><circle class="lv-slate" cx="15" cy="14" r="5"/></pattern></defs>
+        <rect class="bx-out" x="250" y="30" width="632" height="280"/>
+        <rect x="450" y="84" width="300" height="140" fill="url(#pt1)"/>
+        <text class="mono mu" x="566" y="298" font-size="10.5" text-anchor="middle">PLATEIA</text>
+        <rect class="bx-slate" x="18" y="60" width="160" height="220"/>
+        <text class="b" x="98" y="160" font-size="13" text-anchor="middle">Palco</text>
+        <text class="mu" x="98" y="178" font-size="11" text-anchor="middle">microfones</text>
+        <text class="mu" x="98" y="193" font-size="11" text-anchor="middle">e retornos</text>
+
+        <rect class="hd-blue" x="190" y="40" width="48" height="36"/>
+        <text class="on b" x="214" y="63" font-size="12" text-anchor="middle">PA</text>
+        <rect class="hd-blue" x="190" y="264" width="48" height="36"/>
+        <text class="on b" x="214" y="287" font-size="12" text-anchor="middle">PA</text>
+        <text class="b" x="262" y="52" font-size="12">Caixas principais</text>
+        <text class="mu" x="262" y="68" font-size="11">uma de cada lado, à frente dos microfones</text>
+
+        <rect class="bx-amber" x="190" y="96" width="30" height="22"/>
+        <rect class="bx-amber" x="190" y="222" width="30" height="22"/>
+        <text class="b" x="262" y="106" font-size="12">Front fill</text>
+        <text class="mu" x="262" y="122" font-size="11">para as primeiras filas</text>
+
+        <rect class="hd-slate" x="190" y="140" width="48" height="60"/>
+        <text class="on b" x="214" y="174" font-size="12" text-anchor="middle">Sub</text>
+        <text class="b" x="262" y="166" font-size="12">Subwoofer</text>
+        <text class="mu" x="262" y="182" font-size="11">os graves, no chão</text>
+
+        <rect class="hd-amber" x="560" y="40" width="44" height="32"/>
+        <text class="on b" x="582" y="60" font-size="11" text-anchor="middle">Delay</text>
+        <rect class="hd-amber" x="560" y="254" width="44" height="32"/>
+        <text class="on b" x="582" y="274" font-size="11" text-anchor="middle">Delay</text>
+        <text class="b" x="616" y="52" font-size="12">Caixas de delay</text>
+        <text class="mu" x="616" y="68" font-size="11">reforço para o fundo, com atraso</text>
+
+        <rect class="bx-ink" x="770" y="142" width="96" height="48"/>
+        <text class="t-ground b" x="818" y="163" font-size="12" text-anchor="middle">Mesa de som</text>
+        <text class="t-ground" x="818" y="179" font-size="10.5" text-anchor="middle">no meio do público</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> As partes de um PA, vistas de cima. Uma igreja pequena pode ter só as duas caixas principais. O subwoofer, o front fill e as caixas de delay entram conforme a sala e o tipo de evento pedem.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Parte</th><th style="width:40%">O que faz</th><th>Quando é necessária</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Caixas principais</strong></td><td>Cobrem a maior parte da plateia.</td><td>Sempre. São o PA propriamente dito.</td></tr>
+        <tr><td><strong>Subwoofer</strong></td><td>Só os graves profundos: bumbo, baixo.</td><td>Com banda e música gravada. Para fala, não faz falta.</td></tr>
+        <tr><td><strong>Front fill</strong></td><td>Caixas pequenas para as primeiras filas.</td><td>Quando o PA passa por cima ou ao lado de quem senta na frente.</td></tr>
+        <tr><td><strong>Caixas de delay</strong></td><td>Reforço para o fundo, com atraso.</td><td>Salas compridas, sob mezanino, ao ar livre.</td></tr>
+        <tr><td><strong>Amplificador</strong></td><td>Transforma o sinal de linha em potência.</td><td>Sempre: em rack ou dentro da caixa.</td></tr>
+        <tr><td><strong>Processador</strong></td><td>Divide, alinha, equaliza e limita cada saída.</td><td>Com sub, com delay ou com caixas passivas de várias vias.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>Quando o fundo não ouve, a primeira pergunta é “onde estão as caixas e para onde apontam?”, e só depois “quanto volume o sistema tem?”. Posição resolve mais do que potência, e custa menos.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="caixa">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>Por dentro da caixa</h2>
+  <p>Um alto-falante é um motor que empurra o ar: a bobina, presa a um cone e dentro de um ímã, vai e vem com o sinal, e o ar vibra. Nenhum alto-falante faz bem todas as frequências. Um cone grande move muito ar e faz os graves, mas é pesado demais para vibrar milhares de vezes por segundo. Por isso a caixa de PA divide o trabalho em <strong>vias</strong>.</p>
+  <ul>
+    <li><strong>Woofer</strong>: o cone grande, de 10 a 15 polegadas. Reproduz os graves e os médios.</li>
+    <li><strong>Driver de compressão</strong>: um diafragma pequeno e leve, preso a uma <strong>corneta</strong>. Reproduz os médios altos e os agudos. A corneta dá eficiência e define para onde o som vai.</li>
+    <li><strong>Crossover</strong> (divisor de frequências): o filtro que manda os graves para o woofer e os agudos para o driver. Sem ele, o driver receberia graves e queimaria em segundos.</li>
+  </ul>
+  <p>A caixa mais comum em igreja e evento pequeno é a de <strong>duas vias</strong>: woofer de 12 ou 15 polegadas e driver com corneta. O <strong>subwoofer</strong> é uma caixa à parte, com cones de 15 ou 18 polegadas, só para os graves profundos. As faixas de frequência e o que soa em cada uma estão no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 250" role="img" aria-label="Gráfico das faixas de frequência de cada via, em escala logarítmica de 20 hertz a 20 quilohertz. O subwoofer, com cones de 15 ou 18 polegadas, cobre de cerca de 35 a 100 hertz: bumbo, baixo, o peso do som. O woofer, de 10 a 15 polegadas, cobre de cerca de 60 a 100 hertz até perto de 2 quilohertz: o corpo da voz e dos instrumentos. O driver com corneta cobre de 2 quilohertz para cima: clareza da fala, pratos, brilho. O corte entre o subwoofer e a caixa fica entre 80 e 120 hertz. O corte entre o woofer e o driver fica entre 1,5 e 3 quilohertz.">
+        <line class="ref" x1="318" y1="38" x2="318" y2="196"/>
+        <line class="ref" x1="630" y1="38" x2="630" y2="196"/>
+        <text class="mu" x="318" y="28" font-size="10.5" text-anchor="middle">corte entre sub e caixa: 80 a 120 Hz</text>
+        <text class="mu" x="630" y="28" font-size="10.5" text-anchor="middle">corte entre woofer e driver: 1,5 a 3 kHz</text>
+
+        <text class="b" x="18" y="62" font-size="12">Subwoofer</text>
+        <text class="mu" x="18" y="77" font-size="10.5">15 ou 18 polegadas</text>
+        <rect class="hd-slate" x="208" y="50" width="110" height="28"/>
+        <text class="on b" x="263" y="68" font-size="11" text-anchor="middle">35 a 100 Hz</text>
+        <text class="mu" x="330" y="68" font-size="10.5">bumbo, baixo, o peso do som</text>
+
+        <text class="b" x="18" y="108" font-size="12">Woofer</text>
+        <text class="mu" x="18" y="123" font-size="10.5">10 a 15 polegadas</text>
+        <rect class="hd-blue" x="264" y="96" width="366" height="28"/>
+        <text class="on b" x="447" y="114" font-size="11" text-anchor="middle">dos graves até perto de 2 kHz</text>
+        <text class="mu" x="642" y="114" font-size="10.5">corpo da voz e dos instrumentos</text>
+
+        <text class="b" x="18" y="154" font-size="12">Driver e corneta</text>
+        <text class="mu" x="18" y="169" font-size="10.5">diafragma de 1 a 2 pol.</text>
+        <rect class="hd-amber" x="630" y="142" width="229" height="28"/>
+        <text class="on b" x="744" y="160" font-size="11" text-anchor="middle">de 2 kHz para cima</text>
+        <text class="mu" x="618" y="160" font-size="10.5" text-anchor="end">clareza da fala, pratos, brilho</text>
+
+        <line class="ln-mu" x1="150" y1="196" x2="870" y2="196"/>
+        <g class="ln-mu" stroke-width="1">
+          <line x1="150" y1="196" x2="150" y2="202"/><line x1="245" y1="196" x2="245" y2="202"/><line x1="318" y1="196" x2="318" y2="202"/>
+          <line x1="390" y1="196" x2="390" y2="202"/><line x1="485" y1="196" x2="485" y2="202"/><line x1="558" y1="196" x2="558" y2="202"/>
+          <line x1="630" y1="196" x2="630" y2="202"/><line x1="725" y1="196" x2="725" y2="202"/><line x1="798" y1="196" x2="798" y2="202"/>
+          <line x1="870" y1="196" x2="870" y2="202"/>
+        </g>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="150" y="216">20</text><text class="mu" x="245" y="216">50</text><text class="mu" x="318" y="216">100</text>
+          <text class="mu" x="390" y="216">200</text><text class="mu" x="485" y="216">500</text><text class="mu" x="558" y="216">1 k</text>
+          <text class="mu" x="630" y="216">2 k</text><text class="mu" x="725" y="216">5 k</text><text class="mu" x="798" y="216">10 k</text>
+          <text class="mu" x="866" y="216">20 k</text>
+        </g>
+        <text class="mu" x="510" y="238" font-size="11" text-anchor="middle">frequência, em Hz</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> Cada via cuida de uma faixa. Os pontos de corte são típicos e mudam com o modelo: o fabricante escolhe o corte entre o woofer e o driver, e quem monta o sistema escolhe o corte entre o subwoofer e a caixa.</figcaption>
+  </figure>
+
+  <h3>Caixa ativa e caixa passiva</h3>
+  <p>A diferença está em onde fica o amplificador. A <strong>caixa passiva</strong> tem só os alto-falantes e um crossover simples. Ela recebe potência de um amplificador externo, por cabo de caixa. A <strong>caixa ativa</strong> traz o amplificador dentro, e quase sempre um processador digital junto: recebe o sinal de linha direto da mesa e a energia da tomada.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Dois caminhos do sinal. No sistema passivo, a mesa manda o sinal de linha ao processador, se houver, e dele ao amplificador. O amplificador manda potência, por cabo de caixa, à caixa passiva. Dentro dela, um crossover passivo divide o sinal entre o woofer e o driver. No sistema ativo, a mesa manda o sinal de linha, por cabo balanceado, direto à caixa ativa. Dentro dela ficam o processamento, com crossover, equalizador e limiter, um amplificador para os graves, ligado ao woofer, e um amplificador para os agudos, ligado ao driver. A caixa ativa também precisa de um cabo de energia.">
+        <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="24" font-size="10.5">SISTEMA PASSIVO</text>
+        <text class="b" x="882" y="24" font-size="11.5" text-anchor="end">Caixa passiva</text>
+        <rect class="bx" x="18" y="42" width="110" height="56"/>
+        <text class="b" x="73" y="66" font-size="12" text-anchor="middle">Mesa</text>
+        <text class="mu" x="73" y="83" font-size="10.5" text-anchor="middle">sinal de linha</text>
+        <line class="ln" x1="130" y1="70" x2="156" y2="70" marker-end="url(#ar2)"/>
+        <rect class="bx" x="160" y="42" width="130" height="56"/>
+        <text class="b" x="225" y="66" font-size="12" text-anchor="middle">Processador</text>
+        <text class="mu" x="225" y="83" font-size="10.5" text-anchor="middle">se houver</text>
+        <line class="ln" x1="292" y1="70" x2="318" y2="70" marker-end="url(#ar2)"/>
+        <rect class="hd-amber" x="322" y="42" width="140" height="56"/>
+        <text class="on b" x="392" y="66" font-size="12" text-anchor="middle">Amplificador</text>
+        <text class="on" x="392" y="83" font-size="10.5" text-anchor="middle">em rack, fora da caixa</text>
+        <line class="ln-bold" x1="466" y1="70" x2="548" y2="70"/>
+        <line class="ln" x1="548" y1="70" x2="556" y2="70" marker-end="url(#ar2)"/>
+        <text class="mu" x="510" y="60" font-size="10.5" text-anchor="middle">cabo de caixa</text>
+        <text class="mu" x="510" y="88" font-size="10.5" text-anchor="middle">potência</text>
+        <rect class="bx-out" x="560" y="34" width="322" height="72"/>
+        <rect class="bx-blue" x="572" y="50" width="120" height="40"/>
+        <text class="b" x="632" y="67" font-size="11" text-anchor="middle">Crossover</text>
+        <text class="mu" x="632" y="82" font-size="10.5" text-anchor="middle">passivo</text>
+        <line class="ln" x1="694" y1="62" x2="722" y2="55" marker-end="url(#ar2)"/>
+        <line class="ln" x1="694" y1="78" x2="722" y2="87" marker-end="url(#ar2)"/>
+        <rect class="bx" x="726" y="42" width="144" height="26"/>
+        <text class="b" x="798" y="59" font-size="11" text-anchor="middle">Woofer</text>
+        <rect class="bx" x="726" y="74" width="144" height="26"/>
+        <text class="b" x="798" y="91" font-size="11" text-anchor="middle">Driver</text>
+        <text class="mu" x="18" y="128" font-size="11">Da mesa ao amplificador: sinal de linha, em cabo balanceado. Do amplificador à caixa: potência, em cabo de caixa.</text>
+
+        <text class="mono mu" x="18" y="166" font-size="10.5">SISTEMA ATIVO</text>
+        <text class="b" x="882" y="166" font-size="11.5" text-anchor="end">Caixa ativa: tudo dentro da caixa</text>
+        <rect class="bx" x="18" y="194" width="110" height="56"/>
+        <text class="b" x="73" y="218" font-size="12" text-anchor="middle">Mesa</text>
+        <text class="mu" x="73" y="235" font-size="10.5" text-anchor="middle">sinal de linha</text>
+        <line class="ln" x1="130" y1="222" x2="318" y2="222" marker-end="url(#ar2)"/>
+        <text class="mu" x="224" y="212" font-size="10.5" text-anchor="middle">cabo balanceado (XLR)</text>
+        <text class="mu" x="224" y="240" font-size="10.5" text-anchor="middle">pode ser longo</text>
+        <rect class="bx-out" x="322" y="176" width="560" height="92"/>
+        <rect class="bx-blue" x="334" y="196" width="150" height="52"/>
+        <text class="b" x="409" y="218" font-size="11" text-anchor="middle">Processamento</text>
+        <text class="mu" x="409" y="234" font-size="10.5" text-anchor="middle">crossover, EQ, limiter</text>
+        <line class="ln" x1="486" y1="212" x2="516" y2="202" marker-end="url(#ar2)"/>
+        <line class="ln" x1="486" y1="232" x2="516" y2="244" marker-end="url(#ar2)"/>
+        <rect class="hd-amber" x="520" y="184" width="150" height="34"/>
+        <text class="on b" x="595" y="205" font-size="11" text-anchor="middle">Amplificador dos graves</text>
+        <rect class="hd-amber" x="520" y="226" width="150" height="34"/>
+        <text class="on b" x="595" y="247" font-size="11" text-anchor="middle">Amplificador dos agudos</text>
+        <line class="ln" x1="672" y1="201" x2="702" y2="201" marker-end="url(#ar2)"/>
+        <line class="ln" x1="672" y1="243" x2="702" y2="243" marker-end="url(#ar2)"/>
+        <rect class="bx" x="706" y="184" width="164" height="34"/>
+        <text class="b" x="788" y="205" font-size="11" text-anchor="middle">Woofer</text>
+        <rect class="bx" x="706" y="226" width="164" height="34"/>
+        <text class="b" x="788" y="247" font-size="11" text-anchor="middle">Driver</text>
+        <text class="mu" x="18" y="288" font-size="11">A caixa ativa recebe dois cabos: o de sinal, que vem da mesa, e o de energia, que vem da tomada.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> O mesmo caminho, montado de dois jeitos. Na caixa ativa, o fabricante já casou o amplificador com cada alto-falante e ajustou a proteção. No sistema passivo, esse casamento é trabalho de quem monta.</figcaption>
+  </figure>
+
+  <div class="pair">
+    <div class="box">
+      <h4>Caixa ativa</h4>
+      <ul>
+        <li>Amplificador, crossover e limiter já casados pelo fabricante: é difícil ligar errado.</li>
+        <li>Menos equipamento. O cabo de sinal pode ser longo.</li>
+        <li>Precisa de tomada aterrada perto de cada caixa. É mais pesada.</li>
+        <li>Os controles traseiros podem ser mudados sem você ver.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Caixa passiva</h4>
+      <ul>
+        <li>Mais leve, sem tomada perto dela: boa para instalação fixa no alto.</li>
+        <li>Os amplificadores ficam juntos, em um rack de fácil acesso.</li>
+        <li>Quem monta casa o amplificador, confere a impedância e ajusta a proteção.</li>
+        <li>O cabo de caixa precisa ser grosso e curto.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>O painel da caixa ativa</h3>
+  <p>Antes de ligar, olhe a traseira de cada caixa ativa. Os nomes mudam com o modelo, mas os controles se repetem:</p>
+  <ul>
+    <li><strong>Chave mic/linha</strong>: para sinal da mesa, linha (<em>line</em>). Em “mic”, o sinal entra forte demais, distorce e chia.</li>
+    <li><strong>Nível</strong> (<em>level</em>, <em>gain</em>): o ajuste com a mesa está no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>.</li>
+    <li><strong>Filtro passa-altas</strong> (HPF, <em>low cut</em>, “with sub”): tira os graves profundos da caixa quando há subwoofer.</li>
+    <li><strong>Modo ou preset</strong>: curvas para PA em tripé, retorno de chão ou fala. Use a da posição real da caixa.</li>
+    <li><strong>Saída de sinal</strong> (<em>link</em>, <em>thru</em>) e <strong>luz de limite</strong> (<em>limit</em>, <em>clip</em>): a primeira repassa o sinal à próxima caixa; a segunda avisa que a proteção interna está atuando.</li>
+  </ul>
+
+  <h3>O subwoofer</h3>
+  <p>Uma caixa de duas vias em tripé não dá conta dos graves profundos em volume alto. O sub assume essa faixa, e a caixa principal, livre deles, ganha folga. O corte fica em geral entre 80 e 120 Hz: o sub recebe o que está abaixo, e a caixa, pelo filtro passa-altas dela ou do processador, o que está acima.</p>
+  <p>O grave se espalha para todos os lados: o sub fica no chão e não precisa apontar para ninguém. Dois subs lado a lado somam de forma uniforme. Um de cada lado do palco cria pela sala faixas com mais e com menos grave. Se puder, junte os subs no centro.</p>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Depois de ligar o sub, toque uma música com baixo e bumbo e inverta a polaridade do sub (chave <em>polarity</em>, <em>phase</em> ou 0°/180°). Fique com a posição que dá mais grave na região do corte. Sub e caixa em polaridades opostas cancelam justamente a faixa em que se encontram. Fase e polaridade estão no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="amp">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Amplificador, potência e impedância</h2>
+  <p>O sinal da mesa tem cerca de 1 volt e quase nenhuma corrente: carrega a informação, mas não move um cone. O <strong>amplificador de potência</strong> entrega uma cópia dele com dezenas de volts e vários ampères. Em sistema passivo, este módulo é o que evita queimar caixa e amplificador.</p>
+
+  <h3>Potência: qual número olhar</h3>
+  <p>Na etiqueta da caixa, a potência em watts (W) diz quanto ela <em>suporta</em>, e não quanto som faz. No manual do amplificador, diz quanto ele <em>entrega</em>, em uma impedância dada. Só um dos números serve para comparar.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Número</th><th style="width:20%">Relação</th><th style="width:14%">Exemplo</th><th>O que quer dizer</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Contínua</strong> (no dia a dia, “RMS”; em manuais, também AES)</td><td>É a base.</td><td class="num">350 W</td><td>O que a caixa suporta por horas, com um sinal de teste. É o número para comparar com o amplificador.</td></tr>
+        <tr><td><strong>Programa</strong> (ou música)</td><td>2 vezes a contínua.</td><td class="num">700 W</td><td>Convenção para música e fala, que têm a média bem abaixo dos picos. Serve de teto para a potência do amplificador.</td></tr>
+        <tr><td><strong>Pico</strong></td><td>4 vezes a contínua.</td><td class="num">1.400 W</td><td>O que a caixa aguenta por um instante. Não serve para escolher amplificador.</td></tr>
+        <tr><td><strong>PMPO</strong></td><td>Nenhuma definida.</td><td>–</td><td>Número de propaganda, sem método de medida comum. Ignore.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>No amplificador, a potência vem sempre com a impedância: “450 W em 8 Ω, 700 W em 4 Ω, por canal”. Compare a potência contínua da caixa com a potência do amplificador <em>na impedância que ele vai enxergar</em>.</p>
+
+  <h3>Impedância: a carga que o amplificador enxerga</h3>
+  <p>A impedância, em ohms (Ω), é a oposição da caixa à corrente. Caixas de PA têm 8 Ω ou 4 Ω nominais, escritos perto do conector. Quanto <em>menor</em> a impedância, <em>mais</em> corrente o amplificador fornece.</p>
+  <p>Pense no amplificador como uma bomba d'água e em cada caixa como uma torneira. A torneira estreita (8 Ω) passa pouca água; a larga (4 Ω), o dobro. Cada torneira a mais aumenta a vazão que a bomba sustenta. Com torneiras demais, a bomba esquenta e para.</p>
+  <p>Quando uma caixa passiva é ligada à outra pelo conector de saída (<em>link</em>, <em>parallel out</em>), ou quando as duas são ligadas nos bornes do mesmo canal, elas ficam <strong>em paralelo</strong>. Para caixas iguais, a conta é simples: a impedância de uma, dividida pelo número de caixas.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Quatro ligações em um amplificador que aceita no mínimo 4 ohms por canal, com caixas de 8 ohms em paralelo. Uma caixa: total de 8 ohms, dentro do limite, e o amplificador entrega menos potência. Duas caixas: 8 dividido por 2, total de 4 ohms, no limite, com a potência máxima do canal. Três caixas: 8 dividido por 3, total de 2,67 ohms, abaixo do mínimo: o amplificador aquece e entra em proteção. Quatro caixas: 8 dividido por 4, total de 2 ohms, abaixo do mínimo, com risco de queimar o amplificador.">
+        <text class="mono mu" x="18" y="24" font-size="10.5">AMPLIFICADOR COM MÍNIMO DE 4 Ω POR CANAL · CAIXAS DE 8 Ω EM PARALELO</text>
+
+        <rect class="hd-amber" x="18" y="40" width="190" height="36"/>
+        <text class="on b" x="113" y="63" font-size="11.5" text-anchor="middle">Saída do amplificador</text>
+        <path class="ln" d="M113 76 V118"/>
+        <rect class="bx-blue" x="93" y="118" width="40" height="40"/>
+        <text class="b" x="113" y="142" font-size="11" text-anchor="middle">8 Ω</text>
+        <text class="b" x="113" y="186" font-size="13" text-anchor="middle">Total: 8 Ω</text>
+        <text class="mu" x="113" y="204" font-size="11" text-anchor="middle">8 ÷ 1</text>
+        <rect class="bx" x="18" y="220" width="190" height="52"/>
+        <text class="t-good b" x="113" y="242" font-size="11.5" text-anchor="middle">Dentro do limite</text>
+        <text class="mu" x="113" y="259" font-size="10.5" text-anchor="middle">menos potência por canal</text>
+
+        <rect class="hd-amber" x="238" y="40" width="190" height="36"/>
+        <text class="on b" x="333" y="63" font-size="11.5" text-anchor="middle">Saída do amplificador</text>
+        <path class="ln" d="M333 76 V98 M309 98 H357 M309 98 V118 M357 98 V118"/>
+        <rect class="bx-blue" x="289" y="118" width="40" height="40"/><rect class="bx-blue" x="337" y="118" width="40" height="40"/>
+        <text class="b" x="309" y="142" font-size="11" text-anchor="middle">8 Ω</text><text class="b" x="357" y="142" font-size="11" text-anchor="middle">8 Ω</text>
+        <text class="b" x="333" y="186" font-size="13" text-anchor="middle">Total: 4 Ω</text>
+        <text class="mu" x="333" y="204" font-size="11" text-anchor="middle">8 ÷ 2</text>
+        <rect class="bx" x="238" y="220" width="190" height="52"/>
+        <text class="t-good b" x="333" y="242" font-size="11.5" text-anchor="middle">No limite</text>
+        <text class="mu" x="333" y="259" font-size="10.5" text-anchor="middle">potência máxima do canal</text>
+
+        <rect class="hd-amber" x="458" y="40" width="190" height="36"/>
+        <text class="on b" x="553" y="63" font-size="11.5" text-anchor="middle">Saída do amplificador</text>
+        <path class="ln" d="M553 76 V98 M505 98 H601 M505 98 V118 M553 98 V118 M601 98 V118"/>
+        <rect class="bx-blue" x="485" y="118" width="40" height="40"/><rect class="bx-blue" x="533" y="118" width="40" height="40"/><rect class="bx-blue" x="581" y="118" width="40" height="40"/>
+        <text class="b" x="505" y="142" font-size="11" text-anchor="middle">8 Ω</text><text class="b" x="553" y="142" font-size="11" text-anchor="middle">8 Ω</text><text class="b" x="601" y="142" font-size="11" text-anchor="middle">8 Ω</text>
+        <text class="b" x="553" y="186" font-size="13" text-anchor="middle">Total: 2,67 Ω</text>
+        <text class="mu" x="553" y="204" font-size="11" text-anchor="middle">8 ÷ 3</text>
+        <rect class="bx-red" x="458" y="220" width="190" height="52"/>
+        <text class="t-red b" x="553" y="242" font-size="11.5" text-anchor="middle">Abaixo do mínimo</text>
+        <text x="553" y="259" font-size="10.5" text-anchor="middle">aquece e entra em proteção</text>
+
+        <rect class="hd-amber" x="678" y="40" width="204" height="36"/>
+        <text class="on b" x="780" y="63" font-size="11.5" text-anchor="middle">Saída do amplificador</text>
+        <path class="ln" d="M780 76 V98 M708 98 H852 M708 98 V118 M756 98 V118 M804 98 V118 M852 98 V118"/>
+        <rect class="bx-blue" x="688" y="118" width="40" height="40"/><rect class="bx-blue" x="736" y="118" width="40" height="40"/><rect class="bx-blue" x="784" y="118" width="40" height="40"/><rect class="bx-blue" x="832" y="118" width="40" height="40"/>
+        <text class="b" x="708" y="142" font-size="11" text-anchor="middle">8 Ω</text><text class="b" x="756" y="142" font-size="11" text-anchor="middle">8 Ω</text><text class="b" x="804" y="142" font-size="11" text-anchor="middle">8 Ω</text><text class="b" x="852" y="142" font-size="11" text-anchor="middle">8 Ω</text>
+        <text class="b" x="780" y="186" font-size="13" text-anchor="middle">Total: 2 Ω</text>
+        <text class="mu" x="780" y="204" font-size="11" text-anchor="middle">8 ÷ 4</text>
+        <rect class="bx-red" x="678" y="220" width="204" height="52"/>
+        <text class="t-red b" x="780" y="242" font-size="11.5" text-anchor="middle">Abaixo do mínimo</text>
+        <text x="780" y="259" font-size="10.5" text-anchor="middle">risco de queimar o amplificador</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> Cada caixa a mais em paralelo baixa a impedância total. O mínimo é do amplificador e está no manual: 4 Ω por canal é o mais comum, e alguns modelos aceitam 2 Ω.</figcaption>
+  </figure>
+
+  <p>Para caixas de impedâncias diferentes, some os inversos: 1 ÷ total = 1 ÷ Z1 + 1 ÷ Z2 + … Uma caixa de 8 Ω com uma de 4 Ω dá 2,67 Ω. E a potência não se divide por igual: a caixa de menor impedância puxa mais corrente e recebe a maior parte, neste caso o dobro da outra. A planilha de apoio faz as duas contas.</p>
+  <p>A impedância real da caixa muda com a frequência e, em alguns pontos, fica abaixo da nominal. Por isso o mínimo do amplificador é limite, e não alvo. Abaixo dele, o amplificador fornece corrente demais, aquece, distorce e desarma; sem proteção, queima. Um cabo em curto leva a impedância perto de zero, e a proteção atua na hora.</p>
+
+  <h3>Casar o amplificador com a caixa</h3>
+  <p>Ponto de partida comum: a potência do amplificador, na impedância da carga, deve ficar <strong>entre uma e duas vezes a potência contínua da caixa</strong>. Com duas caixas iguais em paralelo, cada uma recebe metade da potência do canal. Exemplo: 700 W por canal em 4 Ω, com duas caixas de 8 Ω e 350 W em paralelo. O canal enxerga 4 Ω e entrega 350 W a cada caixa: razão de uma vez, na faixa.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>Amplificador fraco para a caixa</h4>
+      <ul>
+        <li>Para dar o volume pedido, ele chega ao limite e corta os picos: é o <strong>clip</strong>.</li>
+        <li>O sinal cortado tem média mais alta e mais energia nos agudos do que o sinal limpo. Quem sofre é o driver.</li>
+        <li>Por isso um amplificador pequeno em clip queima caixa que “aguentava mais”.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Amplificador forte para a caixa</h4>
+      <ul>
+        <li>Sobra folga: os picos passam limpos, e o som fica mais claro.</li>
+        <li>Mas ele consegue entregar mais do que a caixa suporta. Um descuido no master queima o woofer por calor ou por excesso de curso.</li>
+        <li>Acima de duas vezes a potência contínua, só com limiter bem ajustado e operador atento.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Controles e modos do amplificador</h3>
+  <ul>
+    <li><strong>Controles de nível</strong>: atenuam a entrada, mas não limitam a potência. Com o botão no meio, o amplificador ainda chega ao máximo se a mesa mandar sinal forte.</li>
+    <li><strong>Luz de clip</strong>: pode piscar de leve nos picos. Acesa com frequência, pede menos nível. <strong>Luz de proteção</strong> (<em>protect</em>): o amplificador se desligou das caixas por calor, curto ou carga baixa. Descubra a causa antes de insistir.</li>
+    <li><strong>Estéreo</strong>: cada canal recebe um sinal. <strong>Paralelo</strong>: a entrada A alimenta os dois canais, e as saídas seguem independentes.</li>
+    <li><strong>Ponte</strong> (<em>bridge</em>): os dois canais viram uma saída só, com mais tensão. A impedância mínima dobra: quem aceita 4 Ω por canal só aceita 8 Ω em ponte. Use apenas se o manual mostrar a ligação.</li>
+  </ul>
+  <p>Entre o amplificador e a caixa passiva vai cabo de caixa: dois condutores grossos, com Speakon ou bornes. Cabo de instrumento, mesmo com plugue P10, é fino demais. Como referência, 1,5 mm² serve para até 10 m com carga de 8 Ω, e 2,5 mm² para trechos maiores ou carga de 4 Ω. Os conectores e os tipos de cabo estão no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>.</p>
+
+  <div class="note">
+    <h4>Segurança: eletricidade</h4>
+    <p>A saída de um amplificador de potência tem tensão suficiente para dar choque: 700 W em 4 Ω são mais de 50 volts. Ligue e desligue cabos de caixa com o amplificador desligado, e não use cabo com capa cortada ou emenda exposta. Amplificadores e caixas ativas pedem tomada com aterramento: nunca quebre nem isole o pino de terra para “tirar zumbido”. A carga dos circuitos e a régua de energia estão no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="spl">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Sensibilidade e SPL</h2>
+  <p>Watts não dizem quanto som a caixa faz. Quem diz é a <strong>sensibilidade</strong>: o nível de pressão sonora (SPL) que a caixa produz a 1 metro de distância quando recebe 1 watt. Uma caixa de PA de duas vias fica em geral entre 93 e 100 dB (1 W, 1 m). Uma caixa de som doméstica fica perto de 87 dB. O decibel e o dB SPL estão no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>. Aqui bastam três regras.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:30%">Mudança</th><th style="width:22%">Efeito no nível</th><th>O que isso ensina</th></tr></thead>
+      <tbody>
+        <tr><td><span class="k blue">P</span> Dobrar a potência</td><td class="num">+3 dB</td><td>É pouco no ouvido. Trocar um amplificador de 400 W por um de 800 W quase não muda o volume.</td></tr>
+        <tr><td><span class="k blue">P</span> Dez vezes a potência</td><td class="num">+10 dB</td><td>É o que o ouvido percebe como “o dobro do volume”. Custa dez vezes mais amplificador e caixas que suportem.</td></tr>
+        <tr><td><span class="k amber">A</span> Dobrar a distância</td><td class="num">−6 dB</td><td>Vale ao ar livre. Quem está a 16 m recebe 18 dB a menos do que quem está a 2 m.</td></tr>
+        <tr><td>Sensibilidade 3 dB maior</td><td class="num">+3 dB</td><td>Vale tanto quanto dobrar a potência. Uma caixa mais eficiente rende mais com o mesmo amplificador.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Com elas se estima o nível máximo de uma caixa em qualquer ponto, em dois passos.</p>
+  <ol>
+    <li><strong>A 1 metro:</strong> sensibilidade + 10 × log(potência). Com 97 dB de sensibilidade e 400 W contínuos: 97 + 26 = 123 dB.</li>
+    <li><strong>Na distância do ouvinte:</strong> tire 20 × log(distância em metros). A 16 m: 123 − 24 = 99 dB.</li>
+  </ol>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Gráfico do nível máximo contínuo de uma caixa com 97 decibéis de sensibilidade e 400 watts, em campo livre. A 1 metro, 123 decibéis; a 2 metros, 117; a 4 metros, 111; a 8 metros, 105; a 16 metros, 99; a 32 metros, 93. Cada vez que a distância dobra, o nível cai 6 decibéis. Uma linha marca um alvo de exemplo, de 100 decibéis: 90 de nível médio mais 10 de folga. A caixa alcança esse alvo até cerca de 14 metros. Ao lado, a conta a 1 metro: 1 watt dá 97 decibéis; 10 watts, 107; 100 watts, 117; 400 watts, 123; 800 watts, 126.">
+        <g class="grid">
+          <line x1="110" y1="40" x2="560" y2="40"/><line x1="110" y1="78" x2="560" y2="78"/><line x1="110" y1="116" x2="560" y2="116"/>
+          <line x1="110" y1="192" x2="560" y2="192"/>
+        </g>
+        <line class="ln-mu" x1="110" y1="230" x2="560" y2="230"/>
+        <g font-size="10.5" text-anchor="end">
+          <text class="mu" x="100" y="44">130</text><text class="mu" x="100" y="82">120</text><text class="mu" x="100" y="120">110</text>
+          <text class="mu" x="100" y="158">100</text><text class="mu" x="100" y="196">90</text><text class="mu" x="100" y="234">80</text>
+        </g>
+        <text class="mu" x="18" y="30" font-size="10.5">dB SPL</text>
+        <line class="ref" x1="110" y1="154" x2="560" y2="154"/>
+        <text class="mu" x="118" y="170" font-size="10.5">exemplo de alvo: 90 dB + 10 dB de folga</text>
+        <line class="ref" x1="454" y1="154" x2="454" y2="230"/>
+        <text class="b" x="447" y="218" font-size="10.5" text-anchor="end">até cerca de 14 m</text>
+
+        <path class="s-blue" d="M110 66.6 L200 89.4 L290 112.2 L380 135 L470 157.8 L560 180.6"/>
+        <g class="f-blue">
+          <circle cx="110" cy="66.6" r="4"/><circle cx="200" cy="89.4" r="4"/><circle cx="290" cy="112.2" r="4"/>
+          <circle cx="380" cy="135" r="4"/><circle cx="470" cy="157.8" r="4"/><circle cx="560" cy="180.6" r="4"/>
+        </g>
+        <g font-size="11">
+          <text class="b" x="118" y="59">123 dB</text><text class="b" x="208" y="82">117 dB</text><text class="b" x="298" y="105">111 dB</text>
+          <text class="b" x="388" y="128">105 dB</text><text class="b" x="478" y="150">99 dB</text><text class="b" x="552" y="172" text-anchor="end">93 dB</text>
+        </g>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="t-blue" x="150" y="100">−6 dB</text><text class="t-blue" x="240" y="123">−6 dB</text><text class="t-blue" x="330" y="146">−6 dB</text>
+          <text class="t-blue" x="512" y="192">−6 dB</text>
+        </g>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="110" y="248">1 m</text><text class="mu" x="200" y="248">2 m</text><text class="mu" x="290" y="248">4 m</text>
+          <text class="mu" x="380" y="248">8 m</text><text class="mu" x="470" y="248">16 m</text><text class="mu" x="560" y="248">32 m</text>
+        </g>
+        <text class="mu" x="335" y="272" font-size="11" text-anchor="middle">distância da caixa ao ouvinte: cada passo dobra a distância</text>
+
+        <rect class="bx" x="604" y="40" width="278" height="190"/>
+        <text class="b" x="620" y="64" font-size="12.5">A conta a 1 metro</text>
+        <text class="mu" x="620" y="82" font-size="10.5">sensibilidade de 97 dB (1 W, 1 m)</text>
+        <g font-size="11.5">
+          <text x="620" y="108">1 W</text><text class="b" x="866" y="108" text-anchor="end">97 dB</text>
+          <text x="620" y="128">10 W</text><text class="b" x="866" y="128" text-anchor="end">107 dB</text>
+          <text x="620" y="148">100 W</text><text class="b" x="866" y="148" text-anchor="end">117 dB</text>
+          <text x="620" y="168">400 W</text><text class="t-blue b" x="866" y="168" text-anchor="end">123 dB</text>
+          <text x="620" y="188">800 W</text><text class="b" x="866" y="188" text-anchor="end">126 dB</text>
+        </g>
+        <text class="mu" x="620" y="214" font-size="10.5">o dobro da potência rende só 3 dB</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> O nível máximo contínuo de uma caixa, em campo livre. A potência entra na conta uma vez, a 1 metro. A distância tira 6 dB a cada dobra. Passar de 400 W para 800 W estende o alcance do exemplo de 14 m para perto de 20 m.</figcaption>
+  </figure>
+
+  <h3>O que a conta não mostra</h3>
+  <ul>
+    <li><strong>A sala.</strong> A regra dos 6 dB vale em campo livre. Em sala fechada, as reflexões somam, e o nível ao fundo cai menos. Mas o som refletido chega atrasado: aumenta o volume, e não a clareza.</li>
+    <li><strong>O SPL máximo do folheto.</strong> Em caixa ativa, o “SPL máximo” do manual quase sempre é de pico, calculado. Como ponto de partida deste material, desconte 6 dB para ter o nível contínuo; o desconto real depende do modelo.</li>
+    <li><strong>A folga.</strong> Os picos passam bem da média. Para 90 dB médios na plateia, planeje uns 100 dB de máximo ali, ou o limiter atua o tempo todo.</li>
+    <li><strong>Duas caixas.</strong> A do outro lado do palco soma pouco para quem está perto de uma delas. Conte uma caixa por zona.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Segurança: volume alto</h4>
+    <p>A mesma conta mostra o risco de perto: a caixa que entrega 100 dB a 16 m entrega 118 dB a 2 m. Não deixe público, crianças nem equipe parados na frente das caixas, nem assentos encostados no PA. O nível médio a adotar e os limites de exposição estão nos estudos <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a> e <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="cobertura">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Cobertura e posicionamento</h2>
+  <p>A corneta concentra os agudos em um feixe, descrito pelo <strong>ângulo de cobertura</strong>: horizontal × vertical, como 90° × 50°. Dentro dele, o som chega completo; na borda, os agudos já estão 6 dB abaixo do eixo; fora, sobram graves e médios, e a fala fica abafada. Os graves saem para todos os lados, inclusive para trás. Posicionar o PA é apontar esses feixes para onde há gente e tirá-los das paredes, do teto, do palco e dos microfones.</p>
+
+  <h3>Altura e inclinação</h3>
+  <p>Agudos não atravessam pessoas. Com a caixa na altura das cabeças, a primeira fila leva o volume mais alto e faz sombra para quem está atrás. A corneta precisa ficar <strong>acima da cabeça de quem está em pé</strong>, em geral a 2 m ou mais, com o eixo apontado para as últimas filas.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Duas vistas de lado. À esquerda, a caixa baixa, na altura das cabeças: o som cruza a plateia na altura das cabeças, a primeira fila recebe o volume mais alto e barra os agudos para quem está atrás. À direita, a caixa alta, em tripé, inclinada para o fundo: a corneta fica acima das cabeças de quem está em pé, o eixo da caixa aponta para as últimas filas, a frente fica fora do eixo, e a diferença de volume entre as filas diminui.">
+        <defs><marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah f-blue" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="b" x="18" y="28" font-size="13">Caixa baixa</text>
+        <text class="mu" x="18" y="46" font-size="11">O som cruza a plateia na altura das cabeças.</text>
+        <line class="ln-mu" x1="18" y1="236" x2="430" y2="236"/>
+        <line class="ln" x1="47" y1="210" x2="47" y2="236"/>
+        <rect class="hd-blue" x="30" y="160" width="34" height="50"/>
+        <line class="s-blue" x1="66" y1="182" x2="106" y2="182" marker-end="url(#ar6)"/>
+        <g class="lv-slate">
+          <rect x="111" y="192" width="18" height="44"/><rect x="171" y="192" width="18" height="44"/><rect x="231" y="192" width="18" height="44"/>
+          <rect x="291" y="192" width="18" height="44"/><rect x="351" y="192" width="18" height="44"/><rect x="401" y="192" width="18" height="44"/>
+        </g>
+        <g class="f-slate">
+          <circle cx="120" cy="182" r="8"/><circle cx="180" cy="182" r="8"/><circle cx="240" cy="182" r="8"/>
+          <circle cx="300" cy="182" r="8"/><circle cx="360" cy="182" r="8"/><circle cx="410" cy="182" r="8"/>
+        </g>
+        <line class="s-blue dash" x1="134" y1="182" x2="166" y2="182"/>
+        <text class="t-red b" x="120" y="150" font-size="11" text-anchor="middle">volume alto demais</text>
+        <text class="mu" x="330" y="150" font-size="11" text-anchor="middle">agudos barrados, som abafado</text>
+        <text x="18" y="262" font-size="11.5">A primeira fila leva o maior volume da sala</text>
+        <text x="18" y="278" font-size="11.5">e faz sombra para quem está atrás.</text>
+
+        <text class="b" x="470" y="28" font-size="13">Caixa alta, inclinada para o fundo</text>
+        <text class="mu" x="470" y="46" font-size="11">A corneta fica acima das cabeças de quem está em pé.</text>
+        <line class="ln-mu" x1="470" y1="236" x2="882" y2="236"/>
+        <line class="ln" x1="500" y1="112" x2="500" y2="236"/>
+        <path class="ln" d="M500 236 L484 236 M500 220 L486 236 M500 220 L514 236"/>
+        <rect class="hd-blue" x="483" y="62" width="34" height="50" transform="rotate(12 500 87)"/>
+        <line class="s-blue" x1="519" y1="92" x2="850" y2="174" marker-end="url(#ar6)"/>
+        <line class="s-blue dash" x1="519" y1="92" x2="564" y2="170"/>
+        <g class="lv-slate">
+          <rect x="563" y="192" width="18" height="44"/><rect x="623" y="192" width="18" height="44"/><rect x="683" y="192" width="18" height="44"/>
+          <rect x="743" y="192" width="18" height="44"/><rect x="803" y="192" width="18" height="44"/><rect x="853" y="192" width="18" height="44"/>
+        </g>
+        <g class="f-slate">
+          <circle cx="572" cy="182" r="8"/><circle cx="632" cy="182" r="8"/><circle cx="692" cy="182" r="8"/>
+          <circle cx="752" cy="182" r="8"/><circle cx="812" cy="182" r="8"/><circle cx="862" cy="182" r="8"/>
+        </g>
+        <text class="t-blue b" x="690" y="112" font-size="11">eixo da caixa</text>
+        <text x="470" y="262" font-size="11.5">A frente fica fora do eixo, e o fundo, no eixo:</text>
+        <text x="470" y="278" font-size="11.5">a diferença de volume entre as filas diminui.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> Altura e inclinação. A altura tira as cabeças do caminho dos agudos. A inclinação põe o fundo no eixo, onde a caixa rende mais, e a frente fora dele, onde rende menos.</figcaption>
+  </figure>
+
+  <ul>
+    <li>Aponte o eixo para as últimas filas de assentos, e não para a parede do fundo. Som na parede volta como eco e embaralha a fala.</li>
+    <li>Não deite a caixa de lado para usar como PA. A corneta gira junto: a cobertura larga passa a ser a vertical, e a horizontal fica estreita.</li>
+    <li>Com o teto baixo, a caixa não sobe o bastante. Aí o caminho é dividir a sala em zonas, com mais caixas em volume menor.</li>
+  </ul>
+
+  <h3>Direção: para a plateia, à frente dos microfones</h3>
+  <p>Visto de cima, o feixe de cada caixa deve cair sobre os assentos. Duas regras evitam a maioria dos problemas: as caixas ficam <strong>à frente da linha dos microfones</strong>, sem nenhum microfone dentro da cobertura, e são viradas um pouco <strong>para dentro</strong>, para a borda do feixe não gastar som nas paredes laterais.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 350" role="img" aria-label="Duas vistas de cima de uma sala com o palco no alto e a plateia embaixo. À esquerda, o erro: as caixas estão no fundo do palco, atrás da linha dos microfones, apontadas para a frente. Os microfones laterais ficam dentro da cobertura das caixas, o som volta para eles, e a margem antes do apito cai. Parte do som bate nas paredes laterais. À direita, o certo: as caixas estão à frente do palco e da linha dos microfones, viradas um pouco para dentro. A cobertura cai sobre a plateia, e não sobre os microfones nem sobre as paredes.">
+        <defs>
+          <clipPath id="cp7a"><rect x="30" y="36" width="390" height="264"/></clipPath>
+          <clipPath id="cp7b"><rect x="480" y="36" width="390" height="264"/></clipPath>
+        </defs>
+        <text class="t-red b" x="30" y="24" font-size="13">Errado: caixas atrás dos microfones</text>
+        <rect class="bx" x="30" y="36" width="390" height="264"/>
+        <rect class="bx-slate" x="40" y="44" width="370" height="70"/>
+        <g clip-path="url(#cp7a)">
+          <polygon class="lv-blue" points="64,68 -180,312 308,312"/>
+          <polygon class="lv-blue" points="386,68 142,312 630,312"/>
+        </g>
+        <rect class="hd-blue" x="52" y="48" width="24" height="24"/>
+        <rect class="hd-blue" x="374" y="48" width="24" height="24"/>
+        <text class="b" x="225" y="66" font-size="12" text-anchor="middle">Palco</text>
+        <text class="mu" x="225" y="84" font-size="10.5" text-anchor="middle">linha dos microfones</text>
+        <line class="ref" x1="84" y1="100" x2="366" y2="100"/>
+        <g class="f-ink"><circle cx="96" cy="100" r="5"/><circle cx="225" cy="100" r="5"/><circle cx="354" cy="100" r="5"/></g>
+        <text class="b" x="225" y="210" font-size="12" text-anchor="middle">Plateia</text>
+        <text x="30" y="320" font-size="11.5">Os microfones laterais ficam dentro da cobertura: o som volta</text>
+        <text x="30" y="336" font-size="11.5">para eles. E parte do som bate nas paredes laterais.</text>
+
+        <text class="t-good b" x="480" y="24" font-size="13">Certo: caixas à frente, viradas para dentro</text>
+        <rect class="bx" x="480" y="36" width="390" height="264"/>
+        <rect class="bx-slate" x="490" y="44" width="370" height="70"/>
+        <g clip-path="url(#cp7b)">
+          <polygon class="lv-blue" points="514,130 462,323 900,323 900,233"/>
+          <polygon class="lv-blue" points="836,130 888,323 450,323 450,233"/>
+        </g>
+        <rect class="hd-blue" x="502" y="118" width="24" height="24" transform="rotate(-30 514 130)"/>
+        <rect class="hd-blue" x="824" y="118" width="24" height="24" transform="rotate(30 836 130)"/>
+        <text class="b" x="675" y="66" font-size="12" text-anchor="middle">Palco</text>
+        <text class="mu" x="675" y="84" font-size="10.5" text-anchor="middle">linha dos microfones</text>
+        <line class="ref" x1="534" y1="100" x2="816" y2="100"/>
+        <g class="f-ink"><circle cx="546" cy="100" r="5"/><circle cx="675" cy="100" r="5"/><circle cx="804" cy="100" r="5"/></g>
+        <text class="b" x="675" y="250" font-size="12" text-anchor="middle">Plateia</text>
+        <text x="480" y="320" font-size="11.5">Nenhum microfone dentro da cobertura. O som cai sobre</text>
+        <text x="480" y="336" font-size="11.5">os assentos, e pouco dele chega às paredes.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> A cobertura horizontal de duas caixas de 90°, vista de cima. A posição das caixas em relação aos microfones é a primeira medida contra a microfonia, tratada no estudo <a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>.</figcaption>
+  </figure>
+
+  <ul>
+    <li>Afaste as caixas dos cantos, quando puder: o canto reforça os graves e embola o som.</li>
+    <li>Uma caixa por zona. Duas caixas lado a lado, apontadas para o mesmo lugar, somam os graves e criam cancelamentos nos agudos.</li>
+  </ul>
+  <p>Com uma caixa de cada lado, cada pessoa ouve principalmente a do seu lado. Por isso a mistura precisa funcionar em qualquer das duas: o essencial vai igual para os dois lados. O panorama está no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p>
+
+  <h3>Caixa única e line array</h3>
+  <p>As caixas descritas até aqui são do tipo <em>point source</em> (fonte pontual): cada caixa funciona como um ponto de onde o som sai. O <em>line array</em> é outra arquitetura: várias caixas iguais, empilhadas em uma linha vertical curva, que trabalham como uma fonte só.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>Caixa única (point source)</h4>
+      <ul>
+        <li>Uma caixa por zona, em tripé, em suporte de parede ou suspensa.</li>
+        <li>Simples de apontar. Cai 6 dB a cada dobra da distância.</li>
+        <li>Atende salas pequenas e médias; para o fundo distante, pede delay. É a escolha natural em igreja e evento pequeno.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Line array</h4>
+      <ul>
+        <li>Cobertura vertical estreita: menos som no teto e no palco.</li>
+        <li>Perto do conjunto, o nível cai menos com a distância, perto de 3 dB por dobra; o efeito depende do comprimento da linha e da frequência.</li>
+        <li>Pede caixas suficientes, ângulos calculados em programa do fabricante e içamento por profissional. Duas ou três caixas não fazem uma linha.</li>
+      </ul>
+    </div>
+  </div>
+  <p>A <strong>coluna</strong>, uma fileira vertical de alto-falantes pequenos em caixa estreita, é parente do line array: cobertura horizontal larga, vertical estreita, pouco som no teto. É boa para fala em sala com muito eco.</p>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="sistema">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Delay, front fill e processador</h2>
+  <p>Quando as caixas principais não alcançam todo mundo, o remédio é aproximar o som de quem ficou de fora, com caixas de apoio em nível moderado. Subir o PA ensurdece a frente e pouco muda no fundo.</p>
+
+  <h3>Front fill: as primeiras filas</h3>
+  <p>Com as caixas principais no alto, abertas para os lados e apontadas para o fundo, as primeiras filas do centro podem ficar em um “buraco”, ouvindo mais o palco e os retornos do que o PA. O <strong>front fill</strong> são caixas pequenas na borda do palco, apontadas para essas filas, em nível baixo e com saída própria na mesa ou no processador.</p>
+
+  <h3>Caixas de delay: o fundo</h3>
+  <p>Em sala comprida, sob mezanino ou ao ar livre, uma segunda linha de caixas, mais perto do fundo, repõe o nível e a clareza. Mas há um problema de tempo: o sinal elétrico chega a ela na mesma hora em que chega ao PA, e o <em>som</em> do PA viaja pelo ar a cerca de 343 m/s, quase 3 milésimos de segundo por metro.</p>
+  <p>Sem correção, o fundo ouve primeiro a caixa ao lado e, logo depois, o som do palco: um eco curto que embaralha a fala. A correção é atrasar o sinal da caixa do fundo. Daí o nome: caixa de delay.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 276" role="img" aria-label="Vista de lado de uma sala comprida. O PA principal fica junto ao palco. A caixa de delay fica 14 metros adiante. O último ouvinte está a 23 metros do PA principal e a 9 metros da caixa de delay. O som do PA principal percorre 23 metros e leva 67 milissegundos. O som da caixa de delay percorre 9 metros e leva 26 milissegundos. Sem atraso, a caixa de delay chega 41 milissegundos antes. O atraso a programar é a distância entre as caixas, 14 metros, dividida por 343 metros por segundo, cerca de 41 milissegundos, mais 5 a 15 milissegundos para o som parecer vir do palco.">
+        <defs>
+          <marker id="ar8b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah f-blue" d="M0 0 L10 5 L0 10 z"/></marker>
+          <marker id="ar8a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah f-amber" d="M0 0 L10 5 L0 10 z"/></marker>
+        </defs>
+        <line class="ln-mu" x1="18" y1="200" x2="882" y2="200"/>
+        <rect class="bx-slate" x="18" y="170" width="100" height="30"/>
+        <text class="mu" x="68" y="190" font-size="10.5" text-anchor="middle">palco</text>
+        <line class="ln" x1="142" y1="114" x2="142" y2="200"/>
+        <rect class="hd-blue" x="128" y="70" width="28" height="44"/>
+        <text class="b" x="142" y="58" font-size="11.5" text-anchor="middle">PA principal</text>
+        <line class="ln" x1="522" y1="100" x2="522" y2="200"/>
+        <rect class="hd-amber" x="508" y="58" width="28" height="42"/>
+        <text class="b" x="522" y="46" font-size="11.5" text-anchor="middle">Caixa de delay</text>
+
+        <rect class="lv-slate" x="754" y="162" width="18" height="38"/>
+        <circle class="f-slate" cx="763" cy="152" r="8"/>
+        <text class="mu" x="782" y="176" font-size="10.5">último ouvinte</text>
+
+        <line class="s-blue" x1="158" y1="94" x2="748" y2="148" marker-end="url(#ar8b)"/>
+        <text class="t-blue b" x="200" y="88" font-size="11">som do PA principal: 23 m, 67 ms</text>
+        <line class="s-amber" x1="538" y1="80" x2="750" y2="138" marker-end="url(#ar8a)"/>
+        <text class="t-amber b" x="600" y="76" font-size="11">som da caixa de delay: 9 m, 26 ms</text>
+
+        <path class="ln-mu" stroke-width="1" d="M142 212 V222 M142 217 H522 M522 212 V222 M522 217 H763 M763 212 V222"/>
+        <text class="mu" x="332" y="234" font-size="10.5" text-anchor="middle">14 m entre as caixas</text>
+        <text class="mu" x="642" y="234" font-size="10.5" text-anchor="middle">9 m</text>
+        <text class="b" x="450" y="262" font-size="12" text-anchor="middle">Atraso da caixa de delay: 14 m ÷ 343 m/s ≈ 41 ms, mais 5 a 15 ms de atraso extra</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> Sem atraso, o som da caixa de delay chega ao último ouvinte 41 ms antes do som do PA. Com o atraso programado, o som do palco chega primeiro, e a caixa de delay o reforça logo em seguida.</figcaption>
+  </figure>
+
+  <ol>
+    <li>Meça com a trena a distância entre o PA principal e a caixa de delay.</li>
+    <li>Divida por 343 e multiplique por 1.000 para ter os milissegundos. Na prática: 2,9 ms por metro.</li>
+    <li>Some de 5 a 15 ms. O ouvido localiza o som pelo que chega primeiro: com o palco chegando um instante antes, tudo parece vir do palco.</li>
+    <li>Programe o atraso na saída que alimenta a caixa de delay: no processador, na mesa digital ou na própria caixa ativa, se ela tiver o recurso.</li>
+    <li>Com alguém falando no palco, suba a caixa de delay só até a fala ficar clara no fundo. Se quem está perto percebe que o som vem dali, ela está alta demais ou com pouco atraso.</li>
+  </ol>
+  <p>A caixa de delay aponta no mesmo sentido do PA principal, para o fundo, e nunca de volta para o palco. Ela precisa de uma saída separada da mesa (auxiliar ou matriz, descritos no estudo <a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>) ou de uma saída própria do processador.</p>
+
+  <h3>O processador</h3>
+  <p>O processador de caixas (gerenciador de sistema, DSP) fica entre a mesa e os amplificadores e prepara um sinal para cada saída. A caixa ativa já traz um dentro, e a mesa digital tem parte das funções nas próprias saídas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Função</th><th style="width:40%">O que faz</th><th>Onde se usa</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Crossover</strong></td><td>Divide as frequências: graves para o sub, o resto para as caixas principais.</td><td>Sempre que há sub, ou caixas com um amplificador por via.</td></tr>
+        <tr><td><strong>Atraso (delay)</strong></td><td>Atrasa cada saída em milissegundos.</td><td>Caixas de delay, front fill, alinhamento entre sub e caixa.</td></tr>
+        <tr><td><strong>Equalização</strong></td><td>Corrige a resposta de cada caixa na sala.</td><td>Ajuste do sistema, feito uma vez. O método está no estudo <a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>.</td></tr>
+        <tr><td><strong>Nível e polaridade</strong></td><td>Equilibra o volume entre as saídas e inverte a polaridade quando preciso.</td><td>Sub em relação às caixas, front fill, delay.</td></tr>
+        <tr><td><strong>Limiter</strong></td><td>Impede que o sinal de cada saída passe de um teto.</td><td>Em todas as saídas. É a proteção das caixas.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O processador é ajustado uma vez, por quem conhece o sistema, e fica travado com senha ou guardado em memória. Se o som mudou de uma semana para outra, confira se alguém mexeu nele ou nas traseiras das caixas.</p>
+
+  <h3>Limiter: a proteção das caixas</h3>
+  <p>O limiter é um teto automático: quando o sinal tenta passar do limiar, ele reduz o ganho naquele instante. No PA, o limiar é escolhido para o amplificador não entregar à caixa mais do que ela suporta, nem entrar em clip. O funcionamento do limiter e do compressor está no estudo <a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>.</p>
+  <ul>
+    <li>Em caixa ativa, o limiter já vem ajustado de fábrica. A luz de limite mostra quando ele atua.</li>
+    <li>Em sistema passivo, ele fica no processador ou no amplificador, e alguém precisa ajustá-lo. O limiar depende da potência e da impedância da caixa e do ganho do amplificador: a planilha calcula um ponto de partida, e o manual da caixa costuma indicar o valor.</li>
+    <li>Luz de limite piscando nos picos: sistema bem aproveitado. Acesa quase o tempo todo: o sistema chegou ao fim, o som fica “apertado” e as caixas aquecem. Baixe o master.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>O limiter protege contra o excesso, e não contra tudo: uma microfonia longa logo abaixo do limiar, ou o estalo de um cabo ligado com o sistema aberto, ainda castigam o driver. E ele não torna o sistema mais forte: se atua sempre, falta sistema para a sala, ou sobra volume no pedido.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>A montagem do PA vem antes da passagem de som. Reserve tempo para ela: caixa mal posicionada não se conserta na mesa. Os passos de 1 a 4 são feitos com tudo desligado.</p>
+  <ol class="steps">
+    <li><h4>Planeje no papel</h4><p>Desenhe a sala vista de cima: palco, microfones, plateia, tomadas. Marque as zonas (frente, meio, fundo, laterais) e a caixa que cobre cada uma. Em sistema passivo, calcule a impedância de cada saída do amplificador <span class="k blue">P</span> antes de ligar qualquer cabo.</p></li>
+    <li><h4>Posicione as caixas</h4><p>À frente da linha dos microfones, com a corneta acima das cabeças, o eixo nas últimas filas e o giro para dentro <span class="k amber">A</span>. Subwoofer no chão, de preferência no centro.</p></li>
+    <li><h4>Monte os tripés com segurança</h4><p>Base toda aberta, piso firme, pino travado, duas pessoas para erguer a caixa. Veja o quadro de segurança abaixo.</p></li>
+    <li><h4>Passe os cabos</h4><p>Cabo de caixa para as passivas; sinal balanceado e energia para as ativas. Prenda os cabos ao pé do tripé, para ninguém tropeçar e puxar a caixa, e cubra o que cruzar passagem.</p></li>
+    <li><h4>Confira as chaves</h4><p>Nas caixas ativas: entrada em linha, nível fechado, filtro e modo certos para a posição. No amplificador: modo estéreo ou paralelo, conforme a ligação, e controles de nível fechados.</p></li>
+    <li><h4>Ligue na ordem</h4><p>Master fechado. Primeiro as fontes, depois a mesa, depois o processador. Por último, os amplificadores e as caixas ativas: assim, o estalo que um aparelho dá ao ligar não chega amplificado aos alto-falantes.</p></li>
+    <li><h4>Teste uma caixa de cada vez</h4><p>Com uma música conhecida, em volume baixo, abra uma caixa por vez: graves e agudos saindo, sem chiado, zumbido ou som rachado? Depois ligue o sub e confira a polaridade.</p></li>
+    <li><h4>Ajuste o nível do sistema</h4><p>Com a mesa no nível nominal, abra amplificadores ou caixas ativas até o volume da sala, como no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>. As duas caixas principais ficam iguais.</p></li>
+    <li><h4>Ande pela sala</h4><p>Com música e depois com alguém falando ao microfone, ouça na frente, no meio, no fundo e nas laterais. Onde a fala perde clareza ou o volume incomoda, corrija primeiro com posição e direção.</p></li>
+    <li><h4>Ajuste as caixas de apoio</h4><p>Programe o atraso das caixas de delay pela distância e suba o nível delas só até a clareza voltar. Faça o mesmo com o front fill.</p></li>
+    <li><h4>Durante o evento, olhe as luzes</h4><p>As luzes de clip e de limite são o painel do PA. Piscando nos picos, tudo bem; acesas direto, baixe o master.</p></li>
+    <li><h4>Desligue na ordem inversa</h4><p>Master fechado. Primeiro os amplificadores e as caixas ativas. Espere alguns segundos e desligue o processador, a mesa e as fontes.</p></li>
+  </ol>
+
+  <div class="note">
+    <h4>Segurança: tripés, peso suspenso e trabalho em altura</h4>
+    <p>Uma caixa de 20 kg que cai de 2 metros fere gravemente. No tripé: abra a base por inteiro, use piso firme e plano, respeite a carga e a altura máximas do tripé, trave o pino de segurança e nunca deixe a trava só no aperto do manípulo. Levante a caixa em duas pessoas. Ao ar livre, ponha peso na base (sacos de areia) e baixe as caixas se o vento apertar. Mantenha o público afastado do tripé e não empilhe caixa sobre caixa sem encaixe e cinta. Pendurar caixa no teto ou em estrutura é içamento: só com os pontos de fixação e a ferragem previstos pelo fabricante, cabo de segurança e projeto e montagem de profissional habilitado. Nunca pendure uma caixa pelas alças. Para subir em escada ou andaime, trabalhe em dupla e com o equipamento de proteção adequado.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. Os dois primeiros estão preenchidos na planilha de apoio.</p>
+
+  <h3>Exemplo 1. O amplificador que desligava no meio da formatura</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Auditório de 150 lugares. Amplificador de dois canais: 450 W em 8 Ω e 700 W em 4 Ω por canal, mínimo de 4 Ω. Três caixas passivas de 8 Ω e 350 W contínuos: duas principais e um retorno.</dd></div>
+    <div><dt>Sintoma</dt><dd>Depois de uns 20 minutos, a luz de proteção do amplificador acendia, e o som caía. Voltava sozinho minutos depois.</dd></div>
+    <div><dt>Causa</dt><dd>As três caixas estavam ligadas em cadeia na saída A, uma na outra. Três caixas de 8 Ω em paralelo: 2,67 Ω, abaixo do mínimo de 4 Ω.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Saída A: só as duas caixas principais. Saída B: o retorno, sozinho, alimentado por um auxiliar da mesa.</dd></div>
+    <div><dt>Resultado</dt><dd>O amplificador trabalhou a formatura inteira sem desarmar. O retorno ganhou volume e mistura próprios.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:30%">Saída</th><th class="n" style="width:10%">Caixas</th><th class="n" style="width:14%">Impedância total</th><th class="n" style="width:14%">Potência por caixa</th><th class="n" style="width:12%">Razão</th><th>Situação</th></tr></thead>
+      <tbody>
+        <tr><td>Canal A, antes: principais e retorno</td><td class="num n">3</td><td class="num n">2,67 Ω</td><td class="num n">–</td><td class="num n">–</td><td class="red">Abaixo do mínimo</td></tr>
+        <tr><td>Canal A, depois: duas principais</td><td class="num n">2</td><td class="num n">4 Ω</td><td class="num n">350 W</td><td class="num n">1,0</td><td>OK</td></tr>
+        <tr><td>Canal B, depois: um retorno</td><td class="num n">1</td><td class="num n">8 Ω</td><td class="num n">450 W</td><td class="num n">1,3</td><td>OK</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> O defeito parecia do amplificador, mas era da ligação: o conector de saída da caixa passiva põe a seguinte em paralelo com ela. O canal B, vazio, estava ali o tempo todo. Com 4 Ω no canal A, cada caixa principal recebe até 350 W, a potência contínua dela. O retorno, sozinho em 8 Ω, pode receber 450 W, e a razão de 1,3 fica na faixa.</p>
+
+  <h3>Exemplo 2. O fundo que não ouvia, ao ar livre</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Culto em uma praça, com cerca de 300 pessoas em uma área de 20 m por 26 m. Duas caixas ativas de 15 polegadas em tripé, com SPL máximo de folheto de 129 dB.</dd></div>
+    <div><dt>Sintoma</dt><dd>O fundo não entendia a pregação. O operador subiu o master: a luz de limite das caixas ficou acesa, e a primeira fila reclamou do volume.</dd></div>
+    <div><dt>Causa</dt><dd>Distância. A 25 m, cada caixa entrega no máximo cerca de 95 dB contínuos. Para a média de 90 dB com 10 dB de folga, faltam 5 dB.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Duas caixas iguais a 14 m do palco, apontadas para o fundo, com atraso de 51 ms. O PA voltou ao nível da passagem.</dd></div>
+    <div><dt>Resultado</dt><dd>O fundo passou a ter cerca de 102 dB de máximo contínuo, com folga. A luz de limite do PA apagou, e a frente parou de reclamar.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:34%">Zona</th><th class="n" style="width:16%">Distância até a caixa</th><th class="n" style="width:16%">Perda pela distância</th><th class="n" style="width:16%">SPL máximo contínuo</th><th>Situação (alvo de 100 dB)</th></tr></thead>
+      <tbody>
+        <tr><td>Frente, PA principal</td><td class="num n">3 m</td><td class="num n">9,5 dB</td><td class="num n">113,5 dB</td><td>OK</td></tr>
+        <tr><td>Meio, PA principal</td><td class="num n">9 m</td><td class="num n">19,1 dB</td><td class="num n">103,9 dB</td><td>OK</td></tr>
+        <tr><td>Fundo, só com o PA principal</td><td class="num n">25 m</td><td class="num n">28,0 dB</td><td class="num n">95,0 dB</td><td class="red">Falta nível: 5 dB</td></tr>
+        <tr><td>Fundo, com a caixa de delay</td><td class="num n">11 m</td><td class="num n">20,8 dB</td><td class="num n">102,2 dB</td><td>OK</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> O SPL contínuo a 1 m foi estimado em 123 dB: os 129 dB do folheto menos 6 dB. Entre a primeira fila e o fundo, a diferença era de 18 dB: nenhum ajuste de master atende as duas ao mesmo tempo. O atraso veio da distância entre as caixas: 14 m ÷ 343 m/s dá 41 ms, mais 10 ms de atraso extra. Caixas com o dobro da potência dariam só 3 dB, menos do que faltava.</p>
+
+  <h3>Exemplo 3. A primeira fila reclama, o fundo não entende, e o púlpito apita</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, com 12 m de largura e 18 m de fundo. Duas caixas ativas de 12 polegadas sobre mesinhas, no fundo do palco, ao lado do púlpito.</dd></div>
+    <div><dt>Sintoma</dt><dd>Volume alto demais nas primeiras filas, fala abafada do meio para trás, e o microfone do púlpito apita quando o pastor fala mais baixo e o operador sobe o fader.</dd></div>
+    <div><dt>Causa</dt><dd>Caixas baixas, na altura das cabeças, e atrás da linha dos microfones. O púlpito estava dentro da cobertura das caixas.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Caixas em tripés na frente do palco, uma de cada lado, com a corneta a 2,2 m, inclinadas para as últimas filas e viradas um pouco para dentro. Nível refeito com a mesa no nominal.</dd></div>
+    <div><dt>Resultado</dt><dd>A fala ficou clara até o fundo com o master mais baixo. A primeira fila parou de reclamar, e o púlpito ganhou margem antes do apito.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> Nada foi comprado. As mesmas caixas, 2 m à frente e 1 m acima, resolveram três queixas: a frente saiu do eixo da corneta, os agudos deixaram de ser barrados pelas cabeças e o microfone saiu da frente das caixas. O que sobrar de microfonia se trata com as medidas do estudo <a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Ligar caixas em cadeia sem fazer a conta</h4><p>“Sobrou uma caixa, liga na saída da outra.” A impedância cai abaixo do mínimo, e o amplificador desarma no meio do evento.</p><p class="fix"><b>Correção:</b> some as caixas de cada saída antes de ligar. Em geral, no máximo duas de 8 Ω por canal.</p></div>
+    <div><h4>Comprar watts para resolver alcance</h4><p>O fundo não ouve, e a solução proposta é um amplificador maior. O dobro da potência rende 3 dB.</p><p class="fix"><b>Correção:</b> primeiro altura, direção e caixas de apoio. Potência é o último recurso.</p></div>
+    <div><h4>Caixas atrás dos microfones</h4><p>As caixas ficam no fundo do palco “para o pregador se ouvir”. O sistema apita antes de dar volume.</p><p class="fix"><b>Correção:</b> PA à frente da linha dos microfones. Para o palco se ouvir, use retorno.</p></div>
+    <div><h4>Ignorar a luz de clip e de limite</h4><p>As luzes vermelhas ficam acesas “porque o evento está animado”. O driver queima na semana seguinte.</p><p class="fix"><b>Correção:</b> luz acesa direto é ordem para baixar o master. Se sempre falta volume, falta sistema.</p></div>
+    <div><h4>Ligar e desligar em qualquer ordem</h4><p>Alguém desliga a mesa com os amplificadores ligados, e as caixas dão um estouro.</p><p class="fix"><b>Correção:</b> amplificadores e caixas ativas ligam por último e desligam primeiro. Cole a ordem no rack.</p></div>
+    <div><h4>Caixa de delay sem atraso, ou virada para o palco</h4><p>O fundo ganha volume e perde clareza: a fala chega dobrada, com eco curto.</p><p class="fix"><b>Correção:</b> caixa apontada para o fundo, atraso de 2,9 ms por metro mais uns 10 ms, e nível moderado.</p></div>
+    <div><h4>Chave da caixa ativa em “mic”</h4><p>A caixa chia e distorce com o controle de nível quase fechado, e qualquer toque no botão muda muito.</p><p class="fix"><b>Correção:</b> para sinal da mesa, entrada em linha. Confira as traseiras antes de cada evento.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>O PA é o fim do caminho do sinal: o que a mesa faz só chega ao público pelas caixas. E é o começo de dois problemas da operação, a microfonia e o volume da sala.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>: o decibel, o dB SPL, a perda de 6 dB com a distância, fase e polaridade.</li>
+        <li><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>: nível de linha e nível de alto-falante, Speakon, cabo balanceado.</li>
+        <li><a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>: as saídas master, auxiliar e matriz que alimentam o PA, o front fill e o delay.</li>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>: o nível nominal na saída da mesa e o ajuste do controle de nível do amplificador ou da caixa ativa.</li>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>: circuitos de energia, carga, aterramento e a ordem de ligar o sistema inteiro.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>: a posição das caixas é a primeira das medidas contra o apito.</li>
+        <li><a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>: as mesmas regras de impedância, potência e cobertura valem para as caixas de chão.</li>
+        <li><a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>: o EQ de sistema corrige a caixa na sala, depois que a posição está certa.</li>
+        <li><a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>: como o limiter funciona por dentro.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: a mistura e o volume da sala partem de um PA montado e conferido.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: o som que sai das caixas não serve para a internet, e a transmissão pede uma mistura própria.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira depois de montar o sistema e antes de abrir as portas. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>A impedância total de cada saída do amplificador foi calculada e não fica abaixo do mínimo do manual.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>A potência do amplificador, na impedância da carga, fica entre uma e duas vezes a potência contínua de cada caixa.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>As caixas passivas estão ligadas com cabo de caixa, de bitola adequada ao comprimento, e não com cabo de instrumento.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>Nas caixas ativas, a chave de entrada está em linha, e o filtro para uso com subwoofer está ligado quando há sub.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>As caixas principais estão à frente da linha dos microfones e apontam para a plateia, e não para as paredes.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>A corneta fica acima da cabeça de quem está em pé, e o eixo da caixa aponta para as últimas filas.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>A primeira fila e o fundo foram ouvidos: se a diferença é grande, há front fill, caixa de delay ou nova posição.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>As caixas de delay têm o atraso calculado pela distância e o nível só o bastante para devolver a clareza.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>O sistema foi ligado na ordem: fontes, mesa, processador e, por último, amplificadores e caixas ativas.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>No trecho mais forte, a luz de clip do amplificador não acende, e a luz de limite só pisca de vez em quando.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>Os tripés estão com a base toda aberta, em piso firme e plano, com o pino de segurança travado e os cabos presos.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>Nenhuma caixa está pendurada sem ferragem própria, e as tomadas têm aterramento e carga compatível.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Onde está o problema?</h3>
+  <p>Cada frase descreve uma situação com o PA. Escolha onde está a causa: <strong>Z</strong>, impedância e ligação; <strong>W</strong>, potência, nível e limite; <strong>C</strong>, cobertura e posição das caixas; <strong>T</strong>, tempo, que inclui o atraso do delay e a ordem de ligar.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"Z": "Impedância e ligação", "W": "Potência, nível e limite", "C": "Cobertura e posição", "T": "Tempo: atraso e ordem de ligar"},
+ "itens": [
+  {"t": "Quatro caixas passivas de 8 Ω estão ligadas em cadeia no canal A. O amplificador esquenta e desarma depois de meia hora.", "a": "Z", "w": "Quatro caixas de 8 Ω em paralelo dão 2 Ω, abaixo do mínimo da maioria dos amplificadores. Divida as caixas entre os canais."},
+  {"t": "O fundo da igreja recebe som abafado. As caixas estão sobre cadeiras, na altura das cabeças.", "a": "C", "w": "As pessoas da frente barram os agudos. Suba as caixas e aponte o eixo para as últimas filas."},
+  {"t": "A luz de limite das caixas ativas fica acesa durante todo o louvor, e o som está sem impacto.", "a": "W", "w": "O sistema chegou ao fim: o limiter está segurando o sinal o tempo todo. Baixe o master."},
+  {"t": "Perto das caixas do fundo, a fala chega dobrada, como um eco curto.", "a": "T", "w": "As caixas de delay estão sem atraso, ou com atraso errado: cerca de 2,9 ms por metro de distância do PA, mais uns 10 ms."},
+  {"t": "O microfone do púlpito apita cedo. As caixas principais estão no fundo do palco, atrás do pregador.", "a": "C", "w": "O microfone está dentro da cobertura das caixas. Leve o PA para a frente da linha dos microfones."},
+  {"t": "Ao fim do evento, alguém desliga a mesa primeiro, e as caixas dão um estouro forte.", "a": "T", "w": "Amplificadores e caixas ativas desligam primeiro e ligam por último."},
+  {"t": "Uma caixa de 8 Ω e uma de 4 Ω estão no mesmo canal. A de 4 Ω toca mais forte e foi a que queimou.", "a": "Z", "w": "Em paralelo, a caixa de menor impedância recebe a maior parte da potência, e o total de 2,67 Ω ainda fica abaixo do mínimo."},
+  {"t": "Um amplificador de 150 W alimenta uma caixa de 400 W contínuos. A luz de clip fica acesa, e o driver queimou.", "a": "W", "w": "Amplificador fraco, levado ao clip, manda ao driver um sinal cortado, com mais energia nos agudos. Baixe o nível ou use um amplificador adequado."},
+  {"t": "As primeiras filas do centro ouvem mais o palco do que o PA. As caixas principais estão altas e abertas para os lados.", "a": "C", "w": "É um buraco de cobertura na frente. A solução é front fill na borda do palco."},
+  {"t": "O amplificador desarma na hora em que é ligado, com uma só caixa. O cabo de caixa foi pisado e amassado.", "a": "Z", "w": "Um cabo em curto apresenta impedância perto de zero, e a proteção atua. Troque o cabo e teste a caixa."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: meça a sua sala</h3>
+  <p>Você vai precisar de trena, dos manuais, de uma música conhecida e da planilha. Um medidor de nível sonoro (ou um aplicativo de celular, para comparar pontos) ajuda. Faça com a sala vazia e em volume moderado.</p>
+  <ol>
+    <li>Anote da etiqueta de cada caixa a impedância e a potência contínua. Em caixa ativa, anote o SPL máximo do manual.</li>
+    <li>Em sistema passivo, preencha a aba “Amplificador e caixas” com o que está ligado em cada saída. Veja a impedância total e a situação.</li>
+    <li>Meça com a trena, em linha reta a partir da caixa, a distância até a primeira fila, o meio e a última fila. Preencha a aba “SPL e cobertura”.</li>
+    <li>Com uma caixa só, em volume moderado, meça o nível na primeira fila, no meio e no fundo, e compare com a diferença que a planilha estimou. Em sala fechada, a medida costuma ser menor. Por quê?</li>
+    <li>Ainda com uma caixa só, ande de um lado ao outro, no meio da sala, e marque onde os agudos somem: é a borda da cobertura. Depois sente na primeira fila e peça para alguém ficar em pé entre você e a caixa.</li>
+    <li>Se a sala tem caixas de delay, calcule o atraso pela distância e compare com o que está programado.</li>
+  </ol>
+  <p>Depois, desenhe a sala vista de cima e marque o que mudaria em cada caixa. Mostre ao responsável pelo som antes de mexer em caixas fixas.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Caixas-e-Amplificacao-modelo.xlsx">Caixas-e-Amplificacao-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e premissas do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Amplificador e caixas</strong></td><td>Registro de até 8 saídas de amplificador: quantas caixas em paralelo, impedância e potência de cada uma, dados do amplificador.</td><td>Impedância total, potência estimada por caixa, razão amplificador ÷ caixa, situação e limiar de partida do limiter. Traz uma calculadora de paralelo para impedâncias diferentes.</td></tr>
+        <tr><td><strong>SPL e cobertura</strong></td><td>Lista de até 6 caixas e 12 zonas da plateia, com a distância de cada zona até a caixa que a cobre.</td><td>SPL contínuo a 1 m, perda pela distância, SPL máximo em cada zona, margem sobre o alvo, diferença entre frente e fundo e atraso das caixas de delay.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Potências, impedância em paralelo, decibéis por potência e por distância, cabo de caixa, ordem de ligar e posição.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Amplificador</strong></td><td>As saídas do exemplo 1, antes e depois da correção.</td><td>Os mesmos resultados da aba Amplificador e caixas.</td></tr>
+        <tr><td><strong>Exemplo - Cobertura</strong></td><td>As zonas do exemplo 2, com o fundo antes e depois das caixas de delay.</td><td>Os mesmos resultados da aba SPL e cobertura.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A estimativa de SPL vale para campo livre e uma caixa por zona: serve para comparar zonas e ver se o sistema tem chance de atender a sala, sem substituir a medição nem o ouvido. Os valores de referência ficam no alto de cada aba e podem ser trocados.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Amplificador de potência</dt><dd>Aparelho que transforma o sinal de linha em potência suficiente para mover os alto-falantes.</dd></div>
+    <div><dt>Ângulo de cobertura</dt><dd>Abertura do feixe da caixa, horizontal × vertical. Na borda dele, o nível está 6 dB abaixo do eixo.</dd></div>
+    <div><dt>Caixa ativa</dt><dd>Caixa com amplificador e processamento dentro. Recebe sinal de linha e energia da tomada.</dd></div>
+    <div><dt>Caixa de delay</dt><dd>Caixa de apoio para o fundo, com o sinal atrasado para acompanhar o som que vem do PA principal.</dd></div>
+    <div><dt>Caixa passiva</dt><dd>Caixa sem amplificador. Recebe potência de um amplificador externo, por cabo de caixa.</dd></div>
+    <div><dt>Crossover</dt><dd>Divisor de frequências. Manda cada faixa para o alto-falante que a reproduz bem.</dd></div>
+    <div><dt>Driver de compressão</dt><dd>Alto-falante de agudos e médios altos, usado com corneta. É a parte mais frágil da caixa.</dd></div>
+    <div><dt>Front fill</dt><dd>Caixas pequenas na borda do palco, para as primeiras filas.</dd></div>
+    <div><dt>Impedância</dt><dd>Oposição da caixa à corrente, em ohms (Ω). Quanto menor, mais corrente o amplificador fornece.</dd></div>
+    <div><dt>Limiter</dt><dd>Proteção que impede o sinal de passar de um teto ajustado.</dd></div>
+    <div><dt>Line array</dt><dd>Conjunto de caixas iguais em linha vertical, que trabalha como uma fonte só, com cobertura vertical estreita.</dd></div>
+    <div><dt>PA</dt><dd>Do inglês public address. O sistema de caixas e amplificadores voltado para o público.</dd></div>
+    <div><dt>Paralelo</dt><dd>Ligação em que todas as caixas recebem a mesma tensão. A impedância total cai a cada caixa a mais.</dd></div>
+    <div><dt>Potência contínua</dt><dd>Potência que a caixa suporta por longo tempo. No dia a dia, é chamada de RMS.</dd></div>
+    <div><dt>Sensibilidade</dt><dd>Nível, em dB SPL, que a caixa produz a 1 metro com 1 watt.</dd></div>
+    <div><dt>Subwoofer</dt><dd>Caixa só para os graves profundos, abaixo de cerca de 100 Hz.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>

@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A mesa de som e o caminho do sinal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --ground:#F3F6F7; --surface:#FFFFFF; --sunk:#E9EEF0; --ink:#16242E; --muted:#566672; --rule:#D3DBE0;
+  --accent:#2B5C8A;
+  --blue:#2B5C8A; --blue-tint:#DCE8F3;
+  --amber:#A96A12; --amber-tint:#F6E8CF;
+  --teal:#1E7B73; --teal-tint:#D9EEEB;
+  --purple:#7A4A9A; --purple-tint:#E9DEF1;
+  --red:#B0413E; --red-tint:#F5DEDC;
+  --slate:#5B6B76; --slate-tint:#E3E8EB;
+  --on-hue:#FFFFFF;
+  --good:#1F7A4D; --good-tint:#DDF1E5;
+  --bad:#B0413E; --bad-tint:#F5DEDC;
+  --display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+    --accent:#86B7E3;
+    --blue:#86B7E3; --blue-tint:#1B2F42;
+    --amber:#E2AC4F; --amber-tint:#3A2C12;
+    --teal:#5FC6BA; --teal-tint:#15332F;
+    --purple:#C09ADB; --purple-tint:#2E2139;
+    --red:#EC8E89; --red-tint:#3D1F1E;
+    --slate:#9BABB6; --slate-tint:#26333B;
+    --on-hue:#0F171C;
+    --good:#6FCF9B; --good-tint:#163326;
+    --bad:#EC8E89; --bad-tint:#3D1F1E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+  --accent:#86B7E3;
+  --blue:#86B7E3; --blue-tint:#1B2F42;
+  --amber:#E2AC4F; --amber-tint:#3A2C12;
+  --teal:#5FC6BA; --teal-tint:#15332F;
+  --purple:#C09ADB; --purple-tint:#2E2139;
+  --red:#EC8E89; --red-tint:#3D1F1E;
+  --slate:#9BABB6; --slate-tint:#26333B;
+  --on-hue:#0F171C;
+  --good:#6FCF9B; --good-tint:#163326;
+  --bad:#EC8E89; --bad-tint:#3D1F1E;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.65 var(--body);-webkit-text-size-adjust:100%}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.page{max-width:1180px;margin-inline:auto;padding-inline:20px;padding-block:36px 80px}
+
+/* Cabeçalho */
+.mast{display:flex;flex-direction:column;gap:18px;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+.tiles{display:flex;gap:6px}
+.tiles span{width:44px;height:44px;display:grid;place-items:center;font:700 24px/1 var(--display);color:var(--on-hue)}
+h1{font:700 clamp(2.3rem,6vw,3.6rem)/1.02 var(--display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.lead{font-size:1.15rem;line-height:1.55;max-width:62ch;margin:0;color:var(--ink)}
+.meta{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px 22px;font:400 .8rem/1.4 var(--mono);color:var(--muted);margin:0;padding:0;list-style:none}
+
+/* Estrutura */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;padding-top:32px}
+.toc{font-size:.92rem}
+.toc h2{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 20px;counter-reset:toc}
+.toc li{counter-increment:toc}
+.toc a{display:flex;gap:10px;padding:5px 0;color:var(--ink);text-decoration:none;line-height:1.35}
+.toc a::before{content:counter(toc,decimal-leading-zero);font:400 .75rem/1.7 var(--mono);color:var(--muted)}
+.toc a:hover{color:var(--accent);text-decoration:underline}
+@media (min-width:1020px){
+  .layout{grid-template-columns:200px minmax(0,1fr);gap:64px}
+  .toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start}
+  .toc ol{grid-template-columns:1fr}
+}
+main{display:flex;flex-direction:column;gap:72px;min-width:0}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
+.eyebrow{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+h2{font:700 clamp(1.7rem,4vw,2.2rem)/1.1 var(--display);margin:0;text-wrap:balance}
+h3{font:600 1.3rem/1.2 var(--display);margin:12px 0 0;text-wrap:balance}
+h4{font:600 .95rem/1.3 var(--body);margin:0}
+p{margin:0}
+section > p, section > ul, section > ol, section > h3{max-width:68ch}
+ul,ol{margin:0;padding-left:1.25em;display:flex;flex-direction:column;gap:6px}
+strong{font-weight:600}
+code{font:400 .88em var(--mono);background:var(--sunk);padding:1px 5px;border-radius:3px}
+
+/* Letras coloridas no texto */
+.k{display:inline-grid;place-items:center;width:1.45em;height:1.45em;font:700 .85em/1 var(--display);color:var(--on-hue);vertical-align:.05em}
+
+/* Figuras */
+figure{margin:0;display:flex;flex-direction:column;gap:10px;position:relative}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.scroll svg{display:block;width:100%;min-width:820px;height:auto;color:var(--ink)}
+figcaption{font-size:.86rem;line-height:1.5;color:var(--muted);max-width:72ch}
+figcaption b{color:var(--ink);font-weight:600}
+svg text{font-family:var(--body);fill:var(--ink)}
+svg .disp{font-family:var(--display);font-weight:700}
+svg .mono{font-family:var(--mono);letter-spacing:.08em}
+svg .on{fill:var(--on-hue)}
+svg .mu{fill:var(--muted)}
+svg .b{font-weight:600}
+svg .ln{stroke:var(--ink);stroke-width:1.5;fill:none}
+svg .ln-mu{stroke:var(--muted);stroke-width:1.5;fill:none}
+svg .ln-bold{stroke:var(--ink);stroke-width:3;fill:none;stroke-linejoin:round;stroke-linecap:round}
+svg .dash{stroke-dasharray:5 4}
+svg .ah{fill:var(--ink)} svg .ah-mu{fill:var(--muted)}
+svg .bx{fill:var(--surface);stroke:var(--rule);stroke-width:1.5}
+svg .bx-ink{fill:var(--ink);stroke:var(--ink)}
+svg .t-ground{fill:var(--ground)}
+svg .bx-out{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 4}
+svg .gap{stroke:var(--surface);stroke-width:4}
+svg .gap2{stroke:var(--surface);stroke-width:2}
+svg .hub{fill:var(--surface)}
+
+/* Gráfico */
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .hit{fill:transparent;cursor:crosshair;outline:none}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);padding:6px 10px;font-size:.78rem;line-height:1.4;transform:translate(-50%,calc(-100% - 14px));white-space:nowrap;z-index:2}
+.tip b{display:block;font:600 1.05rem/1.2 var(--body)}
+details.data{font-size:.88rem}
+details.data summary{cursor:pointer;font:400 .82rem var(--mono);color:var(--muted);padding:4px 0}
+details.data .tbl{margin-top:8px}
+details.data table{min-width:420px}
+
+/* Tabelas */
+.tbl{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:780px;font-size:.88rem;line-height:1.4}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+tr:last-child > td{border-bottom:0}
+thead th{font:600 .8rem/1.3 var(--body);background:var(--sunk)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--mono);font-size:.82rem}
+
+/* Cores: blue, amber, teal, purple, red, slate */
+.tiles .blue, .k.blue{background:var(--blue)} .tiles span.w, .k.w{width:auto;padding:0 8px}
+svg .bx-blue{fill:var(--blue-tint);stroke:var(--blue);stroke-width:1.5} svg .hd-blue, svg .f-blue{fill:var(--blue)} svg .lv-blue{fill:var(--blue);fill-opacity:.36} svg .s-blue{stroke:var(--blue);stroke-width:2;fill:none} svg .t-blue{fill:var(--blue)}
+th.blue{background:var(--blue);color:var(--on-hue)} td.blue{background:var(--blue-tint)}
+.tiles .amber, .k.amber{background:var(--amber)}
+svg .bx-amber{fill:var(--amber-tint);stroke:var(--amber);stroke-width:1.5} svg .hd-amber, svg .f-amber{fill:var(--amber)} svg .lv-amber{fill:var(--amber);fill-opacity:.36} svg .s-amber{stroke:var(--amber);stroke-width:2;fill:none} svg .t-amber{fill:var(--amber)}
+th.amber{background:var(--amber);color:var(--on-hue)} td.amber{background:var(--amber-tint)}
+.tiles .teal, .k.teal{background:var(--teal)}
+svg .bx-teal{fill:var(--teal-tint);stroke:var(--teal);stroke-width:1.5} svg .hd-teal, svg .f-teal{fill:var(--teal)} svg .lv-teal{fill:var(--teal);fill-opacity:.36} svg .s-teal{stroke:var(--teal);stroke-width:2;fill:none} svg .t-teal{fill:var(--teal)}
+th.teal{background:var(--teal);color:var(--on-hue)} td.teal{background:var(--teal-tint)}
+.tiles .purple, .k.purple{background:var(--purple)}
+svg .bx-purple{fill:var(--purple-tint);stroke:var(--purple);stroke-width:1.5} svg .hd-purple, svg .f-purple{fill:var(--purple)} svg .lv-purple{fill:var(--purple);fill-opacity:.36} svg .s-purple{stroke:var(--purple);stroke-width:2;fill:none} svg .t-purple{fill:var(--purple)}
+th.purple{background:var(--purple);color:var(--on-hue)} td.purple{background:var(--purple-tint)}
+.tiles .red, .k.red{background:var(--red)}
+svg .bx-red{fill:var(--red-tint);stroke:var(--red);stroke-width:1.5} svg .hd-red, svg .f-red{fill:var(--red)} svg .lv-red{fill:var(--red);fill-opacity:.36} svg .s-red{stroke:var(--red);stroke-width:2;fill:none} svg .t-red{fill:var(--red)}
+th.red{background:var(--red);color:var(--on-hue)} td.red{background:var(--red-tint)}
+.tiles .slate, .k.slate{background:var(--slate)}
+svg .bx-slate{fill:var(--slate-tint);stroke:var(--slate);stroke-width:1.5} svg .hd-slate, svg .f-slate{fill:var(--slate)} svg .lv-slate{fill:var(--slate);fill-opacity:.36} svg .s-slate{stroke:var(--slate);stroke-width:2;fill:none} svg .t-slate{fill:var(--slate)}
+th.slate{background:var(--slate);color:var(--on-hue)} td.slate{background:var(--slate-tint)}
+svg .bar{fill:var(--accent)}
+svg .ref{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3}
+svg .s-ink{stroke:var(--ink);stroke-width:2;fill:none}
+/* tela de projeção: sempre escura com letra clara, nos dois temas */
+svg .scr{fill:#0B1116;stroke:#0B1116} svg .scr-tx{fill:#F3F6F7}
+svg .f-sunk{fill:var(--sunk)} svg .f-surface{fill:var(--surface)} svg .f-ink{fill:var(--ink)}
+svg .t-good{fill:var(--good)} svg .t-bad{fill:var(--bad)}
+svg .f-good{fill:var(--good)} svg .f-bad{fill:var(--bad)} svg .s-good{stroke:var(--good);stroke-width:2;fill:none} svg .s-bad{stroke:var(--bad);stroke-width:2;fill:none}
+td.n, th.n{text-align:center}
+td small{display:block;color:var(--muted);font-size:.8rem}
+
+/* Vídeo do tutorial */
+.video{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);gap:20px;align-items:start;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.video video{width:100%;height:auto;display:block;background:#000}
+.video div{display:flex;flex-direction:column;gap:8px;font-size:.93rem}
+@media (max-width:640px){.video{grid-template-columns:1fr}}
+
+/* Voltar ao painel */
+.back{font:500 .78rem var(--mono);text-decoration:none;color:var(--muted)}
+.back:hover{color:var(--accent)}
+
+/* Ficha da matriz (acima de cada exemplo) */
+.ficha{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border:1px solid var(--rule);background:var(--surface)}
+.ficha div{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 -1px -1px 0}
+.ficha dt{font:500 .68rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ficha dd{margin:0;font-size:.9rem;line-height:1.4}
+dl{margin:0}
+
+/* Blocos */
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.box{background:var(--surface);border:1px solid var(--rule);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.box h4{font:600 1.1rem/1.2 var(--display)}
+.box ul{font-size:.93rem}
+.note{background:var(--sunk);padding:16px 20px;max-width:72ch;font-size:.94rem;display:flex;flex-direction:column;gap:6px}
+.note h4{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* Passo a passo */
+.steps{list-style:none;padding:0;counter-reset:st;gap:0;max-width:none;border-top:1px solid var(--rule)}
+.steps li{counter-increment:st;display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font:700 1.7rem/1 var(--display);color:var(--muted);grid-row:span 2}
+.steps h4{font:600 1.1rem/1.25 var(--display)}
+.steps p{font-size:.95rem;max-width:64ch;grid-column:2}
+
+/* Erros comuns */
+.errs{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.errs div{padding:16px 16px 16px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
+.errs h4{font:600 1.05rem/1.25 var(--display)}
+.errs p{font-size:.92rem}
+.errs .fix{color:var(--muted)}
+.errs .fix b{color:var(--ink);font-weight:600}
+
+/* Checklist */
+.check{list-style:none;padding:0;gap:0;max-width:none;border:1px solid var(--rule);background:var(--surface)}
+.check li{border-bottom:1px solid var(--rule)}
+.check li:last-child{border-bottom:0}
+.check label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:11px 16px;cursor:pointer;font-size:.94rem;align-items:start}
+.check input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--teal)}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font:400 .82rem var(--mono);color:var(--muted)}
+.bar b{color:var(--ink);font-weight:500}
+
+/* Exercício */
+.quiz{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);background:var(--surface)}
+.q{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:14px 16px;border-bottom:1px solid var(--rule)}
+.q:last-child{border-bottom:0}
+@media (min-width:720px){.q{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
+.q p{font-size:.95rem}
+.q .why{grid-column:1/-1;font-size:.86rem;color:var(--muted)}
+.q .why b{font-weight:600}
+.q .why.ok b{color:var(--good)} .q .why.no b{color:var(--bad)}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts button{min-width:40px;height:40px;padding:0 10px;border:1.5px solid var(--rule);background:var(--surface);color:var(--ink);font:700 1.1rem/1 var(--display);cursor:pointer;border-radius:0}
+.opts button:hover:not(:disabled){border-color:var(--ink)}
+.opts button:disabled{cursor:default;opacity:.45}
+.opts button.right{background:var(--good-tint);border-color:var(--good);color:var(--good);opacity:1}
+.opts button.wrong{background:var(--bad-tint);border-color:var(--bad);color:var(--bad);opacity:1}
+.btn{border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:500 .82rem var(--mono);padding:7px 14px;cursor:pointer;border-radius:0}
+.btn:hover{background:var(--ink);color:var(--ground)}
+
+/* Glossário */
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.gloss div{padding:12px 0;border-bottom:1px solid var(--rule)}
+.gloss dt{font:600 1.02rem/1.3 var(--display)}
+.gloss dd{margin:2px 0 0;font-size:.9rem;color:var(--muted)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:.84rem;color:var(--muted);max-width:72ch}
+</style>
+</head>
+<body>
+<div class="page" lang="pt-BR" data-estudo="mesa">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="blue w">IN</span><span class="teal w">MIX</span><span class="amber w">OUT</span></div>
+  <h1>A mesa de som e o caminho do sinal</h1>
+  <p class="lead">Um guia de estudo para saber o que cada controle do canal faz, por onde o sinal passa dentro da mesa e a que saída cada barramento leva, em mesa analógica ou digital.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O que a mesa faz</a></li>
+    <li><a href="#canal">O canal, de cima para baixo</a></li>
+    <li><a href="#barras">Barramentos e saídas</a></li>
+    <li><a href="#prepos">Pré-fader, pós-fader e os pontos de tomada</a></li>
+    <li><a href="#digital">Mesa analógica e mesa digital</a></li>
+    <li><a href="#blocos">Como ler o diagrama de blocos</a></li>
+    <li><a href="#passo">Passo a passo: zerar a mesa</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O que a mesa faz</h2>
+  <p>Uma mesa de som (<em>mixer</em>, console) parece complicada porque repete a mesma coluna de botões muitas vezes. Quem entende uma entende todas. E a mesa faz só três trabalhos, sempre na mesma ordem.</p>
+  <ul>
+    <li><span class="k blue w">IN</span> <strong>Recebe.</strong> Cada fonte (um microfone, um violão, o computador) entra em um <strong>canal</strong>. O canal prepara o sinal: acerta o nível, tira o que sobra e ajusta o timbre.</li>
+    <li><span class="k teal w">MIX</span> <strong>Mistura.</strong> Cada canal manda o seu sinal para um ou mais <strong>barramentos</strong> (<em>bus</em>), na quantidade que você escolhe. O barramento soma tudo o que recebe. Cada barramento é uma mixagem.</li>
+    <li><span class="k amber w">OUT</span> <strong>Entrega.</strong> Cada barramento termina em uma <strong>saída</strong>, ligada a um destino: as caixas da frente, o retorno de um músico, um efeito, a gravação, a transmissão.</li>
+  </ul>
+  <p>Pense em uma cozinha. Cada canal é um ingrediente já lavado e cortado. Cada barramento é uma panela. O mesmo ingrediente entra em várias panelas, em quantidades diferentes: muita voz e pouco baixo na panela do retorno da cantora, tudo equilibrado na panela do público. E cada panela é servida em uma mesa diferente. O operador não faz uma mixagem: faz várias ao mesmo tempo, com os mesmos ingredientes.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 348" role="img" aria-label="Visão geral da mesa em quatro colunas. O que entra: microfones, instrumentos por direct box, teclado e computador. Os canais: um por fonte, com ganho, filtro e equalizador, envios, fader e endereçamento. Os barramentos: grupos, que desembocam no master LR; o master, que alimenta a matriz; e os auxiliares. Para onde vai: o master vai às caixas da frente; a matriz, a outras salas, gravação e transmissão; os auxiliares, aos retornos de palco e aos efeitos.">
+  <defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+  <text class="mono mu" x="18" y="28" font-size="10.5">IN · O QUE ENTRA</text>
+  <text class="mono mu" x="236" y="28" font-size="10.5">OS CANAIS</text>
+  <text class="mono mu" x="470" y="28" font-size="10.5">MIX · OS BARRAMENTOS</text>
+  <text class="mono mu" x="724" y="28" font-size="10.5">OUT · PARA ONDE VAI</text>
+
+  <rect class="bx-blue" x="18" y="46" width="170" height="44"/>
+  <text class="b" x="103" y="65" font-size="12" text-anchor="middle">Microfones</text>
+  <text class="mu" x="103" y="81" font-size="10.5" text-anchor="middle">com fio e sem fio</text>
+  <rect class="bx-blue" x="18" y="106" width="170" height="44"/>
+  <text class="b" x="103" y="125" font-size="12" text-anchor="middle">Instrumentos</text>
+  <text class="mu" x="103" y="141" font-size="10.5" text-anchor="middle">por direct box (DI)</text>
+  <rect class="bx-blue" x="18" y="166" width="170" height="44"/>
+  <text class="b" x="103" y="185" font-size="12" text-anchor="middle">Teclado</text>
+  <text class="mu" x="103" y="201" font-size="10.5" text-anchor="middle">saída de linha</text>
+  <rect class="bx-blue" x="18" y="226" width="170" height="44"/>
+  <text class="b" x="103" y="245" font-size="12" text-anchor="middle">Computador e tocador</text>
+  <text class="mu" x="103" y="261" font-size="10.5" text-anchor="middle">som de vídeos e trilhas</text>
+  <line class="ln" x1="190" y1="68" x2="232" y2="68" marker-end="url(#ar1)"/>
+  <line class="ln" x1="190" y1="128" x2="232" y2="128" marker-end="url(#ar1)"/>
+  <line class="ln" x1="190" y1="188" x2="232" y2="188" marker-end="url(#ar1)"/>
+  <line class="ln" x1="190" y1="248" x2="232" y2="248" marker-end="url(#ar1)"/>
+
+  <rect class="bx" x="236" y="46" width="170" height="224"/>
+  <text class="b" x="321" y="72" font-size="12" text-anchor="middle">Um canal por fonte</text>
+  <rect class="bx-blue" x="252" y="88" width="138" height="30"/>
+  <text x="321" y="107" font-size="11" text-anchor="middle">ganho</text>
+  <rect class="bx-blue" x="252" y="128" width="138" height="30"/>
+  <text x="321" y="147" font-size="11" text-anchor="middle">filtro e equalizador</text>
+  <rect class="bx-teal" x="252" y="168" width="138" height="30"/>
+  <text x="321" y="187" font-size="11" text-anchor="middle">envios (auxiliares)</text>
+  <rect class="bx-teal" x="252" y="208" width="138" height="30"/>
+  <text x="321" y="227" font-size="11" text-anchor="middle">fader e endereçamento</text>
+  <text class="mu" x="321" y="258" font-size="10.5" text-anchor="middle">a mesma coluna, repetida</text>
+
+  <line class="ln" x1="408" y1="68" x2="466" y2="68" marker-end="url(#ar1)"/>
+  <line class="ln" x1="408" y1="128" x2="466" y2="128" marker-end="url(#ar1)"/>
+  <line class="ln" x1="408" y1="248" x2="466" y2="248" marker-end="url(#ar1)"/>
+
+  <rect class="hd-teal" x="470" y="46" width="170" height="44"/>
+  <text class="on b" x="555" y="65" font-size="12" text-anchor="middle">Grupos</text>
+  <text class="on" x="555" y="81" font-size="10.5" text-anchor="middle">somam canais parecidos</text>
+  <line class="ln" x1="555" y1="91" x2="555" y2="103" marker-end="url(#ar1)"/>
+  <rect class="hd-teal" x="470" y="106" width="170" height="44"/>
+  <text class="on b" x="555" y="125" font-size="12" text-anchor="middle">Master LR</text>
+  <text class="on" x="555" y="141" font-size="10.5" text-anchor="middle">a mixagem principal</text>
+  <line class="ln" x1="555" y1="151" x2="555" y2="163" marker-end="url(#ar1)"/>
+  <rect class="hd-teal" x="470" y="166" width="170" height="44"/>
+  <text class="on b" x="555" y="185" font-size="12" text-anchor="middle">Matriz</text>
+  <text class="on" x="555" y="201" font-size="10.5" text-anchor="middle">mistura de barramentos</text>
+  <rect class="hd-teal" x="470" y="226" width="170" height="44"/>
+  <text class="on b" x="555" y="245" font-size="12" text-anchor="middle">Auxiliares</text>
+  <text class="on" x="555" y="261" font-size="10.5" text-anchor="middle">mixagens extras</text>
+
+  <line class="ln" x1="642" y1="128" x2="720" y2="128" marker-end="url(#ar1)"/>
+  <line class="ln" x1="642" y1="188" x2="720" y2="188" marker-end="url(#ar1)"/>
+  <line class="ln" x1="642" y1="248" x2="720" y2="248" marker-end="url(#ar1)"/>
+  <path class="ln" d="M600 271 V308 H720" marker-end="url(#ar1)"/>
+
+  <rect class="bx-amber" x="724" y="106" width="158" height="44"/>
+  <text class="b" x="803" y="125" font-size="12" text-anchor="middle">Caixas da frente</text>
+  <text class="mu" x="803" y="141" font-size="10.5" text-anchor="middle">o PA</text>
+  <rect class="bx-amber" x="724" y="166" width="158" height="44"/>
+  <text class="b" x="803" y="185" font-size="12" text-anchor="middle">Outras salas</text>
+  <text class="mu" x="803" y="201" font-size="10.5" text-anchor="middle">gravação e transmissão</text>
+  <rect class="bx-amber" x="724" y="226" width="158" height="44"/>
+  <text class="b" x="803" y="245" font-size="12" text-anchor="middle">Retornos de palco</text>
+  <text class="mu" x="803" y="261" font-size="10.5" text-anchor="middle">caixas de chão e fones</text>
+  <rect class="bx-amber" x="724" y="286" width="158" height="44"/>
+  <text class="b" x="803" y="305" font-size="12" text-anchor="middle">Efeitos</text>
+  <text class="mu" x="803" y="321" font-size="10.5" text-anchor="middle">reverb e delay</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> A mesa em três trabalhos: recebe as fontes nos canais, mistura nos barramentos e entrega cada mixagem a uma saída. As ligações mostradas são as mais comuns; a sua mesa pode ter menos barramentos, ou mais.</figcaption>
+  </figure>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>Diante de qualquer mesa, faça três perguntas: onde este som entra, para que barramentos ele vai e em que saída cada barramento termina. Quem responde às três sabe operar a mesa, mesmo sem nunca ter visto o modelo.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="canal">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>O canal, de cima para baixo</h2>
+  <p>Na mesa analógica, cada canal é uma coluna de controles (<em>channel strip</em>). Os controles estão dispostos, de cima para baixo, quase na mesma ordem em que o sinal passa por eles. Ler a coluna de cima para baixo é, portanto, seguir o sinal. Na mesa digital, os mesmos controles existem, mas aparecem na tela quando você seleciona o canal (módulo 5).</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 460" role="img" aria-label="Canal de mesa analógica, de cima para baixo, em quatro partes. Entrada: conectores XLR e P10, chaves de phantom de mais 48 volts e de pad, e o botão de ganho. Filtro e equalizador: chave do filtro passa-altas e três botões de equalização. Envios: os botões de auxiliar, cópias do canal para outras mixagens. Mixagem principal: pan, mute, PFL, botões de endereçamento L-R, 1-2 e 3-4, e o fader.">
+  <rect class="bx" x="336" y="16" width="140" height="432"/>
+  <line class="grid" x1="336" y1="134" x2="476" y2="134"/>
+  <line class="grid" x1="336" y1="254" x2="476" y2="254"/>
+  <line class="grid" x1="336" y1="310" x2="476" y2="310"/>
+
+  <circle class="bx-slate" cx="386" cy="38" r="10"/><circle class="bx-slate" cx="426" cy="38" r="10"/>
+  <rect class="bx-slate" x="364" y="68" width="36" height="17"/><text x="382" y="81" font-size="10.5" text-anchor="middle">+48</text>
+  <rect class="bx-slate" x="412" y="68" width="36" height="17"/><text x="430" y="81" font-size="10.5" text-anchor="middle">PAD</text>
+  <circle class="f-blue" cx="406" cy="112" r="14"/><line class="gap2" x1="406" y1="112" x2="396" y2="122"/>
+
+  <rect class="bx-slate" x="388" y="144" width="36" height="17"/><text x="406" y="157" font-size="10.5" text-anchor="middle">HPF</text>
+  <circle class="f-purple" cx="406" cy="184" r="11"/><line class="gap2" x1="406" y1="184" x2="406" y2="173"/>
+  <circle class="f-purple" cx="406" cy="210" r="11"/><line class="gap2" x1="406" y1="210" x2="406" y2="199"/>
+  <circle class="f-purple" cx="406" cy="236" r="11"/><line class="gap2" x1="406" y1="236" x2="406" y2="225"/>
+
+  <circle class="f-teal" cx="406" cy="270" r="11"/><line class="gap2" x1="406" y1="270" x2="398" y2="278"/>
+  <circle class="f-teal" cx="406" cy="295" r="11"/><line class="gap2" x1="406" y1="295" x2="398" y2="303"/>
+
+  <circle class="f-amber" cx="406" cy="328" r="11"/><line class="gap2" x1="406" y1="328" x2="406" y2="317"/>
+  <rect class="hd-red" x="360" y="346" width="40" height="17"/><text class="on" x="380" y="359" font-size="10.5" text-anchor="middle">MUTE</text>
+  <rect class="bx-slate" x="412" y="346" width="40" height="17"/><text x="432" y="359" font-size="10.5" text-anchor="middle">PFL</text>
+  <rect class="bx-slate" x="352" y="376" width="38" height="17"/><text x="371" y="389" font-size="10.5" text-anchor="middle">L-R</text>
+  <rect class="bx-slate" x="352" y="399" width="38" height="17"/><text x="371" y="412" font-size="10.5" text-anchor="middle">1-2</text>
+  <rect class="bx-slate" x="352" y="422" width="38" height="17"/><text x="371" y="435" font-size="10.5" text-anchor="middle">3-4</text>
+  <rect class="f-sunk" x="435" y="374" width="6" height="68"/>
+  <rect class="hd-amber" x="422" y="410" width="32" height="14"/>
+
+  <path class="ln-mu" stroke-width="1" d="M326 22 H318 V128 H326"/>
+  <text class="mono t-blue b" x="306" y="66" font-size="10.5" text-anchor="end">1 · ENTRADA</text>
+  <text class="mu" x="306" y="84" font-size="11" text-anchor="end">leva a fonte ao nível</text>
+  <text class="mu" x="306" y="99" font-size="11" text-anchor="end">de trabalho da mesa</text>
+  <path class="ln-mu" stroke-width="1" d="M326 140 H318 V248 H326"/>
+  <text class="mono t-purple b" x="306" y="186" font-size="10.5" text-anchor="end">2 · FILTRO E EQ</text>
+  <text class="mu" x="306" y="204" font-size="11" text-anchor="end">tira o que sobra e</text>
+  <text class="mu" x="306" y="219" font-size="11" text-anchor="end">acerta o som da fonte</text>
+  <path class="ln-mu" stroke-width="1" d="M326 260 H318 V304 H326"/>
+  <text class="mono t-teal b" x="306" y="272" font-size="10.5" text-anchor="end">3 · ENVIOS</text>
+  <text class="mu" x="306" y="290" font-size="11" text-anchor="end">cópias do canal para</text>
+  <text class="mu" x="306" y="305" font-size="11" text-anchor="end">outras mixagens</text>
+  <path class="ln-mu" stroke-width="1" d="M326 316 H318 V442 H326"/>
+  <text class="mono t-amber b" x="306" y="370" font-size="10.5" text-anchor="end">4 · MIXAGEM PRINCIPAL</text>
+  <text class="mu" x="306" y="388" font-size="11" text-anchor="end">quanto do canal vai,</text>
+  <text class="mu" x="306" y="403" font-size="11" text-anchor="end">e para onde</text>
+
+  <g class="ln-mu" stroke-width="1">
+    <line x1="478" y1="38" x2="494" y2="38"/><line x1="478" y1="77" x2="494" y2="77"/><line x1="478" y1="112" x2="494" y2="112"/>
+    <line x1="478" y1="153" x2="494" y2="153"/><line x1="478" y1="210" x2="494" y2="204"/><line x1="478" y1="282" x2="494" y2="276"/>
+    <line x1="478" y1="328" x2="494" y2="320"/><line x1="478" y1="355" x2="494" y2="355"/><line x1="478" y1="396" x2="494" y2="390"/>
+    <line x1="478" y1="424" x2="494" y2="428"/>
+  </g>
+  <text class="b" x="500" y="35" font-size="11.5">Entradas</text>
+  <text class="mu" x="500" y="50" font-size="10.5">XLR para microfone e P10 para linha</text>
+  <text class="b" x="500" y="74" font-size="11.5">Phantom (+48 V) e pad</text>
+  <text class="mu" x="500" y="89" font-size="10.5">alimentação para condensador e DI ativa; redutor de nível</text>
+  <text class="b" x="500" y="109" font-size="11.5">Ganho (gain, trim)</text>
+  <text class="mu" x="500" y="124" font-size="10.5">quanto o pré-amplificador aumenta o sinal que entra</text>
+  <text class="b" x="500" y="150" font-size="11.5">Filtro passa-altas (HPF, low cut)</text>
+  <text class="mu" x="500" y="165" font-size="10.5">corta os graves que a fonte não usa</text>
+  <text class="b" x="500" y="201" font-size="11.5">Equalizador (EQ)</text>
+  <text class="mu" x="500" y="216" font-size="10.5">agudos, médios e graves: corta ou realça cada faixa</text>
+  <text class="b" x="500" y="273" font-size="11.5">Auxiliares (aux, send)</text>
+  <text class="mu" x="500" y="288" font-size="10.5">um botão para cada mixagem extra: retornos e efeitos</text>
+  <text class="b" x="500" y="317" font-size="11.5">Pan</text>
+  <text class="mu" x="500" y="332" font-size="10.5">posição do canal entre a esquerda e a direita</text>
+  <text class="b" x="500" y="353" font-size="11.5">Mute e PFL (solo)</text>
+  <text class="mu" x="500" y="368" font-size="10.5">mute cala o canal; PFL leva o canal ao fone e ao medidor</text>
+  <text class="b" x="500" y="388" font-size="11.5">Endereçamento (routing)</text>
+  <text class="mu" x="500" y="403" font-size="10.5">os barramentos que recebem o canal: L-R e grupos</text>
+  <text class="b" x="500" y="426" font-size="11.5">Fader</text>
+  <text class="mu" x="500" y="441" font-size="10.5">quanto do canal vai para a mixagem principal</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> O canal de uma mesa analógica típica, em esquema. A ordem e o número de botões mudam de um modelo para outro, mas as quatro partes estão em todas as mesas: entrada, filtro e equalizador, envios e mixagem principal.</figcaption>
+  </figure>
+
+  <h3>1. A entrada</h3>
+  <ul>
+    <li><strong>Phantom (+48 V)</strong>: alimentação enviada pelo próprio cabo XLR a microfones condensadores e direct boxes ativas. Em mesas pequenas, uma chave liga o phantom de todos os canais, ou de um bloco. Quem precisa e os cuidados estão no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>.</li>
+    <li><strong>Pad</strong> e <strong>ganho</strong> (<em>gain</em>, <em>trim</em>): definem com que nível o sinal entra na mesa. São o assunto do estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader: a estrutura de ganho</a>.</li>
+    <li><strong>Inversão de polaridade</strong> (Ø): comum nas digitais e em algumas analógicas. Vira a onda “de cabeça para baixo”, para corrigir dois microfones que se cancelam (estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>).</li>
+  </ul>
+
+  <h3>2. Filtro e equalizador</h3>
+  <p>O <strong>filtro passa-altas</strong> (HPF, <em>low cut</em>) corta os graves abaixo de uma frequência: nas analógicas, uma chave com frequência fixa, em geral entre 75 e 100 Hz; nas digitais, ajustável. O <strong>equalizador</strong> vem em seguida, com dois a quatro botões de corte e realce. Como usar os dois é assunto do estudo <a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>. Aqui basta saber que ficam depois do ganho e antes do fader.</p>
+
+  <h3>3. Os envios auxiliares</h3>
+  <p>Cada botão de auxiliar (<em>aux</em>, <em>send</em>, às vezes <em>mon</em> ou <em>FX</em>) manda uma cópia do canal para um barramento auxiliar. Ele não tira nada da mixagem principal: só define quanto do canal entra naquela mixagem extra. Quatro auxiliares, quatro botões por canal, quatro mixagens além da principal. O módulo 4 explica o envio pré-fader e o pós-fader.</p>
+
+  <h3>4. A mixagem principal</h3>
+  <ul>
+    <li><strong>Pan</strong>: distribui o canal entre a esquerda e a direita. Em canais estéreo, chama-se <em>balance</em>.</li>
+    <li><strong>Mute</strong>: cala o canal no master e nos envios pós-fader. Na maioria das mesas, também nos pré-fader, mas há exceções: teste na sua. Em algumas marcas, a lógica é invertida: o botão se chama ON, e o canal só soa com ele aceso.</li>
+    <li><strong>PFL</strong> ou <strong>solo</strong>: leva o canal ao fone e ao medidor, sem mudar o que sai nas caixas (módulo 4).</li>
+    <li><strong>Endereçamento</strong> (<em>routing</em>, <em>assign</em>): escolhe que barramentos recebem o canal depois do fader. L-R (ou ST, MAIN) manda ao master; 1-2 e 3-4, aos grupos. Sem nenhum botão apertado, o canal só sai nos auxiliares.</li>
+    <li><strong>Fader</strong>: quanto do canal vai para os barramentos escolhidos no endereçamento.</li>
+  </ul>
+
+  <h3>Canais estéreo e outras entradas</h3>
+  <p>Quase toda mesa tem também <strong>canais estéreo</strong> (duas entradas de linha com um só fader, para teclado e computador), <strong>retornos</strong> (<em>FX return</em>, <em>stereo return</em>: entradas de linha simples para a volta de um efeito) e uma entrada de gravador ou USB (<em>2TR in</em>), que cai no master ou só no fone, conforme uma chave.</p>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Ligar ou desligar o phantom, trocar um cabo ou apertar a chave de pad com o canal aberto produz um estalo forte nas caixas e nos retornos. Antes de qualquer uma dessas ações, feche o canal com o mute e confira que ele não está aberto em nenhum auxiliar pré-fader que o mute da sua mesa não corte.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="barras">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Barramentos e saídas</h2>
+  <p>Um barramento (<em>bus</em>) é um caminho interno da mesa que recebe o sinal de vários canais e soma tudo. Por fora, você não vê o barramento. Vê o controle que manda o canal para ele (um botão de envio ou de endereçamento), o controle geral dele (um fader ou um botão master) e o conector de saída em que ele termina.</p>
+  <p>No diagrama da mesa, os canais são linhas horizontais, e os barramentos, linhas verticais. Em cada cruzamento há um controle que decide se aquele canal entra naquele barramento, e com quanto.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 372" role="img" aria-label="Grade com três canais em linhas (voz da cantora, violão e teclado) e quatro barramentos em colunas (auxiliar 1, auxiliar 2, grupo 1-2 e master LR). Um ponto no cruzamento indica envio. A voz vai aos dois auxiliares e ao grupo; o violão, aos dois auxiliares e ao master; o teclado, ao auxiliar 1 e ao master. O grupo passa pelo seu fader e desemboca no master. Cada barramento termina no seu controle geral e em uma saída: retorno de palco, efeito e caixas da frente; uma cópia do master alimenta a matriz, que vai a outra sala e à gravação.">
+  <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+  <g font-size="10.5" text-anchor="middle">
+    <text class="mono mu" x="235" y="34">AUX 1</text><text class="mono mu" x="345" y="34">AUX 2</text>
+    <text class="mono mu" x="455" y="34">GRUPO 1-2</text><text class="mono mu" x="565" y="34">MASTER LR</text>
+  </g>
+  <line class="ln" x1="148" y1="73" x2="592" y2="73"/>
+  <line class="ln" x1="148" y1="123" x2="592" y2="123"/>
+  <line class="ln" x1="148" y1="173" x2="592" y2="173"/>
+  <line class="s-teal" stroke-width="3" x1="235" y1="44" x2="235" y2="262"/>
+  <line class="s-teal" stroke-width="3" x1="345" y1="44" x2="345" y2="262"/>
+  <line class="s-teal" stroke-width="3" x1="455" y1="44" x2="455" y2="206"/>
+  <line class="s-teal" stroke-width="3" x1="565" y1="44" x2="565" y2="262"/>
+
+  <rect class="bx-blue" x="18" y="56" width="130" height="34"/>
+  <text class="b" x="83" y="77" font-size="11.5" text-anchor="middle">Voz da cantora</text>
+  <rect class="bx-blue" x="18" y="106" width="130" height="34"/>
+  <text class="b" x="83" y="127" font-size="11.5" text-anchor="middle">Violão</text>
+  <rect class="bx-blue" x="18" y="156" width="130" height="34"/>
+  <text class="b" x="83" y="177" font-size="11.5" text-anchor="middle">Teclado</text>
+
+  <g class="f-ink">
+    <circle cx="235" cy="73" r="5.5"/><circle cx="345" cy="73" r="5.5"/><circle cx="455" cy="73" r="5.5"/>
+    <circle cx="235" cy="123" r="5.5"/><circle cx="345" cy="123" r="5.5"/><circle cx="565" cy="123" r="5.5"/>
+    <circle cx="235" cy="173" r="5.5"/><circle cx="565" cy="173" r="5.5"/>
+    <circle cx="565" cy="223" r="5.5"/>
+  </g>
+
+  <rect class="hd-teal" x="402" y="206" width="106" height="34"/>
+  <text class="on b" x="455" y="227" font-size="11" text-anchor="middle">Fader do grupo</text>
+  <line class="ln" x1="510" y1="223" x2="556" y2="223" marker-end="url(#ar3)"/>
+
+  <rect class="hd-teal" x="182" y="262" width="106" height="34"/>
+  <text class="on b" x="235" y="283" font-size="11" text-anchor="middle">Master do aux 1</text>
+  <rect class="hd-teal" x="292" y="262" width="106" height="34"/>
+  <text class="on b" x="345" y="283" font-size="11" text-anchor="middle">Master do aux 2</text>
+  <rect class="hd-teal" x="512" y="262" width="106" height="34"/>
+  <text class="on b" x="565" y="283" font-size="11" text-anchor="middle">Fader master</text>
+  <line class="ln" x1="235" y1="297" x2="235" y2="318" marker-end="url(#ar3)"/>
+  <line class="ln" x1="345" y1="297" x2="345" y2="318" marker-end="url(#ar3)"/>
+  <line class="ln" x1="565" y1="297" x2="565" y2="318" marker-end="url(#ar3)"/>
+  <rect class="bx-amber" x="182" y="322" width="106" height="34"/>
+  <text class="b" x="235" y="343" font-size="11" text-anchor="middle">Retorno de palco</text>
+  <rect class="bx-amber" x="292" y="322" width="106" height="34"/>
+  <text class="b" x="345" y="343" font-size="11" text-anchor="middle">Efeito (reverb)</text>
+  <rect class="bx-amber" x="512" y="322" width="106" height="34"/>
+  <text class="b" x="565" y="343" font-size="11" text-anchor="middle">Caixas da frente</text>
+
+  <line class="ln" x1="620" y1="279" x2="686" y2="279" marker-end="url(#ar3)"/>
+  <rect class="hd-teal" x="690" y="262" width="106" height="34"/>
+  <text class="on b" x="743" y="283" font-size="11" text-anchor="middle">Matriz</text>
+  <line class="ln" x1="743" y1="297" x2="743" y2="318" marker-end="url(#ar3)"/>
+  <rect class="bx-amber" x="668" y="322" width="150" height="34"/>
+  <text class="b" x="743" y="343" font-size="11" text-anchor="middle">Outra sala, gravação</text>
+
+  <circle class="f-ink" cx="640" cy="69" r="5.5"/>
+  <text x="654" y="73" font-size="11">ponto: o canal envia</text>
+  <text x="654" y="88" font-size="11">para este barramento</text>
+  <text class="mu" x="634" y="121" font-size="11">Sem ponto, o canal não</text>
+  <text class="mu" x="634" y="136" font-size="11">entra naquela mixagem.</text>
+  <text class="mu" x="634" y="169" font-size="11">A voz vai ao master pelo</text>
+  <text class="mu" x="634" y="184" font-size="11">grupo, e não direto.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> Canais em linhas, barramentos em colunas. Cada ponto é um botão de envio aberto ou um botão de endereçamento apertado. Embaixo de cada barramento há um controle geral e uma saída.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%">Barramento</th><th style="width:22%">O que soma</th><th style="width:22%">Como o canal chega a ele</th><th style="width:17%">Controle geral</th><th>Uso típico</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Master LR</strong> (main, stereo, mix)</td><td>Os canais e os grupos endereçados a ele.</td><td>Botão L-R do canal, fader e pan.</td><td>Fader master.</td><td>As caixas da frente. É a mixagem que o público ouve.</td></tr>
+        <tr><td><strong>Grupo</strong> (subgrupo)</td><td>Os canais endereçados a ele.</td><td>Botões 1-2, 3-4 do canal, fader e pan.</td><td>Fader do grupo, que desemboca no master.</td><td>Controlar e processar um conjunto: vozes, bateria, coral.</td></tr>
+        <tr><td><strong>Auxiliar</strong> (aux, mix)</td><td>Uma cópia de cada canal, na medida do botão de envio.</td><td>Botão de auxiliar do canal, em pré-fader ou pós-fader.</td><td>Master do auxiliar.</td><td>Retornos de palco, efeitos e outras mixagens independentes.</td></tr>
+        <tr><td><strong>Matriz</strong> (matrix)</td><td>Outros barramentos: o master, os grupos e, em muitas mesas, os auxiliares.</td><td>O canal não chega direto: vai por um barramento.</td><td>Master da matriz.</td><td>Outra sala, caixas de delay, gravação, transmissão.</td></tr>
+        <tr><td><strong>DCA</strong> ou <strong>VCA</strong></td><td>Nada. Não carrega áudio.</td><td>O canal é atribuído ao DCA.</td><td>Fader do DCA.</td><td>Subir e baixar vários faders de uma vez.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Grupos</h3>
+  <p>O grupo (subgrupo) soma os canais endereçados a ele e entrega a soma ao master por um fader só. Com as cinco vozes de apoio no grupo 1-2, um fader move o conjunto sem desfazer o equilíbrio entre elas, e como o áudio passa pelo grupo, ele aceita um compressor ou um equalizador para o conjunto. Os grupos vêm em pares, e o pan do canal escolhe o lado: todo à esquerda, só o grupo ímpar; todo à direita, só o par.</p>
+  <p>Dois cuidados. O grupo precisa estar endereçado ao master (há um botão perto do fader dele), ou os seus canais não saem nas caixas. E o canal que vai pelo grupo <strong>não</strong> deve ter também o botão L-R apertado: o sinal chegaria ao master duas vezes, até 6 dB mais alto, e o fader do grupo deixaria de controlá-lo.</p>
+
+  <h3>Auxiliares e matriz</h3>
+  <p>Cada auxiliar é uma mixagem independente, montada com os botões de envio dos canais, e termina em um retorno, um efeito ou um gravador. A montagem dos retornos está no estudo <a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>, e os efeitos, no estudo <a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>.</p>
+  <p>A matriz é uma mixagem de mixagens: soma barramentos, e não canais. Serve para mandar o master à sala das crianças com volume próprio, ou o master com um pouco do grupo dos microfones de ambiente para a gravação. Nas mesas digitais, cada matriz costuma ter equalizador e atraso (<em>delay</em>) próprios, o que a torna a saída natural para caixas de delay (estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>) e para a mixagem da internet (estudo <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>).</p>
+
+  <h3>DCA ou VCA: o controle remoto</h3>
+  <p>O DCA (nas digitais) ou VCA (nas analógicas grandes) parece um grupo, mas nenhum áudio passa por ele. Baixar o DCA em 5 dB é como se uma mão invisível baixasse 5 dB em cada fader dos canais atribuídos a ele. Com o DCA em 0 dB, nada muda.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:34%">Pergunta</th><th class="teal" style="width:33%">Grupo</th><th class="slate">DCA ou VCA</th></tr></thead>
+      <tbody>
+        <tr><td>O áudio passa por ele? Aceita compressor ou EQ?</td><td>Sim.</td><td>Não.</td></tr>
+        <tr><td>O envio de efeito pós-fader dos canais acompanha?</td><td>Não, a menos que o retorno do efeito também vá ao grupo.</td><td>Sim. O reverb baixa junto.</td></tr>
+        <tr><td>Muda os envios pré-fader (retornos)?</td><td>Não.</td><td>Não.</td></tr>
+        <tr><td>O canal pode estar em mais de um?</td><td>Pode, mas quase nunca deve.</td><td>Pode. O efeito dos DCA se soma.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Parente do DCA é o <strong>grupo de mute</strong> (<em>mute group</em>): um botão que cala de uma vez os canais atribuídos a ele, como a banda inteira na hora da pregação.</p>
+
+  <h3>As saídas</h3>
+  <p>Cada barramento tem o seu conector no painel de trás: <em>main out</em>, <em>aux send</em>, grupo, matriz. O fone e a saída de cabine (<em>control room</em>) acompanham o solo. Na digital, a ligação entre barramento e conector se faz no patch de saída (módulo 5). Em qualquer mesa, anote que barramento sai em que conector e para onde vai o cabo. Os tipos de conector e de cabo estão no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="prepos">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Pré-fader, pós-fader e os pontos de tomada</h2>
+  <p>Ao longo do canal, o sinal é copiado em alguns pontos e levado a outros lugares. Cada um desses pontos é uma <strong>tomada</strong>. O que importa em cada tomada é a posição dela em relação ao fader. Uma tomada <strong>pré-fader</strong> fica antes do fader: o que sai por ela não muda quando você mexe no fader. Uma tomada <strong>pós-fader</strong> fica depois: o que sai por ela sobe e desce com o fader.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Caminho do sinal no canal: pré, insert, filtro e equalizador, mute, fader, pan e endereçamento, até o master e os grupos. Depois do equalizador sai a tomada do PFL, para o fone e o medidor. Depois do mute e antes do fader sai o auxiliar pré-fader, para os retornos. Depois do fader saem o auxiliar pós-fader, para os efeitos, e o AFL. O que fica antes do fader não muda quando ele se move; o que fica depois muda junto.">
+  <defs><marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+  <text class="mono mu" x="18" y="24" font-size="10.5">OS PONTOS DE TOMADA DO CANAL</text>
+
+  <rect class="bx-blue" x="18" y="128" width="78" height="44"/>
+  <text class="b" x="57" y="147" font-size="12" text-anchor="middle">Pré</text><text class="mu" x="57" y="163" font-size="10.5" text-anchor="middle">ganho</text>
+  <line class="ln" x1="98" y1="150" x2="114" y2="150" marker-end="url(#ar5)"/>
+  <rect class="bx-blue" x="118" y="128" width="78" height="44"/>
+  <text class="b" x="157" y="154" font-size="12" text-anchor="middle">Insert</text>
+  <line class="ln" x1="198" y1="150" x2="214" y2="150" marker-end="url(#ar5)"/>
+  <rect class="bx-blue" x="218" y="128" width="94" height="44"/>
+  <text class="b" x="265" y="154" font-size="12" text-anchor="middle">Filtro e EQ</text>
+  <line class="ln" x1="314" y1="150" x2="358" y2="150" marker-end="url(#ar5)"/>
+  <rect class="bx-blue" x="362" y="128" width="62" height="44"/>
+  <text class="b" x="393" y="154" font-size="12" text-anchor="middle">Mute</text>
+  <line class="ln" x1="426" y1="150" x2="474" y2="150" marker-end="url(#ar5)"/>
+  <rect class="hd-teal" x="478" y="128" width="74" height="44"/>
+  <text class="on b" x="515" y="154" font-size="12.5" text-anchor="middle">Fader</text>
+  <line class="ln" x1="554" y1="150" x2="606" y2="150" marker-end="url(#ar5)"/>
+  <rect class="bx-teal" x="610" y="128" width="116" height="44"/>
+  <text class="b" x="668" y="147" font-size="11.5" text-anchor="middle">Pan e</text><text class="b" x="668" y="163" font-size="11.5" text-anchor="middle">endereçamento</text>
+  <line class="ln" x1="728" y1="150" x2="756" y2="150" marker-end="url(#ar5)"/>
+  <rect class="bx-teal" x="760" y="128" width="122" height="44"/>
+  <text class="b" x="821" y="147" font-size="11.5" text-anchor="middle">Master LR</text><text class="b" x="821" y="163" font-size="11.5" text-anchor="middle">e grupos</text>
+
+  <path class="ln" d="M336 150 V216" marker-end="url(#ar5)"/>
+  <circle class="f-ink" cx="336" cy="150" r="3.5"/>
+  <rect class="bx-blue" x="256" y="220" width="160" height="44"/>
+  <text class="b" x="336" y="239" font-size="11.5" text-anchor="middle">PFL</text><text class="mu" x="336" y="255" font-size="10.5" text-anchor="middle">fone e medidor</text>
+
+  <path class="ln" d="M450 150 V84" marker-end="url(#ar5)"/>
+  <circle class="f-ink" cx="450" cy="150" r="3.5"/>
+  <rect class="bx-blue" x="370" y="36" width="160" height="44"/>
+  <text class="b" x="450" y="55" font-size="11.5" text-anchor="middle">Auxiliar pré-fader</text><text class="mu" x="450" y="71" font-size="10.5" text-anchor="middle">retornos de palco</text>
+
+  <path class="ln" d="M580 150 V84" marker-end="url(#ar5)"/>
+  <path class="ln" d="M580 150 V216" marker-end="url(#ar5)"/>
+  <circle class="f-ink" cx="580" cy="150" r="3.5"/>
+  <rect class="bx-teal" x="546" y="36" width="160" height="44"/>
+  <text class="b" x="626" y="55" font-size="11.5" text-anchor="middle">Auxiliar pós-fader</text><text class="mu" x="626" y="71" font-size="10.5" text-anchor="middle">efeitos (reverb, delay)</text>
+  <rect class="bx-teal" x="500" y="220" width="160" height="44"/>
+  <text class="b" x="580" y="239" font-size="11.5" text-anchor="middle">AFL</text><text class="mu" x="580" y="255" font-size="10.5" text-anchor="middle">escuta depois do fader</text>
+
+  <rect class="bx-blue" x="18" y="274" width="16" height="16"/>
+  <text x="42" y="286" font-size="11.5">antes do fader: não muda quando ele se move</text>
+  <rect class="bx-teal" x="330" y="274" width="16" height="16"/>
+  <text x="354" y="286" font-size="11.5">depois do fader: muda junto com ele</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> As tomadas do canal em uma ordem comum. A posição do insert, do mute e da tomada pré-fader em relação ao equalizador varia de uma mesa para outra: quem dá a resposta certa é o diagrama de blocos do manual (módulo 6).</figcaption>
+  </figure>
+
+  <h3>Auxiliar pré-fader e pós-fader</h3>
+  <p>Em muitas mesas, cada auxiliar (ou cada par) tem uma chave PRE/POST. Em outras, alguns auxiliares são fixos em pré e outros em pós. Nas digitais, a escolha se faz na tela, por barramento ou até por canal.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>Pré-fader</h4>
+      <ul>
+        <li>Sai antes do fader: com o fader fechado, o canal continua indo ao auxiliar. O nível depende só do ganho e do botão de envio.</li>
+        <li>É a escolha para os <strong>retornos</strong>: o músico precisa de uma mixagem que não mude quando o operador ajusta a sala.</li>
+        <li>Conforme a mesa, sai antes ou depois do equalizador, ou há opção. Isso decide se o retorno ouve a sua equalização.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Pós-fader</h4>
+      <ul>
+        <li>Sai depois do fader: fader fechado, envio fechado. Fader em −10 dB e envio em 0 dB entregam −10 dB.</li>
+        <li>É a escolha para os <strong>efeitos</strong>: quando a voz baixa na sala, o reverb dela baixa junto.</li>
+        <li>Serve também para mixagens que devem acompanhar a principal.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:26%">Uso do auxiliar</th><th style="width:16%">Tomada</th><th>Por quê</th></tr></thead>
+      <tbody>
+        <tr><td>Retorno de chão ou fone do músico</td><td class="blue">Pré-fader</td><td>A mixagem do músico não pode mudar quando o operador mexe no fader para a sala.</td></tr>
+        <tr><td>Efeito (reverb, delay)</td><td class="teal">Pós-fader</td><td>O efeito deve acompanhar o canal. Em pré-fader, o canal fechado continua soando no reverb.</td></tr>
+        <tr><td>Subwoofer alimentado por auxiliar</td><td class="teal">Pós-fader</td><td>Os graves precisam subir e descer com o resto da mixagem.</td></tr>
+        <tr><td>Outra sala ou caixas de delay, sem matriz</td><td class="teal">Pós-fader</td><td>A sala anexa deve ouvir a mesma mixagem do salão, com os mesmos mutes.</td></tr>
+        <tr><td>Gravação ou transmissão</td><td>Depende</td><td>Pós-fader, com os envios em 0 dB, se a mixagem deve seguir a da sala com pequenos ajustes. Pré-fader, se alguém mixa só para isso. O estudo <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a> explica a escolha.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Insert: o desvio de ida e volta</h3>
+  <p>O insert é um ponto em que o sinal inteiro sai do canal, passa por um aparelho e volta para o mesmo lugar. Ele fica logo depois do pré, em geral antes do equalizador. Serve para processadores que devem tratar todo o sinal, como compressor e gate (estudo <a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>). Os grupos e o master também costumam ter insert: é ali que entra um equalizador gráfico ou um compressor para a soma.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 232" role="img" aria-label="À esquerda, o laço do insert: o sinal sai do pré pelo envio, passa por um compressor ou gate externo, volta pelo retorno e segue ao equalizador; sem plugue, passa direto. À direita, o plugue P10 TRS do insert: ponta leva o envio, anel traz o retorno, luva é a malha. O cabo em Y tem um P10 TRS na mesa e dois P10 TS no aparelho.">
+  <defs><marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+  <text class="mono mu" x="18" y="24" font-size="10.5">O LAÇO DO INSERT</text>
+  <rect class="bx" x="18" y="60" width="84" height="44"/>
+  <text class="b" x="60" y="86" font-size="12" text-anchor="middle">Pré</text>
+  <path class="ln" d="M104 82 H164 V146" marker-end="url(#ar6)"/>
+  <line class="ln-mu dash" x1="164" y1="82" x2="276" y2="82"/>
+  <text class="mu" x="220" y="60" font-size="10.5" text-anchor="middle">sem plugue,</text>
+  <text class="mu" x="220" y="74" font-size="10.5" text-anchor="middle">passa direto</text>
+  <path class="ln" d="M276 150 V82 H336" marker-end="url(#ar6)"/>
+  <rect class="bx" x="340" y="60" width="96" height="44"/>
+  <text class="b" x="388" y="86" font-size="12" text-anchor="middle">Filtro e EQ</text>
+  <line class="ln" x1="438" y1="82" x2="474" y2="82" marker-end="url(#ar6)"/>
+  <text class="mu" x="482" y="86" font-size="11">ao fader</text>
+  <rect class="bx-purple" x="140" y="150" width="160" height="48"/>
+  <text class="b" x="220" y="171" font-size="12" text-anchor="middle">Compressor ou gate</text>
+  <text class="mu" x="220" y="187" font-size="10.5" text-anchor="middle">aparelho externo</text>
+  <text class="mu" x="156" y="124" font-size="10.5" text-anchor="end">envio</text>
+  <text class="mu" x="284" y="124" font-size="10.5">retorno</text>
+
+  <text class="mono mu" x="580" y="24" font-size="10.5">O PLUGUE TRS DO INSERT</text>
+  <rect class="f-sunk" x="580" y="60" width="80" height="44"/>
+  <rect class="bx-slate" x="664" y="70" width="110" height="24"/>
+  <rect class="bx-amber" x="780" y="70" width="24" height="24"/>
+  <path class="bx-blue" d="M810 70 H830 L846 82 L830 94 H810 z"/>
+  <line class="ln-mu" stroke-width="1" x1="719" y1="96" x2="719" y2="112"/>
+  <text x="719" y="127" font-size="11" text-anchor="middle">luva: malha</text>
+  <line class="ln-mu" stroke-width="1" x1="792" y1="96" x2="792" y2="140"/>
+  <text x="792" y="155" font-size="11" text-anchor="middle">anel: retorno</text>
+  <line class="ln-mu" stroke-width="1" x1="828" y1="96" x2="828" y2="112"/>
+  <text x="806" y="127" font-size="11">ponta: envio</text>
+  <text class="mu" x="580" y="190" font-size="11">Cabo de insert, em Y: um P10 TRS na mesa e dois</text>
+  <text class="mu" x="580" y="206" font-size="11">P10 TS no aparelho, um na entrada e outro na saída.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> O insert desvia o sinal inteiro para um aparelho e o traz de volta. Na maioria das mesas, a ponta leva o envio e o anel traz o retorno, mas há marcas que invertem: confira o manual. Nas digitais, o processamento já está no canal, e o insert serve a aparelhos externos.</figcaption>
+  </figure>
+
+  <p>Insert é desvio; auxiliar é cópia. No insert, só o som processado segue adiante. No auxiliar, o original continua no canal, e a cópia processada volta por outra entrada para ser somada a ele. Por isso o compressor vai no insert, e o reverb, no auxiliar. Algumas mesas têm ainda a saída direta (<em>direct out</em>), uma tomada sem volta que leva o canal sozinho a um gravador multipista.</p>
+
+  <h3>Solo: PFL, AFL e solo in place</h3>
+  <p>O solo é a tomada de escuta do operador, em três tipos.</p>
+  <ul>
+    <li><strong>PFL</strong> (escuta pré-fader): o canal antes do fader. Serve para ajustar o ganho e conferir um canal fechado.</li>
+    <li><strong>AFL</strong> (escuta pós-fader): o sinal depois do fader ou do master. É o usual nos masters dos auxiliares: com o AFL do auxiliar 1, você ouve o que o músico recebe.</li>
+    <li><strong>Solo in place</strong> (SIP): cala todos os outros canais na saída principal. Em evento ao vivo, derruba o som da sala.</li>
+  </ul>
+  <p>Sem solo apertado, o fone e o medidor principal mostram o master; com solo, mostram o que está em solo. Os medidores e os alvos de leitura estão no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>.</p>
+
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="digital">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Mesa analógica e mesa digital</h2>
+  <p>O caminho do sinal é o mesmo nas duas: entrada, canal, barramento, saída. O que muda é a forma de chegar aos controles. Na analógica, cada função tem o seu botão, sempre à vista. Na digital, o som é convertido em números logo depois do pré, e todo o resto é feito por um processador. Poucos controles físicos servem a muitos canais, e o que eles controlam depende do que está selecionado.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>Analógica</h4>
+      <ul>
+        <li>Um botão por função. O que você vê é o que está valendo.</li>
+        <li>O caminho do sinal é fixo, definido pela construção da mesa.</li>
+        <li>O número de canais e de barramentos é o que está no painel.</li>
+        <li>Compressores, gates e efeitos são aparelhos externos, ligados por insert e auxiliar.</li>
+        <li>Não guarda os ajustes: foto ou anotação.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Digital</h4>
+      <ul>
+        <li>Seleciona-se o canal (botão <em>select</em>), e um conjunto único de controles e a tela passam a mostrar aquele canal.</li>
+        <li>O caminho tem partes configuráveis: patch, tomadas pré ou pós, ordem de alguns processadores.</li>
+        <li>Mais canais do que faders: os faders trabalham em camadas.</li>
+        <li>Cada canal já tem filtro, EQ paramétrico, gate e compressor. Os efeitos são internos.</li>
+        <li>Guarda tudo em cenas, que podem ser chamadas de volta.</li>
+      </ul>
+    </div>
+  </div>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 292" role="img" aria-label="À esquerda, camadas: o mesmo banco de oito faders serve aos canais 1 a 8, aos canais 9 a 16 ou aos auxiliares e DCA, conforme a camada escolhida. À direita, patch: as entradas 1, 2 e 5 vão aos canais de mesmo número; a entrada 3 vai ao canal 4, do baixo, e a entrada 4 vai ao canal 3, do teclado.">
+  <defs><marker id="ar7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker>
+  <marker id="ar7b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah f-amber" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+  <text class="mono mu" x="18" y="24" font-size="10.5">CAMADAS: OS MESMOS FADERS, VÁRIAS FUNÇÕES</text>
+  <rect class="hd-blue" x="18" y="40" width="130" height="28"/><text class="on b" x="83" y="59" font-size="11.5" text-anchor="middle">Camada 1</text>
+  <rect class="bx" x="154" y="40" width="130" height="28"/><text class="b" x="219" y="59" font-size="11.5" text-anchor="middle">Camada 2</text>
+  <rect class="bx" x="290" y="40" width="130" height="28"/><text class="b" x="355" y="59" font-size="11.5" text-anchor="middle">Camada 3</text>
+  <text class="t-blue b" x="83" y="86" font-size="10.5" text-anchor="middle">canais 1 a 8</text>
+  <text class="mu" x="219" y="86" font-size="10.5" text-anchor="middle">canais 9 a 16</text>
+  <text class="mu" x="355" y="86" font-size="10.5" text-anchor="middle">auxiliares e DCA</text>
+  <rect class="bx" x="18" y="100" width="402" height="136"/>
+  <g class="f-sunk">
+    <rect x="41" y="114" width="6" height="88"/><rect x="91" y="114" width="6" height="88"/><rect x="141" y="114" width="6" height="88"/><rect x="191" y="114" width="6" height="88"/>
+    <rect x="241" y="114" width="6" height="88"/><rect x="291" y="114" width="6" height="88"/><rect x="341" y="114" width="6" height="88"/><rect x="391" y="114" width="6" height="88"/>
+  </g>
+  <g class="hd-blue">
+    <rect x="30" y="148" width="28" height="13"/><rect x="80" y="136" width="28" height="13"/><rect x="130" y="158" width="28" height="13"/><rect x="180" y="142" width="28" height="13"/>
+    <rect x="230" y="168" width="28" height="13"/><rect x="280" y="148" width="28" height="13"/><rect x="330" y="132" width="28" height="13"/><rect x="380" y="154" width="28" height="13"/>
+  </g>
+  <g font-size="10.5" text-anchor="middle">
+    <text class="mu" x="44" y="224">1</text><text class="mu" x="94" y="224">2</text><text class="mu" x="144" y="224">3</text><text class="mu" x="194" y="224">4</text>
+    <text class="mu" x="244" y="224">5</text><text class="mu" x="294" y="224">6</text><text class="mu" x="344" y="224">7</text><text class="mu" x="394" y="224">8</text>
+  </g>
+  <text x="18" y="260" font-size="11.5">Trocar de camada muda o que os faders controlam.</text>
+  <text x="18" y="277" font-size="11.5">Confira a camada antes de mexer.</text>
+
+  <text class="mono mu" x="474" y="24" font-size="10.5">PATCH: QUALQUER ENTRADA EM QUALQUER CANAL</text>
+  <g font-size="11.5" text-anchor="middle">
+    <rect class="bx-slate" x="474" y="40" width="120" height="28"/><text x="534" y="59">Entrada 1</text>
+    <rect class="bx-slate" x="474" y="80" width="120" height="28"/><text x="534" y="99">Entrada 2</text>
+    <rect class="bx-slate" x="474" y="120" width="120" height="28"/><text x="534" y="139">Entrada 3</text>
+    <rect class="bx-slate" x="474" y="160" width="120" height="28"/><text x="534" y="179">Entrada 4</text>
+    <rect class="bx-slate" x="474" y="200" width="120" height="28"/><text x="534" y="219">Entrada 5</text>
+    <rect class="bx-blue" x="722" y="40" width="160" height="28"/><text class="b" x="802" y="59">Canal 1 · Voz</text>
+    <rect class="bx-blue" x="722" y="80" width="160" height="28"/><text class="b" x="802" y="99">Canal 2 · Violão</text>
+    <rect class="bx-blue" x="722" y="120" width="160" height="28"/><text class="b" x="802" y="139">Canal 3 · Teclado</text>
+    <rect class="bx-blue" x="722" y="160" width="160" height="28"/><text class="b" x="802" y="179">Canal 4 · Baixo</text>
+    <rect class="bx-blue" x="722" y="200" width="160" height="28"/><text class="b" x="802" y="219">Canal 5 · Púlpito</text>
+  </g>
+  <line class="ln" x1="596" y1="54" x2="718" y2="54" marker-end="url(#ar7)"/>
+  <line class="ln" x1="596" y1="94" x2="718" y2="94" marker-end="url(#ar7)"/>
+  <line class="s-amber" x1="596" y1="134" x2="718" y2="172" marker-end="url(#ar7b)"/>
+  <line class="s-amber" x1="596" y1="174" x2="718" y2="136" marker-end="url(#ar7b)"/>
+  <line class="ln" x1="596" y1="214" x2="718" y2="214" marker-end="url(#ar7)"/>
+  <text x="474" y="260" font-size="11.5">O número do canal não precisa ser o número da entrada.</text>
+  <text x="474" y="277" font-size="11.5">Anote o patch na folha de canais.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> Duas ideias típicas da mesa digital. As camadas fazem os mesmos faders servirem a canais diferentes. O patch liga cada conector físico ao canal que você quiser.</figcaption>
+  </figure>
+
+  <h3>Camadas e envios nos faders</h3>
+  <p>Uma mesa digital de 32 canais pode ter 16 faders, ou 8. Eles trabalham em <strong>camadas</strong> (<em>layers</em>): canais de 1 a 16 em uma, de 17 a 32 em outra, auxiliares e DCA em outra. Antes de mexer em um fader, leia o nome no visor acima dele.</p>
+  <p>No modo <strong>envios nos faders</strong> (<em>sends on faders</em>), você escolhe um auxiliar, e os faders dos canais passam a controlar o envio de cada canal para ele. É a forma mais rápida de montar um retorno, e a armadilha mais comum: com o modo esquecido ligado, o operador pensa que mixa a sala e está mudando o retorno de alguém. A mesa avisa com outra cor nos visores ou um botão piscando. Saia do modo assim que terminar.</p>
+
+  <h3>Patch digital</h3>
+  <p>Na analógica, o conector 5 é o canal 5. Na digital, uma tabela, o <strong>patch</strong>, diz qual entrada física alimenta cada canal e qual barramento sai em cada conector. Isso permite pôr os canais na ordem mais cômoda, usar a mesma entrada em dois canais (um para a sala, outro para a transmissão) e receber sinais pela USB ou pela rede. O patch também liga a mesa à <strong>caixa de palco digital</strong> (<em>stage box</em>), que fica no palco com os prés e manda tudo por um cabo de rede (estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>). O preço: canal sem sinal, em mesa digital, muitas vezes é patch errado, e não cabo ruim.</p>
+
+  <h3>Cenas</h3>
+  <p>Uma <strong>cena</strong> (<em>scene</em>, <em>snapshot</em>) é uma fotografia de todos os ajustes da mesa, com número e nome. Chamá-la (<em>recall</em>) devolve a mesa àquele estado em um instante.</p>
+  <ul>
+    <li>Salve uma cena ao fim da passagem, com nome e data: é o seu ponto de volta.</li>
+    <li>Mantenha uma <strong>cena de partida</strong>, com o patch, os nomes e as saídas do local, e o resto zerado.</li>
+    <li>Chamar uma cena no meio do evento pode trocar ganhos, mutes e retornos de uma vez. O filtro de cena (<em>recall safe</em>, <em>scope</em>; o nome varia) protege o que não deve mudar.</li>
+    <li>Confira o número antes de gravar, e guarde uma cópia em pendrive.</li>
+  </ul>
+
+  <h3>Controle por tablet</h3>
+  <p>Muitas digitais aceitam controle por aplicativo, por Wi-Fi: dá para ouvir de onde o público ouve e ajustar o retorno ao lado do músico. Use um roteador só para a mesa, com senha, fora da rede dos visitantes e, se possível, em 5 GHz. A conexão pode cair: alguém precisa chegar à mesa em segundos, e o tablet fica carregado e sem bloqueio automático de tela.</p>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="blocos">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Como ler o diagrama de blocos</h2>
+  <p>O diagrama de blocos (<em>block diagram</em>), nas últimas páginas do manual, é o mapa do caminho do sinal dentro da mesa. Lê-se como um mapa de metrô: não é preciso entender a eletrônica, só seguir a linha e ver por quais estações ela passa, e em que ordem. Ele responde às perguntas que os módulos anteriores deixaram “conforme a mesa”.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 384" role="img" aria-label="Em cima, os símbolos do diagrama de blocos: círculo é conector; triângulo é amplificador; retângulo cortado por seta é controle, botão ou fader; dois pontos com haste são chave; ponto sobre a linha é derivação; linha grossa é barramento. Embaixo, um canal simplificado: microfone, pré, insert, filtro e equalizador; uma derivação leva à chave de PFL, para o fone e o medidor; seguem a chave de mute, o fader, o pan e as chaves L-R até os barramentos L e R. Derivações antes e depois do fader chegam a uma chave pré ou pós que alimenta o botão do auxiliar 1 e o barramento do auxiliar 1. Linhas que se cruzam sem ponto não estão ligadas.">
+  <defs><marker id="ar8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+  <text class="mono mu" x="18" y="24" font-size="10.5">OS SÍMBOLOS</text>
+  <circle class="ln" cx="38" cy="62" r="9"/>
+  <text class="b" x="66" y="59" font-size="11">Conector</text><text class="mu" x="66" y="74" font-size="10.5">entra ou sai</text>
+  <path class="ln" d="M168 46 V78 L198 62 z"/>
+  <text class="b" x="210" y="59" font-size="11">Amplificador</text><text class="mu" x="210" y="74" font-size="10.5">pré, somador</text>
+  <rect class="ln" x="312" y="50" width="30" height="24"/><line class="ln" x1="306" y1="80" x2="347" y2="45" marker-end="url(#ar8)"/>
+  <text class="b" x="358" y="59" font-size="11">Controle</text><text class="mu" x="358" y="74" font-size="10.5">botão ou fader</text>
+  <circle class="f-ink" cx="458" cy="64" r="2.8"/><circle class="f-ink" cx="490" cy="64" r="2.8"/><line class="ln" x1="458" y1="64" x2="486" y2="52"/>
+  <text class="b" x="502" y="59" font-size="11">Chave</text><text class="mu" x="502" y="74" font-size="10.5">liga ou escolhe</text>
+  <line class="ln" x1="596" y1="56" x2="636" y2="56"/><line class="ln" x1="616" y1="56" x2="616" y2="80"/><circle class="f-ink" cx="616" cy="56" r="4"/>
+  <text class="b" x="646" y="59" font-size="11">Derivação</text><text class="mu" x="646" y="74" font-size="10.5">divide o sinal</text>
+  <line class="s-teal" stroke-width="3" x1="770" y1="42" x2="770" y2="82"/><line class="ln" x1="744" y1="62" x2="770" y2="62"/><circle class="f-ink" cx="770" cy="62" r="4"/>
+  <text class="b" x="784" y="59" font-size="11">Barramento</text><text class="mu" x="784" y="74" font-size="10.5">soma os canais</text>
+  <line class="grid" x1="18" y1="100" x2="882" y2="100"/>
+  <text class="mono mu" x="18" y="124" font-size="10.5">UM CANAL NO DIAGRAMA, SIMPLIFICADO</text>
+
+  <line class="s-teal" stroke-width="3" x1="790" y1="132" x2="790" y2="350"/>
+  <line class="s-teal" stroke-width="3" x1="820" y1="132" x2="820" y2="350"/>
+  <line class="s-teal" stroke-width="3" x1="850" y1="132" x2="850" y2="350"/>
+  <g font-size="10.5" text-anchor="middle">
+    <text class="mono t-teal b" x="784" y="368" text-anchor="end">AUX 1</text><text class="mono t-teal b" x="820" y="368">L</text><text class="mono t-teal b" x="850" y="368">R</text>
+  </g>
+
+  <circle class="ln" cx="36" cy="262" r="9"/>
+  <text class="mono" x="36" y="242" font-size="10.5" text-anchor="middle">MIC</text>
+  <line class="ln" x1="45" y1="262" x2="74" y2="262"/>
+  <path class="ln" d="M74 244 V280 L106 262 z"/>
+  <text class="mono" x="88" y="234" font-size="10.5" text-anchor="middle">PRÉ</text>
+  <line class="ln" x1="106" y1="262" x2="140" y2="262"/>
+  <line class="ln" x1="140" y1="262" x2="140" y2="294" marker-end="url(#ar8)"/>
+  <line class="ln-mu dash" x1="140" y1="262" x2="176" y2="262"/>
+  <line class="ln" x1="176" y1="298" x2="176" y2="265" marker-end="url(#ar8)"/>
+  <text class="mono" x="158" y="242" font-size="10.5" text-anchor="middle">INSERT</text>
+  <text class="mu" x="132" y="312" font-size="10.5" text-anchor="end">envio</text>
+  <text class="mu" x="184" y="312" font-size="10.5">retorno</text>
+  <line class="ln" x1="176" y1="262" x2="210" y2="262"/>
+  <rect class="ln" x="210" y="246" width="68" height="32"/>
+  <text class="mono" x="244" y="266" font-size="10.5" text-anchor="middle">HPF+EQ</text>
+  <line class="ln" x1="278" y1="262" x2="318" y2="262"/>
+  <circle class="f-ink" cx="300" cy="262" r="4"/>
+  <circle class="f-ink" cx="318" cy="262" r="2.8"/><circle class="f-ink" cx="352" cy="262" r="2.8"/><line class="ln" x1="318" y1="262" x2="348" y2="251"/>
+  <text class="mono" x="336" y="284" font-size="10.5" text-anchor="middle">MUTE</text>
+  <line class="ln" x1="352" y1="262" x2="408" y2="262"/>
+  <circle class="f-ink" cx="378" cy="262" r="4"/>
+  <rect class="ln" x="408" y="246" width="38" height="32"/><line class="ln" x1="402" y1="284" x2="451" y2="241" marker-end="url(#ar8)"/>
+  <text class="mono" x="427" y="300" font-size="10.5" text-anchor="middle">FADER</text>
+  <line class="ln" x1="446" y1="262" x2="520" y2="262"/>
+  <circle class="f-ink" cx="478" cy="262" r="4"/>
+  <rect class="ln" x="520" y="240" width="46" height="44"/>
+  <text class="mono" x="543" y="266" font-size="10.5" text-anchor="middle">PAN</text>
+  <line class="ln" x1="566" y1="250" x2="600" y2="250"/>
+  <circle class="f-ink" cx="600" cy="250" r="2.8"/><circle class="f-ink" cx="634" cy="250" r="2.8"/><line class="ln" x1="600" y1="250" x2="630" y2="240"/>
+  <line class="ln" x1="634" y1="250" x2="820" y2="250"/><circle class="f-ink" cx="820" cy="250" r="4"/>
+  <line class="ln" x1="566" y1="274" x2="600" y2="274"/>
+  <circle class="f-ink" cx="600" cy="274" r="2.8"/><circle class="f-ink" cx="634" cy="274" r="2.8"/><line class="ln" x1="600" y1="274" x2="630" y2="264"/>
+  <line class="ln" x1="634" y1="274" x2="850" y2="274"/><circle class="f-ink" cx="850" cy="274" r="4"/>
+  <text class="mono" x="617" y="296" font-size="10.5" text-anchor="middle">L-R</text>
+
+  <path class="ln" d="M378 262 V196 H410"/><circle class="f-ink" cx="412" cy="196" r="2.8"/>
+  <path class="ln" d="M478 262 V196 H446"/><circle class="f-ink" cx="444" cy="196" r="2.8"/>
+  <circle class="f-ink" cx="428" cy="174" r="2.8"/><line class="ln" x1="428" y1="174" x2="414" y2="193"/>
+  <text class="mono" x="395" y="212" font-size="10.5" text-anchor="middle">PRÉ</text>
+  <text class="mono" x="461" y="212" font-size="10.5" text-anchor="middle">PÓS</text>
+  <path class="ln" d="M428 174 V150 H540"/>
+  <rect class="ln" x="540" y="134" width="38" height="32"/><line class="ln" x1="534" y1="172" x2="583" y2="129" marker-end="url(#ar8)"/>
+  <text class="mono" x="559" y="186" font-size="10.5" text-anchor="middle">AUX 1</text>
+  <line class="ln" x1="578" y1="150" x2="790" y2="150"/><circle class="f-ink" cx="790" cy="150" r="4"/>
+
+  <path class="ln" d="M300 262 V332 H330"/>
+  <circle class="f-ink" cx="330" cy="332" r="2.8"/><circle class="f-ink" cx="364" cy="332" r="2.8"/><line class="ln" x1="330" y1="332" x2="360" y2="321"/>
+  <text class="mono" x="347" y="354" font-size="10.5" text-anchor="middle">PFL</text>
+  <line class="ln" x1="364" y1="332" x2="400" y2="332" marker-end="url(#ar8)"/>
+  <text class="mu" x="408" y="336" font-size="10.5">ao fone e ao medidor</text>
+
+  <line class="ln-mu" stroke-width="1" x1="716" y1="318" x2="786" y2="278"/>
+  <text class="mu" x="586" y="326" font-size="10.5">cruzamento sem ponto:</text>
+  <text class="mu" x="586" y="341" font-size="10.5">as linhas não se ligam</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> Os símbolos e um canal de exemplo. Neste canal, o PFL sai antes do mute, e por isso funciona com o canal mutado; o auxiliar em pré-fader sai depois do mute, e por isso é cortado por ele. Na sua mesa, a ordem pode ser outra: é isso que o diagrama mostra.</figcaption>
+  </figure>
+
+  <h3>Como seguir o sinal</h3>
+  <ol>
+    <li>Ache a entrada do canal de microfone, quase sempre no canto superior esquerdo. O sinal anda da esquerda para a direita.</li>
+    <li>Siga a linha principal e diga em voz alta por onde ela passa: pré, insert, filtro, equalizador, mute, fader, pan.</li>
+    <li>Em cada ponto de derivação, veja para onde vai o ramo e em que lugar da linha ele nasce: antes ou depois do equalizador, do mute, do fader.</li>
+    <li>Siga até os barramentos, as linhas longas que cruzam o desenho. Linhas que se cruzam só estão ligadas se houver um ponto no cruzamento.</li>
+    <li>Do barramento, siga até a saída: somador, insert do barramento, fader master, conector.</li>
+  </ol>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:40%">Pergunta</th><th>O que procurar no diagrama</th></tr></thead>
+      <tbody>
+        <tr><td>O auxiliar pré-fader leva o som com ou sem a minha equalização?</td><td>A derivação do auxiliar pré nasce antes ou depois do bloco de EQ.</td></tr>
+        <tr><td>O mute corta o retorno do músico?</td><td>A chave de mute fica antes ou depois da derivação do auxiliar pré.</td></tr>
+        <tr><td>O PFL funciona com o canal mutado? Ele mostra o efeito do EQ?</td><td>A derivação do PFL em relação ao mute e ao EQ.</td></tr>
+        <tr><td>O compressor ligado no insert recebe o som já equalizado?</td><td>O insert fica antes ou depois do EQ.</td></tr>
+        <tr><td>A saída direta do canal acompanha o fader?</td><td>A derivação do <em>direct out</em>: pré ou pós-fader, ou com chave.</td></tr>
+        <tr><td>A entrada de gravador (2TR, USB) vai para as caixas?</td><td>Aonde chega a linha dessa entrada: ao barramento master, ou só ao fone e à cabine.</td></tr>
+        <tr><td>O que a matriz pode receber?</td><td>Quais barramentos têm uma linha chegando ao bloco de matriz.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Nas mesas digitais, o diagrama mostra ainda o que é configurável: uma chave desenhada no ponto de tomada do auxiliar significa que a escolha entre pré e pós se faz na tela. Muitos manuais trazem também uma tabela com a ordem de processamento do canal. Vale a pena imprimir a página do diagrama e deixá-la junto da mesa.</p>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo: zerar a mesa</h2>
+  <p>Zerar a mesa é devolver todos os controles a uma posição conhecida. Uma mesa que veio de outro evento guarda surpresas: um auxiliar aberto, um pad ligado, um canal endereçado a um grupo que ninguém usa. Em vez de procurar uma a uma, você apaga todas de uma vez. Leva de cinco a dez minutos em uma analógica de 16 canais, e segundos em uma digital com a cena de partida salva.</p>
+
+  <ol class="steps">
+    <li><h4>Comece com o sistema calado</h4><p>Amplificadores ou caixas ativas desligados, ou com o nível fechado. A ordem de ligar é sempre a mesma: a mesa primeiro, as caixas por último. Para desligar, o contrário. O motivo está no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>.</p></li>
+    <li><h4>Guarde o que existe, se for de alguém</h4><p>Em mesa compartilhada, fotografe o painel ou salve uma cena antes de mexer. Zerar a mesa em que outra equipe deixou um evento pronto é um erro que não se desfaz.</p></li>
+    <li><h4>Feche as saídas <span class="k amber w">OUT</span></h4><p>Master, grupos e masters dos auxiliares embaixo. Retornos de efeito e entrada de gravador fechados. Volume do fone baixo.</p></li>
+    <li><h4>Feche os canais</h4><p>Faders embaixo e mute ligado em todos. Nenhum PFL ou solo apertado.</p></li>
+    <li><h4>Zere a entrada de cada canal <span class="k blue w">IN</span></h4><p>Ganho no mínimo, pad desligado, phantom desligado, polaridade normal. O ajuste do ganho vem depois, com a fonte tocando, como no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>.</p></li>
+    <li><h4>Deixe o equalizador plano</h4><p>Botões de corte e realce no centro, filtro passa-altas desligado. Na digital, EQ, gate e compressor desligados ou planos. O filtro volta a ser ligado canal por canal, conforme a folha de canais.</p></li>
+    <li><h4>Feche os envios <span class="k teal w">MIX</span></h4><p>Todos os botões de auxiliar no mínimo. Confira as chaves pré e pós de cada auxiliar pelo mapa de saídas: retorno em pré, efeito em pós.</p></li>
+    <li><h4>Acerte pan e endereçamento</h4><p>Pan no centro. Em cada canal, só o botão L-R apertado. Os canais que vão por grupo recebem o botão do grupo no lugar do L-R, e o grupo é endereçado ao master.</p></li>
+    <li><h4>Na digital, carregue a cena de partida</h4><p>Ela faz os passos 3 a 8 de uma vez, e mantém o patch, os nomes e as saídas do local. Não use a restauração de fábrica para isso: ela apaga também o patch e a configuração das saídas. Depois de carregar, salve com outro nome, para não gravar por cima da cena de partida.</p></li>
+    <li><h4>Identifique os canais</h4><p>Escreva o nome de cada fonte em uma fita de papel abaixo dos faders, ou no visor da digital, na ordem da folha de canais. Canal sem nome é canal que alguém vai abrir por engano.</p></li>
+    <li><h4>Confira o patch, canal por canal</h4><p>Com a folha de canais na mão, faça o teste de linha: uma fonte por vez, no PFL, para ver se o sinal chega ao canal certo. Ligue o phantom onde a folha indica, com o canal em mute. A sequência completa da passagem está no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p></li>
+  </ol>
+
+  <div class="note">
+    <h4>O que não se zera</h4>
+    <p>Em instalação fixa, o equalizador do sistema, os atrasos das caixas e os níveis das saídas foram ajustados por quem calibrou a sala, no processador ou nas saídas e matrizes da mesa digital. Zere os canais e os envios; não mexa na calibração das saídas.</p>
+  </div>
+
+  <h3>Se um canal não dá som: siga o sinal</h3>
+  <p>Conhecer o caminho transforma “não sai som” em uma busca com começo e fim: ande do início para o fim e pergunte, em cada ponto, se o sinal chegou até ali.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:5%" class="n">#</th><th style="width:33%">O que você vê</th><th>Onde procurar</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td>Com o PFL apertado, não há sinal no medidor do canal.</td><td>Antes do canal ou na entrada dele: fonte desligada ou em mudo, cabo, entrada errada, patch (na digital), phantom desligado, ganho no mínimo.</td></tr>
+        <tr><td class="n">2</td><td>Há sinal no PFL, mas o canal não aparece no medidor do master.</td><td>Na parte de baixo do canal: mute, fader, botão L-R, grupo com o fader fechado ou não endereçado ao master, DCA ou grupo de mute fechado. Na digital, camada errada ou envios nos faders ligado.</td></tr>
+        <tr><td class="n">3</td><td>Há sinal no medidor do master, mas não há som nas caixas.</td><td>Depois da mesa: patch de saída (na digital), cabo de saída, processador, amplificador ou caixa ativa.</td></tr>
+        <tr><td class="n">4</td><td>Há som nas caixas, mas não no retorno ou no efeito.</td><td>No auxiliar: botão de envio do canal, master do auxiliar, chave pré ou pós, saída e cabo do auxiliar.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O método geral de diagnóstico, para som e vídeo, está no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento: roteiro, equipe e imprevistos</a>.</p>
+
+  <div class="note">
+    <h4>Segurança: volume alto</h4>
+    <p>Durante a rotina de zerar e o teste de linha, as caixas e os retornos podem dar estalos e sons inesperados, e quem está no palco costuma estar perto deles. Mantenha o master e os masters dos auxiliares fechados até terminar de zerar, abra devagar e avise o palco antes de abrir qualquer saída. Nunca ligue ou desligue cabos e phantom com o canal aberto.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. O primeiro está preenchido na planilha de apoio.</p>
+
+  <h3>Exemplo 1. A folha de canais que achou três erros antes do teste de linha</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, mesa digital de 16 canais com caixa de palco de 16 entradas. Culto com banda, coral e púlpito.</dd></div>
+    <div><dt>Sintoma</dt><dd>No domingo anterior, o coral “não tinha som”, o teclado soava de um lado só e uma voz de apoio ficava sempre acima das outras.</dd></div>
+    <div><dt>Causa</dt><dd>Phantom desligado no canal do coral. Canais 9 e 10 com a mesma entrada no patch. Canal 5 endereçado ao master direto e também pelo grupo.</dd></div>
+    <div><dt>O que foi feito</dt><dd>A folha de canais foi preenchida na planilha a partir do que estava na mesa. Os três avisos foram corrigidos antes do teste de linha.</dd></div>
+    <div><dt>Resultado</dt><dd>Dezesseis canais em situação OK. Cena salva depois da passagem, com cópia no pendrive.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="n" style="width:7%">Canal</th><th style="width:20%">Fonte</th><th class="n" style="width:8%">Entrada</th><th style="width:13%">+48 V</th><th style="width:12%">Destino</th><th style="width:14%">Situação</th><th>O que foi feito</th></tr></thead>
+      <tbody>
+        <tr><td class="num n">5</td><td>Voz de apoio 2</td><td class="num n">5</td><td>Não precisa</td><td>LR + grupo</td><td class="amber">Caminho duplo</td><td>Botão L-R do canal desligado. A voz passou a ir ao master só pelo grupo 1-2, e voltou ao nível das outras.</td></tr>
+        <tr><td class="num n">6</td><td>Coral (condensador suspenso)</td><td class="num n">6</td><td>Precisa, desligado</td><td>Grupo 1-2</td><td class="red">Falta phantom</td><td>Phantom do canal 6 ligado, com o canal em mute. O sinal apareceu no PFL.</td></tr>
+        <tr><td class="num n">9</td><td>Teclado E</td><td class="num n">9</td><td>Não precisa</td><td>LR</td><td class="red">Entrada repetida</td><td>O canal estava certo. O aviso apareceu porque o canal 10 usava a mesma entrada.</td></tr>
+        <tr><td class="num n">10</td><td>Teclado D</td><td class="num n">9</td><td>Não precisa</td><td>LR</td><td class="red">Entrada repetida</td><td>Patch do canal 10 corrigido para a entrada 10. O teclado voltou a soar dos dois lados.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> Nenhum dos três problemas era de cabo ou de microfone: estavam no caminho do sinal dentro da mesa. No teclado, os dois canais mostravam sinal, e ninguém desconfiava: era o mesmo lado do teclado duas vezes, e o cabo do outro lado chegava a uma entrada que nenhum canal usava. A folha de canais deixa esse erro à vista antes de alguém tocar uma nota.</p>
+
+  <h3>Exemplo 2. O eco que não fecha e o retorno que some</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Formatura em auditório de escola. Mesa analógica de 12 canais com quatro auxiliares, cada um com chave pré e pós. Reverb em aparelho externo.</dd></div>
+    <div><dt>Sintoma</dt><dd>Com o fader do microfone do cantor fechado, ainda se ouve a voz dele ao longe, com eco. E o cantor reclama que o retorno sobe e desce durante a música.</dd></div>
+    <div><dt>Causa</dt><dd>As chaves estavam trocadas: o auxiliar 1, do retorno, em pós-fader; o auxiliar 3, do reverb, em pré-fader.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Mapa de saídas preenchido na planilha, que apontou os dois avisos. Chaves corrigidas com os masters dos auxiliares fechados, e envios refeitos.</dd></div>
+    <div><dt>Resultado</dt><dd>O retorno parou de acompanhar o fader, e o reverb passou a fechar junto com o canal.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> Os dois sintomas pareciam não ter relação, e tinham a mesma origem: a tomada errada em relação ao fader. Os auxiliares 2 (retorno, em pré) e 4 (gravação, em pós) estavam certos. Trocar uma chave pré e pós muda o nível que chega ao auxiliar: por isso os masters foram fechados antes, e os envios, refeitos depois.</p>
+
+  <h3>Exemplo 3. O fader que não fazia nada na sala</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Culto em igreja de 200 lugares, mesa digital com 16 faders em camadas. Retornos em caixas de chão.</dd></div>
+    <div><dt>Sintoma</dt><dd>No louvor, o operador sobe o fader da voz da cantora, e nada muda na sala. Pouco depois, o retorno dela começa a apitar.</dd></div>
+    <div><dt>Causa</dt><dd>O modo de envios nos faders tinha ficado ligado desde a passagem, no auxiliar 1. Os faders estavam controlando o retorno da cantora, e não a mixagem principal.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Master do auxiliar 1 baixado para parar o apito. Modo de envios desligado. Envio da voz devolvido ao valor da cena salva na passagem, e master do auxiliar reaberto.</dd></div>
+    <div><dt>Resultado</dt><dd>O retorno voltou ao que era, e o fader voltou a controlar a voz na sala.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> Na mesa digital, o mesmo fader faz trabalhos diferentes conforme a camada e o modo. A mesa avisava: os visores dos canais estavam na cor do auxiliar. A cena salva ao fim da passagem deu o valor certo para voltar. E o primeiro gesto foi fechar o master do auxiliar, que para o apito de imediato; as outras medidas contra o apito estão no estudo <a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Canal no master e no grupo ao mesmo tempo</h4><p>O canal fica mais alto do que os outros do conjunto, e o fader do grupo não consegue fechá-lo.</p><p class="fix"><b>Correção:</b> um só caminho até o master. Quem vai pelo grupo fica sem o botão L-R.</p></div>
+    <div><h4>Efeito em auxiliar pré-fader</h4><p>O canal está fechado, e a voz continua soando ao longe, dentro do reverb.</p><p class="fix"><b>Correção:</b> envio de efeito sempre em pós-fader.</p></div>
+    <div><h4>Retorno em auxiliar pós-fader</h4><p>O músico reclama que o retorno muda sozinho. Muda toda vez que o operador ajusta a sala.</p><p class="fix"><b>Correção:</b> retorno de palco em pré-fader. Confira a chave antes de montar as mixagens.</p></div>
+    <div><h4>Baixar o grupo e esperar que o efeito baixe</h4><p>O operador fecha o grupo das vozes, e o reverb delas continua na sala.</p><p class="fix"><b>Correção:</b> use um DCA para as vozes, ou enderece o retorno do efeito ao mesmo grupo.</p></div>
+    <div><h4>Camada errada ou envios nos faders ligado</h4><p>Na digital, o operador mexe no fader certo da camada errada, ou muda um retorno pensando que mexe na sala.</p><p class="fix"><b>Correção:</b> leia o visor antes de mover o fader, e saia do modo de envios assim que terminar.</p></div>
+    <div><h4>Chamar uma cena sem saber o que ela muda</h4><p>No meio do evento, a cena “do louvor” devolve ganhos, mutes e retornos da semana passada.</p><p class="fix"><b>Correção:</b> salve a cena do dia depois da passagem e proteja o que não deve mudar com o filtro de cena da mesa.</p></div>
+    <div><h4>Restaurar a mesa de fábrica para “zerar”</h4><p>O patch, os nomes e a calibração das saídas do local desaparecem junto.</p><p class="fix"><b>Correção:</b> zere pelos canais, ou carregue a cena de partida. Tenha cópia do arquivo do local fora da mesa.</p></div>
+    <div><h4>Canais sem nome e sem folha</h4><p>Ninguém sabe em que canal está o microfone do púlpito, e o operador abre os faders um a um até achar.</p><p class="fix"><b>Correção:</b> folha de canais preenchida e nomes na mesa antes do teste de linha.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>A mesa é o centro do sistema de som: tudo chega a ela e tudo sai dela. Este estudo é o mapa; os outros ensinam a usar cada parte do caminho.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>: o decibel das escalas e a polaridade.</li>
+        <li><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>: conectores, phantom, direct box e caixa de palco.</li>
+        <li><a href="../Microfones/treinamento-microfones.html">Microfones</a>: o microfone de cada canal, e se ele precisa de phantom.</li>
+        <li><a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Microfones sem fio</a>: o receptor, que entra como mais uma fonte.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>: o ajuste do pré e os medidores.</li>
+        <li><a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>: o filtro e o EQ do canal.</li>
+        <li><a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>: o insert e o envio de efeito pós-fader.</li>
+        <li><a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>: as mixagens nos auxiliares pré-fader.</li>
+        <li><a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>: o equalizador de cada retorno.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: o teste de linha e a mixagem.</li>
+        <li><a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>: o que vem depois das saídas.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: a mixagem da internet, por auxiliar ou matriz.</li>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>: o diagnóstico e a ordem de ligar e desligar.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira antes do teste de linha e de novo ao fim da passagem de som. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>A folha de canais está preenchida e bate com os nomes escritos na mesa e na caixa de palco.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>A mesa foi zerada, ou a cena de partida foi carregada, antes de ligar as caixas.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>Cada fonte está na entrada anotada, e nenhuma entrada física aparece em dois canais sem querer.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>O phantom (+48 V) está ligado só nos canais que precisam dele.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>O filtro passa-altas de cada canal está como anotado na folha de canais.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>Cada canal tem um só caminho até o master: direto ou pelo grupo.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>Os grupos em uso estão endereçados ao master, e os DCA em uso estão em 0 dB.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>Os auxiliares de retorno estão em pré-fader, e os de efeito, em pós-fader.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>Cada saída física está ligada ao destino anotado no mapa de saídas.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>Nenhum solo ficou apertado, e o modo de solo da mesa é PFL, e não solo in place.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>Na mesa digital, a camada à vista é a dos canais principais, e o modo de envios nos faders está desligado.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>A configuração final foi guardada: cena salva com cópia fora da mesa, ou foto do painel da mesa analógica.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Que recurso da mesa resolve?</h3>
+  <p>Cada frase descreve uma necessidade. Escolha o recurso que a atende melhor: <strong>A</strong>, auxiliar; <strong>G</strong>, grupo; <strong>D</strong>, DCA; <strong>M</strong>, matriz.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"A": "Auxiliar", "G": "Grupo", "D": "DCA", "M": "Matriz"},
+ "itens": [
+  {"t": "A cantora quer ouvir mais a própria voz na caixa de chão, sem que nada mude na sala.", "a": "A", "w": "O retorno é uma mixagem independente, feita com os envios de um auxiliar pré-fader."},
+  {"t": "Você quer um só compressor para as cinco vozes de apoio juntas.", "a": "G", "w": "Só um barramento por onde o áudio passa aceita processador. As vozes vão ao grupo, e o compressor entra no insert dele."},
+  {"t": "Você quer baixar a banda inteira com um fader, e o reverb dos instrumentos deve baixar junto.", "a": "D", "w": "O DCA move os faders dos canais, e os envios de efeito pós-fader acompanham. No grupo, o reverb ficaria."},
+  {"t": "A sala das crianças precisa receber a mesma mixagem do salão, com volume próprio.", "a": "M", "w": "A matriz recebe o master e o entrega a outra saída, com nível independente."},
+  {"t": "Você quer mandar um pouco da voz e do violão para o reverb interno da mesa.", "a": "A", "w": "O efeito é alimentado por um auxiliar pós-fader, com um botão de envio em cada canal."},
+  {"t": "As quatro peças da bateria precisam de um fader só e de um equalizador para o conjunto.", "a": "G", "w": "Controle e processamento do conjunto: o áudio precisa passar por um grupo."},
+  {"t": "Em mesa digital, você quer três faders, vozes, banda e mídia, sem mudar o endereçamento de nenhum canal.", "a": "D", "w": "O DCA não mexe no caminho do áudio: só comanda os faders dos canais atribuídos a ele."},
+  {"t": "As caixas de delay do fundo do salão recebem o master, com atraso e equalização próprios.", "a": "M", "w": "A saída de matriz leva o master a outro destino, com o processamento dela."},
+  {"t": "O tecladista usa fone e pede uma mixagem só dele, com muito teclado e pouca bateria.", "a": "A", "w": "Cada mixagem de retorno, de caixa ou de fone, é um auxiliar."},
+  {"t": "A gravação precisa do master somado ao grupo dos microfones de ambiente, que não vai para as caixas.", "a": "M", "w": "Somar barramentos em uma saída extra é exatamente o trabalho da matriz."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: descubra o caminho do sinal da sua mesa</h3>
+  <p>Você vai precisar de uma mesa, um microfone dinâmico com cabo, um fone e a planilha de apoio. Deixe as caixas desligadas ou o master fechado, e o fone em volume baixo. Se tiver o manual, deixe o diagrama de blocos aberto, mas só olhe no fim.</p>
+  <ol>
+    <li>Zere a mesa pelos passos do módulo 7. Preencha a aba “Canais” com o microfone no canal 1.</li>
+    <li>Ligue o microfone, aperte o PFL do canal 1 e ajuste o ganho falando no microfone, como no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>. Solte o PFL.</li>
+    <li>Abra o envio do canal 1 para o auxiliar 1 até a metade e abra o master do auxiliar 1. Aperte o solo (AFL) do master do auxiliar 1: você está ouvindo o barramento.</li>
+    <li>Falando no microfone, suba e desça o fader do canal. O som no fone muda? Se muda, o auxiliar está em pós-fader. Se não muda, está em pré-fader. Anote na aba “Saídas e auxiliares”. Se houver chave, troque e repita.</li>
+    <li>Com o auxiliar em pré-fader, aperte o mute do canal. O som no fone some? Agora você sabe se o mute da sua mesa corta os retornos.</li>
+    <li>Ainda em pré-fader, tire todo o agudo no equalizador do canal. O som no fone ficou abafado? Então o envio pré-fader sai depois do EQ.</li>
+    <li>Solte o solo do auxiliar. Enderece o canal só ao grupo 1-2, e o grupo ao master. Abra os faders e veja o sinal no medidor do master. Agora aperte também o L-R do canal e veja quanto o medidor sobe: é o caminho duplo.</li>
+    <li>Se a mesa for digital: salve uma cena chamada “teste”, mexa em três controles, chame a cena de volta e veja o que voltou. Registre na aba “Cenas”.</li>
+    <li>Compare as suas respostas dos passos 4, 5 e 6 com o diagrama de blocos do manual.</li>
+  </ol>
+  <p>Guarde as respostas na coluna de observação da planilha. Elas valem enquanto a mesa for a mesma, e poupam a dúvida no meio de um evento.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Mesa-de-Som-modelo.xlsx">Mesa-de-Som-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Canais</strong></td><td>A folha de canais: até 32 canais, com fonte, microfone ou DI, entrada física, phantom, filtro passa-altas, destino e DCA.</td><td>Situação de cada canal (entrada repetida ou fora da mesa, falta de phantom, phantom sem uso, caminho duplo, falta de destino) e resumo.</td></tr>
+        <tr><td><strong>Saídas e auxiliares</strong></td><td>O mapa de saídas: até 20 barramentos, com tipo, tomada pré ou pós, uso, saída física e destino.</td><td>Situação de cada barramento (tomada errada para o uso, saída repetida, falta de saída) e resumo.</td></tr>
+        <tr><td><strong>Cenas</strong></td><td>O registro das cenas da mesa digital: número, nome, data, o que mudou e se há cópia fora da mesa.</td><td>Situação de cada cena (número repetido, falta de data, falta de cópia), total e data da mais recente.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Os controles do canal e a posição de cada um ao zerar, os barramentos, a tomada indicada para cada uso e o roteiro “siga o sinal”.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Canais</strong></td><td>Os dezesseis canais do exemplo 1, como estavam antes da correção, e o que foi corrigido.</td><td>Os mesmos resultados da aba Canais.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A folha de canais desta planilha cuida do que acontece dentro da mesa. A lista completa do evento, com pedestais, posições no palco e cronograma, está no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>AFL</dt><dd>Escuta depois do fader (after-fader listen). Leva ao fone o sinal já com o nível do fader ou do master.</dd></div>
+    <div><dt>Auxiliar (aux)</dt><dd>Barramento que recebe uma cópia de cada canal, na medida do botão de envio. Cada auxiliar é uma mixagem extra.</dd></div>
+    <div><dt>Barramento (bus)</dt><dd>Caminho interno da mesa que soma os sinais enviados a ele e os leva a uma saída.</dd></div>
+    <div><dt>Camada (layer)</dt><dd>Na mesa digital, cada um dos conjuntos de canais ou barramentos que os mesmos faders podem controlar.</dd></div>
+    <div><dt>Cena (scene)</dt><dd>Registro de todos os ajustes da mesa digital, que pode ser chamado de volta.</dd></div>
+    <div><dt>DCA ou VCA</dt><dd>Fader que comanda à distância os faders de vários canais. Não carrega áudio.</dd></div>
+    <div><dt>Diagrama de blocos</dt><dd>Desenho do manual que mostra o caminho do sinal dentro da mesa, com a ordem de cada etapa.</dd></div>
+    <div><dt>Endereçamento (routing)</dt><dd>Escolha dos barramentos que recebem o canal depois do fader: master, grupos.</dd></div>
+    <div><dt>Folha de canais (input list)</dt><dd>Tabela que diz o que está ligado em cada canal, por qual entrada, e com que ajustes de partida.</dd></div>
+    <div><dt>Grupo (subgrupo)</dt><dd>Barramento que soma alguns canais e entrega a soma ao master por um fader só.</dd></div>
+    <div><dt>Insert</dt><dd>Ponto em que o sinal inteiro sai do canal ou do barramento, passa por um processador e volta.</dd></div>
+    <div><dt>Master LR</dt><dd>Barramento principal, estéreo, que alimenta as caixas da frente.</dd></div>
+    <div><dt>Matriz</dt><dd>Barramento que soma outros barramentos, para alimentar saídas extras.</dd></div>
+    <div><dt>Patch</dt><dd>Tabela de ligações entre conectores físicos e canais ou barramentos. Na mesa digital, é configurável.</dd></div>
+    <div><dt>Pós-fader</dt><dd>Tomada depois do fader. O que sai por ela acompanha o fader.</dd></div>
+    <div><dt>Pré-fader</dt><dd>Tomada antes do fader. O que sai por ela não muda quando o fader se move.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector('.page');
+  var NOME = page.getAttribute('data-estudo') || 'estudo';
+  function read(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { return null; } }
+  function write(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+
+  /* ---------- Checklist ---------- */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+  var count = document.getElementById('ck-count');
+  var total = document.getElementById('ck-total');
+  if (boxes.length && count) {
+    var CK = 'av-' + NOME + '-checklist';
+    var saved = read(CK) || {};
+    if (total) { total.textContent = boxes.length; }
+    var refreshChecks = function () {
+      var n = 0, state = {};
+      boxes.forEach(function (b, i) { if (b.checked) { n++; } state[b.id || i] = b.checked; });
+      count.textContent = n;
+      return state;
+    };
+    boxes.forEach(function (b, i) {
+      if (saved[b.id || i]) { b.checked = true; }
+      b.addEventListener('change', function () { write(CK, refreshChecks()); });
+    });
+    refreshChecks();
+    var ckReset = document.getElementById('ck-reset');
+    if (ckReset) {
+      ckReset.addEventListener('click', function () {
+        boxes.forEach(function (b) { b.checked = false; });
+        write(CK, refreshChecks());
+      });
+    }
+  }
+
+  /* ---------- Exercício ---------- */
+  /* Os dados vêm do bloco JSON de id quiz-data:
+     { "opcoes": {"A": "Nome da opção A", ...}, "itens": [ {"t": "frase", "a": "A", "w": "por quê"} ] } */
+  var quiz = document.getElementById('quiz');
+  var dataEl = document.getElementById('quiz-data');
+  if (quiz && dataEl) {
+    var data = JSON.parse(dataEl.textContent);
+    var NAMES = data.opcoes, ITEMS = data.itens, KEYS = Object.keys(NAMES);
+    var score = document.getElementById('qz-score');
+    var done = document.getElementById('qz-done');
+    document.getElementById('qz-total').textContent = ITEMS.length;
+    var hits = 0, answered = 0;
+    var render = function () {
+      hits = 0; answered = 0; score.textContent = 0; done.textContent = 0;
+      quiz.textContent = '';
+      ITEMS.forEach(function (item, idx) {
+        var row = document.createElement('div'); row.className = 'q';
+        var p = document.createElement('p'); p.textContent = (idx + 1) + '. ' + item.t;
+        var opts = document.createElement('div'); opts.className = 'opts';
+        opts.setAttribute('role', 'group'); opts.setAttribute('aria-label', 'Resposta do item ' + (idx + 1));
+        var why = document.createElement('p'); why.className = 'why'; why.hidden = true;
+        KEYS.forEach(function (k) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.textContent = k;
+          b.setAttribute('aria-label', NAMES[k]); b.title = NAMES[k];
+          b.addEventListener('click', function () {
+            var ok = k === item.a;
+            Array.prototype.forEach.call(opts.children, function (o) {
+              o.disabled = true;
+              if (o.textContent === item.a) { o.className = 'right'; }
+            });
+            if (!ok) { b.className = 'wrong'; }
+            var lead = document.createElement('b');
+            lead.textContent = (ok ? 'Certo. ' : 'A resposta é ' + item.a + (NAMES[item.a] !== item.a ? ', ' + NAMES[item.a] : '') + '. ');
+            why.textContent = ''; why.appendChild(lead); why.appendChild(document.createTextNode(item.w));
+            why.className = 'why ' + (ok ? 'ok' : 'no'); why.hidden = false;
+            answered++; if (ok) { hits++; }
+            score.textContent = hits; done.textContent = answered;
+          });
+          opts.appendChild(b);
+        });
+        row.appendChild(p); row.appendChild(opts); row.appendChild(why);
+        quiz.appendChild(row);
+      });
+    };
+    render();
+    document.getElementById('qz-reset').addEventListener('click', render);
+  }
+})();
+</script>
+</body>
+</html>

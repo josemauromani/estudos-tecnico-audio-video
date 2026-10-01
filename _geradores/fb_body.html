@@ -1,0 +1,903 @@
+<div class="page" lang="pt-BR" data-estudo="fb">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="red w">MIC</span><span class="slate">↻</span></div>
+  <h1>Microfonia</h1>
+  <p class="lead">Um guia de estudo para entender por que a caixa apita, ganhar margem antes do apito com posição, distância, volume e equalização, e saber o que fazer quando ele aparece no meio do evento.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O que é microfonia</a></li>
+    <li><a href="#ciclo">Por que apita, e por que uma nota só</a></li>
+    <li><a href="#margem">Ganho antes da microfonia</a></li>
+    <li><a href="#medidas">As quatro medidas, na ordem</a></li>
+    <li><a href="#abertos">Microfones abertos e a sala</a></li>
+    <li><a href="#frequencia">Identificar a frequência</a></li>
+    <li><a href="#passo">Passo a passo: o ring-out</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O que é microfonia</h2>
+  <p>Microfonia é o apito, o uivo ou o ronco que aparece quando o som da caixa volta para o microfone, é amplificado e sai de novo pela caixa, em círculo. O nome técnico é realimentação acústica; no dia a dia, muita gente usa o termo em inglês, <em>feedback</em>. Não é defeito de equipamento: é um ciclo <span class="k slate">↻</span> que qualquer sistema com microfone <span class="k red w">MIC</span> e caixa no mesmo ambiente pode formar.</p>
+  <p>Pense em uma câmera apontada para a TV que mostra a imagem dela mesma. A câmera filma a tela, a tela mostra o que a câmera filmou, a câmera filma de novo, e surge um túnel sem fim de telas dentro de telas. Com o som é igual: o microfone capta a caixa, a mesa amplifica, a caixa toca, e o microfone capta outra vez. Se cada volta chegar mais forte do que a anterior, o som cresce sozinho até virar um apito.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 304" role="img" aria-label="A analogia da câmera e da TV, em duas linhas. Na linha de cima: a câmera filma a tela, o cabo leva a imagem, a TV mostra a imagem, e a câmera filma a tela de novo; a cada volta a tela mostra a tela, e forma-se um túnel sem fim. Na linha de baixo, o equivalente no som: o microfone capta o som, a mesa e o amplificador aumentam o sinal, a caixa toca o som, e o som da caixa volta ao microfone pelo ar; a cada volta o som fica mais forte, até virar um apito.">
+        <defs>
+          <marker id="fb1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker>
+          <marker id="fb1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah f-red" d="M0 0 L10 5 L0 10 z"/></marker>
+        </defs>
+        <text class="mono mu" x="18" y="26" font-size="10.5">NA CÂMERA E NA TV</text>
+        <rect class="bx-slate" x="18" y="40" width="150" height="52"/>
+        <text class="b" x="93" y="62" font-size="12.5" text-anchor="middle">Câmera</text>
+        <text class="mu" x="93" y="80" font-size="11" text-anchor="middle">filma a tela</text>
+        <line class="ln" x1="170" y1="66" x2="224" y2="66" marker-end="url(#fb1a)"/>
+        <rect class="bx" x="228" y="40" width="150" height="52"/>
+        <text class="b" x="303" y="62" font-size="12.5" text-anchor="middle">Cabo</text>
+        <text class="mu" x="303" y="80" font-size="11" text-anchor="middle">leva a imagem</text>
+        <line class="ln" x1="380" y1="66" x2="434" y2="66" marker-end="url(#fb1a)"/>
+        <rect class="bx" x="438" y="40" width="150" height="52"/>
+        <text class="b" x="513" y="62" font-size="12.5" text-anchor="middle">TV</text>
+        <text class="mu" x="513" y="80" font-size="11" text-anchor="middle">mostra a imagem</text>
+        <path class="ln" d="M513 94 V118 H93 V97" marker-end="url(#fb1a)"/>
+        <text class="mu" x="303" y="136" font-size="11" text-anchor="middle">a câmera filma a tela de novo</text>
+        <text class="b" x="620" y="58" font-size="12.5">Uma imagem dentro da outra</text>
+        <text class="mu" x="620" y="76" font-size="11">A cada volta, a tela mostra a tela.</text>
+        <text class="mu" x="620" y="92" font-size="11">É o túnel sem fim.</text>
+
+        <text class="mono mu" x="18" y="176" font-size="10.5">NO SISTEMA DE SOM</text>
+        <rect class="hd-red" x="18" y="190" width="150" height="52"/>
+        <text class="on b" x="93" y="212" font-size="12.5" text-anchor="middle">Microfone</text>
+        <text class="on" x="93" y="230" font-size="11" text-anchor="middle">capta o som</text>
+        <line class="ln" x1="170" y1="216" x2="224" y2="216" marker-end="url(#fb1a)"/>
+        <rect class="bx" x="228" y="190" width="150" height="52"/>
+        <text class="b" x="303" y="212" font-size="12.5" text-anchor="middle">Mesa e amplificador</text>
+        <text class="mu" x="303" y="230" font-size="11" text-anchor="middle">aumentam o sinal</text>
+        <line class="ln" x1="380" y1="216" x2="434" y2="216" marker-end="url(#fb1a)"/>
+        <rect class="bx" x="438" y="190" width="150" height="52"/>
+        <text class="b" x="513" y="212" font-size="12.5" text-anchor="middle">Caixa</text>
+        <text class="mu" x="513" y="230" font-size="11" text-anchor="middle">toca o som</text>
+        <path class="s-red" d="M513 244 V268 H93 V248" marker-end="url(#fb1b)"/>
+        <text class="t-red b" x="303" y="286" font-size="11" text-anchor="middle">o som da caixa volta ao microfone pelo ar</text>
+        <text class="b" x="620" y="208" font-size="12.5">Um som em cima do outro</text>
+        <text class="mu" x="620" y="226" font-size="11">A cada volta, o som fica mais forte,</text>
+        <text class="mu" x="620" y="242" font-size="11">até virar um apito.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> A câmera que filma a própria TV e o microfone que capta a própria caixa formam o mesmo tipo de ciclo. Para acabar com o túnel, basta virar a câmera para o lado. Para acabar com o apito, é preciso enfraquecer a volta do som da caixa para o microfone.</figcaption>
+  </figure>
+
+  <div class="video">
+    <video controls preload="metadata" src="../docs/tutoriais/audio/AQMMfS8_JQpGs0iAgD1D5V_J1fcfQwkT8GHxzVZ1OwARrg52_BHof53GRgw5aovTFLWMkXUv.mp4"></video>
+    <div><h4>Vídeo: Microfonia: por que a caixa apita?</h4><p>Em um minuto, o vídeo mostra a analogia da câmera e da TV, explica por que quase sempre apita uma nota só e apresenta as quatro medidas que quebram o ciclo. Este estudo parte daí e vai até o ajuste do sistema e a conduta na hora do apito.</p></div>
+  </div>
+
+  <p>Nem todo ruído é microfonia. A microfonia tem três marcas: é uma nota única, cresce sozinha e depende do microfone aberto.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">O que se ouve</th><th>Como reconhecer</th><th style="width:30%">Onde está explicado</th></tr></thead>
+      <tbody>
+        <tr><td class="red"><strong>Microfonia</strong></td><td>Uma nota só, que cresce sem ninguém falar. Para quando o microfone é fechado ou o volume baixa. Muda de nota ou some quando o microfone muda de lugar.</td><td>Neste estudo.</td></tr>
+        <tr><td><strong>Zumbido</strong></td><td>Som grave e constante, que não cresce e não muda com a posição do microfone. Costuma vir da rede elétrica ou de um laço de terra.</td><td><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a></td></tr>
+        <tr><td><strong>Chiado</strong></td><td>Ruído contínuo, sem nota definida, que aparece nos silêncios e sobe junto com o volume.</td><td><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>Microfonia não se resolve com equipamento mais potente. Ela se resolve enfraquecendo a volta do som da caixa para o microfone: com a posição, com a distância, com o volume e, por último, com o equalizador.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="ciclo">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>Por que apita, e por que uma nota só</h2>
+  <p>Siga um som pelo ciclo. Ele entra no microfone, é aumentado pela mesa e pelo amplificador e sai pela caixa. Na volta pelo ar ele perde força, e o microfone capta só uma parte dele. A conta que importa é simples: depois de uma volta completa, o som chegou ao microfone mais fraco, igual ou mais forte do que saiu?</p>
+  <p>Essa comparação é o <strong>ganho do ciclo</strong>. Quando ele é menor que 1, cada volta chega mais fraca, e o som morre. Quando chega a 1, o som se sustenta sozinho. Quando passa de 1, cada volta é mais forte que a anterior, e o som cresce até o sistema não ter mais para onde ir.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 270" role="img" aria-label="Três gráficos de barras mostram o nível de um som a cada volta no ciclo. No primeiro, a volta chega mais fraca: o ganho do ciclo está abaixo de 1, as barras diminuem rápido, o som morre em poucas voltas e o sistema está estável. No segundo, a volta chega quase igual: o ganho do ciclo está perto de 1, as barras diminuem bem devagar, o som demora a morrer e a voz ganha uma cauda metálica; é o aviso. No terceiro, a volta chega mais forte: o ganho do ciclo está acima de 1, as barras crescem até o limite do sistema; é o apito.">
+        <text class="b" x="40" y="26" font-size="13">A volta chega mais fraca</text>
+        <text class="mu" x="40" y="44" font-size="11">ganho do ciclo abaixo de 1</text>
+        <g class="lv-teal">
+          <rect x="40" y="70" width="26" height="130"/><rect x="76" y="109" width="26" height="91"/><rect x="112" y="136" width="26" height="64"/>
+          <rect x="148" y="155" width="26" height="45"/><rect x="184" y="169" width="26" height="31"/><rect x="220" y="178" width="26" height="22"/>
+        </g>
+        <line class="ln-mu" x1="34" y1="200" x2="252" y2="200"/>
+        <text class="mu" x="40" y="216" font-size="10.5">voltas no ciclo →</text>
+        <text x="40" y="240" font-size="11.5">O som morre em poucas voltas:</text>
+        <text x="40" y="256" font-size="11.5">o sistema está estável.</text>
+
+        <text class="b" x="335" y="26" font-size="13">A volta chega quase igual</text>
+        <text class="mu" x="335" y="44" font-size="11">ganho do ciclo perto de 1</text>
+        <g class="lv-amber">
+          <rect x="335" y="70" width="26" height="130"/><rect x="371" y="78" width="26" height="122"/><rect x="407" y="85" width="26" height="115"/>
+          <rect x="443" y="92" width="26" height="108"/><rect x="479" y="98" width="26" height="102"/><rect x="515" y="104" width="26" height="96"/>
+        </g>
+        <line class="ln-mu" x1="329" y1="200" x2="547" y2="200"/>
+        <text class="mu" x="335" y="216" font-size="10.5">voltas no ciclo →</text>
+        <text x="335" y="240" font-size="11.5">O som demora a morrer: a voz ganha</text>
+        <text x="335" y="256" font-size="11.5">uma cauda metálica. É o aviso.</text>
+
+        <text class="b" x="630" y="26" font-size="13">A volta chega mais forte</text>
+        <text class="mu" x="630" y="44" font-size="11">ganho do ciclo acima de 1</text>
+        <g class="lv-red">
+          <rect x="630" y="166" width="26" height="34"/><rect x="666" y="152" width="26" height="48"/><rect x="702" y="133" width="26" height="67"/>
+          <rect x="738" y="106" width="26" height="94"/><rect x="774" y="70" width="26" height="130"/><rect x="810" y="70" width="26" height="130"/>
+        </g>
+        <line class="s-bad dash" x1="624" y1="70" x2="842" y2="70"/>
+        <text class="t-red b" x="842" y="62" font-size="10.5" text-anchor="end">limite do sistema</text>
+        <line class="ln-mu" x1="624" y1="200" x2="842" y2="200"/>
+        <text class="mu" x="630" y="216" font-size="10.5">voltas no ciclo →</text>
+        <text x="630" y="240" font-size="11.5">O som cresce até o limite do sistema:</text>
+        <text x="630" y="256" font-size="11.5">é o apito.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> O que decide entre o silêncio e o apito é o ganho do ciclo. Em decibéis, o limite é 0 dB: a volta chega com a mesma força com que saiu.</figcaption>
+  </figure>
+
+  <h3>Por que parece instantâneo</h3>
+  <p>O som anda cerca de 34 centímetros por milésimo de segundo. Com a caixa a três metros e meio do microfone, uma volta leva perto de 10 milésimos de segundo: são cem voltas por segundo. Se cada volta ganha 1 dB, o som sobe cerca de 100 dB em um segundo. Por isso o apito parece surgir do nada. Só um fio acima do limite, o crescimento é lento, e dá para ouvir a nota nascendo (módulo 7).</p>
+  <p>O crescimento só para quando alguma etapa chega ao limite: o amplificador satura ou o limitador segura. O resultado é um tom contínuo na potência máxima do sistema, que agride o ouvido e queima alto-falantes.</p>
+
+  <h3>Por que uma nota só</h3>
+  <p>O ciclo não trata todas as frequências do mesmo jeito. O microfone capta umas um pouco mais do que outras, a caixa reproduz umas com mais força, a sala reforça algumas, e um realce no equalizador soma mais alguns decibéis em uma região. Juntando tudo, a resposta do ciclo é uma linha cheia de picos e vales.</p>
+  <p>Quando você sobe o volume, a linha inteira sobe junto. O pico mais alto é o primeiro a encostar no limite, e é nessa frequência que o sistema apita. As outras ficam quietas. Se você cortar esse pico e subir mais o volume, o segundo pico mais alto passa a apitar, em outra nota. A divisão do som em frequências está no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 250" role="img" aria-label="Gráfico da resposta do ciclo, de 100 hertz a 10 quilohertz. O eixo vertical é o nível com que cada frequência volta ao microfone. Uma linha tracejada horizontal no alto marca o limite da microfonia: a volta chega tão forte quanto saiu. A curva cheia mostra o sistema no volume de operação: ela tem vários picos e vales, e o pico mais alto, em 2,5 quilohertz, fica 6 dB abaixo do limite. A curva tracejada é a mesma curva com 6 dB a mais de volume: a curva inteira sobe, e o pico de 2,5 quilohertz encosta no limite. É nessa frequência que o sistema apita primeiro.">
+        <text class="mu" x="18" y="34" font-size="10.5">nível com que o som volta ao microfone</text>
+        <line class="ln-mu" x1="80" y1="44" x2="80" y2="205"/>
+        <line class="ln-mu" x1="80" y1="205" x2="600" y2="205"/>
+        <line class="s-bad dash" x1="80" y1="80" x2="616" y2="80"/>
+        <text class="t-red b" x="86" y="72" font-size="11">limite: a volta chega tão forte quanto saiu</text>
+        <path class="s-red dash" d="M80 162 C87 159 108 148 120 142 C132 136 140 132 150 126 C160 120 172 103 183 104 C194 105 202 131 215 134 C228 137 248 119 262 120 C276 121 287 139 300 138 C313 137 327 113 340 112 C353 111 367 131 380 130 C393 129 409 116 420 108 C431 100 436 79 444 80 C452 81 461 109 470 116 C479 123 491 125 500 122 C509 119 514 97 522 98 C530 99 537 118 550 128 C563 138 592 153 600 158"/>
+        <path class="s-ink" d="M80 192 C87 189 108 178 120 172 C132 166 140 162 150 156 C160 150 172 133 183 134 C194 135 202 161 215 164 C228 167 248 149 262 150 C276 151 287 169 300 168 C313 167 327 143 340 142 C353 141 367 161 380 160 C393 159 409 146 420 138 C431 130 436 109 444 110 C452 111 461 139 470 146 C479 153 491 155 500 152 C509 149 514 127 522 128 C530 129 537 148 550 158 C563 168 592 183 600 188"/>
+        <circle class="f-red" cx="444" cy="80" r="4.5"/>
+        <text class="t-red b" x="454" y="60" font-size="11">2,5 kHz: apita primeiro</text>
+        <line class="ref" x1="448" y1="110" x2="616" y2="110"/>
+        <path class="ln-mu" stroke-width="1" d="M606 84 H614 M610 84 V106 M606 106 H614"/>
+        <text class="mu" x="622" y="99" font-size="11">margem de 6 dB</text>
+        <g class="ln-mu" stroke-width="1">
+          <line x1="80" y1="205" x2="80" y2="211"/><line x1="183" y1="205" x2="183" y2="211"/><line x1="262" y1="205" x2="262" y2="211"/>
+          <line x1="340" y1="205" x2="340" y2="211"/><line x1="444" y1="205" x2="444" y2="211"/><line x1="522" y1="205" x2="522" y2="211"/><line x1="600" y1="205" x2="600" y2="211"/>
+        </g>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="80" y="225">100</text><text class="mu" x="183" y="225">250</text><text class="mu" x="262" y="225">500</text>
+          <text class="mu" x="340" y="225">1 k</text><text class="b" x="444" y="225">2,5 k</text><text class="mu" x="522" y="225">5 k</text><text class="mu" x="600" y="225">10 k</text>
+        </g>
+        <text class="mu" x="340" y="243" font-size="11" text-anchor="middle">frequência, em Hz</text>
+
+        <line class="s-ink" x1="640" y1="140" x2="670" y2="140"/>
+        <text class="b" x="678" y="144" font-size="12">No volume de operação</text>
+        <text class="mu" x="640" y="161" font-size="11">O pico mais alto fica 6 dB abaixo</text>
+        <text class="mu" x="640" y="176" font-size="11">do limite.</text>
+        <line class="s-red dash" x1="640" y1="200" x2="670" y2="200"/>
+        <text class="b" x="678" y="204" font-size="12">Com 6 dB a mais de volume</text>
+        <text class="mu" x="640" y="221" font-size="11">A curva inteira sobe, e o pico mais</text>
+        <text class="mu" x="640" y="236" font-size="11">alto encosta no limite.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> A resposta do ciclo, em esquema. O volume sobe a curva inteira; a frequência do pico mais alto é a que apita primeiro. A forma da curva muda de um sistema para outro, e muda quando o microfone ou a caixa mudam de lugar.</figcaption>
+  </figure>
+
+  <p>Há mais uma condição: só se sustenta a frequência cuja onda volta ao microfone “em passo” com a que está saindo. Como isso depende do tempo de cada volta, mexer o microfone alguns centímetros troca a nota do apito. Por isso um microfone que anda pelo palco apita em notas diferentes em lugares diferentes, e o equalizador nunca substitui a margem de segurança.</p>
+
+  <h3>Os avisos antes do apito</h3>
+  <p>Perto do limite, o som demora a morrer naquela frequência, e o sistema avisa:</p>
+  <ul>
+    <li>a voz ganha uma cauda, um “rabo” que continua um instante depois de cada sílaba;</li>
+    <li>o som fica metálico ou oco, como dentro de um cano;</li>
+    <li>uma nota começa a soar baixinho nas pausas e some quando alguém fala.</li>
+  </ul>
+  <p>Quem aprende a ouvir esses sinais baixa o volume antes de o público perceber.</p>
+
+  <div class="note">
+    <h4>Segurança: volume alto</h4>
+    <p>Um apito no volume máximo do sistema pode ferir a audição de quem está perto de uma caixa ou usa fone, e queimar alto-falantes em poucos segundos. Nunca provoque microfonia com gente perto das caixas ou de fone no ouvido, mantenha a mão no controle da saída durante os testes e deixe o limitador ligado. Os limites de exposição ao som estão no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="margem">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Ganho antes da microfonia</h2>
+  <p>Todo sistema tem um ponto em que começa a apitar. A distância entre o microfone fechado e esse ponto é o <strong>ganho antes da microfonia</strong> (em inglês, <em>gain before feedback</em>): o máximo de amplificação que aquele microfone pode receber, naquela posição, naquela sala. Não é um botão. É uma propriedade da montagem.</p>
+  <p>Se o sistema entrega o volume de que o público precisa com folga antes do ponto de apito, a montagem está boa. Se o volume necessário fica colado nesse ponto, ou acima dele, não há ajuste de mesa que resolva: é preciso mudar a montagem. Caixa mais potente não ajuda, porque o ponto de apito depende do caminho do som, e não da potência.</p>
+
+  <h3>A margem de segurança</h3>
+  <p>Operar no ponto de apito não funciona: o som já fica com cauda alguns decibéis antes, e qualquer mudança no palco cruza o limite. A regra prática mais usada é trabalhar pelo menos <strong>6 dB abaixo do ponto do primeiro apito</strong>. Essa distância é a <strong>margem</strong>. Com menos de 3 dB, o sistema já soa metálico. Microfones que andam pelo palco pedem mais margem do que microfones fixos.</p>
+
+  <h3>As três distâncias</h3>
+  <p>Três distâncias decidem quase tudo. Elas valem para as caixas da frente e para os retornos.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 296" role="img" aria-label="Vista de cima de um palco e do público, com três distâncias marcadas. A distância 1 vai da fonte, que é a boca de quem fala, ao microfone: quanto menor, melhor; na metade da distância, a margem aumenta 6 dB. A distância 2 vai da caixa ao microfone: quanto maior, melhor; no dobro da distância, a margem aumenta até 6 dB. A distância 3 vai da caixa ao ouvinte mais distante: com a caixa mais perto do público, é preciso menos volume. A caixa fica na frente do palco, à frente do microfone, e aponta para o público.">
+        <rect class="bx-out" x="18" y="40" width="330" height="190"/>
+        <text class="mono mu" x="30" y="58" font-size="10.5">PALCO</text>
+        <text class="mono mu" x="380" y="58" font-size="10.5">PÚBLICO</text>
+        <polygon class="lv-blue" style="fill-opacity:.14" points="340,82 870,44 870,222"/>
+        <rect class="bx-ink" x="280" y="62" width="60" height="40"/>
+        <text class="t-ground b" x="310" y="86" font-size="11.5" text-anchor="middle">Caixa</text>
+        <circle class="bx" cx="80" cy="170" r="13"/>
+        <text class="b" x="80" y="204" font-size="11.5" text-anchor="middle">Fonte</text>
+        <text class="mu" x="80" y="219" font-size="10.5" text-anchor="middle">a boca</text>
+        <circle class="f-red" cx="150" cy="170" r="7"/>
+        <text class="b" x="166" y="204" font-size="11.5" text-anchor="middle">Microfone</text>
+        <line class="s-red" x1="94" y1="170" x2="142" y2="170"/>
+        <circle class="f-red" cx="118" cy="148" r="9"/><text class="on b" x="118" y="152" font-size="11" text-anchor="middle">1</text>
+        <line class="s-slate dash" x1="280" y1="96" x2="157" y2="166"/>
+        <circle class="f-slate" cx="222" cy="118" r="9"/><text class="on b" x="222" y="122" font-size="11" text-anchor="middle">2</text>
+        <line class="s-blue" x1="340" y1="90" x2="746" y2="160"/>
+        <circle class="f-blue" cx="540" cy="124" r="9"/><text class="on b" x="540" y="128" font-size="11" text-anchor="middle">3</text>
+        <circle class="bx" cx="760" cy="163" r="13"/>
+        <text class="b" x="760" y="198" font-size="11.5" text-anchor="middle">Ouvinte mais distante</text>
+
+        <circle class="f-red" cx="27" cy="256" r="9"/><text class="on b" x="27" y="260" font-size="11" text-anchor="middle">1</text>
+        <text class="b" x="44" y="260" font-size="12">Fonte–microfone</text>
+        <text class="mu" x="18" y="282" font-size="11">Metade da distância: +6 dB de margem.</text>
+        <circle class="f-slate" cx="327" cy="256" r="9"/><text class="on b" x="327" y="260" font-size="11" text-anchor="middle">2</text>
+        <text class="b" x="344" y="260" font-size="12">Caixa–microfone</text>
+        <text class="mu" x="318" y="282" font-size="11">O dobro da distância: até +6 dB.</text>
+        <circle class="f-blue" cx="617" cy="256" r="9"/><text class="on b" x="617" y="260" font-size="11" text-anchor="middle">3</text>
+        <text class="b" x="634" y="260" font-size="12">Caixa–ouvinte</text>
+        <text class="mu" x="608" y="282" font-size="11">Caixa perto do público: menos volume.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> As três distâncias que definem o ganho antes da microfonia. A primeira é a mais barata de mudar e a que mais rende.</figcaption>
+  </figure>
+
+  <p>A conta por trás da figura é a lei do inverso do quadrado, explicada no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>: a cada vez que a distância cai pela metade, o som chega 6 dB mais forte. Um microfone a 10 cm da boca recebe a voz 6 dB mais forte do que a 20 cm, e 12 dB mais forte do que a 40 cm. O sistema amplifica menos para dar o mesmo volume, e cada decibel a menos de amplificação é um decibel a mais de margem.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:36%">Medida</th><th style="width:20%">Efeito na margem</th><th>Do que depende</th></tr></thead>
+      <tbody>
+        <tr><td>Microfone na metade da distância da boca</td><td class="num">+6 dB</td><td>Vale a cada metade. De 20 cm para 5 cm são 12 dB.</td></tr>
+        <tr><td>Caixa ao dobro da distância do microfone</td><td class="num">até +6 dB</td><td>O valor cheio só aparece ao ar livre. Em sala reflexiva, o som volta pelas paredes, e o efeito é menor.</td></tr>
+        <tr><td>Caixa fora da frente do microfone, na zona em que ele capta menos</td><td>Vários dB</td><td>Do padrão polar e das reflexões da sala.</td></tr>
+        <tr><td>Metade dos microfones abertos</td><td class="num">+3 dB</td><td>De os microfones captarem o sistema de forma parecida (módulo 5).</td></tr>
+        <tr><td>Ring-out: cortes estreitos de EQ nas frequências que apitam</td><td class="num">3 a 6 dB</td><td>Faixa típica. Se os primeiros cortes rendem pouco, a posição está ruim.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>São valores de referência. Repare: aproximar o microfone da boca rende o mesmo que um ring-out bem-feito, sem tirar nada do som.</p>
+
+  <div class="note">
+    <h4>O que não muda a margem</h4>
+    <p>Trocar ganho por fader não muda nada: 6 dB a mais no ganho com 6 dB a menos no fader dão o mesmo ganho do ciclo. O que conta é o volume total que aquele microfone recebe em cada caixa. O ajuste do ganho pelo medidor está no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="medidas">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>As quatro medidas, na ordem</h2>
+  <p>Há quatro medidas contra a microfonia, e a ordem importa. As três primeiras enfraquecem o ciclo sem tirar nada do som. A quarta, o equalizador, tira um pedaço do som para ganhar alguns decibéis. Por isso ela vem por último.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="n" style="width:7%">Ordem</th><th style="width:25%">Medida</th><th>O que ela faz no ciclo</th></tr></thead>
+      <tbody>
+        <tr><td class="n"><span class="k red">1</span></td><td><strong>Posição das caixas</strong></td><td>Reduz o quanto do som da caixa chega ao microfone.</td></tr>
+        <tr><td class="n"><span class="k red">2</span></td><td><strong>Microfone perto da fonte</strong></td><td>Aumenta a voz que entra no microfone, e o sistema precisa amplificar menos.</td></tr>
+        <tr><td class="n"><span class="k red">3</span></td><td><strong>Ganho sem exagero</strong></td><td>Reduz a força de cada volta: menos volume, menos microfones abertos.</td></tr>
+        <tr><td class="n"><span class="k red">4</span></td><td><strong>EQ estreito</strong></td><td>Baixa só o pico em que o ciclo apita.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3><span class="k red">1</span> Posição das caixas</h3>
+  <p>As caixas da frente ficam à frente da linha dos microfones e apontam para o público. Assim, o microfone fica atrás delas, fora da região que elas cobrem. Caixa atrás de quem fala, ou ao lado, apontada para o palco, joga som direto no microfone. O mesmo vale para o pregador que desce do palco e passa com o microfone na frente das caixas. A cobertura e o posicionamento do PA estão no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 326" role="img" aria-label="Duas vistas de cima de um palco. À esquerda, o errado: as duas caixas ficam no fundo do palco, atrás do cantor, e o som delas passa pelo microfone antes de chegar ao público; a margem é mínima. À direita, o certo: as duas caixas ficam na frente do palco, à frente do microfone, e apontam para o público; uma caixa de retorno, no chão à frente do cantor, aponta para ele e chega pela parte de trás do microfone, o lado em que o microfone capta menos.">
+        <text class="t-bad b" x="18" y="26" font-size="13.5">Errado: caixas atrás do microfone</text>
+        <rect class="bx-out" x="18" y="40" width="414" height="140"/>
+        <text class="mono mu" x="30" y="170" font-size="10.5">PALCO</text>
+        <polygon class="lv-blue" style="fill-opacity:.16" points="170,76 58,270 348,270"/>
+        <polygon class="lv-blue" style="fill-opacity:.16" points="280,76 102,270 392,270"/>
+        <rect class="bx-ink" x="148" y="50" width="44" height="26"/><text class="t-ground" x="170" y="67" font-size="10.5" text-anchor="middle">caixa</text>
+        <rect class="bx-ink" x="258" y="50" width="44" height="26"/><text class="t-ground" x="280" y="67" font-size="10.5" text-anchor="middle">caixa</text>
+        <circle class="bx" cx="225" cy="116" r="11"/>
+        <text class="mu" x="242" y="120" font-size="10.5">cantor</text>
+        <circle class="f-red" cx="225" cy="142" r="6"/>
+        <text class="mu" x="238" y="147" font-size="10.5">microfone</text>
+        <text class="t-bad b" x="204" y="131" font-size="11" text-anchor="end">o microfone fica dentro</text>
+        <text class="t-bad b" x="204" y="146" font-size="11" text-anchor="end">do som das caixas</text>
+        <text class="mono mu" x="225" y="258" font-size="10.5" text-anchor="middle">PÚBLICO</text>
+        <text x="18" y="296" font-size="11.5">O som das caixas passa pelo microfone antes de chegar</text>
+        <text x="18" y="312" font-size="11.5">ao público. A margem é mínima.</text>
+
+        <text class="t-good b" x="468" y="26" font-size="13.5">Certo: caixas à frente do microfone</text>
+        <rect class="bx-out" x="468" y="40" width="414" height="140"/>
+        <text class="mono mu" x="480" y="58" font-size="10.5">PALCO</text>
+        <polygon class="lv-blue" style="fill-opacity:.16" points="520,176 468,270 658,270"/>
+        <polygon class="lv-blue" style="fill-opacity:.16" points="830,176 692,270 882,270"/>
+        <rect class="bx-ink" x="498" y="150" width="44" height="26"/><text class="t-ground" x="520" y="167" font-size="10.5" text-anchor="middle">caixa</text>
+        <rect class="bx-ink" x="808" y="150" width="44" height="26"/><text class="t-ground" x="830" y="167" font-size="10.5" text-anchor="middle">caixa</text>
+        <polygon class="lv-amber" points="675,138 644,88 706,88"/>
+        <circle class="bx" cx="675" cy="70" r="11"/>
+        <text class="mu" x="692" y="68" font-size="10.5">cantor</text>
+        <circle class="f-red" cx="675" cy="96" r="6"/>
+        <text class="mu" x="712" y="100" font-size="10.5">microfone</text>
+        <rect class="bx-amber" x="657" y="138" width="36" height="18"/>
+        <text class="t-amber b" x="704" y="136" font-size="11">retorno: chega por</text>
+        <text class="t-amber b" x="704" y="151" font-size="11">trás do microfone</text>
+        <text class="mono mu" x="675" y="258" font-size="10.5" text-anchor="middle">PÚBLICO</text>
+        <text x="468" y="296" font-size="11.5">As caixas apontam para o público, e o retorno chega pelo</text>
+        <text x="468" y="312" font-size="11.5">lado em que o microfone capta menos.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> Vista de cima do palco. As caixas da frente ficam à frente da linha dos microfones. O retorno aponta para o músico, mas chega ao microfone pelo lado de trás.</figcaption>
+  </figure>
+
+  <h3>O retorno e o padrão polar do microfone</h3>
+  <p>A caixa de retorno precisa apontar para o músico, e o microfone está bem ali. A saída é usar a direção em que o microfone capta menos, que muda conforme o padrão polar, explicado no estudo <a href="../Microfones/treinamento-microfones.html">Microfones</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 334" role="img" aria-label="Dois diagramas polares vistos de cima, com a frente do microfone para o alto, na direção da boca. À esquerda, o cardioide: a captação tem forma de coração e é mínima bem atrás, a 180 graus; a caixa de retorno fica bem atrás do microfone. À direita, o supercardioide: a captação é mais estreita na frente, mas tem um pequeno lóbulo atrás; os pontos de menor captação ficam a cerca de 125 graus de cada lado; as caixas de retorno ficam na diagonal, e não bem atrás, onde o microfone ainda capta.">
+        <text class="b" x="230" y="26" font-size="13.5" text-anchor="middle">Cardioide</text>
+        <text class="mu" x="230" y="54" font-size="11" text-anchor="middle">frente: a boca</text>
+        <circle class="ref" fill="none" cx="230" cy="160" r="85"/>
+        <path class="lv-red" style="stroke:var(--red);stroke-width:2" d="M230.0 75.0 L241.8 76.2 L253.0 79.9 L263.1 85.7 L271.6 93.4 L278.2 102.5 L282.7 112.5 L284.9 122.9 L284.9 133.2 L282.9 142.8 L279.1 151.3 L274.0 158.5 L267.8 164.0 L261.3 167.8 L254.6 170.0 L248.4 170.6 L242.9 170.1 L238.3 168.6 L234.8 166.6 L232.3 164.4 L230.9 162.4 L230.2 160.9 L230.0 160.1 L230.0 160.1 L229.8 160.9 L229.1 162.4 L227.7 164.4 L225.2 166.6 L221.7 168.6 L217.1 170.1 L211.6 170.6 L205.4 170.0 L198.7 167.8 L192.2 164.0 L186.0 158.5 L180.9 151.3 L177.1 142.8 L175.1 133.2 L175.1 122.9 L177.3 112.5 L181.8 102.5 L188.4 93.4 L196.9 85.7 L207.0 79.9 L218.2 76.2 Z"/>
+        <line class="ref" x1="230" y1="160" x2="230" y2="262"/>
+        <circle class="f-ink" cx="230" cy="160" r="3.5"/>
+        <rect class="bx-amber" x="198" y="262" width="64" height="24"/>
+        <text class="b" x="230" y="278" font-size="11" text-anchor="middle">retorno</text>
+        <text x="230" y="306" font-size="11.5" text-anchor="middle">Capta menos bem atrás, a 180°:</text>
+        <text x="230" y="322" font-size="11.5" text-anchor="middle">o retorno fica atrás do microfone.</text>
+
+        <text class="b" x="670" y="26" font-size="13.5" text-anchor="middle">Supercardioide</text>
+        <text class="mu" x="670" y="54" font-size="11" text-anchor="middle">frente: a boca</text>
+        <circle class="ref" fill="none" cx="670" cy="160" r="85"/>
+        <path class="lv-red" style="stroke:var(--red);stroke-width:2" d="M670.0 75.0 L681.8 76.3 L692.9 80.3 L702.7 86.6 L710.7 94.8 L716.6 104.5 L720.0 115.0 L720.9 125.7 L719.4 135.9 L715.6 145.2 L710.1 152.9 L703.3 158.8 L695.7 162.7 L687.9 164.5 L680.6 164.3 L674.0 162.3 L671.2 160.9 L674.9 165.1 L677.0 169.6 L677.4 174.0 L676.5 177.7 L674.4 180.5 L671.5 181.9 L668.5 181.9 L665.6 180.5 L663.5 177.7 L662.6 174.0 L663.0 169.6 L665.1 165.1 L668.8 160.9 L666.0 162.3 L659.4 164.3 L652.1 164.5 L644.3 162.7 L636.7 158.8 L629.9 152.9 L624.4 145.2 L620.6 135.9 L619.1 125.7 L620.0 115.0 L623.4 104.5 L629.3 94.8 L637.3 86.6 L647.1 80.3 L658.2 76.3 Z"/>
+        <line class="ref" x1="670" y1="160" x2="762" y2="227"/>
+        <line class="ref" x1="670" y1="160" x2="578" y2="227"/>
+        <circle class="f-ink" cx="670" cy="160" r="3.5"/>
+        <rect class="bx-amber" x="752" y="222" width="64" height="24"/>
+        <text class="b" x="784" y="238" font-size="11" text-anchor="middle">retorno</text>
+        <rect class="bx-amber" x="524" y="222" width="64" height="24"/>
+        <text class="b" x="556" y="238" font-size="11" text-anchor="middle">retorno</text>
+        <text class="t-bad b" x="670" y="204" font-size="11" text-anchor="middle">atrás ele</text>
+        <text class="t-bad b" x="670" y="218" font-size="11" text-anchor="middle">ainda capta</text>
+        <text x="670" y="306" font-size="11.5" text-anchor="middle">Capta menos a cerca de 125° de cada lado:</text>
+        <text x="670" y="322" font-size="11.5" text-anchor="middle">o retorno fica na diagonal, e não bem atrás.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> Onde colocar o retorno, conforme o padrão polar. No hipercardioide, os pontos de menor captação ficam mais para o lado, perto de 110°. Os ângulos são os valores de projeto; o diagrama no manual do microfone mostra o caso real.</figcaption>
+  </figure>
+
+  <p>O microfone onidirecional, como a maioria das lapelas, capta igual de todos os lados: não há posição boa para o retorno, e a margem vem só da distância e do volume.</p>
+  <p>A rejeição só funciona com o microfone apontado para a boca. Quando o cantor abaixa o braço, a frente do microfone aponta para o retorno: é uma causa comum de apito entre uma música e outra. A montagem das mixagens de retorno e o uso de fones estão no estudo <a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>.</p>
+
+  <h3><span class="k red">2</span> Microfone perto da fonte</h3>
+  <p>É a medida que mais rende e a que menos custa. Com o microfone longe, a voz entra fraca, o operador compensa com volume, e o ciclo fica mais forte na mesma medida.</p>
+  <ul>
+    <li><strong>Microfone de mão:</strong> a poucos dedos da boca, apontado para ela, e não para o teto. Quem segura na altura do peito perde 10 dB ou mais.</li>
+    <li><strong>Não cobrir a grade com a mão.</strong> A mão em volta da cápsula tapa as entradas traseiras, que fazem o microfone ser direcional: ele passa a captar de todos os lados e apita mais cedo.</li>
+    <li><strong>Púlpito:</strong> o microfone de haste aponta para a boca, e não para o papel.</li>
+    <li><strong>Lapela:</strong> fica a cerca de um palmo da boca e costuma ser onidirecional. É o formato com menos margem. Um microfone de cabeça (<em>headset</em>), a dois ou três dedos do canto da boca, costuma render 10 dB ou mais.</li>
+  </ul>
+  <p>A técnica de mão, os formatos de microfone e o posicionamento por fonte estão no estudo <a href="../Microfones/treinamento-microfones.html">Microfones</a>.</p>
+
+  <h3><span class="k red">3</span> Ganho sem exagero</h3>
+  <p>Aqui, “ganho” é o ganho do ciclo inteiro: tudo o que aumenta o volume daquele microfone em alguma caixa. Menos ganho, menos força em cada volta.</p>
+  <ul>
+    <li><strong>Volume de palco:</strong> o retorno é a caixa mais próxima do microfone e costuma apitar primeiro. Combine um volume de palco moderado.</li>
+    <li><strong>Realces no equalizador:</strong> 6 dB de realce em uma faixa são 6 dB a mais de ganho do ciclo naquela faixa. Prefira cortar a realçar, como ensina o estudo <a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>.</li>
+    <li><strong>Compressor:</strong> o ganho de compensação (<em>make-up</em>) aumenta o canal sempre que o compressor não está atuando, ou seja, nas pausas. Com 6 dB de compensação, o canal fica 6 dB mais perto do apito quando o cantor para. Veja o estudo <a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>.</li>
+    <li><strong>Filtro passa-altas</strong> (HPF) nos microfones de voz: tira do ciclo os graves que a voz não usa, onde costumam nascer os roncos.</li>
+  </ul>
+
+  <h3><span class="k red">4</span> EQ estreito</h3>
+  <p>Se o sistema ainda apita antes do volume necessário, entra o equalizador, para baixar só o pico em que o ciclo apita. O corte tem de ser estreito: no paramétrico, isso significa <strong>Q</strong> alto. Os tipos de filtro e o significado de frequência, ganho e Q estão no estudo <a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 244" role="img" aria-label="Dois gráficos de um corte de 6 dB em 2,5 quilohertz, com o eixo de frequência de 100 hertz a 10 quilohertz. Uma faixa sombreada marca a região de 2 a 5 quilohertz, que dá clareza à voz. À esquerda, o corte estreito, com Q perto de 8: uma fenda fina, que tira o apito e quase não muda o som; só cerca de 300 hertz são afetados. À direita, o corte largo, com Q perto de 1: uma bacia larga, que tira o apito e leva junto a clareza; de 1,5 a 4 quilohertz, tudo cai 3 dB ou mais.">
+        <text class="b" x="60" y="26" font-size="13">Corte estreito: Q perto de 8</text>
+        <rect class="lv-teal" style="fill-opacity:.16" x="281" y="56" width="68" height="114"/>
+        <text class="mu" x="315" y="50" font-size="10.5" text-anchor="middle">clareza da voz</text>
+        <line class="ref" x1="60" y1="70" x2="400" y2="70"/>
+        <line class="ln-mu" x1="60" y1="170" x2="400" y2="170"/>
+        <text class="mu" x="52" y="74" font-size="10.5" text-anchor="end">0 dB</text>
+        <text class="mu" x="52" y="146" font-size="10.5" text-anchor="end">−6 dB</text>
+        <path class="s-red" d="M60.0 70.0 L110.5 70.0 L160.5 70.0 L210.5 70.1 L260.5 71.1 L274.0 72.7 L279.0 74.3 L282.0 76.0 L284.0 77.7 L285.5 79.5 L287.0 81.8 L288.0 83.9 L289.0 86.4 L290.0 89.7 L290.5 91.6 L291.0 93.8 L291.5 96.3 L292.0 99.0 L292.5 102.2 L293.0 105.7 L293.5 109.6 L294.0 114.0 L294.5 118.7 L295.0 123.6 L295.5 128.6 L296.0 133.4 L296.5 137.5 L297.0 140.5 L297.6 142.0 L299.0 136.0 L299.5 131.5 L300.0 126.6 L300.5 121.6 L301.0 116.8 L301.5 112.2 L302.0 108.0 L302.5 104.3 L303.0 100.9 L303.5 97.9 L304.0 95.2 L304.5 92.9 L305.0 90.8 L305.5 89.0 L306.0 87.3 L307.0 84.6 L308.0 82.4 L309.0 80.6 L310.5 78.6 L312.5 76.6 L315.0 75.0 L319.0 73.3 L327.5 71.7 L377.5 70.2 L400.0 70.1"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="60" y="187">100</text><text class="mu" x="230" y="187">1 k</text><text class="b" x="298" y="187">2,5 k</text><text class="mu" x="400" y="187">10 k</text>
+        </g>
+        <text x="60" y="212" font-size="11.5">Tira o apito e quase não muda o som:</text>
+        <text x="60" y="228" font-size="11.5">só cerca de 300 Hz são afetados.</text>
+
+        <text class="b" x="510" y="26" font-size="13">Corte largo: Q perto de 1</text>
+        <rect class="lv-teal" style="fill-opacity:.16" x="731" y="56" width="68" height="114"/>
+        <text class="mu" x="765" y="50" font-size="10.5" text-anchor="middle">clareza da voz</text>
+        <line class="ref" x1="510" y1="70" x2="850" y2="70"/>
+        <line class="ln-mu" x1="510" y1="170" x2="850" y2="170"/>
+        <text class="mu" x="502" y="74" font-size="10.5" text-anchor="end">0 dB</text>
+        <text class="mu" x="502" y="146" font-size="10.5" text-anchor="end">−6 dB</text>
+        <path class="s-red" d="M510.0 70.2 L560.0 70.6 L608.0 72.2 L628.0 73.8 L641.0 75.5 L650.5 77.1 L658.0 78.8 L664.0 80.4 L669.5 82.1 L674.0 83.8 L678.0 85.4 L682.0 87.2 L685.5 89.0 L688.5 90.7 L691.5 92.5 L694.0 94.1 L696.5 95.9 L699.0 97.8 L701.5 99.8 L703.5 101.4 L705.5 103.2 L707.5 105.0 L709.5 107.0 L711.5 109.0 L713.5 111.1 L715.0 112.7 L716.5 114.4 L718.0 116.1 L719.5 117.8 L721.0 119.5 L722.5 121.3 L724.0 123.1 L725.5 124.8 L727.0 126.6 L728.5 128.3 L730.0 130.1 L731.5 131.7 L733.5 133.8 L735.5 135.8 L737.5 137.5 L740.0 139.4 L743.0 141.0 L747.6 142.0 L755.5 139.3 L758.0 137.4 L760.0 135.6 L762.0 133.6 L764.0 131.5 L765.5 129.8 L767.0 128.1 L768.5 126.4 L770.0 124.6 L771.5 122.8 L773.0 121.0 L774.5 119.3 L776.0 117.5 L777.5 115.8 L779.0 114.1 L780.5 112.5 L782.0 110.9 L784.0 108.8 L786.0 106.8 L788.0 104.9 L790.0 103.0 L792.0 101.3 L794.0 99.6 L796.5 97.6 L799.0 95.7 L801.5 94.0 L804.0 92.4 L807.0 90.6 L810.0 88.9 L813.5 87.1 L817.0 85.5 L821.0 83.9 L825.5 82.2 L831.0 80.5 L837.0 78.9 L844.5 77.2 L850.0 76.2"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="510" y="187">100</text><text class="mu" x="680" y="187">1 k</text><text class="b" x="748" y="187">2,5 k</text><text class="mu" x="850" y="187">10 k</text>
+        </g>
+        <text x="510" y="212" font-size="11.5">Tira o apito e leva junto a clareza:</text>
+        <text x="510" y="228" font-size="11.5">de 1,5 a 4 kHz, tudo cai 3 dB ou mais.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> O mesmo corte de 6 dB em 2,5 kHz, estreito e largo. Os dois param o apito. Só o estreito preserva o som.</figcaption>
+  </figure>
+
+  <p>O equalizador gráfico de 31 bandas, comum nas saídas de retorno, tem a largura fixa: cada controle atua em cerca de um terço de oitava. O paramétrico das mesas digitais permite cortes mais estreitos. Como referência: Q perto de 4 equivale a um terço de oitava; Q perto de 9, a um sexto; Q perto de 14, a um décimo. Para cortes de microfonia, Q entre 5 e 10 é um bom ponto de partida.</p>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="abertos">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Microfones abertos e a sala</h2>
+  <p>Duas coisas mudam a margem sem ninguém tocar no volume: os microfones abertos e a sala.</p>
+
+  <h3>Cada microfone aberto é mais uma entrada</h3>
+  <p>Todo microfone aberto capta um pouco do som das caixas e o devolve para a mistura. Com dois microfones no mesmo nível, entra o dobro de som das caixas, e o ganho do ciclo sobe 3 dB. A regra geral: <strong>cada vez que o número de microfones abertos dobra, a margem cai 3 dB</strong>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 236" role="img" aria-label="Gráfico de barras horizontais da margem perdida em relação a um microfone aberto. Um microfone aberto: referência, 0 dB. Dois microfones abertos: menos 3 dB. Quatro: menos 6 dB. Oito: menos 9 dB. Dezesseis: menos 12 dB. Cada vez que o número de microfones abertos dobra, a margem cai 3 dB.">
+        <text class="mono mu" x="18" y="26" font-size="10.5">MARGEM PERDIDA EM RELAÇÃO A UM MICROFONE ABERTO</text>
+        <text class="b" x="18" y="65" font-size="12">1 microfone aberto</text>
+        <line class="ln-mu" x1="220" y1="44" x2="220" y2="208"/>
+        <text class="mu" x="230" y="65" font-size="11.5">referência: 0 dB</text>
+        <text class="b" x="18" y="99" font-size="12">2 microfones abertos</text>
+        <rect class="lv-red" x="220" y="84" width="120" height="22"/>
+        <text class="t-red b" x="348" y="99" font-size="11.5">−3 dB</text>
+        <text class="b" x="18" y="133" font-size="12">4 microfones abertos</text>
+        <rect class="lv-red" x="220" y="118" width="240" height="22"/>
+        <text class="t-red b" x="468" y="133" font-size="11.5">−6 dB</text>
+        <text class="b" x="18" y="167" font-size="12">8 microfones abertos</text>
+        <rect class="lv-red" x="220" y="152" width="360" height="22"/>
+        <text class="t-red b" x="588" y="167" font-size="11.5">−9 dB</text>
+        <text class="b" x="18" y="201" font-size="12">16 microfones abertos</text>
+        <rect class="lv-red" x="220" y="186" width="480" height="22"/>
+        <text class="t-red b" x="708" y="201" font-size="11.5">−12 dB</text>
+        <text class="mu" x="18" y="228" font-size="11">Cada vez que o número de microfones abertos dobra, a margem cai 3 dB.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> A margem perdida com microfones abertos. A regra supõe microfones parecidos, no mesmo nível e captando o sistema de forma parecida: é uma estimativa, e não uma medida.</figcaption>
+  </figure>
+
+  <p>Na prática, isso muda a operação:</p>
+  <ul>
+    <li><strong>Feche o que não está em uso.</strong> Durante a pregação, os microfones da banda ficam em mute. Durante o louvor, o do púlpito fica em mute. Um sistema ajustado com dois microfones e operado com oito perdeu 6 dB de margem.</li>
+    <li><strong>Use os grupos de mute ou os DCA</strong> da mesa para fechar e abrir conjuntos inteiros de uma vez. Eles estão descritos no estudo <a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>.</li>
+    <li><strong>Faça o ring-out com os microfones que vão ficar abertos juntos.</strong> A margem medida com um microfone só não vale para a banda inteira.</li>
+    <li><strong>Mesas com mixagem automática</strong> (<em>automixer</em>) reduzem sozinhas os microfones em que ninguém está falando. Ajudam em mesa-redonda e debate.</li>
+  </ul>
+
+  <h3>A sala reflexiva</h3>
+  <p>Em uma sala com paredes lisas, piso frio e vidro, o som das caixas bate, volta e continua circulando. O microfone recebe então dois sons da caixa: o direto, que depende da posição, e o refletido, que chega de todos os lados. Isso tem três consequências:</p>
+  <ul>
+    <li>a rejeição do microfone direcional rende menos, porque parte do som chega pela frente dele, refletida;</li>
+    <li>afastar a caixa do microfone rende menos do que a regra dos 6 dB promete;</li>
+    <li>superfícies duras perto do microfone criam picos novos: o tampo do púlpito, uma parede logo atrás de quem fala, um vidro lateral.</li>
+  </ul>
+  <p>O que ajuda, nesta ordem:</p>
+  <ul>
+    <li>apontar as caixas para as pessoas, e não para paredes, vidro e teto: gente absorve som, parede devolve;</li>
+    <li>trazer o som para mais perto de quem ouve, com caixas mais próximas do público e menos volume em cada uma;</li>
+    <li>aproximar ainda mais o microfone da fonte, a medida que não depende da sala;</li>
+    <li>cortina, carpete, cadeira estofada e painel absorvente, onde for possível.</li>
+  </ul>
+  <p>A sala cheia absorve mais do que a sala vazia, e o ajuste feito com ela vazia costuma ficar do lado seguro. Mas o público faz ruído, e o operador tende a subir o volume: a margem conquistada na passagem não é para ser gasta inteira.</p>
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Qualquer superfície dura que chega perto do microfone muda o ciclo: a mão, um caderno, a aba de um boné, o rosto de quem se inclina sobre o púlpito. Se o apito aparece sempre que alguém se aproxima de um microfone aberto, falta margem, e não um corte a mais.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="frequencia">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Identificar a frequência</h2>
+  <p>Para cortar só o pico que apita, é preciso saber a frequência dele. O ouvido dá a região, e o analisador dá o número.</p>
+
+  <h3>Pelo ouvido: grave, médio ou agudo</h3>
+  <p>O primeiro passo é classificar o som: um ronco e um silvo fino estão em pontas opostas. Com treino, dá para chegar perto da faixa certa só de ouvir. Um apoio de memória comum é comparar a nota com uma vogal sustentada: “u” para a região de 250 Hz, “ô” para 500 Hz, “a” para 1 kHz, “é” para 2 kHz, “i” para 4 kHz. É uma aproximação, que serve para começar a busca.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 262" role="img" aria-label="Em cima, a tela de um analisador de espectro durante um apito: barras de 63 hertz a 16 quilohertz, quase todas baixas, e uma barra bem mais alta que as vizinhas em 2,5 quilohertz. É um pico estreito, que fica parado e cresce. Embaixo, o mapa das faixas de frequência e de como o apito soa em cada uma. Grave, até 250 hertz: ronco. Médio-grave, de 250 a 500 hertz: uivo. Médio, de 500 hertz a 2 quilohertz: buzina, som de cano. Médio-agudo, de 2 a 5 quilohertz: apito claro. Agudo, acima de 5 quilohertz: silvo fino.">
+        <text class="mono mu" x="30" y="26" font-size="10.5">O ANALISADOR (RTA) DURANTE UM APITO</text>
+        <rect class="lv-slate" x="30" y="140" width="20" height="30"/>
+        <rect class="lv-slate" x="65" y="134" width="20" height="36"/>
+        <rect class="lv-slate" x="98" y="126" width="20" height="44"/>
+        <rect class="lv-slate" x="131" y="120" width="20" height="50"/>
+        <rect class="lv-slate" x="168" y="112" width="20" height="58"/>
+        <rect class="lv-slate" x="201" y="116" width="20" height="54"/>
+        <rect class="lv-slate" x="234" y="108" width="20" height="62"/>
+        <rect class="lv-slate" x="268" y="104" width="20" height="66"/>
+        <rect class="lv-slate" x="304" y="110" width="20" height="60"/>
+        <rect class="lv-slate" x="337" y="106" width="20" height="64"/>
+        <rect class="lv-slate" x="371" y="100" width="20" height="70"/>
+        <rect class="lv-slate" x="406" y="104" width="20" height="66"/>
+        <rect class="lv-slate" x="439" y="108" width="20" height="62"/>
+        <rect class="lv-slate" x="472" y="102" width="20" height="68"/>
+        <rect class="lv-slate" x="509" y="106" width="20" height="64"/>
+        <rect class="lv-slate" x="542" y="110" width="20" height="60"/>
+        <rect class="f-red" x="575" y="52" width="20" height="118"/>
+        <rect class="lv-slate" x="609" y="108" width="20" height="62"/>
+        <rect class="lv-slate" x="645" y="114" width="20" height="56"/>
+        <rect class="lv-slate" x="678" y="120" width="20" height="50"/>
+        <rect class="lv-slate" x="712" y="126" width="20" height="44"/>
+        <rect class="lv-slate" x="747" y="130" width="20" height="40"/>
+        <rect class="lv-slate" x="780" y="138" width="20" height="32"/>
+        <rect class="lv-slate" x="813" y="144" width="20" height="26"/>
+        <rect class="lv-slate" x="850" y="150" width="20" height="20"/>
+        <line class="ln-mu" x1="30" y1="170" x2="870" y2="170"/>
+        <text class="t-red b" x="566" y="62" font-size="11.5" text-anchor="end">pico estreito, que fica parado e cresce: 2,5 kHz</text>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="40" y="186">63</text><text class="mu" x="141" y="186">125</text><text class="mu" x="244" y="186">250</text><text class="mu" x="347" y="186">500</text>
+          <text class="mu" x="449" y="186">1 k</text><text class="mu" x="552" y="186">2 k</text><text class="mu" x="655" y="186">4 k</text><text class="mu" x="757" y="186">8 k</text><text class="mu" x="860" y="186">16 k</text>
+        </g>
+        <rect class="bx-slate" x="40" y="198" width="204" height="48"/>
+        <text class="b" x="142" y="218" font-size="11.5" text-anchor="middle">Grave</text>
+        <text class="mu" x="142" y="235" font-size="10.5" text-anchor="middle">ronco</text>
+        <rect class="bx-purple" x="244" y="198" width="103" height="48"/>
+        <text class="b" x="295" y="218" font-size="11.5" text-anchor="middle">Médio-grave</text>
+        <text class="mu" x="295" y="235" font-size="10.5" text-anchor="middle">uivo</text>
+        <rect class="bx-teal" x="347" y="198" width="205" height="48"/>
+        <text class="b" x="449" y="218" font-size="11.5" text-anchor="middle">Médio</text>
+        <text class="mu" x="449" y="235" font-size="10.5" text-anchor="middle">buzina, som de cano</text>
+        <rect class="bx-amber" x="552" y="198" width="136" height="48"/>
+        <text class="b" x="620" y="218" font-size="11.5" text-anchor="middle">Médio-agudo</text>
+        <text class="mu" x="620" y="235" font-size="10.5" text-anchor="middle">apito claro</text>
+        <rect class="bx-red" x="688" y="198" width="172" height="48"/>
+        <text class="b" x="774" y="218" font-size="11.5" text-anchor="middle">Agudo</text>
+        <text class="mu" x="774" y="235" font-size="10.5" text-anchor="middle">silvo fino</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 9.</b> Em cima, o que o analisador mostra durante um apito: uma barra que se destaca das vizinhas e não se mexe. Embaixo, as faixas e como o apito soa em cada uma. Os limites entre as faixas são aproximados.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:16%">Faixa</th><th style="width:16%">Frequência</th><th style="width:26%">Como soa</th><th>Onde costuma aparecer</th></tr></thead>
+      <tbody>
+        <tr><td class="slate"><strong>Grave</strong></td><td class="num">até 250 Hz</td><td>Ronco, zumbido que cresce.</td><td>Lapela, microfone de violão ou de bumbo, microfone perto do subwoofer, palco oco.</td></tr>
+        <tr><td class="purple"><strong>Médio-grave</strong></td><td class="num">250 a 500 Hz</td><td>Uivo, som “embolado” que cresce.</td><td>Púlpito e coral captados de longe, sala reverberante, caixa atrás de quem fala.</td></tr>
+        <tr><td class="teal"><strong>Médio</strong></td><td class="num">500 Hz a 2 kHz</td><td>Buzina, som de cano, anasalado.</td><td>Retorno de chão alto, mão em volta da cápsula.</td></tr>
+        <tr><td class="amber"><strong>Médio-agudo</strong></td><td class="num">2 a 5 kHz</td><td>Apito claro, o mais conhecido.</td><td>Microfone de voz com retorno de chão; microfone apontado para a caixa.</td></tr>
+        <tr><td class="red"><strong>Agudo</strong></td><td class="num">acima de 5 kHz</td><td>Silvo fino, às vezes quase inaudível para quem tem mais idade.</td><td>Microfone condensador, lapela ou headset que passa perto de uma caixa.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A última coluna reúne casos frequentes, e não regras: o mesmo microfone pode apitar em qualquer faixa.</p>
+
+  <h3>Pelo analisador</h3>
+  <p>O analisador de espectro em tempo real (<em>RTA</em>) mostra o nível de cada faixa de frequência em barras ou em uma curva. A música e a voz fazem as barras subir e descer. A microfonia aparece como um pico estreito, parado, que cresce: o valor no pé dele é a frequência a cortar.</p>
+  <p>Muitas mesas digitais mostram o analisador na tela do equalizador, por cima da curva. Um aplicativo de analisador no celular, com o microfone do próprio aparelho, também basta para achar a frequência de um apito.</p>
+
+  <h3>Sem analisador: a busca pelo equalizador</h3>
+  <p>Com a nota só começando a soar, use o próprio equalizador para achá-la.</p>
+  <ul>
+    <li><strong>No gráfico:</strong> baixe uns 3 dB o controle da faixa que você estimou pelo ouvido. Se a nota parar, é ali. Se não parar, devolva o controle ao zero e tente o vizinho.</li>
+    <li><strong>No paramétrico:</strong> prepare um corte estreito de uns 6 dB e passeie com a frequência pela região estimada. Quando o filtro passar pela nota, ela some.</li>
+  </ul>
+  <p>Evite realçar uma faixa para “provocar” o apito: o salto de volume é difícil de controlar.</p>
+
+  <div class="note">
+    <h4>Oitavas</h4>
+    <p>Quando você erra a faixa, costuma errar por uma oitava: o dobro ou a metade da frequência. Se o corte em 2 kHz não resolveu, tente 1 kHz e 4 kHz antes de procurar mais longe.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo: o ring-out</h2>
+  <p>O <em>ring-out</em> é o ajuste que encontra, antes do evento, as primeiras frequências em que cada saída apita, e as corta com filtros estreitos. Ele vem depois das três primeiras medidas do módulo 4 e antes da passagem de som. Faça uma saída por vez: cada retorno, e depois as caixas da frente.</p>
+  <ol class="steps">
+    <li><h4>Monte como vai ser no evento</h4><p>Caixas, retornos e microfones nas posições finais, pedestais na altura de uso. Ganho de cada canal ajustado pelo medidor, filtro passa-altas das vozes ligado.</p></li>
+    <li><h4>Avise e proteja</h4><p>Avise quem está no ambiente. Ninguém perto das caixas nem de fone no ouvido. Limitador ligado, mão no controle da saída.</p></li>
+    <li><h4>Escolha a saída e abra os microfones dela</h4><p>Comece por um retorno. Abra nele os microfones que vão ficar abertos juntos, no nível de uso. As outras saídas ficam fechadas.</p></li>
+    <li><h4>Suba a saída devagar, até o primeiro aviso</h4><p>Suba o master dessa saída aos poucos, sem ninguém falando. Pare quando a primeira nota começar a soar baixinho, e anote o nível: é o ponto do primeiro apito.</p></li>
+    <li><h4>Recue um pouco e identifique a frequência</h4><p>Baixe uns 3 dB para a nota parar. Use o analisador e o ouvido, como no módulo 6.</p></li>
+    <li><h4>Faça um corte estreito</h4><p>No equalizador dessa saída, corte a frequência encontrada. Comece com 3 dB. No paramétrico, use Q entre 5 e 10. No gráfico, baixe só o controle daquela faixa.</p></li>
+    <li><h4>Suba de novo, até a próxima nota</h4><p>Se for a mesma nota, aprofunde o corte em mais 2 ou 3 dB. Se for outra, faça um novo corte. Repita.</p></li>
+    <li><h4>Saiba a hora de parar</h4><p>Pare quando várias notas começarem a soar juntas, quando cada novo corte render menos de 1 dB, ou ao chegar a uns cinco cortes na mesma saída. Um corte que precisa passar de uns 9 dB indica problema de posição, e não de equalização.</p></li>
+    <li><h4>Volte para o nível de operação</h4><p>Anote o novo ponto do primeiro apito. Baixe a saída para o nível em que ela vai trabalhar, pelo menos 6 dB abaixo desse ponto. Essa é a sua margem. Se o nível necessário fica acima disso, volte às medidas 1 a 3.</p></li>
+    <li><h4>Teste como vai ser usado</h4><p>Fale e cante no microfone, e ande com ele pelo caminho real. Se a voz ficou fina ou oca, há corte demais.</p></li>
+    <li><h4>Anote e passe à próxima saída</h4><p>Registre na planilha as frequências, os cortes, o Q e os níveis. Repita nos outros retornos e, por fim, nas caixas da frente, com os retornos já abertos.</p></li>
+  </ol>
+
+  <h3>Na saída ou no canal</h3>
+  <p>O corte na saída vale para tudo o que passa por ela, inclusive o teclado e a trilha: é o lugar certo quando o pico aparece com qualquer microfone. Quando só um microfone apita, como a lapela do palestrante, o corte fica melhor no canal dele, lembrando que ali ele vale para todos os destinos do canal. O uso do equalizador gráfico nos retornos está no estudo <a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>.</p>
+
+  <h3>O supressor automático</h3>
+  <p>O supressor automático de microfonia (<em>feedback suppressor</em>) faz sozinho o que você faz no ring-out: detecta uma nota estreita que se sustenta e cresce, e aplica um filtro bem estreito naquela frequência. Em geral tem dois tipos de filtro: os fixos, definidos durante o ring-out e mantidos, e os móveis, que entram durante o evento e são liberados depois de um tempo.</p>
+  <p>Ele ajuda como rede de segurança para microfones que andam (lapela, headset, microfone na plateia) e em eventos falados com palestrantes sem treino. Os limites:</p>
+  <ul>
+    <li>rende os mesmos poucos decibéis de um ring-out manual e não compensa caixa mal posicionada nem microfone longe;</li>
+    <li>só age depois que o apito começou: o público ouve o início;</li>
+    <li>pode confundir uma nota sustentada de flauta, órgão ou teclado com microfonia, e cortar a música;</li>
+    <li>muitos filtros acumulados deixam o som oco: limite os filtros móveis e limpe-os a cada evento.</li>
+  </ul>
+  <p>Se puder escolher, ligue o supressor só no caminho dos microfones de voz (no canal ou no grupo deles), e não na mistura inteira com a música. Os modos e o número de filtros mudam conforme o fabricante: confira o manual.</p>
+
+  <h3>Na hora do apito, durante o evento</h3>
+  <p>Com o evento em andamento, a sequência é outra: parar o apito, achar de onde veio, tirar a causa e, só se for preciso, equalizar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 200" role="img" aria-label="Sequência de quatro passos para a hora do apito. Passo 1, baixe: baixe uns 3 a 6 dB o que você acabou de subir; se não sabe o que foi, baixe a saída que apita. Passo 2, ache: retorno ou frente? Qual canal? O medidor dele fica parado no alto, sem ninguém falando. Passo 3, tire a causa: microfone longe da boca, virado para a caixa, com a mão na cápsula ou aberto sem uso. Passo 4, EQ, se voltar: se a mesma nota insistir, faça um corte estreito na saída que apitou e anote na planilha.">
+        <defs><marker id="fb10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="24" font-size="10.5">A SEQUÊNCIA NA HORA DO APITO</text>
+        <rect class="bx-red" x="18" y="40" width="192" height="142"/>
+        <text class="b" x="30" y="64" font-size="12.5">1. Baixe</text>
+        <text x="30" y="88" font-size="11">Baixe uns 3 a 6 dB o que</text>
+        <text x="30" y="105" font-size="11">você acabou de subir.</text>
+        <text x="30" y="122" font-size="11">Se não sabe o que foi,</text>
+        <text x="30" y="139" font-size="11">baixe a saída que apita.</text>
+        <line class="ln" x1="212" y1="110" x2="234" y2="110" marker-end="url(#fb10)"/>
+        <rect class="bx" x="238" y="40" width="192" height="142"/>
+        <text class="b" x="250" y="64" font-size="12.5">2. Ache</text>
+        <text x="250" y="88" font-size="11">Retorno ou frente? Qual</text>
+        <text x="250" y="105" font-size="11">canal? O medidor dele</text>
+        <text x="250" y="122" font-size="11">fica parado no alto, sem</text>
+        <text x="250" y="139" font-size="11">ninguém falando.</text>
+        <line class="ln" x1="432" y1="110" x2="454" y2="110" marker-end="url(#fb10)"/>
+        <rect class="bx-amber" x="458" y="40" width="192" height="142"/>
+        <text class="b" x="470" y="64" font-size="12.5">3. Tire a causa</text>
+        <text x="470" y="88" font-size="11">Microfone longe da boca,</text>
+        <text x="470" y="105" font-size="11">virado para a caixa, com</text>
+        <text x="470" y="122" font-size="11">a mão na cápsula ou</text>
+        <text x="470" y="139" font-size="11">aberto sem uso.</text>
+        <line class="ln" x1="652" y1="110" x2="674" y2="110" marker-end="url(#fb10)"/>
+        <rect class="bx-slate" x="678" y="40" width="192" height="142"/>
+        <text class="b" x="690" y="64" font-size="12.5">4. EQ, se voltar</text>
+        <text x="690" y="88" font-size="11">Se a mesma nota insistir,</text>
+        <text x="690" y="105" font-size="11">faça um corte estreito</text>
+        <text x="690" y="122" font-size="11">na saída que apitou.</text>
+        <text x="690" y="139" font-size="11">Anote na planilha.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 10.</b> Primeiro o volume, depois a causa, por último o equalizador. O corte feito às pressas, no meio do evento, deve ser revisto com calma depois.</figcaption>
+  </figure>
+
+  <ul>
+    <li><strong>Baixe pouco e rápido.</strong> Três a seis decibéis no canal ou no envio certo param o apito. Derrubar o master no susto tira o som da sala inteira.</li>
+    <li><strong>Desconfie do que mudou por último.</strong> O fader que acabou de subir, o microfone que acabou de abrir, a pessoa que andou para a frente das caixas.</li>
+    <li><strong>Não volte ao volume de antes</strong> sem ter mudado alguma coisa. O limite continua no mesmo lugar.</li>
+    <li><strong>Registre.</strong> A ocorrência anotada mostra o que corrigir na montagem. O método de diagnóstico está no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>.</li>
+  </ul>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos. O primeiro está preenchido na planilha de apoio.</p>
+
+  <h3>Exemplo 1. O ring-out de um culto, saída por saída</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, mesa digital com EQ paramétrico nas saídas, dois retornos de chão e as caixas da frente.</dd></div>
+    <div><dt>Sintoma</dt><dd>Nos domingos anteriores, o retorno da cantora apitava sempre que ela pedia mais voz.</dd></div>
+    <div><dt>Causa</dt><dd>Os retornos nunca tinham passado por ring-out, e o sistema era operado colado no ponto de apito.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Ring-out das três saídas, com os microfones de cada uma abertos, e registro na planilha.</dd></div>
+    <div><dt>Resultado</dt><dd>De 4 a 6 dB a mais antes do apito em cada saída. Duas ficaram com 7 dB de margem. A terceira, com 4 dB, foi corrigida pela posição.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Saída</th><th style="width:26%">Cortes, na ordem</th><th class="n" style="width:9%">Apito antes</th><th class="n" style="width:9%">Apito depois</th><th class="n" style="width:9%">Operação</th><th class="n" style="width:8%">Margem</th><th>Situação</th></tr></thead>
+      <tbody>
+        <tr><td>Retorno 1, voz principal<small>1 microfone aberto</small></td><td>2,5 kHz, −6 dB · 630 Hz, −4 dB · 4 kHz, −5 dB · 250 Hz, −3 dB</td><td class="num n">−8 dB</td><td class="num n">−2 dB</td><td class="num n">−9 dB</td><td class="num n">7 dB</td><td>OK</td></tr>
+        <tr><td>Retorno 2, vozes de apoio<small>3 microfones abertos</small></td><td>1,6 kHz, −5 dB · 400 Hz, −10 dB · 3,15 kHz, −4 dB</td><td class="num n">−10 dB</td><td class="num n">−5 dB</td><td class="num n">−9 dB</td><td class="num n">4 dB</td><td class="amber">Margem curta, com um corte fundo</td></tr>
+        <tr><td>Frente (PA)<small>4 microfones abertos</small></td><td>3,15 kHz, −4 dB · 500 Hz, −3 dB com Q 2</td><td class="num n">+3 dB</td><td class="num n">+7 dB</td><td class="num n">0 dB</td><td class="num n">7 dB</td><td class="amber">Margem OK, com um corte largo</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> Os níveis são a posição do master de cada saída, em dB. No retorno 2, um corte de 10 dB e uma margem de só 4 dB mostravam que a equalização tinha chegado ao limite. A causa: a caixa ficava bem atrás de microfones supercardioides, no lóbulo traseiro. Com o retorno na diagonal, o corte de 400 Hz voltou para 5 dB, e o ponto de apito subiu para −2 dB: 7 dB de margem. Na frente, o corte de 500 Hz com Q 2 pegava mais de uma oitava e foi refeito com Q 6.</p>
+
+  <h3>Exemplo 2. A lapela que uivava na palestra</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Auditório de escola com 150 lugares, paredes lisas e piso frio. Duas caixas ativas em tripés no fundo do palco. Palestrante com lapela.</dd></div>
+    <div><dt>Sintoma</dt><dd>Um uivo médio-grave, perto de 315 Hz, sempre que o volume chegava ao necessário para as últimas fileiras.</dd></div>
+    <div><dt>Causa</dt><dd>Caixas atrás do microfone. Lapela onidirecional a 20 cm da boca. Sala reflexiva.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Caixas levadas para a frente da linha do palestrante, apontadas para o público. Lapela trocada por um microfone de mão, a 5 cm da boca. Filtro passa-altas ligado.</dd></div>
+    <div><dt>Resultado</dt><dd>Volume suficiente até a última fileira, sem uivo e sem nenhum corte de equalizador.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> O operador tinha cortado 315, 250 e 400 Hz: a voz ficou fina, e o uivo voltava em outra nota. A solução veio das duas primeiras medidas. De 20 cm para 5 cm, a distância caiu pela metade duas vezes: a voz chega cerca de 12 dB mais forte, e o fader desceu os mesmos 12 dB. Para deixar as mãos livres, a alternativa seria um headset, que também fica perto da boca.</p>
+
+  <h3>Exemplo 3. A cauda que apareceu na pregação</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares. O ring-out da frente foi feito com 2 microfones abertos, e a margem medida foi de 7 dB.</dd></div>
+    <div><dt>Sintoma</dt><dd>No começo da pregação, a voz do pastor ganhou uma cauda metálica. Quando ele se inclinou sobre o púlpito, o sistema apitou.</dd></div>
+    <div><dt>Causa</dt><dd>A banda saiu do palco, mas os canais ficaram abertos: 8 microfones abertos, e não 2.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Fader do pastor 3 dB abaixo, na hora. Em seguida, mute nos sete microfones da banda, e o fader voltou.</dd></div>
+    <div><dt>Resultado</dt><dd>A cauda sumiu. Só com o microfone do pastor, a margem estimada passou a 10 dB.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> De 2 para 8 microfones, o número dobrou duas vezes: 6 dB a menos. A margem de 7 dB virou 1 dB, e o rosto do pastor perto do microfone fez o resto. Com um microfone só, metade dos dois do ajuste, a margem foi a 10 dB. A ocorrência foi anotada na planilha, e o mute da banda entrou no roteiro do culto.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Começar pelo equalizador</h4><p>Ao primeiro apito, o operador corta uma faixa, depois outra, e o som fica fino sem o problema acabar.</p><p class="fix"><b>Correção:</b> siga a ordem. Posição das caixas, distância do microfone e volume vêm antes de qualquer corte.</p></div>
+    <div><h4>Corte largo ou fundo demais</h4><p>Vários controles vizinhos do gráfico embaixo, ou um corte fundo com Q baixo. A voz perde corpo.</p><p class="fix"><b>Correção:</b> corte estreito, de poucos dB, um por frequência. Se passa de uns 9 dB ou de uns cinco cortes, o problema é de posição.</p></div>
+    <div><h4>Retorno bem atrás do supercardioide</h4><p>O retorno fica atrás do microfone “porque é o certo”, mas o supercardioide capta ali.</p><p class="fix"><b>Correção:</b> confira o padrão polar. No supercardioide e no hipercardioide, o retorno vai para a diagonal.</p></div>
+    <div><h4>Mão em volta da cápsula</h4><p>O cantor segura o microfone pela grade, e o apito aparece só com ele.</p><p class="fix"><b>Correção:</b> oriente a segurar pelo corpo do microfone, com a grade livre.</p></div>
+    <div><h4>Microfone abaixado, virado para o retorno</h4><p>Entre uma música e outra, o braço desce, e a frente do microfone aponta para a caixa do chão.</p><p class="fix"><b>Correção:</b> mute nos intervalos, e combine com os cantores: microfone parado aponta para cima ou para o lado.</p></div>
+    <div><h4>Todos os microfones abertos o tempo todo</h4><p>A banda sai, o coral senta, e os canais continuam abertos.</p><p class="fix"><b>Correção:</b> mute em tudo o que não está em uso. Grupos de mute para abrir e fechar conjuntos.</p></div>
+    <div><h4>Confiar tudo ao supressor</h4><p>O supressor fica ligado na mistura inteira, com todos os filtros móveis, e a posição das caixas nunca é revista.</p><p class="fix"><b>Correção:</b> o supressor é rede de segurança. Primeiro as quatro medidas; depois ele, só no caminho das vozes.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>A microfonia é onde vários assuntos se encontram: a acústica, o microfone, a caixa, o ganho e o equalizador. Este estudo usa o que os outros ensinam e devolve um sistema estável para a mixagem.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>: frequência, decibel e inverso do quadrado.</li>
+        <li><a href="../Microfones/treinamento-microfones.html">Microfones</a>: os padrões polares, os formatos e a técnica de mão.</li>
+        <li><a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>: cobertura, posição das caixas e limitador.</li>
+        <li><a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>: auxiliares, mute, grupos e medidores.</li>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>: o ganho ajustado pelo medidor.</li>
+        <li><a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>: os tipos de filtro, o Q e o filtro passa-altas.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>: retornos estáveis para as mixagens de cada músico.</li>
+        <li><a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>: quanta compensação o sistema aguenta antes de apitar.</li>
+        <li><a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Microfones sem fio</a>: o microfone que anda é o que mais precisa de margem.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: o ring-out vem antes da passagem com os músicos.</li>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>: o registro de ocorrências e a revisão.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira na montagem, antes da passagem de som. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>As caixas da frente estão à frente da linha dos microfones e apontam para o público.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>As caixas apontam para as pessoas, e não para paredes, vidro ou teto.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>Cada retorno está na direção em que o microfone capta menos: atrás do cardioide, na diagonal do supercardioide.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>Cada microfone está o mais perto possível da fonte, e quem usa foi orientado: perto da boca, grade livre.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>O ganho de cada canal foi ajustado pelo medidor, e o filtro passa-altas está ligado nos microfones de voz.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>O volume dos retornos é o menor que atende os músicos.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>Só ficam abertos os microfones em uso. Os demais estão em mute, e há grupos de mute para os conjuntos.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>O ring-out foi feito em cada retorno e nas caixas da frente, com os microfones que ficam abertos juntos.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>Os cortes são estreitos e poucos: até uns cinco por saída, nenhum além de uns 9 dB.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>Há pelo menos 6 dB de margem entre o nível de operação e o ponto do primeiro apito, em cada saída.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>Os microfones que andam foram testados no caminho real, inclusive perto das caixas.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>As frequências, os cortes e os níveis de cada saída estão anotados.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Qual medida vem primeiro?</h3>
+  <p>Cada frase descreve uma situação. Escolha a medida que você tomaria primeiro: <strong>P</strong>, posição das caixas ou do retorno; <strong>M</strong>, microfone mais perto da fonte ou mais bem usado; <strong>G</strong>, ganho do ciclo: volume e microfones abertos; <strong>E</strong>, corte estreito de equalizador.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"P": "Posição das caixas ou do retorno", "M": "Microfone perto da fonte", "G": "Ganho do ciclo: volume e microfones abertos", "E": "Corte estreito de EQ"},
+ "itens": [
+  {"t": "As caixas da frente estão no fundo do palco, atrás do pregador, e o sistema apita antes de chegar ao volume necessário.", "a": "P", "w": "O microfone está dentro da cobertura das caixas. Leve-as para a frente da linha dos microfones."},
+  {"t": "O pregador segura o microfone na altura do peito, e o operador precisa subir muito o canal para a voz aparecer.", "a": "M", "w": "A voz chega fraca ao microfone. Perto da boca, o sistema amplifica bem menos para o mesmo volume."},
+  {"t": "A banda saiu do palco para a pregação, os oito canais dela continuam abertos, e a voz do pastor ganhou uma cauda metálica.", "a": "G", "w": "Cada microfone aberto soma no ciclo. Feche os que não estão em uso."},
+  {"t": "Caixas à frente, microfone perto da boca, só um canal aberto e volume moderado. No ring-out, uma nota em 2,5 kHz insiste em aparecer primeiro.", "a": "E", "w": "As três primeiras medidas estão feitas. Cabe um corte estreito em 2,5 kHz, na saída que apita."},
+  {"t": "O retorno está no chão, bem atrás de um microfone supercardioide, e apita cedo.", "a": "P", "w": "O supercardioide capta um pouco bem atrás. Desloque o retorno para a diagonal, perto de 125°."},
+  {"t": "O apito só aparece quando um dos cantores usa o microfone, e ele segura com a mão fechada em volta da grade.", "a": "M", "w": "A mão na cápsula tira a direcionalidade do microfone. Oriente a segurar pelo corpo."},
+  {"t": "Depois da passagem, cada músico pediu um pouco mais de si no retorno. Agora os retornos soam metálicos nas pausas.", "a": "G", "w": "O volume de palco comeu a margem. Baixe os retornos e combine um nível menor."},
+  {"t": "A palestrante usa lapela em uma sala reflexiva, e o uivo aparece antes do volume necessário. Há um headset disponível.", "a": "M", "w": "O headset fica muito mais perto da boca do que a lapela: a voz entra mais forte, e sobra margem."},
+  {"t": "O pregador desce do palco com o microfone de mão, anda na frente das caixas, e o sistema apita.", "a": "P", "w": "Ele entrou na cobertura das caixas. Combine um caminho por fora dessa região."},
+  {"t": "Tudo está em ordem, o retorno do púlpito foi ajustado com 5 dB de margem, e só uma nota em 800 Hz aparece quando se sobe um pouco mais.", "a": "E", "w": "Falta pouco para a margem de 6 dB, e é uma nota só: um corte estreito em 800 Hz resolve."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: ache o ponto de apito e a margem</h3>
+  <p>Você vai precisar de uma mesa, um microfone de voz com pedestal, uma caixa, um analisador no celular e a planilha. Faça sem outras pessoas na sala, com volume moderado e a mão no controle da saída: a ideia é ouvir o primeiro aviso, e não o apito cheio.</p>
+  <ol>
+    <li>Caixa no chão, como um retorno; microfone no pedestal, a cerca de um metro, com a parte de trás virada para a caixa. Ganho pelo medidor, equalizador plano.</li>
+    <li>Sem falar, suba a saída devagar até a primeira nota começar a soar. Anote o nível na aba “Ring-out”. Recue 3 dB.</li>
+    <li>Vire a frente do microfone para a caixa e repita. Quantos decibéis antes o aviso chegou? Essa diferença é a rejeição do seu microfone, nessa sala.</li>
+    <li>Volte à posição do passo 1. Envolva a grade com a mão e repita. Compare de novo.</li>
+    <li>Com o microfone livre, ache a frequência da primeira nota pelo ouvido e confira no analisador. Faça um corte estreito e suba de novo. Registre até três cortes.</li>
+    <li>Anote o novo ponto de apito e escolha um nível de operação 6 dB abaixo. Veja o ganho obtido e a margem que a planilha calcula.</li>
+    <li>Fale a 20 cm e depois a 5 cm do microfone, com a mesma força, olhando o medidor do canal. A diferença deve ficar perto de 12 dB; confira na calculadora da aba “Margem”.</li>
+  </ol>
+  <p>Depois, repita o passo 2 perto de uma parede. O ponto de apito e a nota mudam: a sala faz parte do ciclo.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Microfonia-modelo.xlsx">Microfonia-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Ring-out</strong></td><td>Até 8 saídas (apito antes e depois dos cortes, nível de operação) e até 30 cortes (saída, frequência, corte, Q).</td><td>Ganho obtido, margem e situação de cada saída; faixa, largura e situação de cada corte.</td></tr>
+        <tr><td><strong>Ocorrências</strong></td><td>Até 20 apitos durante os eventos: quando, saída, canal, som, causa e medida na hora.</td><td>Medida definitiva sugerida, situação e contagem por causa.</td></tr>
+        <tr><td><strong>Margem</strong></td><td>Margem em cada momento do evento, pelos microfones abertos, e calculadora de distância.</td><td>Margem estimada, situação e máximo de microfones abertos.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Faixas do apito, Q e largura do corte, microfones abertos, medidas e posição do retorno por padrão polar.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Ring-out</strong></td><td>As três saídas e os nove cortes do exemplo 1, e o que foi ajustado depois.</td><td>Os mesmos resultados da aba Ring-out.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A margem mínima, o corte mais fundo aceito, o Q mínimo e o número máximo de cortes por saída ficam no alto da aba Ring-out e podem ser trocados. Os valores iniciais são os deste treinamento: 6 dB, −9 dB, Q 4 e cinco cortes. São regras práticas, e não norma.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Analisador de espectro (RTA)</dt><dd>Instrumento ou aplicativo que mostra, em tempo real, o nível de cada faixa de frequência do som.</dd></div>
+    <div><dt>Ciclo de realimentação</dt><dd>Caminho fechado do som: microfone, mesa, amplificador, caixa, ar e microfone de novo.</dd></div>
+    <div><dt>Corte estreito</dt><dd>Redução de uma faixa pequena de frequências, com Q alto, para baixar só o pico que apita.</dd></div>
+    <div><dt>EQ paramétrico</dt><dd>Equalizador em que se escolhem a frequência, o ganho e a largura (Q) de cada filtro.</dd></div>
+    <div><dt>Ganho antes da microfonia</dt><dd>O máximo de amplificação que um microfone pode receber, em uma montagem, antes de o sistema apitar.</dd></div>
+    <div><dt>Ganho do ciclo</dt><dd>Comparação entre a força com que o som volta ao microfone e a força com que saiu. Em 1 (0 dB), o sistema apita.</dd></div>
+    <div><dt>Margem</dt><dd>Distância, em dB, entre o nível de operação e o ponto do primeiro apito. A regra prática é pelo menos 6 dB.</dd></div>
+    <div><dt>Microfones abertos</dt><dd>Microfones com o canal aberto ao mesmo tempo. Cada vez que o número dobra, a margem cai cerca de 3 dB.</dd></div>
+    <div><dt>Microfonia</dt><dd>Realimentação acústica: o apito, uivo ou ronco que surge quando o som da caixa volta ao microfone e é amplificado de novo.</dd></div>
+    <div><dt>Padrão polar</dt><dd>Desenho de como o microfone capta o som de cada direção: cardioide, supercardioide, onidirecional e outros.</dd></div>
+    <div><dt>Ponto do primeiro apito</dt><dd>Nível da saída em que a primeira nota começa a soar sozinha.</dd></div>
+    <div><dt>Q</dt><dd>Medida da largura de um filtro. Quanto maior o Q, mais estreito o corte.</dd></div>
+    <div><dt>Ring-out</dt><dd>Ajuste feito antes do evento: subir a saída até cada primeiro apito e cortar, uma a uma, as frequências que aparecem.</dd></div>
+    <div><dt>Supressor automático</dt><dd>Processador que detecta a microfonia e aplica sozinho filtros estreitos nas frequências que apitam.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>

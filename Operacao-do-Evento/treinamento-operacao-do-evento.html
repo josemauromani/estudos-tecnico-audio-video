@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Operação do evento: roteiro, equipe e imprevistos</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --ground:#F3F6F7; --surface:#FFFFFF; --sunk:#E9EEF0; --ink:#16242E; --muted:#566672; --rule:#D3DBE0;
+  --accent:#2B5C8A;
+  --blue:#2B5C8A; --blue-tint:#DCE8F3;
+  --amber:#A96A12; --amber-tint:#F6E8CF;
+  --teal:#1E7B73; --teal-tint:#D9EEEB;
+  --purple:#7A4A9A; --purple-tint:#E9DEF1;
+  --red:#B0413E; --red-tint:#F5DEDC;
+  --slate:#5B6B76; --slate-tint:#E3E8EB;
+  --on-hue:#FFFFFF;
+  --good:#1F7A4D; --good-tint:#DDF1E5;
+  --bad:#B0413E; --bad-tint:#F5DEDC;
+  --display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+    --accent:#86B7E3;
+    --blue:#86B7E3; --blue-tint:#1B2F42;
+    --amber:#E2AC4F; --amber-tint:#3A2C12;
+    --teal:#5FC6BA; --teal-tint:#15332F;
+    --purple:#C09ADB; --purple-tint:#2E2139;
+    --red:#EC8E89; --red-tint:#3D1F1E;
+    --slate:#9BABB6; --slate-tint:#26333B;
+    --on-hue:#0F171C;
+    --good:#6FCF9B; --good-tint:#163326;
+    --bad:#EC8E89; --bad-tint:#3D1F1E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+  --accent:#86B7E3;
+  --blue:#86B7E3; --blue-tint:#1B2F42;
+  --amber:#E2AC4F; --amber-tint:#3A2C12;
+  --teal:#5FC6BA; --teal-tint:#15332F;
+  --purple:#C09ADB; --purple-tint:#2E2139;
+  --red:#EC8E89; --red-tint:#3D1F1E;
+  --slate:#9BABB6; --slate-tint:#26333B;
+  --on-hue:#0F171C;
+  --good:#6FCF9B; --good-tint:#163326;
+  --bad:#EC8E89; --bad-tint:#3D1F1E;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.65 var(--body);-webkit-text-size-adjust:100%}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.page{max-width:1180px;margin-inline:auto;padding-inline:20px;padding-block:36px 80px}
+
+/* Cabeçalho */
+.mast{display:flex;flex-direction:column;gap:18px;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+.tiles{display:flex;gap:6px}
+.tiles span{width:44px;height:44px;display:grid;place-items:center;font:700 24px/1 var(--display);color:var(--on-hue)}
+h1{font:700 clamp(2.3rem,6vw,3.6rem)/1.02 var(--display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.lead{font-size:1.15rem;line-height:1.55;max-width:62ch;margin:0;color:var(--ink)}
+.meta{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px 22px;font:400 .8rem/1.4 var(--mono);color:var(--muted);margin:0;padding:0;list-style:none}
+
+/* Estrutura */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;padding-top:32px}
+.toc{font-size:.92rem}
+.toc h2{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 20px;counter-reset:toc}
+.toc li{counter-increment:toc}
+.toc a{display:flex;gap:10px;padding:5px 0;color:var(--ink);text-decoration:none;line-height:1.35}
+.toc a::before{content:counter(toc,decimal-leading-zero);font:400 .75rem/1.7 var(--mono);color:var(--muted)}
+.toc a:hover{color:var(--accent);text-decoration:underline}
+@media (min-width:1020px){
+  .layout{grid-template-columns:200px minmax(0,1fr);gap:64px}
+  .toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start}
+  .toc ol{grid-template-columns:1fr}
+}
+main{display:flex;flex-direction:column;gap:72px;min-width:0}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
+.eyebrow{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+h2{font:700 clamp(1.7rem,4vw,2.2rem)/1.1 var(--display);margin:0;text-wrap:balance}
+h3{font:600 1.3rem/1.2 var(--display);margin:12px 0 0;text-wrap:balance}
+h4{font:600 .95rem/1.3 var(--body);margin:0}
+p{margin:0}
+section > p, section > ul, section > ol, section > h3{max-width:68ch}
+ul,ol{margin:0;padding-left:1.25em;display:flex;flex-direction:column;gap:6px}
+strong{font-weight:600}
+code{font:400 .88em var(--mono);background:var(--sunk);padding:1px 5px;border-radius:3px}
+
+/* Letras coloridas no texto */
+.k{display:inline-grid;place-items:center;width:1.45em;height:1.45em;font:700 .85em/1 var(--display);color:var(--on-hue);vertical-align:.05em}
+
+/* Figuras */
+figure{margin:0;display:flex;flex-direction:column;gap:10px;position:relative}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.scroll svg{display:block;width:100%;min-width:820px;height:auto;color:var(--ink)}
+figcaption{font-size:.86rem;line-height:1.5;color:var(--muted);max-width:72ch}
+figcaption b{color:var(--ink);font-weight:600}
+svg text{font-family:var(--body);fill:var(--ink)}
+svg .disp{font-family:var(--display);font-weight:700}
+svg .mono{font-family:var(--mono);letter-spacing:.08em}
+svg .on{fill:var(--on-hue)}
+svg .mu{fill:var(--muted)}
+svg .b{font-weight:600}
+svg .ln{stroke:var(--ink);stroke-width:1.5;fill:none}
+svg .ln-mu{stroke:var(--muted);stroke-width:1.5;fill:none}
+svg .ln-bold{stroke:var(--ink);stroke-width:3;fill:none;stroke-linejoin:round;stroke-linecap:round}
+svg .dash{stroke-dasharray:5 4}
+svg .ah{fill:var(--ink)} svg .ah-mu{fill:var(--muted)}
+svg .bx{fill:var(--surface);stroke:var(--rule);stroke-width:1.5}
+svg .bx-ink{fill:var(--ink);stroke:var(--ink)}
+svg .t-ground{fill:var(--ground)}
+svg .bx-out{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 4}
+svg .gap{stroke:var(--surface);stroke-width:4}
+svg .gap2{stroke:var(--surface);stroke-width:2}
+svg .hub{fill:var(--surface)}
+
+/* Gráfico */
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .hit{fill:transparent;cursor:crosshair;outline:none}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);padding:6px 10px;font-size:.78rem;line-height:1.4;transform:translate(-50%,calc(-100% - 14px));white-space:nowrap;z-index:2}
+.tip b{display:block;font:600 1.05rem/1.2 var(--body)}
+details.data{font-size:.88rem}
+details.data summary{cursor:pointer;font:400 .82rem var(--mono);color:var(--muted);padding:4px 0}
+details.data .tbl{margin-top:8px}
+details.data table{min-width:420px}
+
+/* Tabelas */
+.tbl{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:780px;font-size:.88rem;line-height:1.4}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+tr:last-child > td{border-bottom:0}
+thead th{font:600 .8rem/1.3 var(--body);background:var(--sunk)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--mono);font-size:.82rem}
+
+/* Cores: blue, amber, teal, purple, red, slate */
+.tiles .blue, .k.blue{background:var(--blue)} .tiles span.w, .k.w{width:auto;padding:0 8px}
+svg .bx-blue{fill:var(--blue-tint);stroke:var(--blue);stroke-width:1.5} svg .hd-blue, svg .f-blue{fill:var(--blue)} svg .lv-blue{fill:var(--blue);fill-opacity:.36} svg .s-blue{stroke:var(--blue);stroke-width:2;fill:none} svg .t-blue{fill:var(--blue)}
+th.blue{background:var(--blue);color:var(--on-hue)} td.blue{background:var(--blue-tint)}
+.tiles .amber, .k.amber{background:var(--amber)}
+svg .bx-amber{fill:var(--amber-tint);stroke:var(--amber);stroke-width:1.5} svg .hd-amber, svg .f-amber{fill:var(--amber)} svg .lv-amber{fill:var(--amber);fill-opacity:.36} svg .s-amber{stroke:var(--amber);stroke-width:2;fill:none} svg .t-amber{fill:var(--amber)}
+th.amber{background:var(--amber);color:var(--on-hue)} td.amber{background:var(--amber-tint)}
+.tiles .teal, .k.teal{background:var(--teal)}
+svg .bx-teal{fill:var(--teal-tint);stroke:var(--teal);stroke-width:1.5} svg .hd-teal, svg .f-teal{fill:var(--teal)} svg .lv-teal{fill:var(--teal);fill-opacity:.36} svg .s-teal{stroke:var(--teal);stroke-width:2;fill:none} svg .t-teal{fill:var(--teal)}
+th.teal{background:var(--teal);color:var(--on-hue)} td.teal{background:var(--teal-tint)}
+.tiles .purple, .k.purple{background:var(--purple)}
+svg .bx-purple{fill:var(--purple-tint);stroke:var(--purple);stroke-width:1.5} svg .hd-purple, svg .f-purple{fill:var(--purple)} svg .lv-purple{fill:var(--purple);fill-opacity:.36} svg .s-purple{stroke:var(--purple);stroke-width:2;fill:none} svg .t-purple{fill:var(--purple)}
+th.purple{background:var(--purple);color:var(--on-hue)} td.purple{background:var(--purple-tint)}
+.tiles .red, .k.red{background:var(--red)}
+svg .bx-red{fill:var(--red-tint);stroke:var(--red);stroke-width:1.5} svg .hd-red, svg .f-red{fill:var(--red)} svg .lv-red{fill:var(--red);fill-opacity:.36} svg .s-red{stroke:var(--red);stroke-width:2;fill:none} svg .t-red{fill:var(--red)}
+th.red{background:var(--red);color:var(--on-hue)} td.red{background:var(--red-tint)}
+.tiles .slate, .k.slate{background:var(--slate)}
+svg .bx-slate{fill:var(--slate-tint);stroke:var(--slate);stroke-width:1.5} svg .hd-slate, svg .f-slate{fill:var(--slate)} svg .lv-slate{fill:var(--slate);fill-opacity:.36} svg .s-slate{stroke:var(--slate);stroke-width:2;fill:none} svg .t-slate{fill:var(--slate)}
+th.slate{background:var(--slate);color:var(--on-hue)} td.slate{background:var(--slate-tint)}
+svg .bar{fill:var(--accent)}
+svg .ref{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3}
+svg .s-ink{stroke:var(--ink);stroke-width:2;fill:none}
+/* tela de projeção: sempre escura com letra clara, nos dois temas */
+svg .scr{fill:#0B1116;stroke:#0B1116} svg .scr-tx{fill:#F3F6F7}
+svg .f-sunk{fill:var(--sunk)} svg .f-surface{fill:var(--surface)} svg .f-ink{fill:var(--ink)}
+svg .t-good{fill:var(--good)} svg .t-bad{fill:var(--bad)}
+svg .f-good{fill:var(--good)} svg .f-bad{fill:var(--bad)} svg .s-good{stroke:var(--good);stroke-width:2;fill:none} svg .s-bad{stroke:var(--bad);stroke-width:2;fill:none}
+td.n, th.n{text-align:center}
+td small{display:block;color:var(--muted);font-size:.8rem}
+
+/* Vídeo do tutorial */
+.video{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);gap:20px;align-items:start;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.video video{width:100%;height:auto;display:block;background:#000}
+.video div{display:flex;flex-direction:column;gap:8px;font-size:.93rem}
+@media (max-width:640px){.video{grid-template-columns:1fr}}
+
+/* Voltar ao painel */
+.back{font:500 .78rem var(--mono);text-decoration:none;color:var(--muted)}
+.back:hover{color:var(--accent)}
+
+/* Ficha da matriz (acima de cada exemplo) */
+.ficha{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border:1px solid var(--rule);background:var(--surface)}
+.ficha div{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 -1px -1px 0}
+.ficha dt{font:500 .68rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ficha dd{margin:0;font-size:.9rem;line-height:1.4}
+dl{margin:0}
+
+/* Blocos */
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.box{background:var(--surface);border:1px solid var(--rule);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.box h4{font:600 1.1rem/1.2 var(--display)}
+.box ul{font-size:.93rem}
+.note{background:var(--sunk);padding:16px 20px;max-width:72ch;font-size:.94rem;display:flex;flex-direction:column;gap:6px}
+.note h4{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* Passo a passo */
+.steps{list-style:none;padding:0;counter-reset:st;gap:0;max-width:none;border-top:1px solid var(--rule)}
+.steps li{counter-increment:st;display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font:700 1.7rem/1 var(--display);color:var(--muted);grid-row:span 2}
+.steps h4{font:600 1.1rem/1.25 var(--display)}
+.steps p{font-size:.95rem;max-width:64ch;grid-column:2}
+
+/* Erros comuns */
+.errs{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.errs div{padding:16px 16px 16px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
+.errs h4{font:600 1.05rem/1.25 var(--display)}
+.errs p{font-size:.92rem}
+.errs .fix{color:var(--muted)}
+.errs .fix b{color:var(--ink);font-weight:600}
+
+/* Checklist */
+.check{list-style:none;padding:0;gap:0;max-width:none;border:1px solid var(--rule);background:var(--surface)}
+.check li{border-bottom:1px solid var(--rule)}
+.check li:last-child{border-bottom:0}
+.check label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:11px 16px;cursor:pointer;font-size:.94rem;align-items:start}
+.check input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--teal)}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font:400 .82rem var(--mono);color:var(--muted)}
+.bar b{color:var(--ink);font-weight:500}
+
+/* Exercício */
+.quiz{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);background:var(--surface)}
+.q{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:14px 16px;border-bottom:1px solid var(--rule)}
+.q:last-child{border-bottom:0}
+@media (min-width:720px){.q{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
+.q p{font-size:.95rem}
+.q .why{grid-column:1/-1;font-size:.86rem;color:var(--muted)}
+.q .why b{font-weight:600}
+.q .why.ok b{color:var(--good)} .q .why.no b{color:var(--bad)}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts button{min-width:40px;height:40px;padding:0 10px;border:1.5px solid var(--rule);background:var(--surface);color:var(--ink);font:700 1.1rem/1 var(--display);cursor:pointer;border-radius:0}
+.opts button:hover:not(:disabled){border-color:var(--ink)}
+.opts button:disabled{cursor:default;opacity:.45}
+.opts button.right{background:var(--good-tint);border-color:var(--good);color:var(--good);opacity:1}
+.opts button.wrong{background:var(--bad-tint);border-color:var(--bad);color:var(--bad);opacity:1}
+.btn{border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:500 .82rem var(--mono);padding:7px 14px;cursor:pointer;border-radius:0}
+.btn:hover{background:var(--ink);color:var(--ground)}
+
+/* Glossário */
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.gloss div{padding:12px 0;border-bottom:1px solid var(--rule)}
+.gloss dt{font:600 1.02rem/1.3 var(--display)}
+.gloss dd{margin:2px 0 0;font-size:.9rem;color:var(--muted)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:.84rem;color:var(--muted);max-width:72ch}
+</style>
+</head>
+<body>
+<div class="page" lang="pt-BR" data-estudo="oper">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="blue">A</span><span class="amber">D</span><span class="teal">P</span></div>
+  <h1>Operação do evento: roteiro, equipe e imprevistos</h1>
+  <p class="lead">Um guia de estudo para organizar o evento antes, conduzir a equipe durante e aprender com ele depois: quem faz o quê, em que hora, e o que fazer quando algo falha.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">Antes, durante e depois</a></li>
+    <li><a href="#roteiro">O roteiro técnico</a></li>
+    <li><a href="#equipe">Equipe, comunicação e cronograma</a></li>
+    <li><a href="#energia">Energia e segurança</a></li>
+    <li><a href="#diagnostico">Diagnóstico de falhas</a></li>
+    <li><a href="#depois">Revisão, manutenção e inventário</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>Antes, durante e depois</h2>
+  <p>Os outros estudos desta série ensinam a operar cada equipamento. Este trata do que junta tudo em um evento que começa na hora, corre sem sustos e termina com o material guardado e inteiro: a <strong>operação do evento</strong>.</p>
+  <p>A maior parte do resultado se decide <strong>antes</strong> <span class="k blue">A</span>: no roteiro, na escala, no cronograma de montagem e na conferência da energia. <strong>Durante</strong> <span class="k amber">D</span>, o trabalho é seguir o combinado e reagir às falhas sem piorar a situação. <strong>Depois</strong> <span class="k teal">P</span>, a equipe desliga e guarda na ordem, conversa sobre o que aconteceu e conserta o que quebrou.</p>
+  <p>Pense em uma cozinha de restaurante. O cliente só vê o prato chegar. Atrás disso há ingredientes cortados antes de abrir a casa, cada cozinheiro no seu posto e alguém que chama os pedidos na ordem. Quando um prato queima, a cozinha serve outra coisa primeiro e só depois descobre por que queimou.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="As três fases da operação, em colunas. Antes: roteiro fechado e distribuído, equipe escalada, montagem pelo cronograma para trás, energia e segurança conferidas, passagem de som e de vídeo. Durante: seguir o roteiro deixa por deixa, um comando por vez, plano B primeiro, diagnóstico com uma troca por vez, anotar as ocorrências. Depois: desligar na ordem e contar, reunião de revisão, cada falha vira ação com responsável, consertar e etiquetar, atualizar inventário e roteiro. Uma seta volta do Depois para o Antes.">
+        <defs><marker id="op1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="hd-blue" x="18" y="20" width="274" height="50"/>
+        <text class="on disp" x="32" y="42" font-size="14">Antes</text>
+        <text class="on" x="32" y="60" font-size="10.5">nos dias e nas horas anteriores</text>
+        <rect class="bx" x="18" y="70" width="274" height="146"/>
+        <g font-size="11.5">
+          <text x="32" y="96">Roteiro técnico fechado e distribuído</text>
+          <text x="32" y="120">Equipe escalada, cada um no seu posto</text>
+          <text x="32" y="144">Montagem pelo cronograma para trás</text>
+          <text x="32" y="168">Energia e segurança conferidas</text>
+          <text x="32" y="192">Passagem de som e de vídeo</text>
+        </g>
+        <line class="ln" x1="294" y1="45" x2="310" y2="45" marker-end="url(#op1)"/>
+
+        <rect class="hd-amber" x="313" y="20" width="274" height="50"/>
+        <text class="on disp" x="327" y="42" font-size="14">Durante</text>
+        <text class="on" x="327" y="60" font-size="10.5">das portas abertas ao fim</text>
+        <rect class="bx" x="313" y="70" width="274" height="146"/>
+        <g font-size="11.5">
+          <text x="327" y="96">Seguir o roteiro, deixa por deixa</text>
+          <text x="327" y="120">Um comando por vez na comunicação</text>
+          <text x="327" y="144">Falhou? Plano B primeiro</text>
+          <text x="327" y="168">Diagnóstico com uma troca por vez</text>
+          <text x="327" y="192">Anotar cada ocorrência, com a hora</text>
+        </g>
+        <line class="ln" x1="589" y1="45" x2="605" y2="45" marker-end="url(#op1)"/>
+
+        <rect class="hd-teal" x="608" y="20" width="274" height="50"/>
+        <text class="on disp" x="622" y="42" font-size="14">Depois</text>
+        <text class="on" x="622" y="60" font-size="10.5">da última fala ao próximo evento</text>
+        <rect class="bx" x="608" y="70" width="274" height="146"/>
+        <g font-size="11.5">
+          <text x="622" y="96">Desligar na ordem, desmontar e contar</text>
+          <text x="622" y="120">Reunião de revisão em 15 minutos</text>
+          <text x="622" y="144">Cada falha vira ação com responsável</text>
+          <text x="622" y="168">Consertar, repor e etiquetar</text>
+          <text x="622" y="192">Atualizar o inventário e o roteiro</text>
+        </g>
+
+        <path class="ln-mu" d="M745 218 V244 H155 V222" marker-end="url(#op1)"/>
+        <text class="mu" x="450" y="268" font-size="11" text-anchor="middle">o que se aprendeu volta para o próximo evento: roteiro, checklist e inventário atualizados</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> As três fases da operação. O “antes” decide a maior parte do resultado, e o “depois” alimenta o “antes” do evento seguinte.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:16%"></th><th class="blue" style="width:28%">Antes</th><th class="amber" style="width:28%">Durante</th><th class="teal">Depois</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Documento</strong></td><td>Roteiro técnico, escala e cronograma de montagem.</td><td>O mesmo roteiro, com a hora real e as ocorrências anotadas.</td><td>Registro de ocorrências, ações e inventário.</td></tr>
+        <tr><td><strong>Erro típico</strong></td><td>Deixar o combinado só na cabeça de uma pessoa.</td><td>Investigar a falha ao vivo, em vez de usar o reserva.</td><td>Guardar o defeito junto com o equipamento.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>O imprevisto que tem plano deixa de ser imprevisto. Para cada item sem o qual o evento para (o microfone de quem fala, a energia da mesa, o computador da mídia), a equipe precisa saber, antes de abrir as portas, qual é o reserva e quem faz a troca.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="roteiro">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>O roteiro técnico</h2>
+  <p>O <strong>roteiro técnico</strong> (em inglês, <em>run of show</em>) é a lista de tudo o que acontece no evento, na ordem, com a hora, a duração e o que cada área técnica faz em cada momento. Ele é para a equipe o que a partitura é para a banda: todos leem a mesma página e sabem quando entram.</p>
+  <p>O roteiro técnico nasce da programação, que vem de quem conduz o evento: o pastor, o dirigente, o cerimonial. A programação diz <em>o que</em> acontece. O roteiro acrescenta <em>como</em> a técnica atende cada momento. Cada linha tem a hora de início e a duração, o nome do momento, quem conduz, e uma instrução para cada área:</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Coluna</th><th>Exemplo, no momento dos avisos</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Início e duração</strong></td><td>19:18, 4 min. O início sai da soma das durações anteriores.</td></tr>
+        <tr><td><strong>Som</strong></td><td>Som do vídeo no canal 11; microfones da banda fechados.</td></tr>
+        <tr><td><strong>Vídeo e câmeras</strong></td><td>Vídeo de avisos no programa.</td></tr>
+        <tr><td><strong>Luz</strong></td><td>Palco em meia-luz.</td></tr>
+        <tr><td><strong>Mídia e telão</strong></td><td>avisos-04-out.mp4, com áudio. Sempre o nome exato do arquivo.</td></tr>
+        <tr><td><strong>Deixa</strong></td><td>Último acorde da terceira música.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>A deixa: o que dispara cada mudança</h3>
+  <p>Um evento ao vivo raramente segue o relógio ao minuto. A hora serve para planejar, e quem dispara cada mudança é a <strong>deixa</strong> (<em>cue</em>): um sinal combinado que todos reconhecem, como uma frase, um gesto, o último acorde, o fim de um vídeo ou o comando do diretor técnico. Uma boa deixa não depende de adivinhar. “Quando o pastor terminar” é fraca: ninguém sabe se ele terminou ou fez uma pausa. “Quando o pastor disser ‘vamos orar’ e a banda subir” é forte. Sem deixa clara, a entrada é por comando do diretor técnico.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 344" role="img" aria-label="Meia hora de roteiro como linha do tempo, das 19:00 às 19:30: abertura, louvor, avisos, leitura e oferta. Para cada momento, quatro faixas dizem o que fazem o som, o vídeo, a luz e a mídia; por exemplo, nos avisos, som do vídeo no canal 11, vídeo no programa, palco em meia-luz e vídeo de avisos no telão. Quatro deixas numeradas marcam as trocas: o dirigente diz vamos cantar; último acorde da terceira música; o vídeo termina; o leitor diz amém.">
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="120" y="24" text-anchor="start">19:00</text><text class="mu" x="195" y="24">19:03</text><text class="mu" x="575" y="24">19:18</text>
+          <text class="mu" x="676" y="24">19:22</text><text class="mu" x="752" y="24">19:25</text><text class="mu" x="880" y="24" text-anchor="end">19:30</text>
+        </g>
+        <g font-size="12">
+          <text class="b" x="18" y="55">Momento</text><text class="b" x="18" y="100">Som</text><text class="b" x="18" y="146">Vídeo</text>
+          <text class="b" x="18" y="192">Luz</text><text class="b" x="18" y="238">Mídia</text><text class="b" x="18" y="279">Deixa</text>
+        </g>
+
+        <rect class="hd-slate" x="120" y="34" width="73" height="32"/><text class="on b" x="156" y="54" font-size="11" text-anchor="middle">Abertura</text>
+        <rect class="hd-slate" x="196" y="34" width="377" height="32"/><text class="on b" x="384" y="54" font-size="11" text-anchor="middle">Louvor · 15 min</text>
+        <rect class="hd-slate" x="576" y="34" width="98" height="32"/><text class="on b" x="625" y="54" font-size="11" text-anchor="middle">Avisos</text>
+        <rect class="hd-slate" x="677" y="34" width="73" height="32"/><text class="on b" x="713" y="54" font-size="11" text-anchor="middle">Leitura</text>
+        <rect class="hd-slate" x="753" y="34" width="127" height="32"/><text class="on b" x="816" y="54" font-size="11" text-anchor="middle">Oferta</text>
+
+        <g font-size="10.5">
+          <rect class="bx-blue" x="120" y="76" width="73" height="40"/><text x="126" y="93">mic do</text><text x="126" y="107">dirigente</text>
+          <rect class="bx-blue" x="196" y="76" width="377" height="40"/><text x="204" y="100">banda aberta, voz principal por cima; púlpito fechado</text>
+          <rect class="bx-blue" x="576" y="76" width="98" height="40"/><text x="582" y="93">som do vídeo</text><text x="582" y="107">no canal 11</text>
+          <rect class="bx-blue" x="677" y="76" width="73" height="40"/><text x="683" y="93">mic do</text><text x="683" y="107">púlpito</text>
+          <rect class="bx-blue" x="753" y="76" width="127" height="40"/><text x="759" y="93">teclado e violão,</text><text x="759" y="107">vozes de apoio</text>
+
+          <rect class="bx-amber" x="120" y="122" width="73" height="40"/><text x="126" y="139">câmera 2</text><text x="126" y="153">de frente</text>
+          <rect class="bx-amber" x="196" y="122" width="377" height="40"/><text x="204" y="146">câmera 1 no geral; câmeras 2 e 3 nos músicos e na voz</text>
+          <rect class="bx-amber" x="576" y="122" width="98" height="40"/><text x="582" y="139">vídeo no</text><text x="582" y="153">programa</text>
+          <rect class="bx-amber" x="677" y="122" width="73" height="40"/><text x="683" y="139">câmera 2</text><text x="683" y="153">no leitor</text>
+          <rect class="bx-amber" x="753" y="122" width="127" height="40"/><text x="759" y="139">câmera 1 no geral</text><text x="759" y="153">e em detalhes</text>
+
+          <rect class="bx-teal" x="120" y="168" width="73" height="40"/><text x="126" y="185">palco</text><text x="126" y="199">aceso</text>
+          <rect class="bx-teal" x="196" y="168" width="377" height="40"/><text x="204" y="192">cena de louvor; plateia em meia-luz</text>
+          <rect class="bx-teal" x="576" y="168" width="98" height="40"/><text x="582" y="185">palco em</text><text x="582" y="199">meia-luz</text>
+          <rect class="bx-teal" x="677" y="168" width="73" height="40"/><text x="683" y="185">foco no</text><text x="683" y="199">púlpito</text>
+          <rect class="bx-teal" x="753" y="168" width="127" height="40"/><text x="759" y="185">cena de</text><text x="759" y="199">louvor</text>
+
+          <rect class="bx-purple" x="120" y="214" width="73" height="40"/><text x="126" y="231">tela de</text><text x="126" y="245">abertura</text>
+          <rect class="bx-purple" x="196" y="214" width="377" height="40"/><text x="204" y="238">letras, música por música, no tempo de quem canta</text>
+          <rect class="bx-purple" x="576" y="214" width="98" height="40"/><text x="582" y="231">vídeo de</text><text x="582" y="245">avisos</text>
+          <rect class="bx-purple" x="677" y="214" width="73" height="40"/><text x="683" y="231">texto</text><text x="683" y="245">bíblico</text>
+          <rect class="bx-purple" x="753" y="214" width="127" height="40"/><text x="759" y="231">letra da</text><text x="759" y="245">música</text>
+        </g>
+
+        <line class="ref" x1="194.5" y1="30" x2="194.5" y2="264"/><line class="ref" x1="574.5" y1="30" x2="574.5" y2="264"/>
+        <line class="ref" x1="675.5" y1="30" x2="675.5" y2="264"/><line class="ref" x1="751.5" y1="30" x2="751.5" y2="264"/>
+        <g font-size="11" text-anchor="middle">
+          <rect class="bx-ink" x="185.5" y="265" width="18" height="18"/><text class="t-ground b" x="194.5" y="278">1</text>
+          <rect class="bx-ink" x="565.5" y="265" width="18" height="18"/><text class="t-ground b" x="574.5" y="278">2</text>
+          <rect class="bx-ink" x="666.5" y="265" width="18" height="18"/><text class="t-ground b" x="675.5" y="278">3</text>
+          <rect class="bx-ink" x="742.5" y="265" width="18" height="18"/><text class="t-ground b" x="751.5" y="278">4</text>
+        </g>
+        <g font-size="11">
+          <text x="120" y="308"><tspan class="b">1</tspan>  O dirigente diz “vamos cantar”: entra a banda</text>
+          <text x="500" y="308"><tspan class="b">2</tspan>  Último acorde da terceira música: entra o vídeo</text>
+          <text x="120" y="328"><tspan class="b">3</tspan>  O vídeo termina: abre o microfone do púlpito</text>
+          <text x="500" y="328"><tspan class="b">4</tspan>  O leitor diz “amém”: entra a música da oferta</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> Meia hora de roteiro vista como linha do tempo. Cada momento tem uma instrução para cada área, e cada troca de momento tem uma deixa. Os canais, as câmeras e as cenas são de um exemplo.</figcaption>
+  </figure>
+
+  <h3>O tempo: somar antes de prometer</h3>
+  <p>O erro mais comum de um roteiro é não caber no horário: cada momento parece curto, e a soma surpreende. Some as durações e compare com a hora de terminar. Na planilha de apoio, o início de cada linha é calculado e um aviso mostra quantos minutos passam do limite.</p>
+  <ul>
+    <li><strong>Use durações medidas.</strong> Uma música de quatro minutos na gravação leva cinco ou seis ao vivo. Anote a hora real em cada evento e corrija o próximo.</li>
+    <li><strong>Conte as trocas.</strong> A subida do coral ou a troca de microfone levam de um a três minutos. Fora do roteiro, viram atraso.</li>
+    <li><strong>Marque o que pode encolher.</strong> Combine antes, com quem conduz, o que sai se o evento atrasar. Decidir isso ao vivo, pelo intercom, é pedir confusão.</li>
+  </ul>
+  <p>O roteiro muda até a última hora. Ponha no alto o número da versão e a hora em que foi fechado, e entregue a mesma versão a todos os postos. Mudança de última hora passa pelo diretor técnico, que avisa todas as áreas de uma vez. A preparação da passagem está no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>, e o roteiro de corte, em <a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>.</p>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Diga no roteiro se cada vídeo tem áudio. Um vídeo com som que ninguém avisou ao operador entra mudo, ou entra estourando.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="equipe">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Equipe, comunicação e cronograma</h2>
+  <p>Um evento pequeno pode ter duas pessoas na técnica, e um médio, dez. As <strong>funções</strong> são as mesmas: muda quantas cada pessoa acumula. O que não pode haver é função sem dono, ou duas pessoas achando que a outra cuida.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Função</th><th style="width:44%">O que faz</th><th>Em equipe pequena, acumula com</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Diretor técnico</strong></td><td>Fecha o roteiro, dá os comandos, decide o plano B e fala com quem conduz o evento.</td><td>Som ou corte.</td></tr>
+        <tr><td><strong>Operador de som</strong></td><td>Mesa, microfones, retornos e o som da transmissão.</td><td>Direção técnica.</td></tr>
+        <tr><td><strong>Operador de corte</strong></td><td>Switcher, gráficos, gravação e, em muitas equipes, a transmissão.</td><td>Transmissão.</td></tr>
+        <tr><td><strong>Operadores de câmera</strong></td><td>Enquadram, seguem o corte e avisam o que veem no palco.</td><td>Câmeras fixas, sem operador.</td></tr>
+        <tr><td><strong>Operadores de luz e de mídia</strong></td><td>Cenas de luz do palco e da plateia; letras, slides e vídeos no telão.</td><td>Uma só pessoa para os dois.</td></tr>
+        <tr><td><strong>Apoio de palco</strong></td><td>Troca microfones, pilhas e cabos, e é os olhos da técnica perto do palco.</td><td>Um músico ou um diácono combinado antes.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A <strong>escala</strong> registra quem ocupa cada função, a hora de chegada, o posto e o reserva. Escale com dias de antecedência e confirme na véspera. Não acumule duas funções que acontecem ao mesmo tempo: quem opera a mesa não troca a pilha no palco.</p>
+
+  <h3>Comunicação: uma voz, um comando por vez</h3>
+  <p>Durante o evento, a equipe se fala por um canal combinado: intercom, rádio com fone de ouvido ou sinais de mão para quem está à vista. Mensagem de celular não substitui a voz: ninguém lê e opera ao mesmo tempo.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 370" role="img" aria-label="Quem conduz o evento combina o roteiro e as mudanças com o diretor técnico, que dá os comandos e decide o plano B. Dele, por intercom, rádio ou sinais, os comandos chegam a seis postos: som, corte, câmeras, luz, mídia e palco. Embaixo, um comando em três tempos e a confirmação: atenção, vídeo de avisos; mídia pronta, som pronto; vai vídeo; vídeo no ar, com som.">
+        <defs><marker id="op3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="bx" x="340" y="20" width="220" height="46"/>
+        <text class="b" x="450" y="40" font-size="12" text-anchor="middle">Quem conduz o evento</text>
+        <text class="mu" x="450" y="56" font-size="10.5" text-anchor="middle">dirigente, cerimonial, palco</text>
+        <line class="ln" x1="450" y1="68" x2="450" y2="96" marker-end="url(#op3)"/>
+        <text class="mu" x="462" y="86" font-size="10.5">combinam o roteiro e as mudanças</text>
+        <rect class="hd-blue" x="340" y="100" width="220" height="48"/>
+        <text class="on b" x="450" y="121" font-size="13" text-anchor="middle">Diretor técnico</text>
+        <text class="on" x="450" y="138" font-size="10.5" text-anchor="middle">dá os comandos e decide o plano B</text>
+        <text class="mono mu" x="18" y="172" font-size="10.5">INTERCOM, RÁDIO OU SINAIS COMBINADOS</text>
+        <path class="ln" d="M450 150 V182 M85 182 H815"/>
+        <g class="ln">
+          <line x1="85" y1="182" x2="85" y2="198" marker-end="url(#op3)"/><line x1="231" y1="182" x2="231" y2="198" marker-end="url(#op3)"/>
+          <line x1="377" y1="182" x2="377" y2="198" marker-end="url(#op3)"/><line x1="523" y1="182" x2="523" y2="198" marker-end="url(#op3)"/>
+          <line x1="669" y1="182" x2="669" y2="198" marker-end="url(#op3)"/><line x1="815" y1="182" x2="815" y2="198" marker-end="url(#op3)"/>
+        </g>
+        <g text-anchor="middle">
+          <rect class="bx" x="19" y="202" width="132" height="58"/><text class="b" x="85" y="222" font-size="12">Som</text><text class="mu" x="85" y="238" font-size="10.5">mesa, microfones</text><text class="mu" x="85" y="252" font-size="10.5">e retornos</text>
+          <rect class="bx" x="165" y="202" width="132" height="58"/><text class="b" x="231" y="222" font-size="12">Corte</text><text class="mu" x="231" y="238" font-size="10.5">switcher, gráficos</text><text class="mu" x="231" y="252" font-size="10.5">e transmissão</text>
+          <rect class="bx" x="311" y="202" width="132" height="58"/><text class="b" x="377" y="222" font-size="12">Câmeras</text><text class="mu" x="377" y="238" font-size="10.5">enquadram e avisam</text><text class="mu" x="377" y="252" font-size="10.5">o que veem</text>
+          <rect class="bx" x="457" y="202" width="132" height="58"/><text class="b" x="523" y="222" font-size="12">Luz</text><text class="mu" x="523" y="238" font-size="10.5">cenas do palco</text><text class="mu" x="523" y="252" font-size="10.5">e luz da plateia</text>
+          <rect class="bx" x="603" y="202" width="132" height="58"/><text class="b" x="669" y="222" font-size="12">Mídia</text><text class="mu" x="669" y="238" font-size="10.5">letras, vídeos</text><text class="mu" x="669" y="252" font-size="10.5">e telão</text>
+          <rect class="bx" x="749" y="202" width="132" height="58"/><text class="b" x="815" y="222" font-size="12">Palco</text><text class="mu" x="815" y="238" font-size="10.5">troca microfones,</text><text class="mu" x="815" y="252" font-size="10.5">pilhas e cabos</text>
+        </g>
+
+        <text class="mono mu" x="18" y="292" font-size="10.5">UM COMANDO EM TRÊS TEMPOS, E A CONFIRMAÇÃO</text>
+        <rect class="bx-blue" x="20" y="302" width="200" height="54"/>
+        <text class="b" x="34" y="324" font-size="12">1. Atenção</text><text x="34" y="342" font-size="11">“Atenção, vídeo de avisos.”</text>
+        <line class="ln" x1="222" y1="329" x2="236" y2="329" marker-end="url(#op3)"/>
+        <rect class="bx" x="240" y="302" width="200" height="54"/>
+        <text class="b" x="254" y="324" font-size="12">2. Pronto</text><text x="254" y="342" font-size="11">“Mídia pronta.” “Som pronto.”</text>
+        <line class="ln" x1="442" y1="329" x2="456" y2="329" marker-end="url(#op3)"/>
+        <rect class="bx-amber" x="460" y="302" width="200" height="54"/>
+        <text class="b" x="474" y="324" font-size="12">3. Vai</text><text x="474" y="342" font-size="11">“Vai vídeo.”</text>
+        <line class="ln" x1="662" y1="329" x2="676" y2="329" marker-end="url(#op3)"/>
+        <rect class="bx-teal" x="680" y="302" width="200" height="54"/>
+        <text class="b" x="694" y="324" font-size="12">4. Confirmação</text><text x="694" y="342" font-size="11">“Vídeo no ar, com som.”</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> Quem fala com quem. As mudanças de programa chegam à equipe por uma só pessoa, e cada comando tem aviso, resposta, execução e confirmação. As palavras exatas variam de equipe para equipe: o que importa é que sejam sempre as mesmas.</figcaption>
+  </figure>
+
+  <p>Fale pouco e sempre do mesmo jeito: primeiro o posto, depois a instrução (“Som, abre o púlpito”). Confirme o que ouviu, porque silêncio não é confirmação. Avise o que você vê: quem está perto do palco enxerga antes da mesa. E deixe o canal limpo perto de cada deixa. A linguagem de comando das câmeras está no estudo <a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>, e os sinais entre músico e operador, em <a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>.</p>
+
+  <h3>O cronograma de montagem, contado para trás</h3>
+  <p>A pergunta “a que horas a equipe chega?” só tem resposta certa se a conta começar pelo fim. Parta da hora do evento e volte, etapa por etapa: portas abertas, palco limpo, fim da passagem, até a chegada. Isso é o <strong>cronograma para trás</strong>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 330" role="img" aria-label="Cronograma de montagem contado para trás a partir das 19:00: portas abertas, 30 minutos; palco limpo e teste final, 15; folga, 15; passagem de som e de vídeo, 60; conferência de linhas, 30; montagem e ligações, 90; chegada e descarga, 30. A equipe chega às 14:30.">
+        <defs><marker id="op4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah-mu" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <line class="ln-mu" x1="792" y1="30" x2="264" y2="30" marker-end="url(#op4)"/>
+        <text class="mu" x="528" y="20" font-size="11" text-anchor="middle">conte para trás, a partir da hora do evento</text>
+        <line class="ref" x1="800" y1="22" x2="800" y2="286"/>
+        <text class="b" x="806" y="34" font-size="11">19:00</text>
+
+        <g font-size="12">
+          <text x="18" y="62">Chegada e descarga</text><text x="18" y="96">Montagem e ligações</text><text x="18" y="130">Conferência de linhas</text>
+          <text x="18" y="164">Passagem de som e de vídeo</text><text x="18" y="198">Folga para imprevistos</text>
+          <text x="18" y="232">Palco limpo e teste final</text><text x="18" y="266">Portas abertas</text>
+        </g>
+        <rect class="bx-blue" x="260" y="46" width="60" height="24"/><text class="mu" x="328" y="62" font-size="11">30 min · 14:30 a 15:00</text>
+        <rect class="bx-blue" x="320" y="80" width="180" height="24"/><text class="mu" x="508" y="96" font-size="11">90 min · 15:00 a 16:30</text>
+        <rect class="bx-blue" x="500" y="114" width="60" height="24"/><text class="mu" x="568" y="130" font-size="11">30 min · 16:30 a 17:00</text>
+        <rect class="bx-blue" x="560" y="148" width="120" height="24"/><text class="mu" x="552" y="164" font-size="11" text-anchor="end">60 min · 17:00 a 18:00</text>
+        <rect class="bx-slate" x="680" y="182" width="30" height="24"/><text class="mu" x="672" y="198" font-size="11" text-anchor="end">15 min · 18:00 a 18:15</text>
+        <rect class="bx-blue" x="710" y="216" width="30" height="24"/><text class="mu" x="702" y="232" font-size="11" text-anchor="end">15 min · 18:15 a 18:30</text>
+        <rect class="bx-amber" x="740" y="250" width="60" height="24"/><text class="mu" x="732" y="266" font-size="11" text-anchor="end">30 min · 18:30 a 19:00</text>
+        <rect class="hd-amber" x="800" y="250" width="60" height="24"/><text class="on b" x="830" y="266" font-size="11" text-anchor="middle">evento</text>
+
+        <line class="ln-mu" x1="200" y1="286" x2="860" y2="286"/>
+        <path class="ln-mu" stroke-width="1" d="M200 286 V292 M260 286 V292 M320 286 V292 M380 286 V292 M440 286 V292 M500 286 V292 M560 286 V292 M620 286 V292 M680 286 V292 M740 286 V292 M800 286 V292 M860 286 V292"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="200" y="306">14:00</text><text class="b" x="260" y="306">14:30</text><text class="mu" x="320" y="306">15:00</text><text class="mu" x="380" y="306">15:30</text>
+          <text class="mu" x="440" y="306">16:00</text><text class="mu" x="500" y="306">16:30</text><text class="mu" x="560" y="306">17:00</text><text class="mu" x="620" y="306">17:30</text>
+          <text class="mu" x="680" y="306">18:00</text><text class="mu" x="740" y="306">18:30</text><text class="b" x="800" y="306">19:00</text><text class="mu" x="860" y="306">19:30</text>
+        </g>
+        <text class="mu" x="18" y="306" font-size="11">chegada da equipe: 14:30</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> O cronograma parte da hora do evento e volta até a chegada. Neste exemplo, a soma das etapas é de 4 horas e 30 minutos: para começar às 19:00, a equipe chega às 14:30.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:32%">Etapa</th><th style="width:20%">Duração típica</th><th>Do que depende</th></tr></thead>
+      <tbody>
+        <tr><td>Chegada, descarga e posicionamento</td><td class="num">20 a 40 min</td><td>Distância do carro ao palco, escadas, volume de carga.</td></tr>
+        <tr><td>Montagem de som, de vídeo ou de luz</td><td class="num">45 a 120 min</td><td>Número de linhas e de câmeras, refletores a pendurar.</td></tr>
+        <tr><td>Conferência de linhas (<em>line check</em>)</td><td class="num">15 a 30 min</td><td>Número de canais. É feita sem os músicos.</td></tr>
+        <tr><td>Passagem de som e de vídeo</td><td class="num">60 a 90 min</td><td>Com banda. Em evento só com fala, de 20 a 30 min.</td></tr>
+        <tr><td>Folga para imprevistos</td><td class="num">15 a 30 min</td><td>Local, equipe ou equipamento novos pedem a folga maior.</td></tr>
+        <tr><td>Palco limpo, teste final e reunião</td><td class="num">15 min</td><td>Termina quando as portas abrem.</td></tr>
+        <tr><td>Portas abertas até o início</td><td class="num">20 a 30 min</td><td>Combinado com a organização.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>São faixas típicas de eventos pequenos e médios, para a primeira conta: meça os tempos da sua equipe e troque os números. Som, vídeo e luz montados ao mesmo tempo, por pessoas diferentes, entram com a etapa mais longa, e não com a soma. A folga é uma etapa com hora marcada, e não o tempo que sobra: sem ela, o primeiro cabo com defeito come a passagem. Confira também com o local a hora em que o espaço é liberado.</p>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="energia">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Energia e segurança</h2>
+  <p>Todo o sistema depende de tomadas que a equipe não projetou e muitas vezes não conhece. Um disjuntor que cai apaga som, imagem e luz de uma vez, e uma ligação malfeita pode dar choque. A energia se confere antes de ligar o primeiro equipamento.</p>
+
+  <h3>Circuito, corrente e carga</h3>
+  <p>Um <strong>circuito</strong> é o conjunto de tomadas ligadas ao mesmo <strong>disjuntor</strong> no quadro de distribuição. O disjuntor desliga quando a corrente passa do valor marcado nele, para os fios da parede não aquecerem. Tomadas de paredes diferentes podem ser do mesmo circuito, e tomadas lado a lado podem ser de circuitos diferentes: só o quadro, ou um teste, diz. A corrente, em ampères (A), depende da potência, em watts (W), e da tensão, em volts (V):</p>
+  <p><code>corrente (A) = potência (W) ÷ tensão (V)</code></p>
+  <p>No Brasil, as tomadas são de 127 V ou de 220 V, conforme a cidade e a instalação. Em 127 V, a mesma potência puxa mais corrente: 2.000 W dão 15,7 A em 127 V e 9,1 A em 220 V. A capacidade de um circuito é a corrente do disjuntor vezes a tensão:</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Disjuntor ou elo</th><th class="n" style="width:18%">Em 127 V</th><th class="n" style="width:18%">Em 220 V</th><th>Onde aparece</th></tr></thead>
+      <tbody>
+        <tr><td><strong>10 A</strong></td><td class="num n">1.270 W</td><td class="num n">2.200 W</td><td>Tomada comum, a maioria das réguas e extensões.</td></tr>
+        <tr><td><strong>16 A</strong></td><td class="num n">2.032 W</td><td class="num n">3.520 W</td><td>Disjuntor comum de circuitos de tomadas.</td></tr>
+        <tr><td><strong>20 A</strong></td><td class="num n">2.540 W</td><td class="num n">4.400 W</td><td>Tomada de 20 A (pinos mais grossos), circuitos de maior carga.</td></tr>
+        <tr><td><strong>25 A</strong></td><td class="num n">3.175 W</td><td class="num n">5.500 W</td><td>Circuitos dedicados, conforme o projeto.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Como regra prática, planeje usar até cerca de 80% da capacidade. A folga cobre picos de consumo, o que você esqueceu de somar e o que mais estiver ligado no mesmo disjuntor. Com sobrecarga moderada, o disjuntor não cai na hora: aquece e desliga depois de um tempo, que vai de alguns minutos a mais de uma hora, conforme a sobrecarga e o disjuntor. Por isso o sistema passa no teste rápido e cai no meio do evento.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 216" role="img" aria-label="Barras com a carga do exemplo 3 em 127 volts: antes, tudo no circuito A, 26,5 ampères, acima do disjuntor de 20; depois, circuito A com som e vídeo, 15,7 ampères, abaixo do limite de trabalho de 16; circuito B com a luz, 10,7 ampères.">
+        <text class="mono mu" x="18" y="18" font-size="10.5">EXEMPLO 3: A CARGA EM UM CIRCUITO DE 20 A, EM 127 V</text>
+        <line class="ref" x1="608" y1="28" x2="608" y2="168"/><line class="ref" x1="680" y1="28" x2="680" y2="168"/>
+        <text class="mu" x="602" y="42" font-size="10.5" text-anchor="end">limite de trabalho: 16 A</text>
+        <text class="t-red b" x="686" y="42" font-size="10.5">disjuntor: 20 A</text>
+
+        <text class="b" x="18" y="64" font-size="11.5">Antes: tudo no circuito A</text>
+        <text class="mu" x="18" y="79" font-size="10.5">3.360 W ÷ 127 V</text>
+        <rect class="lv-red" x="320" y="54" width="477" height="24"/>
+        <text class="t-red b" x="804" y="70" font-size="11.5">26,5 A</text>
+
+        <text class="b" x="18" y="104" font-size="11.5">Depois: circuito A, som e vídeo</text>
+        <text class="mu" x="18" y="119" font-size="10.5">2.000 W ÷ 127 V</text>
+        <rect class="lv-teal" x="320" y="94" width="283" height="24"/>
+        <text class="b" x="596" y="110" font-size="11.5" text-anchor="end">15,7 A</text>
+
+        <text class="b" x="18" y="144" font-size="11.5">Depois: circuito B, luz</text>
+        <text class="mu" x="18" y="159" font-size="10.5">1.360 W ÷ 127 V</text>
+        <rect class="lv-teal" x="320" y="134" width="193" height="24"/>
+        <text class="b" x="506" y="150" font-size="11.5" text-anchor="end">10,7 A</text>
+
+        <line class="ln-mu" x1="320" y1="168" x2="860" y2="168"/>
+        <path class="ln-mu" stroke-width="1" d="M320 168 V174 M410 168 V174 M500 168 V174 M590 168 V174 M680 168 V174 M770 168 V174 M860 168 V174"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="320" y="188">0</text><text class="mu" x="410" y="188">5</text><text class="mu" x="500" y="188">10</text><text class="mu" x="590" y="188">15</text>
+          <text class="mu" x="680" y="188">20</text><text class="mu" x="770" y="188">25</text><text class="mu" x="860" y="188">30</text>
+        </g>
+        <text class="mu" x="590" y="206" font-size="11" text-anchor="middle">corrente no circuito, em ampères</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> A carga do exemplo 3. Somar tudo em um circuito passa do disjuntor; dividir entre dois circuitos deixa os dois abaixo do limite de trabalho, de cerca de 80% da capacidade.</figcaption>
+  </figure>
+
+  <p>O consumo está na etiqueta traseira ou no manual. Use esse número, e não a potência de som anunciada na caixa: uma caixa ativa “de 1.000 W” não puxa 1.000 W da tomada o tempo todo. Os maiores consumidores costumam ser os refletores halógenos (300 a 1.000 W cada), o projetor (250 a 600 W), o subwoofer e as caixas ativas. O cálculo de carga por circuito, com alerta de sobrecarga, está na planilha do estudo <a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>.</p>
+
+  <h3>Tomada, extensão e régua</h3>
+  <ul>
+    <li><strong>Confira a tensão antes de ligar.</strong> Pergunte ao responsável pelo local ou meça com um multímetro. Fonte automática (etiqueta com algo como 100–240 V) aceita as duas tensões. Equipamento com chave seletora em 127 V, ligado em 220 V, queima.</li>
+    <li><strong>O elo mais fraco manda.</strong> A tomada de 20 A aceita plugues de 10 A e de 20 A, mas uma régua de 10 A ligada nela continua sendo de 10 A.</li>
+    <li><strong>Régua não se liga em régua.</strong> A primeira carrega a soma de tudo o que vem depois. Se faltam tomadas, use outra tomada da parede.</li>
+    <li><strong>Extensão desenrolada.</strong> Cabo enrolado no carretel, com carga alta, aquece. Extensão fina e longa também aquece e derruba a tensão: para carga alta, use cabo de bitola maior, indicada na capa.</li>
+    <li><strong>Som e vídeo juntos, luz separada.</strong> Se a carga couber, alimente pelo mesmo circuito os aparelhos de áudio e de vídeo ligados entre si por cabos de sinal: isso reduz zumbidos. A luz de palco, principalmente com dimmer, vai em outro circuito, longe do ar-condicionado e da cozinha.</li>
+  </ul>
+
+  <h3>Aterramento</h3>
+  <p>O terceiro pino do plugue é o <strong>terra</strong>. Ele liga a carcaça metálica do equipamento ao aterramento do prédio. Se um defeito encostar a fase na carcaça, a corrente escoa pelo terra e o disjuntor desliga. Sem o terra, a carcaça fica energizada à espera de alguém tocar nela, e esse alguém pode estar com a boca em um microfone ligado ao mesmo sistema.</p>
+  <p>Nunca corte o pino de terra, nem use adaptador que o elimina, para “resolver” um zumbido. O laço de terra se resolve no cabo de sinal, com a chave de <em>ground lift</em> da direct box ou com transformador isolador, como no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>. Um testador de tomadas, barato, mostra na hora se a tomada tem terra e se fase e neutro estão no lugar.</p>
+
+  <h3>No-break: para o que não pode reiniciar</h3>
+  <p>O no-break mantém a energia por alguns minutos quando a rede cai ou oscila. Ligue nele só o que demora a voltar ou perde dados com uma piscada: mesa digital, computador da mídia, switcher, codificador e roteador. Amplificadores, caixas ativas, luz e projetor consomem muito e ficam fora. A capacidade vem em VA, e a potência que ele sustenta, em watts, é menor: em modelos pequenos, costuma ficar entre 50% e 70% do valor em VA. Confira o valor em watts na ficha e deixe folga. Prefira saída senoidal para áudio e vídeo, e teste antes do evento: bateria velha sustenta segundos, e não minutos.</p>
+
+  <h3>A ordem de ligar e de desligar</h3>
+  <p>Todo equipamento dá um estalo elétrico ao ligar e ao desligar. Com a caixa já ligada, o estouro pode queimar o alto-falante e ferir o ouvido de quem está perto. A regra: o que amplifica liga por último e desliga primeiro.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 214" role="img" aria-label="Ordem de ligar, da tomada para a caixa de som: energia, depois fontes e periféricos, depois mesa e switcher com o master fechado, e por último amplificadores e caixas ativas. Para desligar, o inverso: amplificadores e caixas primeiro, energia por último.">
+        <defs><marker id="op6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono b" x="19" y="24" font-size="10.5">LIGAR: DA TOMADA PARA A CAIXA DE SOM</text>
+        <line class="ln" x1="19" y1="40" x2="879" y2="40" marker-end="url(#op6)"/>
+        <rect class="bx" x="19" y="56" width="196" height="92"/>
+        <text class="b" x="33" y="80" font-size="12.5">Energia</text>
+        <text class="mu" x="33" y="100" font-size="11">disjuntores, no-break</text><text class="mu" x="33" y="116" font-size="11">e réguas</text>
+        <rect class="bx" x="241" y="56" width="196" height="92"/>
+        <text class="b" x="255" y="80" font-size="12.5">Fontes e periféricos</text>
+        <text class="mu" x="255" y="100" font-size="11">computador, câmeras,</text><text class="mu" x="255" y="116" font-size="11">receptores sem fio,</text><text class="mu" x="255" y="132" font-size="11">processador</text>
+        <rect class="bx" x="463" y="56" width="196" height="92"/>
+        <text class="b" x="477" y="80" font-size="12.5">Mesa e switcher</text>
+        <text class="mu" x="477" y="100" font-size="11">com o master fechado</text><text class="mu" x="477" y="116" font-size="11">e as saídas em mute</text>
+        <rect class="hd-amber" x="685" y="56" width="196" height="92"/>
+        <text class="on b" x="699" y="80" font-size="12.5">Amplificadores e caixas</text>
+        <text class="on" x="699" y="100" font-size="11">por último ao ligar,</text><text class="on" x="699" y="116" font-size="11">primeiro ao desligar</text>
+        <line class="ln" x1="881" y1="164" x2="21" y2="164" marker-end="url(#op6)"/>
+        <text class="mono b" x="881" y="190" font-size="10.5" text-anchor="end">DESLIGAR: DA CAIXA DE SOM PARA A TOMADA</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> A ordem de ligar segue o caminho do sinal, e a de desligar é o inverso. Espere cada etapa terminar de iniciar antes de ligar a seguinte.</figcaption>
+  </figure>
+
+  <p>Salve a cena da mesa digital antes de desligar, e desligue os computadores pelo sistema, e não pela régua. Projetor de lâmpada precisa ventilar: desligue pelo controle e só corte a energia quando a ventoinha parar. Se a energia cair durante o evento, desligue amplificadores e caixas ativas antes que ela volte, e religue na ordem. O detalhe no sistema de som está no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>.</p>
+
+  <div class="note">
+    <h4>Segurança: eletricidade</h4>
+    <p>O risco é de choque e de incêndio. A equipe técnica usa tomadas, e não mexe em quadro, fiação ou disjuntor: isso é trabalho de eletricista. Não use cabo com capa cortada, plugue quebrado ou emenda de fita. Líquidos longe da mesa e das réguas; ao ar livre, conexões fora do chão molhado e protegidas da chuva. Se um disjuntor cair, reduza a carga antes de religar: religar sem mudar nada repete a queda, e trocar o disjuntor por um maior põe os fios da parede em risco.</p>
+  </div>
+
+  <h3>Segurança do espaço e das pessoas</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:18%">Risco</th><th>Conduta segura</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cabos no chão</strong></td><td>Cabos junto às paredes. Onde cruzam a passagem, em linha reta, presos em toda a extensão com fita de palco ou passa-cabos. Nunca cabo esticado à altura do pé. Saídas de emergência livres.</td></tr>
+        <tr><td><strong>Altura</strong></td><td>Escada firme, com outra pessoa segurando, e nunca cadeira ou mesa. Ninguém embaixo de quem trabalha no alto. Estruturas, talhas e içamento são trabalho de profissional habilitado.</td></tr>
+        <tr><td><strong>Peso</strong></td><td>Tripé com os pés bem abertos, em piso plano, com trava e pino, dentro do peso que suporta. Duas pessoas para erguer a caixa. Tudo o que fica suspenso tem cabo de segurança.</td></tr>
+        <tr><td><strong>Volume</strong></td><td>Avise antes de testar e abra o nível devagar. Proteção auditiva para quem passa muito tempo perto das caixas.</td></tr>
+        <tr><td><strong>Calor</strong></td><td>Nada de tecido, papel ou cabo encostado em refletor quente. Entradas de ar livres.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A fixação de caixas e tripés está no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>; a de refletores, em <a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>; os níveis de exposição ao som, em <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>. Diante de risco para alguém (fumaça, choque, estrutura balançando), qualquer pessoa da equipe pode e deve parar e avisar: o evento espera.</p>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="diagnostico">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Diagnóstico de falhas</h2>
+  <p>Quando algo falha, a reação natural é mexer em tudo ao mesmo tempo. Às vezes o som volta, e ninguém sabe o que resolveu; às vezes a tentativa cria um segundo problema. O diagnóstico é um método para achar a falha em poucos testes, sem criar outras.</p>
+
+  <h3>Dividir a cadeia ao meio</h3>
+  <p>Todo sinal percorre uma cadeia de cabos e aparelhos, e a falha está em um ponto dela. Testar elo por elo funciona, mas demora. É mais rápido testar no meio: se o sinal chega bem até ali, a falha está na segunda metade; se não, na primeira. Depois, divida de novo a metade que sobrou. É como procurar uma palavra no dicionário: ninguém lê da primeira página, abre no meio e vê se a palavra está antes ou depois. Em uma cadeia de oito elos, três testes bastam.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 236" role="img" aria-label="A cadeia do som em oito blocos, da fonte à caixa de som. O primeiro teste, no medidor do canal da mesa, divide a cadeia ao meio. Sem sinal no medidor, a falha está antes: ligue um microfone e um cabo bons direto no canal. Com sinal, a falha está depois: veja se o medidor do master mexe; se sim, amplificador, caixa ou cabo de saída; se não, mute, fader ou roteamento.">
+        <defs><marker id="op7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="b" x="560" y="24" font-size="12" text-anchor="middle">1º teste: o medidor do canal mostra sinal?</text>
+        <line class="s-amber dash" x1="560" y1="34" x2="560" y2="212"/>
+        <g text-anchor="middle" font-size="11.5">
+          <rect class="bx" x="19" y="52" width="92" height="44"/><text class="b" x="65" y="79">Fonte</text>
+          <rect class="bx" x="129" y="52" width="92" height="44"/><text class="b" x="175" y="79">Microfone</text>
+          <rect class="bx" x="239" y="52" width="92" height="44"/><text class="b" x="285" y="79">Cabo</text>
+          <rect class="bx" x="349" y="52" width="92" height="44"/><text class="b" x="395" y="72">Caixa</text><text class="b" x="395" y="87">de palco</text>
+          <rect class="bx-amber" x="459" y="52" width="92" height="44"/><text class="b" x="505" y="72">Canal</text><text class="b" x="505" y="87">da mesa</text>
+          <rect class="bx" x="569" y="52" width="92" height="44"/><text class="b" x="615" y="79">Master</text>
+          <rect class="bx" x="679" y="52" width="92" height="44"/><text class="b" x="725" y="79">Amplificador</text>
+          <rect class="bx" x="789" y="52" width="92" height="44"/><text class="b" x="835" y="72">Caixa</text><text class="b" x="835" y="87">de som</text>
+        </g>
+        <g class="ln">
+          <line x1="112" y1="74" x2="126" y2="74" marker-end="url(#op7)"/><line x1="222" y1="74" x2="236" y2="74" marker-end="url(#op7)"/>
+          <line x1="332" y1="74" x2="346" y2="74" marker-end="url(#op7)"/><line x1="442" y1="74" x2="456" y2="74" marker-end="url(#op7)"/>
+          <line x1="662" y1="74" x2="676" y2="74" marker-end="url(#op7)"/><line x1="772" y1="74" x2="786" y2="74" marker-end="url(#op7)"/>
+        </g>
+        <path class="ln-mu" stroke-width="1" d="M19 106 V114 H551 V106"/>
+        <path class="ln-mu" stroke-width="1" d="M569 106 V114 H881 V106"/>
+        <text class="b" x="19" y="140" font-size="12">Sem sinal no medidor: a falha está antes.</text>
+        <text class="mu" x="19" y="160" font-size="11">2º teste: ligue um microfone e um cabo bons direto no canal.</text>
+        <text class="mu" x="19" y="177" font-size="11">Funcionou: a falha está no palco. Divida de novo, na caixa de palco.</text>
+        <text class="mu" x="19" y="194" font-size="11">Não funcionou: entrada, phantom, ganho ou patch do canal.</text>
+        <text class="b" x="573" y="140" font-size="12">Com sinal no medidor: a falha está depois.</text>
+        <text class="mu" x="573" y="160" font-size="11">2º teste: o medidor do master mexe?</text>
+        <text class="mu" x="573" y="177" font-size="11">Sim: amplificador, caixa ou cabo de saída.</text>
+        <text class="mu" x="573" y="194" font-size="11">Não: mute, fader ou roteamento do canal.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> O medidor do canal divide a cadeia do som em duas partes. Um só olhar diz de que lado está a falha. No vídeo, o ponto do meio é o multiview do switcher: se a câmera aparece ali, a falha está depois dele.</figcaption>
+  </figure>
+
+  <h3>As cinco regras do método</h3>
+  <ol>
+    <li><strong>Descreva o sintoma antes de mexer.</strong> “Sem som” é pouco. “O canal 5 não marca no medidor, e os outros estão normais” já elimina metade das causas.</li>
+    <li><strong>Pergunte o que mudou.</strong> Se funcionava na passagem e parou, a causa costuma estar na última coisa que alguém mexeu: um cabo, um mute, uma pilha, uma cena.</li>
+    <li><strong>Divida a cadeia ao meio</strong> e teste no ponto do meio, como na figura 7.</li>
+    <li><strong>Troque uma coisa por vez</strong>, por outra que você sabe que funciona. Trocando microfone e cabo juntos, você não sabe qual estava ruim, e o defeituoso volta para a caixa.</li>
+    <li><strong>Desfaça o que não resolveu</strong> antes do teste seguinte, e anote o que achou. O item com defeito sai de uso com uma etiqueta, na hora.</li>
+  </ol>
+
+  <h3>Sintomas e causas prováveis</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:24%">Sintoma</th><th style="width:48%">Causas mais prováveis, na ordem</th><th>Primeiro teste</th></tr></thead>
+      <tbody>
+        <tr><td>Um canal sem som</td><td>Mute; fader ou roteamento; cabo; phantom desligado em condensador ou DI ativa; pilha do sem fio.</td><td>Medidor do canal no PFL.</td></tr>
+        <tr><td>Tudo sem som</td><td>Master ou saída em mute; amplificador ou caixas desligados; cabo de saída; disjuntor.</td><td>Medidor do master.</td></tr>
+        <tr><td>Zumbido grave contínuo</td><td>Laço de terra entre aparelhos em tomadas diferentes; cabo desbalanceado longo; cabo de sinal junto de energia ou dimmer.</td><td>Feche canal por canal até sumir.</td></tr>
+        <tr><td>Chiado constante</td><td>Ganho baixo compensado adiante; caixa ativa aberta demais; sem fio com sinal fraco.</td><td>Feche o canal: o chiado some?</td></tr>
+        <tr><td>Estalos que vão e voltam</td><td>Mau contato em cabo ou conector; sem fio com interferência ou pilha fraca.</td><td>Mexa de leve no cabo, com o canal baixo.</td></tr>
+        <tr><td>Distorção</td><td>Ganho alto; fonte de linha em entrada de microfone; ganho alto no transmissor; sistema no limite.</td><td>Luz de clip do canal.</td></tr>
+        <tr><td>Apito</td><td>Microfone de frente para a caixa; retorno alto; muitos microfones abertos.</td><td>Baixe o canal ou o retorno suspeito.</td></tr>
+        <tr><td>Câmera “sem sinal” no switcher</td><td>Cabo solto ou com defeito; formato diferente do sistema; conversor sem energia.</td><td>Câmera direto em um monitor.</td></tr>
+        <tr><td>Imagem pisca ou cai</td><td>Cabo longo demais ou ruim; conector frouxo; adaptador.</td><td>Troque por um cabo curto e bom.</td></tr>
+        <tr><td>Telão sem imagem</td><td>Entrada errada no projetor; segunda tela do computador desativada; cabo; resolução não aceita.</td><td>O projetor diz “sem sinal”?</td></tr>
+        <tr><td>Vídeo toca sem som</td><td>Saída de áudio do computador errada; volume do computador; canal da mesa fechado.</td><td>Medidor do canal do computador.</td></tr>
+        <tr><td>Faixas ou cintilação</td><td>Obturador em desacordo com as lâmpadas ou o telão de LED.</td><td>Mude o obturador e observe.</td></tr>
+        <tr><td>Transmissão travando</td><td>Upload insuficiente ou instável; bitrate alto; Wi-Fi; computador sobrecarregado.</td><td>Quadros perdidos no codificador.</td></tr>
+        <tr><td>Transmissão sem áudio</td><td>Fonte de áudio errada no codificador; saída da mesa em mute.</td><td>Medidor de áudio do codificador.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A tabela é um atalho para o primeiro palpite, e não substitui o método. As causas estão na ordem em que costumam aparecer em sistemas pequenos. O detalhe de cada uma está nos estudos <a href="../Mesa-de-Som/treinamento-mesa-de-som.html">Mesa de som</a>, <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos</a>, <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho</a>, <a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>, <a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Sem fio</a>, <a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais de vídeo</a>, <a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção</a>, <a href="../Exposicao/treinamento-exposicao.html">Exposição</a> e <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão</a>.</p>
+
+  <h3>O kit de emergência</h3>
+  <p>O plano B só existe se o reserva estiver à mão, testado, em um lugar que todos conhecem. Monte uma caixa que vai a todos os eventos e é reposta depois de cada um.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>Para trocar</h4>
+      <ul>
+        <li>Um microfone com fio e um cabo XLR longo, prontos perto do palco.</li>
+        <li>Cabos XLR, P10, HDMI (e SDI, se usado), direct box e cabo P2.</li>
+        <li>Pilhas novas para todos os sem fio, e mais um jogo.</li>
+        <li>Adaptadores, extensão, régua e fontes dos aparelhos críticos.</li>
+        <li>As mídias em um pen drive e em um segundo computador.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para testar, prender e identificar</h4>
+      <ul>
+        <li>Testador de cabos, testador de tomadas ou multímetro.</li>
+        <li>Lanterna de cabeça, fita de palco, fita crepe e caneta.</li>
+        <li>Abraçadeiras, alicate de corte e chaves pequenas.</li>
+        <li>Etiquetas “com defeito” e protetores auriculares.</li>
+        <li>O roteiro impresso e a lista de contatos.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Com o evento em andamento, a ordem muda: primeiro o plano B, depois o diagnóstico. Se o microfone de quem fala falhou, entregue o reserva e só então descubra o que houve com o primeiro. A figura 9, no módulo 7, mostra como decidir.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="depois">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Revisão, manutenção e inventário</h2>
+  <p>O evento acabou, mas a operação ainda não. O que a equipe faz na hora seguinte decide se o próximo evento começa melhor ou com os mesmos problemas.</p>
+
+  <h3>A reunião de revisão</h3>
+  <p>A reunião de revisão é uma conversa de cerca de quinze minutos com toda a equipe técnica, logo depois da desmontagem, enquanto todos lembram (ou em até dois ou três dias). Ela responde a três perguntas:</p>
+  <ol>
+    <li><strong>O que funcionou</strong> e deve ser mantido?</li>
+    <li><strong>O que falhou, ou quase falhou?</strong> O “quase” importa: o cabo que alguém tropeçou sem cair, a pilha que chegou ao fim com uma barra.</li>
+    <li><strong>O que muda</strong> no próximo evento?</li>
+  </ol>
+  <p>A base da conversa é o <strong>registro de ocorrências</strong>, feito durante o evento, com a hora e o que foi feito: sem ele, a reunião vira disputa de memória. Procure a causa no processo, e não um culpado. “O roteiro não dizia que o vídeo tinha áudio” leva a uma correção. “O operador errou” não leva a nada, e ensina a equipe a esconder os erros.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 190" role="img" aria-label="Cinco etapas, com um exemplo: ocorrência, às 19:21 o vídeo entrou sem som; causa, o roteiro não dizia que ele tinha áudio; ação, coluna de áudio na lista de mídias e teste na passagem; responsável e prazo, operador de mídia, até sábado; conferência, item novo no checklist do próximo evento.">
+        <defs><marker id="op8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="20" y="20" font-size="10.5">DA OCORRÊNCIA À MUDANÇA</text>
+        <g text-anchor="middle">
+          <rect class="bx-amber" x="20" y="30" width="156" height="52"/><text class="b" x="98" y="52" font-size="12">Ocorrência</text><text class="mu" x="98" y="69" font-size="10.5">o que aconteceu, e quando</text>
+          <rect class="bx" x="196" y="30" width="156" height="52"/><text class="b" x="274" y="52" font-size="12">Causa</text><text class="mu" x="274" y="69" font-size="10.5">por que aconteceu</text>
+          <rect class="bx" x="372" y="30" width="156" height="52"/><text class="b" x="450" y="52" font-size="12">Ação</text><text class="mu" x="450" y="69" font-size="10.5">o que muda no processo</text>
+          <rect class="bx" x="548" y="30" width="156" height="52"/><text class="b" x="626" y="52" font-size="12">Responsável e prazo</text><text class="mu" x="626" y="69" font-size="10.5">quem faz, e até quando</text>
+          <rect class="bx-teal" x="724" y="30" width="156" height="52"/><text class="b" x="802" y="52" font-size="12">Conferência</text><text class="mu" x="802" y="69" font-size="10.5">no próximo evento</text>
+        </g>
+        <line class="ln" x1="178" y1="56" x2="192" y2="56" marker-end="url(#op8)"/><line class="ln" x1="354" y1="56" x2="368" y2="56" marker-end="url(#op8)"/>
+        <line class="ln" x1="530" y1="56" x2="544" y2="56" marker-end="url(#op8)"/><line class="ln" x1="706" y1="56" x2="720" y2="56" marker-end="url(#op8)"/>
+        <text class="mono mu" x="20" y="112" font-size="10.5">UM EXEMPLO</text>
+        <g font-size="11">
+          <text x="20" y="134">19:21: o vídeo de avisos</text><text x="20" y="150">entrou sem som.</text>
+          <text x="196" y="134">O roteiro não dizia que</text><text x="196" y="150">o vídeo tinha áudio.</text>
+          <text x="372" y="134">Coluna “tem áudio?” na</text><text x="372" y="150">lista de mídias, e teste</text><text x="372" y="166">de cada vídeo na passagem.</text>
+          <text x="548" y="134">Operador de mídia,</text><text x="548" y="150">até sábado.</text>
+          <text x="724" y="134">Item novo no checklist:</text><text x="724" y="150">feito e marcado.</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> Uma ocorrência só está resolvida quando vira uma mudança com dono e prazo, conferida no evento seguinte. Parar na causa é só explicar o problema.</figcaption>
+  </figure>
+
+  <p>Feche a reunião com a lista de ações em voz alta: o quê, quem, até quando. Na planilha, um alerta marca as ações sem dono ou com o prazo vencido.</p>
+
+  <h3>Desmontar e guardar</h3>
+  <p>Desligue na ordem da figura 6, e só então solte os cabos. Tire as pilhas dos transmissores que vão ficar parados. Enrole os cabos sem torcer, como no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>. O que falhou recebe etiqueta e vai para um lugar próprio, e não para a caixa dos bons. E conte os itens pela lista antes de sair, principalmente os pequenos: microfones, receptores, adaptadores.</p>
+
+  <h3>Manutenção preventiva</h3>
+  <p>Manutenção preventiva é cuidar do equipamento antes que ele falhe em público. Em sistema pequeno, quase tudo é limpeza, teste e reaperto.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Quando</th><th>O que fazer</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Depois de cada evento</strong></td><td>Guardar os cabos; carregar baterias; cobrir a mesa; higienizar os microfones de voz; separar o que falhou; repor o kit.</td></tr>
+        <tr><td><strong>Todo mês</strong></td><td>Testar todos os cabos; limpar o filtro do projetor, se houver; copiar as cenas da mesa e as configurações.</td></tr>
+        <tr><td><strong>A cada seis meses</strong></td><td>Reapertar tripés e suportes; revisar cabos de segurança; tirar o pó das entradas de ar; testar o no-break com carga.</td></tr>
+        <tr><td><strong>Todo ano</strong></td><td>Revisão das tomadas e do quadro por um eletricista; inventário item por item.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Os intervalos são ponto de partida para uso semanal; sistema que viaja pede intervalos menores. Atualização de <em>firmware</em> de mesa, câmera ou switcher é manutenção, e nunca tarefa do dia do evento.</p>
+
+  <h3>Inventário</h3>
+  <p>O inventário é a lista de tudo o que a equipe tem. Identifique cada item com um código curto (C-12 para o cabo 12, MIC-03 para o terceiro microfone), usado também nas ocorrências. Registre o local, o estado (bom, regular, com defeito, em conserto) e a data da última manutenção com o intervalo: a planilha calcula a próxima e avisa o que venceu. Item com defeito continua na lista, para ninguém contar com ele. Atualize depois de cada evento: inventário desatualizado é pior do que nenhum, porque a equipe confia nele.</p>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>O defeito não registrado volta. O cabo guardado sem etiqueta será o do microfone principal daqui a três semanas. A etiqueta leva dez segundos.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>O procedimento completo, do planejamento à revisão. A letra de cada passo indica a fase.</p>
+  <ol class="steps">
+    <li><h4>Feche o roteiro com quem conduz o evento <span class="k blue">A</span></h4><p>Peça a programação com dois ou três dias de antecedência. Monte o roteiro com duração, deixa e instrução de cada área, some as durações e confira o nome e o áudio de cada mídia.</p></li>
+    <li><h4>Escale a equipe e distribua o roteiro <span class="k blue">A</span></h4><p>Uma pessoa por função, reserva para as críticas, confirmação na véspera. Todos com a mesma versão.</p></li>
+    <li><h4>Monte o cronograma para trás <span class="k blue">A</span></h4><p>Da hora do evento até a chegada, com a folga como etapa. Confira a hora em que o local é liberado.</p></li>
+    <li><h4>Prepare o kit e confira o inventário <span class="k blue">A</span></h4><p>Reservas testados, pilhas novas, mídias em dois lugares, nada com defeito ou manutenção vencida.</p></li>
+    <li><h4>No local, confira a energia antes de ligar <span class="k blue">A</span></h4><p>Tensão, terra, circuito e carga de cada tomada. Som e vídeo juntos, luz separada, no-break para o que não pode reiniciar.</p></li>
+    <li><h4>Monte, proteja os caminhos e ligue na ordem <span class="k blue">A</span></h4><p>Cabos presos nas passagens, tripés travados, cabos de segurança no que fica suspenso. Ligue da tomada para a caixa, com o master fechado.</p></li>
+    <li><h4>Confira as linhas e faça a passagem <span class="k blue">A</span></h4><p>Teste cada linha de som e de vídeo, passe com os músicos e com quem fala, e passe cada vídeo com o som, como no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p></li>
+    <li><h4>Reúna a equipe por cinco minutos <span class="k blue">A</span></h4><p>Leia o roteiro em voz alta, destaque as deixas difíceis, diga o plano B dos itens críticos e teste a comunicação com todos os postos.</p></li>
+    <li><h4>Siga o roteiro, deixa por deixa <span class="k amber">D</span></h4><p>Atenção, pronto, vai, confirmação. Anote a hora real. Se atrasar, avise quem conduz e aplique o corte combinado.</p></li>
+    <li><h4>Se algo falhar, plano B primeiro <span class="k amber">D</span></h4><p>Decida pela figura 9, anote a hora e o que foi feito, e investigue numa pausa ou depois.</p></li>
+    <li><h4>Desligue na ordem, desmonte e conte <span class="k teal">P</span></h4><p>Caixas e amplificadores primeiro. Tire as pilhas, enrole os cabos, etiquete o que falhou, confira a lista.</p></li>
+    <li><h4>Faça a revisão e atualize os registros <span class="k teal">P</span></h4><p>Três perguntas, cada ação com responsável e prazo. Atualize o inventário e as durações do roteiro, e reponha o kit.</p></li>
+  </ol>
+
+  <h3>Falhou durante o evento: o que fazer primeiro</h3>
+  <p>Com o público na sala, a prioridade deixa de ser entender a falha e passa a ser manter o evento. Quatro perguntas, na ordem, dizem o que fazer.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 246" role="img" aria-label="Quatro perguntas, da esquerda para a direita. Há risco para alguém? Se sim, pare e desligue. O público percebe a falha agora? Se sim, plano B já, sem investigar ao vivo. Pode piorar antes do fim? Se sim, corrija na próxima pausa, com a equipe avisada. Se não afeta e não piora, não mexa: anote a hora e trate depois.">
+        <defs><marker id="op9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="22" font-size="10.5">COMECE PELA ESQUERDA</text>
+
+        <rect class="bx" x="18" y="34" width="192" height="84"/>
+        <text x="30" y="60" font-size="11.5">Há risco para alguém?</text>
+        <text class="mu" x="30" y="77" font-size="11">Choque, queda, fumaça,</text>
+        <text class="mu" x="30" y="94" font-size="11">cheiro de queimado.</text>
+        <line class="ln" x1="212" y1="76" x2="234" y2="76" marker-end="url(#op9)"/>
+        <text class="mu" x="224" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="114" y1="120" x2="114" y2="146" marker-end="url(#op9)"/>
+        <text class="mu" x="122" y="137" font-size="10.5">sim</text>
+        <rect class="bx-red" x="18" y="150" width="192" height="78"/>
+        <text class="b" x="30" y="174" font-size="12">Pare e desligue.</text>
+        <text x="30" y="192" font-size="11.5">A segurança vem antes</text>
+        <text x="30" y="209" font-size="11.5">do evento.</text>
+
+        <rect class="bx" x="238" y="34" width="192" height="84"/>
+        <text x="250" y="60" font-size="11.5">O público percebe a falha</text>
+        <text x="250" y="77" font-size="11.5">agora?</text>
+        <text class="mu" x="250" y="94" font-size="11">Na sala ou na transmissão.</text>
+        <line class="ln" x1="432" y1="76" x2="454" y2="76" marker-end="url(#op9)"/>
+        <text class="mu" x="444" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="334" y1="120" x2="334" y2="146" marker-end="url(#op9)"/>
+        <text class="mu" x="342" y="137" font-size="10.5">sim</text>
+        <rect class="bx-amber" x="238" y="150" width="192" height="78"/>
+        <text class="b" x="250" y="174" font-size="12">Plano B já.</text>
+        <text x="250" y="192" font-size="11.5">Troque pelo reserva.</text>
+        <text x="250" y="209" font-size="11.5">Não investigue ao vivo.</text>
+
+        <rect class="bx" x="458" y="34" width="192" height="84"/>
+        <text x="470" y="60" font-size="11.5">Pode piorar antes do fim?</text>
+        <text class="mu" x="470" y="77" font-size="11">Pilha fraca, canal perto do</text>
+        <text class="mu" x="470" y="94" font-size="11">clip, cabo frouxo.</text>
+        <line class="ln" x1="652" y1="76" x2="674" y2="76" marker-end="url(#op9)"/>
+        <text class="mu" x="664" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="554" y1="120" x2="554" y2="146" marker-end="url(#op9)"/>
+        <text class="mu" x="562" y="137" font-size="10.5">sim</text>
+        <rect class="bx-teal" x="458" y="150" width="192" height="78"/>
+        <text class="b" x="470" y="174" font-size="12">Corrija na próxima pausa.</text>
+        <text x="470" y="192" font-size="11.5">Com a equipe avisada, e</text>
+        <text x="470" y="209" font-size="11.5">uma troca por vez.</text>
+
+        <rect class="bx" x="678" y="34" width="192" height="84"/>
+        <text x="690" y="60" font-size="11.5">Não afeta o público e</text>
+        <text x="690" y="77" font-size="11.5">não piora?</text>
+        <line class="ln" x1="774" y1="120" x2="774" y2="146" marker-end="url(#op9)"/>
+        <text class="mu" x="782" y="137" font-size="10.5">sim</text>
+        <rect class="bx-slate" x="678" y="150" width="192" height="78"/>
+        <text class="b" x="690" y="174" font-size="12">Não mexa.</text>
+        <text x="690" y="192" font-size="11.5">Anote a hora e trate</text>
+        <text x="690" y="209" font-size="11.5">depois do evento.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 9.</b> A decisão durante o evento. Em todos os casos, anote a hora e o que foi feito: a causa se investiga depois, com o método do módulo 5.</figcaption>
+  </figure>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns, com cenários e números ilustrativos, criados para este treinamento. O primeiro está preenchido na planilha de apoio.</p>
+
+  <h3>Exemplo 1. O culto que sempre terminava atrasado</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, culto de domingo às 19:00, com transmissão. O salão precisa estar livre às 20:30.</dd></div>
+    <div><dt>Sintoma</dt><dd>O culto termina dez minutos depois do combinado quase toda semana, e a transmissão é cortada no meio da bênção.</dd></div>
+    <div><dt>Causa</dt><dd>A programação era uma lista sem durações. Somados, os momentos davam 100 minutos para 90 disponíveis.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Roteiro técnico com durações e deixas. O dirigente tirou uma música do louvor e uma do coral.</dd></div>
+    <div><dt>Resultado</dt><dd>Roteiro de 90 minutos. O culto terminou às 20:35, e a hora real mostrou onde o tempo se perdeu.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="n" style="width:9%">Início</th><th class="n" style="width:9%">Duração</th><th style="width:24%">Momento</th><th class="n" style="width:11%">Hora real</th><th class="n" style="width:10%">Desvio</th><th>Deixa de entrada</th></tr></thead>
+      <tbody>
+        <tr><td class="num n">19:00</td><td class="num n">3 min</td><td>Abertura e boas-vindas</td><td class="num n">19:02</td><td class="num n">+2</td><td>Comando do diretor técnico</td></tr>
+        <tr><td class="num n">19:03</td><td class="num n">15 min</td><td>Louvor, três músicas</td><td class="num n">19:05</td><td class="num n">+2</td><td>O dirigente diz “vamos cantar”</td></tr>
+        <tr><td class="num n">19:18</td><td class="num n">4 min</td><td>Avisos, em vídeo</td><td class="num n">19:21</td><td class="num n">+3</td><td>Último acorde da terceira música</td></tr>
+        <tr><td class="num n">19:22</td><td class="num n">3 min</td><td>Leitura bíblica</td><td class="num n">19:25</td><td class="num n">+3</td><td>O vídeo termina</td></tr>
+        <tr><td class="num n">19:25</td><td class="num n">5 min</td><td>Oferta, com música</td><td class="num n">19:28</td><td class="num n">+3</td><td>O leitor diz “amém”</td></tr>
+        <tr><td class="num n">19:30</td><td class="num n">5 min</td><td>Coral, uma música</td><td class="num n">19:33</td><td class="num n">+3</td><td>O coral está posicionado</td></tr>
+        <tr><td class="num n">19:35</td><td class="num n">40 min</td><td>Pregação</td><td class="num n">19:38</td><td class="num n">+3</td><td>O coral desce; o pastor sobe</td></tr>
+        <tr><td class="num n">20:15</td><td class="num n">7 min</td><td>Oração, com teclado de fundo</td><td class="num n">20:21</td><td class="amber num n">+6</td><td>O pastor diz “vamos orar”</td></tr>
+        <tr><td class="num n">20:22</td><td class="num n">5 min</td><td>Música final</td><td class="num n">20:28</td><td class="amber num n">+6</td><td>O pastor diz “amém”</td></tr>
+        <tr><td class="num n">20:27</td><td class="num n">3 min</td><td>Bênção e encerramento</td><td class="num n">20:32</td><td class="amber num n">+5</td><td>Último acorde da música</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> O início de cada linha é a hora do evento mais a soma das durações anteriores. O roteiro termina às 20:30, no limite, sem folga, e a planilha mostra isso. O culto começou dois minutos atrasado, e a pregação durou 43 minutos em vez de 40: a coluna da hora real mostrou onde o tempo foi perdido. Na revisão, a equipe combinou começar na hora, com contagem regressiva no telão, e avisar o pastor pelo relógio de palco cinco minutos antes do fim da pregação. O cronograma de montagem desse culto é o da figura 4.</p>
+
+  <h3>Exemplo 2. O microfone do púlpito mudo, dez minutos antes da formatura</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Auditório de escola, mesa analógica no fundo, multicabo de doze vias. O microfone do púlpito está na via 5.</dd></div>
+    <div><dt>Sintoma</dt><dd>Funcionou na passagem. Dez minutos antes do início, o canal 5 não marca nada; os outros estão normais.</dd></div>
+    <div><dt>Causa</dt><dd>Mau contato no conector da via 5 da caixa de palco, que piorou quando alguém arrastou o púlpito.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Três testes, uma troca por vez. O microfone passou para a via 8, livre, ligada ao canal 8 da mesa.</dd></div>
+    <div><dt>Resultado</dt><dd>Som de volta em quatro minutos. A via 5 recebeu etiqueta de defeito e entrou no registro de ocorrências.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:8%">Teste</th><th style="width:40%">O que foi feito</th><th style="width:20%">Resultado</th><th>Conclusão</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td>PFL no canal 5, com alguém falando no púlpito.</td><td>Medidor parado.</td><td>A falha está antes da mesa: não é mute, fader nem caixa de som.</td></tr>
+        <tr><td class="n">2</td><td>Microfone e cabo reservas, bons, ligados direto na entrada 5 da mesa.</td><td>Sinal normal.</td><td>O canal está bom. A falha está no palco: microfone, cabo ou multicabo.</td></tr>
+        <tr><td class="n">3</td><td>O mesmo microfone reserva, com o mesmo cabo, ligado na via 5 da caixa de palco.</td><td>Sem sinal.</td><td>A falha está na via 5 do multicabo. O microfone e o cabo do púlpito não tinham defeito.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> O operador não começou trocando o microfone, que era o palpite de todos. O primeiro teste dividiu a cadeia ao meio sem sair da mesa; o segundo usou um conjunto que funcionava; no terceiro, só o caminho pelo multicabo mudou. Por isso a conclusão foi segura. Trocando o microfone logo de início, o novo também ficaria mudo, e dois microfones bons iriam para a caixa dos suspeitos.</p>
+
+  <h3>Exemplo 3. O disjuntor que caiu no meio do louvor</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Salão alugado para uma apresentação musical, rede de 127 V. Som, vídeo e luz ligados nas tomadas do palco.</dd></div>
+    <div><dt>Sintoma</dt><dd>Cerca de dez minutos depois de acenderem os dois refletores halógenos, tudo apaga: som, projetor e luz.</dd></div>
+    <div><dt>Causa</dt><dd>Todas as tomadas do palco eram do mesmo circuito, com disjuntor de 20 A. A carga somava 3.360 W, ou 26,5 A.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Com o zelador, a equipe achou um segundo circuito de 20 A, e a luz foi para ele. Som e vídeo ficaram no primeiro, em duas réguas, cada uma em uma tomada.</dd></div>
+    <div><dt>Resultado</dt><dd>Circuito A com 15,7 A e circuito B com 10,7 A. O disjuntor não caiu mais.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:44%">Carga (consumo da etiqueta)</th><th class="n" style="width:14%">Potência</th><th class="n" style="width:20%">Antes</th><th class="n">Depois</th></tr></thead>
+      <tbody>
+        <tr><td>Duas caixas ativas (300 W cada) e subwoofer (400 W)</td><td class="num n">1.000 W</td><td class="n">Circuito A</td><td class="n">Circuito A, régua 1</td></tr>
+        <tr><td>Mesa (100 W), dois retornos (150 W cada), projetor (350 W), computador e switcher (250 W)</td><td class="num n">1.000 W</td><td class="n">Circuito A</td><td class="n">Circuito A, régua 2</td></tr>
+        <tr><td>Seis refletores de LED, 60 W cada</td><td class="num n">360 W</td><td class="n">Circuito A</td><td class="teal n">Circuito B</td></tr>
+        <tr><td>Dois refletores halógenos, 500 W cada</td><td class="num n">1.000 W</td><td class="n">Circuito A</td><td class="teal n">Circuito B</td></tr>
+        <tr><td><strong>Total por circuito</strong></td><td class="num n">3.360 W</td><td class="red num n">A: 26,5 A</td><td class="num n">A: 15,7 A · B: 10,7 A</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> Com 26,5 A em um disjuntor de 20 A, a sobrecarga era de cerca de 30%: pouco para cair na hora, e o bastante para o disjuntor aquecer e desligar depois de algum tempo. No teste da tarde, com os halógenos apagados, a carga era de 2.360 W, ou 18,6 A, e nada caiu. Depois da divisão, o circuito A ficou perto do limite de trabalho de 16 A, e cada régua de 10 A ficou com 1.000 W, ou 7,9 A. Antes de religar, a equipe desligou as caixas ativas. Na revisão, o mapa das tomadas do salão entrou na ficha do local.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Roteiro na cabeça de uma pessoa</h4><p>Só o diretor técnico, ou só o dirigente, sabe a ordem. Cada operador descobre o próximo momento quando ele começa.</p><p class="fix"><b>Correção:</b> roteiro escrito, com versão, em todos os postos, lido em voz alta antes de abrir as portas.</p></div>
+    <div><h4>Roteiro só com horários</h4><p>“19:18, avisos”, sem dizer qual vídeo, em que canal entra o som nem o que dispara a entrada.</p><p class="fix"><b>Correção:</b> cada linha com a deixa e a instrução de som, vídeo, luz e mídia.</p></div>
+    <div><h4>Cronograma contado para a frente</h4><p>“A gente chega às cinco e vê no que dá.” A passagem termina com o público entrando.</p><p class="fix"><b>Correção:</b> conte para trás a partir da hora do evento, com a folga como etapa.</p></div>
+    <div><h4>Tudo na mesma tomada</h4><p>Régua em régua, som, luz e projetor no mesmo circuito. O disjuntor cai no meio do evento.</p><p class="fix"><b>Correção:</b> some os watts, descubra os circuitos e divida. Uma régua por tomada.</p></div>
+    <div><h4>Tirar o terra contra o zumbido</h4><p>Um adaptador sem o pino de terra faz o zumbido sumir, e a proteção contra choque também.</p><p class="fix"><b>Correção:</b> mantenha o terra. Resolva o laço no cabo de sinal, com direct box ou isolador.</p></div>
+    <div><h4>Trocar várias coisas de uma vez</h4><p>Microfone, cabo e canal trocados juntos. O som volta, e ninguém sabe o que estava ruim.</p><p class="fix"><b>Correção:</b> divida a cadeia ao meio e troque uma coisa por vez.</p></div>
+    <div><h4>Investigar ao vivo</h4><p>O microfone falha, e o operador testa botões por dois minutos enquanto quem fala espera.</p><p class="fix"><b>Correção:</b> plano B primeiro; o diagnóstico fica para depois.</p></div>
+    <div><h4>Guardar o defeito</h4><p>O cabo que falhou volta para a caixa sem etiqueta, e a revisão não acontece.</p><p class="fix"><b>Correção:</b> etiqueta na hora, registro no mesmo dia, ação com responsável e prazo.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>Este estudo fecha a série: organiza o uso de todos os equipamentos em um evento, e devolve aos outros estudos o que a equipe aprende.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: lista de canais, mapa de palco e ordem da passagem.</li>
+        <li><a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>: roteiro de corte e comando das câmeras.</li>
+        <li><a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>: a lista de mídias, que alimenta o roteiro.</li>
+        <li><a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>: cenas de luz e carga por circuito.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: checklist e contingência da transmissão.</li>
+        <li><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>: teste de cabos e laço de terra.</li>
+        <li><a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>: ordem de ligar e segurança de montagem.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>: o caminho do sinal que o diagnóstico divide.</li>
+        <li><a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>: o mesmo método aplicado ao “sem sinal”.</li>
+        <li><a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Microfones sem fio</a>: pilhas e plano B com fio, no kit e no roteiro.</li>
+        <li><a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>: as ocorrências de apito alimentam o diagnóstico.</li>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader: a estrutura de ganho</a>: ganhos anotados para voltar ao ponto certo após uma falha.</li>
+        <li><a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>: pedidos dos músicos anotados para o próximo evento.</li>
+        <li>Todos os estudos: cada ocorrência registrada aponta o estudo a rever.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira os oito primeiros itens antes de abrir as portas, e os quatro últimos durante e depois do evento. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>O roteiro técnico tem duração, deixa e instrução de som, vídeo, luz e mídia em cada momento.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>A soma das durações cabe no horário, e o que sai em caso de atraso está combinado.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>Todos os postos têm a mesma versão do roteiro, e ele foi lido em voz alta com a equipe.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>Cada função tem um responsável confirmado, e as funções críticas têm reserva.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>O cronograma foi contado para trás, com folga, e a montagem terminou antes de abrir as portas.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>A tensão, o terra e a carga de cada circuito foram conferidos, e nenhuma régua está ligada em outra.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>Os cabos nas passagens estão presos, os tripés estão travados e as saídas estão livres.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>O kit de emergência está à mão, e o plano B dos itens críticos tem responsável.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>A comunicação foi testada com todos os postos, e os comandos seguem o padrão combinado.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>A hora real de cada momento e as ocorrências foram anotadas durante o evento.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>O sistema foi desligado na ordem, os itens foram contados e o que falhou recebeu etiqueta.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>A reunião de revisão foi feita, e cada ação tem responsável e prazo.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Em que fase isso se resolve?</h3>
+  <p>Cada frase descreve uma situação. Escolha a fase em que ela deve ser tratada: <strong>A</strong>, antes do evento; <strong>D</strong>, durante; <strong>P</strong>, depois.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"A": "Antes", "D": "Durante", "P": "Depois"},
+ "itens": [
+  {"t": "A soma das durações dos momentos passa seis minutos da hora combinada para terminar.", "a": "A", "w": "É um problema do roteiro. Resolve-se com quem conduz o evento, antes de fechar a versão."},
+  {"t": "O microfone de quem está falando começa a falhar no meio de uma frase.", "a": "D", "w": "O público percebe agora: plano B já. Entregue o reserva e investigue o primeiro depois."},
+  {"t": "O cabo que falhou no evento precisa ser testado e consertado, ou descartado.", "a": "P", "w": "É manutenção. O cabo sai de uso com etiqueta na hora, e o conserto fica para depois."},
+  {"t": "Ninguém sabe em qual disjuntor estão as tomadas do palco.", "a": "A", "w": "A energia se confere antes de ligar o primeiro equipamento, com quem conhece o prédio."},
+  {"t": "A pregação passou cinco minutos do previsto, e ainda faltam três momentos no roteiro.", "a": "D", "w": "O diretor técnico avisa quem conduz e aplica o corte que foi combinado antes."},
+  {"t": "O roteiro não diz se o vídeo de avisos tem áudio.", "a": "A", "w": "O nome exato do arquivo e a informação de áudio entram no roteiro, e o vídeo é testado na passagem."},
+  {"t": "A equipe quer entender por que o disjuntor caiu no evento de ontem.", "a": "P", "w": "É assunto da reunião de revisão: causa, ação, responsável e prazo."},
+  {"t": "Um cabo atravessa o corredor por onde o público vai entrar, sem fita nem passa-cabos.", "a": "A", "w": "Os caminhos são protegidos na montagem, antes de abrir as portas."},
+  {"t": "O transmissor sem fio do cantor mostra a última barra de pilha na segunda música.", "a": "D", "w": "Pode piorar antes do fim: troque na próxima pausa do roteiro, com o palco e a mesa avisados."},
+  {"t": "O filtro de ar do projetor está entupido de pó.", "a": "P", "w": "É manutenção preventiva, com data marcada no inventário, e não tarefa do dia do evento."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: o roteiro, o cronograma e uma falha plantada</h3>
+  <p>Você vai precisar da planilha, da programação do próximo evento, de um colega e do sistema de som montado, com as caixas baixas.</p>
+  <ol>
+    <li>Na aba “Roteiro técnico”, informe a hora de início e a hora limite e liste os momentos com duração e deixa. A soma cabe? Se não, o que você cortaria?</li>
+    <li>Preencha som, vídeo, luz e mídia de três momentos e peça a um colega de outra área que leia: ele saberia o que fazer só com o que está escrito?</li>
+    <li>Na aba “Escala e cronograma”, liste as etapas de montagem com as durações da sua equipe e compare a hora de chegada calculada com a de costume.</li>
+    <li>Com o responsável pelo local, descubra o circuito e a tensão de cada tomada usada pela técnica e some o consumo de cada circuito. Não abra o quadro nem desligue disjuntores.</li>
+    <li>Peça ao colega que plante uma falha simples (cabo solto, mute, phantom desligado, pilha tirada). Ache-a dividindo a cadeia ao meio, uma troca por vez. Conte os testes.</li>
+    <li>Registre a falha na aba “Ocorrências e revisão”, com causa, ação, responsável e prazo, e cadastre dez itens na aba “Inventário”.</li>
+  </ol>
+  <p>Depois, troquem de lugar. Com o método, uma falha simples em uma cadeia de oito elos sai em três ou quatro testes.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Operacao-do-Evento-modelo.xlsx">Operacao-do-Evento-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Roteiro técnico</strong></td><td>Até 30 momentos, com duração, quem conduz, som, vídeo, luz, mídia, deixa e hora real.</td><td>Início e fim de cada momento, folga até a hora limite, desvio da hora real.</td></tr>
+        <tr><td><strong>Escala e cronograma</strong></td><td>Escala de até 10 funções e até 12 etapas de montagem.</td><td>Etapas contadas para trás a partir do evento, hora de chegada, alertas.</td></tr>
+        <tr><td><strong>Inventário</strong></td><td>Até 40 itens, com código, local, estado e manutenção.</td><td>Próxima manutenção e situação (Em dia, Vence logo, Vencida, Fora de uso).</td></tr>
+        <tr><td><strong>Ocorrências e revisão</strong></td><td>Até 15 ocorrências, com causa, ação, responsável e prazo, e as três perguntas da revisão.</td><td>Alerta de cada ação (sem responsável, sem prazo, atrasada) e resumo.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Sintomas e causas, capacidade dos circuitos, durações de montagem, kit de emergência.</td><td>Nada. É para consulta.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Roteiro</strong></td><td>O roteiro do exemplo 1, com as horas reais e as ações da revisão.</td><td>Os mesmos resultados da aba Roteiro técnico.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>As abas de trabalho trazem uma linha de exemplo, marcada com “Ex.”, que não entra nas contas, e o cronograma já vem com as etapas da figura 4, para você trocar pelas da sua equipe. Horas no formato 19:00; durações em minutos.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Aterramento (terra)</dt><dd>Ligação da carcaça do equipamento à terra do prédio, pelo terceiro pino do plugue. Protege contra choque.</dd></div>
+    <div><dt>Circuito</dt><dd>Conjunto de tomadas ligadas ao mesmo disjuntor. A carga de todas se soma.</dd></div>
+    <div><dt>Conferência de linhas (line check)</dt><dd>Teste de cada cabo e canal, sem os músicos, antes da passagem de som.</dd></div>
+    <div><dt>Cronograma para trás</dt><dd>Cronograma de montagem calculado a partir da hora do evento, voltando até a chegada.</dd></div>
+    <div><dt>Deixa (cue)</dt><dd>Sinal combinado que dispara uma mudança: uma frase, um gesto, o fim de uma música, um comando.</dd></div>
+    <div><dt>Diretor técnico</dt><dd>Quem fecha o roteiro, dá os comandos e decide o plano B.</dd></div>
+    <div><dt>Disjuntor</dt><dd>Chave automática que desliga o circuito quando a corrente passa do valor marcado nele.</dd></div>
+    <div><dt>Escala</dt><dd>Quem ocupa cada função, com hora de chegada, posto e reserva.</dd></div>
+    <div><dt>Intercom</dt><dd>Comunicação por fones e microfones entre os postos da equipe técnica.</dd></div>
+    <div><dt>Inventário</dt><dd>Lista dos equipamentos, com código, local, estado e manutenção.</dd></div>
+    <div><dt>No-break</dt><dd>Aparelho com bateria que mantém a energia por alguns minutos quando a rede cai.</dd></div>
+    <div><dt>Ocorrência</dt><dd>Falha, quase falha ou desvio do roteiro, anotado com a hora e o que foi feito.</dd></div>
+    <div><dt>Plano B</dt><dd>O reserva de um item crítico, testado, com quem faz a troca definido antes.</dd></div>
+    <div><dt>Reunião de revisão</dt><dd>Conversa curta depois do evento: o que funcionou, o que falhou e o que muda.</dd></div>
+    <div><dt>Roteiro técnico (run of show)</dt><dd>Os momentos do evento, na ordem, com hora, duração, deixa e o que cada área faz.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector('.page');
+  var NOME = page.getAttribute('data-estudo') || 'estudo';
+  function read(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { return null; } }
+  function write(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+
+  /* ---------- Checklist ---------- */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+  var count = document.getElementById('ck-count');
+  var total = document.getElementById('ck-total');
+  if (boxes.length && count) {
+    var CK = 'av-' + NOME + '-checklist';
+    var saved = read(CK) || {};
+    if (total) { total.textContent = boxes.length; }
+    var refreshChecks = function () {
+      var n = 0, state = {};
+      boxes.forEach(function (b, i) { if (b.checked) { n++; } state[b.id || i] = b.checked; });
+      count.textContent = n;
+      return state;
+    };
+    boxes.forEach(function (b, i) {
+      if (saved[b.id || i]) { b.checked = true; }
+      b.addEventListener('change', function () { write(CK, refreshChecks()); });
+    });
+    refreshChecks();
+    var ckReset = document.getElementById('ck-reset');
+    if (ckReset) {
+      ckReset.addEventListener('click', function () {
+        boxes.forEach(function (b) { b.checked = false; });
+        write(CK, refreshChecks());
+      });
+    }
+  }
+
+  /* ---------- Exercício ---------- */
+  /* Os dados vêm do bloco JSON de id quiz-data:
+     { "opcoes": {"A": "Nome da opção A", ...}, "itens": [ {"t": "frase", "a": "A", "w": "por quê"} ] } */
+  var quiz = document.getElementById('quiz');
+  var dataEl = document.getElementById('quiz-data');
+  if (quiz && dataEl) {
+    var data = JSON.parse(dataEl.textContent);
+    var NAMES = data.opcoes, ITEMS = data.itens, KEYS = Object.keys(NAMES);
+    var score = document.getElementById('qz-score');
+    var done = document.getElementById('qz-done');
+    document.getElementById('qz-total').textContent = ITEMS.length;
+    var hits = 0, answered = 0;
+    var render = function () {
+      hits = 0; answered = 0; score.textContent = 0; done.textContent = 0;
+      quiz.textContent = '';
+      ITEMS.forEach(function (item, idx) {
+        var row = document.createElement('div'); row.className = 'q';
+        var p = document.createElement('p'); p.textContent = (idx + 1) + '. ' + item.t;
+        var opts = document.createElement('div'); opts.className = 'opts';
+        opts.setAttribute('role', 'group'); opts.setAttribute('aria-label', 'Resposta do item ' + (idx + 1));
+        var why = document.createElement('p'); why.className = 'why'; why.hidden = true;
+        KEYS.forEach(function (k) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.textContent = k;
+          b.setAttribute('aria-label', NAMES[k]); b.title = NAMES[k];
+          b.addEventListener('click', function () {
+            var ok = k === item.a;
+            Array.prototype.forEach.call(opts.children, function (o) {
+              o.disabled = true;
+              if (o.textContent === item.a) { o.className = 'right'; }
+            });
+            if (!ok) { b.className = 'wrong'; }
+            var lead = document.createElement('b');
+            lead.textContent = (ok ? 'Certo. ' : 'A resposta é ' + item.a + (NAMES[item.a] !== item.a ? ', ' + NAMES[item.a] : '') + '. ');
+            why.textContent = ''; why.appendChild(lead); why.appendChild(document.createTextNode(item.w));
+            why.className = 'why ' + (ok ? 'ok' : 'no'); why.hidden = false;
+            answered++; if (ok) { hits++; }
+            score.textContent = hits; done.textContent = answered;
+          });
+          opts.appendChild(b);
+        });
+        row.appendChild(p); row.appendChild(opts); row.appendChild(why);
+        quiz.appendChild(row);
+      });
+    };
+    render();
+    document.getElementById('qz-reset').addEventListener('click', render);
+  }
+})();
+</script>
+</body>
+</html>

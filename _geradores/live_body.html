@@ -1,0 +1,945 @@
+<div class="page" lang="pt-BR" data-estudo="live">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="red w">LIVE</span></div>
+  <h1>Transmissão ao vivo</h1>
+  <p class="lead">Um guia de estudo para levar a imagem e o som do evento à internet sem travar: escolher o bitrate que cabe na rede, preparar um áudio feito para quem assiste de casa e ter um roteiro para quando algo falhar.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">A cadeia da transmissão</a></li>
+    <li><a href="#codificador">O codificador e a plataforma</a></li>
+    <li><a href="#video">Resolução, quadros e bitrate</a></li>
+    <li><a href="#rede">Upload, folga e rede</a></li>
+    <li><a href="#audio">O áudio da transmissão</a></li>
+    <li><a href="#nivel">Nível, loudness e sincronismo</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>A cadeia da transmissão</h2>
+  <p>Transmitir ao vivo é entregar a imagem e o som do evento, pela internet, a quem não está na sala, enquanto o evento acontece. Quem assiste em um celular, em uma TV ou em um computador só tem a tela e o alto-falante do aparelho: tudo o que sabe do evento é o que a transmissão entrega.</p>
+  <p>Entre a sala e o espectador há uma cadeia. As câmeras e a mesa produzem a imagem e o áudio, o switcher escolhe a imagem que vai ao ar, o <strong>codificador</strong> (<em>encoder</em>) comprime a imagem e o som e os envia pela rede, e a <strong>plataforma</strong> distribui a todos os espectadores. Se uma etapa falha, as seguintes falham junto.</p>
+  <p>Pense em um caminhão de entregas que sai da sua porta a cada segundo. O codificador empacota a carga, o <strong>bitrate</strong> é a largura do caminhão, e a sua internet é a rua. Caminhão mais largo que a rua não passa: é a transmissão travando. A solução nunca é empurrar o caminhão, e sim fazer uma carga que caiba na rua, com folga para o trânsito.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 292" role="img" aria-label="A cadeia da transmissão em seis blocos, com o que acontece se cada um falhar. Câmeras e som: sem imagem ou som na origem. Switcher: imagem errada ou tela preta. Codificador: travamento, blocos, som fora de sincronismo. Rede e internet: quedas e pausas para carregar. Plataforma: evento não abre, música bloqueada. Espectador: se só ele vê o problema, é do lado dele. As quatro primeiras etapas ficam no local, onde o operador corrige; as duas últimas ficam fora, e ele só acompanha. O atraso até o espectador vai de alguns segundos a cerca de meio minuto.">
+        <defs><marker id="lv1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="26" font-size="10.5">DA SALA ATÉ A TELA DE QUEM ASSISTE</text>
+
+        <rect class="bx" x="18" y="40" width="120" height="56"/>
+        <text class="b" x="78" y="64" font-size="12.5" text-anchor="middle">Câmeras e som</text>
+        <text class="mu" x="78" y="82" font-size="11" text-anchor="middle">imagem e áudio</text>
+        <line class="ln" x1="140" y1="68" x2="155" y2="68" marker-end="url(#lv1)"/>
+        <rect class="bx" x="158" y="40" width="120" height="56"/>
+        <text class="b" x="218" y="64" font-size="12.5" text-anchor="middle">Switcher</text>
+        <text class="mu" x="218" y="82" font-size="11" text-anchor="middle">escolhe a imagem</text>
+        <line class="ln" x1="280" y1="68" x2="295" y2="68" marker-end="url(#lv1)"/>
+        <rect class="hd-red" x="298" y="40" width="140" height="56"/>
+        <text class="on b" x="368" y="64" font-size="12.5" text-anchor="middle">Codificador</text>
+        <text class="on" x="368" y="82" font-size="11" text-anchor="middle">comprime e envia</text>
+        <line class="ln" x1="440" y1="68" x2="455" y2="68" marker-end="url(#lv1)"/>
+        <rect class="bx" x="458" y="40" width="140" height="56"/>
+        <text class="b" x="528" y="64" font-size="12.5" text-anchor="middle">Rede e internet</text>
+        <text class="mu" x="528" y="82" font-size="11" text-anchor="middle">o upload do local</text>
+        <line class="ln" x1="600" y1="68" x2="615" y2="68" marker-end="url(#lv1)"/>
+        <rect class="bx" x="618" y="40" width="140" height="56"/>
+        <text class="b" x="688" y="64" font-size="12.5" text-anchor="middle">Plataforma</text>
+        <text class="mu" x="688" y="82" font-size="11" text-anchor="middle">recebe e distribui</text>
+        <line class="ln" x1="760" y1="68" x2="775" y2="68" marker-end="url(#lv1)"/>
+        <rect class="bx" x="778" y="40" width="104" height="56"/>
+        <text class="b" x="830" y="64" font-size="12.5" text-anchor="middle">Espectador</text>
+        <text class="mu" x="830" y="82" font-size="11" text-anchor="middle">celular, TV, PC</text>
+
+        <text class="mono mu" x="18" y="128" font-size="10.5">SE FALHAR AQUI</text>
+        <g font-size="10.5" text-anchor="middle">
+          <text x="78" y="150">sem imagem ou</text><text x="78" y="165">sem som na origem</text>
+          <text x="218" y="150">imagem errada</text><text x="218" y="165">ou tela preta</text>
+          <text x="368" y="150">travamento, blocos,</text><text x="368" y="165">som fora de sincronismo</text>
+          <text x="528" y="150">quedas e pausas</text><text x="528" y="165">para carregar</text>
+          <text x="688" y="150">evento não abre,</text><text x="688" y="165">música bloqueada</text>
+          <text x="830" y="150">só ele vê:</text><text x="830" y="165">é do lado dele</text>
+        </g>
+
+        <path class="ln-mu" stroke-width="1" d="M18 186 V194 H598 V186"/>
+        <text class="b" x="308" y="212" font-size="11.5" text-anchor="middle">No local do evento: é aqui que você ajusta e corrige</text>
+        <path class="ln-mu" stroke-width="1" d="M618 186 V194 H882 V186"/>
+        <text class="mu" x="750" y="212" font-size="11.5" text-anchor="middle">Fora do local: você só acompanha</text>
+
+        <line class="ln-mu" x1="18" y1="248" x2="878" y2="248" marker-end="url(#lv1)"/>
+        <text class="mu" x="450" y="270" font-size="11.5" text-anchor="middle">atraso total até o espectador: de alguns segundos a cerca de meio minuto</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> A cadeia da transmissão. O codificador é o ponto em que a imagem e o som da sala viram dados na rede. Quase todos os problemas de travamento nascem nele ou na etapa seguinte, a rede.</figcaption>
+  </figure>
+
+  <p>O espectador vê tudo com atraso: a plataforma recebe, converte e distribui o vídeo, e o aparelho de quem assiste guarda alguns segundos antes de exibir. Esse atraso, a <strong>latência</strong>, vai de alguns segundos a cerca de meio minuto, conforme a plataforma e o modo escolhido. É normal, e não defeito. Os indicadores que mostram a saúde de cada etapa estão no módulo 7.</p>
+  <p>As etapas anteriores ao codificador têm estudos próprios: os formatos e os cabos, em <a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>, e o uso do switcher, em <a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>. Este estudo começa onde a imagem pronta e o som pronto chegam ao codificador.</p>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>A transmissão é outro evento, com outro público. O que soa bem na sala não chega bem à tela por conta própria: alguém precisa assistir à transmissão como o espectador, em um aparelho comum, antes e durante o evento.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="codificador">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>O codificador e a plataforma</h2>
+  <p>Um sinal de vídeo em alta definição, do jeito que sai da câmera, ocupa cerca de 1.500 megabits por segundo em um cabo SDI. Nenhuma internet comum carrega isso. O codificador reduz esse fluxo algumas centenas de vezes, para 3 a 6 megabits por segundo, jogando fora o que o olho menos percebe e reaproveitando o que se repete de um quadro para o outro. Depois, empacota o resultado junto com o áudio e envia à plataforma.</p>
+  <p>Há dois tipos de codificador. No codificador <strong>por software</strong>, um programa roda em um computador comum (o OBS é o mais conhecido), e uma placa de captura recebe o HDMI ou o SDI do switcher e o entrega por USB. No codificador <strong>por hardware</strong>, um aparelho dedicado recebe o vídeo por HDMI ou SDI e faz o envio sozinho. Muitos switchers atuais já trazem um codificador embutido. Nos dois casos, o codificador sai por cabo de rede até o roteador e envia o resultado à plataforma.</p>
+
+
+  <div class="pair">
+    <div class="box">
+      <h4>Por software</h4>
+      <ul>
+        <li>Monta cenas com várias fontes, textos, logotipo e legendas.</li>
+        <li>Mostra indicadores detalhados e grava no disco ao mesmo tempo. O programa mais usado é gratuito.</li>
+        <li>Depende de um computador saudável: atualização, notificação ou outro programa aberto podem derrubar a transmissão.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Por hardware</h4>
+      <ul>
+        <li>Liga, recebe o vídeo e transmite. Tem menos pontos de falha e é mais simples para voluntários em rodízio.</li>
+        <li>Não monta cenas: os gráficos precisam vir prontos do switcher.</li>
+        <li>Mostra menos informação, e mudar um ajuste no meio do evento costuma ser mais difícil.</li>
+      </ul>
+    </div>
+  </div>
+  <p>No computador, a compressão pode ser feita pelo processador ou por um circuito próprio da placa de vídeo. Quando houver esse circuito, use-o: o processador fica livre para as cenas e para a captura.</p>
+
+  <h3>RTMP, endereço e chave de transmissão</h3>
+  <p>O codificador fala com a plataforma por um protocolo de envio, quase sempre o <strong>RTMP</strong> ou a versão com criptografia, o RTMPS (algumas plataformas aceitam outros, como o SRT). A plataforma fornece na página do evento os dados que você copia para o codificador:</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:24%">Dado</th><th style="width:38%">O que é</th><th>Cuidado</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Endereço do servidor (URL)</strong></td><td>Para onde enviar. Começa com <code>rtmp://</code> ou <code>rtmps://</code>.</td><td>Copie e cole. Um caractere errado, e o codificador não conecta.</td></tr>
+        <tr><td><strong>Chave de transmissão (<em>stream key</em>)</strong></td><td>O código que identifica o seu canal ou o seu evento. Funciona como senha.</td><td>Quem tem a chave transmite no seu canal. Não a mostre na tela nem a envie em grupo; se vazar, gere outra.</td></tr>
+        <tr><td><strong>Evento</strong></td><td>A página que o público abre, com título, data, capa e visibilidade.</td><td>Em algumas plataformas, cada evento agendado tem a própria chave. Confira se a chave do codificador é a do evento de hoje.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A visibilidade define quem vê: <strong>público</strong> aparece para todos, <strong>não listado</strong> só abre para quem tem o link, <strong>privado</strong> só para as contas autorizadas. Teste em não listado ou privado. Saiba também se o seu evento começa sozinho quando o sinal chega ou por um botão na plataforma, para não entrar no ar antes da hora nem transmitir para ninguém.</p>
+
+  <h3>Cenas e gráficos</h3>
+  <p>No codificador por software, uma <strong>cena</strong> é um arranjo pronto de fontes, trocado com um clique. Prepare antes e dê nomes claros:</p>
+  <ul>
+    <li><strong>Espera:</strong> “Começamos em instantes” e o horário. Entre no ar com ela de 10 a 15 minutos antes.</li>
+    <li><strong>Programa:</strong> a saída do switcher em tela cheia, a cena de quase todo o tempo.</li>
+    <li><strong>Programa com legenda:</strong> o mesmo, com o nome de quem fala. Texto grande: boa parte do público assiste no celular.</li>
+    <li><strong>Problema técnico:</strong> uma tela de “Voltamos em instantes”, para quando a imagem ou o som da sala falhar.</li>
+    <li><strong>Encerramento:</strong> agradecimento e próximos horários, por um minuto.</li>
+  </ul>
+  <p>Com switcher, o corte, as legendas e as letras costumam ser feitos nele, e o codificador recebe a imagem pronta (veja <a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a> e <a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>).</p>
+
+  <div class="note">
+    <h4>Direitos autorais de músicas</h4>
+    <p>As plataformas identificam músicas de forma automática, inclusive tocadas ao vivo. Conforme o acordo com os donos da obra, a transmissão pode ficar sem som em um trecho, ser bloqueada em alguns países ou ser interrompida. Gravações comerciais (música ambiente, clipe, base gravada) são as que mais geram bloqueio. A autorização do local para executar música em público não vale, por si só, para a internet. Veja as regras da plataforma e as licenças da sua organização, e na tela de espera use só músicas que você tem o direito de usar.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="video">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Resolução, quadros e bitrate</h2>
+  <p>Cinco ajustes do codificador definem o peso e a qualidade do vídeo. O que limita todos é a rede: primeiro se descobre quanto bitrate cabe no upload (módulo 4), depois se escolhe o formato que fica bem com ele.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Ajuste</th><th style="width:36%">O que é</th><th>Ponto de partida</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Resolução</strong></td><td>Quantos pontos formam cada imagem: 1280 × 720 (720p) ou 1920 × 1080 (1080p).</td><td>720p ou 1080p, o que couber no upload. Mais pontos pedem mais bitrate.</td></tr>
+        <tr><td><strong>Taxa de quadros</strong></td><td>Quantas imagens por segundo: 30 ou 60.</td><td>30 quadros para culto, palestra e formatura. 60 só com rede e processador folgados, e dobra o trabalho.</td></tr>
+        <tr><td><strong>Bitrate de vídeo</strong></td><td>Quantos dados por segundo o codificador usa para o vídeo, em kbps.</td><td>Dentro da faixa do formato (figura 2), e dentro do que a rede permite.</td></tr>
+        <tr><td><strong>Codec</strong></td><td>O método de compressão.</td><td>H.264, aceito por todas as plataformas e todos os aparelhos. Codecs mais novos, como H.265 e AV1, só onde a plataforma e o seu codificador aceitam.</td></tr>
+        <tr><td><strong>Intervalo de keyframe</strong></td><td>De quanto em quanto tempo o codificador envia uma imagem inteira.</td><td>2 segundos, que é o que a maioria das plataformas pede.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O formato da transmissão parte do que o sistema de vídeo já usa: com câmeras e switcher em 1080p a 59,94 quadros, o codificador pode enviar 1080p ou reduzir para 720p, a 59,94 ou a 29,97 quadros (os “60” e “30” das plataformas). Por que todos os equipamentos precisam do mesmo formato está no estudo <a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>.</p>
+
+  <h3>Bitrate: quanto cada formato pede</h3>
+  <p>O bitrate é medido em kbps ou Mbps: 1 Mbps são 1.000 kbps. Com pouco bitrate para o formato, a imagem fica com blocos e borrões, sobretudo com movimento, luzes que piscam ou fumaça. Acima da faixa, a imagem quase não melhora, e a transmissão só fica mais pesada para a sua rede e para a do espectador.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 316" role="img" aria-label="Gráfico de barras horizontais com a faixa de bitrate de vídeo de cada formato, em kbps, como ponto de partida para o codec H.264. 480p a 30 quadros: de 1.000 a 2.000 kbps. 720p a 30 quadros: de 2.500 a 4.000 kbps. 720p a 60 quadros: de 3.500 a 6.000 kbps. 1080p a 30 quadros: de 4.000 a 6.000 kbps. 1080p a 60 quadros: de 6.000 a 9.000 kbps.">
+        <g font-size="12">
+          <text class="b" x="18" y="50">480p a 30 quadros</text>
+          <text class="b" x="18" y="94">720p a 30 quadros</text>
+          <text class="b" x="18" y="138">720p a 60 quadros</text>
+          <text class="b" x="18" y="182">1080p a 30 quadros</text>
+          <text class="b" x="18" y="226">1080p a 60 quadros</text>
+        </g>
+        <g font-size="10.5">
+          <text class="mu" x="18" y="65">854 × 480</text>
+          <text class="mu" x="18" y="109">1280 × 720</text>
+          <text class="mu" x="18" y="153">1280 × 720</text>
+          <text class="mu" x="18" y="197">1920 × 1080</text>
+          <text class="mu" x="18" y="241">1920 × 1080</text>
+        </g>
+        <g class="grid">
+          <line x1="250" y1="30" x2="250" y2="256"/><line x1="370" y1="30" x2="370" y2="256"/><line x1="490" y1="30" x2="490" y2="256"/>
+          <line x1="610" y1="30" x2="610" y2="256"/><line x1="730" y1="30" x2="730" y2="256"/><line x1="850" y1="30" x2="850" y2="256"/>
+        </g>
+        <rect class="bx-red" x="310" y="38" width="60" height="24"/>
+        <text class="t-red b" x="380" y="54" font-size="11">1.000 a 2.000 kbps</text>
+        <rect class="bx-red" x="400" y="82" width="90" height="24"/>
+        <text class="t-red b" x="500" y="98" font-size="11">2.500 a 4.000 kbps</text>
+        <rect class="bx-red" x="460" y="126" width="150" height="24"/>
+        <text class="t-red b" x="620" y="142" font-size="11">3.500 a 6.000 kbps</text>
+        <rect class="bx-red" x="490" y="170" width="120" height="24"/>
+        <text class="t-red b" x="620" y="186" font-size="11">4.000 a 6.000 kbps</text>
+        <rect class="bx-red" x="610" y="214" width="180" height="24"/>
+        <text class="t-red b" x="600" y="230" font-size="11" text-anchor="end">6.000 a 9.000 kbps</text>
+
+        <line class="ln-mu" x1="250" y1="256" x2="850" y2="256"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="250" y="274">0</text><text class="mu" x="370" y="274">2.000</text><text class="mu" x="490" y="274">4.000</text>
+          <text class="mu" x="610" y="274">6.000</text><text class="mu" x="730" y="274">8.000</text><text class="mu" x="850" y="274">10.000</text>
+        </g>
+        <text class="mu" x="550" y="298" font-size="11" text-anchor="middle">bitrate de vídeo, em kbps (codec H.264)</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> Faixas de bitrate de vídeo por formato, como ponto de partida. Cada plataforma publica a sua tabela, e os valores mudam com o tempo: confira a da plataforma que você usa. Cenas com muito movimento pedem a parte de cima da faixa.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:17%">Formato</th><th style="width:19%">Bitrate de vídeo</th><th style="width:21%">Upload medido para caber</th><th>Quando usar</th></tr></thead>
+      <tbody>
+        <tr><td><strong>480p a 30 quadros</strong></td><td class="num">1.000 a 2.000 kbps</td><td class="num">2,5 a 4,5 Mbps</td><td>Rede fraca ou link de reserva. Letras pequenas ficam ilegíveis.</td></tr>
+        <tr><td><strong>720p a 30 quadros</strong></td><td class="num">2.500 a 4.000 kbps</td><td class="num">5,5 a 8,5 Mbps</td><td>O formato seguro para a maioria dos eventos pequenos.</td></tr>
+        <tr><td><strong>720p a 60 quadros</strong></td><td class="num">3.500 a 6.000 kbps</td><td class="num">7,5 a 12,5 Mbps</td><td>Movimento rápido. Raro em culto e palestra.</td></tr>
+        <tr><td><strong>1080p a 30 quadros</strong></td><td class="num">4.000 a 6.000 kbps</td><td class="num">8,5 a 12,5 Mbps</td><td>O padrão quando a rede comporta.</td></tr>
+        <tr><td><strong>1080p a 60 quadros</strong></td><td class="num">6.000 a 9.000 kbps</td><td class="num">12,5 a 18,5 Mbps</td><td>Só com rede e processador com muita folga.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A coluna do upload já inclui o áudio e a regra da metade (módulo 4). O formato menor com bitrate folgado ganha do maior com bitrate apertado: 720p a 3.500 kbps sai mais limpo do que 1080p com os mesmos 3.500 kbps, porque cada ponto recebe mais dados.</p>
+
+  <h3>Bitrate constante</h3>
+  <p>O bitrate pode ser fixo (CBR, taxa constante) ou variar com a cena (VBR). Ao vivo, use <strong>CBR</strong>: a rede e a plataforma lidam melhor com um fluxo previsível, e um pico de bitrate em cena agitada é o que estoura um upload apertado.</p>
+
+  <h3>Keyframe: a imagem inteira de tempos em tempos</h3>
+  <p>Para economizar dados, o codificador envia de tempos em tempos uma imagem inteira, o <strong>keyframe</strong> (quadro-chave), e entre eles só o que mudou de um quadro para o outro. Em cena parada, esses quadros intermediários são pequenos; com movimento, crescem. Quem entra na transmissão, ou muda de qualidade, só monta a imagem a partir de um keyframe. Por isso as plataformas pedem um intervalo fixo e curto, em geral de 2 segundos: a 30 quadros por segundo, um keyframe a cada 60 quadros. Em “automático”, alguns programas espaçam demais os keyframes, e o painel do evento mostra um aviso. Defina o valor.</p>
+
+  <h3>Áudio no codificador</h3>
+  <p>O áudio viaja junto, comprimido em AAC. Use estéreo, de 128 a 160 kbps, com taxa de amostragem de 48 kHz, a mesma na mesa, na interface e no codificador. O áudio pesa pouco perto do vídeo, mas entra na conta do bitrate total. De onde vem esse áudio, e em que nível, está nos módulos 5 e 6.</p>
+
+  <div class="note">
+    <h4>Valores de referência</h4>
+    <p>As faixas de bitrate deste módulo são ponto de partida para o codec H.264 e variam conforme a plataforma, o conteúdo e o codificador. Confira a tabela que a sua plataforma publica e o manual do seu equipamento.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="rede">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Upload, folga e rede</h2>
+  <p>A internet tem duas velocidades. O <strong>download</strong> é o que chega, e é o que o provedor anuncia. O <strong>upload</strong> é o que sai, e é só ele que importa para transmitir. Uma internet “de 300 mega” pode ter 150, 30 ou 10 Mbps de upload, conforme a tecnologia e o contrato. E não vale o número do contrato: vale o que você mede no local.</p>
+
+  <h3>Como medir</h3>
+  <ol>
+    <li>Meça no computador da transmissão, ligado por cabo, no ponto de rede que será usado no evento.</li>
+    <li>Use um teste de velocidade no navegador e anote o upload, em Mbps.</li>
+    <li>Meça pelo menos três vezes, uma delas no horário do evento, com a sala cheia.</li>
+    <li>Fique com o <strong>menor</strong> valor. A transmissão precisa caber no pior momento, e não na média.</li>
+  </ol>
+  <p>Cuidado com as unidades: Mbps são megabits por segundo; megabytes por segundo (MB/s) são oito vezes mais. E o codificador usa kbps: 4.500 kbps são 4,5 Mbps.</p>
+
+  <h3>A regra da metade</h3>
+  <p>Como regra prática, o bitrate total, de vídeo mais áudio, deve ficar em até cerca de <strong>metade do upload medido</strong>: com 10 Mbps, a transmissão usa até 5 Mbps. A outra metade é folga, e não desperdício. A velocidade oscila de um minuto para o outro, e o teste mede só um instante, até um servidor próximo. O envio tem dados de controle, o fluxo do codificador oscila mesmo em CBR, e outros aparelhos da rede também usam upload: celulares copiando fotos, câmeras de segurança, o computador da secretaria.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Três configurações comparadas com um upload medido de 8 Mbps. A metade do upload, 4 Mbps, é o limite recomendado. Primeira: vídeo a 3.500 kbps, total de 3,7 Mbps, 46 por cento do upload: OK, sobra folga para as variações. Segunda: vídeo a 5.000 kbps, total de 5,2 Mbps, 64 por cento do upload: apertado, qualquer variação da rede faz travar. Terceira: vídeo a 9.000 kbps, total de 9,2 Mbps, 115 por cento do upload: insuficiente, passa do upload e trava sempre.">
+        <text class="b" x="490" y="24" font-size="11" text-anchor="middle">metade do upload</text>
+        <text class="b" x="730" y="24" font-size="11" text-anchor="middle">upload medido: 8 Mbps</text>
+
+        <text class="b" x="18" y="56" font-size="12">Vídeo a 3.500 kbps</text>
+        <text class="mu" x="18" y="72" font-size="10.5">total de 3,7 Mbps: 46% do upload</text>
+        <text class="t-good b" x="18" y="88" font-size="10.5">OK: sobra folga para as variações</text>
+        <rect class="bx" x="250" y="52" width="480" height="26"/>
+        <rect class="f-good" style="fill-opacity:.45" x="250" y="52" width="222" height="26"/>
+
+        <text class="b" x="18" y="126" font-size="12">Vídeo a 5.000 kbps</text>
+        <text class="mu" x="18" y="142" font-size="10.5">total de 5,2 Mbps: 64% do upload</text>
+        <text class="t-amber b" x="18" y="158" font-size="10.5">Apertado: qualquer variação trava</text>
+        <rect class="bx" x="250" y="122" width="480" height="26"/>
+        <rect class="lv-amber" x="250" y="122" width="310" height="26"/>
+
+        <text class="b" x="18" y="196" font-size="12">Vídeo a 9.000 kbps</text>
+        <text class="mu" x="18" y="212" font-size="10.5">total de 9,2 Mbps: 115% do upload</text>
+        <text class="t-red b" x="18" y="228" font-size="10.5">Insuficiente: trava sempre</text>
+        <rect class="bx" x="250" y="192" width="480" height="26"/>
+        <rect class="lv-red" x="250" y="192" width="552" height="26"/>
+
+        <line class="ref" x1="490" y1="32" x2="490" y2="244"/>
+        <line class="s-ink" x1="730" y1="32" x2="730" y2="244"/>
+        <line class="ln-mu" x1="250" y1="244" x2="850" y2="244"/>
+        <g class="ln-mu" stroke-width="1">
+          <line x1="250" y1="244" x2="250" y2="250"/><line x1="370" y1="244" x2="370" y2="250"/><line x1="490" y1="244" x2="490" y2="250"/>
+          <line x1="610" y1="244" x2="610" y2="250"/><line x1="730" y1="244" x2="730" y2="250"/><line x1="850" y1="244" x2="850" y2="250"/>
+        </g>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="250" y="264">0</text><text class="mu" x="370" y="264">2</text><text class="b" x="490" y="264">4</text>
+          <text class="mu" x="610" y="264">6</text><text class="b" x="730" y="264">8</text><text class="mu" x="850" y="264">10</text>
+        </g>
+        <text class="mu" x="550" y="286" font-size="11" text-anchor="middle">bitrate total da transmissão (vídeo + áudio), em Mbps</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> A mesma rede, com 8 Mbps de upload medido, e três configurações. A primeira usa menos da metade e aguenta as variações. A segunda funciona no teste e trava no meio do evento. A terceira não funciona em momento algum.</figcaption>
+  </figure>
+  <p>A metade é regra prática, e não norma. Em rede dedicada, estável e medida muitas vezes, dá para usar um pouco mais; em Wi-Fi ou rede móvel, use menos. Se o bitrate que cabe ficar abaixo da faixa do formato, desça um degrau na tabela do módulo 3.</p>
+
+  <h3>Cabo, Wi-Fi e a rede do público</h3>
+  <p>Ligue o codificador ao roteador <strong>por cabo de rede</strong>. O Wi-Fi divide o ar com os celulares da sala e com as redes vizinhas: funciona no ensaio e falha quando o público chega. Microfones sem fio em 2,4 GHz disputam a mesma faixa (veja <a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Microfones sem fio</a>). O tráfego do público também não pode disputar o upload: o ideal é um acesso só para a transmissão; com um acesso só, peça a quem cuida da rede para separar e limitar a rede dos visitantes, ou dar prioridade ao codificador.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 310" role="img" aria-label="Diagrama da rede da transmissão. O codificador, que é um computador ou um aparelho, liga-se por cabo de rede a um roteador usado só pela transmissão. Do roteador saem dois caminhos até a internet e a plataforma: o link principal, de fibra ou cabo, e o link de reserva, que pode ser 4G, 5G ou um segundo provedor e entra quando o principal cai. O Wi-Fi do público fica em outra rede, ou com limite de banda, para não disputar o upload da transmissão.">
+        <defs><marker id="lv6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="hd-red" x="18" y="96" width="150" height="56"/>
+        <text class="on b" x="93" y="120" font-size="12.5" text-anchor="middle">Codificador</text>
+        <text class="on" x="93" y="137" font-size="10.5" text-anchor="middle">computador ou aparelho</text>
+        <line class="ln-bold" x1="170" y1="124" x2="232" y2="124"/>
+        <text class="b" x="201" y="86" font-size="10.5" text-anchor="middle">cabo de rede</text>
+        <rect class="bx" x="234" y="96" width="166" height="56"/>
+        <text class="b" x="317" y="120" font-size="12.5" text-anchor="middle">Roteador</text>
+        <text class="mu" x="317" y="137" font-size="10.5" text-anchor="middle">só da transmissão</text>
+
+        <line class="ln" x1="402" y1="112" x2="466" y2="72" marker-end="url(#lv6)"/>
+        <rect class="bx-teal" x="470" y="40" width="200" height="56"/>
+        <text class="b" x="570" y="64" font-size="12.5" text-anchor="middle">Link principal</text>
+        <text class="mu" x="570" y="81" font-size="10.5" text-anchor="middle">fibra ou cabo</text>
+        <line class="ln" x1="672" y1="72" x2="736" y2="110" marker-end="url(#lv6)"/>
+
+        <line class="ln dash" x1="402" y1="136" x2="466" y2="176" marker-end="url(#lv6)"/>
+        <rect class="bx-amber" x="470" y="152" width="200" height="56"/>
+        <text class="b" x="570" y="176" font-size="12.5" text-anchor="middle">Link de reserva</text>
+        <text class="mu" x="570" y="193" font-size="10.5" text-anchor="middle">4G, 5G ou segundo provedor</text>
+        <line class="ln dash" x1="672" y1="176" x2="736" y2="138" marker-end="url(#lv6)"/>
+
+        <rect class="bx" x="740" y="96" width="142" height="56"/>
+        <text class="b" x="811" y="120" font-size="12.5" text-anchor="middle">Internet</text>
+        <text class="mu" x="811" y="137" font-size="10.5" text-anchor="middle">até a plataforma</text>
+
+        <rect class="bx-slate" x="234" y="240" width="166" height="52"/>
+        <text class="b" x="317" y="262" font-size="12" text-anchor="middle">Wi-Fi do público</text>
+        <text class="mu" x="317" y="279" font-size="10.5" text-anchor="middle">e da equipe</text>
+        <text x="420" y="262" font-size="11.5">Fica em outra rede, ou com limite de banda,</text>
+        <text x="420" y="279" font-size="11.5">para não disputar o upload da transmissão.</text>
+        <text class="mu" x="18" y="262" font-size="11">Entra só quando</text>
+        <text class="mu" x="18" y="279" font-size="11">o principal cai:</text>
+        <path class="ln-mu dash" stroke-width="1" d="M110 268 H130"/>
+        <text class="mu" x="136" y="272" font-size="11">tracejado</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> A rede da transmissão. O codificador vai por cabo a um roteador que não atende o público. O link de reserva, tracejado, só entra quando o principal cai.</figcaption>
+  </figure>
+
+  <h3>Link de reserva</h3>
+  <p>Internet cai, e cai no pior momento. O link de reserva é um segundo caminho, de outro provedor ou de outra tecnologia: modem 4G ou 5G, celular ligado por USB ao computador, segundo plano fixo. Roteadores com duas entradas trocam de link sozinhos; sem eles, a troca é manual e precisa estar ensaiada.</p>
+  <ul>
+    <li>Meça o upload do link de reserva no local. Rede móvel muda de um ponto do prédio para outro e piora com a sala cheia, porque todos os celulares usam a mesma antena.</li>
+    <li>Deixe pronto um perfil de bitrate menor para ele, em geral 720p ou 480p a 30 quadros.</li>
+    <li>Confira a franquia: uma transmissão de 4,6 Mbps consome cerca de 2 GB por hora.</li>
+    <li>Na troca, o codificador perde a conexão por alguns segundos. Deixe a reconexão automática ligada.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Segurança: cabos e energia</h4>
+    <p>O cabo de rede costuma cruzar um corredor ou a nave. Passe-o junto à parede e, onde cruzar uma passagem, cubra com fita larga ou passa-cabos: um tropeço machuca alguém e derruba a transmissão. Ligue o modem, o roteador e o codificador em no-break, todos eles. Os cuidados com energia e com cabos no chão estão no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="audio">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>O áudio da transmissão</h2>
+  <p>O espectador perdoa uma imagem simples, mas não um som ruim: se não entende a fala, ele sai. E o erro mais comum é enviar à internet a mesma mistura das caixas da sala.</p>
+  <p>A mistura da sala é feita para <em>completar</em> o som que já existe ali. A bateria, o amplificador da guitarra e os retornos já soam alto sozinhos, e o operador reforça só o que falta: vozes, violão, teclado. Na transmissão, só chega o que passou pela mesa: voz muito alta, banda magra, bateria distante e nenhum sinal do público. É como ouvir de dentro do carro, com o vidro fechado, uma festa que acontece na calçada.</p>
+
+  <div class="pair">
+    <div class="box">
+      <h4>O que a sala tem, e a transmissão não</h4>
+      <ul>
+        <li>O som direto do palco: bateria, amplificadores, retornos.</li>
+        <li>A acústica da sala e o público cantando e aplaudindo.</li>
+        <li>Caixas grandes, com graves, e volume alto.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>O que a transmissão precisa</h4>
+      <ul>
+        <li>Todos os instrumentos, inclusive os que a sala não reforça, e um pouco de ambiente.</li>
+        <li>Variação de volume menor: no celular, os trechos baixos somem.</li>
+        <li>Fala clara em alto-falante pequeno, em fone e em TV.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Três formas de fazer a mistura</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:24%">Forma</th><th style="width:34%">Como funciona</th><th style="width:20%">Quem opera</th><th>Resultado</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cópia do master</strong></td><td>O computador recebe a mesma mistura das caixas.</td><td>Ninguém.</td><td>O pior. Só serve para evento falado, com um ou dois microfones.</td></tr>
+        <tr><td><strong>Auxiliar ou matriz da mesma mesa</strong></td><td>Uma saída separada, com proporção própria entre os canais, somada aos microfones de ambiente.</td><td>O operador da sala ajusta na passagem e confere no fone.</td><td>Bom, com pouco custo. É o caminho da maioria das igrejas e dos eventos pequenos.</td></tr>
+        <tr><td><strong>Mixagem dedicada</strong></td><td>Outra mesa, ou um computador, recebe todos os canais separados e faz uma mistura independente.</td><td>Um segundo operador, de fone, de preferência em outra sala.</td><td>O melhor. Pede equipamento, pessoa e espaço.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Com um <strong>auxiliar pós-fader</strong>, cada canal vai para a transmissão na proporção definida no envio e continua acompanhando o fader: quando o operador sobe o solo ou fecha um microfone, a transmissão acompanha. É a escolha certa quando ninguém cuida só desse som. Com uma <strong>matriz</strong>, você parte da mistura principal e soma os grupos de instrumentos que faltam e os microfones de ambiente. O auxiliar pré-fader não acompanha nada: só vale com alguém operando essa mistura o tempo todo. O que são auxiliares, grupos e matrizes está no estudo <a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 336" role="img" aria-label="Caminho do áudio na mesa de som. Os canais da mesa, com vozes e instrumentos, seguem para dois destinos. O primeiro é o master LR, a mistura da sala, que alimenta as caixas da sala e completa o som que já existe ali: bateria e palco entram pouco. O segundo é um auxiliar pós-fader ou uma matriz, com a mistura da transmissão, que segue para a interface de áudio, em entrada de linha, e dali para o codificador, com medidor em dBFS. Do codificador sai o fone fechado, para ouvir o que vai ao ar. Os microfones de ambiente, que captam o público e a sala, entram só na mistura da transmissão, nunca nas caixas.">
+        <defs><marker id="lv7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="bx" x="18" y="106" width="140" height="56"/>
+        <text class="b" x="88" y="130" font-size="12" text-anchor="middle">Canais da mesa</text>
+        <text class="mu" x="88" y="147" font-size="10.5" text-anchor="middle">vozes e instrumentos</text>
+        <path class="ln" d="M160 134 H184"/>
+        <path class="ln" d="M184 134 V68 H206" marker-end="url(#lv7)"/>
+        <path class="ln" d="M184 134 V208 H206" marker-end="url(#lv7)"/>
+        <circle class="f-ink" cx="184" cy="134" r="3.5"/>
+
+        <rect class="bx" x="210" y="40" width="140" height="56"/>
+        <text class="b" x="280" y="64" font-size="12" text-anchor="middle">Master LR</text>
+        <text class="mu" x="280" y="81" font-size="10.5" text-anchor="middle">a mistura da sala</text>
+        <line class="ln" x1="352" y1="68" x2="396" y2="68" marker-end="url(#lv7)"/>
+        <rect class="bx" x="400" y="40" width="160" height="56"/>
+        <text class="b" x="480" y="64" font-size="12" text-anchor="middle">Caixas da sala</text>
+        <text class="mu" x="480" y="81" font-size="10.5" text-anchor="middle">PA</text>
+        <text class="mu" x="580" y="64" font-size="11">Completa o som que já existe na sala:</text>
+        <text class="mu" x="580" y="80" font-size="11">bateria e palco entram pouco.</text>
+
+        <rect class="hd-red" x="210" y="180" width="190" height="56"/>
+        <text class="on b" x="305" y="204" font-size="11.5" text-anchor="middle">Auxiliar pós-fader ou matriz</text>
+        <text class="on" x="305" y="221" font-size="10.5" text-anchor="middle">a mistura da transmissão</text>
+        <line class="ln" x1="402" y1="208" x2="446" y2="208" marker-end="url(#lv7)"/>
+        <rect class="bx-red" x="450" y="180" width="150" height="56"/>
+        <text class="b" x="525" y="204" font-size="12" text-anchor="middle">Interface de áudio</text>
+        <text class="mu" x="525" y="221" font-size="10.5" text-anchor="middle">entrada de linha</text>
+        <line class="ln" x1="602" y1="208" x2="646" y2="208" marker-end="url(#lv7)"/>
+        <rect class="bx-red" x="650" y="180" width="150" height="56"/>
+        <text class="b" x="725" y="204" font-size="12" text-anchor="middle">Codificador</text>
+        <text class="mu" x="725" y="221" font-size="10.5" text-anchor="middle">medidor em dBFS</text>
+        <line class="ln" x1="725" y1="238" x2="725" y2="262" marker-end="url(#lv7)"/>
+        <rect class="bx" x="650" y="266" width="150" height="52"/>
+        <text class="b" x="725" y="288" font-size="12" text-anchor="middle">Fone fechado</text>
+        <text class="mu" x="725" y="305" font-size="10.5" text-anchor="middle">ouvir o que vai ao ar</text>
+
+        <rect class="bx-teal" x="18" y="266" width="172" height="52"/>
+        <text class="b" x="104" y="288" font-size="11.5" text-anchor="middle">Microfones de ambiente</text>
+        <text class="mu" x="104" y="305" font-size="10.5" text-anchor="middle">o público e a sala</text>
+        <path class="ln" d="M192 292 H305 V240" marker-end="url(#lv7)"/>
+        <text class="t-teal b" x="318" y="270" font-size="10.5">só para a transmissão,</text>
+        <text class="t-teal b" x="318" y="285" font-size="10.5">nunca para as caixas</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> A mesma mesa entrega duas misturas. A da sala vai para as caixas. A da transmissão sai por um auxiliar pós-fader ou por uma matriz, recebe os microfones de ambiente e vai para o codificador. Quem cuida dela ouve no fone o que sai do codificador.</figcaption>
+  </figure>
+
+  <h3>Como montar a mistura da transmissão</h3>
+  <ol>
+    <li>Faça antes a passagem de som da sala: a mistura da transmissão parte de ganhos e faders acertados.</li>
+    <li>Com fone fechado, abra na saída da transmissão as vozes e a fala.</li>
+    <li>Suba os instrumentos que a sala quase não usa: bateria, baixo, guitarra.</li>
+    <li>Some os microfones de ambiente, aos poucos, até a sala “aparecer” sem embolar a fala.</li>
+    <li>Peça à banda o trecho mais forte e confira o nível no medidor do codificador (módulo 6).</li>
+    <li>Ouça o resultado no alto-falante de um celular. Se a fala está clara ali, está clara em qualquer lugar.</li>
+  </ol>
+  <p>Um compressor suave e um limitador na saída seguram a diferença entre a oração baixa e o louvor forte (veja <a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>). A ordem da passagem está em <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p>
+
+  <h3>Microfones de ambiente</h3>
+  <p>Sem o som da sala, a música termina e há silêncio onde havia aplauso. Um par de condensadores resolve, na frente do palco apontados para o público ou suspensos sobre as primeiras fileiras, longe das caixas e fora da direção delas. A escolha e o padrão polar estão no estudo <a href="../Microfones/treinamento-microfones.html">Microfones</a>.</p>
+  <ul>
+    <li>Os microfones de ambiente vão <strong>só para a transmissão</strong>. Nas caixas da sala, eles causam microfonia e eco.</li>
+    <li>O som leva cerca de 3 milésimos de segundo por metro. No fundo da sala, o microfone ouve as caixas atrasadas em relação aos canais diretos, e a mistura ganha eco. Prefira-o perto do palco e use o ambiente baixo, como tempero, e mais baixo ainda na fala.</li>
+  </ul>
+
+  <h3>Ligar a mesa ao codificador</h3>
+  <p>A saída da mesa é sinal de linha, e a entrada de microfone P2 do computador espera um sinal muito mais fraco: distorce. Use uma <strong>interface de áudio</strong> USB com entradas de linha, a saída USB da própria mesa digital, ou as entradas de áudio do switcher ou do codificador por hardware. Envie os dois lados; se só um cabo chega, marque a fonte como mono no codificador, ou o espectador ouve o som em um lado só do fone. Um zumbido que aparece quando a mesa é ligada ao computador costuma ser laço de terra, tratado no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>.</p>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Não dá para julgar o som da transmissão ouvindo dentro da sala, porque as caixas cobrem o fone. Use fone fechado e, sempre que possível, confira de outro cômodo. Comece com o fone baixo e suba aos poucos: quem tenta vencer o volume da sala no fone se expõe a um nível que fere a audição.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="nivel">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Nível, loudness e sincronismo</h2>
+  <p>Com a mistura pronta, faltam duas conferências: o som precisa chegar ao codificador no nível certo, e precisa chegar junto com a imagem.</p>
+
+  <h3>O nível no medidor do codificador</h3>
+  <p>O medidor do codificador usa a escala dBFS, em que 0 é o teto, explicada no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader: a estrutura de ganho</a>. Na mesa, o sinal fica bem abaixo do teto, porque ainda vai ser somado e processado. Na transmissão, o som já está pronto e pode trabalhar mais alto, desde que os picos nunca encostem em 0.</p>
+  <p>Há duas medidas. O <strong>pico</strong>, em dBFS, mostra o ponto mais alto do sinal, e serve para evitar a distorção. O <strong>loudness</strong>, em LUFS, mede o volume que o ouvido percebe ao longo do tempo, e serve para a transmissão não ficar mais baixa nem mais alta do que os outros vídeos que o espectador assiste. Uma diferença de 1 LUFS equivale a 1 dB.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 262" role="img" aria-label="Duas escalas de medidor, de menos 60 a 0. Em cima, o medidor de pico em dBFS: até menos 20 ficam os silêncios e os trechos baixos; de menos 20 a menos 6, a fala e a música passam a maior parte do tempo; de menos 6 a menos 1 só devem chegar os picos mais fortes; o 0 é o clip. Embaixo, o medidor de loudness em LUFS: o alvo de partida fica entre menos 16 e menos 14 LUFS; abaixo de menos 20, a transmissão está baixa e o espectador precisa aumentar o volume; acima de menos 12, o som está alto demais e espremido.">
+        <text class="b" x="18" y="62" font-size="12">Medidor de pico</text>
+        <text class="mu" x="18" y="78" font-size="10.5">em dBFS</text>
+        <rect class="bx" x="130" y="50" width="720" height="26"/>
+        <rect class="f-good" style="fill-opacity:.4" x="130" y="50" width="480" height="26"/>
+        <rect class="lv-amber" x="610" y="50" width="168" height="26"/>
+        <rect class="lv-red" x="778" y="50" width="72" height="26"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="130" y="94">−60</text><text class="mu" x="250" y="94">−50</text><text class="mu" x="370" y="94">−40</text><text class="mu" x="490" y="94">−30</text>
+          <text class="b" x="610" y="94">−20</text><text class="mu" x="706" y="94">−12</text><text class="b" x="778" y="94">−6</text><text class="b" x="850" y="94">0</text>
+        </g>
+        <g font-size="11" text-anchor="middle">
+          <text class="mu" x="370" y="40">silêncios e trechos baixos</text>
+          <text class="b" x="694" y="40">fala e música</text>
+          <text class="t-red b" x="820" y="40">só picos</text>
+        </g>
+        <text class="t-red b" x="850" y="112" font-size="10.5" text-anchor="middle">clip</text>
+
+        <text class="b" x="18" y="176" font-size="12">Loudness</text>
+        <text class="mu" x="18" y="192" font-size="10.5">em LUFS</text>
+        <rect class="bx" x="130" y="164" width="720" height="26"/>
+        <rect class="lv-slate" x="130" y="164" width="480" height="26"/>
+        <rect class="f-good" style="fill-opacity:.55" x="658" y="164" width="24" height="26"/>
+        <rect class="lv-red" x="706" y="164" width="144" height="26"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="370" y="208">−40</text><text class="mu" x="490" y="208">−30</text><text class="mu" x="610" y="208">−20</text>
+          <text class="b" x="656" y="208">−16</text><text class="b" x="686" y="208">−14</text><text class="mu" x="730" y="208">−10</text><text class="mu" x="850" y="208">0</text>
+        </g>
+        <g font-size="11">
+          <text class="mu" x="370" y="154" text-anchor="middle">baixo: o espectador aumenta o volume</text>
+          <text class="t-red b" x="778" y="154" text-anchor="middle">alto demais, espremido</text>
+          <text class="b" x="670" y="232" text-anchor="middle">alvo de partida: de −16 a −14 LUFS</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> As duas medidas do áudio no codificador. O medidor de pico protege contra a distorção. O medidor de loudness diz se a transmissão está no volume dos outros conteúdos. As faixas são ponto de partida.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:24%">Medida</th><th style="width:30%">Ponto de partida</th><th>Como conferir</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Picos (dBFS)</strong></td><td>Abaixo de −1 dBFS, sempre. Um limitador com teto entre −2 e −1 dBFS garante isso.</td><td>No medidor do codificador, com o trecho mais forte da música e com a fala mais forte.</td></tr>
+        <tr><td><strong>Fala e música no medidor</strong></td><td>A maior parte do tempo entre −20 e −6 dBFS.</td><td>Olhando o medidor por um minuto.</td></tr>
+        <tr><td><strong>Loudness (LUFS)</strong></td><td>Entre −16 e −14 LUFS, medido ao longo de um ou dois minutos de programa.</td><td>Com um medidor de loudness: muitas mesas digitais e programas de transmissão têm um, ou aceitam um como complemento.</td></tr>
+        <tr><td><strong>Fala em relação à música</strong></td><td>Perto do mesmo loudness. A fala não pode cair muito quando a banda para.</td><td>Comparando os dois trechos no fone e no medidor.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>São pontos de partida usados na internet, e não norma (a televisão trabalha mais baixo, perto de −23 LUFS). Algumas plataformas reduzem o volume de vídeos gravados muito altos, mas ao vivo, em geral, ninguém corrige por você: em −28 LUFS, o espectador põe o celular no máximo e ainda acha baixo. Corrija o nível na origem, na saída da transmissão na mesa ou na entrada da interface; se o programa varia demais entre trechos baixos e fortes, o caminho é o compressor, e não mais ganho.</p>
+
+  <h3>Sincronismo entre som e imagem</h3>
+  <p>A câmera, o switcher e a placa de captura atrasam a imagem em um ou dois quadros cada. O áudio, que vem da mesa pela interface, chega quase na hora. Resultado: o som <em>antes</em> da imagem. A maioria das pessoas percebe a partir de 40 a 50 milésimos de segundo (ms) de som adiantado; o som atrasado incomoda menos, porque na vida real o som chega depois da luz. A correção é atrasar o áudio (<em>delay</em>) até encontrar o vídeo: os programas de transmissão têm um campo de atraso por fonte de áudio, em ms, e mesas digitais e switchers também têm atraso de áudio.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 262" role="img" aria-label="Linha do tempo de uma palma, em milissegundos. O áudio, pela mesa e pela interface, chega ao codificador quase na hora. O vídeo passa pela câmera, que atrasa um quadro, pelo switcher, que atrasa um quadro, e pela captura, que atrasa dois quadros: a 30 quadros por segundo, quatro quadros são 133 milissegundos. Para os dois chegarem juntos, acrescenta-se ao áudio um atraso de cerca de 130 milissegundos.">
+        <defs><marker id="lv9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah f-blue" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="b" x="200" y="26" font-size="11" text-anchor="middle">a palma acontece</text>
+        <line class="ref" x1="200" y1="34" x2="200" y2="204"/>
+        <line class="ref" x1="680" y1="34" x2="680" y2="204"/>
+        <text class="b" x="680" y="26" font-size="11" text-anchor="middle">os dois chegam juntos ao codificador</text>
+
+        <text class="b" x="18" y="74" font-size="12">Áudio</text>
+        <text class="mu" x="18" y="90" font-size="10.5">mesa e interface</text>
+        <rect class="hd-blue" x="200" y="60" width="30" height="30"/>
+        <line class="s-blue dash" x1="234" y1="75" x2="676" y2="75" marker-end="url(#lv9)"/>
+        <text class="t-blue b" x="455" y="66" font-size="11" text-anchor="middle">atraso acrescentado ao áudio: cerca de 130 ms</text>
+
+        <text class="b" x="18" y="150" font-size="12">Vídeo</text>
+        <text class="mu" x="18" y="166" font-size="10.5">câmera, switcher, captura</text>
+        <rect class="bx-red" x="200" y="134" width="120" height="34"/>
+        <text x="260" y="155" font-size="11" text-anchor="middle">câmera: 1 quadro</text>
+        <rect class="bx-red" x="320" y="134" width="120" height="34"/>
+        <text x="380" y="155" font-size="11" text-anchor="middle">switcher: 1 quadro</text>
+        <rect class="bx-red" x="440" y="134" width="240" height="34"/>
+        <text x="560" y="155" font-size="11" text-anchor="middle">captura: 2 quadros</text>
+
+        <line class="ln-mu" x1="200" y1="204" x2="800" y2="204"/>
+        <g class="ln-mu" stroke-width="1">
+          <line x1="200" y1="204" x2="200" y2="210"/><line x1="320" y1="204" x2="320" y2="210"/><line x1="440" y1="204" x2="440" y2="210"/>
+          <line x1="560" y1="204" x2="560" y2="210"/><line x1="680" y1="204" x2="680" y2="210"/><line x1="800" y1="204" x2="800" y2="210"/>
+        </g>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="200" y="224">0</text><text class="mu" x="320" y="224">33</text><text class="mu" x="440" y="224">67</text>
+          <text class="mu" x="560" y="224">100</text><text class="b" x="680" y="224">133</text><text class="mu" x="800" y="224">167</text>
+        </g>
+        <text class="mu" x="500" y="246" font-size="11" text-anchor="middle">tempo, em milésimos de segundo (a 30 quadros por segundo, um quadro dura 33 ms)</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> Por que o som chega antes. Cada etapa de vídeo atrasa a imagem em alguns quadros; o áudio quase não atrasa. Os atrasos de cada aparelho são ilustrativos: meça o seu sistema.</figcaption>
+  </figure>
+
+  <h3>O teste da palma</h3>
+  <ol>
+    <li>Com tudo ligado como no evento, grave no codificador alguns segundos de uma pessoa batendo palmas diante da câmera, perto de um microfone aberto.</li>
+    <li>Abra a gravação em um programa que avance quadro a quadro e mostre a onda do áudio.</li>
+    <li>Conte quantos quadros há entre o estalo no áudio e o quadro em que as mãos se tocam.</li>
+    <li>Multiplique pela duração de um quadro: 33 ms a 30 quadros por segundo, 17 ms a 60.</li>
+    <li>Digite o resultado como atraso da fonte de áudio. Grave de novo e confira.</li>
+  </ol>
+  <p>Faça o teste em cada câmera. Se uma atrasa mais, por ser de outro modelo ou passar por conversor, ajuste pela que mostra a fala em primeiro plano. Se o áudio entra embutido no vídeo, pelo switcher, corrija no atraso de áudio do switcher.</p>
+
+  <div class="note">
+    <h4>Valores de referência</h4>
+    <p>Os alvos de pico e de loudness e o limite de percepção do sincronismo são faixas típicas. O atraso de cada aparelho de vídeo varia com o modelo e com o formato: refaça o teste da palma sempre que mudar câmera, conversor ou configuração do switcher.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>O que não foi testado antes falha diante do público. Os horários são ponto de partida, e a planilha calcula a hora de cada conferência a partir do início.</p>
+  <ol class="steps">
+    <li><h4>Na véspera: crie o evento e faça um teste completo</h4><p>Crie o evento na plataforma e copie o endereço e a chave para o codificador. Transmita pelo menos dez minutos em um evento de teste não listado, com imagem, som e gráficos, e assista em outro aparelho.</p></li>
+    <li><h4>Duas horas antes: ligue a rede e meça o upload</h4><p>Codificador no cabo de rede e no no-break. Meça o upload e confira na planilha se o bitrate total cabe na metade do menor valor. Se não cabe, baixe agora, e não no meio do evento.</p></li>
+    <li><h4>Prepare o computador</h4><p>Feche os outros programas. Desligue atualizações automáticas, suspensão, proteção de tela e notificações. Confira o espaço em disco para a gravação.</p></li>
+    <li><h4>Confira a configuração e a chave</h4><p>Resolução, quadros, bitrate, CBR, keyframe de 2 segundos e áudio em 48 kHz iguais aos do teste. A chave é a do evento de hoje? Se a plataforma gera uma por evento, a da véspera não serve mais.</p></li>
+    <li><h4>Uma hora antes: teste o link de reserva</h4><p>Meça o upload do link de reserva e simule a troca. Deixe o roteiro de contingência impresso ao lado do operador.</p></li>
+    <li><h4>Acerte o áudio com a passagem de som</h4><p>Monte a mistura da transmissão no fone, some o ambiente e confira o nível no medidor do codificador com o trecho mais forte: picos abaixo de −1 dBFS, som nos dois lados. Meça o loudness, se houver medidor.</p></li>
+    <li><h4>Confira o sincronismo</h4><p>Faça o teste da palma, ou confira o atraso anotado se nada mudou no sistema de vídeo desde o último evento.</p></li>
+    <li><h4>Meia hora antes: passe as cenas e os gráficos</h4><p>Espera, programa, legendas, letras, problema técnico, encerramento. Confira a grafia dos nomes.</p></li>
+    <li><h4>Quinze minutos antes: entre no ar na tela de espera</h4><p>Inicie a gravação local e a transmissão. Abra a transmissão em um celular com dados móveis, fora da rede do evento, com fone, e confira imagem, som e sincronismo.</p></li>
+    <li><h4>Durante: acompanhe, e não mexa na configuração</h4><p>Uma pessoa olha os indicadores e o retorno no celular. Resolução, bitrate e codec não se mudam no ar: na maioria dos codificadores, isso exige parar e recomeçar.</p></li>
+    <li><h4>No fim: encerre na ordem</h4><p>Cena de encerramento por um minuto. Pare a transmissão no codificador, depois encerre o evento na plataforma, e então pare a gravação. Anote as quedas e o que ajustar para a próxima vez.</p></li>
+  </ol>
+
+  <h3>O que acompanhar durante a transmissão</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:25%">Indicador</th><th style="width:19%">Onde aparece</th><th style="width:22%">Leitura boa</th><th>Se sair dela</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Quadros perdidos por rede</strong></td><td>Codificador</td><td>Zero, ou muito perto de zero.</td><td>A rede não está dando conta. Passe ao link de reserva ou baixe o bitrate.</td></tr>
+        <tr><td><strong>Quadros perdidos na codificação</strong></td><td>Codificador</td><td>Zero.</td><td>O computador não está dando conta. Feche programas; na próxima pausa, reduza quadros ou resolução.</td></tr>
+        <tr><td><strong>Uso do processador</strong></td><td>Codificador</td><td>Como regra prática, abaixo de 70%.</td><td>Alivie antes que os quadros comecem a cair.</td></tr>
+        <tr><td><strong>Integridade do sinal</strong></td><td>Painel do evento, na plataforma</td><td>Boa ou excelente, sem avisos.</td><td>Leia o aviso: ele costuma dizer o que está fora, como bitrate baixo ou keyframe errado.</td></tr>
+        <tr><td><strong>Medidor de áudio</strong></td><td>Codificador</td><td>Em movimento, com picos abaixo de −1 dBFS.</td><td>Parado: sem áudio. No topo: distorção. Siga o sinal desde a mesa.</td></tr>
+        <tr><td><strong>Retorno</strong></td><td>Celular com dados móveis e fone</td><td>Imagem fluida, som claro nos dois lados, boca e voz juntas.</td><td>É a única conferência que mostra o que o espectador recebe.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Os nomes mudam de um programa para outro. Quadros perdidos <em>por rede</em> apontam para a internet; <em>na codificação</em>, para o computador. O retorno chega atrasado: serve para conferir a qualidade, e não para dar deixas.</p>
+
+  <h3>Roteiro de contingência</h3>
+  <p>Quando algo falha, a pressa leva a mexer em tudo ao mesmo tempo. O roteiro põe as perguntas em ordem.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 246" role="img" aria-label="Roteiro de quatro perguntas, da esquerda para a direita, para quando a transmissão falha. Quadros perdidos por rede, ou desconectou? Sim: rede; passe ao link de reserva ou baixe o bitrate. Não: quadros perdidos na codificação, ou processador no limite? Sim: codificador; feche outros programas e, na pausa, alivie o ajuste. Não: indicadores bons, mas retorno com som ruim ou sem som? Sim: áudio; olhe o medidor e o mute e siga o sinal desde a mesa. Não: tudo certo no local, e só alguns espectadores reclamam? Sim: lado do espectador; avise no chat e siga.">
+        <defs><marker id="lv10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="22" font-size="10.5">COMECE PELA ESQUERDA</text>
+
+        <rect class="bx" x="18" y="34" width="192" height="84"/>
+        <text x="30" y="60" font-size="11.5">O codificador mostra</text>
+        <text x="30" y="77" font-size="11.5">quadros perdidos por rede,</text>
+        <text x="30" y="94" font-size="11.5">ou desconectou?</text>
+        <line class="ln" x1="212" y1="76" x2="234" y2="76" marker-end="url(#lv10)"/>
+        <text class="mu" x="224" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="114" y1="120" x2="114" y2="146" marker-end="url(#lv10)"/>
+        <text class="mu" x="122" y="137" font-size="10.5">sim</text>
+        <rect class="bx-red" x="18" y="150" width="192" height="78"/>
+        <text class="b" x="30" y="174" font-size="12">Rede.</text>
+        <text x="30" y="192" font-size="11.5">Passe ao link de reserva.</text>
+        <text x="30" y="209" font-size="11.5">Sem ele, baixe o bitrate.</text>
+
+        <rect class="bx" x="238" y="34" width="192" height="84"/>
+        <text x="250" y="60" font-size="11.5">Mostra quadros perdidos</text>
+        <text x="250" y="77" font-size="11.5">na codificação, ou o</text>
+        <text x="250" y="94" font-size="11.5">processador no limite?</text>
+        <line class="ln" x1="432" y1="76" x2="454" y2="76" marker-end="url(#lv10)"/>
+        <text class="mu" x="444" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="334" y1="120" x2="334" y2="146" marker-end="url(#lv10)"/>
+        <text class="mu" x="342" y="137" font-size="10.5">sim</text>
+        <rect class="bx-amber" x="238" y="150" width="192" height="78"/>
+        <text class="b" x="250" y="174" font-size="12">Codificador.</text>
+        <text x="250" y="192" font-size="11.5">Feche outros programas.</text>
+        <text x="250" y="209" font-size="11.5">Na pausa, alivie o ajuste.</text>
+
+        <rect class="bx" x="458" y="34" width="192" height="84"/>
+        <text x="470" y="60" font-size="11.5">Os indicadores estão bons,</text>
+        <text x="470" y="77" font-size="11.5">mas o retorno tem som</text>
+        <text x="470" y="94" font-size="11.5">ruim ou nenhum som?</text>
+        <line class="ln" x1="652" y1="76" x2="674" y2="76" marker-end="url(#lv10)"/>
+        <text class="mu" x="664" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="554" y1="120" x2="554" y2="146" marker-end="url(#lv10)"/>
+        <text class="mu" x="562" y="137" font-size="10.5">sim</text>
+        <rect class="bx-teal" x="458" y="150" width="192" height="78"/>
+        <text class="b" x="470" y="174" font-size="12">Áudio.</text>
+        <text x="470" y="192" font-size="11.5">Olhe o medidor e o mute.</text>
+        <text x="470" y="209" font-size="11.5">Siga o sinal desde a mesa.</text>
+
+        <rect class="bx" x="678" y="34" width="192" height="84"/>
+        <text x="690" y="60" font-size="11.5">Tudo certo no local, e só</text>
+        <text x="690" y="77" font-size="11.5">alguns espectadores</text>
+        <text x="690" y="94" font-size="11.5">reclamam?</text>
+        <line class="ln" x1="774" y1="120" x2="774" y2="146" marker-end="url(#lv10)"/>
+        <text class="mu" x="782" y="137" font-size="10.5">sim</text>
+        <rect class="bx-slate" x="678" y="150" width="192" height="78"/>
+        <text class="b" x="690" y="174" font-size="12">Lado do espectador.</text>
+        <text x="690" y="192" font-size="11.5">Internet ou aparelho dele.</text>
+        <text x="690" y="209" font-size="11.5">Avise no chat e siga.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> Onde está a falha. Os indicadores do codificador separam o problema de rede do problema de computador. Se todos os espectadores reclamam ao mesmo tempo, o problema é seu; se são poucos, é deles.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:24%">O que aconteceu</th><th style="width:40%">Primeira ação</th><th>Se não voltar</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A internet principal caiu</strong></td><td>Passe ao link de reserva, com o perfil reduzido. Com a mesma chave, em geral o evento continua na mesma página.</td><td>Siga gravando no disco, avise nos comentários e publique a gravação depois.</td></tr>
+        <tr><td><strong>O programa travou, ou o computador reiniciou</strong></td><td>Reabra o programa e transmita de novo. A gravação recomeça em outro arquivo.</td><td>Use o codificador de reserva, se houver, já com a chave configurada.</td></tr>
+        <tr><td><strong>A transmissão está sem som</strong></td><td>Medidor parado? Confira o mute e o dispositivo escolhido; depois, a interface, o cabo e a saída da mesa.</td><td>Use o áudio de uma câmera até resolver.</td></tr>
+        <tr><td><strong>Faltou energia</strong></td><td>O no-break segura a rede e o codificador por alguns minutos. Ponha a cena de problema técnico.</td><td>Encerre com um aviso antes que ele acabe.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A gravação local é o seguro da transmissão: se tudo o mais falhar, o evento ainda pode ser publicado depois. O método geral para achar uma falha, dividindo a cadeia ao meio, está no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns, com cenários e números ilustrativos. O primeiro está preenchido na planilha.</p>
+
+  <h3>Exemplo 1. A transmissão que travava com a igreja cheia</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, codificador por software, um único acesso à internet, com Wi-Fi aberto aos visitantes.</dd></div>
+    <div><dt>Sintoma</dt><dd>No teste de quinta-feira, imagem perfeita. No domingo, a transmissão trava a cada poucos segundos, e o codificador acusa quadros perdidos por rede.</dd></div>
+    <div><dt>Causa</dt><dd>Bitrate escolhido “para ficar bonito”, 1080p a 60 quadros com 9.000 kbps, sem medir o upload no horário do culto.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Três medições de upload, formato reduzido para caber no menor valor e, depois, Wi-Fi dos visitantes em outra rede.</dd></div>
+    <div><dt>Resultado</dt><dd>Nenhum quadro perdido no domingo seguinte. Com a rede separada, o formato pôde subir para 1080p a 30 quadros.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:34%">Medição de upload, por cabo</th><th class="n" style="width:14%">Upload</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Quinta-feira, 20 h, sala vazia</td><td class="num n">12,4 Mbps</td><td>O teste da quinta foi feito nesta condição.</td></tr>
+        <tr><td>Domingo, 18 h, antes do culto</td><td class="num n">9,8 Mbps</td><td>A equipe já estava usando a rede.</td></tr>
+        <tr><td>Domingo, 19 h 30, sala cheia</td><td class="num n">8,2 Mbps</td><td>Visitantes no Wi-Fi da mesma rede. <strong>É o valor que vale.</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:34%">Configuração</th><th class="n" style="width:14%">Total</th><th class="n" style="width:16%">Uso do upload</th><th style="width:14%">Situação</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr><td>1080p a 60 quadros, vídeo a 9.000 kbps</td><td class="num n">9.160 kbps</td><td class="num n">112%</td><td class="red">Insuficiente</td><td>O envio é maior que o upload de 8,2 Mbps. Trava sempre.</td></tr>
+        <tr><td>720p a 30 quadros, vídeo a 3.500 kbps</td><td class="num n">3.660 kbps</td><td class="num n">45%</td><td class="teal">OK</td><td>Cabe na metade do upload, que é 4.100 kbps.</td></tr>
+        <tr><td>1080p a 30 quadros, vídeo a 4.500 kbps, com 11,5 Mbps</td><td class="num n">4.660 kbps</td><td class="num n">41%</td><td class="teal">OK</td><td>Depois de separar a rede dos visitantes.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> O áudio, a 160 kbps, entra na conta. Com 8,2 Mbps, o limite do total é 4.100 kbps, e sobram 3.940 kbps para o vídeo: menos do que o começo da faixa de 1080p a 30 quadros. Por isso a escolha foi 720p com folga. A diferença de um terço entre as medições já avisava que havia mais gente usando aquele upload. O link de reserva, um modem 4G com 6 Mbps, comporta 720p a 30 quadros com 2.500 kbps de vídeo, 44% dele.</p>
+
+  <h3>Exemplo 2. Voz alta, banda distante e som estourado</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, mesa digital, banda com bateria acústica. O computador da transmissão recebe uma cópia do master pela entrada de microfone.</dd></div>
+    <div><dt>Sintoma</dt><dd>Quem assiste em casa ouve a voz muito alta e distorcida nos trechos fortes, quase nenhuma bateria, e silêncio total entre as músicas.</dd></div>
+    <div><dt>Causa</dt><dd>Mistura feita para a sala, onde a bateria soa sozinha. Sinal de linha em entrada de microfone. Nenhum microfone de ambiente.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Auxiliar pós-fader estéreo na entrada de linha de uma interface de áudio, com bateria, baixo e guitarra reforçados. Dois microfones de ambiente só para a transmissão. Compressor e limitador na saída.</dd></div>
+    <div><dt>Resultado</dt><dd>Loudness de −15 LUFS em dois minutos de louvor, picos em −1,5 dBFS. A banda apareceu inteira, e os aplausos voltaram.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> Dois problemas com o mesmo sintoma de “som ruim”: a distorção vinha da ligação, nível de linha em entrada de microfone; o desequilíbrio vinha da mistura. O auxiliar pós-fader manteve a transmissão acompanhando o operador da sala, que continuou sozinho na mesa.</p>
+
+  <h3>Exemplo 3. A boca atrasada na formatura</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Auditório de escola, duas câmeras por HDMI em um switcher, placa de captura, programa de transmissão a 30 quadros. O áudio vem da mesa por uma interface USB.</dd></div>
+    <div><dt>Sintoma</dt><dd>Nos comentários, espectadores dizem que a voz chega antes de a boca do orador se mexer.</dd></div>
+    <div><dt>Causa</dt><dd>O vídeo passa pela câmera, pelo switcher e pela captura. O áudio vai direto ao computador e chega antes.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Teste da palma gravado no codificador. O estalo apareceu 4 quadros antes de as mãos se tocarem: 4 × 33 ms = 133 ms. Atraso de 130 ms aplicado à fonte de áudio.</dd></div>
+    <div><dt>Resultado</dt><dd>Novo teste: som e imagem no mesmo quadro. O valor foi anotado na ficha de configuração.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> O atraso não aparece para quem está na sala nem no monitor do switcher, que mostra a imagem antes da captura. Só aparece na gravação do codificador e no retorno. O valor vale para aquele conjunto de equipamentos naquele formato: trocar a câmera, o conversor ou a taxa de quadros pede um teste novo.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Escolher o bitrate sem medir o upload</h4><p>O operador copia a configuração de um vídeo da internet. Funciona no teste, com a sala vazia, e trava no evento.</p><p class="fix"><b>Correção:</b> meça o upload no local e no horário, fique com o menor valor e use até cerca de metade dele.</p></div>
+    <div><h4>Transmitir por Wi-Fi</h4><p>O computador da transmissão usa a mesma rede sem fio que os celulares do público.</p><p class="fix"><b>Correção:</b> cabo de rede até o roteador, e a rede dos visitantes separada ou limitada.</p></div>
+    <div><h4>Mandar o som da sala para a internet</h4><p>A transmissão recebe a cópia do master: voz alta, banda magra, nenhum ambiente.</p><p class="fix"><b>Correção:</b> mistura própria em auxiliar pós-fader, matriz ou mesa dedicada, com microfones de ambiente.</p></div>
+    <div><h4>Julgar o som da transmissão de dentro da sala</h4><p>O operador ouve o fone com as caixas tocando ao lado e acha que está bom.</p><p class="fix"><b>Correção:</b> fone fechado, conferência em outro cômodo e no alto-falante de um celular.</p></div>
+    <div><h4>Usar a chave errada</h4><p>O codificador transmite com a chave do teste ou do evento passado. O sinal sai, e a página do evento de hoje fica em “aguardando”.</p><p class="fix"><b>Correção:</b> confira a chave e o evento antes de entrar no ar, e veja a página pública no celular.</p></div>
+    <div><h4>Preferir 1080p a 60 quadros a qualquer custo</h4><p>Formato alto com bitrate baixo: a imagem se desfaz em blocos a cada movimento, ou o processador não dá conta.</p><p class="fix"><b>Correção:</b> primeiro o bitrate que cabe na rede, depois o formato que fica bem com ele. 720p limpo vence 1080p quebrado.</p></div>
+    <div><h4>Não ter retorno</h4><p>A equipe confia no “ao vivo” do codificador. O som saiu em um lado só durante o evento inteiro, e ninguém soube.</p><p class="fix"><b>Correção:</b> uma pessoa assiste em um celular com dados móveis e fone, do começo ao fim.</p></div>
+    <div><h4>Não gravar no disco</h4><p>A internet cai por dez minutos, e esse trecho do evento se perde para sempre.</p><p class="fix"><b>Correção:</b> gravação local em todo evento, iniciada antes da transmissão.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>A transmissão é o fim da cadeia: recebe a imagem e o som que os outros estudos ensinam a produzir, e devolve a gravação, o melhor material para a equipe rever o próprio trabalho.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>: formato, HDMI, SDI e placa de captura.</li>
+        <li><a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>: a saída de programa e as legendas.</li>
+        <li><a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>: auxiliares e matrizes.</li>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader: a estrutura de ganho</a>: a escala dBFS, a folga e o clip.</li>
+        <li><a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>: o compressor e o limitador da saída da transmissão.</li>
+        <li><a href="../Microfones/treinamento-microfones.html">Microfones</a>: a escolha e a posição dos microfones de ambiente.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: a mistura da sala, que vem antes.</li>
+        <li><a href="../Exposicao/treinamento-exposicao.html">Exposição</a> e <a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>: imagem com ruído pesa mais para o codificador.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>: os horários no roteiro técnico, a energia e as ocorrências.</li>
+        <li><a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>: vídeos e letras que vão ao ar, com direitos conferidos.</li>
+        <li><a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Microfones sem fio</a>: o Wi-Fi da transmissão e os sistemas em 2,4 GHz dividem a mesma faixa.</li>
+        <li><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>: nível de linha e laço de terra.</li>
+        <li><a href="../Enquadramento-e-Movimento/treinamento-enquadramento-e-movimento.html">Enquadramento e movimento de câmera</a>: a gravação da transmissão mostra o quadro como o espectador o viu.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Os itens estão na ordem do tempo, da véspera até a transmissão no ar. As marcações ficam salvas neste navegador. Na planilha, o mesmo checklist calcula a hora de cada conferência.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>O evento está criado na plataforma, com título, data e visibilidade certos, e a chave no codificador é a desse evento.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>Um teste não listado, de pelo menos dez minutos, foi transmitido e assistido em outro aparelho.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>O upload foi medido no local, por cabo, e o bitrate total usa até cerca de metade do menor valor medido.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>O codificador está no cabo de rede e na tomada, com atualizações, suspensão e notificações desligadas.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>Resolução, quadros, bitrate, CBR e keyframe de 2 segundos conferem com a ficha de configuração.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>O link de reserva foi testado, e o roteiro de contingência está à vista do operador.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>O áudio vem de uma mistura própria (auxiliar, matriz ou mesa dedicada), com microfones de ambiente.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>Com a banda e com a fala, os picos ficam abaixo de −1 dBFS no medidor do codificador, e há som nos dois lados.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>O sincronismo entre som e imagem foi conferido com o teste da palma.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>As cenas e os gráficos foram conferidos: espera, programa, legendas, problema técnico e encerramento.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>A gravação local está rodando, e a transmissão entrou no ar na tela de espera.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>Uma pessoa acompanha o retorno em um celular com dados móveis e fone, olha os indicadores e registra as quedas.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Em que etapa está o problema?</h3>
+  <p>Cada frase descreve um sintoma. Escolha a etapa em que você procuraria primeiro: <strong>R</strong>, rede; <strong>C</strong>, codificador ou computador; <strong>A</strong>, áudio e sincronismo; <strong>P</strong>, plataforma.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"R": "Rede", "C": "Codificador ou computador", "A": "Áudio e sincronismo", "P": "Plataforma"},
+ "itens": [
+  {"t": "O contador de quadros perdidos por rede sobe sem parar, e o bitrate enviado oscila muito abaixo do configurado.", "a": "R", "w": "O upload não está dando conta do envio. Passe ao link de reserva ou baixe o bitrate."},
+  {"t": "O processador está em 95%, e o programa acusa quadros perdidos na codificação.", "a": "C", "w": "O computador não consegue comprimir a tempo. Feche programas e alivie o formato na próxima pausa."},
+  {"t": "Quem assiste em casa ouve a voz muito alta e quase não ouve a bateria, que na sala está forte.", "a": "A", "w": "A transmissão está recebendo a mistura da sala. Ela precisa de uma mistura própria."},
+  {"t": "O codificador mostra que está transmitindo, mas a página do evento de hoje continua em “aguardando”.", "a": "P", "w": "O sinal está indo para outra chave ou outro evento. Confira a chave e o evento na plataforma."},
+  {"t": "Os espectadores com fone dizem que o som sai só do lado esquerdo.", "a": "A", "w": "Um sinal mono está entrando em um lado de uma fonte estéreo. Envie os dois lados ou marque a fonte como mono."},
+  {"t": "No teste de quinta, com a sala vazia, a transmissão ficou perfeita. No domingo, com o público no Wi-Fi do local, ela trava.", "a": "R", "w": "O público está dividindo o upload com a transmissão. Meça com a sala cheia e separe as redes."},
+  {"t": "A imagem se desfaz em blocos quando a câmera se move. Não há quadros perdidos. O formato é 1080p a 60 quadros, com 2.500 kbps.", "a": "C", "w": "É configuração do codificador: bitrate baixo demais para o formato. Reduza o formato para um que fique bem com esse bitrate."},
+  {"t": "Depois do evento, a gravação na página aparece sem som em um trecho, com um aviso sobre a música tocada.", "a": "P", "w": "A plataforma identificou a música e aplicou a regra de direitos autorais. Veja o aviso e as licenças."},
+  {"t": "A voz do orador chega antes de a boca dele se mexer.", "a": "A", "w": "O vídeo atrasa mais do que o áudio. Meça com o teste da palma e acrescente atraso ao áudio."},
+  {"t": "No meio da transmissão aparece na tela uma janela de atualização, e a imagem congela.", "a": "C", "w": "O computador não foi preparado. Desligue atualizações, suspensão e notificações antes do evento."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: uma transmissão de teste completa</h3>
+  <p>Codificador, câmera, uma fonte de áudio, celular com dados móveis e fone, e a planilha. Use um evento de teste não listado.</p>
+  <ol>
+    <li>Meça o upload três vezes, por cabo, e anote na aba “Bitrate e upload”. Meça também por Wi-Fi e compare.</li>
+    <li>Preencha a configuração pretendida, ajuste o bitrate até a situação ficar OK, configure o codificador e preencha a aba “Configuração”.</li>
+    <li>Transmita por dez minutos. Anote os quadros perdidos e o uso do processador no início e no fim.</li>
+    <li>Assista no celular. Meça com um relógio o atraso entre um gesto diante da câmera e a chegada dele à tela.</li>
+    <li>Faça o teste da palma, conte os quadros e anote na aba “Configuração”. Aplique o atraso calculado e repita.</li>
+    <li>Tire o cabo de rede por vinte segundos e recoloque. Veja o que o codificador mostra, quanto leva para reconectar e o que o espectador vê. Anote na aba “Quedas”.</li>
+    <li>Encerre e ouça a gravação do teste no alto-falante do celular.</li>
+  </ol>
+  <p>Depois, repita o passo 3 com o dobro do bitrate indicado e compare os indicadores: é como reconhecer, sem público, uma transmissão que não cabe na rede.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Transmissao-ao-Vivo-modelo.xlsx">Transmissao-ao-Vivo-modelo.xlsx</a>, na mesma pasta. As células em amarelo-claro são para preenchimento; as cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Bitrate e upload</strong></td><td>Até cinco medições de upload, a configuração pretendida e o link de reserva.</td><td>Menor upload, bitrate total, uso do upload, situação da rede (OK, Apertado ou Insuficiente), bitrate máximo de vídeo, consumo de dados e quais formatos cabem.</td></tr>
+        <tr><td><strong>Configuração</strong></td><td>A ficha da transmissão: plataforma, vídeo, áudio, rede e segurança, em 26 itens.</td><td>Situação de cada item conferível, o atraso de sincronismo a partir dos quadros contados no teste da palma, e o total de pendências.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>A hora limite de cada item, a partir do horário de início, e o percentual atendido.</td></tr>
+        <tr><td><strong>Quedas</strong></td><td>Registro das falhas durante a transmissão: horário, o que aconteceu, causa e o que foi feito.</td><td>Duração de cada queda, tempo total com problema, percentual da transmissão e a causa mais frequente.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Faixas de bitrate por formato, ajustes do codificador, áudio e tabela de sintomas.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Exemplo - Bitrate</strong></td><td>As medições e a configuração do exemplo 1, antes da correção, e o que foi ajustado.</td><td>Os mesmos resultados da aba Bitrate e upload.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A fração do upload que a transmissão pode usar começa em 50% e fica em uma célula da aba “Bitrate e upload”, junto com a tabela de faixas por formato, que pode ser trocada pela da sua plataforma. A planilha não tem campo para a chave de transmissão, de propósito: a chave é uma senha.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Bitrate</dt><dd>Quantidade de dados que o codificador envia por segundo, em kbps ou Mbps. Define o peso e a qualidade da transmissão.</dd></div>
+    <div><dt>CBR</dt><dd>Taxa constante de bits. O codificador mantém o bitrate fixo, o que dá à rede um fluxo previsível.</dd></div>
+    <div><dt>Cena</dt><dd>Arranjo pronto de fontes de imagem e de som no programa de transmissão, trocado com um clique.</dd></div>
+    <div><dt>Chave de transmissão</dt><dd>Código que identifica o canal ou o evento na plataforma. Funciona como senha e não deve ser divulgado.</dd></div>
+    <div><dt>Codec</dt><dd>Método de compressão do vídeo ou do áudio. H.264 para o vídeo e AAC para o áudio são os mais aceitos.</dd></div>
+    <div><dt>Codificador (encoder)</dt><dd>Programa ou aparelho que comprime a imagem e o som e os envia à plataforma.</dd></div>
+    <div><dt>Keyframe (quadro-chave)</dt><dd>Quadro enviado com a imagem inteira. Os quadros entre dois keyframes levam só o que mudou.</dd></div>
+    <div><dt>Latência</dt><dd>Atraso entre o que acontece na sala e o que o espectador vê. Vai de alguns segundos a cerca de meio minuto.</dd></div>
+    <div><dt>Link de reserva</dt><dd>Segundo acesso à internet, de outro provedor ou de outra tecnologia, usado quando o principal cai.</dd></div>
+    <div><dt>Loudness (LUFS)</dt><dd>Medida do volume percebido ao longo do tempo. Serve para igualar a transmissão a outros conteúdos.</dd></div>
+    <div><dt>Mbps e kbps</dt><dd>Megabits e quilobits por segundo. 1 Mbps são 1.000 kbps. Não confundir com megabytes por segundo (MB/s).</dd></div>
+    <div><dt>Microfone de ambiente</dt><dd>Microfone que capta o público e a sala, usado só na mistura da transmissão.</dd></div>
+    <div><dt>Quadros perdidos</dt><dd>Quadros que o codificador não conseguiu enviar (rede) ou não conseguiu produzir a tempo (computador).</dd></div>
+    <div><dt>RTMP</dt><dd>Protocolo mais comum para enviar a transmissão do codificador à plataforma. RTMPS é a versão com criptografia.</dd></div>
+    <div><dt>Sincronismo</dt><dd>Chegada do som e da imagem ao mesmo tempo. Corrige-se com atraso no áudio, medido pelo teste da palma.</dd></div>
+    <div><dt>Upload</dt><dd>Velocidade com que os dados saem do local para a internet. É o que limita o bitrate da transmissão.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>

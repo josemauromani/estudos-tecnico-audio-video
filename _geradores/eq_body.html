@@ -1,0 +1,1016 @@
+<div class="page" lang="pt-BR" data-estudo="eq">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="purple">E</span><span class="blue">Q</span></div>
+  <h1>Equalização</h1>
+  <p class="lead">Um guia de estudo para ouvir o que sobra e o que falta em cada som, escolher o filtro certo e equalizar cada canal, o sistema e os retornos, com o passa-altas, poucos cortes e menos realces ainda.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O que o equalizador faz</a></li>
+    <li><a href="#faixas">As faixas e como soam</a></li>
+    <li><a href="#filtros">Filtros, frequência, ganho e Q</a></li>
+    <li><a href="#cortar">Cortar antes de realçar</a></li>
+    <li><a href="#fontes">Ponto de partida por fonte</a></li>
+    <li><a href="#sistema">Canal, sistema e retorno</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O que o equalizador faz</h2>
+  <p>O fader sobe ou desce o canal inteiro: o grave, o médio e o agudo andam juntos. O equalizador, ou EQ, faz o mesmo trabalho por partes. Ele é um conjunto de controles de volume, cada um para uma região do som, do grave ao agudo. Com ele você baixa só o grave que embola uma voz, ou sobe só a região que dá clareza às palavras, sem mexer no resto.</p>
+  <p>Todo EQ se lê no mesmo desenho: uma curva sobre uma linha de 0 dB. Onde a curva fica sobre a linha, o som passa como chegou. Onde ela sobe, o EQ <strong>realça</strong> aquela região. Onde ela desce, o EQ <strong>corta</strong>. A mesa digital mostra essa curva na tela. Na mesa analógica a curva não aparece, mas é ela que os botões desenham.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Gráfico de uma curva de equalização de voz falada. O eixo horizontal é a frequência, de 20 Hz, no grave, a 20 kHz, no agudo. O eixo vertical é o ganho, de menos 18 a mais 12 dB, com a linha de 0 dB no meio: acima dela o equalizador realça, abaixo dela ele corta. A curva mostra três ajustes. O passa-altas, em 100 Hz, derruba tudo o que fica abaixo da voz e tira o ronco. Um corte de 4 dB em 300 Hz tira o som embolado. Um realce suave de 3 dB em 3 kHz dá clareza às consoantes. No resto da faixa, a curva fica sobre a linha de 0 dB: o som passa sem mudança.">
+        <text class="mono mu" x="18" y="26" font-size="10.5">UM EQ DE VOZ FALADA, COMO EXEMPLO</text>
+        <rect class="bx" x="70" y="46" width="800" height="190"/>
+        <path class="grid" d="M70 46V236 M176.1 46V236 M256.4 46V236 M336.7 46V236 M442.8 46V236 M523.1 46V236 M603.3 46V236 M709.5 46V236 M789.7 46V236 M870 46V236"/>
+        <g font-size="10.5" text-anchor="middle"><text class="mu" x="70" y="252">20</text><text class="mu" x="176.1" y="252">50</text><text class="mu" x="256.4" y="252">100</text><text class="mu" x="336.7" y="252">200</text><text class="mu" x="442.8" y="252">500</text><text class="mu" x="523.1" y="252">1 k</text><text class="mu" x="603.3" y="252">2 k</text><text class="mu" x="709.5" y="252">5 k</text><text class="mu" x="789.7" y="252">10 k</text><text class="mu" x="870" y="252">20 k</text></g>
+        <path class="grid" d="M70 84H870 M70 160H870 M70 198H870"/>
+        <line class="ln-mu" stroke-width="1" x1="70" y1="122" x2="870" y2="122"/>
+        <g font-size="10.5" text-anchor="end"><text class="mu" x="62" y="88">+6</text><text class="b" x="62" y="126">0 dB</text><text class="mu" x="62" y="164">−6</text><text class="mu" x="62" y="202">−12</text></g>
+        <path class="lv-purple" d="M70 122 L70 236 L136 236 L138 235.1 L168 207.6 L192 186.5 L212 170.3 L228 158.7 L244 148.9 L260 141.3 L274 136.4 L290 133 L300 131.9 L310 131.5 L320 131.9 L328 132.8 L338 134.6 L346 136.7 L374 146.3 L380 147.3 L386 147.4 L396 145.2 L418 136.5 L428 133.1 L440 130 L452 127.7 L480 124.3 L542 119.6 L570 116.7 L596 112.6 L632 104.9 L640 103.8 L648 103.2 L656 103.3 L664 104.1 L712 113.6 L728 115.9 L746 117.7 L768 119.2 L796 120.3 L870 121.6 L870 122 Z"/>
+        <path class="s-purple" stroke-width="2.5" d="M70 236 L136 236 L138 235.1 L168 207.6 L192 186.5 L212 170.3 L228 158.7 L244 148.9 L260 141.3 L274 136.4 L290 133 L300 131.9 L310 131.5 L320 131.9 L328 132.8 L338 134.6 L346 136.7 L374 146.3 L380 147.3 L386 147.4 L396 145.2 L418 136.5 L428 133.1 L440 130 L452 127.7 L480 124.3 L542 119.6 L570 116.7 L596 112.6 L632 104.9 L640 103.8 L648 103.2 L656 103.3 L664 104.1 L712 113.6 L728 115.9 L746 117.7 L768 119.2 L796 120.3 L870 121.6"/>
+        <text class="t-purple b" x="78.4" y="67.5" font-size="12">Passa-altas em 100 Hz</text>
+        <text class="mu" x="78.4" y="82.5" font-size="11">tira o ronco que fica abaixo da voz</text>
+        <text class="t-purple b" x="394.7" y="175.8" font-size="12" text-anchor="middle">Corte em 300 Hz</text>
+        <text class="mu" x="394.7" y="190.8" font-size="11" text-anchor="middle">tira o som embolado</text>
+        <text class="t-purple b" x="650.3" y="67.5" font-size="12" text-anchor="middle">Realce suave em 3 kHz</text>
+        <text class="mu" x="650.3" y="82.5" font-size="11" text-anchor="middle">dá clareza às consoantes</text>
+        <text class="mu" x="836.7" y="207.5" font-size="11" text-anchor="end">acima de 0 dB, realça; abaixo, corta</text>
+        <text class="mu" x="70" y="278" font-size="11">grave</text>
+        <text class="mu" x="470.0" y="278" font-size="11" text-anchor="middle">frequência, em Hz</text>
+        <text class="mu" x="870" y="278" font-size="11" text-anchor="end">agudo</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> A curva de um equalizador. Com três ajustes, a voz perde o ronco e o som embolado e ganha clareza. Os valores são um exemplo: cada voz e cada microfone pedem os seus.</figcaption>
+  </figure>
+
+  <p>Na mesa ao vivo, o EQ serve para três coisas: <strong>limpar</strong> cada canal do que não é da fonte (ronco de palco, vento, batida de mão); <strong>corrigir</strong> o timbre, tirando o que sobra e, com cuidado, repondo o que falta; e <strong>encaixar</strong> cada fonte na mistura, para uma não cobrir a outra.</p>
+
+  <div class="pair">
+    <div class="box">
+      <h4>O que o EQ consegue</h4>
+      <ul>
+        <li>Mudar o equilíbrio entre graves, médios e agudos de um sinal que chegou limpo.</li>
+        <li>Tirar uma sobra em uma região definida, como o som embolado de uma voz.</li>
+        <li>Reduzir, na saída do retorno, as frequências que apitam primeiro.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>O que o EQ não consegue</h4>
+      <ul>
+        <li>Criar o que o microfone não captou. Realçar uma região vazia só sobe ruído.</li>
+        <li>Consertar microfone longe ou mal apontado, tirar distorção ou separar a voz do som de sala.</li>
+        <li>Substituir o fader. Se a voz está baixa, o controle é o de volume.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Por isso o EQ vem depois de três acertos: a fonte soando bem, o microfone certo no lugar certo e o ganho ajustado. O microfone e a posição estão no estudo <a href="../Microfones/treinamento-microfones.html">Microfones</a>, e o ganho, no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>. O lugar do EQ no canal da mesa está no estudo <a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>.</p>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>Primeiro a fonte, depois o microfone, depois o ganho, e só então o EQ. Se mover o microfone um palmo resolve, não gaste uma banda do equalizador com isso.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="faixas">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>As faixas e como soam</h2>
+  <p>Para equalizar, é preciso ligar o que se ouve a um lugar na escala, de cerca de 20 Hz a 20 kHz. O que é frequência e onde cada instrumento fica estão no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>. Aqui interessa como soa cada faixa quando sobra e quando falta. Lembre que o ouvido conta em <strong>oitavas</strong>: cada vez que a frequência dobra, sobe uma oitava. De 100 a 200 Hz há uma oitava, e de 5 a 10 kHz também. Por isso os gráficos de EQ espremem os números altos, e 50 Hz mudam muito no grave e quase nada no agudo.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 312" role="img" aria-label="Mapa das sete faixas de frequência, do grave ao agudo, em três grupos. Graves: subgrave, de 20 a 60 Hz, e grave, de 60 a 250 Hz. Médios: médio-grave, de 250 a 500 Hz; médio, de 500 Hz a 2 kHz; e médio-agudo, de 2 a 4 kHz. Agudos: agudo, de 4 a 8 kHz, e brilho, de 8 a 20 kHz. Para cada faixa, o mapa diz como o som fica quando ela sobra e quando ela falta. Subgrave: em excesso, ronco e vibração; em falta, bumbo sem peso. Grave: retumbante e pesado demais; ou magro e sem corpo. Médio-grave: embolado, som de papelão; ou oco e sem calor. Médio: anasalado, som de telefone; ou distante e vazio. Médio-agudo: áspero e estridente; ou sem clareza nas palavras. Agudo: sibilante e cortante; ou opaco e sem ataque. Brilho: chiado, agudo que cansa; ou abafado e sem ar.">
+        <text class="mono mu" x="30" y="26" font-size="10.5">DO GRAVE AO AGUDO: SETE FAIXAS E COMO CADA UMA SOA</text>
+        <rect class="hd-blue" x="31" y="40" width="305.1" height="24"/>
+        <text class="on mono" x="183.6" y="56" font-size="10.5" text-anchor="middle">GRAVES</text>
+        <rect class="hd-amber" x="338.1" y="40" width="335.2" height="24"/>
+        <text class="on mono" x="505.7" y="56" font-size="10.5" text-anchor="middle">MÉDIOS</text>
+        <rect class="hd-purple" x="675.3" y="40" width="193.7" height="24"/>
+        <text class="on mono" x="772.1" y="56" font-size="10.5" text-anchor="middle">AGUDOS</text>
+        <g font-size="11" text-anchor="middle">
+        <rect class="bx-blue" x="31" y="70" width="131.6" height="42"/><text class="b" x="96.8" y="88" font-size="11.5">Subgrave</text><text class="mu" x="96.8" y="103" font-size="10.5">20 a 60 Hz</text>
+        <rect class="bx" x="31" y="142" width="131.6" height="48"/><text x="96.8" y="163">ronco,</text><text x="96.8" y="178">vibração</text>
+        <rect class="bx" x="31" y="222" width="131.6" height="48"/><text x="96.8" y="243">sem peso</text><text x="96.8" y="258">no bumbo</text>
+        <rect class="bx-blue" x="164.6" y="70" width="171.5" height="42"/><text class="b" x="250.4" y="88" font-size="11.5">Grave</text><text class="mu" x="250.4" y="103" font-size="10.5">60 a 250 Hz</text>
+        <rect class="bx" x="164.6" y="142" width="171.5" height="48"/><text x="250.4" y="163">retumbante,</text><text x="250.4" y="178">pesado demais</text>
+        <rect class="bx" x="164.6" y="222" width="171.5" height="48"/><text x="250.4" y="243">magro,</text><text x="250.4" y="258">sem corpo</text>
+        <rect class="bx-amber" x="338.1" y="70" width="82.3" height="42"/><text class="b" x="379.3" y="88" font-size="11.5">Médio-grave</text><text class="mu" x="379.3" y="103" font-size="10.5">250 a 500 Hz</text>
+        <rect class="bx" x="338.1" y="142" width="82.3" height="48"/><text x="379.3" y="163">embolado,</text><text x="379.3" y="178">papelão</text>
+        <rect class="bx" x="338.1" y="222" width="82.3" height="48"/><text x="379.3" y="243">oco,</text><text x="379.3" y="258">sem calor</text>
+        <rect class="bx-amber" x="422.4" y="70" width="166.6" height="42"/><text class="b" x="505.7" y="88" font-size="11.5">Médio</text><text class="mu" x="505.7" y="103" font-size="10.5">500 Hz a 2 kHz</text>
+        <rect class="bx" x="422.4" y="142" width="166.6" height="48"/><text x="505.7" y="163">anasalado,</text><text x="505.7" y="178">som de telefone</text>
+        <rect class="bx" x="422.4" y="222" width="166.6" height="48"/><text x="505.7" y="243">distante,</text><text x="505.7" y="258">vazio</text>
+        <rect class="bx-amber" x="591" y="70" width="82.3" height="42"/><text class="b" x="632.1" y="88" font-size="11.5">Médio-agudo</text><text class="mu" x="632.1" y="103" font-size="10.5">2 a 4 kHz</text>
+        <rect class="bx" x="591" y="142" width="82.3" height="48"/><text x="632.1" y="163">áspero,</text><text x="632.1" y="178">estridente</text>
+        <rect class="bx" x="591" y="222" width="82.3" height="48"/><text x="632.1" y="243">sem clareza</text><text x="632.1" y="258">nas palavras</text>
+        <rect class="bx-purple" x="675.3" y="70" width="82.3" height="42"/><text class="b" x="716.4" y="88" font-size="11.5">Agudo</text><text class="mu" x="716.4" y="103" font-size="10.5">4 a 8 kHz</text>
+        <rect class="bx" x="675.3" y="142" width="82.3" height="48"/><text x="716.4" y="163">sibilante,</text><text x="716.4" y="178">cortante</text>
+        <rect class="bx" x="675.3" y="222" width="82.3" height="48"/><text x="716.4" y="243">opaco,</text><text x="716.4" y="258">sem ataque</text>
+        <rect class="bx-purple" x="759.6" y="70" width="109.4" height="42"/><text class="b" x="814.3" y="88" font-size="11.5">Brilho</text><text class="mu" x="814.3" y="103" font-size="10.5">8 a 20 kHz</text>
+        <rect class="bx" x="759.6" y="142" width="109.4" height="48"/><text x="814.3" y="163">chiado,</text><text x="814.3" y="178">agudo que cansa</text>
+        <rect class="bx" x="759.6" y="222" width="109.4" height="48"/><text x="814.3" y="243">abafado,</text><text x="814.3" y="258">sem ar</text>
+        </g>
+        <text class="mono mu" x="30" y="134" font-size="10.5">EM EXCESSO, SOA</text>
+        <text class="mono mu" x="30" y="214" font-size="10.5">EM FALTA, SOA</text>
+        <line class="ln-mu" x1="30" y1="282" x2="870" y2="282"/>
+        <line class="ln-mu" stroke-width="1" x1="30" y1="282" x2="30" y2="288"/>
+        <text class="mu" x="30" y="302" font-size="10.5" text-anchor="start">20 Hz</text>
+        <line class="ln-mu" stroke-width="1" x1="163.6" y1="282" x2="163.6" y2="288"/>
+        <text class="mu" x="163.6" y="302" font-size="10.5" text-anchor="middle">60</text>
+        <line class="ln-mu" stroke-width="1" x1="337.1" y1="282" x2="337.1" y2="288"/>
+        <text class="mu" x="337.1" y="302" font-size="10.5" text-anchor="middle">250</text>
+        <line class="ln-mu" stroke-width="1" x1="421.4" y1="282" x2="421.4" y2="288"/>
+        <text class="mu" x="421.4" y="302" font-size="10.5" text-anchor="middle">500</text>
+        <line class="ln-mu" stroke-width="1" x1="590" y1="282" x2="590" y2="288"/>
+        <text class="mu" x="590" y="302" font-size="10.5" text-anchor="middle">2 k</text>
+        <line class="ln-mu" stroke-width="1" x1="674.3" y1="282" x2="674.3" y2="288"/>
+        <text class="mu" x="674.3" y="302" font-size="10.5" text-anchor="middle">4 k</text>
+        <line class="ln-mu" stroke-width="1" x1="758.6" y1="282" x2="758.6" y2="288"/>
+        <text class="mu" x="758.6" y="302" font-size="10.5" text-anchor="middle">8 k</text>
+        <line class="ln-mu" stroke-width="1" x1="870" y1="282" x2="870" y2="288"/>
+        <text class="mu" x="870" y="302" font-size="10.5" text-anchor="end">20 kHz</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> As sete faixas e as palavras que descrevem cada uma. A divisão é uma convenção: os limites variam um pouco de um autor para outro, e o que importa é a ordem e o caráter de cada região.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%">Faixa</th><th style="width:13%">Limites</th><th style="width:26%">O que mora ali</th><th style="width:23%">Em excesso, soa</th><th>Em falta, soa</th></tr></thead>
+      <tbody>
+        <tr><td class="blue"><strong>Subgrave</strong></td><td class="num">20 a 60 Hz</td><td>O peso do bumbo e as notas mais graves do baixo e do teclado. Mais se sente do que se ouve.</td><td>Ronco, vibração no palco, caixas trabalhando à toa.</td><td>Bumbo e baixo sem peso. Nas outras fontes, não faz falta.</td></tr>
+        <tr><td class="blue"><strong>Grave</strong></td><td class="num">60 a 250 Hz</td><td>O corpo do baixo, do bumbo e do violão, e a nota fundamental das vozes.</td><td>Retumbante, pesado, “som de barril”.</td><td>Magro, fino, sem corpo.</td></tr>
+        <tr><td class="amber"><strong>Médio-grave</strong></td><td class="num">250 a 500 Hz</td><td>O calor das vozes e dos instrumentos. É onde quase todas as fontes se acumulam.</td><td>Embolado, turvo, “som de caixa de papelão”.</td><td>Oco, sem calor.</td></tr>
+        <tr><td class="amber"><strong>Médio</strong></td><td class="num">500 Hz a 2 kHz</td><td>O miolo das vozes, do violão, do teclado e da guitarra.</td><td>Anasalado, “som de corneta” ou de telefone.</td><td>Distante, vazio.</td></tr>
+        <tr><td class="amber"><strong>Médio-agudo</strong></td><td class="num">2 a 4 kHz</td><td>As consoantes e a clareza da fala. É a região em que o ouvido é mais sensível.</td><td>Áspero, estridente, cansativo.</td><td>Sem clareza: ouve-se a voz, mas não se entendem as palavras.</td></tr>
+        <tr><td class="purple"><strong>Agudo</strong></td><td class="num">4 a 8 kHz</td><td>A definição, o ataque das cordas e dos pratos, o “s” e o “ch” das vozes.</td><td>Sibilante, cortante.</td><td>Opaco, sem ataque.</td></tr>
+        <tr><td class="purple"><strong>Brilho</strong></td><td class="num">8 a 20 kHz</td><td>O brilho dos pratos e das cordas e a sensação de “ar” nas vozes.</td><td>Chiado, agudo que cansa.</td><td>Abafado, “com um cobertor por cima”.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Do que se ouve para onde procurar</h3>
+  <p>Na passagem, o caminho é o inverso: você ouve um defeito, dá um nome a ele e procura na região provável. A frequência exata muda com a fonte, o microfone e a sala, e é confirmada pelo ouvido, com o método do <a href="#cortar">módulo 4</a>.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:30%">Como soa</th><th style="width:20%">Onde procurar</th><th>Primeira medida</th></tr></thead>
+      <tbody>
+        <tr><td>Ronco, vento, “pof” nas letras P e B, batida de mão</td><td>abaixo de 100 Hz</td><td>Ligar ou subir o passa-altas.</td></tr>
+        <tr><td>Retumbante, pesado</td><td class="num">100 a 250 Hz</td><td>Subir um pouco o passa-altas, ou cortar com o shelving de graves.</td></tr>
+        <tr><td>Embolado, turvo</td><td class="num">200 a 400 Hz</td><td>Corte de 2 a 4 dB com uma banda bell.</td></tr>
+        <tr><td>“Caixa de papelão”, som oco de tambor</td><td class="num">300 a 600 Hz</td><td>Corte com uma banda bell. No bumbo, o corte costuma ser maior.</td></tr>
+        <tr><td>Anasalado, “corneta”, telefone</td><td class="num">800 Hz a 1,5 kHz</td><td>Corte de 2 a 4 dB com uma banda bell.</td></tr>
+        <tr><td>Áspero, estridente, cansa o ouvido</td><td class="num">2 a 5 kHz</td><td>Corte suave e largo. Confira antes se há realce demais nessa região.</td></tr>
+        <tr><td>Sibilante: “s” e “ch” que espetam</td><td class="num">5 a 8 kHz</td><td>Corte leve, ou o de-esser, do estudo <a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>.</td></tr>
+        <tr><td>Abafado, ou sem clareza nas palavras</td><td>2 kHz para cima</td><td>Conferir o microfone e a posição. Cortar o que embola (200 a 400 Hz). Só então, se faltar, realce largo de 2 a 3 dB.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Repare na última linha: uma voz com médios-graves sobrando parece sem agudos. Tirada a sobra, o agudo que já estava lá aparece. E as palavras variam de pessoa para pessoa: combine o vocabulário com a equipe e use o exercício 2 do <a href="#pratique">módulo 12</a> para ligar cada palavra a uma região, com a sua própria voz.</p>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="filtros">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Filtros, frequência, ganho e Q</h2>
+  <p>Um equalizador é feito de filtros. No canal de uma mesa há três tipos, e cada um age sobre uma parte da escala de um jeito próprio.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 272" role="img" aria-label="Quatro quadros, cada um com a curva de um tipo de filtro. No primeiro, o passa-altas, ou HPF: a curva fica em 0 dB nos agudos e despenca abaixo do ponto escolhido, 100 Hz no exemplo; serve para tirar ronco, vento e batida de mão. No segundo, o shelving de graves: abaixo de 100 Hz, a curva sobe para um patamar, no realce, ou desce para um patamar, no corte; serve para dar ou tirar peso. No terceiro, o shelving de agudos: acima de 10 kHz, a curva sobe ou desce para um patamar; serve para dar ou tirar brilho. No quarto, o bell, ou sino: a curva forma um morro, no realce, ou um vale, no corte, em torno de 1 kHz, e volta a 0 dB dos dois lados; serve para tirar uma sobra ou dar um realce em uma região só.">
+        <text class="b" x="28" y="28" font-size="13">Passa-altas (HPF)</text>
+        <text class="mu" x="28" y="46" font-size="11">corta tudo abaixo do ponto</text>
+        <rect class="bx" x="28" y="62" width="196" height="112"/>
+        <line class="ln-mu" stroke-width="1" x1="28" y1="118" x2="224" y2="118"/>
+        <line class="ref" x1="73.7" y1="62" x2="73.7" y2="174"/>
+        <path class="s-purple" d="M28 174 L48.9 174 L49.6 173.6 L62 147.6 L70.5 133.3 L74.4 128.4 L78.3 124.8 L82.9 121.9 L87.5 120.2 L95.9 118.7 L109 118.1 L224 118"/>
+        <text class="b" x="73.7" y="189" font-size="10.5" text-anchor="middle">100 Hz</text>
+        <text class="mu" x="224" y="189" font-size="10.5" text-anchor="end">agudo</text>
+        <text class="mu" x="218" y="112" font-size="10.5" text-anchor="end">0 dB</text>
+        <text x="28" y="212" font-size="11">Uso: tirar ronco, vento e batida</text>
+        <text x="28" y="227" font-size="11">de mão de quem não precisa de grave.</text>
+        <text class="b" x="244" y="28" font-size="13">Shelving de graves</text>
+        <text class="mu" x="244" y="46" font-size="11">sobe ou desce tudo abaixo</text>
+        <rect class="bx" x="244" y="62" width="196" height="112"/>
+        <line class="ln-mu" stroke-width="1" x1="244" y1="118" x2="440" y2="118"/>
+        <line class="ref" x1="289.7" y1="62" x2="289.7" y2="174"/>
+        <path class="s-purple" d="M244 84.5 L262.9 85.3 L268.8 86.4 L274.1 88.2 L278 90.4 L281.9 93.3 L295 106.8 L300.2 111.2 L306.7 114.8 L313.9 116.8 L322.4 117.6 L334.8 117.9 L440 118"/>
+        <path class="s-blue dash" d="M244 151.5 L262.9 150.7 L268.8 149.6 L274.1 147.8 L278 145.6 L281.9 142.7 L295 129.2 L300.2 124.8 L306.7 121.2 L313.9 119.2 L322.4 118.4 L334.8 118.1 L440 118"/>
+        <text class="b" x="289.7" y="189" font-size="10.5" text-anchor="middle">100 Hz</text>
+        <text class="mu" x="440" y="189" font-size="10.5" text-anchor="end">agudo</text>
+        <text x="244" y="212" font-size="11">Uso: dar ou tirar peso, sem</text>
+        <text x="244" y="227" font-size="11">escolher uma nota.</text>
+        <text class="b" x="460" y="28" font-size="13">Shelving de agudos</text>
+        <text class="mu" x="460" y="46" font-size="11">sobe ou desce tudo acima</text>
+        <rect class="bx" x="460" y="62" width="196" height="112"/>
+        <line class="ln-mu" stroke-width="1" x1="460" y1="118" x2="656" y2="118"/>
+        <line class="ref" x1="636.3" y1="62" x2="636.3" y2="174"/>
+        <path class="s-purple" d="M460 118 L589.4 117.9 L603.1 117.6 L611.6 116.8 L618.8 115 L625.3 111.6 L630.5 107.3 L644.9 92.7 L650.1 89.1 L656 86.7"/>
+        <path class="s-blue dash" d="M460 118 L589.4 118.1 L603.1 118.4 L611.6 119.2 L618.8 121 L625.3 124.4 L630.5 128.7 L644.9 143.3 L650.1 146.9 L656 149.3"/>
+        <text class="b" x="636.3" y="189" font-size="10.5" text-anchor="middle">10 kHz</text>
+        <text class="mu" x="460" y="189" font-size="10.5">grave</text>
+        <text x="460" y="212" font-size="11">Uso: dar ou tirar brilho, de</text>
+        <text x="460" y="227" font-size="11">modo amplo.</text>
+        <text class="b" x="676" y="28" font-size="13">Bell (sino)</text>
+        <text class="mu" x="676" y="46" font-size="11">atua em torno de um ponto</text>
+        <rect class="bx" x="676" y="62" width="196" height="112"/>
+        <line class="ln-mu" stroke-width="1" x1="676" y1="118" x2="872" y2="118"/>
+        <line class="ref" x1="787" y1="62" x2="787" y2="174"/>
+        <path class="s-purple" d="M676 118 L736.8 117.4 L750.5 116.3 L760.3 114.3 L767.5 111.2 L773.3 106.2 L777.9 99.8 L784.5 86.7 L785.8 85 L787.1 84.4 L788.4 85.1 L789.7 86.9 L795.6 98.8 L800.1 105.7 L805.4 110.4 L811.2 113.5 L819.7 115.7 L830.8 117 L846.5 117.7 L872 117.9"/>
+        <path class="s-blue dash" d="M676 118 L736.8 118.6 L750.5 119.7 L760.3 121.7 L767.5 124.8 L773.3 129.8 L777.9 136.2 L784.5 149.3 L785.8 151 L787.1 151.6 L788.4 150.9 L789.7 149.1 L795.6 137.2 L800.1 130.3 L805.4 125.6 L811.2 122.5 L819.7 120.3 L830.8 119 L846.5 118.3 L872 118.1"/>
+        <text class="b" x="787" y="189" font-size="10.5" text-anchor="middle">1 kHz</text>
+        <text class="mu" x="676" y="189" font-size="10.5">grave</text>
+        <text class="mu" x="872" y="189" font-size="10.5" text-anchor="end">agudo</text>
+        <text x="676" y="212" font-size="11">Uso: tirar uma sobra ou dar um</text>
+        <text x="676" y="227" font-size="11">realce em uma região só.</text>
+        <line class="s-purple" x1="28" y1="256" x2="58" y2="256"/><text x="66" y="260" font-size="11">realce</text>
+        <line class="s-blue dash" x1="128" y1="256" x2="158" y2="256"/><text x="166" y="260" font-size="11">corte</text>
+        <text class="mu" x="872" y="260" font-size="11" text-anchor="end">a linha do meio de cada quadro é 0 dB: nela, o som passa sem mudança</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> Os três tipos de filtro de um EQ de canal: o passa-altas, o shelving (de graves e de agudos) e o bell. O passa-altas só corta. Os outros dois cortam ou realçam.</figcaption>
+  </figure>
+
+  <h3>Passa-altas</h3>
+  <p>O passa-altas (<em>high-pass filter</em>, HPF) deixa passar o que está acima de uma frequência e derruba o que está abaixo. Na mesa aparece como HPF, <em>low cut</em> ou só o número da frequência ao lado de uma chave. A frequência indicada é o ponto em que o corte chega a 3 dB. Dali para baixo, o sinal cai em rampa, em geral de 12 ou 18 dB por oitava: com 12 dB por oitava e o filtro em 100 Hz, o que está em 50 Hz sai cerca de 12 dB mais fraco.</p>
+  <p>É o filtro mais usado da mesa, porque quase toda fonte traz, abaixo das suas notas, um grave que não é dela: ronco de palco, vento, o bumbo que entra no microfone da voz. Esse grave ocupa a mistura, gasta potência das caixas e embola a sala. A frequência de partida para cada fonte está no <a href="#fontes">módulo 5</a>. O filtro oposto, o passa-baixas (<em>low-pass filter</em>, LPF), corta os agudos acima de um ponto. Ao vivo é pouco usado: serve, por exemplo, para tirar o chiado de um amplificador de baixo.</p>
+
+  <h3>Shelving</h3>
+  <p>O shelving (prateleira) sobe ou desce tudo o que está de um ponto em diante, até um patamar. O de graves age do ponto para baixo, e o de agudos, do ponto para cima. São os botões LF e HF (<em>low</em> e <em>high</em>) das mesas analógicas, em geral com o ponto fixo perto de 80 Hz e de 12 kHz. É um controle amplo, para dar ou tirar peso e brilho. Usado como realce, o shelving de graves sobe também o ronco abaixo da fonte: combine com o passa-altas ligado.</p>
+
+  <h3>Bell</h3>
+  <p>O bell (sino), também chamado de <em>peaking</em>, age em torno de uma frequência central e volta a 0 dB dos dois lados. É o filtro para tratar uma região definida: o embolado em 300 Hz, o anasalado em 1 kHz. Ele tem três controles, e a diferença entre os equalizadores está em quantos deles você pode ajustar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 336" role="img" aria-label="Dois painéis de equalizador de canal, em esquema. À esquerda, o de uma mesa analógica, com três bandas: o botão HF é um shelving de agudos com ponto fixo, em geral 12 kHz; o botão MID é o ganho de um bell de médios com largura fixa; o botão FREQ escolhe a frequência desse bell, de 100 Hz a 8 kHz; o botão LF é um shelving de graves com ponto fixo, em geral 80 Hz; e a chave HPF liga o passa-altas em 80 ou 100 Hz. À direita, a tela de uma mesa digital, com a curva do equalizador, o passa-altas e quatro bandas numeradas. Para a banda escolhida há três controles: frequência, que define onde a banda atua; ganho, que define quanto ela corta ou realça; e Q, que define a largura da banda.">
+        <text class="mono mu" x="18" y="26" font-size="10.5">MESA ANALÓGICA</text>
+        <text class="b" x="18" y="46" font-size="12.5">Três bandas, com médio semiparamétrico</text>
+        <rect class="bx" x="18" y="60" width="130" height="262"/>
+        <text class="mono mu" x="30" y="96" font-size="10.5">HF</text>
+        <circle class="bx-purple" cx="106" cy="92" r="16"/>
+        <line class="s-purple" x1="106" y1="92" x2="106" y2="78"/>
+        <line class="ln-mu" stroke-width="1" x1="126" y1="92" x2="164" y2="92"/>
+        <text class="b" x="170" y="90" font-size="11.5">Agudos: shelving</text>
+        <text class="mu" x="170" y="105" font-size="10.5">ponto fixo, em geral 12 kHz</text>
+        <text class="mono mu" x="30" y="146" font-size="10.5">MID</text>
+        <circle class="bx-purple" cx="106" cy="142" r="16"/>
+        <line class="s-purple" x1="106" y1="142" x2="95.3" y2="133"/>
+        <line class="ln-mu" stroke-width="1" x1="126" y1="142" x2="164" y2="142"/>
+        <text class="b" x="170" y="140" font-size="11.5">Médios: ganho do bell</text>
+        <text class="mu" x="170" y="155" font-size="10.5">a largura (Q) é fixa</text>
+        <text class="mono mu" x="30" y="196" font-size="10.5">FREQ</text>
+        <circle class="bx-purple" cx="106" cy="192" r="16"/>
+        <line class="s-purple" x1="106" y1="192" x2="92.2" y2="194.4"/>
+        <line class="ln-mu" stroke-width="1" x1="126" y1="192" x2="164" y2="192"/>
+        <text class="b" x="170" y="190" font-size="11.5">Médios: frequência</text>
+        <text class="mu" x="170" y="205" font-size="10.5">escolhe o ponto, de 100 Hz a 8 kHz</text>
+        <text class="mono mu" x="30" y="246" font-size="10.5">LF</text>
+        <circle class="bx-purple" cx="106" cy="242" r="16"/>
+        <line class="s-purple" x1="106" y1="242" x2="106" y2="228"/>
+        <line class="ln-mu" stroke-width="1" x1="126" y1="242" x2="164" y2="242"/>
+        <text class="b" x="170" y="240" font-size="11.5">Graves: shelving</text>
+        <text class="mu" x="170" y="255" font-size="10.5">ponto fixo, em geral 80 Hz</text>
+        <text class="mono mu" x="30" y="296" font-size="10.5">HPF</text>
+        <rect class="hd-blue" x="94" y="282" width="24" height="18"/>
+        <line class="ln-mu" stroke-width="1" x1="122" y1="291" x2="164" y2="291"/>
+        <text class="b" x="170" y="289" font-size="11.5">Passa-altas: chave</text>
+        <text class="mu" x="170" y="304" font-size="10.5">liga o corte em 80 ou 100 Hz</text>
+        <text class="mono mu" x="430" y="26" font-size="10.5">MESA DIGITAL</text>
+        <text class="b" x="430" y="46" font-size="12.5">Quatro bandas paramétricas e passa-altas, na tela</text>
+        <rect class="bx" x="430" y="60" width="452" height="156"/>
+        <path class="grid" d="M543.9 74V186 M683.9 74V186 M823.9 74V186"/>
+        <g font-size="10.5" text-anchor="middle"><text class="mu" x="543.9" y="201">100</text><text class="mu" x="683.9" y="201">1 k</text><text class="mu" x="823.9" y="201">10 k</text></g>
+        <line class="ln-mu" stroke-width="1" x1="446" y1="120.7" x2="866" y2="120.7"/>
+        <path class="lv-purple" d="M446 120.7 L446 186 L489.1 186 L511.1 159.4 L519.5 150.4 L527.9 142.6 L535.2 137 L542.6 132.6 L550 129.4 L557.3 127.4 L567.8 126.6 L577.2 127.9 L584.6 131 L596.1 138.9 L598.2 139.6 L600.4 139.7 L603.5 138.5 L613 131.4 L619.2 127.9 L626.6 125.4 L636.1 124 L645.5 123.8 L653.9 125 L660.2 127.7 L667.5 133.3 L670.7 134.1 L673.9 132.4 L682.2 125.2 L688.6 122.1 L695.9 120 L718 115.1 L740 108.4 L747.3 106.9 L751.5 106.7 L756.8 107.1 L781 112.8 L788.3 113.8 L795.7 114.1 L809.3 113.2 L841.8 108.3 L866 106.9 L866 120.7 Z"/>
+        <path class="s-purple" d="M446 186 L489.1 186 L511.1 159.4 L519.5 150.4 L527.9 142.6 L535.2 137 L542.6 132.6 L550 129.4 L557.3 127.4 L567.8 126.6 L577.2 127.9 L584.6 131 L596.1 138.9 L598.2 139.6 L600.4 139.7 L603.5 138.5 L613 131.4 L619.2 127.9 L626.6 125.4 L636.1 124 L645.5 123.8 L653.9 125 L660.2 127.7 L667.5 133.3 L670.7 134.1 L673.9 132.4 L682.2 125.2 L688.6 122.1 L695.9 120 L718 115.1 L740 108.4 L747.3 106.9 L751.5 106.7 L756.8 107.1 L781 112.8 L788.3 113.8 L795.7 114.1 L809.3 113.2 L841.8 108.3 L866 106.9"/>
+        <circle class="f-purple" cx="599.6" cy="155.3" r="9"/>
+        <text class="on b" x="599.6" y="159.3" font-size="11" text-anchor="middle">1</text>
+        <circle class="f-purple" cx="670.3" cy="150.7" r="9"/>
+        <text class="on b" x="670.3" y="154.7" font-size="11" text-anchor="middle">2</text>
+        <circle class="f-purple" cx="750.7" cy="90.7" r="9"/>
+        <text class="on b" x="750.7" y="94.7" font-size="11" text-anchor="middle">3</text>
+        <circle class="f-purple" cx="834.9" cy="90.7" r="9"/>
+        <text class="on b" x="834.9" y="94.7" font-size="11" text-anchor="middle">4</text>
+        <rect class="hd-blue" x="478.3" y="90.3" width="34" height="18"/>
+        <text class="on b" x="495.3" y="103.3" font-size="10.5" text-anchor="middle">HPF</text>
+        <text class="mu" x="430" y="238" font-size="11">Para a banda escolhida, três controles:</text>
+        <circle class="bx-purple" cx="470" cy="284" r="16"/>
+        <line class="s-purple" x1="470" y1="284" x2="457.9" y2="277"/>
+        <text class="mono mu" x="470" y="318" font-size="10.5" text-anchor="middle">FREQ</text>
+        <text class="b" x="494" y="282" font-size="11.5">Frequência</text>
+        <text class="mu" x="494" y="297" font-size="10.5">onde a banda atua</text>
+        <circle class="bx-purple" cx="620" cy="284" r="16"/>
+        <line class="s-purple" x1="620" y1="284" x2="629" y2="273.3"/>
+        <text class="mono mu" x="620" y="318" font-size="10.5" text-anchor="middle">GAIN</text>
+        <text class="b" x="644" y="282" font-size="11.5">Ganho</text>
+        <text class="mu" x="644" y="297" font-size="10.5">quanto corta ou realça</text>
+        <circle class="bx-purple" cx="770" cy="284" r="16"/>
+        <line class="s-purple" x1="770" y1="284" x2="765.2" y2="270.8"/>
+        <text class="mono mu" x="770" y="318" font-size="10.5" text-anchor="middle">Q</text>
+        <text class="b" x="794" y="282" font-size="11.5">Q</text>
+        <text class="mu" x="794" y="297" font-size="10.5">largura da banda</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> O EQ de canal em duas mesas. Os pontos fixos, a faixa do botão de frequência e o número de bandas variam com o modelo. Em muitas mesas digitais, a primeira e a última banda podem ser trocadas de bell para shelving.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Tipo de EQ</th><th style="width:34%">O que você ajusta em cada banda</th><th>Onde aparece</th></tr></thead>
+      <tbody>
+        <tr><td><strong>De bandas fixas</strong></td><td>Só o ganho. A frequência e a largura são fixas.</td><td>Mesas analógicas pequenas, com os botões de agudo, médio e grave. O médio costuma ficar perto de 2,5 kHz.</td></tr>
+        <tr><td><strong>Semiparamétrico</strong></td><td>O ganho e a frequência. A largura é fixa.</td><td>Mesas analógicas com “médio varrível”: um botão de ganho e um de frequência.</td></tr>
+        <tr><td><strong>Paramétrico</strong></td><td>O ganho, a frequência e a largura (Q).</td><td>Mesas digitais, em geral com quatro bandas por canal, e processadores de sistema.</td></tr>
+        <tr><td><strong>Gráfico</strong></td><td>Só o ganho, em muitas bandas fixas e estreitas.</td><td>Na saída: nos retornos e no sistema. Está no <a href="#sistema">módulo 6</a>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Frequência, ganho e Q</h3>
+  <p>A <strong>frequência</strong> diz onde a banda atua. O <strong>ganho</strong> diz quanto ela corta ou realça, em dB: em 0 dB a banda não faz nada, e a escala costuma ir até 15 dB para cada lado. O <span class="k blue">Q</span> diz a largura da banda: Q alto é banda estreita, e Q baixo é banda larga. Algumas mesas mostram a largura em oitavas; aí, número alto é banda larga.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 282" role="img" aria-label="Gráfico com três curvas de realce de 9 dB em 1 kHz, com a mesma frequência e o mesmo ganho, e três valores de Q. Com Q 0,7, a banda é larga: o morro se espalha por cerca de duas oitavas, de 500 Hz a 2 kHz, e muda o timbre de modo suave; é o Q dos realces. Com Q 1,4, a banda é média, com cerca de uma oitava; é o corte comum de som embolado ou anasalado. Com Q 4,3, a banda é estreita, com cerca de um terço de oitava; serve para cortar uma ressonância ou uma microfonia.">
+        <rect class="bx" x="64" y="34" width="520" height="200"/>
+        <path class="grid" d="M64 34V234 M133 34V234 M185.2 34V234 M237.3 34V234 M306.3 34V234 M358.5 34V234 M410.7 34V234 M479.6 34V234 M531.8 34V234 M584 34V234"/>
+        <g font-size="10.5" text-anchor="middle"><text class="mu" x="64" y="250">20</text><text class="mu" x="133" y="250">50</text><text class="mu" x="185.2" y="250">100</text><text class="mu" x="237.3" y="250">200</text><text class="mu" x="306.3" y="250">500</text><text class="mu" x="358.5" y="250">1 k</text><text class="mu" x="410.7" y="250">2 k</text><text class="mu" x="479.6" y="250">5 k</text><text class="mu" x="531.8" y="250">10 k</text><text class="mu" x="584" y="250">20 k</text></g>
+        <path class="grid" d="M64 74H584 M64 114H584 M64 154H584"/>
+        <line class="ln-mu" stroke-width="1" x1="64" y1="194" x2="584" y2="194"/>
+        <g font-size="10.5" text-anchor="end"><text class="mu" x="56" y="78">+9</text><text class="mu" x="56" y="118">+6</text><text class="mu" x="56" y="158">+3</text><text class="b" x="56" y="198">0 dB</text></g>
+        <line class="ref" x1="358.5" y1="34" x2="358.5" y2="234"/>
+        <path class="s-blue" d="M64 193.9 L143.3 193 L169.3 192.1 L190.1 190.7 L208.3 188.7 L225.2 185.8 L239.5 182.3 L252.5 177.7 L262.9 173 L273.3 166.9 L283.7 159.4 L292.8 151.4 L303.2 140.4 L312.3 129 L321.4 116.2 L337 92.7 L344.8 82.5 L348.7 78.5 L352.6 75.7 L356.5 74.2 L359.1 74 L361.7 74.5 L365.6 76.4 L369.5 79.7 L373.4 83.9 L379.9 92.6 L403.3 127.2 L411.1 137.2 L418.9 146.1 L426.7 153.8 L434.5 160.4 L443.6 166.9 L452.7 172.2 L463.1 177.2 L474.8 181.4 L487.8 185 L502.1 187.8 L517.7 189.8 L535.9 191.4 L584 193.3"/>
+        <line class="s-blue" x1="612" y1="58" x2="642" y2="58"/>
+        <text class="b" x="650" y="62" font-size="12">Q 0,7: banda larga</text>
+        <text class="mu" x="612" y="80" font-size="11">Cerca de 2 oitavas. Ajuste suave de</text>
+        <text class="mu" x="612" y="95" font-size="11">timbre: é o Q dos realces.</text>
+        <path class="s-purple" d="M64 194 L170.6 193.5 L201.8 192.8 L225.2 191.8 L244.7 190.2 L261.6 187.9 L275.9 184.8 L287.6 180.8 L298 175.6 L307.1 169.2 L314.9 161.6 L322.7 151.4 L329.2 140.1 L334.4 128.9 L339.6 115.7 L348.7 89.8 L352.6 80.4 L355.2 76.1 L356.5 74.8 L357.8 74.1 L359.1 74.1 L361.7 76 L365.6 83 L381.2 125.6 L386.4 137.3 L392.9 149.2 L399.4 158.5 L405.9 165.6 L413.7 172.2 L421.5 177.1 L431.9 181.8 L443.6 185.4 L457.9 188.4 L473.5 190.4 L491.7 191.8 L515.1 192.8 L584 193.8"/>
+        <line class="s-purple" x1="612" y1="120" x2="642" y2="120"/>
+        <text class="b" x="650" y="124" font-size="12">Q 1,4: banda média</text>
+        <text class="mu" x="612" y="142" font-size="11">Cerca de 1 oitava. O corte comum de</text>
+        <text class="mu" x="612" y="157" font-size="11">som embolado ou anasalado.</text>
+        <path class="s-amber" d="M64 194 L209.6 193.8 L269.4 193.1 L288.9 192.3 L303.2 191.1 L313.6 189.4 L322.7 186.7 L326.6 184.9 L330.5 182.4 L335.7 177.2 L339.6 171.2 L343.5 161.9 L347.4 147 L350 132.4 L356.5 80.8 L357.8 74.9 L359.1 74.7 L360.4 80.3 L366.9 131.9 L369.5 146.7 L372.1 157.4 L376 168.4 L379.9 175.4 L385.1 181.2 L390.3 184.8 L396.8 187.6 L405.9 189.9 L417.6 191.5 L433.2 192.6 L481.3 193.7 L584 194"/>
+        <line class="s-amber" x1="612" y1="182" x2="642" y2="182"/>
+        <text class="b" x="650" y="186" font-size="12">Q 4,3: banda estreita</text>
+        <text class="mu" x="612" y="204" font-size="11">Cerca de 1/3 de oitava. Corte de uma</text>
+        <text class="mu" x="612" y="219" font-size="11">ressonância ou de uma microfonia.</text>
+        <text class="mu" x="324.0" y="270" font-size="11" text-anchor="middle">três realces de 9 dB em 1 kHz: a mesma frequência e o mesmo ganho, com três valores de Q</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> O Q muda quanto do entorno entra no ajuste. A banda larga muda o timbre sem chamar atenção. A banda estreita age quase como um bisturi, sobre uma região pequena.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="n" style="width:12%">Q</th><th style="width:20%">Largura aproximada</th><th>Uso típico</th></tr></thead>
+      <tbody>
+        <tr><td class="num n">0,7</td><td>2 oitavas</td><td>Realce suave de timbre: presença na voz, brilho.</td></tr>
+        <tr><td class="num n">1,4</td><td>1 oitava</td><td>Corte ou realce comum. É o valor para começar.</td></tr>
+        <tr><td class="num n">2,9</td><td>1/2 oitava</td><td>Corte de uma sobra bem localizada: papelão do bumbo, anasalado.</td></tr>
+        <tr><td class="num n">4,3</td><td>1/3 de oitava</td><td>Corte de ressonância ou de microfonia. É a largura de uma banda do EQ gráfico de 31 bandas.</td></tr>
+        <tr><td class="num n">8,7</td><td>1/6 de oitava</td><td>Corte cirúrgico de uma frequência que apita, quase sem mudar o timbre.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A regra de uso: <strong>cortes podem ser estreitos, realces devem ser largos</strong>. Um corte estreito tira o defeito e quase não se nota. Um realce estreito soa como um apito pendurado no som, e convida a microfonia naquela frequência. A conta entre Q e largura muda um pouco de um fabricante para outro: use a tabela como ordem de grandeza. No EQ semiparamétrico, a largura fixa costuma ficar perto de uma oitava.</p>
+
+  <div class="note">
+    <h4>Valores de referência</h4>
+    <p>Os pontos fixos dos botões (80 Hz, 2,5 kHz, 12 kHz), a rampa do passa-altas e a faixa de ganho deste módulo são valores comuns, para servir de referência. Confira o manual do seu equipamento.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="cortar">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Cortar antes de realçar</h2>
+  <p>Quando falta clareza em uma voz, a primeira vontade é girar o botão de agudos para a direita. Quase sempre o problema é outro: há alguma coisa sobrando e cobrindo o que já está lá. É como uma janela suja em uma sala escura. Acender mais lâmpadas ajuda pouco. Limpar o vidro resolve. No EQ, limpar é cortar.</p>
+
+  <div class="pair">
+    <div class="box">
+      <h4>O que o corte faz</h4>
+      <ul>
+        <li>Tira o defeito e deixa o resto do som como estava.</li>
+        <li>Baixa um pouco o nível do canal: sobra folga antes do clip.</li>
+        <li>Reduz o ganho do sistema naquela faixa: a microfonia fica mais longe.</li>
+        <li>Abre espaço para as outras fontes da mistura.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>O que o realce faz</h4>
+      <ul>
+        <li>Sobe o nível do canal. Um realce de 6 dB em uma região forte da fonte pode levar o canal ao clip.</li>
+        <li>Sobe também o ruído e o vazamento do palco naquela faixa.</li>
+        <li>Aumenta o ganho do sistema naquela faixa: é ali que a microfonia vai aparecer primeiro.</li>
+        <li>Engana o ouvido: o som mais alto parece melhor, mesmo quando não é.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p>Isso não proíbe o realce. Depois de limpar, um realce pequeno e largo, de 2 a 3 dB, pode dar a presença que falta de verdade. A regra pede a ordem: primeiro o que cortar. Vários realces de 6 dB ou mais no mesmo canal indicam defeito antes do EQ: volte ao microfone e ao ganho. Depois de qualquer realce, confira o nível do canal no medidor.</p>
+
+  <h3>O método de varredura</h3>
+  <p>Saber que uma voz está embolada não diz se a sobra está em 220, em 300 ou em 380 Hz. Para achar o ponto, use o próprio EQ como lupa: realce bastante uma banda estreita e passeie com ela pela região suspeita. Quando o pico passa pelo defeito, ele salta ao ouvido, e você sabe onde cortar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 236" role="img" aria-label="O método de varredura em três quadros. No primeiro, uma banda bell recebe um realce estreito, de 6 a 9 dB, com Q alto, de 4 ou mais. No segundo, o operador gira a frequência devagar, e o pico percorre a faixa; no ponto em que o defeito salta ao ouvido, 300 Hz no exemplo, ele para. No terceiro, o ganho da mesma banda vira corte, de 3 a 6 dB, com o Q um pouco mais aberto; o operador compara com o equalizador desligado.">
+        <defs><marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah f-purple" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="b" x="30" y="30" font-size="13">1. Realce estreito</text>
+        <rect class="bx" x="30" y="50" width="256" height="116"/>
+        <line class="ln-mu" stroke-width="1" x1="30" y1="108" x2="286" y2="108"/>
+        <path class="s-purple" d="M30 108 L146.5 107.8 L163.8 107.1 L173.4 105.8 L177.2 104.3 L179.8 102.5 L181.7 100.2 L183.6 96.5 L186.2 87 L189.4 66 L190 64.5 L191.3 69.7 L193.8 87 L195.8 94.7 L197 97.9 L199 101.1 L200.9 103 L203.4 104.6 L210.5 106.5 L222 107.5 L286 108"/>
+        <text class="t-purple b" x="178" y="74.2" font-size="11" text-anchor="end">+9 dB, Q 5</text>
+        <text class="mu" x="38" y="102" font-size="10.5">0 dB</text>
+        <text class="mu" x="30" y="180" font-size="10.5">grave</text>
+        <text class="mu" x="286" y="180" font-size="10.5" text-anchor="end">agudo</text>
+        <text x="30" y="204" font-size="11">Suba de 6 a 9 dB em uma banda bell,</text>
+        <text x="30" y="219" font-size="11">com Q alto (4 ou mais).</text>
+        <text class="b" x="322" y="30" font-size="13">2. Varra devagar</text>
+        <rect class="bx" x="322" y="50" width="256" height="116"/>
+        <line class="ln-mu" stroke-width="1" x1="322" y1="108" x2="578" y2="108"/>
+        <path class="ln-mu dash" stroke-width="1.2" d="M322 108 L438.5 107.8 L455.8 107.1 L465.4 105.8 L469.2 104.3 L471.8 102.5 L473.7 100.2 L475.6 96.5 L478.2 87 L481.4 66 L482 64.5 L483.3 69.7 L485.8 87 L487.8 94.7 L489 97.9 L491 101.1 L492.9 103 L495.4 104.6 L502.5 106.5 L514 107.5 L578 108"/>
+        <path class="ln-mu dash" stroke-width="1.2" d="M322 108 L414.8 107.7 L430.2 106.9 L438.5 105.4 L441 104.3 L443.6 102.4 L445.5 100.1 L447.4 96.3 L450 86.6 L452.6 69.2 L453.2 65.6 L453.8 64.5 L454.5 66.3 L457.7 87.4 L459.6 95 L461.5 99.3 L463.4 101.9 L466 104 L468.6 105.2 L476.9 106.9 L491 107.6 L578 108"/>
+        <path class="s-purple" d="M322 108 L389.2 107.5 L401.4 106.6 L408.4 104.9 L411 103.4 L413.5 100.9 L415.4 97.7 L416.7 94.3 L418.6 86.4 L421.8 65.5 L422.5 64.6 L423.1 66.5 L426.3 87.6 L428.9 96.8 L430.8 100.4 L432.7 102.6 L435.3 104.4 L438.5 105.6 L447.4 107.1 L464.7 107.7 L578 108"/>
+        <line class="s-purple" x1="490.8" y1="137" x2="425.9" y2="137" marker-end="url(#ar6)"/>
+        <text class="t-purple b" x="422.4" y="154.4" font-size="11" text-anchor="middle">300 Hz: o defeito salta</text>
+        <text class="mu" x="322" y="180" font-size="10.5">grave</text>
+        <text class="mu" x="578" y="180" font-size="10.5" text-anchor="end">agudo</text>
+        <text x="322" y="204" font-size="11">Gire a frequência devagar. No ponto</text>
+        <text x="322" y="219" font-size="11">em que o defeito salta ao ouvido, pare.</text>
+        <text class="b" x="614" y="30" font-size="13">3. Corte no ponto achado</text>
+        <rect class="bx" x="614" y="50" width="256" height="116"/>
+        <line class="ln-mu" stroke-width="1" x1="614" y1="108" x2="870" y2="108"/>
+        <path class="lv-purple" d="M614 108 L614 108 L667.8 108.6 L681.2 109.4 L690.2 110.8 L696.6 113 L701.7 116.3 L705.5 120.5 L711.9 130.5 L713.2 131.8 L714.5 132.2 L715.8 131.6 L717 130.2 L723.4 120.2 L727.9 115.6 L734.3 112.1 L742.6 110.1 L754.8 108.9 L773.4 108.3 L870 108 L870 108 Z"/>
+        <path class="s-purple" d="M614 108 L667.8 108.6 L681.2 109.4 L690.2 110.8 L696.6 113 L701.7 116.3 L705.5 120.5 L711.9 130.5 L713.2 131.8 L714.5 132.2 L715.8 131.6 L717 130.2 L723.4 120.2 L727.9 115.6 L734.3 112.1 L742.6 110.1 L754.8 108.9 L773.4 108.3 L870 108"/>
+        <text class="t-purple b" x="714.4" y="149.6" font-size="11" text-anchor="middle">−5 dB em 300 Hz, Q 2</text>
+        <text class="mu" x="614" y="180" font-size="10.5">grave</text>
+        <text class="mu" x="870" y="180" font-size="10.5" text-anchor="end">agudo</text>
+        <text x="614" y="204" font-size="11">Leve o ganho a −3 ou −6 dB e abra um</text>
+        <text x="614" y="219" font-size="11">pouco o Q. Compare com o EQ desligado.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> A varredura. O realce serve só para achar o ponto, e dura alguns segundos. O ajuste que fica é o corte.</figcaption>
+  </figure>
+
+  <ol>
+    <li>Ouça o canal e dê um nome ao defeito. A varredura confirma um problema que você já ouviu, e não sai à procura de problemas.</li>
+    <li>Escolha uma banda bell, feche o Q (4 ou mais) e suba o ganho de 6 a 9 dB. Faça isso com o volume moderado.</li>
+    <li>Gire a frequência devagar pela região suspeita, com a fonte soando. No ponto em que o defeito fica mais feio e mais evidente, pare.</li>
+    <li>Leve o ganho de volta, passe pelo 0 e corte de 3 a 6 dB. Abra o Q para perto de 2, para o corte soar natural.</li>
+    <li>Desligue e ligue o EQ (bypass) algumas vezes. Se o som não melhorou com o EQ ligado, volte o ganho da banda a 0.</li>
+  </ol>
+  <p>No EQ semiparamétrico o método é o mesmo, com o botão de frequência do médio; como a largura é mais aberta, vá mais devagar e corte um pouco menos. Com um realce estreito de 9 dB, qualquer som fica feio em qualquer ponto: procure o defeito que você já tinha ouvido, e não o lugar “mais feio”. Dois ou três cortes por canal costumam bastar. Mais do que isso, o som fica sem vida, e o problema está em outro lugar.</p>
+
+  <div class="note">
+    <h4>Segurança: volume alto</h4>
+    <p>Um realce estreito de 9 dB aumenta o ganho do sistema naquela frequência e pode disparar uma microfonia forte de repente, capaz de ferir a audição de quem está perto das caixas e de danificar os alto-falantes. Faça a varredura com o fader mais baixo que o normal, avise quem está no palco e mantenha a mão no fader. Se puder, faça primeiro no fone.</p>
+  </div>
+
+  <h3>Compare sempre no mesmo volume</h3>
+  <p>O ouvido prefere o som mais alto. Um canal com três realces fica mais alto, e por isso parece melhor que com o EQ desligado. Para julgar o timbre, e não o volume, compense no fader ao comparar. O analisador (RTA) que muitas mesas digitais mostram na tela do EQ ajuda a confirmar onde está uma sobra, mas a decisão é do ouvido: curva bonita na tela não é som bom na sala.</p>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="fontes">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Ponto de partida por fonte</h2>
+  <p>Não existe EQ pronto para “voz” ou para “violão”. Existe o EQ desta voz, neste microfone, nesta sala, hoje. O que existe são regiões em que cada tipo de fonte costuma sobrar ou faltar, para você saber onde procurar primeiro.</p>
+
+  <h3>O passa-altas por fonte</h3>
+  <p>Suba o passa-altas até perto da nota mais grave que a fonte produz: o que fica abaixo disso não é som dela. Na prática, com a fonte soando, suba a frequência até o som começar a ficar magro, e volte um pouco.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 390" role="img" aria-label="Gráfico de barras sobre um eixo de frequência de 20 Hz a 1 kHz. Para cada fonte, uma barra mostra onde o som dela começa, e outra mostra a faixa de partida do passa-altas. Bumbo: peso entre 50 e 80 Hz; passa-altas opcional, desligado ou entre 30 e 40 Hz. Baixo: nota mais grave em 41 Hz; passa-altas opcional, desligado ou entre 30 e 40 Hz. Teclado com som de piano: nota mais grave em 27,5 Hz; passa-altas opcional, desligado ou entre 40 e 120 Hz. Voz masculina: fundamental a partir de 85 Hz; passa-altas entre 80 e 120 Hz. Voz feminina: fundamental a partir de 165 Hz; passa-altas entre 100 e 180 Hz. Violão: nota mais grave em 82 Hz; passa-altas entre 80 e 120 Hz. Caixa da bateria: corpo a partir de 150 Hz; passa-altas entre 80 e 120 Hz. Pratos e chimbal: som útil acima de 300 Hz; passa-altas entre 200 e 400 Hz.">
+        <text class="mono mu" x="18" y="26" font-size="10.5">ONDE COMEÇA O SOM DE CADA FONTE, E ONDE LIGAR O PASSA-ALTAS</text>
+        <path class="grid" d="M262 40V316 M325 40V316 M369.7 40V316 M432.7 40V316 M477.5 40V316 M512.1 40V316 M575.2 40V316 M619.9 40V316 M682.9 40V316 M727.6 40V316 M790.6 40V316 M870 40V316 M18 77H870 M18 111H870 M18 145H870 M18 179H870 M18 213H870 M18 247H870 M18 281H870"/>
+        <g font-size="10.5" text-anchor="middle"><text class="mu" x="262" y="332">20</text><text class="mu" x="325" y="332">30</text><text class="mu" x="369.7" y="332">40</text><text class="mu" x="432.7" y="332">60</text><text class="mu" x="477.5" y="332">80</text><text class="mu" x="512.1" y="332">100</text><text class="mu" x="575.2" y="332">150</text><text class="mu" x="619.9" y="332">200</text><text class="mu" x="682.9" y="332">300</text><text class="mu" x="727.6" y="332">400</text><text class="mu" x="790.6" y="332">600</text><text class="mu" x="870" y="332">1 k</text></g>
+        <text class="b" x="18" y="57" font-size="12">Bumbo</text>
+        <text class="mu" x="18" y="71" font-size="10.5">peso entre 50 e 80 Hz</text>
+        <rect class="lv-teal" x="404.4" y="48" width="465.6" height="10"/>
+        <rect class="bx-purple" x="325" y="62" width="44.7" height="10"/>
+        <text class="b" x="18" y="91" font-size="12">Baixo</text>
+        <text class="mu" x="18" y="105" font-size="10.5">nota mais grave: 41 Hz</text>
+        <rect class="lv-teal" x="373.6" y="82" width="496.4" height="10"/>
+        <rect class="bx-purple" x="325" y="96" width="44.7" height="10"/>
+        <text class="b" x="18" y="125" font-size="12">Teclado (piano)</text>
+        <text class="mu" x="18" y="139" font-size="10.5">nota mais grave: 27,5 Hz</text>
+        <rect class="lv-teal" x="311.5" y="116" width="558.5" height="10"/>
+        <rect class="bx-purple" x="369.7" y="130" width="170.7" height="10"/>
+        <text class="b" x="18" y="159" font-size="12">Voz masculina</text>
+        <text class="mu" x="18" y="173" font-size="10.5">fundamental a partir de 85 Hz</text>
+        <rect class="lv-teal" x="486.9" y="150" width="383.1" height="10"/>
+        <rect class="hd-purple" x="477.5" y="164" width="63" height="10"/>
+        <text class="b" x="18" y="193" font-size="12">Voz feminina</text>
+        <text class="mu" x="18" y="207" font-size="10.5">fundamental a partir de 165 Hz</text>
+        <rect class="lv-teal" x="590" y="184" width="280" height="10"/>
+        <rect class="hd-purple" x="512.1" y="198" width="91.4" height="10"/>
+        <text class="b" x="18" y="227" font-size="12">Violão</text>
+        <text class="mu" x="18" y="241" font-size="10.5">nota mais grave: 82 Hz</text>
+        <rect class="lv-teal" x="481.3" y="218" width="388.7" height="10"/>
+        <rect class="hd-purple" x="477.5" y="232" width="63" height="10"/>
+        <text class="b" x="18" y="261" font-size="12">Caixa da bateria</text>
+        <text class="mu" x="18" y="275" font-size="10.5">corpo a partir de 150 Hz</text>
+        <rect class="lv-teal" x="575.2" y="252" width="294.8" height="10"/>
+        <rect class="hd-purple" x="477.5" y="266" width="63" height="10"/>
+        <text class="b" x="18" y="295" font-size="12">Pratos e chimbal</text>
+        <text class="mu" x="18" y="309" font-size="10.5">som útil acima de 300 Hz</text>
+        <rect class="lv-teal" x="682.9" y="286" width="187.1" height="10"/>
+        <rect class="hd-purple" x="619.9" y="300" width="107.7" height="10"/>
+        <text class="mu" x="566" y="350" font-size="11" text-anchor="middle">frequência, em Hz</text>
+        <rect class="lv-teal" x="18" y="364" width="26" height="10"/><text x="52" y="374" font-size="11">som da fonte</text>
+        <rect class="hd-purple" x="160" y="364" width="26" height="10"/><text x="194" y="374" font-size="11">passa-altas: faixa de partida</text>
+        <rect class="bx-purple" x="400" y="364" width="26" height="10"/><text x="434" y="374" font-size="11">passa-altas opcional: desligado, ou nesta faixa</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> O passa-altas fica perto do começo do som de cada fonte. Em voz, é comum o filtro passar um pouco do começo da fundamental, porque o microfone perto da boca já exagera os graves. No bumbo, no baixo e no teclado, que fazem o grave da mistura, o filtro é opcional.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:30%">Fonte</th><th style="width:24%">Passa-altas para começar</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Voz masculina, falada ou cantada</td><td class="num">80 a 120 Hz</td><td>Em voz muito grave, acima de 120 Hz o timbre já afina. Ouça.</td></tr>
+        <tr><td>Voz feminina ou infantil</td><td class="num">100 a 180 Hz</td><td>Microfone de lapela, de cabeça (headset) e de púlpito seguem a faixa da voz.</td></tr>
+        <tr><td>Coral com microfones suspensos</td><td class="num">100 a 180 Hz</td><td>O microfone distante capta muito grave da sala e do palco.</td></tr>
+        <tr><td>Violão</td><td class="num">80 a 150 Hz</td><td>Sozinho, perto de 80 Hz. Com banda, mais alto: o baixo cuida do grave.</td></tr>
+        <tr><td>Guitarra (amplificador) e caixa da bateria</td><td class="num">80 a 120 Hz</td><td>Tira o ronco do amplificador, e o bumbo que entra no microfone da caixa.</td></tr>
+        <tr><td>Tons e surdo</td><td class="num">40 a 100 Hz</td><td>Quanto maior o tambor, mais baixo o filtro.</td></tr>
+        <tr><td>Pratos e chimbal</td><td class="num">200 a 400 Hz</td><td>Deixa passar só os pratos, e não o resto da bateria.</td></tr>
+        <tr><td>Teclado</td><td>desligado, ou 40 a 120 Hz</td><td>Baixo quando o teclado faz o grave da música. Mais alto quando há baixista.</td></tr>
+        <tr><td>Baixo, bumbo, computador e música gravada</td><td>desligado, ou 30 a 40 Hz</td><td>Tira só o subgrave que as caixas não reproduzem.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Se a mesa só tem uma chave de passa-altas fixa em 80 ou 100 Hz: ligada em todos os canais, menos no bumbo, no baixo, no teclado e no computador. Se não bastar em uma voz, complete com um pequeno corte no shelving de graves.</p>
+
+  <h3>As seis fontes mais comuns</h3>
+  <p>Use a tabela como roteiro de procura, com a varredura, e não como receita. Cada linha supõe o passa-altas já ajustado.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:13%">Fonte</th><th style="width:34%">Onde costuma sobrar (cortar)</th><th style="width:27%">Onde pode faltar (realçar com cuidado)</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Voz falada</strong></td><td>200 a 350 Hz: embolado, pior com o microfone colado na boca.<br>800 Hz a 1,5 kHz: anasalado.<br>5 a 8 kHz: sibilância.</td><td>2 a 4 kHz: clareza das palavras, com 2 a 3 dB e banda larga.</td><td>A meta é entender cada palavra do fundo da sala. Lapela no peito costuma soar abafada.</td></tr>
+        <tr><td><strong>Voz cantada</strong></td><td>200 a 400 Hz: embolado.<br>2,5 a 4 kHz: áspero nas notas fortes.<br>5 a 8 kHz: sibilância.</td><td>3 a 5 kHz: presença, com 2 a 3 dB.<br>Shelving de agudos em 10 a 12 kHz: “ar”, com 2 a 3 dB.</td><td>Equalize com a pessoa cantando forte, na distância em que vai cantar.</td></tr>
+        <tr><td><strong>Violão</strong></td><td>100 a 250 Hz: retumbante, a ressonância do corpo, onde o violão apita.<br>1 a 3 kHz: som duro, “de plástico”, comum em captador.</td><td>Shelving de agudos em 8 a 10 kHz: brilho das cordas.</td><td>Com banda, o violão pode ficar mais fino do que sozinho: o corpo dele some atrás do baixo de qualquer modo.</td></tr>
+        <tr><td><strong>Baixo</strong></td><td>200 a 300 Hz: embolado.<br>40 a 60 Hz: se a sala retumbar.</td><td>60 a 100 Hz: peso.<br>700 Hz a 1 kHz: definição das notas.<br>2 a 3 kHz: ataque das cordas.</td><td>É a definição, e não o peso, que faz o baixo ser ouvido em caixas pequenas.</td></tr>
+        <tr><td><strong>Bumbo</strong></td><td>300 a 500 Hz: “caixa de papelão”. Cortes de 4 a 8 dB são comuns aqui.</td><td>50 a 80 Hz: peso.<br>2 a 5 kHz: ataque do batedor.</td><td>Microfone dentro do bumbo, perto da pele batida, dá mais ataque. Mais para fora, mais peso.</td></tr>
+        <tr><td><strong>Teclado</strong></td><td>200 a 400 Hz: embolado com a banda.<br>2 a 4 kHz: se disputar com a voz.</td><td>Raramente precisa.</td><td>Os timbres já vêm prontos. Se um soa mal, ajuste-o no próprio teclado.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O grave que o microfone direcional acrescenta quando fica muito perto da boca, o efeito de proximidade, explica boa parte do embolado das vozes e está no estudo <a href="../Microfones/treinamento-microfones.html">Microfones</a>. Quando a sibilância só incomoda em algumas sílabas, a ferramenta é o de-esser, e não um corte fixo, que deixaria a voz opaca o tempo todo.</p>
+
+  <h3>Mascaramento: um espaço para cada fonte</h3>
+  <p>Cada canal, ouvido sozinho, pode estar ótimo, e a mistura estar confusa. A causa é o <strong>mascaramento</strong>: quando duas fontes têm energia na mesma faixa, a mais forte cobre a outra. É a mesa de restaurante em que todos falam ao mesmo tempo: se cada um falar mais alto, ninguém entende nada. Na mistura, cada fonte fala na sua faixa. E o mascaramento se resolve mais com cortes nas fontes que cobrem do que com realce na fonte coberta: se o violão e o teclado cedem 3 dB entre 2 e 4 kHz, a voz aparece sem esforço.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 288" role="img" aria-label="Gráfico com duas curvas de equalização que se completam. A curva da voz tem passa-altas em 100 Hz, um corte leve em 250 Hz e um realce de 2,5 dB em 3 kHz. A curva do violão e do teclado tem passa-altas em 120 Hz e um corte largo de 3 dB em 3 kHz. Duas regiões estão marcadas: abaixo de 100 Hz, a faixa do bumbo e do baixo, de onde as outras fontes saem pelo passa-altas; e entre 2 e 4 kHz, a faixa da clareza da voz, que o violão e o teclado cedem. A diferença entre as duas curvas em 3 kHz passa de 5 dB, sem realce forte na voz.">
+        <rect class="bx" x="64" y="40" width="520" height="200"/>
+        <rect class="lv-slate" style="fill-opacity:.22" x="64" y="40" width="121.2" height="200"/>
+        <rect class="lv-teal" style="fill-opacity:.2" x="410.7" y="40" width="52.2" height="200"/>
+        <path class="grid" d="M64 40V240 M133 40V240 M185.2 40V240 M237.3 40V240 M306.3 40V240 M358.5 40V240 M410.7 40V240 M479.6 40V240 M531.8 40V240 M584 40V240"/>
+        <g font-size="10.5" text-anchor="middle"><text class="mu" x="64" y="256">20</text><text class="mu" x="133" y="256">50</text><text class="mu" x="185.2" y="256">100</text><text class="mu" x="237.3" y="256">200</text><text class="mu" x="306.3" y="256">500</text><text class="mu" x="358.5" y="256">1 k</text><text class="mu" x="410.7" y="256">2 k</text><text class="mu" x="479.6" y="256">5 k</text><text class="mu" x="531.8" y="256">10 k</text><text class="mu" x="584" y="256">20 k</text></g>
+        <path class="grid" d="M64 68.6H584 M64 97.1H584 M64 154.3H584 M64 182.9H584 M64 211.4H584"/>
+        <line class="ln-mu" stroke-width="1" x1="64" y1="125.7" x2="584" y2="125.7"/>
+        <g font-size="10.5" text-anchor="end"><text class="mu" x="56" y="72.6">+6</text><text class="mu" x="56" y="101.1">+3</text><text class="b" x="56" y="129.7">0 dB</text><text class="mu" x="56" y="158.3">−3</text><text class="mu" x="56" y="186.9">−6</text><text class="mu" x="56" y="215.4">−9</text></g>
+        <path class="s-amber" d="M64 240 L147.2 240 L148.5 239.2 L162.8 210.7 L174.5 189.3 L184.9 172.6 L195.3 158.5 L205.7 147.6 L216.1 139.7 L226.5 134.4 L239.5 130.4 L248.6 128.7 L260.3 127.5 L288.9 126.6 L330.5 127.4 L363 129.8 L379.9 132.4 L394.2 136.1 L407.2 141 L430.6 152.1 L435.8 153.7 L441 154.3 L446.2 153.8 L451.4 152.3 L473.5 141.7 L481.3 138.4 L491.7 135 L503.4 132.2 L517.7 130 L535.9 128.2 L556.7 127.1 L584 126.4"/>
+        <path class="s-teal" stroke-width="2.5" d="M64 240 L134.2 240 L135.5 238.4 L148.5 212.8 L158.9 193.9 L168 179.1 L175.8 168.1 L184.9 157.6 L192.7 150.7 L200.5 145.9 L204.4 144.2 L209.6 142.7 L217.4 142 L225.2 143.2 L233 146.2 L247.3 153.9 L251.2 155 L255.1 155.1 L259 154 L262.9 151.9 L275.9 142.8 L283.7 138.1 L290.2 135.2 L298 132.5 L307.1 130.3 L317.5 128.4 L365.6 122.9 L385.1 119.7 L403.3 114.7 L430.6 103.8 L439.7 102.1 L444.9 102.2 L450.1 103.3 L481.3 115.1 L491.7 118 L503.4 120.3 L517.7 122.2 L535.9 123.6 L584 125.2"/>
+        <text class="mu" x="124.6" y="58" font-size="10.5" text-anchor="middle">faixa do bumbo</text>
+        <text class="mu" x="124.6" y="72" font-size="10.5" text-anchor="middle">e do baixo</text>
+        <text class="t-teal b" x="436.8" y="230" font-size="10.5" text-anchor="middle">clareza da voz</text>
+        <line class="s-teal" x1="612" y1="62" x2="642" y2="62"/>
+        <text class="b" x="650" y="66" font-size="12">Voz</text>
+        <text class="mu" x="612" y="84" font-size="11">Passa-altas em 100 Hz, corte leve em</text>
+        <text class="mu" x="612" y="99" font-size="11">250 Hz, realce de 2,5 dB em 3 kHz.</text>
+        <line class="s-amber" x1="612" y1="136" x2="642" y2="136"/>
+        <text class="b" x="650" y="140" font-size="12">Violão e teclado</text>
+        <text class="mu" x="612" y="158" font-size="11">Passa-altas em 120 Hz e corte largo de</text>
+        <text class="mu" x="612" y="173" font-size="11">3 dB em 3 kHz: cedem a faixa da voz.</text>
+        <text x="612" y="216" font-size="11">A diferença entre as curvas em 3 kHz</text>
+        <text x="612" y="231" font-size="11">passa de 5 dB, sem realce forte na voz.</text>
+        <text class="mu" x="324.0" y="276" font-size="11" text-anchor="middle">frequência, em Hz</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> Curvas que se completam. A voz ganha pouco, os instrumentos de acompanhamento cedem um pouco, e todos saem do grave, que fica para o bumbo e o baixo. Os valores são um exemplo.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:24%">Quem disputa</th><th style="width:20%">Onde</th><th>Como dar espaço</th></tr></thead>
+      <tbody>
+        <tr><td>Todas as fontes × bumbo e baixo</td><td>abaixo de 100 Hz</td><td>Passa-altas em tudo o que não é bumbo, baixo ou teclado fazendo o grave.</td></tr>
+        <tr><td>Bumbo × baixo</td><td class="num">50 a 100 Hz</td><td>Decida quem fica mais embaixo. O mais comum: bumbo com o peso em 50 a 80 Hz e baixo com o corpo em 80 a 100 Hz. Não realce os dois no mesmo ponto.</td></tr>
+        <tr><td>Violão, teclado, guitarra e vozes</td><td class="num">200 a 400 Hz</td><td>É onde tudo se acumula. Pequenos cortes em cada canal limpam mais do que um corte grande em um só.</td></tr>
+        <tr><td>Voz × violão, teclado e guitarra</td><td class="num">2 a 4 kHz</td><td>Corte largo de 2 a 3 dB nos instrumentos. A voz é a prioridade.</td></tr>
+        <tr><td>Voz principal × vozes de apoio</td><td class="num">2 a 5 kHz</td><td>Menos presença e menos grave nos apoios. Eles ficam atrás, e não ao lado.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Daí a regra mais importante deste módulo: <strong>o EQ se decide na mistura, e não no solo</strong>. O solo serve para achar um defeito. E o EQ é a terceira ferramenta para dar espaço: antes dele vêm o arranjo, com menos gente tocando a mesma coisa, e o fader. A construção da mistura está no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p>
+
+  <div class="note">
+    <h4>Valores de referência</h4>
+    <p>As faixas deste módulo são típicas e servem de ponto de partida. Mudam com a voz, o instrumento, o microfone, a distância e a sala. Vale o que você ouve na sala, no volume do evento.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="sistema">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Canal, sistema e retorno</h2>
+  <p>Há equalizadores em três lugares do caminho do sinal, e cada um corrige uma coisa. Usar um para fazer o trabalho do outro é a origem de muita mistura ruim.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Diagrama do caminho do sinal com os três lugares em que há equalizador. Na linha de cima, o som da frente: a fonte e o microfone entram no EQ de canal, que corrige a fonte; depois vêm o fader do canal, a mistura, que soma os canais, o EQ de sistema, que corrige as caixas e a sala, e as caixas da frente. Na linha de baixo, o retorno: um ramo sai do canal, depois do EQ de canal e antes do fader, e vai para o auxiliar, que é a mistura do retorno; depois vêm o EQ do retorno, um equalizador gráfico que tira as frequências que apitam, e a caixa de retorno. O EQ de canal existe um por canal e muda só aquela fonte. O EQ de sistema existe um por saída e muda tudo o que vai às caixas. O EQ do retorno existe um por mistura de retorno e muda tudo o que vai àquela caixa de retorno.">
+        <defs><marker id="ar9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="26" font-size="10.5">SOM DA FRENTE</text>
+        <rect class="bx" x="18" y="40" width="120" height="52"/><text class="b" x="78.0" y="63" font-size="11.5" text-anchor="middle">Fonte</text><text class="mu" x="78.0" y="79" font-size="10.5" text-anchor="middle">e microfone</text>
+        <rect class="hd-purple" x="166" y="40" width="120" height="52"/><text class="on b" x="226.0" y="63" font-size="11.5" text-anchor="middle">EQ de canal</text><text class="on" x="226.0" y="79" font-size="10.5" text-anchor="middle">corrige a fonte</text>
+        <rect class="bx" x="314" y="40" width="120" height="52"/><text class="b" x="374.0" y="63" font-size="11.5" text-anchor="middle">Fader</text><text class="mu" x="374.0" y="79" font-size="10.5" text-anchor="middle">do canal</text>
+        <rect class="bx" x="462" y="40" width="120" height="52"/><text class="b" x="522.0" y="63" font-size="11.5" text-anchor="middle">Mistura</text><text class="mu" x="522.0" y="79" font-size="10.5" text-anchor="middle">soma dos canais</text>
+        <rect class="hd-blue" x="610" y="40" width="120" height="52"/><text class="on b" x="670.0" y="63" font-size="11.5" text-anchor="middle">EQ de sistema</text><text class="on" x="670.0" y="79" font-size="10.5" text-anchor="middle">corrige caixas e sala</text>
+        <rect class="bx" x="758" y="40" width="120" height="52"/><text class="b" x="818.0" y="63" font-size="11.5" text-anchor="middle">Caixas</text><text class="mu" x="818.0" y="79" font-size="10.5" text-anchor="middle">da frente (PA)</text>
+        <line class="ln" x1="140" y1="66" x2="162" y2="66" marker-end="url(#ar9)"/>
+        <line class="ln" x1="288" y1="66" x2="310" y2="66" marker-end="url(#ar9)"/>
+        <line class="ln" x1="436" y1="66" x2="458" y2="66" marker-end="url(#ar9)"/>
+        <line class="ln" x1="584" y1="66" x2="606" y2="66" marker-end="url(#ar9)"/>
+        <line class="ln" x1="732" y1="66" x2="754" y2="66" marker-end="url(#ar9)"/>
+        <text class="mono mu" x="18" y="150" font-size="10.5">RETORNO</text>
+        <circle class="f-ink" cx="300" cy="66" r="3.5"/>
+        <path class="ln" d="M300 66 V182 H310" marker-end="url(#ar9)"/>
+        <rect class="bx" x="314" y="156" width="120" height="52"/><text class="b" x="374.0" y="179" font-size="11.5" text-anchor="middle">Auxiliar</text><text class="mu" x="374.0" y="195" font-size="10.5" text-anchor="middle">mistura do retorno</text>
+        <rect class="hd-teal" x="462" y="156" width="120" height="52"/><text class="on b" x="522.0" y="179" font-size="11.5" text-anchor="middle">EQ do retorno</text><text class="on" x="522.0" y="195" font-size="10.5" text-anchor="middle">gráfico: tira o que apita</text>
+        <rect class="bx" x="610" y="156" width="120" height="52"/><text class="b" x="670.0" y="179" font-size="11.5" text-anchor="middle">Caixa</text><text class="mu" x="670.0" y="195" font-size="10.5" text-anchor="middle">de retorno</text>
+        <line class="ln" x1="436" y1="182" x2="458" y2="182" marker-end="url(#ar9)"/>
+        <line class="ln" x1="584" y1="182" x2="606" y2="182" marker-end="url(#ar9)"/>
+        <rect class="hd-purple" x="18" y="236" width="14" height="14"/><text x="40" y="248" font-size="11.5">um por canal: muda só aquela fonte</text>
+        <rect class="hd-blue" x="300" y="236" width="14" height="14"/><text x="322" y="248" font-size="11.5">um por saída: muda tudo o que vai às caixas</text>
+        <rect class="hd-teal" x="18" y="260" width="14" height="14"/><text x="40" y="272" font-size="11.5">um por mistura de retorno: muda tudo o que vai àquela caixa de retorno</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 9.</b> Os três lugares do EQ. Em muitas mesas, o envio para o auxiliar sai depois do EQ de canal, como no desenho: o que você equaliza no canal muda também o retorno. Em outras, sai antes, ou há uma opção. Veja o diagrama de blocos da sua mesa.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:14%"></th><th class="purple" style="width:28%">EQ de canal</th><th class="blue" style="width:29%">EQ de sistema</th><th class="teal">EQ do retorno</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Onde fica</strong></td><td>Em cada canal da mesa.</td><td>Na saída principal: na própria mesa, no processador ou na caixa ativa.</td><td>Na saída de cada auxiliar de retorno.</td></tr>
+        <tr><td><strong>O que corrige</strong></td><td>A fonte e o microfone.</td><td>As caixas e a sala.</td><td>A caixa de retorno e as frequências que apitam nela.</td></tr>
+        <tr><td><strong>Quem ajusta</strong></td><td>O operador, a cada passagem de som.</td><td>Quem instalou ou alinhou o sistema, com medição. Fica guardado.</td><td>O operador, no ring-out, antes de os músicos chegarem.</td></tr>
+        <tr><td><strong>Tipo usual</strong></td><td>Passa-altas mais três ou quatro bandas.</td><td>Paramétrico ou gráfico.</td><td>Gráfico de 31 bandas, ou paramétrico na mesa digital.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>EQ de sistema: a sala e as caixas</h3>
+  <p>Toda sala reforça algumas frequências e engole outras, e toda caixa tem o seu timbre. O EQ de sistema compensa isso uma vez, para todos os canais. Quem alinha o sistema o ajusta, de preferência com microfone de medição e analisador. No dia a dia, o operador não mexe nele; se precisar, anota antes como estava. O processador e o alinhamento estão no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>. Dois sinais mostram que o problema é do sistema, e não do canal:</p>
+  <ul>
+    <li><strong>O mesmo corte se repete em quase todos os canais.</strong> Se tudo pede menos 200 Hz, quem tem 200 Hz sobrando é a sala ou a caixa.</li>
+    <li><strong>Uma música gravada, sem EQ, soa com o mesmo defeito.</strong> A gravação já vem equilibrada: se ela retumba no seu sistema, o canal não tem culpa.</li>
+  </ul>
+  <p>O contrário também vale: o corte no sistema que arruma uma voz estraga todos os outros canais.</p>
+
+  <h3>O EQ gráfico</h3>
+  <p>O EQ gráfico divide a escala em bandas fixas, cada uma com um controle deslizante; a posição dos controles desenha a curva. O de 31 bandas tem uma a cada terço de oitava, de 20 Hz a 20 kHz. O de 15 bandas, uma a cada dois terços de oitava. Cada controle é um bell de frequência e largura fixas.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 270" role="img" aria-label="Painel de um equalizador gráfico de 31 bandas, uma a cada terço de oitava, de 20 Hz a 20 kHz, ligado na saída de um retorno. Cada banda tem um controle deslizante, com escala de mais 12 a menos 12 dB. Vinte e oito bandas estão em 0 dB. Três foram cortadas no ring-out: 250 Hz, com menos 3 dB; 1 kHz, com menos 6 dB; e 4 kHz, com menos 4 dB. Uma curva mostra o resultado: cada corte forma um vale que também alcança as bandas vizinhas.">
+        <text class="mono mu" x="18" y="26" font-size="10.5">EQ GRÁFICO DE 31 BANDAS NA SAÍDA DE UM RETORNO</text>
+        <rect class="bx" x="40" y="46" width="834" height="152"/>
+        <line class="ln-mu" stroke-width="1" x1="40" y1="122" x2="874" y2="122"/>
+        <path class="grid" stroke-width="3" d="M58 62V182 M84.6 62V182 M111.2 62V182 M137.8 62V182 M164.4 62V182 M191 62V182 M217.6 62V182 M244.2 62V182 M270.8 62V182 M297.4 62V182 M324 62V182 M350.6 62V182 M377.2 62V182 M403.8 62V182 M430.4 62V182 M457 62V182 M483.6 62V182 M510.2 62V182 M536.8 62V182 M563.4 62V182 M590 62V182 M616.6 62V182 M643.2 62V182 M669.8 62V182 M696.4 62V182 M723 62V182 M749.6 62V182 M776.2 62V182 M802.8 62V182 M829.4 62V182 M856 62V182"/>
+        <text class="mu" x="34" y="66" font-size="10.5" text-anchor="end">+12</text>
+        <text class="b" x="34" y="126" font-size="10.5" text-anchor="end">0 dB</text>
+        <text class="mu" x="34" y="186" font-size="10.5" text-anchor="end">−12</text>
+        <path class="s-teal" d="M58 122 L246.9 122.2 L284.1 122.6 L305.4 123.3 L318.7 124.4 L329.3 126.6 L337.3 130.1 L345.3 135.6 L347.9 136.8 L350.6 137.1 L353.3 136.2 L361.2 130.8 L366.6 128 L371.9 126.2 L379.9 124.7 L393.2 123.6 L411.8 123.1 L435.7 123.2 L457 124 L467.6 125 L475.6 126.2 L483.6 128.5 L488.9 131 L494.2 134.9 L496.9 137.6 L507.5 151.2 L510.2 152.1 L512.9 150.7 L523.5 137 L526.2 134.4 L531.5 130.7 L536.8 128.3 L542.1 126.7 L558.1 124.4 L576.7 123.5 L603.3 123.3 L624.6 123.9 L637.9 125.2 L645.9 126.9 L653.8 130.3 L659.2 134.2 L667.1 141.2 L669.8 142.1 L672.5 141.5 L683.1 132.4 L688.4 129.1 L696.4 126.2 L707 124.4 L723 123.2 L746.9 122.6 L856 122.1"/>
+        <rect class="f-ink" x="51" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="77.6" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="104.2" y="118" width="14" height="8"/>
+        <text class="mu" x="111.2" y="214" font-size="10.5" text-anchor="middle">31,5</text>
+        <rect class="f-ink" x="130.8" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="157.4" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="184" y="118" width="14" height="8"/>
+        <text class="mu" x="191" y="214" font-size="10.5" text-anchor="middle">63</text>
+        <rect class="f-ink" x="210.6" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="237.2" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="263.8" y="118" width="14" height="8"/>
+        <text class="mu" x="270.8" y="214" font-size="10.5" text-anchor="middle">125</text>
+        <rect class="f-ink" x="290.4" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="317" y="118" width="14" height="8"/>
+        <rect class="hd-teal" x="343.6" y="133" width="14" height="8"/>
+        <text class="b" x="350.6" y="214" font-size="10.5" text-anchor="middle">250</text>
+        <text class="t-teal b" x="350.6" y="110" font-size="10.5" text-anchor="middle">−3 dB</text>
+        <rect class="f-ink" x="370.2" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="396.8" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="423.4" y="118" width="14" height="8"/>
+        <text class="mu" x="430.4" y="214" font-size="10.5" text-anchor="middle">500</text>
+        <rect class="f-ink" x="450" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="476.6" y="118" width="14" height="8"/>
+        <rect class="hd-teal" x="503.2" y="148" width="14" height="8"/>
+        <text class="b" x="510.2" y="214" font-size="10.5" text-anchor="middle">1 k</text>
+        <text class="t-teal b" x="510.2" y="110" font-size="10.5" text-anchor="middle">−6 dB</text>
+        <rect class="f-ink" x="529.8" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="556.4" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="583" y="118" width="14" height="8"/>
+        <text class="mu" x="590" y="214" font-size="10.5" text-anchor="middle">2 k</text>
+        <rect class="f-ink" x="609.6" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="636.2" y="118" width="14" height="8"/>
+        <rect class="hd-teal" x="662.8" y="138" width="14" height="8"/>
+        <text class="b" x="669.8" y="214" font-size="10.5" text-anchor="middle">4 k</text>
+        <text class="t-teal b" x="669.8" y="110" font-size="10.5" text-anchor="middle">−4 dB</text>
+        <rect class="f-ink" x="689.4" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="716" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="742.6" y="118" width="14" height="8"/>
+        <text class="mu" x="749.6" y="214" font-size="10.5" text-anchor="middle">8 k</text>
+        <rect class="f-ink" x="769.2" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="795.8" y="118" width="14" height="8"/>
+        <rect class="f-ink" x="822.4" y="118" width="14" height="8"/>
+        <text class="mu" x="829.4" y="214" font-size="10.5" text-anchor="middle">16 k</text>
+        <rect class="f-ink" x="849" y="118" width="14" height="8"/>
+        <text class="mu" x="874" y="232" font-size="11" text-anchor="end">frequência central de cada banda, em Hz (uma banda a cada terço de oitava)</text>
+        <rect class="hd-teal" x="18" y="246" width="14" height="8"/><text x="40" y="254" font-size="11.5">banda cortada no ring-out</text>
+        <rect class="f-ink" x="230" y="246" width="14" height="8"/><text x="252" y="254" font-size="11.5">banda em 0 dB</text>
+        <line class="s-teal" x1="380" y1="250" x2="410" y2="250"/><text x="418" y="254" font-size="11.5">curva que resulta: cada corte também alcança as bandas vizinhas</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 10.</b> Um EQ gráfico de retorno depois do ring-out: poucos cortes, e o resto em 0 dB. A curva real depende do modelo do equalizador. O desenho é um esquema.</figcaption>
+  </figure>
+
+  <h3>EQ gráfico no retorno</h3>
+  <p>O microfone do cantor fica a um passo da caixa de retorno. Quando o retorno sobe, uma frequência apita antes das outras: aquela em que a soma de microfone, caixa e palco tem mais ganho. O EQ gráfico, na saída do auxiliar, corta só essa frequência, e o retorno pode subir mais alguns dB, até a próxima apitar. O procedimento, o ring-out, está passo a passo no estudo <a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>. As regras de uso do equalizador:</p>
+  <ul>
+    <li><strong>Só cortes, e moderados.</strong> De 3 a 6 dB por banda. Se uma banda pede mais, mude a posição do retorno ou do microfone.</li>
+    <li><strong>Poucos cortes.</strong> Depois de quatro ou cinco bandas, cada novo corte tira mais som do que microfonia, e o músico pede mais volume. Resolva na posição e no volume do palco.</li>
+    <li><strong>Vizinhas somam.</strong> Duas bandas vizinhas cortadas viram um corte só, mais largo e mais fundo do que os controles mostram.</li>
+    <li><strong>Confira com o equalizador desligado, e anote.</strong> A voz no retorno ainda precisa soar como voz. A frequência e o corte de cada banda, por saída, servem de ponto de partida no próximo evento.</li>
+  </ul>
+  <p>Nas mesas digitais, cada saída tem um EQ paramétrico, e muitas oferecem também o gráfico. Para microfonia, o paramétrico com Q alto é mais preciso: acerta a frequência exata e tira menos som em volta. Um retorno de voz com passa-altas perto de 100 Hz fica mais claro no palco e suja menos o som da frente. A montagem dos retornos está no estudo <a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>.</p>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>A “curva do sorriso”, com graves e agudos para cima e médios para baixo no EQ gráfico do sistema, deixa a música gravada mais vistosa e a voz ao vivo pior: os médios são a voz. Se o gráfico do seu sistema está assim, e ninguém sabe por quê, peça a quem alinhou o sistema para rever, ou compare com ele desligado, em volume baixo.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>O EQ de canal vem depois do ajuste de ganho e antes da montagem dos retornos e da mistura. Faça um canal por vez. Com prática, cada canal leva de um a dois minutos.</p>
+  <ol class="steps">
+    <li><h4>Comece com o ganho certo e o EQ plano</h4><p>Ganho ajustado pelo medidor, bandas em 0 dB, passa-altas desligado. Não aproveite o EQ do evento anterior: a voz, o microfone e a distância mudaram.</p></li>
+    <li><h4>Ouça antes de mexer, e dê um nome ao que ouviu</h4><p>Peça a fonte no volume real e ouça no fone e na sala: embolado, anasalado, sibilante, magro? Se não há nada errado, não há o que equalizar.</p></li>
+    <li><h4>Confira a fonte e o microfone</h4><p>Microfone longe, torto ou coberto pela mão se corrige no palco, assim como o timbre do teclado. O EQ vem depois.</p></li>
+    <li><h4>Ligue o passa-altas</h4><p>Em tudo, menos no bumbo, no baixo, no teclado que faz o grave e no computador. Suba até o som começar a ficar magro, e volte um pouco.</p></li>
+    <li><h4>Procure o que sobra e corte</h4><p>A tabela do módulo 2 dá a região, e a varredura acha o ponto. Corte de 3 a 6 dB, com o Q perto de 2. Um ou dois cortes resolvem a maioria dos canais.</p></li>
+    <li><h4>Realce só o que falta de verdade</h4><p>Depois dos cortes, se ainda faltar clareza ou brilho: de 2 a 3 dB, com banda larga ou shelving. Se pedir mais de 6 dB, volte ao passo 3.</p></li>
+    <li><h4>Compare com o EQ desligado</h4><p>Com a chave de bypass, compensando a diferença de volume. Com o EQ ligado, o som tem de ser melhor, e não só mais alto.</p></li>
+    <li><h4>Confira o nível do canal</h4><p>Um realce pode ter levado os picos para perto do clip. Corrija no ganho, antes de montar os retornos.</p></li>
+    <li><h4>Decida na mistura</h4><p>Com todos tocando: a voz está clara por cima da banda? O bumbo e o baixo se distinguem? Abra espaço com cortes nos canais que cobrem.</p></li>
+    <li><h4>Anote</h4><p>Registre o passa-altas e as bandas de cada canal na ficha de EQ da planilha, como ponto de partida para a próxima passagem.</p></li>
+  </ol>
+
+  <h3>Durante o evento</h3>
+  <p>Mexa pouco e devagar, em passos de 1 ou 2 dB, e só no que incomoda de verdade: a sala cheia, que absorve agudos; a troca de quem usa o microfone; uma frequência que começa a apitar. Nesse último caso, a primeira ação é no fader ou no envio do retorno, e o EQ entra depois. Lembre também que, em muitas mesas, o compressor e os envios de retorno recebem o sinal já equalizado: um realce forte muda o quanto o compressor atua. A ordem dos blocos está no estudo <a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. O primeiro está preenchido na planilha de apoio.</p>
+
+  <h3>Exemplo 1. A voz que sumia atrás da banda</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, mesa digital com quatro bandas por canal, oito canais: três vozes, violão, baixo, bumbo, teclado e computador.</dd></div>
+    <div><dt>Sintoma</dt><dd>A voz da cantora some atrás da banda. O operador já realçou os médios-agudos e os agudos dela, e a voz ficou áspera, sem ficar clara.</dd></div>
+    <div><dt>Causa</dt><dd>Seis dos oito canais tinham realce entre 2,5 e 3,5 kHz. Todos disputavam a faixa da voz. A voz da cantora estava sem passa-altas e com dois realces fortes.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Registro do EQ de cada canal na planilha. Realces zerados. Passa-altas e um corte nas vozes. Corte largo em 3 kHz no violão e no teclado.</dd></div>
+    <div><dt>Resultado</dt><dd>A voz ficou clara com um realce de só 3 dB. O canal dela voltou a ter folga antes do clip.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:17%">Canal</th><th style="width:27%">EQ encontrado</th><th style="width:13%">Situação</th><th>O que foi feito</th></tr></thead>
+      <tbody>
+        <tr><td>Voz da cantora</td><td>Sem passa-altas. +8 dB em 3 kHz e +9 dB no shelving em 10 kHz.</td><td class="amber">Realce alto</td><td>Realces em 0. Passa-altas em 120 Hz. Varredura: sobra em 250 Hz, corte de 3 dB. Depois, +3 dB em 3 kHz, com banda larga, e +2 dB no shelving.</td></tr>
+        <tr><td>Voz de apoio</td><td>Passa-altas em 100 Hz. +6 dB em 3,15 kHz e +4 dB no shelving em 10 kHz.</td><td class="amber">Só realces</td><td>Realces em 0. Passa-altas em 120 Hz. Corte de 3 dB em 300 Hz. Nenhum realce: o apoio fica atrás.</td></tr>
+        <tr><td>Violão</td><td>Passa-altas em 80 Hz. −4 dB em 200 Hz e +5 dB em 3 kHz.</td><td class="teal">OK</td><td>O realce em 3 kHz virou corte largo de 3 dB. Passa-altas em 100 Hz.</td></tr>
+        <tr><td>Teclado</td><td>Sem passa-altas. +6 dB em 2,5 kHz e +3 dB no shelving em 8 kHz.</td><td class="amber">Só realces</td><td>Realces em 0. Passa-altas em 100 Hz, porque há baixista. Corte largo de 3 dB em 3 kHz.</td></tr>
+        <tr><td>Pastor, baixo, bumbo e computador</td><td>Um ou dois cortes e realces de até 4 dB. Computador sem EQ.</td><td class="teal">OK</td><td>Mantidos. O ataque do bumbo em 3,5 kHz é curto e não cobre a voz.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> Canal por canal, o violão parecia certo. O problema só apareceu na soma: a planilha contou seis realces na faixa de 2 a 4 kHz. A solução não foi dar mais à voz, e sim tirar dos outros. E, como os realces da voz saíram, o operador conferiu o ganho dela antes de montar os retornos.</p>
+
+  <h3>Exemplo 2. O púlpito abafado em uma formatura</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Auditório de escola, mesa analógica com passa-altas de chave (100 Hz), agudo e grave fixos e um médio semiparamétrico. Um microfone de púlpito.</dd></div>
+    <div><dt>Sintoma</dt><dd>A voz dos oradores soa abafada e retumbante. Com o botão de agudos em +10 dB, apareceram chiado e um começo de apito agudo.</dd></div>
+    <div><dt>Causa</dt><dd>Passa-altas desligado e sobra em torno de 250 Hz: os oradores falam colados no microfone, e a sala reforça os graves. Faltava corte, e não agudo.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Agudos de volta a 0. Passa-altas ligado. Varredura com o médio: o defeito saltou perto de 250 Hz. Corte de 5 dB ali. Por fim, agudos em +2 dB.</dd></div>
+    <div><dt>Resultado</dt><dd>Voz clara, sem chiado. O canal pôde subir mais antes de apitar.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> A única banda com frequência ajustável bastou, porque foi gasta com o defeito principal. O realce de 10 dB nos agudos só subia o chiado e aproximava a microfonia. O operador também pediu aos oradores um palmo de distância do microfone, e o grave diminuiu na origem.</p>
+
+  <h3>Exemplo 3. O mesmo corte em todos os canais</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Salão de eventos, duas caixas ativas em tripés, encostadas nos cantos do fundo do palco. Mesa digital com EQ paramétrico na saída principal.</dd></div>
+    <div><dt>Sintoma</dt><dd>Tudo soa retumbante. O operador cortou 6 dB perto de 160 Hz em cada voz e em cada instrumento, e o som continuou pesado.</dd></div>
+    <div><dt>Causa</dt><dd>O defeito era do sistema e da sala: caixa perto de parede e de canto tem os graves reforçados. Uma música gravada, sem EQ, retumbava do mesmo jeito.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Caixas afastadas dos cantos, até onde o palco permitia. Na saída principal, corte largo de 4 dB em 160 Hz, com a música gravada como referência. O ajuste anterior foi anotado. Cortes dos canais revistos.</dd></div>
+    <div><dt>Resultado</dt><dd>Os canais ficaram com cortes de 0 a 2 dB nessa faixa. As vozes recuperaram o corpo.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> Corte repetido em todos os canais é sinal de problema depois da mistura. No lugar certo, um ajuste só valeu para tudo, inclusive para o som dos vídeos. A primeira medida foi física, e o EQ completou. O posicionamento das caixas está no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Equalizar só no solo</h4><p>Cada canal fica bonito sozinho, cheio de grave e de brilho, e a mistura fica confusa.</p><p class="fix"><b>Correção:</b> use o solo para achar defeitos. Decida o EQ com todos tocando.</p></div>
+    <div><h4>Realçar tudo</h4><p>Graves, médios e agudos para a direita em todos os canais. O resultado é só mais volume, menos folga e mais microfonia.</p><p class="fix"><b>Correção:</b> volte a 0. Procure primeiro o que cortar. Realce pouco e com banda larga.</p></div>
+    <div><h4>Consertar a posição do microfone com EQ</h4><p>Microfone longe ou torto, e o operador gasta 10 dB de agudos para compensar.</p><p class="fix"><b>Correção:</b> vá ao palco. Aproxime e aponte o microfone. Depois equalize o que sobrar.</p></div>
+    <div><h4>Esquecer o passa-altas</h4><p>Vozes e violão sem o filtro. O palco inteiro entra nos graves da mistura, e a sala embola.</p><p class="fix"><b>Correção:</b> passa-altas em tudo o que não faz o grave da música.</p></div>
+    <div><h4>Passa-altas alto demais</h4><p>O filtro em 250 Hz “para limpar” deixa a voz magra, e o operador repõe com o shelving de graves.</p><p class="fix"><b>Correção:</b> suba até o som afinar e volte um pouco. Para o embolado, use um corte bell.</p></div>
+    <div><h4>Copiar o EQ de outro dia ou de outra voz</h4><p>O EQ da semana passada, ou a “receita de voz” da internet, aplicado sem ouvir.</p><p class="fix"><b>Correção:</b> comece plano. Use a anotação anterior só como pista de onde procurar.</p></div>
+    <div><h4>Corrigir a sala em cada canal</h4><p>O mesmo corte em todos os canais, e o som dos vídeos continua com o defeito.</p><p class="fix"><b>Correção:</b> teste com música gravada. Se o defeito continuar, a correção é no EQ de sistema ou na posição das caixas.</p></div>
+    <div><h4>Usar o EQ como volume</h4><p>A voz está baixa, e o operador sobe os médios e os agudos dela em vez do fader.</p><p class="fix"><b>Correção:</b> volume é no fader. O EQ muda o timbre.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>A equalização fica no meio da cadeia: depende do que chega ao canal e prepara o sinal para a dinâmica, os retornos e a mistura.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>: o que é frequência, as faixas de cada instrumento e o decibel.</li>
+        <li><a href="../Microfones/treinamento-microfones.html">Microfones</a>: a resposta de cada microfone, o efeito de proximidade e a posição, que decidem o timbre antes do EQ.</li>
+        <li><a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>: onde ficam o passa-altas e o EQ no canal, e o diagrama de blocos.</li>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>: o nível certo antes do EQ, e a conferência do medidor depois dele.</li>
+        <li><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>: zumbido e ruído de cabo se resolvem na ligação, e não no EQ.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>: o compressor e o de-esser trabalham sobre o sinal já equalizado.</li>
+        <li><a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>: o timbre de cada retorno e o EQ da saída do auxiliar.</li>
+        <li><a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>: o ring-out usa o EQ gráfico ou o paramétrico da saída.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: o EQ é uma etapa da passagem, e o espaço de cada fonte se decide na mistura.</li>
+        <li><a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>: o processador, o EQ de sistema e a posição das caixas.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: a mistura da transmissão é ouvida em fones e caixas pequenas, e pede outra conferência de timbre.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira na passagem de som, depois de equalizar os canais. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>O ganho de cada canal foi ajustado antes do EQ, e o EQ começou plano.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>A fonte, o microfone e a posição foram conferidos antes de equalizar.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>O passa-altas está ligado em tudo o que não faz o grave da música, na faixa de partida de cada fonte.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>Cada ajuste responde a um defeito que foi ouvido e tem nome.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>Os cortes vieram antes dos realces, e o ponto de cada corte foi achado por varredura.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>Os realces são poucos, largos e de até cerca de 6 dB. Nenhum canal tem só realces.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>Cada canal foi comparado com o EQ desligado, no mesmo volume, e ficou melhor com ele ligado.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>O nível de cada canal foi conferido no medidor depois do EQ.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>O EQ foi decidido na mistura: a voz principal está clara por cima da banda, e o bumbo e o baixo se distinguem.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>O mesmo corte não se repete em quase todos os canais. Se repete, o sistema foi testado com música gravada.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>O EQ de cada retorno tem só cortes, poucos e moderados, e foi comparado com o equalizador desligado.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>O EQ de cada canal e de cada saída está anotado, e qualquer mudança no EQ de sistema foi registrada.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Qual é a primeira medida?</h3>
+  <p>Cada frase descreve uma situação na passagem de som. Escolha o que você faria primeiro: <strong>H</strong>, ligar ou subir o passa-altas; <strong>C</strong>, cortar com uma banda bell; <strong>R</strong>, realce suave e largo; <strong>N</strong>, não é caso para o EQ de canal.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"H": "Passa-altas", "C": "Corte com bell", "R": "Realce suave", "N": "Não é caso para o EQ de canal"},
+ "itens": [
+  {"t": "O microfone do púlpito capta as batidas da mão do orador na madeira e um ronco constante.", "a": "H", "w": "Esse som está abaixo da voz. O passa-altas tira o ronco sem mexer no timbre."},
+  {"t": "A voz do pastor está embolada. Na varredura, o defeito salta perto de 300 Hz.", "a": "C", "w": "Sobra localizada: corte de 3 a 6 dB com uma banda bell nesse ponto."},
+  {"t": "O coral soa distante e com muito som de sala. Os microfones estão a três metros das vozes.", "a": "N", "w": "O microfone captou mais sala do que voz, e o EQ não separa as duas. Aproxime os microfones."},
+  {"t": "Depois do passa-altas e de um corte em 250 Hz, a voz cantada está limpa, mas falta um pouco de brilho.", "a": "R", "w": "Agora falta de verdade: de 2 a 3 dB no shelving de agudos, ou em uma banda larga."},
+  {"t": "O bumbo tem peso e ataque, mas soa como uma caixa de papelão.", "a": "C", "w": "É a sobra entre 300 e 500 Hz. Ache o ponto com a varredura e corte."},
+  {"t": "O canal do chimbal traz junto o grave do bumbo e do baixo.", "a": "H", "w": "O chimbal não tem som útil abaixo de 300 Hz. Passa-altas entre 200 e 400 Hz."},
+  {"t": "A voz está com o timbre certo no fone, mas baixa na sala em relação à banda.", "a": "N", "w": "É volume, e não timbre. O controle é o fader."},
+  {"t": "Todos os canais, e até a música do computador sem EQ, soam retumbantes na sala.", "a": "N", "w": "O defeito é do sistema ou da sala. A correção é na posição das caixas e no EQ de sistema."},
+  {"t": "O violão retumba e ameaça apitar sempre na mesma nota grave.", "a": "C", "w": "É a ressonância do corpo, entre 100 e 250 Hz. Corte estreito no ponto achado pela varredura."},
+  {"t": "A voz falada está limpa e sem sobras, mas quem senta no fundo entende mal as consoantes.", "a": "R", "w": "Realce largo de 2 a 3 dB entre 2 e 4 kHz, e conferência do nível do canal depois."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: ouça as faixas na sua voz</h3>
+  <p>Você vai precisar de uma mesa com médio semiparamétrico ou EQ paramétrico, um microfone, um fone e a planilha de apoio. Deixe as caixas desligadas ou o master fechado, e o fone em volume moderado.</p>
+  <ol>
+    <li>Ajuste o ganho do canal, deixe o EQ plano e aperte o PFL. Fale um texto qualquer, a um palmo do microfone, sem parar.</li>
+    <li>Ligue e desligue o passa-altas. Depois sopre de leve no microfone e bata a mão no corpo dele, com o filtro desligado e ligado. Compare.</li>
+    <li>Em uma banda bell, com o Q em 4 (ou no médio varrível), suba 9 dB e passeie devagar de 100 Hz a 8 kHz. Anote a frequência em que a sua voz soa retumbante, embolada, anasalada, áspera e sibilante.</li>
+    <li>Na aba “Faixas e sintomas” da planilha, digite cada frequência anotada na consulta e compare a faixa indicada com o que você ouviu.</li>
+    <li>Volte ao ponto em que a voz soou embolada e troque o realce por um corte de 4 dB. Compare com o EQ desligado.</li>
+    <li>No mesmo ponto, deixe o corte em 4 dB e mude o Q: 0,7, depois 2, depois 8. Ouça quanto do entorno vai junto. Use a calculadora de largura da mesma aba para ver de onde até onde cada Q atua.</li>
+    <li>Aproxime o microfone até dois dedos da boca e fale igual. Ouça o grave que aparece. Corrija com o passa-altas e com o corte, e anote o resultado na aba “Ficha de EQ”.</li>
+  </ol>
+  <p>Depois, repita os passos 3 a 5 com outra pessoa falando e compare as frequências anotadas. Elas mudam de uma voz para outra, e é por isso que não se copia EQ.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Equalizacao-modelo.xlsx">Equalizacao-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Aba</th><th>Para que serve</th><th style="width:40%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Ficha de EQ</strong></td><td>Registro de até 24 canais: fonte, passa-altas e até quatro bandas, com tipo, frequência, ganho e Q.</td><td>Faixa de partida e conferência do passa-altas, maior realce, maior corte e situação de cada canal. No fim, o mapa de cortes e realces por faixa, com aviso de faixa repetida em muitos canais.</td></tr>
+        <tr><td><strong>Faixas e sintomas</strong></td><td>Consulta por frequência, calculadora da largura de uma banda, tabela das sete faixas e tabela de sintomas.</td><td>A faixa de qualquer frequência digitada e como ela soa. De onde até onde uma banda bell atua, a partir da frequência e do Q.</td></tr>
+        <tr><td><strong>Guia por fonte</strong></td><td>Ponto de partida de doze tipos de fonte: passa-altas, onde costuma sobrar e onde pode faltar.</td><td>Nada. É para consulta, e alimenta a conferência do passa-altas na ficha.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Ficha de EQ</strong></td><td>Os oito canais do exemplo 1, como foram encontrados, e o que foi ajustado.</td><td>Os mesmos resultados da aba Ficha de EQ.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Os avisos da ficha são convites para conferir, e não erros: um passa-altas fora da faixa de partida ou um realce de 7 dB podem estar certos, se o ouvido aprovar. Os dois limites usados nos avisos ficam no alto da aba e podem ser trocados.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Banda</dt><dd>Cada filtro ajustável de um equalizador, com a sua frequência e o seu ganho.</dd></div>
+    <div><dt>Bell (sino, peaking)</dt><dd>Filtro que corta ou realça em torno de uma frequência central e volta a 0 dB dos dois lados.</dd></div>
+    <div><dt>Bypass</dt><dd>Chave que desliga o equalizador sem desfazer os ajustes, para comparar o som com e sem ele.</dd></div>
+    <div><dt>Corte</dt><dd>Ganho negativo em uma banda: reduz o nível daquela região.</dd></div>
+    <div><dt>EQ gráfico</dt><dd>Equalizador de muitas bandas fixas, cada uma com um controle deslizante. O de 31 bandas tem uma a cada terço de oitava.</dd></div>
+    <div><dt>EQ paramétrico</dt><dd>Equalizador em que cada banda tem frequência, ganho e Q ajustáveis.</dd></div>
+    <div><dt>EQ semiparamétrico</dt><dd>Equalizador em que a banda tem frequência e ganho ajustáveis, com largura fixa.</dd></div>
+    <div><dt>Frequência central</dt><dd>O ponto em torno do qual uma banda bell atua, e onde o corte ou o realce é maior.</dd></div>
+    <div><dt>Mascaramento</dt><dd>Efeito em que um som cobre outro que ocupa a mesma faixa de frequências.</dd></div>
+    <div><dt>Oitava</dt><dd>Intervalo entre uma frequência e o dobro dela: de 100 a 200 Hz, de 1 a 2 kHz.</dd></div>
+    <div><dt>Passa-altas (HPF, low cut)</dt><dd>Filtro que deixa passar o que está acima de uma frequência e corta o que está abaixo.</dd></div>
+    <div><dt>Q</dt><dd>Número que indica a largura de uma banda bell. Q alto, banda estreita. Q baixo, banda larga.</dd></div>
+    <div><dt>Realce</dt><dd>Ganho positivo em uma banda: aumenta o nível daquela região.</dd></div>
+    <div><dt>Ring-out</dt><dd>Procedimento para achar e cortar, na saída de um retorno ou do sistema, as frequências que apitam primeiro.</dd></div>
+    <div><dt>Shelving (prateleira)</dt><dd>Filtro que sobe ou desce, até um patamar, tudo o que está abaixo de um ponto (graves) ou acima dele (agudos).</dd></div>
+    <div><dt>Varredura</dt><dd>Método de achar uma frequência com defeito: realce estreito em uma banda, girando a frequência até o defeito saltar.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>

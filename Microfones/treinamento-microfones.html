@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Microfones</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --ground:#F3F6F7; --surface:#FFFFFF; --sunk:#E9EEF0; --ink:#16242E; --muted:#566672; --rule:#D3DBE0;
+  --accent:#2B5C8A;
+  --blue:#2B5C8A; --blue-tint:#DCE8F3;
+  --amber:#A96A12; --amber-tint:#F6E8CF;
+  --teal:#1E7B73; --teal-tint:#D9EEEB;
+  --purple:#7A4A9A; --purple-tint:#E9DEF1;
+  --red:#B0413E; --red-tint:#F5DEDC;
+  --slate:#5B6B76; --slate-tint:#E3E8EB;
+  --on-hue:#FFFFFF;
+  --good:#1F7A4D; --good-tint:#DDF1E5;
+  --bad:#B0413E; --bad-tint:#F5DEDC;
+  --display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+    --accent:#86B7E3;
+    --blue:#86B7E3; --blue-tint:#1B2F42;
+    --amber:#E2AC4F; --amber-tint:#3A2C12;
+    --teal:#5FC6BA; --teal-tint:#15332F;
+    --purple:#C09ADB; --purple-tint:#2E2139;
+    --red:#EC8E89; --red-tint:#3D1F1E;
+    --slate:#9BABB6; --slate-tint:#26333B;
+    --on-hue:#0F171C;
+    --good:#6FCF9B; --good-tint:#163326;
+    --bad:#EC8E89; --bad-tint:#3D1F1E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+  --accent:#86B7E3;
+  --blue:#86B7E3; --blue-tint:#1B2F42;
+  --amber:#E2AC4F; --amber-tint:#3A2C12;
+  --teal:#5FC6BA; --teal-tint:#15332F;
+  --purple:#C09ADB; --purple-tint:#2E2139;
+  --red:#EC8E89; --red-tint:#3D1F1E;
+  --slate:#9BABB6; --slate-tint:#26333B;
+  --on-hue:#0F171C;
+  --good:#6FCF9B; --good-tint:#163326;
+  --bad:#EC8E89; --bad-tint:#3D1F1E;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.65 var(--body);-webkit-text-size-adjust:100%}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.page{max-width:1180px;margin-inline:auto;padding-inline:20px;padding-block:36px 80px}
+
+/* Cabeçalho */
+.mast{display:flex;flex-direction:column;gap:18px;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+.tiles{display:flex;gap:6px}
+.tiles span{width:44px;height:44px;display:grid;place-items:center;font:700 24px/1 var(--display);color:var(--on-hue)}
+h1{font:700 clamp(2.3rem,6vw,3.6rem)/1.02 var(--display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.lead{font-size:1.15rem;line-height:1.55;max-width:62ch;margin:0;color:var(--ink)}
+.meta{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px 22px;font:400 .8rem/1.4 var(--mono);color:var(--muted);margin:0;padding:0;list-style:none}
+
+/* Estrutura */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;padding-top:32px}
+.toc{font-size:.92rem}
+.toc h2{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 20px;counter-reset:toc}
+.toc li{counter-increment:toc}
+.toc a{display:flex;gap:10px;padding:5px 0;color:var(--ink);text-decoration:none;line-height:1.35}
+.toc a::before{content:counter(toc,decimal-leading-zero);font:400 .75rem/1.7 var(--mono);color:var(--muted)}
+.toc a:hover{color:var(--accent);text-decoration:underline}
+@media (min-width:1020px){
+  .layout{grid-template-columns:200px minmax(0,1fr);gap:64px}
+  .toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start}
+  .toc ol{grid-template-columns:1fr}
+}
+main{display:flex;flex-direction:column;gap:72px;min-width:0}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
+.eyebrow{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+h2{font:700 clamp(1.7rem,4vw,2.2rem)/1.1 var(--display);margin:0;text-wrap:balance}
+h3{font:600 1.3rem/1.2 var(--display);margin:12px 0 0;text-wrap:balance}
+h4{font:600 .95rem/1.3 var(--body);margin:0}
+p{margin:0}
+section > p, section > ul, section > ol, section > h3{max-width:68ch}
+ul,ol{margin:0;padding-left:1.25em;display:flex;flex-direction:column;gap:6px}
+strong{font-weight:600}
+code{font:400 .88em var(--mono);background:var(--sunk);padding:1px 5px;border-radius:3px}
+
+/* Letras coloridas no texto */
+.k{display:inline-grid;place-items:center;width:1.45em;height:1.45em;font:700 .85em/1 var(--display);color:var(--on-hue);vertical-align:.05em}
+
+/* Figuras */
+figure{margin:0;display:flex;flex-direction:column;gap:10px;position:relative}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.scroll svg{display:block;width:100%;min-width:820px;height:auto;color:var(--ink)}
+figcaption{font-size:.86rem;line-height:1.5;color:var(--muted);max-width:72ch}
+figcaption b{color:var(--ink);font-weight:600}
+svg text{font-family:var(--body);fill:var(--ink)}
+svg .disp{font-family:var(--display);font-weight:700}
+svg .mono{font-family:var(--mono);letter-spacing:.08em}
+svg .on{fill:var(--on-hue)}
+svg .mu{fill:var(--muted)}
+svg .b{font-weight:600}
+svg .ln{stroke:var(--ink);stroke-width:1.5;fill:none}
+svg .ln-mu{stroke:var(--muted);stroke-width:1.5;fill:none}
+svg .ln-bold{stroke:var(--ink);stroke-width:3;fill:none;stroke-linejoin:round;stroke-linecap:round}
+svg .dash{stroke-dasharray:5 4}
+svg .ah{fill:var(--ink)} svg .ah-mu{fill:var(--muted)}
+svg .bx{fill:var(--surface);stroke:var(--rule);stroke-width:1.5}
+svg .bx-ink{fill:var(--ink);stroke:var(--ink)}
+svg .t-ground{fill:var(--ground)}
+svg .bx-out{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 4}
+svg .gap{stroke:var(--surface);stroke-width:4}
+svg .gap2{stroke:var(--surface);stroke-width:2}
+svg .hub{fill:var(--surface)}
+
+/* Gráfico */
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .hit{fill:transparent;cursor:crosshair;outline:none}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);padding:6px 10px;font-size:.78rem;line-height:1.4;transform:translate(-50%,calc(-100% - 14px));white-space:nowrap;z-index:2}
+.tip b{display:block;font:600 1.05rem/1.2 var(--body)}
+details.data{font-size:.88rem}
+details.data summary{cursor:pointer;font:400 .82rem var(--mono);color:var(--muted);padding:4px 0}
+details.data .tbl{margin-top:8px}
+details.data table{min-width:420px}
+
+/* Tabelas */
+.tbl{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:780px;font-size:.88rem;line-height:1.4}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+tr:last-child > td{border-bottom:0}
+thead th{font:600 .8rem/1.3 var(--body);background:var(--sunk)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--mono);font-size:.82rem}
+
+/* Cores: blue, amber, teal, purple, red, slate */
+.tiles .blue, .k.blue{background:var(--blue)} .tiles span.w, .k.w{width:auto;padding:0 8px}
+svg .bx-blue{fill:var(--blue-tint);stroke:var(--blue);stroke-width:1.5} svg .hd-blue, svg .f-blue{fill:var(--blue)} svg .lv-blue{fill:var(--blue);fill-opacity:.36} svg .s-blue{stroke:var(--blue);stroke-width:2;fill:none} svg .t-blue{fill:var(--blue)}
+th.blue{background:var(--blue);color:var(--on-hue)} td.blue{background:var(--blue-tint)}
+.tiles .amber, .k.amber{background:var(--amber)}
+svg .bx-amber{fill:var(--amber-tint);stroke:var(--amber);stroke-width:1.5} svg .hd-amber, svg .f-amber{fill:var(--amber)} svg .lv-amber{fill:var(--amber);fill-opacity:.36} svg .s-amber{stroke:var(--amber);stroke-width:2;fill:none} svg .t-amber{fill:var(--amber)}
+th.amber{background:var(--amber);color:var(--on-hue)} td.amber{background:var(--amber-tint)}
+.tiles .teal, .k.teal{background:var(--teal)}
+svg .bx-teal{fill:var(--teal-tint);stroke:var(--teal);stroke-width:1.5} svg .hd-teal, svg .f-teal{fill:var(--teal)} svg .lv-teal{fill:var(--teal);fill-opacity:.36} svg .s-teal{stroke:var(--teal);stroke-width:2;fill:none} svg .t-teal{fill:var(--teal)}
+th.teal{background:var(--teal);color:var(--on-hue)} td.teal{background:var(--teal-tint)}
+.tiles .purple, .k.purple{background:var(--purple)}
+svg .bx-purple{fill:var(--purple-tint);stroke:var(--purple);stroke-width:1.5} svg .hd-purple, svg .f-purple{fill:var(--purple)} svg .lv-purple{fill:var(--purple);fill-opacity:.36} svg .s-purple{stroke:var(--purple);stroke-width:2;fill:none} svg .t-purple{fill:var(--purple)}
+th.purple{background:var(--purple);color:var(--on-hue)} td.purple{background:var(--purple-tint)}
+.tiles .red, .k.red{background:var(--red)}
+svg .bx-red{fill:var(--red-tint);stroke:var(--red);stroke-width:1.5} svg .hd-red, svg .f-red{fill:var(--red)} svg .lv-red{fill:var(--red);fill-opacity:.36} svg .s-red{stroke:var(--red);stroke-width:2;fill:none} svg .t-red{fill:var(--red)}
+th.red{background:var(--red);color:var(--on-hue)} td.red{background:var(--red-tint)}
+.tiles .slate, .k.slate{background:var(--slate)}
+svg .bx-slate{fill:var(--slate-tint);stroke:var(--slate);stroke-width:1.5} svg .hd-slate, svg .f-slate{fill:var(--slate)} svg .lv-slate{fill:var(--slate);fill-opacity:.36} svg .s-slate{stroke:var(--slate);stroke-width:2;fill:none} svg .t-slate{fill:var(--slate)}
+th.slate{background:var(--slate);color:var(--on-hue)} td.slate{background:var(--slate-tint)}
+svg .bar{fill:var(--accent)}
+svg .ref{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3}
+svg .s-ink{stroke:var(--ink);stroke-width:2;fill:none}
+/* tela de projeção: sempre escura com letra clara, nos dois temas */
+svg .scr{fill:#0B1116;stroke:#0B1116} svg .scr-tx{fill:#F3F6F7}
+svg .f-sunk{fill:var(--sunk)} svg .f-surface{fill:var(--surface)} svg .f-ink{fill:var(--ink)}
+svg .t-good{fill:var(--good)} svg .t-bad{fill:var(--bad)}
+svg .f-good{fill:var(--good)} svg .f-bad{fill:var(--bad)} svg .s-good{stroke:var(--good);stroke-width:2;fill:none} svg .s-bad{stroke:var(--bad);stroke-width:2;fill:none}
+td.n, th.n{text-align:center}
+td small{display:block;color:var(--muted);font-size:.8rem}
+
+/* Vídeo do tutorial */
+.video{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);gap:20px;align-items:start;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.video video{width:100%;height:auto;display:block;background:#000}
+.video div{display:flex;flex-direction:column;gap:8px;font-size:.93rem}
+@media (max-width:640px){.video{grid-template-columns:1fr}}
+
+/* Voltar ao painel */
+.back{font:500 .78rem var(--mono);text-decoration:none;color:var(--muted)}
+.back:hover{color:var(--accent)}
+
+/* Ficha da matriz (acima de cada exemplo) */
+.ficha{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border:1px solid var(--rule);background:var(--surface)}
+.ficha div{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 -1px -1px 0}
+.ficha dt{font:500 .68rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ficha dd{margin:0;font-size:.9rem;line-height:1.4}
+dl{margin:0}
+
+/* Blocos */
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.box{background:var(--surface);border:1px solid var(--rule);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.box h4{font:600 1.1rem/1.2 var(--display)}
+.box ul{font-size:.93rem}
+.note{background:var(--sunk);padding:16px 20px;max-width:72ch;font-size:.94rem;display:flex;flex-direction:column;gap:6px}
+.note h4{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* Passo a passo */
+.steps{list-style:none;padding:0;counter-reset:st;gap:0;max-width:none;border-top:1px solid var(--rule)}
+.steps li{counter-increment:st;display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font:700 1.7rem/1 var(--display);color:var(--muted);grid-row:span 2}
+.steps h4{font:600 1.1rem/1.25 var(--display)}
+.steps p{font-size:.95rem;max-width:64ch;grid-column:2}
+
+/* Erros comuns */
+.errs{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.errs div{padding:16px 16px 16px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
+.errs h4{font:600 1.05rem/1.25 var(--display)}
+.errs p{font-size:.92rem}
+.errs .fix{color:var(--muted)}
+.errs .fix b{color:var(--ink);font-weight:600}
+
+/* Checklist */
+.check{list-style:none;padding:0;gap:0;max-width:none;border:1px solid var(--rule);background:var(--surface)}
+.check li{border-bottom:1px solid var(--rule)}
+.check li:last-child{border-bottom:0}
+.check label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:11px 16px;cursor:pointer;font-size:.94rem;align-items:start}
+.check input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--teal)}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font:400 .82rem var(--mono);color:var(--muted)}
+.bar b{color:var(--ink);font-weight:500}
+
+/* Exercício */
+.quiz{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);background:var(--surface)}
+.q{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:14px 16px;border-bottom:1px solid var(--rule)}
+.q:last-child{border-bottom:0}
+@media (min-width:720px){.q{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
+.q p{font-size:.95rem}
+.q .why{grid-column:1/-1;font-size:.86rem;color:var(--muted)}
+.q .why b{font-weight:600}
+.q .why.ok b{color:var(--good)} .q .why.no b{color:var(--bad)}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts button{min-width:40px;height:40px;padding:0 10px;border:1.5px solid var(--rule);background:var(--surface);color:var(--ink);font:700 1.1rem/1 var(--display);cursor:pointer;border-radius:0}
+.opts button:hover:not(:disabled){border-color:var(--ink)}
+.opts button:disabled{cursor:default;opacity:.45}
+.opts button.right{background:var(--good-tint);border-color:var(--good);color:var(--good);opacity:1}
+.opts button.wrong{background:var(--bad-tint);border-color:var(--bad);color:var(--bad);opacity:1}
+.btn{border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:500 .82rem var(--mono);padding:7px 14px;cursor:pointer;border-radius:0}
+.btn:hover{background:var(--ink);color:var(--ground)}
+
+/* Glossário */
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.gloss div{padding:12px 0;border-bottom:1px solid var(--rule)}
+.gloss dt{font:600 1.02rem/1.3 var(--display)}
+.gloss dd{margin:2px 0 0;font-size:.9rem;color:var(--muted)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:.84rem;color:var(--muted);max-width:72ch}
+</style>
+</head>
+<body>
+<div class="page" lang="pt-BR" data-estudo="mic">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="blue">D</span><span class="amber">C</span><span class="teal">P</span></div>
+  <h1>Microfones</h1>
+  <p class="lead">Um guia de estudo para escolher o microfone de cada fonte, entender de onde ele capta e o que rejeita, e colocá-lo no lugar em que a voz ou o instrumento chegam fortes e limpos à mesa.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O que o microfone faz</a></li>
+    <li><a href="#tipos">Dinâmico e condensador</a></li>
+    <li><a href="#polar">Padrões polares</a></li>
+    <li><a href="#resposta">Resposta, proximidade, pop e vento</a></li>
+    <li><a href="#formatos">Formatos e técnica de mão</a></li>
+    <li><a href="#posicao">Posição por fonte e regra 3:1</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- Módulo 1 -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O que o microfone faz</h2>
+  <p>O microfone é o primeiro elo do sistema de som. Ele transforma a variação de pressão do ar, que é o som, em uma tensão elétrica pequena, que segue pelo cabo até a mesa. Tudo o que vem depois trabalha sobre o que ele entregou. O que ele não captou, nenhum botão cria. O que ele captou a mais (o retorno, a bateria ao lado, o eco da sala), nenhum botão separa.</p>
+  <p>Pense em uma lanterna ao contrário. A lanterna joga luz em uma direção, e ilumina mais o que está perto. O microfone “enxerga” o som do mesmo jeito: capta melhor de uma direção, e muito mais o que está perto. Escolher e posicionar um microfone é decidir para onde essa lanterna aponta e a que distância ela fica.</p>
+  <p>São três decisões: o tipo, <span class="k blue">D</span> dinâmico ou <span class="k amber">C</span> condensador (módulo 2); o <span class="k teal">P</span> padrão polar, de onde ele capta e o que rejeita (módulo 3); e a posição, a distância e a direção em relação à fonte (módulo 6). Entre elas entram a resposta de frequência e o formato do microfone.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 200" role="img" aria-label="Fluxo em três blocos. À esquerda, a fonte sonora: voz ou instrumento. No centro, o microfone, com as três decisões: primeira, o tipo, dinâmico ou condensador; segunda, o padrão polar, que define de onde ele capta e o que rejeita; terceira, a posição, que é a distância e a direção em relação à fonte. À direita, o resultado: um sinal de microfone, fraco, que segue para o pré da mesa.">
+        <defs><marker id="mk1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="bx" x="18" y="83" width="134" height="56"/>
+        <text class="b" x="85" y="107" font-size="12.5" text-anchor="middle">Fonte sonora</text>
+        <text class="mu" x="85" y="125" font-size="11" text-anchor="middle">voz ou instrumento</text>
+        <line class="ln" x1="154" y1="111" x2="192" y2="111" marker-end="url(#mk1)"/>
+
+        <rect class="bx-out" x="196" y="36" width="452" height="146"/>
+        <text class="mono mu" x="208" y="26" font-size="10.5">O MICROFONE: TRÊS DECISÕES</text>
+
+        <rect class="bx" x="206" y="52" width="140" height="118"/>
+        <text class="b" x="276" y="76" font-size="12.5" text-anchor="middle">1. Tipo</text>
+        <rect class="hd-blue" x="250" y="90" width="24" height="24"/>
+        <text class="on b" x="262" y="107" font-size="13" text-anchor="middle">D</text>
+        <rect class="hd-amber" x="278" y="90" width="24" height="24"/>
+        <text class="on b" x="290" y="107" font-size="13" text-anchor="middle">C</text>
+        <text x="276" y="140" font-size="11" text-anchor="middle">dinâmico ou</text>
+        <text x="276" y="156" font-size="11" text-anchor="middle">condensador</text>
+
+        <rect class="bx" x="352" y="52" width="140" height="118"/>
+        <text class="b" x="422" y="76" font-size="12.5" text-anchor="middle">2. Padrão polar</text>
+        <rect class="hd-teal" x="410" y="90" width="24" height="24"/>
+        <text class="on b" x="422" y="107" font-size="13" text-anchor="middle">P</text>
+        <text x="422" y="140" font-size="11" text-anchor="middle">de onde ele capta</text>
+        <text x="422" y="156" font-size="11" text-anchor="middle">e o que rejeita</text>
+
+        <rect class="bx" x="498" y="52" width="140" height="118"/>
+        <text class="b" x="568" y="76" font-size="12.5" text-anchor="middle">3. Posição</text>
+        <rect class="hd-slate" x="550" y="90" width="36" height="24"/>
+        <text class="on b" x="568" y="107" font-size="13" text-anchor="middle">cm</text>
+        <text x="568" y="140" font-size="11" text-anchor="middle">distância e direção</text>
+        <text x="568" y="156" font-size="11" text-anchor="middle">em relação à fonte</text>
+
+        <line class="ln" x1="650" y1="111" x2="686" y2="111" marker-end="url(#mk1)"/>
+        <rect class="bx" x="690" y="83" width="192" height="56"/>
+        <text class="b" x="786" y="107" font-size="12.5" text-anchor="middle">Sinal de microfone</text>
+        <text class="mu" x="786" y="125" font-size="10.5" text-anchor="middle">fraco: segue para o pré da mesa</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> As três decisões de cada microfone. O tipo e o padrão polar se escolhem antes do evento, ao separar o equipamento. A posição se decide no palco, e é a que mais muda o resultado.</figcaption>
+  </figure>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>O microfone certo, perto da fonte e apontado para ela, resolve mais do que qualquer ajuste na mesa. Antes de girar um botão para consertar um som, olhe para o palco: o microfone está onde deveria?</p>
+  </div>
+</section>
+
+<!-- Módulo 2 -->
+<section id="tipos">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>Dinâmico e condensador</h2>
+  <p>Dentro de todo microfone há uma <strong>cápsula</strong>, em que uma membrana fina, o <strong>diafragma</strong>, vibra com a pressão do ar. O que muda de um tipo para outro é como essa vibração vira eletricidade.</p>
+  <p>No microfone <strong>dinâmico</strong> <span class="k blue">D</span>, o diafragma leva presa uma bobina de fio, que fica dentro do campo de um ímã. Quando o som move o diafragma, a bobina se move no campo e gera uma tensão. É um alto-falante funcionando ao contrário. Não há circuito eletrônico e não é preciso energia.</p>
+  <p>No microfone <strong>condensador</strong> <span class="k amber">C</span>, o diafragma é uma película muito leve, esticada a uma distância mínima de uma placa fixa. Os dois formam um capacitor (em inglês, <em>condenser</em>). O som muda a distância entre eles, e um circuito dentro do microfone transforma essa variação em sinal. Esse circuito precisa de energia: a alimentação phantom de +48 V que a mesa envia pelo próprio cabo, uma pilha, ou o transmissor, nos modelos sem fio.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Dois esquemas lado a lado. Dinâmico: o som move o diafragma e a bobina presa a ele, dentro do campo de um ímã, e a bobina gera o sinal; não precisa de energia. Condensador: o diafragma leve e uma placa fixa formam um capacitor; o som muda a distância entre eles e um circuito interno gera o sinal; o circuito precisa de energia, como o phantom de mais 48 volts que vem da mesa pelo mesmo cabo.">
+        <defs>
+          <marker id="mk2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker>
+          <marker id="mk2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah f-amber" d="M0 0 L10 5 L0 10 z"/></marker>
+        </defs>
+        <rect class="hd-blue" x="18" y="12" width="24" height="24"/>
+        <text class="on b" x="30" y="29" font-size="13" text-anchor="middle">D</text>
+        <text class="b" x="52" y="29" font-size="13.5">Dinâmico (bobina móvel)</text>
+        <path class="s-slate" d="M50 122 Q62 150 50 178"/>
+        <path class="s-slate" d="M66 112 Q84 150 66 188"/>
+        <path class="s-slate" d="M82 102 Q106 150 82 198"/>
+        <text class="mu" x="66" y="222" font-size="11" text-anchor="middle">som</text>
+        <path class="ln-bold" d="M130 95 Q118 150 130 205"/>
+        <text x="126" y="84" font-size="11" text-anchor="middle">diafragma</text>
+        <rect class="lv-slate" x="140" y="100" width="110" height="30"/>
+        <rect class="lv-slate" x="140" y="170" width="110" height="30"/>
+        <rect class="lv-slate" x="204" y="130" width="46" height="40"/>
+        <text class="b" x="227" y="154" font-size="11" text-anchor="middle">ímã</text>
+        <rect class="bx-blue" x="132" y="135" width="62" height="30"/>
+        <text class="t-blue b" x="163" y="154" font-size="10.5" text-anchor="middle">bobina</text>
+        <line class="ln" x1="252" y1="150" x2="326" y2="150" marker-end="url(#mk2)"/>
+        <text class="mu" x="289" y="142" font-size="10.5" text-anchor="middle">sinal</text>
+        <rect class="bx" x="330" y="128" width="100" height="44"/>
+        <text class="b" x="380" y="147" font-size="11.5" text-anchor="middle">saída</text>
+        <text class="mu" x="380" y="163" font-size="10.5" text-anchor="middle">para a mesa</text>
+        <text x="18" y="252" font-size="11.5">O som move o diafragma e a bobina presa a ele.</text>
+        <text x="18" y="268" font-size="11.5">A bobina, no campo do ímã, gera o sinal.</text>
+        <text class="b" x="18" y="288" font-size="11.5">Não precisa de energia.</text>
+
+        <line class="grid" x1="450" y1="12" x2="450" y2="290"/>
+
+        <rect class="hd-amber" x="468" y="12" width="24" height="24"/>
+        <text class="on b" x="480" y="29" font-size="13" text-anchor="middle">C</text>
+        <text class="b" x="502" y="29" font-size="13.5">Condensador</text>
+        <path class="s-slate" d="M500 122 Q512 150 500 178"/>
+        <path class="s-slate" d="M516 112 Q534 150 516 188"/>
+        <path class="s-slate" d="M532 102 Q556 150 532 198"/>
+        <text class="mu" x="516" y="222" font-size="11" text-anchor="middle">som</text>
+        <path class="s-amber" d="M580 95 Q574 150 580 205"/>
+        <text x="574" y="84" font-size="11" text-anchor="end">diafragma</text>
+        <rect class="f-slate" x="588" y="95" width="9" height="110"/>
+        <text x="590" y="84" font-size="11">placa fixa</text>
+        <line class="ln" x1="599" y1="150" x2="636" y2="150" marker-end="url(#mk2)"/>
+        <rect class="bx-amber" x="640" y="124" width="108" height="52"/>
+        <text class="b" x="694" y="146" font-size="11.5" text-anchor="middle">circuito</text>
+        <text class="b" x="694" y="162" font-size="11.5" text-anchor="middle">interno</text>
+        <line class="ln" x1="750" y1="150" x2="782" y2="150" marker-end="url(#mk2)"/>
+        <rect class="bx" x="786" y="128" width="96" height="44"/>
+        <text class="b" x="834" y="147" font-size="11.5" text-anchor="middle">saída</text>
+        <text class="mu" x="834" y="163" font-size="10.5" text-anchor="middle">para a mesa</text>
+        <path class="s-amber" d="M834 174 V208 H694 V181" marker-end="url(#mk2a)"/>
+        <text class="t-amber b" x="764" y="226" font-size="10.5" text-anchor="middle">energia: phantom +48 V, pela mesa</text>
+        <text x="468" y="252" font-size="11.5">O diafragma e a placa fixa formam um capacitor.</text>
+        <text x="468" y="268" font-size="11.5">O som muda a distância, e o circuito gera o sinal.</text>
+        <text class="b" x="468" y="288" font-size="11.5">Precisa de energia: phantom, pilha ou transmissor.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> Os dois tipos, em esquema. No dinâmico, o diafragma carrega uma bobina, e por isso é mais pesado e mais resistente. No condensador, o diafragma é só uma película, e por isso responde a sons mais fracos e mais rápidos.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%"></th><th class="blue" style="width:40%">Dinâmico</th><th class="amber">Condensador</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Energia</strong></td><td>Não precisa.</td><td>Precisa: phantom (+48 V), pilha ou o transmissor sem fio.</td></tr>
+        <tr><td><strong>Nível de saída</strong></td><td>Mais baixo: em geral de 1 a 3 mV por pascal. Pede mais ganho na mesa.</td><td>Mais alto: em geral de 5 a 30 mV por pascal, uns 10 a 20 dB acima do dinâmico.</td></tr>
+        <tr><td><strong>Som</strong></td><td>Encorpado, com menos detalhe nos agudos extremos.</td><td>Mais detalhe e agudos. Capta bem sons fracos e distantes.</td></tr>
+        <tr><td><strong>Robustez</strong></td><td>Aguenta qualquer fonte de palco, queda, calor e umidade.</td><td>Tem nível máximo, que varia com o modelo (alguns têm pad no corpo). Mais sensível a queda, umidade e manuseio.</td></tr>
+        <tr><td><strong>Uso típico ao vivo</strong></td><td>Voz de mão, caixa e tons da bateria, bumbo, amplificador de guitarra, percussão.</td><td>Coral, púlpito (gooseneck), lapela, headset, violão, piano, pratos, ambiente.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Nenhum dos dois é “melhor”. O dinâmico é a escolha natural quando a fonte é forte e está perto, e quando o microfone passa de mão em mão. O condensador é a escolha quando a fonte é fraca ou fica longe, como um coral, ou quando o microfone precisa ser muito pequeno, como a lapela e o headset.</p>
+
+  <h3>Quem precisa de phantom</h3>
+  <p>O phantom se liga por canal, ou por grupo de canais, na mesa. Precisa dele o condensador com fio ligado direto à mesa: o de coral, o de púlpito, o de violão, o de pratos. Sem energia, esse microfone fica mudo. Não precisam o dinâmico nem o microfone sem fio, em que o transmissor alimenta a cápsula. Um dinâmico balanceado, com cabo em bom estado, não sofre com o phantom ligado no canal. O funcionamento do phantom, os cuidados e a direct box ativa estão no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>.</p>
+
+  <h3>Variações que você vai encontrar</h3>
+  <ul>
+    <li><strong>Eletreto.</strong> É um condensador cuja cápsula já vem carregada de fábrica: o tipo de quase toda lapela, headset e gooseneck. Continua precisando de energia para o circuito interno.</li>
+    <li><strong>Diafragma pequeno e grande.</strong> Os de diafragma pequeno, finos como um lápis, são os mais usados ao vivo. Os de diafragma grande, de estúdio, captam de lado: a frente costuma ser a face com a marca.</li>
+    <li><strong>Fita.</strong> É um terceiro tipo, em que uma fita finíssima de metal faz o papel do diafragma. É frágil e raro em som ao vivo.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Segurança: estalo ao ligar</h4>
+    <p>Ligar o phantom, ou conectar um microfone com o canal aberto, produz um estalo forte que pode ferir a audição de quem usa in-ear e danificar alto-falantes. Feche o canal (mute) antes, espere alguns segundos e só então abra.</p>
+  </div>
+</section>
+
+<!-- Módulo 3 -->
+<section id="polar">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Padrões polares</h2>
+  <p>O <strong>padrão polar</strong> <span class="k teal">P</span> mostra quanto o microfone capta de cada direção. A frente dele é o <strong>eixo</strong>, ou 0°: no microfone de mão, é a ponta da grade. Os lados ficam a 90°, e a parte de trás, a 180°. O desenho do padrão é um mapa visto de cima: quanto mais longe do centro a linha passa, mais o microfone capta daquela direção.</p>
+  <p>No palco, o som que você quer está em uma direção, e o que você não quer (o retorno, a caixa do PA, a bateria) está em outra. O padrão diz onde o microfone é “surdo”. É ali que deve ficar o que você quer rejeitar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 252" role="img" aria-label="Cinco diagramas polares vistos de cima, com a frente do microfone para cima. Cardioide: forma de coração, maior rejeição bem atrás, em 180 graus. Supercardioide: mais fechado, maior rejeição em diagonal, a cerca de 125 graus, com um pequeno lóbulo traseiro. Hipercardioide: ainda mais fechado, maior rejeição a cerca de 110 graus, com lóbulo traseiro maior. Omnidirecional: círculo, capta igual de todos os lados. Figura de 8: dois lóbulos, na frente e atrás, e maior rejeição nos dois lados, em 90 graus.">
+        <text class="b" x="98" y="26" font-size="13" text-anchor="middle">Cardioide</text>
+        <text class="mu" x="98" y="50" font-size="10.5" text-anchor="middle">frente (0°)</text>
+        <circle class="grid" fill="none" cx="98" cy="122" r="60"/><circle class="grid" fill="none" cx="98" cy="122" r="30"/>
+        <line class="grid" x1="32" y1="122" x2="164" y2="122"/><line class="grid" x1="98" y1="56" x2="98" y2="188"/>
+        <path class="bx-teal" d="M98 62 110 64 121 70 130 78 135 88 137 100 135 110 131 119 125 125 118 128 111 130 105 129 101 127 99 124 98 123 98 122 98 123 97 124 95 127 91 129 85 130 78 128 71 125 65 119 61 110 59 100 61 88 66 78 75 70 86 64Z"/>
+        <line class="s-bad dash" x1="98" y1="122" x2="98" y2="192"/>
+        <circle class="f-ink" cx="98" cy="122" r="3.5"/>
+        <text class="t-bad b" x="98" y="216" font-size="11" text-anchor="middle">maior rejeição: 180°</text>
+        <text class="mu" x="98" y="236" font-size="11" text-anchor="middle">retorno bem atrás</text>
+        <text class="b" x="274" y="26" font-size="13" text-anchor="middle">Supercardioide</text>
+        <text class="mu" x="274" y="50" font-size="10.5" text-anchor="middle">frente (0°)</text>
+        <circle class="grid" fill="none" cx="274" cy="122" r="60"/><circle class="grid" fill="none" cx="274" cy="122" r="30"/>
+        <line class="grid" x1="208" y1="122" x2="340" y2="122"/><line class="grid" x1="274" y1="56" x2="274" y2="188"/>
+        <path class="bx-teal" d="M274 62 283 63 292 67 299 72 305 79 309 87 310 96 309 104 306 112 302 118 296 122 290 125 284 125 278 124 274 122 277 125 279 129 279 132 278 135 276 137 274 138 272 137 270 135 269 132 269 129 271 125 274 122 270 124 264 125 258 125 252 122 246 118 242 112 239 104 238 96 239 87 243 79 249 72 256 67 265 63Z"/>
+        <line class="s-bad dash" x1="274" y1="122" x2="331" y2="163"/>
+        <line class="s-bad dash" x1="274" y1="122" x2="217" y2="163"/>
+        <circle class="f-ink" cx="274" cy="122" r="3.5"/>
+        <text class="t-bad b" x="274" y="216" font-size="11" text-anchor="middle">maior rejeição: 125°</text>
+        <text class="mu" x="274" y="236" font-size="11" text-anchor="middle">retorno em diagonal</text>
+        <text class="b" x="450" y="26" font-size="13" text-anchor="middle">Hipercardioide</text>
+        <text class="mu" x="450" y="50" font-size="10.5" text-anchor="middle">frente (0°)</text>
+        <circle class="grid" fill="none" cx="450" cy="122" r="60"/><circle class="grid" fill="none" cx="450" cy="122" r="30"/>
+        <line class="grid" x1="384" y1="122" x2="516" y2="122"/><line class="grid" x1="450" y1="56" x2="450" y2="188"/>
+        <path class="bx-teal" d="M450 62 459 63 468 67 475 73 480 80 483 89 484 98 482 106 477 113 472 119 465 122 458 123 451 122 455 124 459 129 462 134 463 139 461 144 459 148 455 151 450 152 445 151 441 148 439 144 437 139 438 134 441 129 445 124 449 122 442 123 435 122 428 119 423 113 418 106 416 98 417 89 420 80 425 73 432 67 441 63Z"/>
+        <line class="s-bad dash" x1="450" y1="122" x2="516" y2="146"/>
+        <line class="s-bad dash" x1="450" y1="122" x2="384" y2="146"/>
+        <circle class="f-ink" cx="450" cy="122" r="3.5"/>
+        <text class="t-bad b" x="450" y="216" font-size="11" text-anchor="middle">maior rejeição: 110°</text>
+        <text class="mu" x="450" y="236" font-size="11" text-anchor="middle">retorno em diagonal</text>
+        <text class="b" x="626" y="26" font-size="13" text-anchor="middle">Omnidirecional</text>
+        <text class="mu" x="626" y="50" font-size="10.5" text-anchor="middle">frente (0°)</text>
+        <circle class="grid" fill="none" cx="626" cy="122" r="60"/><circle class="grid" fill="none" cx="626" cy="122" r="30"/>
+        <line class="grid" x1="560" y1="122" x2="692" y2="122"/><line class="grid" x1="626" y1="56" x2="626" y2="188"/>
+        <circle class="bx-teal" cx="626" cy="122" r="60"/>
+        <circle class="f-ink" cx="626" cy="122" r="3.5"/>
+        <text class="t-bad b" x="626" y="216" font-size="11" text-anchor="middle">não rejeita</text>
+        <text class="mu" x="626" y="236" font-size="11" text-anchor="middle">longe das caixas</text>
+        <text class="b" x="802" y="26" font-size="13" text-anchor="middle">Figura de 8</text>
+        <text class="mu" x="802" y="50" font-size="10.5" text-anchor="middle">frente (0°)</text>
+        <circle class="grid" fill="none" cx="802" cy="122" r="60"/><circle class="grid" fill="none" cx="802" cy="122" r="30"/>
+        <line class="grid" x1="736" y1="122" x2="868" y2="122"/><line class="grid" x1="802" y1="56" x2="802" y2="188"/>
+        <path class="bx-teal" d="M802 62 811 63 820 68 826 74 831 83 832 92 831 101 826 110 820 116 811 121 802 122 811 123 820 128 826 134 831 143 832 152 831 161 826 170 820 176 811 181 802 182 793 181 784 176 778 170 773 161 772 152 773 143 778 134 784 128 793 123 802 122 793 121 784 116 778 110 773 101 772 92 773 83 778 74 784 68 793 63Z"/>
+        <line class="s-bad dash" x1="802" y1="122" x2="872" y2="122"/>
+        <line class="s-bad dash" x1="802" y1="122" x2="732" y2="122"/>
+        <circle class="f-ink" cx="802" cy="122" r="3.5"/>
+        <text class="t-bad b" x="802" y="216" font-size="11" text-anchor="middle">maior rejeição: 90°</text>
+        <text class="mu" x="802" y="236" font-size="11" text-anchor="middle">caixas nos lados</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> Os cinco padrões, com a frente do microfone para cima. As linhas tracejadas vermelhas marcam a direção de maior rejeição. O desenho está em escala linear e mostra o padrão ideal: no microfone real, a rejeição é menor nos graves e varia com o modelo.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%">Padrão</th><th style="width:11%">Lados (90°)</th><th style="width:11%">Atrás (180°)</th><th style="width:15%">Maior rejeição</th><th style="width:22%">Onde pôr o retorno</th><th>Uso típico</th></tr></thead>
+      <tbody>
+        <tr><td class="teal"><strong>Cardioide</strong></td><td class="num">−6 dB</td><td>quase nada</td><td>180°, bem atrás</td><td>Bem atrás do microfone.</td><td>O mais comum: voz de mão, púlpito, coral, instrumentos.</td></tr>
+        <tr><td class="teal"><strong>Supercardioide</strong></td><td class="num">−9 dB</td><td class="num">−12 dB</td><td>cerca de 125°, em diagonal</td><td>Em diagonal, atrás e ao lado. Nunca bem atrás.</td><td>Voz em palco com volume alto, gooseneck, caixa e tons.</td></tr>
+        <tr><td class="teal"><strong>Hipercardioide</strong></td><td class="num">−12 dB</td><td class="num">−6 dB</td><td>cerca de 110°, quase de lado</td><td>Em diagonal, mais para o lado. Nunca bem atrás.</td><td>Quando o que atrapalha está dos lados: instrumentos vizinhos.</td></tr>
+        <tr><td class="teal"><strong>Omnidirecional</strong></td><td class="num">0 dB</td><td class="num">0 dB</td><td>não tem</td><td>Longe. O microfone não ajuda a rejeitar.</td><td>Lapela e headset, sempre muito perto da boca.</td></tr>
+        <tr><td class="teal"><strong>Figura de 8</strong></td><td>quase nada</td><td class="num">0 dB</td><td>90°, nos dois lados</td><td>Em um dos lados do microfone.</td><td>Raro ao vivo. É o padrão natural do microfone de fita.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Valores do padrão ideal, em relação à frente. Os três primeiros são chamados de <strong>direcionais</strong>.</p>
+
+  <h3>Mais fechado não é sempre melhor</h3>
+  <p>O supercardioide e o hipercardioide rejeitam mais os lados e captam um pouco menos de sala do que o cardioide. Em troca, voltam a captar bem atrás. Trocar um cardioide por um supercardioide e deixar o retorno bem atrás do microfone pode piorar a microfonia: o retorno muda de lugar junto com o padrão.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 344" role="img" aria-label="Vista de cima do palco, em dois quadros. Com microfone cardioide, o retorno fica bem atrás do microfone, a 180 graus, onde a rejeição é maior. Com microfone supercardioide, dois retornos ficam em diagonal, a cerca de 125 graus de cada lado; a posição bem atrás está marcada como errada, porque ali esse padrão volta a captar.">
+        <text class="b" x="18" y="26" font-size="13.5">Cardioide</text>
+        <circle class="bx" cx="225" cy="40" r="16"/>
+        <text x="249" y="44" font-size="11">cantor</text>
+        <path class="bx-teal" d="M225 70 241 73 256 80 268 91 275 105 277 120 275 134 269 145 261 154 251 159 242 160 235 159 229 156 226 153 225 151 225 150 225 151 224 153 221 156 215 159 208 160 199 159 189 154 181 145 175 134 173 120 175 105 182 91 194 80 209 73Z"/>
+        <line class="s-bad dash" x1="225" y1="150" x2="225" y2="234"/>
+        <circle class="f-ink" cx="225" cy="150" r="4"/>
+        <line class="ln-mu" stroke-width="1" x1="231" y1="150" x2="276" y2="150"/><text class="mu" x="280" y="154" font-size="10.5">microfone</text>
+        <rect class="hd-slate" x="190" y="238" width="70" height="28"/>
+        <text class="on b" x="225" y="256" font-size="11" text-anchor="middle">retorno</text>
+        <text x="225" y="292" font-size="11.5" text-anchor="middle">O retorno fica bem atrás do microfone,</text>
+        <text x="225" y="308" font-size="11.5" text-anchor="middle">no ponto de maior rejeição (180°).</text>
+
+        <line class="grid" x1="450" y1="12" x2="450" y2="312"/>
+
+        <text class="b" x="468" y="26" font-size="13.5">Supercardioide</text>
+        <circle class="bx" cx="675" cy="40" r="16"/>
+        <text x="699" y="44" font-size="11">cantor</text>
+        <path class="bx-teal" d="M675 70 687 72 699 76 709 84 716 93 721 104 723 115 722 126 718 136 712 144 705 150 696 153 688 154 681 153 675 150 679 154 682 159 682 164 681 167 678 170 675 171 672 170 669 167 668 164 668 159 671 154 675 150 669 153 662 154 654 153 645 150 638 144 632 136 628 126 627 115 629 104 634 93 641 84 651 76 663 72Z"/>
+        <line class="s-bad dash" x1="675" y1="150" x2="752" y2="206"/>
+        <line class="s-bad dash" x1="675" y1="150" x2="598" y2="206"/>
+        <circle class="f-ink" cx="675" cy="150" r="4"/>
+        <line class="ln-mu" stroke-width="1" x1="700" y1="150" x2="726" y2="150"/><text class="mu" x="730" y="154" font-size="10.5">microfone</text>
+        <rect class="hd-slate" x="748" y="208" width="70" height="28"/>
+        <text class="on b" x="783" y="226" font-size="11" text-anchor="middle">retorno</text>
+        <rect class="hd-slate" x="532" y="208" width="70" height="28"/>
+        <text class="on b" x="567" y="226" font-size="11" text-anchor="middle">retorno</text>
+        <rect class="bx-out" x="640" y="238" width="70" height="28"/>
+        <text class="t-bad b" x="675" y="256" font-size="11" text-anchor="middle">aqui não</text>
+        <text x="675" y="292" font-size="11.5" text-anchor="middle">Retornos em diagonal, a cerca de 125°.</text>
+        <text x="675" y="308" font-size="11.5" text-anchor="middle">Bem atrás, este padrão volta a captar.</text>
+
+        <text class="mono mu" x="450" y="334" font-size="10.5" text-anchor="middle">O PÚBLICO FICA DESTE LADO</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> A posição do retorno acompanha o padrão do microfone. Com um retorno só e microfone supercardioide, coloque a caixa em um dos lados, em diagonal, e não bem à frente do cantor.</figcaption>
+  </figure>
+
+  <h3>O que o padrão não faz</h3>
+  <ul>
+    <li><strong>Ele não “puxa” o som de longe.</strong> O direcional capta menos sala do que o omni e pode ficar um pouco mais longe da fonte: o cardioide, a cerca de 1,7 vez a distância do omni; o hipercardioide, a 2 vezes. Não é muito.</li>
+    <li><strong>Ele não é um muro.</strong> Na sala, o som da caixa bate nas paredes e chega ao microfone por todas as direções. E, nos graves, todo microfone direcional fica mais aberto. O ponto surdo ajuda, mas não isola.</li>
+    <li><strong>Ele depende das entradas de trás.</strong> O microfone direcional rejeita porque o som também entra por aberturas atrás da cápsula. Se a mão tampa essas aberturas, o padrão se abre, vira quase omni, e o microfone apita (módulo 5).</li>
+  </ul>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Microfones de mão quase iguais por fora podem ter padrões diferentes: confira no manual e anote na planilha. As medidas contra o apito estão no estudo <a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>, e a posição dos retornos, no estudo <a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>.</p>
+  </div>
+</section>
+
+<!-- Módulo 4 -->
+<section id="resposta">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Resposta, proximidade, pop e vento</h2>
+  <p>A <strong>resposta de frequência</strong> diz que faixa de graves a agudos o microfone capta e com que equilíbrio. Na ficha técnica, ela é um gráfico de nível por frequência. Linha reta é resposta <strong>plana</strong>: o som como ele é. Linha com subidas e descidas é resposta <strong>moldada</strong>: o microfone já vem “equalizado” para um uso.</p>
+  <p>O microfone de voz para palco quase sempre tem resposta moldada. Os graves são atenuados, porque ele vai trabalhar colado na boca. E há um realce entre 2 e 8 kHz, aproximadamente, que ajuda a voz a ser entendida no meio da banda. Um microfone de bumbo reforça os graves e o ataque e reduz os médios. Por isso um microfone feito para uma fonte pode soar estranho em outra. As faixas de frequência e o que cada uma faz no som estão nos estudos <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a> e <a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 322" role="img" aria-label="Gráfico em esquema da resposta de frequência de um microfone de voz, de 20 hertz a 20 quilohertz. A 60 centímetros, a curva cai nos graves abaixo de 200 hertz, é plana nos médios, tem um realce de presença de cerca de 5 dB perto de 5 quilohertz e cai nos agudos extremos. A 5 centímetros, os graves sobem: cerca de 5 dB a mais em 200 hertz e mais de 10 dB a mais em 100 hertz. É o efeito de proximidade.">
+        <text class="mono mu" x="90" y="28" font-size="10.5">O MESMO MICROFONE DE VOZ, A DUAS DISTÂNCIAS (ESQUEMA)</text>
+        <g class="grid">
+          <line x1="90" y1="60" x2="850" y2="60"/><line x1="90" y1="90" x2="850" y2="90"/><line x1="90" y1="120" x2="850" y2="120"/>
+          <line x1="90" y1="180" x2="850" y2="180"/><line x1="90" y1="210" x2="850" y2="210"/><line x1="90" y1="240" x2="850" y2="240"/><line x1="90" y1="270" x2="850" y2="270"/>
+          <line x1="90" y1="60" x2="90" y2="270"/><line x1="191" y1="60" x2="191" y2="270"/><line x1="267" y1="60" x2="267" y2="270"/><line x1="343" y1="60" x2="343" y2="270"/>
+          <line x1="444" y1="60" x2="444" y2="270"/><line x1="520" y1="60" x2="520" y2="270"/><line x1="597" y1="60" x2="597" y2="270"/><line x1="697" y1="60" x2="697" y2="270"/>
+          <line x1="774" y1="60" x2="774" y2="270"/><line x1="850" y1="60" x2="850" y2="270"/>
+        </g>
+        <line class="ref" x1="90" y1="150" x2="850" y2="150"/>
+        <g font-size="10.5" text-anchor="end">
+          <text class="mu" x="82" y="64">+15</text><text class="mu" x="82" y="94">+10</text><text class="mu" x="82" y="124">+5</text><text class="b" x="82" y="154">0 dB</text>
+          <text class="mu" x="82" y="184">−5</text><text class="mu" x="82" y="214">−10</text><text class="mu" x="82" y="244">−15</text><text class="mu" x="82" y="274">−20</text>
+        </g>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="90" y="288">20</text><text class="mu" x="191" y="288">50</text><text class="mu" x="267" y="288">100</text><text class="mu" x="343" y="288">200</text>
+          <text class="mu" x="444" y="288">500</text><text class="mu" x="520" y="288">1 k</text><text class="mu" x="597" y="288">2 k</text><text class="mu" x="697" y="288">5 k</text>
+          <text class="mu" x="774" y="288">10 k</text><text class="mu" x="850" y="288">20 k</text>
+        </g>
+        <text class="mu" x="470" y="310" font-size="11" text-anchor="middle">frequência, em Hz</text>
+        <path class="s-blue" d="M90 244 L103 238 L115 232 L128 226 L141 221 L153 215 L166 210 L179 204 L191 199 L204 194 L217 189 L229 185 L242 180 L255 176 L267 173 L280 169 L293 166 L305 164 L318 161 L331 159 L343 158 L356 156 L369 155 L381 154 L394 153 L407 152 L419 152 L432 151 L445 151 L457 151 L470 150 L483 150 L495 150 L508 150 L521 150 L533 150 L546 150 L559 149 L571 149 L584 148 L597 147 L609 145 L622 142 L635 138 L647 133 L660 128 L673 124 L685 121 L698 120 L711 121 L723 125 L736 130 L749 136 L761 141 L774 147 L787 152 L799 158 L812 163 L825 170 L837 178 L850 187"/>
+        <path class="s-amber" d="M90 94 L103 95 L115 95 L128 95 L141 95 L153 96 L166 96 L179 97 L191 97 L204 98 L217 99 L229 101 L242 102 L255 104 L267 106 L280 108 L293 110 L305 113 L318 115 L331 118 L343 121 L356 124 L369 127 L381 130 L394 132 L407 135 L419 137 L432 139 L445 141 L457 142 L470 144 L483 145 L495 146 L508 146 L521 147 L533 147 L546 148 L559 148"/>
+        <text class="t-amber b" x="100" y="80" font-size="11.5">a 5 cm: os graves sobem (efeito de proximidade)</text>
+        <text class="t-blue b" x="276" y="232" font-size="11.5">a 60 cm: graves atenuados</text>
+        <text class="mu" x="470" y="168" font-size="10.5" text-anchor="middle">resposta plana</text>
+        <text class="mu" x="697" y="108" font-size="10.5" text-anchor="middle">realce de presença</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> A resposta de um microfone de voz muda com a distância. As curvas são um esquema, para mostrar a forma: o tamanho do reforço de graves e do realce de presença varia de um modelo para outro. Valores de referência: consulte o gráfico da ficha técnica do seu.</figcaption>
+  </figure>
+
+  <h3>Efeito de proximidade</h3>
+  <p>Todo microfone direcional reforça os graves quando a fonte chega muito perto. É o <strong>efeito de proximidade</strong>. Ele começa a aparecer a menos de um palmo e cresce rápido: com a boca a poucos centímetros, o reforço pode passar de 10 dB na região de 100 Hz. O microfone omnidirecional não tem esse efeito. A figura de 8 é a que tem mais.</p>
+  <p>O efeito ajuda quando dá corpo a uma voz fina: o cantor experiente usa a distância como controle de timbre, e é por isso que o microfone de voz já vem com os graves atenuados. Ele atrapalha quando quem lê encosta a boca no microfone do púlpito: a fala fica grave e embolada, as consoantes somem, e o timbre muda a cada movimento.</p>
+  <p>A correção começa pela distância: afastar dois ou três dedos já muda o grave. Depois vem o filtro passa-altas (HPF) do canal, que corta os graves abaixo da voz. Em voz, um ponto de partida comum fica entre 80 e 120 Hz. O uso do filtro e do equalizador está no estudo <a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>.</p>
+
+  <h3>Pop: o estouro das consoantes</h3>
+  <p>As consoantes “p”, “b” e “t” soltam um jato de ar. Quando ele bate no diafragma, o microfone entrega um estouro grave, o <strong>pop</strong>. A primeira medida é tirar o microfone do caminho do ar: o jato sai reto da boca, e com o microfone um pouco abaixo dela, ou de lado, ainda apontado para os lábios, a voz chega e o jato passa. A segunda é a espuma: o microfone de mão já tem uma camada dentro da grade, e uma espuma externa ajuda na fala muito próxima, tirando um pouco dos agudos. O filtro passa-altas reduz o que sobra.</p>
+
+  <h3>Vento</h3>
+  <p>Ao ar livre, o vento faz no diafragma o mesmo que o sopro, e de forma contínua: um ronco grave que encobre tudo. Ventilador e ar-condicionado fazem o mesmo na sala. A espuma comum protege de brisa. Vento de verdade pede um protetor maior, de espuma grossa ou de pelo sintético, próprio para o modelo. Ajudam também o filtro passa-altas e a escolha do padrão: o omni é menos sensível ao vento e ao pop do que os direcionais. Ao ar livre, a lapela e o headset usam sempre a espuma que os acompanha.</p>
+
+  <p>Bater no corpo do microfone, arrastar o cabo e roçar a roupa na lapela também produzem batidas graves: segure firme, prenda o cabo e mantenha o filtro passa-altas ligado nos canais de voz.</p>
+
+</section>
+
+<!-- Módulo 5 -->
+<section id="formatos">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Formatos e técnica de mão</h2>
+  <p>O formato do microfone decide a que distância da fonte ele consegue ficar e quanta liberdade ele dá a quem usa. A distância é o ponto central. Cada vez que a distância até a fonte cai pela metade, o som dela chega ao microfone cerca de 6 dB mais forte, e o som do resto da sala continua igual. A regra vem da lei do inverso do quadrado, que está no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>.</p>
+  <p>Um microfone a 5 cm da boca recebe a voz 18 dB mais forte do que um a 40 cm. Para o mesmo volume na sala, o segundo pede 18 dB a mais de ganho, e esse ganho sobe junto o retorno, a sala e o risco de apito. É por isso que o microfone longe “não rende”, por melhor que seja.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 286" role="img" aria-label="Gráfico da distância típica de cada formato de microfone até a boca, em escala em que cada marca dobra a distância, com o nível da voz em relação a 5 centímetros. Headset: de 1,5 a 3 centímetros, de 10 a 4 dB acima. De mão: de 2 a 10 centímetros, de 8 dB acima a 6 dB abaixo. Lapela: de 15 a 20 centímetros, de 10 a 12 dB abaixo. Gooseneck de púlpito: de 20 a 40 centímetros, de 12 a 18 dB abaixo. Coral suspenso: de 60 a 100 centímetros até a primeira fila, de 22 a 26 dB abaixo.">
+        <line class="ref" x1="424" y1="36" x2="424" y2="226"/>
+        <text class="mu" x="424" y="28" font-size="10.5" text-anchor="middle">referência: 5 cm</text>
+
+        <text class="b" x="18" y="58" font-size="12">Headset</text>
+        <text class="mu" x="18" y="73" font-size="10.5">no canto da boca</text>
+        <rect class="bx-blue" x="273" y="48" width="87" height="22"/>
+        <text x="265" y="63" font-size="11" text-anchor="end">1,5 a 3 cm</text>
+
+        <text class="b" x="18" y="94" font-size="12">De mão</text>
+        <text class="mu" x="18" y="109" font-size="10.5">voz cantada e falada</text>
+        <rect class="bx-blue" x="309" y="84" width="202" height="22"/>
+        <text x="519" y="99" font-size="11">2 a 10 cm</text>
+
+        <text class="b" x="18" y="130" font-size="12">Lapela</text>
+        <text class="mu" x="18" y="145" font-size="10.5">presa no peito</text>
+        <rect class="bx-blue" x="562" y="120" width="37" height="22"/>
+        <text x="607" y="135" font-size="11">15 a 20 cm</text>
+
+        <text class="b" x="18" y="166" font-size="12">Gooseneck</text>
+        <text class="mu" x="18" y="181" font-size="10.5">no púlpito</text>
+        <rect class="bx-blue" x="599" y="156" width="87" height="22"/>
+        <text x="694" y="171" font-size="11">20 a 40 cm</text>
+
+        <text class="b" x="18" y="202" font-size="12">Coral suspenso</text>
+        <text class="mu" x="18" y="217" font-size="10.5">até a primeira fila</text>
+        <rect class="bx-blue" x="737" y="192" width="64" height="22"/>
+        <text x="809" y="207" font-size="11">60 a 100 cm</text>
+
+        <line class="ln-mu" x1="250" y1="232" x2="860" y2="232"/>
+        <path class="ln-mu" stroke-width="1" d="M250 232 V238 M337 232 V238 M424 232 V238 M511 232 V238 M599 232 V238 M686 232 V238 M773 232 V238 M860 232 V238"/>
+        <text class="mu" x="18" y="254" font-size="11">distância até a boca, em cm</text>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="250" y="254">1,25</text><text class="mu" x="337" y="254">2,5</text><text class="b" x="424" y="254">5</text><text class="mu" x="511" y="254">10</text>
+          <text class="mu" x="599" y="254">20</text><text class="mu" x="686" y="254">40</text><text class="mu" x="773" y="254">80</text><text class="mu" x="860" y="254">160</text>
+        </g>
+        <text class="mu" x="18" y="274" font-size="11">nível da voz no microfone, em dB</text>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="t-good b" x="250" y="274">+12</text><text class="t-good b" x="337" y="274">+6</text><text class="b" x="424" y="274">0</text><text class="t-bad b" x="511" y="274">−6</text>
+          <text class="t-bad b" x="599" y="274">−12</text><text class="t-bad b" x="686" y="274">−18</text><text class="t-bad b" x="773" y="274">−24</text><text class="t-bad b" x="860" y="274">−30</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> A distância típica de cada formato e o que ela custa em nível. A conta vale como aproximação, para a voz em campo livre: bem perto da boca e em sala reverberante, a variação real é um pouco menor.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:16%">Formato</th><th style="width:20%">Tipo e padrão mais comuns</th><th style="width:28%">Onde vai bem</th><th>Cuidado principal</th></tr></thead>
+      <tbody>
+        <tr><td><strong>De mão</strong></td><td>Dinâmico, cardioide ou supercardioide.</td><td>Canto, fala, entrevista, microfone que passa de pessoa para pessoa.</td><td>Depende de quem segura: distância e direção mudam o tempo todo.</td></tr>
+        <tr><td><strong>Lapela</strong></td><td>Condensador (eletreto), omni; há modelos cardioides.</td><td>Palestra e pregação com as mãos livres, vídeo.</td><td>Fica longe da boca: é o formato que menos rende antes da microfonia.</td></tr>
+        <tr><td><strong>Headset</strong></td><td>Condensador (eletreto), omni ou cardioide.</td><td>Pregação e canto com mãos livres e movimento. A distância não muda quando a cabeça vira.</td><td>Ajuste no rosto e cuidado com suor, cabo fino e conector.</td></tr>
+        <tr><td><strong>Gooseneck de púlpito</strong></td><td>Condensador, cardioide ou supercardioide. Precisa de phantom.</td><td>Leitura e fala em ponto fixo: púlpito, tribuna, mesa de autoridades.</td><td>A pessoa se afasta ou fala para o lado, e a voz some.</td></tr>
+        <tr><td><strong>Coral suspenso</strong></td><td>Condensador pequeno, cardioide. Precisa de phantom.</td><td>Coral e grupo vocal: um microfone para muitas vozes.</td><td>Capta de longe: pouco ganho antes da microfonia.</td></tr>
+        <tr><td><strong>Overhead (lápis)</strong></td><td>Condensador de diafragma pequeno, cardioide. Precisa de phantom.</td><td>Pratos da bateria, violão, piano, percussão.</td><td>Frágil. Capta tudo o que está em volta.</td></tr>
+        <tr><td><strong>Clip e de contato</strong></td><td>O clip prende um microfone pequeno ao instrumento. O de contato capta a vibração da madeira.</td><td>Tons, sopros, violino, percussão.</td><td>O clip mal preso vibra e cai. O de contato rejeita o palco, mas soa menos natural.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Lapela</h3>
+  <p>Prenda a lapela no centro do peito, cerca de um palmo abaixo do queixo (de 15 a 20 cm). Na gola, de lado, a voz some quando a pessoa vira o rosto. Deixe a cápsula descoberta, sem roupa, crachá ou colar roçando nela, e prenda uma volta do cabo no próprio clipe, para que um puxão não chegue à cápsula. A lapela omni soa igual com a cabeça em qualquer posição. A cardioide rejeita um pouco mais o retorno, mas precisa apontar para a boca.</p>
+
+  <h3>Headset</h3>
+  <p>A cápsula fica ao lado do canto da boca, a um dedo de distância, e não na frente dos lábios: ali ela recebe o jato de ar das consoantes e o sopro do nariz. A haste não encosta na pele nem na barba, e o arco fica firme. Como o headset fica cerca de dez vezes mais perto da boca do que a lapela, ele entrega muito mais voz em relação ao ambiente, mesmo com cápsula omni: em palco com retorno alto, é a escolha segura para quem precisa das mãos livres. A versão sem fio está no estudo <a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Microfones sem fio</a>.</p>
+
+  <h3>Gooseneck de púlpito</h3>
+  <p>Aponte a cápsula para a boca de quem fala, a uma distância de 20 a 40 cm, com a haste um pouco abaixo da linha da boca: a pessoa fala por cima do microfone, o jato de ar passa, e o rosto fica livre para a câmera. Ajuste a altura para cada pessoa antes de ela começar, com o canal fechado. Um microfone só, bem apontado, funciona melhor do que dois: o motivo está no módulo 6.</p>
+
+  <h3>Técnica de mão</h3>
+  <p>O microfone de mão depende de quem segura. Vale a pena ensinar em meio minuto, antes do evento, a cada pessoa que vai usar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 292" role="img" aria-label="Três desenhos de perfil de uma pessoa com microfone de mão. Certo: a mão no corpo, a grade livre, a poucos centímetros da boca e apontada para ela. Errado: a mão em concha na grade tampa as entradas de trás da cápsula, e o microfone apita. Errado: o microfone na altura do peito, virado para cima, a um palmo ou mais da boca; a voz chega fraca e o ganho alto traz a sala e as caixas.">
+        <text class="t-good b" x="18" y="26" font-size="13.5">Certo</text>
+        <circle class="bx" cx="78" cy="84" r="34"/>
+        <path class="ln" d="M109 72 L123 86 L110 92"/>
+        <path class="ln" d="M102 102 h9"/>
+        <line class="s-slate" style="stroke-width:11;stroke-linecap:round" x1="142" y1="118" x2="184" y2="174"/>
+        <circle class="f-slate" cx="134" cy="108" r="11"/>
+        <ellipse class="lv-amber" cx="168" cy="153" rx="18" ry="14"/>
+        <text class="mu" x="192" y="150" font-size="10.5">mão no corpo</text>
+        <text class="b" x="152" y="100" font-size="11">2 a 5 cm, apontado para a boca</text>
+        <text x="18" y="246" font-size="11.5">A mão segura o corpo. A grade fica</text>
+        <text x="18" y="262" font-size="11.5">livre, a poucos centímetros da boca,</text>
+        <text x="18" y="278" font-size="11.5">apontada para ela.</text>
+
+        <text class="t-bad b" x="312" y="26" font-size="13.5">Errado: mão na grade</text>
+        <circle class="bx" cx="372" cy="84" r="34"/>
+        <path class="ln" d="M403 72 L417 86 L404 92"/>
+        <path class="ln" d="M396 102 h9"/>
+        <line class="s-slate" style="stroke-width:11;stroke-linecap:round" x1="436" y1="118" x2="478" y2="174"/>
+        <circle class="f-slate" cx="428" cy="108" r="11"/>
+        <ellipse class="lv-red" cx="434" cy="114" rx="21" ry="18"/>
+        <text class="t-bad b" x="464" y="110" font-size="11">mão em concha</text>
+        <text x="312" y="246" font-size="11.5">A mão tampa as entradas de trás da</text>
+        <text x="312" y="262" font-size="11.5">cápsula. O microfone deixa de</text>
+        <text x="312" y="278" font-size="11.5">rejeitar o retorno, e apita.</text>
+
+        <text class="t-bad b" x="606" y="26" font-size="13.5">Errado: longe e virado para cima</text>
+        <circle class="bx" cx="666" cy="84" r="34"/>
+        <path class="ln" d="M697 72 L711 86 L698 92"/>
+        <path class="ln" d="M690 102 h9"/>
+        <line class="s-slate" style="stroke-width:11;stroke-linecap:round" x1="728" y1="172" x2="728" y2="218"/>
+        <circle class="f-slate" cx="728" cy="160" r="11"/>
+        <ellipse class="lv-amber" cx="728" cy="200" rx="16" ry="13"/>
+        <path class="ln-mu" stroke-width="1" d="M746 102 H758 M752 102 V160 M746 160 H758"/>
+        <text class="b" x="766" y="128" font-size="11">um palmo</text>
+        <text class="b" x="766" y="143" font-size="11">ou mais</text>
+        <text x="606" y="246" font-size="11.5">A voz chega fraca. O operador sobe</text>
+        <text x="606" y="262" font-size="11.5">o ganho, e o microfone capta a</text>
+        <text x="606" y="278" font-size="11.5">sala e as caixas junto.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> Três jeitos de segurar o microfone de mão. O primeiro é o que se ensina a quem vai cantar ou falar. Os outros dois são as causas mais comuns de voz fraca e de microfonia que o operador não consegue resolver na mesa.</figcaption>
+  </figure>
+
+  <ul>
+    <li><strong>Perto e apontado.</strong> De 2 a 5 cm para o canto, de 5 a 10 cm para a fala: dois ou três dedos entre a boca e a grade. A ponta da grade olha para os lábios e acompanha a cabeça. Segurar o microfone em pé, como um sorvete, com a voz passando por cima, tira os agudos e o nível.</li>
+    <li><strong>Mão no corpo.</strong> Nunca na grade, nem em concha em volta dela. No sem fio, a mão também não cobre a base, onde costuma ficar a antena.</li>
+    <li><strong>Longe das caixas.</strong> Não aponte o microfone para o retorno ao baixar o braço, nem passe na frente das caixas do PA com ele aberto.</li>
+    <li><strong>Voz que não chega se resolve na mão de quem fala.</strong> Subir o ganho dura alguns segundos e termina em apito. Combine um sinal discreto para pedir que a pessoa aproxime o microfone.</li>
+  </ul>
+
+</section>
+
+<!-- Módulo 6 -->
+<section id="posicao">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Posição por fonte e regra 3:1</h2>
+  <p>A distância define quanto da fonte entra em relação ao resto. A direção define o timbre, porque cada parte do instrumento soa de um jeito, e o que fica no ponto surdo. Três regras valem para qualquer fonte:</p>
+  <ul>
+    <li><strong>O mais perto que a fonte permite.</strong> Perto, o microfone capta mais fonte e menos palco.</li>
+    <li><strong>A frente para a fonte, o ponto surdo para o que atrapalha.</strong> Gire o microfone até que o retorno, o chimbal ou o instrumento vizinho fiquem na direção de maior rejeição.</li>
+    <li><strong>Mova o microfone antes de equalizar.</strong> Dois centímetros para o lado mudam mais o timbre de um amplificador do que o botão de agudos.</li>
+  </ul>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%">Fonte</th><th style="width:19%">Microfone de partida</th><th style="width:16%">Distância</th><th>Posição e direção</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Voz cantada</strong></td><td>De mão, dinâmico, cardioide ou supercardioide.</td><td>2 a 5 cm</td><td>Apontado para a boca. Retorno na direção de maior rejeição do padrão.</td></tr>
+        <tr><td><strong>Voz falada</strong></td><td>De mão dinâmico, headset, gooseneck ou lapela.</td><td>Conforme o formato (módulo 5)</td><td>O mais perto que o formato permite. Um microfone por pessoa que fala, e só o dela aberto.</td></tr>
+        <tr><td><strong>Coral</strong></td><td>Condensador cardioide, suspenso ou em pedestal alto.</td><td>60 a 90 cm à frente da primeira fila</td><td>Acima das cabeças, apontado para a última fila. Um microfone para cada 15 a 20 vozes.</td></tr>
+        <tr><td><strong>Violão sem captação</strong></td><td>Condensador de diafragma pequeno, cardioide.</td><td>15 a 30 cm</td><td>Apontado para a junção do braço com o corpo. Na boca do violão, o som fica grave e embolado.</td></tr>
+        <tr><td><strong>Amplificador de guitarra</strong></td><td>Dinâmico cardioide.</td><td>2 a 10 cm da tela</td><td>Apontado para o alto-falante. No centro do cone, o som é mais brilhante. Perto da borda, mais cheio.</td></tr>
+        <tr><td><strong>Bumbo</strong></td><td>Dinâmico próprio para graves.</td><td>Dentro do casco ou no furo da pele</td><td>Perto da pele batida, mais ataque. No furo, mais corpo.</td></tr>
+        <tr><td><strong>Caixa e tons</strong></td><td>Dinâmico cardioide ou supercardioide. Nos tons, em geral com clip no aro.</td><td>3 a 5 cm acima da pele, junto ao aro</td><td>Apontado para o centro da pele, fora do caminho da baqueta. Na caixa, com o ponto surdo virado para o chimbal.</td></tr>
+        <tr><td><strong>Chimbal e pratos</strong></td><td>Condensador de diafragma pequeno, cardioide.</td><td>Chimbal: 10 a 15 cm. Pratos: 60 a 100 cm acima</td><td>No chimbal, de cima, do lado oposto à caixa e fora do jato de ar entre os pratos. Nos pratos (overhead), um ou dois microfones apontados para baixo.</td></tr>
+        <tr><td><strong>Piano acústico</strong></td><td>Um ou dois condensadores cardioides.</td><td>15 a 30 cm das cordas</td><td>De cauda: tampa aberta, um microfone sobre as cordas agudas e outro sobre as graves, a um palmo dos martelos. De armário: tampa de cima aberta, com o microfone apontado para dentro.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>São pontos de partida: ouça no fone, mova o microfone e ouça de novo. Violão com captação, baixo e teclado não usam microfone: entram por direct box ou por linha, assunto do estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>. Em sala pequena, a bateria já soa forte sem microfone nenhum: microfonar o bumbo, e talvez os pratos para a transmissão, costuma bastar.</p>
+
+  <h3>Coral</h3>
+  <p>O coral é a fonte mais difícil do palco: muitas vozes, fracas, longe do microfone. O microfone fica à frente e acima, para que a distância até a primeira e até a última fila seja parecida, e aponta para a última fila.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 334" role="img" aria-label="Vista lateral de um coral com três filas em degraus. Um microfone condensador cardioide, em pedestal alto ou suspenso, fica de 60 a 90 centímetros à frente da primeira fila e de 60 a 90 centímetros acima da cabeça dela, apontado para a última fila. A caixa do PA fica à frente do microfone, virada para o público, de modo que o fundo do microfone fique voltado para ela. Um microfone cobre de 15 a 20 vozes, ou cerca de 3 metros de largura.">
+        <defs><marker id="mk8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <line class="ln-mu" x1="18" y1="280" x2="882" y2="280"/>
+        <rect class="bx-slate" x="452" y="250" width="100" height="30"/>
+        <rect class="bx-slate" x="552" y="220" width="120" height="60"/>
+
+        <rect class="lv-slate" x="386" y="170" width="28" height="110"/>
+        <circle class="bx" cx="400" cy="154" r="14"/>
+        <rect class="lv-slate" x="486" y="140" width="28" height="110"/>
+        <circle class="bx" cx="500" cy="124" r="14"/>
+        <rect class="lv-slate" x="586" y="110" width="28" height="110"/>
+        <circle class="bx" cx="600" cy="94" r="14"/>
+        <text class="mu" x="400" y="297" font-size="10.5" text-anchor="middle">1ª fila</text>
+        <text class="mu" x="612" y="297" font-size="10.5" text-anchor="middle">última fila</text>
+
+        <line class="ln" x1="320" y1="90" x2="320" y2="280"/>
+        <line class="ln" x1="300" y1="280" x2="340" y2="280" stroke-width="3"/>
+        <line class="s-amber" style="stroke-width:7;stroke-linecap:round" x1="316" y1="84" x2="338" y2="85"/>
+        <line class="s-amber dash" x1="346" y1="85" x2="578" y2="93" marker-end="url(#mk8)"/>
+        <text class="b" x="320" y="50" font-size="11.5" text-anchor="middle">condensador cardioide,</text>
+        <text class="b" x="320" y="66" font-size="11.5" text-anchor="middle">apontado para a última fila</text>
+
+        <line class="ref" x1="352" y1="140" x2="392" y2="140"/>
+        <path class="ln-mu" stroke-width="1" d="M356 92 H368 M362 92 V140"/>
+        <text x="372" y="116" font-size="11">60 a</text>
+        <text x="372" y="130" font-size="11">90 cm</text>
+        <path class="ln-mu" stroke-width="1" d="M320 302 V314 M320 308 H386 M386 302 V314"/>
+        <text x="353" y="328" font-size="11" text-anchor="middle">60 a 90 cm</text>
+
+        <rect class="bx" x="96" y="150" width="50" height="110"/>
+        <line class="ln" x1="121" y1="260" x2="121" y2="280"/>
+        <circle class="lv-slate" cx="121" cy="225" r="16"/>
+        <circle class="lv-slate" cx="121" cy="178" r="9"/>
+        <line class="ln" x1="92" y1="205" x2="46" y2="205" marker-end="url(#mk8)"/>
+        <text class="mu" x="62" y="196" font-size="10.5" text-anchor="middle">público</text>
+        <text class="b" x="18" y="122" font-size="11.5">Caixa do PA</text>
+        <text class="mu" x="18" y="138" font-size="10.5">à frente do microfone</text>
+        <text class="mu" x="170" y="184" font-size="10.5">o fundo do microfone</text>
+        <text class="mu" x="170" y="199" font-size="10.5">fica virado para a caixa</text>
+
+        <text class="b" x="706" y="118" font-size="12">Ponto de partida</text>
+        <text x="706" y="140" font-size="11.5">Um microfone cobre</text>
+        <text x="706" y="156" font-size="11.5">de 15 a 20 vozes, ou</text>
+        <text x="706" y="172" font-size="11.5">cerca de 3 m de largura.</text>
+        <text class="mu" x="706" y="196" font-size="11.5">Menos microfones abertos,</text>
+        <text class="mu" x="706" y="212" font-size="11.5">mais ganho antes do apito.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> Posição de partida para um coral, em vista lateral. As medidas são referência: o que se busca é uma distância parecida do microfone até a primeira e até a última fila, e o coral inteiro dentro da frente do padrão.</figcaption>
+  </figure>
+
+  <p>Use o menor número de microfones que cobre o grupo: um coral de 30 a 40 vozes pede dois, e não seis. Mantenha as caixas do PA à frente da linha dos microfones e não devolva o som deles ao retorno do próprio coral. Se o coral precisa de retorno, mande a ele o teclado ou a base, sem as vozes.</p>
+
+  <h3>A regra 3:1</h3>
+  <p>Quando dois microfones abertos captam a mesma fonte a distâncias diferentes, o som chega a um deles com atraso. Somados na mesa, os dois se cancelam em algumas frequências e se reforçam em outras. O resultado é um som oco, “de banheiro”, que muda quando a pessoa se mexe. É o <strong>filtro pente</strong>. Com 30 cm de diferença de caminho, por exemplo, o primeiro cancelamento cai perto de 570 Hz, bem no meio da voz.</p>
+  <p>A <strong>regra 3:1</strong> evita o problema: a distância entre dois microfones deve ser pelo menos três vezes a distância de cada um até a própria fonte. Com essa proporção, o som de uma fonte chega ao microfone vizinho cerca de 10 dB mais fraco, e o cancelamento fica pequeno demais para incomodar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Vista de cima, em dois quadros. Dentro da regra: duas pessoas, A e B, cada uma a 30 centímetros do seu microfone, com 90 centímetros entre os microfones; o som de A chega ao microfone de B cerca de 10 dB mais fraco. Fora da regra: cada pessoa a 45 centímetros do seu microfone, com 60 centímetros entre eles; o som de A chega ao microfone de B só 4 dB mais fraco, e a soma soa oca.">
+        <text class="t-good b" x="18" y="26" font-size="13.5">Dentro da regra</text>
+        <circle class="bx" cx="130" cy="64" r="16"/><text class="b" x="130" y="68" font-size="12" text-anchor="middle">A</text>
+        <circle class="bx" cx="310" cy="64" r="16"/><text class="b" x="310" y="68" font-size="12" text-anchor="middle">B</text>
+        <line class="s-bad dash" x1="142" y1="76" x2="304" y2="121"/>
+        <line class="s-good" x1="130" y1="82" x2="130" y2="118"/>
+        <line class="s-good" x1="310" y1="82" x2="310" y2="118"/>
+        <circle class="f-ink" cx="130" cy="124" r="6"/><circle class="f-ink" cx="310" cy="124" r="6"/>
+        <text class="b" x="120" y="105" font-size="11" text-anchor="end">30 cm</text>
+        <text class="b" x="320" y="105" font-size="11">30 cm</text>
+        <text class="mu" x="130" y="147" font-size="10.5" text-anchor="middle">microfone A</text>
+        <text class="mu" x="310" y="147" font-size="10.5" text-anchor="middle">microfone B</text>
+        <path class="ln-mu" stroke-width="1" d="M130 160 V172 M130 166 H310 M310 160 V172"/>
+        <text class="b" x="220" y="186" font-size="11.5" text-anchor="middle">90 cm: três vezes 30 cm</text>
+        <text x="18" y="222" font-size="11.5">O som de A chega ao microfone de B</text>
+        <text x="18" y="238" font-size="11.5">cerca de 10 dB mais fraco.</text>
+        <text class="t-good b" x="18" y="258" font-size="11.5">A soma dos dois quase não muda o timbre.</text>
+
+        <line class="grid" x1="450" y1="12" x2="450" y2="262"/>
+
+        <text class="t-bad b" x="468" y="26" font-size="13.5">Fora da regra</text>
+        <circle class="bx" cx="600" cy="64" r="16"/><text class="b" x="600" y="68" font-size="12" text-anchor="middle">A</text>
+        <circle class="bx" cx="720" cy="64" r="16"/><text class="b" x="720" y="68" font-size="12" text-anchor="middle">B</text>
+        <line class="s-bad dash" x1="610" y1="78" x2="715" y2="148"/>
+        <line class="s-good" x1="600" y1="82" x2="600" y2="145"/>
+        <line class="s-good" x1="720" y1="82" x2="720" y2="145"/>
+        <circle class="f-ink" cx="600" cy="151" r="6"/><circle class="f-ink" cx="720" cy="151" r="6"/>
+        <text class="b" x="590" y="118" font-size="11" text-anchor="end">45 cm</text>
+        <text class="b" x="730" y="118" font-size="11">45 cm</text>
+        <path class="ln-mu" stroke-width="1" d="M600 166 V178 M600 172 H720 M720 166 V178"/>
+        <text class="b" x="660" y="192" font-size="11.5" text-anchor="middle">60 cm: só 1,3 vez 45 cm</text>
+        <text x="468" y="222" font-size="11.5">O som de A chega ao microfone de B</text>
+        <text x="468" y="238" font-size="11.5">só 4 dB mais fraco.</text>
+        <text class="t-bad b" x="468" y="258" font-size="11.5">A soma dos dois soa oca, e muda com o movimento.</text>
+
+        <line class="s-good" x1="18" y1="278" x2="46" y2="278"/>
+        <text class="mu" x="54" y="282" font-size="11">som direto, da fonte ao microfone dela</text>
+        <line class="s-bad dash" x1="330" y1="278" x2="358" y2="278"/>
+        <text class="mu" x="366" y="282" font-size="11">vazamento: o som de uma fonte no microfone da outra</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 9.</b> A regra 3:1, vista de cima. Há dois jeitos de entrar na regra: afastar os microfones um do outro ou aproximar cada microfone da sua fonte. O segundo quase sempre é o mais fácil.</figcaption>
+  </figure>
+
+  <ul>
+    <li><strong>Vale para microfones abertos ao mesmo tempo e somados na mesma mistura,</strong> com ganhos parecidos: leitores lado a lado, mesa de debate, vozes de apoio, instrumentos vizinhos. Entre microfones de coral a 90 cm da primeira fila, o vizinho fica a 2,7 m ou mais.</li>
+    <li><strong>Dois microfones no mesmo púlpito</strong> nunca cumprem a regra, porque os dois captam a mesma boca. Use um só. Se houver um segundo, de reserva, ele fica fechado.</li>
+    <li><strong>Fechar resolve.</strong> Microfone fechado (mute) não soma. Abrir só o microfone de quem fala elimina o filtro pente e aumenta a margem antes da microfonia: cada vez que o número de microfones abertos dobra, a margem cai cerca de 3 dB, como mostra o estudo <a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Segurança: pedestais, cabos e microfone suspenso</h4>
+    <p>Microfone pendurado sobre o coral ou sobre o público é peso suspenso: use fixação própria, com um segundo ponto de segurança, e deixe a instalação em altura para quem tem equipamento e treinamento. No palco, aperte as travas dos pedestais, ponha uma perna do tripé na direção da haste e fixe com fita os cabos que cruzam a passagem das pessoas.</p>
+  </div>
+</section>
+
+<!-- Módulo 7 -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>A escolha começa dias antes, com a lista das fontes. A posição se acerta na montagem, antes do ajuste de ganho.</p>
+  <ol class="steps">
+    <li><h4>Liste as fontes do evento</h4><p>Quem fala, quem canta e o que toca, e quem precisa de movimento ou das mãos livres. A lista de canais completa (input list) está no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p></li>
+    <li><h4>Escolha o microfone de cada fonte</h4><p>Defina o tipo <span class="k blue">D</span> <span class="k amber">C</span>, o padrão <span class="k teal">P</span> e o formato, com a tabela do módulo 6 e a aba “Escolha por fonte” da planilha. Os melhores vão para as fontes mais importantes: a voz de quem prega e a voz principal.</p></li>
+    <li><h4>Confira o inventário</h4><p>Veja se há microfones suficientes, se algum está com defeito e quantos canais pedem phantom. Separe um microfone de mão com fio como reserva.</p></li>
+    <li><h4>Teste cada microfone com o cabo que ele vai usar</h4><p>Fale no microfone, no canal dele, com o fone no PFL. Não sopre nem bata na grade: isso força o diafragma e manda um estouro às caixas. Mexa de leve no conector: estalo ou falha indicam cabo ou conector ruim.</p></li>
+    <li><h4>Posicione: perto, apontado, firme</h4><p>O mais perto que a fonte permite, com a frente para ela. Travas apertadas, cabo preso.</p></li>
+    <li><h4>Confira o padrão e a regra 3:1</h4><p>Cada retorno fica na direção de maior rejeição do microfone diante dele: bem atrás do cardioide, em diagonal para o supercardioide. Nenhum microfone fica à frente das caixas do PA. Meça os microfones que ficam abertos juntos: se a distância entre dois deles não chega a três vezes a distância até a fonte, aproxime cada um da sua fonte. A aba “Regra 3 para 1” faz a conta.</p></li>
+    <li><h4>Ligue o phantom onde precisa</h4><p>Com o canal fechado (mute), ligue o +48 V nos canais dos condensadores com fio. Espere alguns segundos antes de abrir. Ao desmontar, desligue o phantom, também com o canal fechado, antes de desconectar.</p></li>
+    <li><h4>Ajuste o ganho e o filtro</h4><p>Ajuste o ganho pelo medidor, como no estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>. Ligue o filtro passa-altas nos canais de voz. Se o som não está bom, mova o microfone antes de equalizar.</p></li>
+    <li><h4>Oriente quem vai usar</h4><p>Perto da boca, apontado para ela, mão no corpo. Ajuste lapela, headset e gooseneck na própria pessoa.</p></li>
+    <li><h4>Durante o evento, abra só o que está em uso</h4><p>Feche o microfone de quem não está falando nem cantando, e observe o palco: quem afasta o microfone da boca muda o som.</p></li>
+  </ol>
+
+  <h3>Depois do evento: cuidados e higienização</h3>
+  <p>Limpar é higiene e conservação: saliva e umidade na grade abafam o som e oxidam a cápsula.</p>
+  <ul>
+    <li><strong>Grade e espuma do microfone de mão.</strong> Na maioria dos modelos, a grade desenrosca. Lave a grade e a espuma interna com água e detergente neutro, enxágue e deixe secar por completo antes de montar. Nunca molhe a cápsula.</li>
+    <li><strong>Corpo.</strong> Pano levemente umedecido. Para desinfetar entre usuários, pano com álcool isopropílico a 70% na grade e no corpo, sem escorrer para dentro. Confira o que o manual recomenda.</li>
+    <li><strong>Lapela e headset.</strong> Limpe a haste e o cabo com pano umedecido, sem molhar a cápsula, e seque o suor depois do uso. Troque a espuma quando mudar o usuário.</li>
+    <li><strong>Guarda e transporte.</strong> Cada microfone no seu estojo ou em maleta com espuma, longe de umidade e de poeira. Um condensador úmido pode chiar ou estalar até secar. No sem fio, retire as pilhas se ele vai ficar guardado por semanas.</li>
+    <li><strong>Registro.</strong> Anote no inventário o microfone que falhou ou caiu, para testar antes do próximo evento.</li>
+  </ul>
+
+</section>
+
+<!-- Módulo 8 -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns, com cenários e números ilustrativos. O primeiro está preenchido na planilha de apoio.</p>
+
+  <h3>Exemplo 1. Os microfones de um culto com banda e coral</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, dez microfones, nove fontes: pastor, três vozes, coral em dois lados, violão, bumbo e púlpito.</dd></div>
+    <div><dt>Sintoma</dt><dd>No domingo anterior, o coral quase não se ouvia. Quando o operador subia os canais dele, o sistema apitava.</dd></div>
+    <div><dt>Causa</dt><dd>O coral estava com microfones de mão dinâmicos em pedestal, a mais de um metro. Um deles era o mesmo de uma voz de apoio, trocado de lugar no meio do culto.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Inventário e escolha por fonte na planilha. Os dois condensadores suspensos, que estavam guardados, foram para o coral, com phantom.</dd></div>
+    <div><dt>Resultado</dt><dd>Nove fontes com microfone certo, quatro canais com phantom, um microfone separado para conserto.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:17%">Fonte</th><th style="width:21%">Microfone planejado</th><th style="width:14%">Situação</th><th>O que foi feito</th></tr></thead>
+      <tbody>
+        <tr><td>Pastor</td><td>Headset sem fio, condensador omni</td><td class="teal">OK</td><td>Mantido. Sem phantom: o transmissor alimenta a cápsula.</td></tr>
+        <tr><td>Cantora e voz de apoio 1</td><td>De mão, dinâmico cardioide</td><td class="teal">OK</td><td>Mantidos. Retornos bem atrás dos microfones.</td></tr>
+        <tr><td>Voz de apoio 2</td><td>De mão nº 4, sem fita de identificação</td><td class="red">Defeito</td><td>Marcado com defeito no inventário. Entrou o nº 3, supercardioide, e o retorno foi para a diagonal.</td></tr>
+        <tr><td>Coral, lado esquerdo</td><td>De mão nº 3, dinâmico, em pedestal</td><td class="amber">Tipo diferente</td><td>Trocado pelo condensador suspenso nº 6, a 80 cm da primeira fila. Phantom ligado.</td></tr>
+        <tr><td>Coral, lado direito</td><td>De mão nº 2, o mesmo da voz de apoio 1</td><td class="amber">Repetido</td><td>Trocado pelo condensador suspenso nº 7, a 2,7 m do nº 6. Phantom ligado.</td></tr>
+        <tr><td>Violão, bumbo e púlpito</td><td>Lápis, dinâmico de bumbo e gooseneck</td><td class="teal">OK</td><td>Mantidos. Phantom no violão e no púlpito.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> O dinâmico de mão foi feito para trabalhar a centímetros da boca. A um metro do coral, o ganho necessário para compensar traz o apito. O condensador não faz milagre, e o coral continua sendo a fonte com menos margem. Mas ele parte de um sinal uns 10 a 20 dB mais forte e capta os agudos que dão clareza às vozes. Os dois ficaram a 2,7 m um do outro, mais de três vezes os 80 cm até a primeira fila.</p>
+
+  <h3>Exemplo 2. A mesa de debate com som “de banheiro”</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Auditório de escola, mesa com quatro debatedores, quatro microfones dinâmicos em pedestais de mesa, todos abertos.</dd></div>
+    <div><dt>Sintoma</dt><dd>Vozes ocas, timbre que muda quando alguém se mexe, e apito antes do volume necessário.</dd></div>
+    <div><dt>Causa</dt><dd>Cada microfone estava a 50 cm da boca, e a 60 cm do microfone vizinho: razão de 1,2. Cada voz entrava em dois ou três microfones quase com o mesmo nível.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Microfones aproximados para 20 cm da boca de cada debatedor, sem mudar a distância entre eles. Só o microfone de quem fala fica aberto.</dd></div>
+    <div><dt>Resultado</dt><dd>Razão de 3 para 1. A voz ficou cheia, e o volume da sala chegou onde precisava, sem apito.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> A distância entre os microfones continuou em 60 cm. Mudou a distância até a fonte, de 50 para 20 cm, e a razão passou de 1,2 para 3. De quebra, cada voz chegou ao seu microfone cerca de 8 dB mais forte, e o ganho pôde baixar na mesma medida. Fechar os microfones de quem não fala fez o resto. Digite as distâncias na aba “Regra 3 para 1” e confira a conta.</p>
+
+  <h3>Exemplo 3. O microfone novo que apita mais do que o velho</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Evento ao ar livre, cantor com microfone de mão e um retorno de chão bem à frente dele.</dd></div>
+    <div><dt>Sintoma</dt><dd>Com um microfone novo, “melhor”, o retorno apita com menos volume do que antes. Venta, e há um ronco grave.</dd></div>
+    <div><dt>Causa</dt><dd>O microfone novo é supercardioide, e o retorno continuou bem atrás dele, onde esse padrão volta a captar. O cantor ainda segurava o microfone pela grade.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Retorno na diagonal, a cerca de 125°. Cantor orientado a segurar pelo corpo. Espuma e filtro passa-altas.</dd></div>
+    <div><dt>Resultado</dt><dd>O retorno chegou ao volume que o cantor pedia, sem apito, e o ronco do vento caiu.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> Nada foi comprado, e nenhum equalizador foi tocado. O padrão só protege quando o que deve ser rejeitado está no ponto surdo e as entradas de trás da cápsula estão livres.</p>
+</section>
+
+<!-- Módulo 9 -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Microfone longe, ganho alto</h4><p>Microfone na altura do peito, e o operador compensa no ganho. A voz vem com eco de sala, e o sistema apita.</p><p class="fix"><b>Correção:</b> aproxime o microfone da fonte. Cada metade de distância vale cerca de 6 dB.</p></div>
+    <div><h4>Mão em concha na grade</h4><p>O cantor envolve a grade com a mão. O som fica anasalado, e o retorno apita.</p><p class="fix"><b>Correção:</b> a mão segura o corpo do microfone. A grade e a parte logo abaixo dela ficam livres.</p></div>
+    <div><h4>Retorno no lugar errado para o padrão</h4><p>O microfone é supercardioide, e o retorno fica bem atrás dele, como se fosse cardioide.</p><p class="fix"><b>Correção:</b> retorno na direção de maior rejeição do padrão daquele microfone.</p></div>
+    <div><h4>Dois microfones abertos no púlpito</h4><p>Dois goosenecks lado a lado, “para garantir”. A voz fica oca e muda quando a cabeça vira.</p><p class="fix"><b>Correção:</b> um microfone só, bem apontado. O segundo, se existir, fica fechado, como reserva.</p></div>
+    <div><h4>Condensador sem phantom</h4><p>O microfone do coral ou do púlpito está mudo, e a equipe troca cabo e canal à toa.</p><p class="fix"><b>Correção:</b> confira o +48 V do canal. Ligue com o canal fechado.</p></div>
+    <div><h4>Lapela mal colocada</h4><p>A lapela vai na gola, de lado, ou sob o paletó. A voz some quando a pessoa vira o rosto, e a roupa raspa.</p><p class="fix"><b>Correção:</b> no centro do peito, um palmo abaixo do queixo, descoberta, com o cabo preso em uma volta.</p></div>
+    <div><h4>Microfone demais</h4><p>Todos os microfones abertos o culto inteiro, e a bateria toda microfonada em sala pequena.</p><p class="fix"><b>Correção:</b> abra só o que está em uso e microfone só o que a sala não entrega sozinha.</p></div>
+  </div>
+</section>
+
+<!-- Módulo 10 -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>O microfone é a porta de entrada do sistema: entrega às etapas seguintes um sinal com mais fonte e menos vazamento.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>: as faixas de frequência e a perda de 6 dB a cada vez que a distância dobra.</li>
+        <li><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>: o cabo balanceado, o phantom e a direct box para os instrumentos sem microfone.</li>
+        <li><a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Microfones sem fio</a>: o transmissor, as frequências e as pilhas.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>: o tipo e a distância do microfone definem o nível que chega ao pré.</li>
+        <li><a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>: a folha de canais registra o microfone e o phantom de cada entrada.</li>
+        <li><a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>: o filtro e o equalizador partem do timbre que o microfone entrega.</li>
+        <li><a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>: o padrão, a distância e o número de microfones abertos decidem a margem antes do apito.</li>
+        <li><a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>: o lugar de cada retorno depende do padrão do microfone.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: a lista de canais traz o microfone de cada fonte.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: o microfone de ambiente, só para a transmissão.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Módulo 11 -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira na montagem, antes do ajuste de ganho, e de novo ao guardar o equipamento. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>Cada fonte tem um microfone definido, com tipo e formato adequados a ela.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>O padrão polar de cada microfone é conhecido, e cada retorno está na direção de maior rejeição do microfone à frente dele.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>O phantom está ligado só nos canais que precisam dele, e foi ligado com o canal fechado.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>Todos os microfones foram testados com a voz, um por vez, com o cabo e o canal que vão usar.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>Cada microfone está o mais perto da fonte que o formato permite, e apontado para ela.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>Os microfones que ficam abertos juntos respeitam a regra 3:1.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>Nenhum microfone fica à frente das caixas do PA nem apontado para um retorno.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>A lapela e o headset estão firmes, na posição certa, com a cápsula descoberta e o cabo preso.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>Quem usa microfone de mão foi orientado: perto da boca, apontado para ela, mão no corpo.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>Há espuma ou protetor de vento onde é preciso, e o filtro passa-altas está ligado nos canais de voz.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>Só ficam abertos os microfones em uso, e há um microfone reserva com fio, testado.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>Depois do evento, os microfones foram limpos, secos e guardados no estojo, e os defeitos foram anotados no inventário.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- Módulo 12 -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Onde está a causa?</h3>
+  <p>Cada frase descreve um problema com microfone. Escolha o que você conferiria primeiro: <strong>T</strong>, o tipo do microfone e a energia dele; <strong>P</strong>, o padrão polar e a direção; <strong>D</strong>, a distância; <strong>V</strong>, a proteção contra sopro e vento.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"T": "Tipo e energia", "P": "Padrão e direção", "D": "Distância", "V": "Sopro e vento"},
+ "itens": [
+  {"t": "O microfone suspenso do coral está mudo. O cabo e o canal funcionam com outro microfone.", "a": "T", "w": "É um condensador: sem phantom, ele não funciona. Ligue o +48 V com o canal fechado."},
+  {"t": "O cantor recebeu um microfone supercardioide, e o retorno, bem atrás do microfone, passou a apitar.", "a": "P", "w": "O supercardioide volta a captar bem atrás. O retorno deve ir para a diagonal, a cerca de 125°."},
+  {"t": "A voz do pregador chega fraca e cheia de eco da sala. Ele segura o microfone na altura do peito.", "a": "D", "w": "O microfone está longe da boca. Perto, a voz sobe e a sala não. O ganho não resolve isso."},
+  {"t": "A cada “p” e “b” da leitura, as caixas dão um estouro grave.", "a": "V", "w": "É o pop: o jato de ar das consoantes. Tire o microfone do caminho do ar, use espuma e ligue o filtro passa-altas."},
+  {"t": "Quando a leitora encosta a boca no gooseneck, a voz fica grave e embolada.", "a": "D", "w": "É o efeito de proximidade: de muito perto, o microfone direcional reforça os graves. Afaste alguns dedos."},
+  {"t": "No evento ao ar livre, um ronco grave cobre a voz toda vez que venta.", "a": "V", "w": "O vento age no diafragma como um sopro contínuo. Use protetor de vento e o filtro passa-altas."},
+  {"t": "O microfone do chimbal capta mais a caixa da bateria do que o próprio chimbal.", "a": "P", "w": "Gire o microfone: a frente para o chimbal e o ponto de maior rejeição para a caixa."},
+  {"t": "Colocaram um dinâmico de mão em pedestal para o coral. Com o ganho quase no máximo, o som é fraco e sem brilho.", "a": "T", "w": "Fonte fraca e distante pede condensador, que entrega mais nível e mais agudos."},
+  {"t": "Dois leitores lado a lado, cada um a 40 cm do seu microfone, com 50 cm entre os microfones. As vozes soam ocas.", "a": "D", "w": "A regra 3:1 não se cumpre. Aproxime cada microfone da sua fonte, ou abra um de cada vez."},
+  {"t": "O cantor segura o microfone pela grade, com a mão em concha, e o sistema apita em qualquer volume.", "a": "P", "w": "A mão tampa as entradas de trás da cápsula, e o padrão se abre. A mão segura o corpo, e não a grade."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: ouça o padrão, a distância e o sopro</h3>
+  <p>Você vai precisar de uma mesa, um microfone de mão com cabo, um pedestal, um fone e a planilha de apoio. Peça a outra pessoa que fale enquanto você ouve. Deixe as caixas desligadas ou o master fechado, e o fone em volume baixo.</p>
+  <ol>
+    <li>Cadastre seus microfones na aba “Inventário”, com o padrão tirado do manual de cada modelo.</li>
+    <li>Ponha o microfone no pedestal e ajuste o ganho com a pessoa falando a um palmo, de frente. Aperte o PFL e ouça no fone.</li>
+    <li>Peça à pessoa que dê a volta no microfone, sempre a um palmo e falando igual: de frente, de lado, em diagonal por trás e bem atrás. Em que posição a voz quase some? Compare com o padrão que você anotou.</li>
+    <li>De frente outra vez, peça que fale a dois dedos da grade e depois a dois palmos. Observe o grave que aparece de perto, e quanto o medidor cai de longe.</li>
+    <li>Com a pessoa falando de frente, a um palmo, envolva a grade com a mão em concha. Ouça como o timbre muda. Repita o passo 3 com a mão assim: a voz ainda some atrás?</li>
+    <li>Peça a frase “o pato pulou a ponte”, com o microfone bem na frente dos lábios e depois um pouco abaixo da boca, apontado para ela. Compare os estouros.</li>
+    <li>Monte um segundo microfone a 30 cm do primeiro, com a pessoa a 30 cm dos dois, e abra os dois canais com o mesmo ganho. Ouça o timbre quando ela se move de um para o outro. Depois afaste o segundo para 90 cm e repita. Registre as distâncias na aba “Regra 3 para 1”.</li>
+  </ol>
+  <p>Depois, preencha a aba “Escolha por fonte” com o seu próximo evento.</p>
+</section>
+
+<!-- Módulo 13 -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Microfones-modelo.xlsx">Microfones-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Inventário</strong></td><td>Cadastro de até 30 microfones: formato, tipo, padrão polar, ligação, teste e higienização.</td><td>Se precisa de phantom, a direção de maior rejeição, onde pôr o retorno e a situação de cada microfone.</td></tr>
+        <tr><td><strong>Escolha por fonte</strong></td><td>Até 20 fontes do evento, cada uma com o microfone escolhido no inventário.</td><td>O microfone de partida para a fonte, o phantom do canal e a situação: OK, Defeito, Repetido, Tipo diferente ou Padrão diferente.</td></tr>
+        <tr><td><strong>Regra 3 para 1</strong></td><td>Até 12 pares de microfones abertos juntos, com as distâncias medidas.</td><td>A distância mínima entre os microfones, a razão, o vazamento estimado e o que fazer.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Ponto de partida por fonte, padrões polares, dinâmico e condensador, formatos.</td><td>Nada. É para consulta rápida, e alimenta a aba Escolha por fonte.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Escolha</strong></td><td>As nove fontes do exemplo 1, como foram planejadas, com os dez microfones do inventário e o que foi ajustado.</td><td>Os mesmos resultados da aba Escolha por fonte.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A sugestão por fonte é um ponto de partida. “Tipo diferente” ou “Padrão diferente” não quer dizer que a escolha está errada: pede que você confira se o microfone serve à fonte e se o retorno está no lugar certo para o padrão dele.</p>
+</section>
+
+<!-- Glossário -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Cápsula</dt><dd>Parte do microfone que converte o som em sinal elétrico. Nela fica o diafragma, a membrana que vibra com o som.</dd></div>
+    <div><dt>Cardioide</dt><dd>Padrão polar em forma de coração: capta a frente e tem a maior rejeição bem atrás, em 180°.</dd></div>
+    <div><dt>Condensador</dt><dd>Microfone em que o diafragma e uma placa fixa formam um capacitor. Precisa de energia: phantom, pilha ou transmissor.</dd></div>
+    <div><dt>Dinâmico</dt><dd>Microfone em que uma bobina presa ao diafragma se move no campo de um ímã. Não precisa de energia.</dd></div>
+    <div><dt>Efeito de proximidade</dt><dd>Reforço dos graves que o microfone direcional apresenta quando a fonte está muito perto.</dd></div>
+    <div><dt>Figura de 8</dt><dd>Padrão polar que capta igual na frente e atrás e rejeita os dois lados.</dd></div>
+    <div><dt>Filtro pente</dt><dd>Cancelamentos e reforços em série que aparecem quando o mesmo som é somado a uma cópia atrasada dele. Soa oco.</dd></div>
+    <div><dt>Gooseneck</dt><dd>Microfone pequeno em haste flexível (“pescoço de ganso”), usado em púlpito e tribuna.</dd></div>
+    <div><dt>Hipercardioide</dt><dd>Padrão mais fechado que o supercardioide, com maior rejeição a cerca de 110° e um lóbulo traseiro maior.</dd></div>
+    <div><dt>Omnidirecional (omni)</dt><dd>Padrão polar que capta igual de todas as direções. Não tem efeito de proximidade.</dd></div>
+    <div><dt>Padrão polar</dt><dd>Mapa de quanto o microfone capta de cada direção.</dd></div>
+    <div><dt>Phantom (+48 V)</dt><dd>Alimentação que a mesa envia pelo cabo de microfone para condensadores e direct boxes ativas.</dd></div>
+    <div><dt>Pop</dt><dd>Estouro grave causado pelo jato de ar de consoantes como “p” e “b” no diafragma.</dd></div>
+    <div><dt>Regra 3:1</dt><dd>A distância entre dois microfones abertos deve ser pelo menos três vezes a distância de cada um até a sua fonte.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector('.page');
+  var NOME = page.getAttribute('data-estudo') || 'estudo';
+  function read(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { return null; } }
+  function write(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+
+  /* ---------- Checklist ---------- */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+  var count = document.getElementById('ck-count');
+  var total = document.getElementById('ck-total');
+  if (boxes.length && count) {
+    var CK = 'av-' + NOME + '-checklist';
+    var saved = read(CK) || {};
+    if (total) { total.textContent = boxes.length; }
+    var refreshChecks = function () {
+      var n = 0, state = {};
+      boxes.forEach(function (b, i) { if (b.checked) { n++; } state[b.id || i] = b.checked; });
+      count.textContent = n;
+      return state;
+    };
+    boxes.forEach(function (b, i) {
+      if (saved[b.id || i]) { b.checked = true; }
+      b.addEventListener('change', function () { write(CK, refreshChecks()); });
+    });
+    refreshChecks();
+    var ckReset = document.getElementById('ck-reset');
+    if (ckReset) {
+      ckReset.addEventListener('click', function () {
+        boxes.forEach(function (b) { b.checked = false; });
+        write(CK, refreshChecks());
+      });
+    }
+  }
+
+  /* ---------- Exercício ---------- */
+  /* Os dados vêm do bloco JSON de id quiz-data:
+     { "opcoes": {"A": "Nome da opção A", ...}, "itens": [ {"t": "frase", "a": "A", "w": "por quê"} ] } */
+  var quiz = document.getElementById('quiz');
+  var dataEl = document.getElementById('quiz-data');
+  if (quiz && dataEl) {
+    var data = JSON.parse(dataEl.textContent);
+    var NAMES = data.opcoes, ITEMS = data.itens, KEYS = Object.keys(NAMES);
+    var score = document.getElementById('qz-score');
+    var done = document.getElementById('qz-done');
+    document.getElementById('qz-total').textContent = ITEMS.length;
+    var hits = 0, answered = 0;
+    var render = function () {
+      hits = 0; answered = 0; score.textContent = 0; done.textContent = 0;
+      quiz.textContent = '';
+      ITEMS.forEach(function (item, idx) {
+        var row = document.createElement('div'); row.className = 'q';
+        var p = document.createElement('p'); p.textContent = (idx + 1) + '. ' + item.t;
+        var opts = document.createElement('div'); opts.className = 'opts';
+        opts.setAttribute('role', 'group'); opts.setAttribute('aria-label', 'Resposta do item ' + (idx + 1));
+        var why = document.createElement('p'); why.className = 'why'; why.hidden = true;
+        KEYS.forEach(function (k) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.textContent = k;
+          b.setAttribute('aria-label', NAMES[k]); b.title = NAMES[k];
+          b.addEventListener('click', function () {
+            var ok = k === item.a;
+            Array.prototype.forEach.call(opts.children, function (o) {
+              o.disabled = true;
+              if (o.textContent === item.a) { o.className = 'right'; }
+            });
+            if (!ok) { b.className = 'wrong'; }
+            var lead = document.createElement('b');
+            lead.textContent = (ok ? 'Certo. ' : 'A resposta é ' + item.a + (NAMES[item.a] !== item.a ? ', ' + NAMES[item.a] : '') + '. ');
+            why.textContent = ''; why.appendChild(lead); why.appendChild(document.createTextNode(item.w));
+            why.className = 'why ' + (ok ? 'ok' : 'no'); why.hidden = false;
+            answered++; if (ok) { hits++; }
+            score.textContent = hits; done.textContent = answered;
+          });
+          opts.appendChild(b);
+        });
+        row.appendChild(p); row.appendChild(opts); row.appendChild(why);
+        quiz.appendChild(row);
+      });
+    };
+    render();
+    document.getElementById('qz-reset').addEventListener('click', render);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Enquadramento e movimento de câmera</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --ground:#F3F6F7; --surface:#FFFFFF; --sunk:#E9EEF0; --ink:#16242E; --muted:#566672; --rule:#D3DBE0;
+  --accent:#2B5C8A;
+  --blue:#2B5C8A; --blue-tint:#DCE8F3;
+  --amber:#A96A12; --amber-tint:#F6E8CF;
+  --teal:#1E7B73; --teal-tint:#D9EEEB;
+  --purple:#7A4A9A; --purple-tint:#E9DEF1;
+  --red:#B0413E; --red-tint:#F5DEDC;
+  --slate:#5B6B76; --slate-tint:#E3E8EB;
+  --on-hue:#FFFFFF;
+  --good:#1F7A4D; --good-tint:#DDF1E5;
+  --bad:#B0413E; --bad-tint:#F5DEDC;
+  --display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+    --accent:#86B7E3;
+    --blue:#86B7E3; --blue-tint:#1B2F42;
+    --amber:#E2AC4F; --amber-tint:#3A2C12;
+    --teal:#5FC6BA; --teal-tint:#15332F;
+    --purple:#C09ADB; --purple-tint:#2E2139;
+    --red:#EC8E89; --red-tint:#3D1F1E;
+    --slate:#9BABB6; --slate-tint:#26333B;
+    --on-hue:#0F171C;
+    --good:#6FCF9B; --good-tint:#163326;
+    --bad:#EC8E89; --bad-tint:#3D1F1E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+  --accent:#86B7E3;
+  --blue:#86B7E3; --blue-tint:#1B2F42;
+  --amber:#E2AC4F; --amber-tint:#3A2C12;
+  --teal:#5FC6BA; --teal-tint:#15332F;
+  --purple:#C09ADB; --purple-tint:#2E2139;
+  --red:#EC8E89; --red-tint:#3D1F1E;
+  --slate:#9BABB6; --slate-tint:#26333B;
+  --on-hue:#0F171C;
+  --good:#6FCF9B; --good-tint:#163326;
+  --bad:#EC8E89; --bad-tint:#3D1F1E;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.65 var(--body);-webkit-text-size-adjust:100%}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.page{max-width:1180px;margin-inline:auto;padding-inline:20px;padding-block:36px 80px}
+
+/* Cabeçalho */
+.mast{display:flex;flex-direction:column;gap:18px;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+.tiles{display:flex;gap:6px}
+.tiles span{width:44px;height:44px;display:grid;place-items:center;font:700 24px/1 var(--display);color:var(--on-hue)}
+h1{font:700 clamp(2.3rem,6vw,3.6rem)/1.02 var(--display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.lead{font-size:1.15rem;line-height:1.55;max-width:62ch;margin:0;color:var(--ink)}
+.meta{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px 22px;font:400 .8rem/1.4 var(--mono);color:var(--muted);margin:0;padding:0;list-style:none}
+
+/* Estrutura */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;padding-top:32px}
+.toc{font-size:.92rem}
+.toc h2{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 20px;counter-reset:toc}
+.toc li{counter-increment:toc}
+.toc a{display:flex;gap:10px;padding:5px 0;color:var(--ink);text-decoration:none;line-height:1.35}
+.toc a::before{content:counter(toc,decimal-leading-zero);font:400 .75rem/1.7 var(--mono);color:var(--muted)}
+.toc a:hover{color:var(--accent);text-decoration:underline}
+@media (min-width:1020px){
+  .layout{grid-template-columns:200px minmax(0,1fr);gap:64px}
+  .toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start}
+  .toc ol{grid-template-columns:1fr}
+}
+main{display:flex;flex-direction:column;gap:72px;min-width:0}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
+.eyebrow{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+h2{font:700 clamp(1.7rem,4vw,2.2rem)/1.1 var(--display);margin:0;text-wrap:balance}
+h3{font:600 1.3rem/1.2 var(--display);margin:12px 0 0;text-wrap:balance}
+h4{font:600 .95rem/1.3 var(--body);margin:0}
+p{margin:0}
+section > p, section > ul, section > ol, section > h3{max-width:68ch}
+ul,ol{margin:0;padding-left:1.25em;display:flex;flex-direction:column;gap:6px}
+strong{font-weight:600}
+code{font:400 .88em var(--mono);background:var(--sunk);padding:1px 5px;border-radius:3px}
+
+/* Letras coloridas no texto */
+.k{display:inline-grid;place-items:center;width:1.45em;height:1.45em;font:700 .85em/1 var(--display);color:var(--on-hue);vertical-align:.05em}
+
+/* Figuras */
+figure{margin:0;display:flex;flex-direction:column;gap:10px;position:relative}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.scroll svg{display:block;width:100%;min-width:820px;height:auto;color:var(--ink)}
+figcaption{font-size:.86rem;line-height:1.5;color:var(--muted);max-width:72ch}
+figcaption b{color:var(--ink);font-weight:600}
+svg text{font-family:var(--body);fill:var(--ink)}
+svg .disp{font-family:var(--display);font-weight:700}
+svg .mono{font-family:var(--mono);letter-spacing:.08em}
+svg .on{fill:var(--on-hue)}
+svg .mu{fill:var(--muted)}
+svg .b{font-weight:600}
+svg .ln{stroke:var(--ink);stroke-width:1.5;fill:none}
+svg .ln-mu{stroke:var(--muted);stroke-width:1.5;fill:none}
+svg .ln-bold{stroke:var(--ink);stroke-width:3;fill:none;stroke-linejoin:round;stroke-linecap:round}
+svg .dash{stroke-dasharray:5 4}
+svg .ah{fill:var(--ink)} svg .ah-mu{fill:var(--muted)}
+svg .bx{fill:var(--surface);stroke:var(--rule);stroke-width:1.5}
+svg .bx-ink{fill:var(--ink);stroke:var(--ink)}
+svg .t-ground{fill:var(--ground)}
+svg .bx-out{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 4}
+svg .gap{stroke:var(--surface);stroke-width:4}
+svg .gap2{stroke:var(--surface);stroke-width:2}
+svg .hub{fill:var(--surface)}
+
+/* Gráfico */
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .hit{fill:transparent;cursor:crosshair;outline:none}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);padding:6px 10px;font-size:.78rem;line-height:1.4;transform:translate(-50%,calc(-100% - 14px));white-space:nowrap;z-index:2}
+.tip b{display:block;font:600 1.05rem/1.2 var(--body)}
+details.data{font-size:.88rem}
+details.data summary{cursor:pointer;font:400 .82rem var(--mono);color:var(--muted);padding:4px 0}
+details.data .tbl{margin-top:8px}
+details.data table{min-width:420px}
+
+/* Tabelas */
+.tbl{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:780px;font-size:.88rem;line-height:1.4}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+tr:last-child > td{border-bottom:0}
+thead th{font:600 .8rem/1.3 var(--body);background:var(--sunk)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--mono);font-size:.82rem}
+
+/* Cores: blue, amber, teal, purple, red, slate */
+.tiles .blue, .k.blue{background:var(--blue)} .tiles span.w, .k.w{width:auto;padding:0 8px}
+svg .bx-blue{fill:var(--blue-tint);stroke:var(--blue);stroke-width:1.5} svg .hd-blue, svg .f-blue{fill:var(--blue)} svg .lv-blue{fill:var(--blue);fill-opacity:.36} svg .s-blue{stroke:var(--blue);stroke-width:2;fill:none} svg .t-blue{fill:var(--blue)}
+th.blue{background:var(--blue);color:var(--on-hue)} td.blue{background:var(--blue-tint)}
+.tiles .amber, .k.amber{background:var(--amber)}
+svg .bx-amber{fill:var(--amber-tint);stroke:var(--amber);stroke-width:1.5} svg .hd-amber, svg .f-amber{fill:var(--amber)} svg .lv-amber{fill:var(--amber);fill-opacity:.36} svg .s-amber{stroke:var(--amber);stroke-width:2;fill:none} svg .t-amber{fill:var(--amber)}
+th.amber{background:var(--amber);color:var(--on-hue)} td.amber{background:var(--amber-tint)}
+.tiles .teal, .k.teal{background:var(--teal)}
+svg .bx-teal{fill:var(--teal-tint);stroke:var(--teal);stroke-width:1.5} svg .hd-teal, svg .f-teal{fill:var(--teal)} svg .lv-teal{fill:var(--teal);fill-opacity:.36} svg .s-teal{stroke:var(--teal);stroke-width:2;fill:none} svg .t-teal{fill:var(--teal)}
+th.teal{background:var(--teal);color:var(--on-hue)} td.teal{background:var(--teal-tint)}
+.tiles .purple, .k.purple{background:var(--purple)}
+svg .bx-purple{fill:var(--purple-tint);stroke:var(--purple);stroke-width:1.5} svg .hd-purple, svg .f-purple{fill:var(--purple)} svg .lv-purple{fill:var(--purple);fill-opacity:.36} svg .s-purple{stroke:var(--purple);stroke-width:2;fill:none} svg .t-purple{fill:var(--purple)}
+th.purple{background:var(--purple);color:var(--on-hue)} td.purple{background:var(--purple-tint)}
+.tiles .red, .k.red{background:var(--red)}
+svg .bx-red{fill:var(--red-tint);stroke:var(--red);stroke-width:1.5} svg .hd-red, svg .f-red{fill:var(--red)} svg .lv-red{fill:var(--red);fill-opacity:.36} svg .s-red{stroke:var(--red);stroke-width:2;fill:none} svg .t-red{fill:var(--red)}
+th.red{background:var(--red);color:var(--on-hue)} td.red{background:var(--red-tint)}
+.tiles .slate, .k.slate{background:var(--slate)}
+svg .bx-slate{fill:var(--slate-tint);stroke:var(--slate);stroke-width:1.5} svg .hd-slate, svg .f-slate{fill:var(--slate)} svg .lv-slate{fill:var(--slate);fill-opacity:.36} svg .s-slate{stroke:var(--slate);stroke-width:2;fill:none} svg .t-slate{fill:var(--slate)}
+th.slate{background:var(--slate);color:var(--on-hue)} td.slate{background:var(--slate-tint)}
+svg .bar{fill:var(--accent)}
+svg .ref{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3}
+svg .s-ink{stroke:var(--ink);stroke-width:2;fill:none}
+/* tela de projeção: sempre escura com letra clara, nos dois temas */
+svg .scr{fill:#0B1116;stroke:#0B1116} svg .scr-tx{fill:#F3F6F7}
+svg .f-sunk{fill:var(--sunk)} svg .f-surface{fill:var(--surface)} svg .f-ink{fill:var(--ink)}
+svg .t-good{fill:var(--good)} svg .t-bad{fill:var(--bad)}
+svg .f-good{fill:var(--good)} svg .f-bad{fill:var(--bad)} svg .s-good{stroke:var(--good);stroke-width:2;fill:none} svg .s-bad{stroke:var(--bad);stroke-width:2;fill:none}
+td.n, th.n{text-align:center}
+td small{display:block;color:var(--muted);font-size:.8rem}
+
+/* Vídeo do tutorial */
+.video{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);gap:20px;align-items:start;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.video video{width:100%;height:auto;display:block;background:#000}
+.video div{display:flex;flex-direction:column;gap:8px;font-size:.93rem}
+@media (max-width:640px){.video{grid-template-columns:1fr}}
+
+/* Voltar ao painel */
+.back{font:500 .78rem var(--mono);text-decoration:none;color:var(--muted)}
+.back:hover{color:var(--accent)}
+
+/* Ficha da matriz (acima de cada exemplo) */
+.ficha{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border:1px solid var(--rule);background:var(--surface)}
+.ficha div{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 -1px -1px 0}
+.ficha dt{font:500 .68rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ficha dd{margin:0;font-size:.9rem;line-height:1.4}
+dl{margin:0}
+
+/* Blocos */
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.box{background:var(--surface);border:1px solid var(--rule);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.box h4{font:600 1.1rem/1.2 var(--display)}
+.box ul{font-size:.93rem}
+.note{background:var(--sunk);padding:16px 20px;max-width:72ch;font-size:.94rem;display:flex;flex-direction:column;gap:6px}
+.note h4{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* Passo a passo */
+.steps{list-style:none;padding:0;counter-reset:st;gap:0;max-width:none;border-top:1px solid var(--rule)}
+.steps li{counter-increment:st;display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font:700 1.7rem/1 var(--display);color:var(--muted);grid-row:span 2}
+.steps h4{font:600 1.1rem/1.25 var(--display)}
+.steps p{font-size:.95rem;max-width:64ch;grid-column:2}
+
+/* Erros comuns */
+.errs{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.errs div{padding:16px 16px 16px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
+.errs h4{font:600 1.05rem/1.25 var(--display)}
+.errs p{font-size:.92rem}
+.errs .fix{color:var(--muted)}
+.errs .fix b{color:var(--ink);font-weight:600}
+
+/* Checklist */
+.check{list-style:none;padding:0;gap:0;max-width:none;border:1px solid var(--rule);background:var(--surface)}
+.check li{border-bottom:1px solid var(--rule)}
+.check li:last-child{border-bottom:0}
+.check label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:11px 16px;cursor:pointer;font-size:.94rem;align-items:start}
+.check input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--teal)}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font:400 .82rem var(--mono);color:var(--muted)}
+.bar b{color:var(--ink);font-weight:500}
+
+/* Exercício */
+.quiz{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);background:var(--surface)}
+.q{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:14px 16px;border-bottom:1px solid var(--rule)}
+.q:last-child{border-bottom:0}
+@media (min-width:720px){.q{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
+.q p{font-size:.95rem}
+.q .why{grid-column:1/-1;font-size:.86rem;color:var(--muted)}
+.q .why b{font-weight:600}
+.q .why.ok b{color:var(--good)} .q .why.no b{color:var(--bad)}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts button{min-width:40px;height:40px;padding:0 10px;border:1.5px solid var(--rule);background:var(--surface);color:var(--ink);font:700 1.1rem/1 var(--display);cursor:pointer;border-radius:0}
+.opts button:hover:not(:disabled){border-color:var(--ink)}
+.opts button:disabled{cursor:default;opacity:.45}
+.opts button.right{background:var(--good-tint);border-color:var(--good);color:var(--good);opacity:1}
+.opts button.wrong{background:var(--bad-tint);border-color:var(--bad);color:var(--bad);opacity:1}
+.btn{border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:500 .82rem var(--mono);padding:7px 14px;cursor:pointer;border-radius:0}
+.btn:hover{background:var(--ink);color:var(--ground)}
+
+/* Glossário */
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.gloss div{padding:12px 0;border-bottom:1px solid var(--rule)}
+.gloss dt{font:600 1.02rem/1.3 var(--display)}
+.gloss dd{margin:2px 0 0;font-size:.9rem;color:var(--muted)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:.84rem;color:var(--muted);max-width:72ch}
+</style>
+</head>
+<body>
+<div class="page" lang="pt-BR" data-estudo="quadro">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="blue w">PG</span><span class="amber w">PM</span><span class="teal w">PP</span></div>
+  <h1>Enquadramento e movimento de câmera</h1>
+  <p class="lead">Um guia de estudo para escolher o plano, compor o quadro e mover a câmera com firmeza, do tripé à cobertura de um culto ou de uma palestra com uma, duas ou três câmeras.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O que é enquadrar</a></li>
+    <li><a href="#planos">Os planos</a></li>
+    <li><a href="#composicao">Composição e ângulo</a></li>
+    <li><a href="#movimentos">Movimentos de câmera</a></li>
+    <li><a href="#suporte">Tripé, mão e estabilizador</a></li>
+    <li><a href="#cobertura">Eixo, posições e cobertura</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O que é enquadrar</h2>
+  <p>A câmera não mostra a sala. Ela mostra um retângulo da sala. Enquadrar é decidir o que fica dentro desse retângulo, de que tamanho e em que lugar. Quem está na igreja escolhe para onde olhar. Quem assiste pela transmissão, pelo telão ou pela gravação vê só o que o operador de câmera escolheu.</p>
+  <p>Essa escolha tem três partes. O <strong>plano</strong> é o tamanho do recorte. A <strong>composição</strong> é o lugar de cada coisa dentro do quadro. O <strong>movimento</strong> é a mudança do quadro enquanto ele está sendo visto. Este estudo trata das três e depois junta tudo na cobertura de um evento.</p>
+  <p>Pense em uma conversa em uma sala cheia. Ao entrar, você olha a sala inteira. Quando alguém começa a falar, você olha para a pessoa. Quando ela diz algo importante, você presta atenção no rosto. Os planos fazem pelo espectador o que os olhos dele fariam se ele estivesse lá. Daí as três famílias de plano que dão as letras deste estudo: o plano geral <span class="k blue w">PG</span>, aberto; o plano médio <span class="k amber w">PM</span>; e o primeiro plano <span class="k teal w">PP</span>, fechado.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg font-size="11" viewBox="0 0 900 344" role="img" aria-label="Uma cena de culto e três quadros tirados dela. À esquerda, a cena: palco com dois telões, o pastor ao centro junto do púlpito, músicos dos lados e a plateia de costas. Três retângulos marcam os quadros: PG, plano geral, a cena toda; PM, plano médio, o pastor da cintura para cima; PP, primeiro plano, o pastor do peito para cima. À direita, cada quadro como a câmera o entrega: o geral mostra onde estamos e quem está presente; o médio, quem fala, com os gestos; o primeiro plano, o rosto e o que a pessoa sente.">
+      <defs><style>.qz-sunk{fill:var(--sunk)}.qz-bx{fill:var(--surface);stroke:var(--rule);stroke-width:1.5}.qz-lv{fill:var(--slate);fill-opacity:.36}.qz-sl{fill:var(--slate)}</style><g id="cena1"><rect class="qz-sunk" x="0" y="0" width="520" height="292"/><rect class="qz-bx" x="40" y="34" width="110" height="62" vector-effect="non-scaling-stroke"/><rect class="qz-bx" x="370" y="34" width="110" height="62" vector-effect="non-scaling-stroke"/><rect class="qz-lv" x="24" y="193" width="472" height="40"/><g id="cena1m" class="qz-sl" style="opacity:0.6"><circle cx="86" cy="104" r="6.5"/><rect x="83" y="109" width="5.9" height="4.9"/><path d="M74 116 Q74 113 77 113 H95 Q98 113 98 116 L95 146 H77 z"/><polygon points="74,115 78,115 76,152 71,152"/><polygon points="77,145 86,145 85,195 79,195"/><polygon points="98,115 94,115 96,152 101,152"/><polygon points="95,145 86,145 87,195 93,195"/></g><use href="#cena1m" x="54"/><use href="#cena1m" x="312"/><use href="#cena1m" x="369"/><rect class="qz-sl" x="368" y="150" width="62" height="8"/><g class="qz-sl" style="opacity:0.6"><circle cx="260" cy="92" r="7.3"/><rect x="257" y="98" width="6.6" height="5.5"/><path d="M246 106 Q246 103 250 103 H270 Q274 103 274 106 L270 140 H250 z"/><polygon points="246,105 251,105 248,147 243,147"/><polygon points="250,139 260,139 259,195 252,195"/><polygon points="274,105 269,105 272,147 277,147"/><polygon points="270,139 260,139 261,195 268,195"/></g><rect class="qz-bx" x="278" y="150" width="26" height="45" vector-effect="non-scaling-stroke"/><g class="qz-sl" style="opacity:.45"><circle cx="40" cy="254" r="10"/><circle cx="84" cy="254" r="10"/><circle cx="128" cy="254" r="10"/><circle cx="172" cy="254" r="10"/><circle cx="216" cy="254" r="10"/><circle cx="260" cy="254" r="10"/><circle cx="304" cy="254" r="10"/><circle cx="348" cy="254" r="10"/><circle cx="392" cy="254" r="10"/><circle cx="436" cy="254" r="10"/><circle cx="480" cy="254" r="10"/><circle cx="18" cy="284" r="12"/><circle cx="66" cy="284" r="12"/><circle cx="114" cy="284" r="12"/><circle cx="162" cy="284" r="12"/><circle cx="210" cy="284" r="12"/><circle cx="258" cy="284" r="12"/><circle cx="306" cy="284" r="12"/><circle cx="354" cy="284" r="12"/><circle cx="402" cy="284" r="12"/><circle cx="450" cy="284" r="12"/><circle cx="498" cy="284" r="12"/></g></g><clipPath id="cl1"><rect x="0" y="0" width="520" height="292"/></clipPath></defs>
+      <text class="mono mu" x="18" y="22" font-size="10.5">A MESMA CENA, TRÊS QUADROS</text>
+      <g transform="translate(18 34)"><use href="#cena1" clip-path="url(#cl1)"/>
+      <rect class="s-blue" x="1.5" y="1.5" width="517" height="289" stroke-width="3"/>
+      <rect class="hd-blue" x="0" y="0" width="36" height="20"/>
+      <text class="on b" x="18" y="14.5" font-size="12" text-anchor="middle">PG</text>
+      <rect class="s-amber" x="206.7" y="75" width="106.6" height="60"/>
+      <line class="s-amber" x1="198" y1="105" x2="206.7" y2="105"/><rect class="hd-amber" x="164" y="96" width="34" height="18"/>
+      <text class="on b" x="181" y="110" font-size="11.5" text-anchor="middle">PM</text>
+      <rect class="s-teal" x="224.5" y="78" width="71" height="40"/>
+      <line class="s-teal" x1="295.5" y1="99" x2="322" y2="99"/><rect class="hd-teal" x="322" y="90" width="34" height="18"/>
+      <text class="on b" x="339" y="104" font-size="11.5" text-anchor="middle">PP</text>
+      </g>
+      <clipPath id="cl10"><rect x="566" y="34" width="150" height="84"/></clipPath><g clip-path="url(#cl10)"><use href="#cena1" transform="translate(566 34) scale(0.288)"/></g>
+      <rect class="s-blue" x="566" y="34" width="150" height="84" stroke-width="2.5"/>
+      <rect class="hd-blue" x="566" y="34" width="32" height="18"/><text class="on b" x="582" y="47" text-anchor="middle">PG</text>
+      <text class="b" x="730" y="58" font-size="12.5">Plano geral</text>
+      <text class="mu" x="730" y="77">Onde estamos e</text>
+      <text class="mu" x="730" y="92">quem está presente.</text>
+      <clipPath id="cl11"><rect x="566" y="138" width="150" height="84"/></clipPath><g clip-path="url(#cl11)"><use href="#cena1" transform="translate(275 32.5) scale(1.407)"/></g>
+      <rect class="s-amber" x="566" y="138" width="150" height="84" stroke-width="2.5"/>
+      <rect class="hd-amber" x="566" y="138" width="32" height="18"/><text class="on b" x="582" y="151" text-anchor="middle">PM</text>
+      <text class="b" x="730" y="162" font-size="12.5">Plano médio</text>
+      <text class="mu" x="730" y="181">Quem fala, com os</text>
+      <text class="mu" x="730" y="196">gestos das mãos.</text>
+      <clipPath id="cl12"><rect x="566" y="242" width="150" height="84"/></clipPath><g clip-path="url(#cl12)"><use href="#cena1" transform="translate(92 77) scale(2.113)"/></g>
+      <rect class="s-teal" x="566" y="242" width="150" height="84" stroke-width="2.5"/>
+      <rect class="hd-teal" x="566" y="242" width="32" height="18"/><text class="on b" x="582" y="255" text-anchor="middle">PP</text>
+      <text class="b" x="730" y="266" font-size="12.5">Primeiro plano</text>
+      <text class="mu" x="730" y="285">O rosto: o que a</text>
+      <text class="mu" x="730" y="300">pessoa sente.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> Três quadros da mesma cena. Nada mudou no palco: mudou o que a câmera escolheu mostrar. Cada plano responde a uma pergunta diferente de quem assiste.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:16%"></th><th class="blue" style="width:28%">Plano aberto (PG)</th><th class="amber" style="width:28%">Plano médio (PM)</th><th class="teal">Plano fechado (PP)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pergunta que responde</strong></td><td>Onde estamos? Quem está aqui?</td><td>Quem está falando? O que está fazendo?</td><td>O que essa pessoa está sentindo?</td></tr>
+        <tr><td><strong>Risco</strong></td><td>Em tela pequena, ninguém reconhece o rosto.</td><td>Monotonia, se for o único plano do evento.</td><td>Um passo da pessoa, e ela sai do quadro.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O quadro, na maioria dos sistemas atuais, tem a proporção de 16 por 9. Os formatos de vídeo estão em <a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>.</p>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>Todo quadro responde a uma pergunta de quem assiste: onde estamos, quem fala, o que ele sente, o que ele tem nas mãos. Se você não sabe a que pergunta o seu quadro responde, ele ainda não está pronto.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="planos">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>Os planos</h2>
+  <p>Os planos têm nome para que a equipe se entenda depressa: “me dá um médio do pastor” descreve um quadro inteiro. Nos planos de uma pessoa, o nome vem da linha do corpo em que o quadro termina, contando de um pouco acima da cabeça.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg font-size="11" viewBox="0 0 900 432" role="img" aria-label="Uma pessoa em pé, de frente, com linhas onde cada plano corta o corpo, contando de acima da cabeça. Close: até o alto dos ombros. Primeiro plano, PP: até o peito. Plano médio, PM: até a cintura. Plano americano, PA: até o meio da coxa. Plano inteiro: o corpo todo, com folga. Um quadrado na mão marca o detalhe: as mãos ou um objeto. À direita, o plano geral, PG, com o ambiente inteiro e as pessoas pequenas, e o plano conjunto, PC, com um grupo de corpo inteiro.">
+      <g class="f-slate" style="opacity:0.6"><circle cx="190" cy="67" r="22.7"/><rect x="180" y="85" width="20.4" height="17"/><path d="M148 110 Q148 100 158 100 H222 Q232 100 232 110 L221 214 H159 z"/><polygon points="148,107 163,107 154,234 137,234"/><polygon points="159,211 190,211 187,384 166,384"/><polygon points="232,107 217,107 226,234 243,234"/><polygon points="221,211 190,211 193,384 214,384"/></g>
+      <line class="ref" x1="100" y1="34" x2="372" y2="34"/>
+      <text class="mu" x="386" y="38">todos os planos começam acima da cabeça</text>
+      <line class="s-teal" x1="100" y1="109" x2="372" y2="109"/>
+      <text class="b" x="386" y="113" font-size="12">Close</text>
+      <text class="mu" x="386" y="128">o rosto: até o alto dos ombros</text>
+      <line class="s-teal" x1="100" y1="143" x2="372" y2="143"/>
+      <text class="b" x="386" y="147" font-size="12">PP · Primeiro plano</text>
+      <text class="mu" x="386" y="162">até o peito</text>
+      <line class="s-amber" x1="100" y1="197" x2="372" y2="197"/>
+      <text class="b" x="386" y="201" font-size="12">PM · Plano médio</text>
+      <text class="mu" x="386" y="216">até a cintura</text>
+      <line class="s-amber" x1="100" y1="265" x2="372" y2="265"/>
+      <text class="b" x="386" y="269" font-size="12">PA · Plano americano</text>
+      <text class="mu" x="386" y="284">até o meio da coxa, acima do joelho</text>
+      <line class="s-blue" x1="100" y1="394" x2="372" y2="394"/>
+      <text class="b" x="386" y="398" font-size="12">Plano inteiro</text>
+      <text class="mu" x="386" y="413">o corpo todo, com folga em cima e embaixo</text>
+      <rect class="s-purple" x="129" y="208" width="34" height="34"/>
+      <text class="b" x="121" y="220" font-size="12" text-anchor="end">Detalhe</text>
+      <text class="mu" x="121" y="235" text-anchor="end">as mãos,</text>
+      <text class="mu" x="121" y="249" text-anchor="end">um objeto</text>
+      <clipPath id="cl2a"><rect x="660" y="44" width="222" height="125"/></clipPath><g clip-path="url(#cl2a)"><use href="#cena1" transform="translate(660 44) scale(0.427)"/></g>
+      <rect class="s-blue" x="660" y="44" width="222" height="125"/>
+      <text class="b" x="660" y="190" font-size="12">PG · Plano geral</text>
+      <text class="mu" x="660" y="206">o ambiente inteiro;</text>
+      <text class="mu" x="660" y="221">as pessoas ficam pequenas</text>
+      <clipPath id="cl2b"><rect x="660" y="244" width="222" height="125"/></clipPath><g clip-path="url(#cl2b)"><use href="#cena1" transform="translate(611 173) scale(0.941)"/></g>
+      <rect class="s-blue" x="660" y="244" width="222" height="125"/>
+      <text class="b" x="660" y="390" font-size="12">PC · Plano conjunto</text>
+      <text class="mu" x="660" y="406">um grupo de corpo inteiro,</text>
+      <text class="mu" x="660" y="421">com um pouco do ambiente</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> Onde cada plano corta o corpo. As linhas passam entre as articulações, e nunca em cima delas. O plano geral e o plano conjunto não se medem pelo corpo de uma pessoa, e sim pelo ambiente e pelo grupo.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:17%">Plano</th><th style="width:25%">O que aparece</th><th style="width:27%">Para que serve</th><th>Em um culto ou em uma palestra</th></tr></thead>
+      <tbody>
+        <tr><td><span class="k blue w">PG</span> <strong>Plano geral</strong></td><td>O ambiente inteiro. As pessoas ficam pequenas.</td><td>Situar: o lugar, o público, o clima.</td><td>Abertura, congregação cantando, trocas de momento. Plano de segurança.</td></tr>
+        <tr><td><strong>Plano conjunto</strong> (PC)</td><td>Um grupo de corpo inteiro. Com uma pessoa só, plano inteiro.</td><td>Mostrar quem está junto e o que cada um faz.</td><td>A banda, o coral, a mesa de convidados.</td></tr>
+        <tr><td><strong>Plano americano</strong> (PA)</td><td>Do meio da coxa para cima.</td><td>Dar espaço a quem anda e gesticula.</td><td>O pregador que caminha pelo palco, o regente.</td></tr>
+        <tr><td><span class="k amber w">PM</span> <strong>Plano médio</strong></td><td>Da cintura para cima.</td><td>Mostrar quem fala, com os gestos.</td><td>O plano de trabalho da pregação, da palestra e dos avisos.</td></tr>
+        <tr><td><span class="k teal w">PP</span> <strong>Primeiro plano</strong></td><td>Do peito para cima.</td><td>Aproximar: o rosto manda no quadro.</td><td>Leitura, oração, apelo, o trecho forte de uma canção.</td></tr>
+        <tr><td><strong>Close</strong></td><td>O rosto, até o alto dos ombros.</td><td>Mostrar a emoção.</td><td>Poucos segundos, com a pessoa parada.</td></tr>
+        <tr><td><strong>Detalhe</strong></td><td>Uma parte do corpo ou um objeto.</td><td>Mostrar o que os outros planos não mostram; cobrir uma troca de câmera.</td><td>As mãos no teclado, a Bíblia aberta, o diploma.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Onde cortar o corpo</h3>
+  <p>A borda de baixo do quadro “corta” a pessoa. Quando o corte cai em uma articulação (pescoço, cintura, pulso, joelho), a pessoa parece amputada. Quando cai entre duas, o olho completa o corpo sem estranhar. Por isso o primeiro plano termina no peito, e não no pescoço. No close, pode-se cortar o alto da cabeça; o queixo, nunca. Confira também as mãos: se os gestos saem do quadro a cada frase, abra um pouco o plano.</p>
+
+  <h3>Quanto mais fechado, mais difícil</h3>
+  <p>O plano fechado aumenta a emoção e também os defeitos. Um tremor invisível no plano geral sacode o close inteiro, o foco fica mais crítico (veja <a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>), e meio passo da pessoa a tira do quadro. Escolha o plano pelo comportamento de quem aparece: quem fala parado no púlpito aceita primeiro plano; quem anda pelo palco pede plano americano. E lembre da tela de quem assiste: no celular, o plano geral vira pontinhos, e a transmissão pede mais planos médios e fechados do que parece necessário na sala.</p>
+
+  <div class="note">
+    <h4>Os nomes variam</h4>
+    <p>Escolas e emissoras não usam exatamente os mesmos nomes: há quem chame de “primeiro plano” o que aqui é close. Combine a lista com a equipe antes do evento e escreva as siglas no roteiro.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="composicao">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Composição e ângulo</h2>
+  <p>Depois de escolher o plano, falta decidir onde cada coisa fica dentro dele. Quatro regras resolvem quase todos os quadros de um evento: a grade de terços, o espaço acima da cabeça, o espaço do olhar e o horizonte nivelado. A quinta decisão é a altura da câmera.</p>
+
+  <h3>A regra dos terços</h3>
+  <p>Divida o quadro com duas linhas horizontais e duas verticais, em nove partes iguais. O que importa fica sobre as linhas ou nos cruzamentos, e não no centro exato. Quase toda câmera mostra essa grade no visor (no menu, <em>grid</em> ou guias); ela aparece só para o operador e não vai para a gravação. Para pessoas, a regra vira uma só: <strong>os olhos ficam na linha do terço superior</strong>, do plano americano ao close.</p>
+
+  <h3>O espaço acima da cabeça</h3>
+  <p>O espaço entre o alto da cabeça e a borda de cima chama-se teto (<em>headroom</em>). O erro mais comum de quem começa é pôr o rosto no centro, como em foto de documento: sobra teto, e a pessoa parece afundar. O erro contrário é encostar a cabeça na borda.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg font-size="11.5" viewBox="0 0 900 262" role="img" aria-label="Três quadros de plano médio da mesma pessoa, cada um com a grade de terços: duas linhas horizontais e duas verticais. No primeiro, teto demais: os olhos ficaram no meio do quadro, sobra muito espaço acima da cabeça e a pessoa parece afundar. No segundo, na medida: os olhos estão na linha do terço superior, e o espaço acima da cabeça fica pequeno e natural. No terceiro, sem teto: a cabeça encosta na borda de cima e é cortada, e o quadro fica apertado.">
+      <text class="mono mu" x="18" y="26" font-size="10.5">A GRADE DE TERÇOS E O ESPAÇO ACIMA DA CABEÇA</text>
+      <clipPath id="cl30"><rect x="18" y="44" width="270" height="152"/></clipPath><rect class="f-sunk" x="18" y="44" width="270" height="152"/><g clip-path="url(#cl30)"><g class="f-slate" style="opacity:0.6"><circle cx="153" cy="122" r="26"/><rect x="142" y="143" width="21.8" height="20.8"/><path d="M83 200 V182 Q83 160 114 158 H192 Q223 160 223 182 V200 z"/></g><circle class="f-surface" cx="143" cy="121" r="2.9"/><circle class="f-surface" cx="163" cy="121" r="2.9"/></g><line class="ref" x1="18" y1="95" x2="288" y2="95"/><line class="ref" x1="108" y1="44" x2="108" y2="196"/><line class="ref" x1="18" y1="145" x2="288" y2="145"/><line class="ref" x1="198" y1="44" x2="198" y2="196"/><rect class="ln" x="18" y="44" width="270" height="152"/>
+      <clipPath id="cl31"><rect x="315" y="44" width="270" height="152"/></clipPath><rect class="f-sunk" x="315" y="44" width="270" height="152"/><g clip-path="url(#cl31)"><g class="f-slate" style="opacity:0.6"><circle cx="450" cy="97" r="26"/><rect x="439" y="117" width="21.8" height="20.8"/><path d="M380 200 V156 Q380 134 411 133 H489 Q520 134 520 156 V200 z"/></g><circle class="f-surface" cx="440" cy="95" r="2.9"/><circle class="f-surface" cx="460" cy="95" r="2.9"/></g><line class="ref" x1="315" y1="95" x2="585" y2="95"/><line class="ref" x1="405" y1="44" x2="405" y2="196"/><line class="ref" x1="315" y1="145" x2="585" y2="145"/><line class="ref" x1="495" y1="44" x2="495" y2="196"/><rect class="ln" x="315" y="44" width="270" height="152"/>
+      <clipPath id="cl32"><rect x="612" y="44" width="270" height="152"/></clipPath><rect class="f-sunk" x="612" y="44" width="270" height="152"/><g clip-path="url(#cl32)"><g class="f-slate" style="opacity:0.6"><circle cx="747" cy="62" r="26"/><rect x="736" y="83" width="21.8" height="20.8"/><path d="M677 200 V122 Q677 100 708 98 H786 Q817 100 817 122 V200 z"/></g><circle class="f-surface" cx="737" cy="61" r="2.9"/><circle class="f-surface" cx="757" cy="61" r="2.9"/></g><line class="ref" x1="612" y1="95" x2="882" y2="95"/><line class="ref" x1="702" y1="44" x2="702" y2="196"/><line class="ref" x1="612" y1="145" x2="882" y2="145"/><line class="ref" x1="792" y1="44" x2="792" y2="196"/><rect class="ln" x="612" y="44" width="270" height="152"/>
+      <path class="ln" stroke-width="1" d="M84 46 H92 M88 46 V95 M84 95 H92"/><text class="b" x="97" y="74" font-size="11">teto</text>
+      <path class="ln" stroke-width="1" d="M381 46 H389 M385 46 V70 M381 70 H389"/><text class="b" x="394" y="62" font-size="11">teto</text>
+      <text class="mu" x="579" y="90" font-size="10.5" text-anchor="end">terço superior</text>
+      <text class="b t-bad" x="18" y="220" font-size="13">Teto demais</text><text x="18" y="239">Os olhos ficaram no meio do quadro:</text><text x="18" y="255">a pessoa parece afundar.</text>
+      <text class="b t-good" x="315" y="220" font-size="13">Na medida</text><text x="315" y="239">Os olhos ficam na linha do terço</text><text x="315" y="255">superior, e o teto se ajusta sozinho.</text>
+      <text class="b t-bad" x="612" y="220" font-size="13">Sem teto</text><text x="612" y="239">A cabeça encosta na borda ou é</text><text x="612" y="255">cortada, e o quadro fica apertado.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> Com os olhos na linha do terço superior, o teto fica certo em qualquer plano de pessoa. Quanto mais fechado o plano, menor o teto. No close, o alto da cabeça pode sair do quadro, e os olhos continuam no terço.</figcaption>
+  </figure>
+
+  <p>O teto encolhe quando o plano fecha. Por isso, todo zoom pede correção do tilt junto: ao fechar, a câmera sobe um pouco; ao abrir, desce.</p>
+
+  <h3>O espaço do olhar</h3>
+  <p>Uma pessoa de lado ou de três quartos olha para algum lugar, e o espectador segue esse olhar. O quadro precisa de espaço livre nessa direção: é o espaço do olhar (<em>looking room</em>). Quando a pessoa anda, o espaço fica à frente dela, na direção do movimento (<em>lead room</em>).</p>
+
+  <figure>
+    <div class="scroll">
+      <svg font-size="11.5" viewBox="0 0 900 262" role="img" aria-label="Três quadros com a grade de terços. No primeiro, nariz na borda: a pessoa olha para a direita, mas está encostada no lado direito do quadro; sobra espaço nas costas, e o olhar bate na borda. No segundo, espaço do olhar: a mesma pessoa está no terço esquerdo, e o espaço maior fica à frente do rosto, na direção para onde ela olha. No terceiro, espaço do movimento: uma pessoa de corpo inteiro anda para a direita e está no terço esquerdo, com o quadro livre à frente, para onde ela vai.">
+      <defs><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <text class="mono mu" x="18" y="26" font-size="10.5">O ESPAÇO VAI PARA O LADO DO OLHAR E DO MOVIMENTO</text>
+      <clipPath id="cl40"><rect x="18" y="44" width="270" height="152"/></clipPath><rect class="f-sunk" x="18" y="44" width="270" height="152"/><g clip-path="url(#cl40)"><g class="f-slate" style="opacity:0.6"><circle cx="234" cy="99" r="24"/><polygon points="256,94 266,103 255,107"/><rect x="222" y="118" width="19.2" height="19.2"/><path d="M181 200 V154 Q181 133 205 132 H256 Q280 133 280 154 V200 z"/></g><circle class="f-surface" cx="246" cy="96" r="2.6"/></g><line class="ref" x1="18" y1="95" x2="288" y2="95"/><line class="ref" x1="108" y1="44" x2="108" y2="196"/><line class="ref" x1="18" y1="145" x2="288" y2="145"/><line class="ref" x1="198" y1="44" x2="198" y2="196"/><rect class="ln" x="18" y="44" width="270" height="152"/>
+      <line class="s-bad dash" x1="270" y1="99" x2="285" y2="99"/>
+      <clipPath id="cl41"><rect x="315" y="44" width="270" height="152"/></clipPath><rect class="f-sunk" x="315" y="44" width="270" height="152"/><g clip-path="url(#cl41)"><g class="f-slate" style="opacity:0.6"><circle cx="401" cy="99" r="24"/><polygon points="423,94 433,103 423,107"/><rect x="389" y="118" width="19.2" height="19.2"/><path d="M349 200 V154 Q349 133 373 132 H423 Q447 133 447 154 V200 z"/></g><circle class="f-surface" cx="413" cy="96" r="2.6"/></g><line class="ref" x1="315" y1="95" x2="585" y2="95"/><line class="ref" x1="405" y1="44" x2="405" y2="196"/><line class="ref" x1="315" y1="145" x2="585" y2="145"/><line class="ref" x1="495" y1="44" x2="495" y2="196"/><rect class="ln" x="315" y="44" width="270" height="152"/>
+      <line class="s-good dash" x1="437" y1="99" x2="569" y2="99" marker-end="url(#ar4)"/>
+      <text class="b" x="499" y="90" font-size="11" text-anchor="middle">espaço do olhar</text>
+      <clipPath id="cl42"><rect x="612" y="44" width="270" height="152"/></clipPath><rect class="f-sunk" x="612" y="44" width="270" height="152"/><g clip-path="url(#cl42)"><g class="f-slate" style="opacity:0.6"><circle cx="688" cy="72" r="7.9"/><rect x="684" y="78" width="7.1" height="5.9"/><path d="M673 87 Q673 83 676 83 H699 Q702 83 702 87 L698 123 H677 z"/><polygon points="673,86 678,86 675,130 669,130"/><polygon points="677,122 688,122 686,182 679,182"/><polygon points="702,86 697,86 700,130 706,130"/><polygon points="698,122 688,122 689,182 696,182"/></g></g><line class="ref" x1="612" y1="95" x2="882" y2="95"/><line class="ref" x1="702" y1="44" x2="702" y2="196"/><line class="ref" x1="612" y1="145" x2="882" y2="145"/><line class="ref" x1="792" y1="44" x2="792" y2="196"/><rect class="ln" x="612" y="44" width="270" height="152"/>
+      <line class="s-good dash" x1="714" y1="140" x2="866" y2="140" marker-end="url(#ar4)"/>
+      <text class="b" x="790" y="131" font-size="11" text-anchor="middle">espaço do movimento</text>
+      <text class="b t-bad" x="18" y="220" font-size="13">Nariz na borda</text><text x="18" y="239">Sobra espaço nas costas, e o olhar</text><text x="18" y="255">bate na borda do quadro.</text>
+      <text class="b t-good" x="315" y="220" font-size="13">Espaço do olhar</text><text x="315" y="239">A pessoa fica em um terço, e o espaço</text><text x="315" y="255">maior fica à frente do rosto.</text>
+      <text class="b t-good" x="612" y="220" font-size="13">Espaço do movimento</text><text x="612" y="239">Quem anda precisa de quadro livre</text><text x="612" y="255">à frente, para onde vai.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> O espaço maior fica sempre à frente do rosto ou do movimento. Quando a pessoa vira para o outro lado, o quadro acompanha: o espaço muda de lado junto com o olhar.</figcaption>
+  </figure>
+
+  <p>Quem fala de frente para a câmera, como o pregador visto pela câmera central, pode ficar no centro do quadro. Vista por uma câmera lateral, a mesma pessoa aparece de três quartos, olhando para a plateia: ali ela vai para o terço oposto ao olhar.</p>
+
+  <h3>A linha do horizonte</h3>
+  <p>O espectador percebe na hora um quadro torto. Em um salão, o papel do horizonte é das linhas da sala: a borda do palco, o alto do telão, as fileiras de bancos, as colunas. Elas têm de ficar paralelas às bordas do quadro. Nivele o tripé pela bolha (módulo 5) e confira comparando uma linha da cena com a grade do visor.</p>
+
+  <h3>Fundo e bordas</h3>
+  <p>Antes de dar o quadro por pronto, passe os olhos pelas quatro bordas e pelo fundo. Procure o que distrai: um pedestal “saindo” da cabeça da pessoa, meio rosto na borda, uma placa de saída acesa. Um passo para o lado ou um pouco de zoom resolve quase sempre. Se a transmissão põe legenda com o nome da pessoa embaixo da tela, deixe livre o quarto inferior do quadro (veja <a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>). Janela ou telão claro atrás da pessoa é assunto de <a href="../Exposicao/treinamento-exposicao.html">Exposição</a>.</p>
+
+  <h3>A altura da câmera</h3>
+  <p>A altura da lente em relação aos olhos de quem aparece muda a leitura do quadro. São três ângulos.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg font-size="11.5" viewBox="0 0 900 340" role="img" aria-label="Vista de lado de uma pessoa em pé e três câmeras apontadas para o rosto dela, em alturas diferentes. A câmera alta, acima da cabeça, olha para baixo: é o plongée, e a pessoa parece menor. A câmera na altura dos olhos de quem aparece dá o ângulo normal, o olhar de uma conversa. A câmera baixa, perto do chão, olha para cima: é o contra-plongée; a pessoa parece maior, e o teto aparece no quadro.">
+      <text class="mono mu" x="18" y="22" font-size="10.5">A ALTURA DA CÂMERA, VISTA DE LADO</text>
+      <line class="ln-mu" x1="330" y1="314" x2="870" y2="314"/>
+      <g class="f-slate" style="opacity:0.6"><circle cx="770" cy="137" r="12.7"/><rect x="764" y="147" width="11.4" height="9.5"/><path d="M746 161 Q746 155 752 155 H788 Q794 155 794 161 L787 219 H753 z"/><polygon points="746,159 755,159 750,230 741,230"/><polygon points="753,217 770,217 768,314 757,314"/><polygon points="794,159 785,159 790,230 799,230"/><polygon points="787,217 770,217 772,314 783,314"/></g>
+      <line class="s-purple dash" x1="422" y1="54" x2="744" y2="137"/>
+      <g transform="rotate(14.3 392 46)"><rect class="bx-ink" x="368" y="32" width="44" height="28" rx="2"/><rect class="bx-ink" x="412" y="37" width="14" height="18"/><rect class="bx-ink" x="362" y="36" width="6" height="12"/></g>
+      <text class="b t-purple" x="18" y="44" font-size="13">Plongée</text>
+      <text x="18" y="62">câmera alta, olhando para baixo:</text>
+      <text x="18" y="77">a pessoa parece menor.</text>
+      <line class="s-teal dash" x1="422" y1="137" x2="744" y2="137"/>
+      <g transform="rotate(0 392 137)"><rect class="bx-ink" x="368" y="123" width="44" height="28" rx="2"/><rect class="bx-ink" x="412" y="128" width="14" height="18"/><rect class="bx-ink" x="362" y="127" width="6" height="12"/></g>
+      <text class="b t-teal" x="18" y="129" font-size="13">Normal</text>
+      <text x="18" y="147">na altura dos olhos de quem aparece:</text>
+      <text x="18" y="162">é o olhar de uma conversa.</text>
+      <line class="s-amber dash" x1="422" y1="279" x2="744" y2="137"/>
+      <g transform="rotate(-23.4 392 292)"><rect class="bx-ink" x="368" y="278" width="44" height="28" rx="2"/><rect class="bx-ink" x="412" y="283" width="14" height="18"/><rect class="bx-ink" x="362" y="282" width="6" height="12"/></g>
+      <text class="b t-amber" x="18" y="270" font-size="13">Contra-plongée</text>
+      <text x="18" y="288">câmera baixa, olhando para cima:</text>
+      <text x="18" y="303">a pessoa parece maior, e aparece o teto.</text>
+      <circle class="f-ink" cx="748" cy="137" r="3"/>
+      <text class="mu" x="804" y="141" font-size="11">olhos</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> Os três ângulos verticais. O que conta é a altura da lente em relação aos olhos de quem aparece, e não em relação ao chão: um pregador sobre o palco tem os olhos bem acima dos olhos do operador.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Ângulo</th><th style="width:26%">Onde fica a câmera</th><th style="width:26%">Como o quadro é lido</th><th>Em um evento</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Normal</strong></td><td>Na altura dos olhos.</td><td>De igual para igual: neutro.</td><td>O alvo para a câmera principal de quem fala.</td></tr>
+        <tr><td><strong>Plongée</strong> (câmera alta)</td><td>Acima dos olhos, para baixo.</td><td>A pessoa parece menor.</td><td>Mezanino: bom para o plano geral, ruim para o rosto.</td></tr>
+        <tr><td><strong>Contra-plongée</strong> (câmera baixa)</td><td>Abaixo dos olhos, para cima.</td><td>A pessoa parece maior; aparecem o teto e os refletores.</td><td>Câmera no chão, colada ao palco: evite para quem fala.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>O ângulo depende da diferença de altura e da distância. A 15 m, 1 m de diferença entre a lente e os olhos dá menos de 4 graus, e ninguém nota. A 3 m, o mesmo metro dá cerca de 18 graus, e o efeito aparece. Como referência prática deste material, até uns 10 graus o ângulo parece normal, e acima de uns 25 graus fica evidente. A câmera que não consegue ficar na altura certa resolve ficando mais longe. A planilha faz essa conta para cada posição.</p>
+
+  <div class="note">
+    <h4>Câmera atrás da plateia</h4>
+    <p>Em sala de piso plano, a câmera do fundo precisa enxergar por cima de quem fica em pé. Em geral, isso pede a lente a 2 m do piso ou mais, sobre um praticável de 40 a 60 cm. Depende da altura do palco e da distância: confira com a congregação em pé e de mãos levantadas, e não com a sala vazia.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="movimentos">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Movimentos de câmera</h2>
+  <p>Um quadro parado e bem composto nunca distrai. Um movimento distrai sempre que não tem motivo. Há quatro movimentos básicos, e cada um muda o quadro de um jeito.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg font-size="11.5" viewBox="0 0 900 286" role="img" aria-label="Quatro quadros, um para cada movimento. Pan, ou panorâmica, vista de cima: a câmera gira para os lados, sem sair do lugar. Tilt, vista de lado: a câmera, sobre o tripé, inclina para cima ou para baixo. Zoom, vista de cima: a câmera fica parada, e a lente fecha o ângulo de visão, de um cone largo para um cone estreito. Travelling, vista de cima: a câmera inteira se desloca sobre um trilho, de uma posição para outra, e o ponto de vista muda.">
+      <defs><marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+      <text class="b" x="18" y="26" font-size="13">Pan (panorâmica)</text>
+      <rect class="bx" x="18" y="40" width="204" height="170"/>
+      <text class="mono mu" x="28" y="58" font-size="10.5">VISTA DE CIMA</text>
+      <text x="18" y="232">A câmera gira para os lados,</text>
+      <text x="18" y="248">sem sair do lugar.</text>
+      <line class="ref" x1="120" y1="152" x2="73" y2="120"/>
+      <path class="s-blue" d="M112 94 A78 78 0 0 0 68 114" marker-end="url(#ar6)"/>
+      <line class="ref" x1="120" y1="152" x2="167" y2="120"/>
+      <path class="s-blue" d="M128 94 A78 78 0 0 1 172 114" marker-end="url(#ar6)"/>
+      <g transform="rotate(0 120 172)"><rect class="bx-ink" x="107" y="163" width="26" height="20" rx="2"/><rect class="bx-ink" x="114" y="154" width="12" height="9"/></g>
+      <text class="b" x="238" y="26" font-size="13">Tilt</text>
+      <rect class="bx" x="238" y="40" width="204" height="170"/>
+      <text class="mono mu" x="248" y="58" font-size="10.5">VISTA DE LADO</text>
+      <text x="238" y="232">A câmera inclina para cima</text>
+      <text x="238" y="248">ou para baixo.</text>
+      <path class="ln" d="M314 136 L284 200 M314 136 L344 200 M314 136 V200"/>
+      <line class="ref" x1="350" y1="100" x2="370" y2="87"/>
+      <path class="s-blue" d="M388 114 A74 74 0 0 0 377 83" marker-end="url(#ar6)"/>
+      <line class="ref" x1="350" y1="144" x2="370" y2="157"/>
+      <path class="s-blue" d="M388 130 A74 74 0 0 1 377 161" marker-end="url(#ar6)"/>
+      <g transform="rotate(0 314 122)"><rect class="bx-ink" x="290" y="108" width="44" height="28" rx="2"/><rect class="bx-ink" x="334" y="113" width="14" height="18"/><rect class="bx-ink" x="284" y="112" width="6" height="12"/></g>
+      <text class="b" x="458" y="26" font-size="13">Zoom</text>
+      <rect class="bx" x="458" y="40" width="204" height="170"/>
+      <text class="mono mu" x="468" y="58" font-size="10.5">VISTA DE CIMA</text>
+      <text x="458" y="232">A lente fecha ou abre o ângulo.</text>
+      <text x="458" y="248">A câmera não sai do lugar.</text>
+      <polygon class="lv-blue" points="560,168 478,70 642,70"/>
+      <polygon class="lv-amber" points="560,168 536,70 584,70"/>
+      <line class="ln" x1="624" y1="84" x2="590" y2="84" marker-end="url(#ar6)"/>
+      <line class="ln" x1="496" y1="84" x2="530" y2="84" marker-end="url(#ar6)"/>
+      <g transform="rotate(0 560 186)"><rect class="bx-ink" x="547" y="177" width="26" height="20" rx="2"/><rect class="bx-ink" x="554" y="168" width="12" height="9"/></g>
+      <text class="b" x="678" y="26" font-size="13">Travelling</text>
+      <rect class="bx" x="678" y="40" width="204" height="170"/>
+      <text class="mono mu" x="688" y="58" font-size="10.5">VISTA DE CIMA</text>
+      <text x="678" y="232">A câmera inteira se desloca,</text>
+      <text x="678" y="248">e o ponto de vista muda.</text>
+      <path class="ln-mu" stroke-width="1" d="M694 164 H866 M694 174 H866"/>
+      <circle class="f-slate" style="opacity:.6" cx="780" cy="82" r="9"/>
+      <line class="ref" x1="724" y1="148" x2="773" y2="94"/>
+      <line class="ref" x1="836" y1="148" x2="787" y2="94"/>
+      <g transform="rotate(33.1 724 168)"><rect class="bx-out" x="711" y="159" width="26" height="20" rx="2"/><rect class="bx-out" x="718" y="150" width="12" height="9"/></g>
+      <g transform="rotate(-33.1 836 168)"><rect class="bx-ink" x="823" y="159" width="26" height="20" rx="2"/><rect class="bx-ink" x="830" y="150" width="12" height="9"/></g>
+      <line class="s-blue" x1="748" y1="194" x2="814" y2="194" marker-end="url(#ar6)"/>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> Os quatro movimentos. Na pan e no tilt, a câmera gira sobre a cabeça do tripé. No zoom, só a lente trabalha. No travelling, a câmera muda de lugar.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:17%">Movimento</th><th style="width:25%">O que acontece</th><th style="width:28%">Quando usar</th><th>Cuidado</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pan</strong> (panorâmica)</td><td>A câmera gira para a esquerda ou para a direita.</td><td>Acompanhar quem anda, ir de um assunto a outro, mostrar a largura do lugar.</td><td>Tripé nivelado, ou o horizonte entorta no meio do giro.</td></tr>
+        <tr><td><strong>Tilt</strong></td><td>A câmera inclina para cima ou para baixo.</td><td>Corrigir o teto, ir das mãos ao rosto, revelar a altura de um lugar.</td><td>Contrapeso ajustado, ou a câmera “cai” ao soltar.</td></tr>
+        <tr><td><strong>Zoom</strong></td><td>A lente muda o ângulo de visão: fecha (<em>zoom in</em>) ou abre (<em>zoom out</em>).</td><td>Trocar de plano fora do ar. No ar, só devagar, uma vez e com motivo.</td><td>Corrigir o teto junto. Conferir o foco depois, conforme a lente.</td></tr>
+        <tr><td><strong>Travelling</strong></td><td>A câmera inteira se desloca: para a frente, para trás ou para o lado.</td><td>Dar profundidade: passar pela banda, chegar perto de quem canta.</td><td>Pede estabilizador, trilho ou rodas, e caminho livre.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Todo movimento tem começo, meio e fim</h3>
+  <p>O movimento que funciona é uma frase com ponto final: antes de começar, você já sabe em que quadro vai terminar.</p>
+  <ol>
+    <li><strong>Começo.</strong> Um quadro parado e composto, seguro por dois ou três segundos.</li>
+    <li><strong>Meio.</strong> O movimento em velocidade constante, que arranca e freia com suavidade.</li>
+    <li><strong>Fim.</strong> Outro quadro parado e composto, seguro por dois ou três segundos. Sem correção depois de parar.</li>
+  </ol>
+  <p>Os trechos parados dão ao diretor um ponto para cortar. O defeito oposto é “caçar” o quadro: corrigir sem parar, um pouco para lá, um pouco para cá. Se o quadro final saiu um pouco errado, segure assim mesmo e corrija quando sair do ar.</p>
+  <p>Uma panorâmica rápida demais borra e trepida, principalmente em 24 ou 30 quadros por segundo. Como ponto de partida, deixe um objeto levar de 5 a 7 segundos para atravessar o quadro. O limite depende da taxa de quadros e do obturador (veja <a href="../Exposicao/treinamento-exposicao.html">Exposição</a>).</p>
+
+  <h3>Zoom não é travelling</h3>
+  <p>O zoom amplia tudo por igual, como quem recorta e aumenta uma foto: o fundo cresce junto com a pessoa. No travelling, a câmera chega perto de verdade: o que está perto cresce mais depressa do que o que está longe, e o espectador sente que entrou na cena. Por isso o zoom no ar parece mecânico. Em evento ao vivo, use o zoom sobretudo para trocar de plano fora do ar, e confira o foco a cada troca: em algumas lentes ele muda com o zoom (veja <a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>).</p>
+
+  <h3>Acompanhar quem anda</h3>
+  <ul>
+    <li>Abra o plano. Em plano americano, a pessoa dá dois passos sem sair do quadro; em primeiro plano, você corre atrás dela.</li>
+    <li>Mantenha o espaço à frente, na direção do movimento.</li>
+    <li>Deixe a pessoa se mexer dentro do quadro. Mova a câmera só quando ela for sair do terço.</li>
+    <li>Posicione o corpo para o fim do movimento e torça-o para o início. Assim você termina firme.</li>
+  </ul>
+
+  <div class="note">
+    <h4>No ar e fora do ar</h4>
+    <p>Com a câmera no ar (luz de <em>tally</em> acesa, ou aviso do diretor), só há movimento ensaiado, pedido ou necessário para não perder a pessoa. Fora do ar, reenquadre, confira o foco e avise que está pronto. Com uma câmera só, tudo está no ar: troque de plano nas mudanças de momento, ou enquanto a tela mostra um slide.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="suporte">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Tripé, mão e estabilizador</h2>
+  <p>A firmeza do quadro vem do suporte, e o suporte de evento é o tripé com cabeça fluida, que tem um amortecimento interno: transforma a força irregular da mão em movimento contínuo. Uma cabeça de fotografia segura bem o quadro parado, mas não desliza: serve para câmera fixa.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg font-size="11.5" viewBox="0 0 900 420" role="img" aria-label="Câmera sobre tripé com cabeça fluida, vista de lado, com sete partes numeradas: 1, placa deslizante, para equilibrar; 2, contrapeso, que segura a câmera em qualquer inclinação; 3, fricção de pan e de tilt, que deixa o movimento contínuo; 4, travas, que prendem a cabeça e não dão resistência; 5, nível de bolha e meia-esfera, para nivelar; 6, alavanca, conduzida com a mão leve; 7, pernas e espalhador, bem abertos em chão firme.">
+      <text class="mono mu" x="18" y="22" font-size="10.5">CABEÇA FLUIDA SOBRE TRIPÉ, VISTA DE LADO</text>
+      <line class="ln-mu" x1="60" y1="392" x2="420" y2="392"/>
+      <path class="ln-bold" d="M232 256 L130 392 M248 256 L350 392"/><line class="ln" x1="240" y1="258" x2="240" y2="392"/>
+      <line class="ln-mu" x1="178" y1="328" x2="302" y2="328"/>
+      <path class="f-slate" d="M216 250 A24 24 0 0 0 264 250 z"/>
+      <rect class="bx-slate" x="212" y="206" width="56" height="44"/>
+      <rect class="f-slate" x="186" y="196" width="112" height="10"/>
+      <rect class="bx" x="176" y="136" width="120" height="60" rx="3"/><rect class="bx" x="296" y="148" width="50" height="36"/>
+      <rect class="bx" x="164" y="144" width="12" height="22"/>
+      <path class="ln-bold" d="M216 234 L120 288"/><path class="ln-bold" stroke-width="7" d="M120 288 L96 301"/>
+      <circle class="hd-blue" cx="318" cy="208" r="10"/><text class="on b" x="318" y="212" text-anchor="middle">1</text>
+      <circle class="hd-blue" cx="284" cy="228" r="10"/><text class="on b" x="284" y="232" text-anchor="middle">2</text>
+      <circle class="hd-blue" cx="240" cy="228" r="10"/><text class="on b" x="240" y="232" text-anchor="middle">3</text>
+      <circle class="hd-blue" cx="196" cy="220" r="10"/><text class="on b" x="196" y="224" text-anchor="middle">4</text>
+      <circle class="hd-blue" cx="240" cy="270" r="10"/><text class="on b" x="240" y="274" text-anchor="middle">5</text>
+      <circle class="hd-blue" cx="146" cy="250" r="10"/><text class="on b" x="146" y="254" text-anchor="middle">6</text>
+      <circle class="hd-blue" cx="240" cy="328" r="10"/><text class="on b" x="240" y="332" text-anchor="middle">7</text>
+      <text class="mu" x="236" y="171" font-size="11" text-anchor="middle">câmera</text>
+      <circle class="hd-blue" cx="480" cy="58" r="10"/><text class="on b" x="480" y="62" text-anchor="middle">1</text>
+      <text class="b" x="500" y="59" font-size="12.5">Placa deslizante</text>
+      <text class="mu" x="500" y="76" font-size="11">Avança ou recua a câmera até ela parar equilibrada.</text>
+      <circle class="hd-blue" cx="480" cy="108" r="10"/><text class="on b" x="480" y="112" text-anchor="middle">2</text>
+      <text class="b" x="500" y="109" font-size="12.5">Contrapeso (counterbalance)</text>
+      <text class="mu" x="500" y="126" font-size="11">Mola que segura a câmera parada em qualquer inclinação.</text>
+      <circle class="hd-blue" cx="480" cy="158" r="10"/><text class="on b" x="480" y="162" text-anchor="middle">3</text>
+      <text class="b" x="500" y="159" font-size="12.5">Fricção (drag) de pan e de tilt</text>
+      <text class="mu" x="500" y="176" font-size="11">Resistência suave que deixa o movimento contínuo.</text>
+      <circle class="hd-blue" cx="480" cy="208" r="10"/><text class="on b" x="480" y="212" text-anchor="middle">4</text>
+      <text class="b" x="500" y="209" font-size="12.5">Travas (lock) de pan e de tilt</text>
+      <text class="mu" x="500" y="226" font-size="11">Prendem a cabeça. Não servem para dar resistência.</text>
+      <circle class="hd-blue" cx="480" cy="258" r="10"/><text class="on b" x="480" y="262" text-anchor="middle">5</text>
+      <text class="b" x="500" y="259" font-size="12.5">Nível de bolha e meia-esfera</text>
+      <text class="mu" x="500" y="276" font-size="11">Nivelam a cabeça sem mexer no comprimento das pernas.</text>
+      <circle class="hd-blue" cx="480" cy="308" r="10"/><text class="on b" x="480" y="312" text-anchor="middle">6</text>
+      <text class="b" x="500" y="309" font-size="12.5">Alavanca (manche)</text>
+      <text class="mu" x="500" y="326" font-size="11">Conduz o movimento, com a mão leve.</text>
+      <circle class="hd-blue" cx="480" cy="358" r="10"/><text class="on b" x="480" y="362" text-anchor="middle">7</text>
+      <text class="b" x="500" y="359" font-size="12.5">Pernas e espalhador</text>
+      <text class="mu" x="500" y="376" font-size="11">Base bem aberta, no chão firme, com as travas apertadas.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> As partes que o operador ajusta. Nem toda cabeça tem todas elas: nas mais simples, o contrapeso é fixo e a fricção tem poucas posições. O manual informa a faixa de peso que a cabeça aceita.</figcaption>
+  </figure>
+
+  <h3>Montar, nivelar e equilibrar</h3>
+  <ol>
+    <li><strong>Abra as pernas por inteiro, em chão firme.</strong> Estenda primeiro as seções de cima, que são as mais grossas. Ajuste a altura pelas pernas. A coluna central levantada, quando existe, deixa o conjunto menos estável.</li>
+    <li><strong>Nivele a cabeça.</strong> Leve a bolha ao centro. Em tripé com meia-esfera, solte a trava de baixo, acerte e aperte. Sem meia-esfera, mude o comprimento das pernas. Teste com uma pan de ponta a ponta: uma linha horizontal da cena não pode subir nem descer no quadro.</li>
+    <li><strong>Prenda a câmera e equilibre.</strong> Com a trava de tilt solta e a fricção no mínimo, segure a câmera e deslize a placa para a frente ou para trás, até ela ficar parada sozinha na horizontal. Bateria, microfone e monitor mudam o peso: equilibre com tudo montado.</li>
+    <li><strong>Ajuste o contrapeso.</strong> Incline a câmera para a frente e solte devagar. Se ela continua caindo, falta contrapeso. Se volta sozinha, sobra. No ponto certo, ela fica onde você a deixa.</li>
+    <li><strong>Escolha a fricção.</strong> Mais fricção para plano fechado e movimento lento. Menos para acompanhar quem anda depressa. Use valores parecidos na pan e no tilt, para a diagonal sair uniforme.</li>
+    <li><strong>Solte as travas para operar e trave ao sair.</strong> A trava não é freio: operar com ela meio apertada dá tranco e estraga a cabeça. E câmera destravada, sem a mão do operador, é câmera que pode cair para a frente.</li>
+  </ol>
+  <p>Ajuste a alavanca e o monitor para trabalhar de pé, com as costas retas, e segure a alavanca com a mão leve: quem a aperta passa para a imagem cada batida do próprio corpo.</p>
+
+  <h3>Câmera na mão</h3>
+  <p>A mão serve para planos abertos e curtos, perto da ação. Quanto mais fechada a lente, mais o tremor aparece: trabalhe com a lente aberta e chegue perto com os pés, e não com o zoom.</p>
+  <ul>
+    <li>Duas mãos, cotovelos colados ao corpo e o visor apoiado no rosto ou no peito: três pontos de contato.</li>
+    <li>Para andar, dobre um pouco os joelhos e pise do calcanhar para a ponta, devagar.</li>
+    <li>Apoie-se no que houver: parede, banco, chão. Um monopé já sustenta o plano médio por muito mais tempo.</li>
+    <li>Ligue a estabilização da lente ou da câmera, se houver. Ela ajuda, mas não firma um close na mão.</li>
+  </ul>
+
+  <h3>Estabilizador</h3>
+  <p>O estabilizador motorizado de três eixos (<em>gimbal</em>) mantém a câmera apontada enquanto o operador anda. Ele corrige as rotações, mas não o sobe e desce dos passos: o andar suave continua necessário. Antes de ligar, equilibre a câmera nos três eixos com a lente e os acessórios que vai usar; senão, os motores trabalham forçados e gastam a bateria. Pede lente aberta, trajeto ensaiado e descanso para o braço.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Suporte</th><th style="width:26%">Planos que sustenta bem</th><th style="width:24%">Movimento</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tripé com cabeça fluida</strong></td><td>Todos, do geral ao close.</td><td>Pan e tilt suaves.</td><td>O suporte padrão. O plano fechado pede piso firme.</td></tr>
+        <tr><td><strong>Tripé com cabeça de fotografia</strong></td><td>Todos, com a câmera parada.</td><td>Nenhum no ar.</td><td>Câmera fixa sem operador.</td></tr>
+        <tr><td><strong>Monopé</strong></td><td>Do geral ao médio.</td><td>Pan curta.</td><td>Rápido de mudar de lugar.</td></tr>
+        <tr><td><strong>Mão ou ombro</strong></td><td>Do geral ao médio, lente aberta.</td><td>Travelling curto.</td><td>Cansa: trechos curtos.</td></tr>
+        <tr><td><strong>Estabilizador</strong></td><td>Do geral ao médio, em movimento.</td><td>Travelling longo.</td><td>Equilíbrio antes de ligar e bateria carregada.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A tabela é referência prática: o plano mais fechado que cada suporte aguenta depende do peso da câmera, da lente e de quem opera. Teste e anote. A câmera robótica (PTZ), que faz pan, tilt e zoom por controle remoto, segue as mesmas regras de quadro e de movimento.</p>
+
+  <div class="note">
+    <h4>Segurança: tripé, cabos e praticável</h4>
+    <p>Tripé em corredor derruba gente, e gente derruba tripé. Monte fora da passagem e das saídas, com as pernas bem abertas, e prenda os cabos ao chão com fita. O praticável precisa ser firme, ter área para o tripé e o operador, e não ser dividido: cada passo de alguém balança o plano fechado. Em mezanino ou plataforma alta, prenda a câmera e os acessórios para que nada caia sobre o público. Quem anda de costas com a câmera precisa de um colega que guie. Os cuidados gerais estão em <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="cobertura">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Eixo, posições e cobertura</h2>
+  <p>Com mais de uma câmera, o espectador monta na cabeça um mapa do lugar, e cada corte tem de confirmar esse mapa. Duas ideias organizam o trabalho: o eixo, que diz onde as câmeras podem ficar, e o plano de cobertura, que diz o que cada uma mostra.</p>
+
+  <h3>O eixo: a regra dos 180 graus</h3>
+  <p>Trace uma linha imaginária entre duas pessoas que conversam, ou ao longo do caminho de quem anda: é o eixo. Com todas as câmeras do mesmo lado dele, quem está à esquerda aparece à esquerda em todos os quadros, e quem anda para a direita anda para a direita em todos os cortes. Uma câmera do outro lado inverte tudo.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg font-size="11" viewBox="0 0 900 400" role="img" aria-label="Vista de cima de um palco com duas pessoas, A e B, uma de frente para a outra. Uma linha tracejada passa pelas duas e atravessa a sala: é o eixo. As câmeras 1, 2 e 3 estão do lado da plateia, todas do mesmo lado do eixo. A câmera 4 está atrás do palco, do outro lado do eixo. À direita, dois quadros. Nas câmeras 1, 2 e 3, A fica à esquerda e B à direita, em todos os cortes. Na câmera 4, A e B trocam de lado, e quem assiste pensa que alguém mudou de lugar.">
+      <rect class="lv-red" style="fill-opacity:.13" x="18" y="34" width="582" height="102"/>
+      <rect class="lv-teal" style="fill-opacity:.13" x="18" y="136" width="582" height="246"/>
+      <rect class="bx-out" x="180" y="94" width="260" height="84"/>
+      <text class="mono mu" x="190" y="110" font-size="10.5">PALCO</text>
+      <line class="ln dash" x1="18" y1="136" x2="600" y2="136"/>
+      <text class="b" x="592" y="128" text-anchor="end">eixo: a linha entre as duas pessoas</text>
+      <text class="b t-red" x="30" y="54" font-size="12">o outro lado do eixo</text>
+      <text class="b t-teal" x="30" y="370" font-size="12">lado da plateia: todas as câmeras ficam aqui</text>
+      <line class="ref" x1="310" y1="312" x2="310" y2="158"/>
+      <g transform="rotate(0 310 336)"><rect class="hd-teal" x="297" y="327" width="26" height="20" rx="2"/><rect class="hd-teal" x="304" y="318" width="12" height="9"/></g><text class="on b" x="310" y="341" text-anchor="middle">1</text>
+      <line class="ref" x1="140" y1="249" x2="292" y2="148"/>
+      <g transform="rotate(56 120 262)"><rect class="hd-teal" x="107" y="253" width="26" height="20" rx="2"/><rect class="hd-teal" x="114" y="244" width="12" height="9"/></g><text class="on b" x="120" y="267" text-anchor="middle">2</text>
+      <line class="ref" x1="480" y1="249" x2="328" y2="148"/>
+      <g transform="rotate(-56 500 262)"><rect class="hd-teal" x="487" y="253" width="26" height="20" rx="2"/><rect class="hd-teal" x="494" y="244" width="12" height="9"/></g><text class="on b" x="500" y="267" text-anchor="middle">3</text>
+      <line class="ref" x1="478" y1="71" x2="331" y2="128"/>
+      <g transform="rotate(-111 500 62)"><rect class="hd-red" x="487" y="53" width="26" height="20" rx="2"/><rect class="hd-red" x="494" y="44" width="12" height="9"/></g><text class="on b" x="500" y="67" text-anchor="middle">4</text>
+      <polygon class="hd-blue" points="272,130 281,136 272,142"/>
+      <circle class="hd-blue" cx="260" cy="136" r="14"/><text class="on b" x="260" y="140" font-size="12.5" text-anchor="middle">A</text>
+      <polygon class="hd-amber" points="348,130 339,136 348,142"/>
+      <circle class="hd-amber" cx="360" cy="136" r="14"/><text class="on b" x="360" y="140" font-size="12.5" text-anchor="middle">B</text>
+      <text class="b t-teal" x="650" y="41" font-size="12.5">Câmeras 1, 2 e 3</text>
+      <clipPath id="cl80"><rect x="650" y="50" width="200" height="112"/></clipPath><rect class="f-sunk" x="650" y="50" width="200" height="112"/>
+      <g clip-path="url(#cl80)"><g class="f-blue" style="opacity:0.9"><circle cx="702" cy="90" r="15"/><polygon points="716,87 722,93 715,95"/><rect x="694" y="102" width="12" height="12"/><path d="M669 166 V124 Q669 112 684 111 H716 Q730 112 730 124 V166 z"/></g><circle class="f-surface" cx="710" cy="88" r="1.6"/><text class="on b" x="700" y="136" font-size="12" text-anchor="middle">A</text><g class="f-amber" style="opacity:0.9"><circle cx="802" cy="90" r="15"/><polygon points="788,87 782,93 789,95"/><rect x="794" y="102" width="12" height="12"/><path d="M769 166 V124 Q769 112 784 111 H816 Q830 112 830 124 V166 z"/></g><circle class="f-surface" cx="794" cy="88" r="1.6"/><text class="on b" x="800" y="136" font-size="12" text-anchor="middle">B</text></g>
+      <rect class="ln" x="650" y="50" width="200" height="112"/>
+      <text x="650" y="181">A fica à esquerda e B, à direita,</text>
+      <text x="650" y="196">em todos os cortes.</text>
+      <text class="b t-red" x="650" y="229" font-size="12.5">Câmera 4</text>
+      <clipPath id="cl81"><rect x="650" y="238" width="200" height="112"/></clipPath><rect class="f-sunk" x="650" y="238" width="200" height="112"/>
+      <g clip-path="url(#cl81)"><g class="f-amber" style="opacity:0.9"><circle cx="702" cy="278" r="15"/><polygon points="716,275 722,281 715,283"/><rect x="694" y="290" width="12" height="12"/><path d="M669 354 V312 Q669 300 684 299 H716 Q730 300 730 312 V354 z"/></g><circle class="f-surface" cx="710" cy="276" r="1.6"/><text class="on b" x="700" y="324" font-size="12" text-anchor="middle">B</text><g class="f-blue" style="opacity:0.9"><circle cx="802" cy="278" r="15"/><polygon points="788,275 782,281 789,283"/><rect x="794" y="290" width="12" height="12"/><path d="M769 354 V312 Q769 300 784 299 H816 Q830 300 830 312 V354 z"/></g><circle class="f-surface" cx="794" cy="276" r="1.6"/><text class="on b" x="800" y="324" font-size="12" text-anchor="middle">A</text></g>
+      <rect class="ln" x="650" y="238" width="200" height="112"/>
+      <text x="650" y="369">A e B trocam de lado: quem assiste</text>
+      <text x="650" y="384">pensa que alguém mudou de lugar.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> O eixo passa pelas duas pessoas. As câmeras 1, 2 e 3 contam a mesma história. A câmera 4 cruzou o eixo: no quadro dela, A e B aparecem em lados trocados.</figcaption>
+  </figure>
+
+  <p>Em um evento, três eixos aparecem com frequência.</p>
+  <ul>
+    <li><strong>O eixo do palco.</strong> Para quem conversa ou anda no palco (uma entrevista, um batismo, o pregador que vai de um lado ao outro), o eixo corre de ponta a ponta do palco, e as câmeras ficam do lado da plateia. Uma câmera no fundo do palco está do outro lado: serve para mostrar a congregação, e não quem está no palco.</li>
+    <li><strong>O eixo do corredor.</strong> Na entrada de noivos ou de formandos, o eixo é o próprio corredor. Câmeras dos dois lados mostram as pessoas andando para a direita em um quadro e para a esquerda no outro.</li>
+    <li><strong>O eixo do olhar.</strong> Quem fala sozinho para a plateia olha para a direita do quadro na câmera da esquerda, e para a esquerda na câmera da direita. Em culto e em palestra esse corte é aceito, mas fica mais suave quando passa pela câmera central.</li>
+  </ul>
+  <p>A câmera sobre o eixo, de frente, é neutra: de um quadro frontal pode-se cortar para qualquer lado. Os erros de continuidade no corte estão em <a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>.</p>
+
+  <h3>Posições de câmera em culto e em palestra</h3>
+  <figure>
+    <div class="scroll">
+      <svg font-size="11" viewBox="0 0 900 440" role="img" aria-label="Planta de uma igreja vista de cima: palco no alto, púlpito ao centro, dois blocos de bancos e corredores. Posição 1, central, ao fundo, sobre praticável: plano geral, segurança e médio de quem fala. Posição 2, lateral direita, a uns 30 a 45 graus do centro: rosto de três quartos, em plano médio e primeiro plano. Posição 3, móvel, perto do palco à esquerda: banda, detalhes e congregação, na mão ou em estabilizador. Posição R, reversa, no fundo do palco: só o público, porque para quem está no palco ela inverte os lados. Com uma câmera, posição 1; com duas, 1 e 2; com três, 1, 2 e 3.">
+      <rect class="bx" x="18" y="20" width="560" height="402"/>
+      <rect class="lv-slate" x="158" y="36" width="280" height="66"/>
+      <text class="mono mu" x="428" y="54" font-size="10.5" text-anchor="end">PALCO</text>
+      <rect class="bx" x="286" y="86" width="24" height="10"/><circle class="f-slate" style="opacity:.7" cx="298" cy="76" r="8"/>
+      <g class="lv-slate" style="fill-opacity:.22"><rect x="66" y="150" width="202" height="12"/><rect x="328" y="150" width="202" height="12"/><rect x="66" y="176" width="202" height="12"/><rect x="328" y="176" width="202" height="12"/><rect x="66" y="202" width="202" height="12"/><rect x="328" y="202" width="202" height="12"/><rect x="66" y="228" width="202" height="12"/><rect x="328" y="228" width="202" height="12"/><rect x="66" y="254" width="202" height="12"/><rect x="328" y="254" width="202" height="12"/><rect x="66" y="280" width="202" height="12"/><rect x="328" y="280" width="202" height="12"/><rect x="66" y="306" width="202" height="12"/><rect x="328" y="306" width="202" height="12"/><rect x="66" y="332" width="202" height="12"/><rect x="328" y="332" width="202" height="12"/></g>
+      <rect class="bx-out" x="266" y="364" width="64" height="44"/>
+      <text class="mu" x="338" y="402" font-size="10.5">praticável</text>
+      <rect class="bx-out" x="36" y="108" width="118" height="34"/>
+      <line class="ref" x1="298" y1="362" x2="298" y2="90"/>
+      <g transform="rotate(0 298 386)"><rect class="hd-blue" x="285" y="377" width="26" height="20" rx="2"/><rect class="hd-blue" x="292" y="368" width="12" height="9"/></g><text class="on b" x="298" y="391" text-anchor="middle">1</text>
+      <line class="ref" x1="520" y1="336" x2="307" y2="87"/>
+      <g transform="rotate(-41 536 354)"><rect class="hd-amber" x="523" y="345" width="26" height="20" rx="2"/><rect class="hd-amber" x="530" y="336" width="12" height="9"/></g><text class="on b" x="536" y="359" text-anchor="middle">2</text>
+      <g transform="rotate(72 70 125)"><rect class="hd-teal" x="57" y="116" width="26" height="20" rx="2"/><rect class="hd-teal" x="64" y="107" width="12" height="9"/></g><text class="on b" x="70" y="130" text-anchor="middle">3</text>
+      <line class="ref" x1="193" y1="74" x2="217" y2="113"/>
+      <g transform="rotate(148 180 54)"><rect class="hd-slate" x="167" y="45" width="26" height="20" rx="2"/><rect class="hd-slate" x="174" y="36" width="12" height="9"/></g><text class="on b" x="180" y="59" text-anchor="middle">R</text>
+      <path class="s-amber" stroke-width="1.5" d="M298 138 A62 62 0 0 0 338 123"/>
+      <text class="b t-amber" x="362" y="141">30° a 45°</text>
+      <circle class="hd-blue" cx="612" cy="44" r="10"/><text class="on b" x="612" y="48" font-size="11.5" text-anchor="middle">1</text>
+      <text class="b" x="630" y="48" font-size="12">Central, ao fundo</text>
+      <text class="mu" x="630" y="65">De frente, sobre praticável: plano geral,</text>
+      <text class="mu" x="630" y="80">segurança e médio de quem fala.</text>
+      <circle class="hd-amber" cx="612" cy="112" r="10"/><text class="on b" x="612" y="116" font-size="11.5" text-anchor="middle">2</text>
+      <text class="b" x="630" y="116" font-size="12">Lateral, a uns 30° a 45° do centro</text>
+      <text class="mu" x="630" y="133">Rosto de três quartos: plano médio e</text>
+      <text class="mu" x="630" y="148">primeiro plano, diferente da câmera 1.</text>
+      <circle class="hd-teal" cx="612" cy="180" r="10"/><text class="on b" x="612" y="184" font-size="11.5" text-anchor="middle">3</text>
+      <text class="b" x="630" y="184" font-size="12">Móvel, perto do palco</text>
+      <text class="mu" x="630" y="201">Banda, detalhes e congregação. Na mão,</text>
+      <text class="mu" x="630" y="216">em monopé ou em estabilizador.</text>
+      <circle class="hd-slate" cx="612" cy="248" r="10"/><text class="on b" x="612" y="252" font-size="11.5" text-anchor="middle">R</text>
+      <text class="b" x="630" y="252" font-size="12">Reversa, no fundo do palco</text>
+      <text class="mu" x="630" y="269">Mostra só o público: para quem está</text>
+      <text class="mu" x="630" y="284">no palco, ela inverte os lados.</text>
+      <text class="mono mu" x="602" y="330" font-size="10.5">COBERTURA</text>
+      <text x="602" y="352" font-size="11.5">Com 1 câmera: posição 1.</text>
+      <text x="602" y="370" font-size="11.5">Com 2 câmeras: posições 1 e 2.</text>
+      <text x="602" y="388" font-size="11.5">Com 3 câmeras: posições 1, 2 e 3.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 9.</b> As posições mais usadas em um salão com palco. As distâncias e os ângulos mudam com a sala. O que se mantém é a função de cada posição.</figcaption>
+  </figure>
+
+  <p>Ao escolher uma posição, confira a visão do palco com o público em pé, o lado do eixo, o alcance da lente (<a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>), o caminho do cabo (<a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>) e a passagem das pessoas. Para um corte funcionar, as duas câmeras precisam diferir no ângulo (cerca de 30 graus ou mais) ou no tamanho do plano.</p>
+
+  <h3>Plano de cobertura com uma, duas e três câmeras</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%"></th><th class="blue" style="width:29%">Câmera 1</th><th class="amber" style="width:28%">Câmera 2</th><th class="teal">Câmera 3</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Uma câmera</strong></td><td>Central, em tripé: americano ou médio folgado de quem fala, geral no louvor. Troca de plano nas mudanças de momento.</td><td>–</td><td>–</td></tr>
+        <tr><td><strong>Duas câmeras</strong></td><td>Central, aberta: plano geral ou conjunto, quase fixa. É o plano de segurança.</td><td>Fechada em quem fala ou canta: PM e PP. Reenquadra com a 1 no ar.</td><td>–</td></tr>
+        <tr><td><strong>Três câmeras</strong></td><td>Central, aberta: plano de segurança.</td><td>Fechada em quem fala: plano médio e primeiro plano.</td><td>Móvel: banda, detalhes, congregação, o rosto de três quartos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Quatro regras valem para qualquer número de câmeras:</p>
+  <ul>
+    <li><strong>Sempre existe um plano aberto pronto.</strong> Se uma câmera perde o foco ou a pessoa, o diretor tem para onde cortar.</li>
+    <li><strong>Duas câmeras não mostram o mesmo assunto no mesmo plano.</strong> Quadros iguais não dão corte.</li>
+    <li><strong>Só uma câmera muda por vez.</strong> Quem está no ar segura. Quem está fora do ar busca o próximo quadro.</li>
+    <li><strong>Cada câmera tem um plano de base.</strong> O operador volta a ele quando não há outro pedido.</li>
+  </ul>
+  <p>Tudo isso se escreve antes do evento em uma lista de planos (<em>shot list</em>): para cada momento, o assunto, o plano e o movimento de cada câmera. A planilha traz essa lista e confere as duas primeiras regras.</p>
+
+  <h3>Comandos do diretor</h3>
+  <p>O diretor de imagem fala com os operadores pelo intercomunicador, com comandos curtos. O operador responde com a imagem, e não com a voz.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:26%">Comando</th><th>O que o operador faz</th></tr></thead>
+      <tbody>
+        <tr><td><strong>“Abre”</strong></td><td>Abre o zoom, para um plano mais aberto.</td></tr>
+        <tr><td><strong>“Fecha”</strong></td><td>Fecha o zoom, para um plano mais fechado.</td></tr>
+        <tr><td><strong>“Sobe”, “desce”</strong></td><td>Tilt para cima ou para baixo. “Mais teto” e “menos teto” pedem o mesmo ajuste pelo resultado.</td></tr>
+        <tr><td><strong>“Esquerda”, “direita”</strong></td><td>Pan. Combinem antes se o lado é o do quadro ou o do palco. O mais comum é o lado do quadro, como o operador vê.</td></tr>
+        <tr><td><strong>“Corrige”</strong></td><td>Acerta o que está fora do lugar: teto, nível, espaço do olhar, foco.</td></tr>
+        <tr><td><strong>“Segura”</strong></td><td>Não mexe em nada. O quadro está bom, ou vai entrar no ar.</td></tr>
+        <tr><td><strong>“Acompanha”</strong></td><td>Segue a pessoa, mantendo o plano e o espaço à frente dela.</td></tr>
+        <tr><td><strong>“Livre”</strong></td><td>A câmera saiu do ar e pode buscar outro quadro.</td></tr>
+        <tr><td><strong>“Volta para a base”</strong></td><td>Retorna ao plano de base combinado para o momento.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Os termos mudam de uma equipe para outra: combinem a lista antes do evento e testem o intercomunicador e a luz de <em>tally</em>. A linguagem do corte (“prepara a 2… corta”) e a função de cada pessoa estão em <a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>O roteiro do operador de câmera no dia do evento, da chegada ao início. Na primeira vez, reserve de trinta a quarenta minutos por câmera.</p>
+  <ol class="steps">
+    <li><h4>Leia o roteiro e a lista de planos</h4><p>Saiba, em cada momento, o assunto e o plano de base da sua câmera. Se não há lista, monte uma com o diretor, na planilha.</p></li>
+    <li><h4>Escolha e confira a posição</h4><p>Olhe o palco do lugar da câmera, com alguém em pé na sua frente. Confira o lado do eixo, a altura da lente, a passagem do público e o caminho do cabo.</p></li>
+    <li><h4>Monte o tripé e nivele</h4><p>Pernas abertas em chão firme, bolha no centro. Em praticável, confira se ele não balança.</p></li>
+    <li><h4>Equilibre e ajuste a cabeça</h4><p>Placa, contrapeso e fricção, como no módulo 5. Prenda os cabos com folga para a pan inteira.</p></li>
+    <li><h4>Ligue a grade e confira a imagem</h4><p>Grade de terços no visor. Exposição, foco e cor certos (estudos <a href="../Exposicao/treinamento-exposicao.html">Exposição</a> e <a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>): um quadro bem composto e escuro não serve.</p></li>
+    <li><h4>Teste a panorâmica de ponta a ponta</h4><p>Olhe uma linha horizontal da cena: se ela sobe ou desce, nivele de novo. Veja se nada bate no tripé e se o cabo não puxa.</p></li>
+    <li><h4>Ache os planos da lista</h4><p>Com alguém no lugar de quem vai falar, faça cada plano: <span class="k blue w">PG</span>, <span class="k amber w">PM</span>, <span class="k teal w">PP</span>. Descubra e anote o plano mais fechado que você mantém firme dessa posição.</p></li>
+    <li><h4>Ensaie os movimentos e a comunicação</h4><p>Quadro inicial, quadro final, corpo posicionado para o final; repita até sair sem correção. Teste o intercomunicador, o <em>tally</em> e os comandos.</p></li>
+    <li><h4>Durante o evento: componha, segure, volte à base</h4><p>No ar, segure. Fora do ar, busque o próximo quadro e fique pronto. Sem pedido, volte ao plano de base. No fim, trave a cabeça antes de soltar a câmera.</p></li>
+  </ol>
+
+  <h3>Dez segundos para conferir um quadro</h3>
+  <p>Antes de segurar um quadro novo, confira sempre na mesma ordem: o plano é o pedido? Os olhos estão no terço superior? Há espaço para onde a pessoa olha ou anda? O quadro está nivelado? As bordas e o fundo estão limpos? Corrija o que faltar com o zoom, o tilt e a pan, nessa ordem, e só então segure.</p>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. O primeiro está preenchido na planilha de apoio.</p>
+
+  <h3>Exemplo 1. Três câmeras e nenhum corte possível</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, culto de domingo transmitido ao vivo. Câmera 1 central, em tripé. Câmera 2 lateral, em tripé. Câmera 3 na mão, perto do palco.</dd></div>
+    <div><dt>Sintoma</dt><dd>Na pregação, as três câmeras mostravam o pastor quase do mesmo tamanho. O corte de uma para outra dava um salto, e a câmera 3 tremia.</dd></div>
+    <div><dt>Causa</dt><dd>Não havia lista de planos. Cada operador buscava “o melhor quadro”, e os três chegavam ao mesmo. Ninguém guardava o plano aberto.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Lista de planos por momento, na planilha: catorze planos em cinco momentos. A planilha apontou seis planos a rever e dois momentos sem plano aberto.</dd></div>
+    <div><dt>Resultado</dt><dd>Quatro planos trocados. Em todos os momentos, a câmera 1 guarda um plano aberto, a 2 fica fechada em quem fala, e a 3 mostra outro assunto.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:12%">Momento</th><th class="n" style="width:9%">Câmera</th><th style="width:23%">Plano na primeira lista</th><th style="width:22%">Aviso da planilha</th><th>Como ficou</th></tr></thead>
+      <tbody>
+        <tr><td>Leitura</td><td class="num n">1</td><td>Leitor, PM</td><td class="red">Plano repetido</td><td>Palco e leitor, PC. O momento ganhou o plano aberto que faltava.</td></tr>
+        <tr><td>Leitura</td><td class="num n">2</td><td>Leitor, PM</td><td class="red">Plano repetido</td><td>Sem mudança: a repetição acabou quando a câmera 1 abriu.</td></tr>
+        <tr><td>Leitura</td><td class="num n">3</td><td>Bíblia nas mãos, detalhe</td><td class="amber">Fechado na mão</td><td>Congregação acompanhando a leitura, PC.</td></tr>
+        <tr><td>Pregação</td><td class="num n">1</td><td>Pastor, PM</td><td class="red">Plano repetido</td><td>Pastor e púlpito, PC, com espaço para ele andar.</td></tr>
+        <tr><td>Pregação</td><td class="num n">2</td><td>Pastor, PM</td><td class="red">Plano repetido</td><td>Sem mudança: pastor, PM, acompanhando.</td></tr>
+        <tr><td>Pregação</td><td class="num n">3</td><td>Pastor, PP</td><td class="amber">Fechado na mão</td><td>Congregação ouvindo, PC.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> O problema era de combinação, e não de operação: os outros oito planos já estavam certos. Ao abrir a câmera 1, a repetição e a falta de plano aberto se resolveram de uma vez. A câmera 3, na mão, saiu dos planos fechados, que não sustenta, e passou a mostrar o que as outras não alcançam.</p>
+
+  <h3>Exemplo 2. A palestra de uma câmera só</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Auditório de escola, piso plano, palco de 40 cm. Palestra de 50 minutos, gravada e transmitida com uma câmera, a 12 m do palco.</dd></div>
+    <div><dt>Sintoma</dt><dd>Cabeças da plateia na parte de baixo do quadro. Palestrante com teto enorme. Zoom indo e voltando, com um tranco a cada correção.</dd></div>
+    <div><dt>Causa</dt><dd>Câmera no chão, com a lente a 1,5 m, atrás do público. Cabeça de fotografia no tripé. O operador seguia cada passo do palestrante em primeiro plano.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Praticável de 50 cm no corredor central: lente a 2,1 m. Cabeça fluida nivelada e equilibrada. Plano de base americano, com os olhos no terço superior.</dd></div>
+    <div><dt>Resultado</dt><dd>Quadro limpo e firme. Três trocas de plano em toda a palestra, todas com a tela mostrando um slide.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> O ângulo vertical não era o problema. Os olhos do palestrante ficam a cerca de 2 m do piso (0,4 m do palco mais 1,6 m); com a lente a 1,5 m, a diferença de 0,5 m a 12 m dá pouco mais de 2 graus. O que atrapalhava era a visão: as cabeças na frente da lente. O praticável resolveu a visão. O plano americano resolveu o resto: o palestrante passou a andar dentro do quadro, e o teto ficou certo porque o operador parou de dar zoom sem corrigir o tilt.</p>
+
+  <h3>Exemplo 3. Os formandos que davam meia-volta</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Formatura em um salão. Os formandos entram pelo corredor central, do fundo até o palco. Duas câmeras em tripé, uma de cada lado do corredor.</dd></div>
+    <div><dt>Sintoma</dt><dd>Na gravação, a cada corte os formandos mudavam de direção: andavam para a direita em um quadro e para a esquerda no seguinte.</dd></div>
+    <div><dt>Causa</dt><dd>O eixo era o corredor, e as câmeras estavam em lados opostos dele.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Câmera 2 levada para o mesmo lado da câmera 1, mais perto do palco, em plano médio. Câmera 1 aberta, em plano conjunto.</dd></div>
+    <div><dt>Resultado</dt><dd>Os formandos andam para o mesmo lado em todos os cortes, com espaço à frente, e os dois quadros têm tamanhos diferentes.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> Nenhum dos dois quadros estava errado sozinho: o erro só aparecia no corte. Outra saída seria pôr uma câmera de frente, na ponta do corredor, sobre o eixo: o quadro frontal é neutro e combina com qualquer lado.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Rosto no centro do quadro</h4><p>Os olhos ficam na metade da altura, sobra teto, e a pessoa parece pequena e afundada.</p><p class="fix"><b>Correção:</b> olhos na linha do terço superior. Use a grade do visor.</p></div>
+    <div><h4>Cortar nas articulações</h4><p>A borda do quadro passa no pescoço, na cintura, no joelho ou no pulso.</p><p class="fix"><b>Correção:</b> corte entre as articulações: no peito, abaixo da cintura, no meio da coxa.</p></div>
+    <div><h4>Nariz na borda</h4><p>A pessoa olha para um lado, e o quadro deixa o espaço nas costas dela.</p><p class="fix"><b>Correção:</b> pessoa no terço oposto ao olhar, com o espaço maior à frente do rosto.</p></div>
+    <div><h4>Caçar o quadro no ar</h4><p>Zoom que vai e volta, pan de correção sem fim, movimento que não termina em lugar nenhum.</p><p class="fix"><b>Correção:</b> movimento com quadro inicial e final. No ar, segure. Corrija quando sair do ar.</p></div>
+    <div><h4>Dar zoom sem corrigir o tilt</h4><p>Ao fechar, a cabeça é cortada. Ao abrir, sobra teto.</p><p class="fix"><b>Correção:</b> zoom e tilt juntos. Ao fechar, a câmera sobe. Ao abrir, desce.</p></div>
+    <div><h4>Tripé desnivelado</h4><p>O quadro parado parece certo, mas o horizonte entorta no meio da panorâmica.</p><p class="fix"><b>Correção:</b> nivele pela bolha e teste com uma pan de ponta a ponta antes do evento.</p></div>
+    <div><h4>Plano fechado na mão</h4><p>O operador fecha o zoom com a câmera na mão, e o quadro treme inteiro.</p><p class="fix"><b>Correção:</b> na mão, lente aberta e pés para chegar perto. Plano fechado é trabalho do tripé.</p></div>
+    <div><h4>Todas as câmeras no mesmo plano</h4><p>Três planos médios do pastor: o diretor não tem para onde cortar, e ninguém guarda o plano aberto.</p><p class="fix"><b>Correção:</b> lista de planos por momento. Uma câmera aberta, uma fechada, uma em outro assunto.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>O enquadramento vem depois de a imagem estar tecnicamente certa (clara, nítida, com a cor correta) e antes do corte, que escolhe entre os quadros que as câmeras oferecem.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Exposicao/treinamento-exposicao.html">Exposição: íris, obturador e ganho</a>: a imagem clara na medida, e o obturador que define como o movimento aparece.</li>
+        <li><a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>: que plano a lente alcança de cada posição, o foco e a estabilização.</li>
+        <li><a href="../Iluminacao/treinamento-iluminacao.html">Iluminação para vídeo e palco</a>: o rosto iluminado e o fundo que não compete com a pessoa.</li>
+        <li><a href="../Sinais-de-Video/treinamento-sinais-de-video.html">Sinais e cabos de vídeo</a>: a proporção do quadro e o cabo que limita a posição da câmera.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>: quadros diferentes e estáveis, do lado certo do eixo, para o diretor cortar.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: planos que funcionam na tela pequena de quem assiste em casa.</li>
+        <li><a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>: a imagem da câmera no telão da sala e as trocas de plano escondidas pela mídia.</li>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento: roteiro, equipe e imprevistos</a>: a lista de planos dentro do roteiro técnico, e a segurança da montagem.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira em cada câmera, antes de o evento começar. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>Li o roteiro e a lista de planos, e sei o plano de base da minha câmera em cada momento.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>A posição tem visão livre do palco com o público em pé, e está do lado certo do eixo.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>O tripé está firme, fora da passagem, e os cabos estão presos ao chão.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>A cabeça está nivelada: a bolha está no centro, e o horizonte fica reto na panorâmica de ponta a ponta.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>A câmera está equilibrada, com contrapeso e fricção ajustados: fica parada onde eu a deixo.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>A grade de terços está ligada no visor, e exposição, foco e cor foram conferidos.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>Em cada plano de pessoa, os olhos ficam no terço superior e o teto está na medida.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>Há espaço livre na direção do olhar ou do movimento.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>As bordas e o fundo estão limpos, e o corte do corpo fica fora das articulações.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>Ensaiei os movimentos: sei o quadro inicial e o final, e seguro dois ou três segundos em cada um.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>Testei e anotei o plano mais fechado que mantenho firme desta posição.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>O intercomunicador e a luz de tally foram testados, e os comandos foram combinados com o diretor.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Que plano você daria?</h3>
+  <p>Cada frase descreve um momento de um evento. Escolha o plano que melhor responde à pergunta de quem assiste: <strong>PG</strong>, plano geral; <strong>PM</strong>, plano médio; <strong>PP</strong>, primeiro plano; <strong>D</strong>, detalhe.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"PG": "Plano geral", "PM": "Plano médio", "PP": "Primeiro plano", "D": "Detalhe"},
+ "itens": [
+  {"t": "O culto vai começar, e a transmissão precisa mostrar a igreja cheia e onde fica o palco.", "a": "PG", "w": "A pergunta é “onde estamos?”. Só o plano aberto mostra o lugar e o público."},
+  {"t": "O pastor prega parado atrás do púlpito e explica cada ponto com as mãos.", "a": "PM", "w": "Da cintura para cima cabem o rosto e os gestos. É o plano de trabalho da pregação."},
+  {"t": "A cantora, parada no pedestal, chega ao trecho mais emocionante do solo.", "a": "PP", "w": "O que importa agora é a expressão. Ela está parada: o plano fechado se sustenta."},
+  {"t": "O tecladista faz a introdução sozinho, e o diretor quer mostrar como ele toca.", "a": "D", "w": "As mãos no teclado são um detalhe: mostram o que nenhum outro plano deixa ver."},
+  {"t": "Durante a oração, a única câmera vai ficar alguns minutos sem operador.", "a": "PG", "w": "Câmera sozinha fica aberta e parada: o plano de segurança aguenta qualquer movimento no palco."},
+  {"t": "No apelo, o pastor fala baixo, quase imóvel, olhando para a congregação.", "a": "PP", "w": "Pessoa parada e momento de emoção: do peito para cima, o rosto manda no quadro."},
+  {"t": "O leitor abre a Bíblia, e o diretor precisa de uma imagem que não mostre quem está falando.", "a": "D", "w": "A Bíblia aberta nas mãos é um detalhe, e serve para cobrir a troca de câmera."},
+  {"t": "Na formatura, a turma inteira joga os capelos para cima ao mesmo tempo.", "a": "PG", "w": "A ação é do grupo todo e ocupa a sala inteira. Um plano fechado perderia o conjunto."},
+  {"t": "O apresentador dá os avisos, parado, e a legenda com o nome dele vai entrar embaixo da tela.", "a": "PM", "w": "O plano médio mostra quem fala e deixa a parte de baixo do quadro livre para a legenda."},
+  {"t": "Em uma entrevista, a convidada responde sentada e desenha no ar com as mãos enquanto explica.", "a": "PM", "w": "Os gestos fazem parte da resposta. Em primeiro plano, as mãos sairiam do quadro."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: do tripé ao quadro</h3>
+  <p>Você vai precisar de uma câmera com zoom, um tripé com cabeça fluida, um colega para servir de assunto e a planilha de apoio, em uma sala com 5 m livres.</p>
+  <ol>
+    <li>Monte e nivele o tripé. Faça uma pan de ponta a ponta olhando o alto de uma porta: ele ficou reto o tempo todo?</li>
+    <li>Equilibre a câmera e ajuste o contrapeso. Incline em três ângulos e solte devagar, com a mão por perto: ela fica onde você a deixou?</li>
+    <li>Com o colega a 4 ou 5 m, faça os sete planos da figura 2. Em cada um, confira olhos, teto e linha de corte. Grave cinco segundos de cada.</li>
+    <li>Repita o primeiro plano com a câmera na mão e compare as duas gravações.</li>
+    <li>Peça ao colega para virar de três quartos, para um lado e para o outro, e mantenha o espaço do olhar.</li>
+    <li>Peça ao colega para atravessar a sala. Acompanhe em plano americano, começando e terminando em quadro parado.</li>
+    <li>Meça a distância e a altura da lente e preencha uma linha da aba “Posições de câmera”. Baixe o tripé ao mínimo e veja como muda o ângulo, na planilha e no quadro.</li>
+    <li>Assista à gravação, pause em seis pontos e preencha a aba “Autoavaliação”. Que critério a planilha manda treinar primeiro?</li>
+  </ol>
+  <p>Repita uma semana depois e compare as notas: a firmeza do quadro melhora com repetição, e não com leitura.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Enquadramento-e-Movimento-modelo.xlsx">Enquadramento-e-Movimento-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Posições de câmera</strong></td><td>Plano de posições de até seis câmeras: lugar, lado da sala, suporte, operador, distância, altura da lente e planos de cada uma.</td><td>Desnível entre a lente e os olhos de quem fala, ângulo vertical aproximado, leitura do ângulo, situação de cada câmera e aviso sobre o eixo.</td></tr>
+        <tr><td><strong>Lista de planos</strong></td><td>Lista de planos por momento e por câmera: assunto, plano e movimento, em até 36 linhas e 8 momentos.</td><td>Suporte de cada câmera, plano repetido, plano fechado na mão, momento sem plano aberto e contagem de planos por câmera.</td></tr>
+        <tr><td><strong>Autoavaliação</strong></td><td>Ficha para avaliar até doze quadros de uma gravação, em sete critérios.</td><td>Nota de cada quadro, atendimento por critério, nota geral e o critério a treinar primeiro.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Planos, regras de composição, movimentos, suportes, cobertura e comandos do diretor.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Planos</strong></td><td>A primeira lista de planos do exemplo 1, com os avisos, e o que foi ajustado.</td><td>Os mesmos resultados da aba Lista de planos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Os limites de ângulo e os cortes de nota são regra prática deste material e podem ser trocados no alto de cada aba.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Cabeça fluida</dt><dd>Cabeça de tripé com amortecimento interno, que deixa a pan e o tilt contínuos e suaves.</dd></div>
+    <div><dt>Contrapeso</dt><dd>Mola da cabeça do tripé que compensa o peso da câmera inclinada, para ela ficar parada onde for deixada.</dd></div>
+    <div><dt>Contra-plongée</dt><dd>Ângulo de câmera baixa, apontada para cima. A pessoa parece maior.</dd></div>
+    <div><dt>Eixo</dt><dd>Linha imaginária entre duas pessoas, ou na direção de um olhar ou de um movimento. As câmeras ficam todas do mesmo lado dela (regra dos 180 graus).</dd></div>
+    <div><dt>Espaço do olhar</dt><dd>Espaço livre no quadro à frente do rosto ou do movimento (looking room, lead room).</dd></div>
+    <div><dt>Estabilizador (gimbal)</dt><dd>Suporte motorizado que mantém a câmera apontada enquanto o operador anda.</dd></div>
+    <div><dt>Fricção (drag)</dt><dd>Resistência ajustável da cabeça fluida ao movimento de pan e de tilt.</dd></div>
+    <div><dt>Panorâmica (pan)</dt><dd>Giro da câmera para a esquerda ou para a direita, sem sair do lugar.</dd></div>
+    <div><dt>Plano</dt><dd>Tamanho do recorte que a câmera faz da cena: geral, conjunto, americano, médio, primeiro plano, close, detalhe.</dd></div>
+    <div><dt>Plano de segurança</dt><dd>Plano aberto e estável, sempre pronto, para o qual o diretor pode cortar a qualquer momento.</dd></div>
+    <div><dt>Plongée</dt><dd>Ângulo de câmera alta, apontada para baixo. A pessoa parece menor.</dd></div>
+    <div><dt>Regra dos terços</dt><dd>Divisão do quadro em nove partes por duas linhas horizontais e duas verticais. O que importa fica sobre as linhas.</dd></div>
+    <div><dt>Teto (headroom)</dt><dd>Espaço entre o alto da cabeça e a borda de cima do quadro.</dd></div>
+    <div><dt>Tilt</dt><dd>Inclinação da câmera para cima ou para baixo, sem sair do lugar.</dd></div>
+    <div><dt>Travelling</dt><dd>Movimento em que a câmera inteira se desloca. Muda o ponto de vista, o que o zoom não faz.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector('.page');
+  var NOME = page.getAttribute('data-estudo') || 'estudo';
+  function read(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { return null; } }
+  function write(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+
+  /* ---------- Checklist ---------- */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+  var count = document.getElementById('ck-count');
+  var total = document.getElementById('ck-total');
+  if (boxes.length && count) {
+    var CK = 'av-' + NOME + '-checklist';
+    var saved = read(CK) || {};
+    if (total) { total.textContent = boxes.length; }
+    var refreshChecks = function () {
+      var n = 0, state = {};
+      boxes.forEach(function (b, i) { if (b.checked) { n++; } state[b.id || i] = b.checked; });
+      count.textContent = n;
+      return state;
+    };
+    boxes.forEach(function (b, i) {
+      if (saved[b.id || i]) { b.checked = true; }
+      b.addEventListener('change', function () { write(CK, refreshChecks()); });
+    });
+    refreshChecks();
+    var ckReset = document.getElementById('ck-reset');
+    if (ckReset) {
+      ckReset.addEventListener('click', function () {
+        boxes.forEach(function (b) { b.checked = false; });
+        write(CK, refreshChecks());
+      });
+    }
+  }
+
+  /* ---------- Exercício ---------- */
+  /* Os dados vêm do bloco JSON de id quiz-data:
+     { "opcoes": {"A": "Nome da opção A", ...}, "itens": [ {"t": "frase", "a": "A", "w": "por quê"} ] } */
+  var quiz = document.getElementById('quiz');
+  var dataEl = document.getElementById('quiz-data');
+  if (quiz && dataEl) {
+    var data = JSON.parse(dataEl.textContent);
+    var NAMES = data.opcoes, ITEMS = data.itens, KEYS = Object.keys(NAMES);
+    var score = document.getElementById('qz-score');
+    var done = document.getElementById('qz-done');
+    document.getElementById('qz-total').textContent = ITEMS.length;
+    var hits = 0, answered = 0;
+    var render = function () {
+      hits = 0; answered = 0; score.textContent = 0; done.textContent = 0;
+      quiz.textContent = '';
+      ITEMS.forEach(function (item, idx) {
+        var row = document.createElement('div'); row.className = 'q';
+        var p = document.createElement('p'); p.textContent = (idx + 1) + '. ' + item.t;
+        var opts = document.createElement('div'); opts.className = 'opts';
+        opts.setAttribute('role', 'group'); opts.setAttribute('aria-label', 'Resposta do item ' + (idx + 1));
+        var why = document.createElement('p'); why.className = 'why'; why.hidden = true;
+        KEYS.forEach(function (k) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.textContent = k;
+          b.setAttribute('aria-label', NAMES[k]); b.title = NAMES[k];
+          b.addEventListener('click', function () {
+            var ok = k === item.a;
+            Array.prototype.forEach.call(opts.children, function (o) {
+              o.disabled = true;
+              if (o.textContent === item.a) { o.className = 'right'; }
+            });
+            if (!ok) { b.className = 'wrong'; }
+            var lead = document.createElement('b');
+            lead.textContent = (ok ? 'Certo. ' : 'A resposta é ' + item.a + (NAMES[item.a] !== item.a ? ', ' + NAMES[item.a] : '') + '. ');
+            why.textContent = ''; why.appendChild(lead); why.appendChild(document.createTextNode(item.w));
+            why.className = 'why ' + (ok ? 'ok' : 'no'); why.hidden = false;
+            answered++; if (ok) { hits++; }
+            score.textContent = hits; done.textContent = answered;
+          });
+          opts.appendChild(b);
+        });
+        row.appendChild(p); row.appendChild(opts); row.appendChild(why);
+        quiz.appendChild(row);
+      });
+    };
+    render();
+    document.getElementById('qz-reset').addEventListener('click', render);
+  }
+})();
+</script>
+</body>
+</html>

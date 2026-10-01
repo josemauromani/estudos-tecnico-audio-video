@@ -1,0 +1,900 @@
+<div class="page" lang="pt-BR" data-estudo="sinal">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="blue w">HD</span><span class="amber w">SDI</span></div>
+  <h1>Sinais e cabos de vídeo</h1>
+  <p class="lead">Um guia de estudo para escolher o formato, o cabo e os conversores entre câmeras, computadores, switcher e telas, e para achar a causa quando a tela mostra “sem sinal”.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O sinal de vídeo e o formato</a></li>
+    <li><a href="#formato">Resolução, quadros e varredura</a></li>
+    <li><a href="#interfaces">HDMI, SDI, rede e USB</a></li>
+    <li><a href="#distancia">Comprimentos e extensores</a></li>
+    <li><a href="#conversores">Conversores, scalers e captura</a></li>
+    <li><a href="#conversa">EDID, HDCP e áudio embutido</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O sinal de vídeo e o formato</h2>
+  <p>Sinal de vídeo é a imagem em viagem: sai de uma origem (câmera, computador), passa por um cabo e chega a um destino (switcher, projetor, TV, computador da transmissão). Hoje esse sinal é digital, uma sequência muito rápida de números. Ou o destino entende esses números e mostra a imagem inteira, ou não entende e mostra uma tela preta com o aviso “sem sinal”.</p>
+  <p>Para a imagem aparecer, três coisas têm de dar certo. O <strong>formato</strong> <span class="k blue w">HD</span>: o tamanho da imagem e o ritmo em que ela é enviada (módulo 2). O <strong>caminho</strong> <span class="k amber w">SDI</span>: o tipo de ligação, o cabo e o comprimento dele (módulos 3 a 5). E a <strong>conversa</strong> entre os aparelhos: no HDMI, origem e destino trocam informações antes de a imagem passar, e essa troca pode falhar (módulo 6).</p>
+  <p>Pense em duas pessoas ao telefone. O formato é o idioma: se uma fala um idioma que a outra não entende, a linha pode estar perfeita e ninguém se comunica. O cabo é a linha: se ela é ruim ou longa demais, a ligação cai, por melhor que seja o idioma. Quando não aparece imagem, pergunte primeiro: o problema está no idioma ou na linha?</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Em cima, o caminho de um sinal de vídeo em cinco blocos: a origem, que é a câmera ou o computador; o formato, que é o que a origem envia; o cabo e a interface, por onde o sinal viaja; a entrada, que é o que o destino aceita; e o destino, que é o switcher ou o telão. Embaixo, como ler o nome de um formato, com o exemplo 1080p59,94: 1080 são as linhas da imagem, a resolução de 1920 por 1080; a letra p é a varredura, p de progressiva ou i de entrelaçada; e 59,94 são as imagens por segundo, quadros no progressivo e campos no entrelaçado.">
+  <defs><marker id="sv1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+  <text class="mono mu" x="18" y="28" font-size="10.5">O CAMINHO DE UM SINAL DE VÍDEO</text>
+  <rect class="bx" x="18" y="44" width="140" height="56"/>
+  <text class="b" x="88" y="68" font-size="12.5" text-anchor="middle">Origem</text>
+  <text class="mu" x="88" y="86" font-size="11" text-anchor="middle">câmera, computador</text>
+  <line class="ln" x1="160" y1="72" x2="198" y2="72" marker-end="url(#sv1)"/>
+  <rect class="hd-blue" x="202" y="44" width="140" height="56"/>
+  <text class="on b" x="272" y="68" font-size="12.5" text-anchor="middle">Formato</text>
+  <text class="on" x="272" y="86" font-size="10.5" text-anchor="middle">o que a origem envia</text>
+  <line class="ln" x1="344" y1="72" x2="382" y2="72" marker-end="url(#sv1)"/>
+  <rect class="hd-amber" x="386" y="44" width="150" height="56"/>
+  <text class="on b" x="461" y="68" font-size="12.5" text-anchor="middle">Cabo e interface</text>
+  <text class="on" x="461" y="86" font-size="10.5" text-anchor="middle">por onde o sinal viaja</text>
+  <line class="ln" x1="538" y1="72" x2="576" y2="72" marker-end="url(#sv1)"/>
+  <rect class="bx" x="580" y="44" width="150" height="56"/>
+  <text class="b" x="655" y="68" font-size="12.5" text-anchor="middle">Entrada</text>
+  <text class="mu" x="655" y="86" font-size="10.5" text-anchor="middle">o que o destino aceita</text>
+  <line class="ln" x1="732" y1="72" x2="770" y2="72" marker-end="url(#sv1)"/>
+  <rect class="bx" x="774" y="44" width="108" height="56"/>
+  <text class="b" x="828" y="68" font-size="12.5" text-anchor="middle">Destino</text>
+  <text class="mu" x="828" y="86" font-size="11" text-anchor="middle">switcher, telão</text>
+
+  <text class="mono mu" x="18" y="140" font-size="10.5">COMO LER O NOME DE UM FORMATO: 1080p59,94</text>
+  <rect class="bx-blue" x="105" y="156" width="110" height="40"/>
+  <text class="b" x="160" y="181" font-size="14" text-anchor="middle">1080</text>
+  <text class="b" x="160" y="220" font-size="12" text-anchor="middle">Linhas da imagem</text>
+  <text class="mu" x="160" y="238" font-size="11" text-anchor="middle">resolução de 1920 × 1080</text>
+  <rect class="bx-blue" x="425" y="156" width="50" height="40"/>
+  <text class="b" x="450" y="181" font-size="14" text-anchor="middle">p</text>
+  <text class="b" x="450" y="220" font-size="12" text-anchor="middle">Varredura</text>
+  <text class="mu" x="450" y="238" font-size="11" text-anchor="middle">p: progressiva · i: entrelaçada</text>
+  <rect class="bx-blue" x="685" y="156" width="110" height="40"/>
+  <text class="b" x="740" y="181" font-size="14" text-anchor="middle">59,94</text>
+  <text class="b" x="740" y="220" font-size="12" text-anchor="middle">Imagens por segundo</text>
+  <text class="mu" x="740" y="238" font-size="11" text-anchor="middle">quadros (no i, são campos)</text>
+  <text class="mu" x="450" y="272" font-size="11" text-anchor="middle">Origem e destino precisam concordar nos três: resolução, varredura e imagens por segundo.</text>
+  </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> O caminho do sinal e a leitura do nome de um formato. Nos menus dos equipamentos, o número aparece com ponto: 1080p59.94.</figcaption>
+  </figure>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>Escolha um formato para o sistema inteiro e configure todas as origens nele. Depois, escolha o cabo de cada trecho pela distância. A maior parte dos “sem sinal” de um evento vem de pular uma dessas duas decisões.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="formato">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>Resolução, quadros e varredura</h2>
+  <p>A imagem digital é uma grade de pontos, os pixels. A <strong>resolução</strong> é o tamanho dessa grade: quantos pontos na largura e quantos na altura. Os nomes do dia a dia usam só a altura: 720, 1080 e 2160 linhas. Quanto mais pontos, mais detalhe a imagem pode ter, e mais dados o cabo precisa carregar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 286" role="img" aria-label="Três retângulos em escala, um dentro do outro, com o mesmo canto superior esquerdo. O menor é o 720p, com 1280 por 720 pontos. O do meio é o 1080i ou 1080p, com 1920 por 1080 pontos. O maior é o 4K, também chamado UHD ou 2160p, com 3840 por 2160 pontos. Ao lado, barras comparam a quantidade de pontos: o 720p tem 0,9 milhão de pixels e é aceito por quase tudo; o 1080 tem 2,1 milhões e é o padrão atual de eventos e de transmissão; o 4K tem 8,3 milhões, quatro vezes o 1080, e pede cabos e aparelhos próprios. Todos têm a mesma proporção, 16 por 9.">
+  <rect class="bx-slate" x="18" y="24" width="422" height="238"/>
+  <rect class="bx-blue" x="18" y="24" width="211" height="119"/>
+  <rect class="bx-amber" x="18" y="24" width="141" height="79"/>
+  <text class="b" x="28" y="50" font-size="12">720p</text>
+  <text class="mu" x="28" y="66" font-size="10.5">1280 × 720</text>
+  <text class="b" x="28" y="121" font-size="12">1080i e 1080p</text>
+  <text class="mu" x="28" y="136" font-size="10.5">1920 × 1080</text>
+  <text class="b" x="28" y="232" font-size="12">4K (UHD, 2160p)</text>
+  <text class="mu" x="28" y="248" font-size="10.5">3840 × 2160</text>
+
+  <text class="mono mu" x="470" y="40" font-size="10.5">QUANTOS PONTOS CADA FORMATO TEM</text>
+  <text class="b" x="470" y="76" font-size="12">720p</text>
+  <rect class="f-amber" x="540" y="64" width="24" height="16"/>
+  <text x="572" y="76" font-size="11.5">0,9 milhão de pixels</text>
+  <text class="mu" x="470" y="94" font-size="10.5">leve, e aceito por quase todo equipamento</text>
+  <text class="b" x="470" y="130" font-size="12">1080</text>
+  <rect class="f-blue" x="540" y="118" width="54" height="16"/>
+  <text x="602" y="130" font-size="11.5">2,1 milhões</text>
+  <text class="mu" x="470" y="148" font-size="10.5">o padrão atual de eventos e de transmissão</text>
+  <text class="b" x="470" y="184" font-size="12">4K</text>
+  <rect class="f-slate" x="540" y="172" width="216" height="16"/>
+  <text x="764" y="184" font-size="11.5">8,3 milhões</text>
+  <text class="mu" x="470" y="202" font-size="10.5">quatro vezes o 1080: pede cabos e aparelhos próprios</text>
+  <text x="470" y="240" font-size="11.5">Os três têm a mesma proporção: 16:9.</text>
+  <text class="mu" x="470" y="257" font-size="11">Muda a quantidade de pontos, e não a forma da tela.</text>
+  </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> As três resoluções mais comuns, em escala. Em eventos pequenos e médios, o 1080 resolve quase tudo. O 4K só vale a pena quando todos os aparelhos do caminho são 4K.</figcaption>
+  </figure>
+
+  <h3>Taxa de quadros</h3>
+  <p>Vídeo é uma sequência de imagens paradas, os quadros, mostradas tão rápido que o olho vê movimento. A <strong>taxa de quadros</strong> diz quantas imagens passam por segundo. Com mais quadros, o movimento fica mais fluido, e o volume de dados cresce na mesma medida. As taxas vêm em famílias, e as famílias não se misturam bem.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Família</th><th style="width:30%">Onde se usa</th><th>O que saber</th></tr></thead>
+      <tbody>
+        <tr><td><strong>29,97 e 59,94</strong></td><td>Brasil e países em que a TV nasceu com 60 Hz.</td><td>A família usual por aqui. Câmeras e switchers costumam vir assim.</td></tr>
+        <tr><td><strong>30 e 60 exatos</strong></td><td>Computadores e monitores.</td><td>Diferem dos anteriores em um milésimo. Muitos menus escrevem “60” e entregam 59,94.</td></tr>
+        <tr><td><strong>25 e 50</strong></td><td>Países em que a TV nasceu com 50 Hz, como os da Europa.</td><td>Câmera nesse padrão não conversa com um sistema em 59,94.</td></tr>
+        <tr><td><strong>23,98 e 24</strong></td><td>Cinema e modos “cine” das câmeras.</td><td>Em sistema ao vivo, costuma ser recusado ou convertido com trancos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A diferença entre 59,94 e 60 parece desprezível, mas um switcher em 1080p59,94 pode recusar uma entrada em 1080p60, e quem converte de um para o outro precisa descartar ou repetir um quadro de tempos em tempos. Escolha a mesma opção em todos os aparelhos. Quando o menu só diz “60”, confira no manual o que ele entrega. A relação entre a taxa de quadros, o obturador e a cintilação das lâmpadas está no estudo <a href="../Exposicao/treinamento-exposicao.html">Exposição: íris, obturador e ganho</a>.</p>
+
+  <h3>Entrelaçado e progressivo</h3>
+  <p>A letra depois do número de linhas diz como a imagem é enviada. No <strong>progressivo</strong> (p), cada quadro traz todas as linhas. No <strong>entrelaçado</strong> (i, de <em>interlaced</em>), cada envio traz só metade das linhas: primeiro as ímpares, depois as pares. Cada metade é um campo, e dois campos formam um quadro. O entrelaçado nasceu na televisão, para dar movimento fluido com metade dos dados, e ainda é a saída de muitas câmeras.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 306" role="img" aria-label="Duas linhas do tempo. Na de cima, o progressivo, com o exemplo 1080p59,94: quatro quadros seguidos, cada um com todas as linhas. São 59,94 quadros completos por segundo. Na de baixo, o entrelaçado, com o exemplo 1080i59,94: quatro campos seguidos, que alternam as linhas ímpares e as linhas pares. Cada campo traz metade das linhas, e dois campos formam um quadro. São 59,94 campos, ou 29,97 quadros, por segundo.">
+  <text class="mono mu" x="18" y="28" font-size="10.5">PROGRESSIVO (p)</text>
+  <rect class="bx" x="18" y="40" width="110" height="68"/><path class="s-blue" d="M26 48 H120 M26 63 H120 M26 78 H120 M26 93 H120"/><path class="s-amber" d="M26 55.5 H120 M26 70.5 H120 M26 85.5 H120 M26 100.5 H120"/>
+  <rect class="bx" x="148" y="40" width="110" height="68"/><path class="s-blue" d="M156 48 H250 M156 63 H250 M156 78 H250 M156 93 H250"/><path class="s-amber" d="M156 55.5 H250 M156 70.5 H250 M156 85.5 H250 M156 100.5 H250"/>
+  <rect class="bx" x="278" y="40" width="110" height="68"/><path class="s-blue" d="M286 48 H380 M286 63 H380 M286 78 H380 M286 93 H380"/><path class="s-amber" d="M286 55.5 H380 M286 70.5 H380 M286 85.5 H380 M286 100.5 H380"/>
+  <rect class="bx" x="408" y="40" width="110" height="68"/><path class="s-blue" d="M416 48 H510 M416 63 H510 M416 78 H510 M416 93 H510"/><path class="s-amber" d="M416 55.5 H510 M416 70.5 H510 M416 85.5 H510 M416 100.5 H510"/>
+  <g font-size="10.5" text-anchor="middle">
+    <text class="mu" x="73" y="124">quadro 1</text><text class="mu" x="203" y="124">quadro 2</text><text class="mu" x="333" y="124">quadro 3</text><text class="mu" x="463" y="124">quadro 4</text>
+  </g>
+  <text class="b" x="548" y="58" font-size="13">1080p59,94</text>
+  <text x="548" y="78" font-size="11.5">Cada quadro traz todas as linhas.</text>
+  <text class="mu" x="548" y="95" font-size="11.5">São 59,94 quadros completos por segundo.</text>
+
+  <text class="mono mu" x="18" y="164" font-size="10.5">ENTRELAÇADO (i)</text>
+  <rect class="bx" x="18" y="176" width="110" height="68"/><path class="s-blue" d="M26 184 H120 M26 199 H120 M26 214 H120 M26 229 H120"/>
+  <rect class="bx" x="148" y="176" width="110" height="68"/><path class="s-amber" d="M156 191.5 H250 M156 206.5 H250 M156 221.5 H250 M156 236.5 H250"/>
+  <rect class="bx" x="278" y="176" width="110" height="68"/><path class="s-blue" d="M286 184 H380 M286 199 H380 M286 214 H380 M286 229 H380"/>
+  <rect class="bx" x="408" y="176" width="110" height="68"/><path class="s-amber" d="M416 191.5 H510 M416 206.5 H510 M416 221.5 H510 M416 236.5 H510"/>
+  <g font-size="10.5" text-anchor="middle">
+    <text class="t-blue b" x="73" y="259">campo ímpar</text><text class="t-amber b" x="203" y="259">campo par</text><text class="t-blue b" x="333" y="259">campo ímpar</text><text class="t-amber b" x="463" y="259">campo par</text>
+  </g>
+  <path class="ln-mu" stroke-width="1" d="M18 268 V274 H258 V268 M278 268 V274 H518 V268"/>
+  <g font-size="10.5" text-anchor="middle"><text class="mu" x="138" y="290">quadro 1</text><text class="mu" x="398" y="290">quadro 2</text></g>
+  <text class="b" x="548" y="194" font-size="13">1080i59,94</text>
+  <text x="548" y="214" font-size="11.5">Cada campo traz metade das linhas.</text>
+  <text class="mu" x="548" y="231" font-size="11.5">São 59,94 campos, ou 29,97 quadros,</text>
+  <text class="mu" x="548" y="248" font-size="11.5">por segundo.</text>
+  </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> No progressivo, cada imagem chega inteira. No entrelaçado, chega em duas metades tiradas em instantes diferentes. O mesmo sinal 1080i59,94 aparece em alguns menus como 1080i29,97 (contado em quadros) ou como 1080/60i.</figcaption>
+  </figure>
+
+  <p>Telas, computadores e plataformas de transmissão trabalham em progressivo. Com um sinal entrelaçado, alguém no caminho precisa juntar os campos (desentrelaçar), e, se isso é mal feito, tudo o que se move fica com as bordas serrilhadas, como um pente. Em um sistema novo, prefira o progressivo do começo ao fim.</p>
+
+  <h3>Proporção de tela</h3>
+  <p>A proporção é a relação entre a largura e a altura da imagem. Os formatos de vídeo deste módulo são todos 16:9. Muitos notebooks e projetores são 16:10 (1280 × 800, 1920 × 1200), e projetores antigos são 4:3 (1024 × 768). Quando as proporções da origem e do destino diferem, a imagem sai com barras pretas, esticada ou cortada. Configure a saída do computador em 1920 × 1080 e prepare slides e vídeos em 16:9. A escolha do telão e da proporção da projeção está no estudo <a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>.</p>
+
+  <h3>Por que o mesmo formato em todo o sistema</h3>
+  <p>Um switcher troca de uma câmera para outra entre um quadro e o seguinte, e para isso todas as entradas precisam ter a mesma grade e o mesmo ritmo. Alguns têm conversor em cada entrada e aceitam quase tudo. Outros mostram preto em qualquer entrada fora do formato configurado. E a conversão custa um pouco de nitidez e de atraso. O caminho seguro é definir o <strong>padrão do sistema</strong> e configurar cada origem nele.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:18%">Padrão</th><th style="width:38%">Quando escolher</th><th>Ponto de atenção</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1080p59,94</td><td>Quando todas as câmeras, o switcher e as telas oferecem esse formato.</td><td>O dobro dos dados do 1080p29,97. No SDI, exige nível 3G.</td></tr>
+        <tr><td class="num">1080p29,97</td><td>Câmeras, conversores ou placas de captura que não chegam a 59,94.</td><td>Movimento rápido menos fluido. Suficiente para pregação e palestra.</td></tr>
+        <tr><td class="num">1080i59,94</td><td>Câmeras e switchers antigos, que só trabalham assim.</td><td>Precisa ser desentrelaçado antes do telão e da transmissão.</td></tr>
+        <tr><td class="num">720p59,94</td><td>Equipamento antigo ou caminho com pouca capacidade.</td><td>Menos detalhe em telas grandes.</td></tr>
+        <tr><td class="num">2160p (4K)</td><td>Só quando toda a cadeia é 4K e há motivo para isso.</td><td>Cabos mais curtos e aparelhos mais caros.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Quem decide o padrão é o elo mais limitado: a câmera mais simples, o switcher, a placa de captura. A lista de formatos aceitos muda de um modelo para outro: confira a tabela de formatos no manual de cada aparelho. A resolução e a taxa da transmissão para a internet são outra decisão, tomada no codificador, e estão no estudo <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>.</p>
+
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="interfaces">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>HDMI, SDI, rede e USB</h2>
+  <p>Interface é o conjunto de conector, cabo e regras que leva o sinal de um aparelho a outro. O mesmo formato, 1080p59,94 por exemplo, pode viajar por interfaces diferentes. Em eventos pequenos e médios, quatro aparecem o tempo todo.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 232" role="img" aria-label="Quatro quadros, um por interface, com o conector visto de frente. HDMI: encaixe sem trava, cabo de 19 vias até uns 10 metros, leva EDID, HDCP e áudio; em câmeras, computadores e TVs. SDI: conector BNC com trava de giro, coaxial de 75 ohms até cerca de 100 metros, um só sentido, sem EDID nem HDCP; em câmeras e switchers. Rede com NDI: conector RJ45 com trava, 100 metros por trecho, vídeo comprimido; em câmeras PTZ e computadores. USB: conector A ou C sem trava, cabo de 2 a 3 metros, vira webcam no computador.">
+  <rect class="bx" x="18" y="18" width="207" height="196"/>
+  <rect class="hd-blue" x="18" y="18" width="207" height="30"/>
+  <text class="on b" x="121.5" y="38" font-size="13" text-anchor="middle">HDMI</text>
+  <path class="ln" d="M81 66 H162 V84 L152 96 H91 L81 84 Z"/>
+  <path class="ln-mu" d="M95 78 H148"/>
+  <g font-size="11">
+    <text x="30" y="130">Encaixe simples, sem trava</text>
+    <text x="30" y="148">Cabo de 19 vias, até uns 10 m</text>
+    <text x="30" y="166">Leva EDID, HDCP e áudio</text>
+    <text class="mu" x="30" y="190">Câmeras, computadores, TVs</text>
+  </g>
+
+  <rect class="bx" x="237" y="18" width="207" height="196"/>
+  <rect class="hd-amber" x="237" y="18" width="207" height="30"/>
+  <text class="on b" x="340.5" y="38" font-size="13" text-anchor="middle">SDI</text>
+  <circle class="ln" cx="340.5" cy="81" r="19"/>
+  <circle class="ln-mu" cx="340.5" cy="81" r="11"/>
+  <circle class="f-ink" cx="340.5" cy="81" r="3"/>
+  <rect class="f-ink" x="316" y="78" width="6" height="6"/><rect class="f-ink" x="359" y="78" width="6" height="6"/>
+  <g font-size="11">
+    <text x="249" y="130">Conector BNC, com trava de giro</text>
+    <text x="249" y="148">Coaxial de 75 ohms, até ~100 m</text>
+    <text x="249" y="166">Um só sentido, sem EDID e HDCP</text>
+    <text class="mu" x="249" y="190">Câmeras e switchers de vídeo</text>
+  </g>
+
+  <rect class="bx" x="456" y="18" width="207" height="196"/>
+  <rect class="hd-teal" x="456" y="18" width="207" height="30"/>
+  <text class="on b" x="559.5" y="38" font-size="13" text-anchor="middle">Rede (NDI)</text>
+  <rect class="ln" x="537.5" y="62" width="44" height="32"/>
+  <rect class="ln" x="551.5" y="94" width="16" height="7"/>
+  <path class="ln-mu" stroke-width="1" d="M544 66 V76 M549 66 V76 M554 66 V76 M559 66 V76 M564 66 V76 M569 66 V76 M574 66 V76"/>
+  <g font-size="11">
+    <text x="468" y="130">Conector RJ45, com trava</text>
+    <text x="468" y="148">Cabo de rede, 100 m por trecho</text>
+    <text x="468" y="166">Vídeo comprimido, na rede local</text>
+    <text class="mu" x="468" y="190">Câmeras PTZ, computadores</text>
+  </g>
+
+  <rect class="bx" x="675" y="18" width="207" height="196"/>
+  <rect class="hd-purple" x="675" y="18" width="207" height="30"/>
+  <text class="on b" x="778.5" y="38" font-size="13" text-anchor="middle">USB</text>
+  <rect class="ln" x="728" y="68" width="46" height="20"/>
+  <rect class="ln-mu" stroke-width="1" x="733" y="72" width="36" height="7"/>
+  <rect class="ln" x="790" y="70" width="40" height="16" rx="8"/>
+  <path class="ln-mu" stroke-width="1" d="M799 78 H821"/>
+  <g font-size="10.5" text-anchor="middle"><text class="mu" x="751" y="104">A</text><text class="mu" x="810" y="104">C</text></g>
+  <g font-size="11">
+    <text x="687" y="130">USB-A ou USB-C, sem trava</text>
+    <text x="687" y="148">Cabo curto: de 2 a 3 m</text>
+    <text x="687" y="166">Vira webcam no computador</text>
+    <text class="mu" x="687" y="190">Webcams, placas de captura</text>
+  </g>
+  </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> As quatro interfaces mais comuns e os conectores, vistos de frente, em esquema. As distâncias são pontos de partida, detalhados no módulo 4.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%"></th><th class="blue" style="width:21%">HDMI</th><th class="amber" style="width:21%">SDI</th><th class="teal" style="width:21%">Rede (NDI)</th><th class="purple">USB</th></tr></thead>
+      <tbody>
+                <tr><td><strong>Distância prática</strong></td><td>Até 5 m sem preocupação. De 5 a 10 m, só com cabo bom.</td><td>Dezenas de metros. Perto de 100 m em HD, com cabo bom.</td><td>Até 100 m por trecho de cabo. Mais, com outro switch de rede.</td><td>De 2 a 3 m em USB 3. Até 5 m em USB 2.</td></tr>
+        <tr><td><strong>Áudio junto</strong></td><td>Sim, até 8 canais.</td><td>Sim, até 16 canais.</td><td>Sim.</td><td>Sim, como entrada de áudio do computador.</td></tr>
+        <tr><td><strong>Ponto fraco</strong></td><td>Distância curta, conector frágil, EDID e HDCP no caminho.</td><td>Poucos computadores e TVs têm entrada: pede conversor.</td><td>Depende de uma rede bem montada e acrescenta atraso.</td><td>Distância muito curta e disputa pela porta do computador.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>HDMI</h3>
+  <p>É a interface de TVs, projetores, computadores e da maioria das câmeras de entrada. Além de vídeo e áudio, leva a conversa entre os aparelhos (EDID e HDCP, do módulo 6). O conector tem três tamanhos: normal (tipo A), mini (tipo C) e micro (tipo D). O micro, comum em câmeras, é frágil: um cabo pendurado nele quebra a porta. Prenda o cabo ao corpo da câmera ou ao tripé, com folga.</p>
+  <p>Os cabos HDMI têm categorias, impressas na embalagem. O <em>High Speed</em> serve para 1080p e para 4K até 30 quadros. O 4K a 60 pede <em>Premium High Speed</em>, e os formatos acima disso, <em>Ultra High Speed</em>. A categoria diz a capacidade, e não a distância: um cabo comprido demais falha mesmo com a categoria certa.</p>
+
+  <h3>SDI</h3>
+  <p>É a interface da produção de vídeo profissional: cabo coaxial de 75 ohms com conector BNC, que trava com um quarto de volta. O sinal vai em um só sentido, e não há conversa: a origem envia o formato configurado, e o destino aceita ou não. Isso torna o SDI previsível e exigente: o formato tem de estar certo nos dois lados. Há níveis, conforme a quantidade de dados, e equipamento de nível mais baixo não passa os formatos de nível mais alto.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:18%">Nível</th><th style="width:18%">Taxa de dados</th><th style="width:34%">Formatos que carrega</th><th>Alcance típico com cabo bom</th></tr></thead>
+      <tbody>
+        <tr><td><strong>HD-SDI</strong></td><td class="num">1,5 Gb/s</td><td>720p, 1080i e 1080p até 30 quadros</td><td>Cerca de 100 m</td></tr>
+        <tr><td><strong>3G-SDI</strong></td><td class="num">3 Gb/s</td><td>1080p a 50, 59,94 e 60 quadros</td><td>De 70 a 100 m</td></tr>
+        <tr><td><strong>6G-SDI</strong></td><td class="num">6 Gb/s</td><td>4K até 30 quadros</td><td>De 50 a 80 m</td></tr>
+        <tr><td><strong>12G-SDI</strong></td><td class="num">12 Gb/s</td><td>4K a 50, 59,94 e 60 quadros</td><td>De 30 a 70 m</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Os alcances valem para cabo coaxial de vídeo de bitola cheia, feito para SDI. Cabos finos e flexíveis alcançam a metade disso ou menos. Cabo coaxial de 50 ohms, de rádio e de antena, tem conector parecido e não serve: o sinal reflete e falha.</p>
+
+  <h3>Vídeo pela rede: NDI</h3>
+  <p>O NDI leva vídeo e áudio pela rede local. Uma câmera com NDI ou um computador com o programa certo aparecem na rede como fonte, e qualquer computador da mesma rede pode recebê-la. Um só cabo de rede pode levar vídeo, controle da câmera e, com um switch de rede apropriado, a alimentação dela (PoE).</p>
+  <p>A versão de alta qualidade usa pouca compressão e ocupa da ordem de 100 a 150 megabits por segundo por fonte em 1080p a 60 quadros. A versão HX comprime bem mais, ocupa da ordem de 10 a 20 megabits por segundo e acrescenta mais atraso. A rede precisa ser cabeada, de 1 gigabit, e de preferência separada da rede do público e do escritório. Wi-Fi não é caminho confiável para vídeo ao vivo. O envio do programa para a internet é outro assunto, tratado no estudo <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>.</p>
+
+  <h3>USB</h3>
+  <p>O USB não liga uma câmera a um switcher ou a um telão: ele leva vídeo para dentro de um computador. Webcams e placas de captura aparecem como uma câmera, e os programas de transmissão as usam sem instalação especial. Em USB 3 (em geral com o interior azul, ou USB-C), o 1080p a 60 quadros passa sem compressão. Em USB 2, a imagem é comprimida e costuma ficar em 30 quadros. Use cabo curto, direto no computador: extensões e hubs são causa frequente de imagem que congela.</p>
+
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="distancia">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Comprimentos e extensores</h2>
+  <p>Todo cabo enfraquece o sinal, e mais ainda as partes rápidas dele. Quanto mais dados por segundo o formato tem, mais cedo o cabo deixa de dar conta. Por isso o comprimento máximo depende do cabo, do formato e de quão bem a entrada do destino recupera um sinal fraco.</p>
+  <p>E o sinal digital não falha aos poucos. Até certo comprimento, a imagem chega perfeita. Um pouco além, aparecem pontos brilhantes, linhas coloridas e apagões de um segundo. Mais um pouco, e ela some de vez: é o efeito penhasco. Um cabo que “funcionou no teste” perto do limite pode falhar no evento, estendido de outro jeito ou com o aparelho mais quente. Trabalhe com folga.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 330" role="img" aria-label="Barras horizontais com o comprimento de cabo em escala comprimida de 1 a 1000 metros. Parte forte: ponto de partida seguro; parte clara: depende do cabo, do formato e do aparelho. USB 3 passivo: 2, até 3 metros. HDMI passivo em 4K a 60: 3, até 5. HDMI passivo em 1080p: 5, até 10. HDMI ativo ou óptico: 30, até 100. SDI 12G: 30, até 70. SDI 3G: 70, até 100. SDI HD: 100, até 150. HDBaseT: 40, até 100. Rede com NDI: 100 por trecho. Fibra: centenas de metros a quilômetros.">
+  <text class="mono mu" x="18" y="26" font-size="10.5">COMPRIMENTO DO CABO, EM METROS</text>
+  <rect class="hd-blue" x="300" y="16" width="14" height="11"/>
+  <text x="320" y="26" font-size="11">ponto de partida seguro</text>
+  <rect class="lv-blue" x="480" y="16" width="14" height="11"/>
+  <text x="500" y="26" font-size="11">depende do cabo, do formato e do aparelho</text>
+  <g class="grid">
+    <line x1="250" y1="42" x2="250" y2="300"/><line x1="345" y1="42" x2="345" y2="300"/><line x1="390" y1="42" x2="390" y2="300"/>
+    <line x1="450" y1="42" x2="450" y2="300"/><line x1="545" y1="42" x2="545" y2="300"/><line x1="590" y1="42" x2="590" y2="300"/>
+    <line x1="650" y1="42" x2="650" y2="300"/><line x1="745" y1="42" x2="745" y2="300"/><line x1="850" y1="42" x2="850" y2="300"/>
+  </g>
+  <g font-size="11.5">
+    <text x="18" y="61">USB 3, cabo passivo</text>
+    <text x="18" y="86">HDMI passivo, 4K a 60</text>
+    <text x="18" y="111">HDMI passivo, 1080p</text>
+    <text x="18" y="136">HDMI ativo ou óptico</text>
+    <text x="18" y="161">SDI 12G, 4K a 60</text>
+    <text x="18" y="186">SDI 3G, 1080p a 60</text>
+    <text x="18" y="211">SDI HD, 1080i e 720p</text>
+    <text x="18" y="236">HDBaseT, em cabo de rede</text>
+    <text x="18" y="261">Rede (NDI), por trecho de cabo</text>
+    <text x="18" y="286">Fibra óptica</text>
+  </g>
+  <rect class="hd-blue" x="250" y="50" width="60" height="14"/><rect class="lv-blue" x="310" y="50" width="35" height="14"/>
+  <rect class="hd-blue" x="250" y="75" width="95" height="14"/><rect class="lv-blue" x="345" y="75" width="45" height="14"/>
+  <rect class="hd-blue" x="250" y="100" width="140" height="14"/><rect class="lv-blue" x="390" y="100" width="60" height="14"/>
+  <rect class="hd-blue" x="250" y="125" width="295" height="14"/><rect class="lv-blue" x="545" y="125" width="105" height="14"/>
+  <rect class="hd-amber" x="250" y="150" width="295" height="14"/><rect class="lv-amber" x="545" y="150" width="74" height="14"/>
+  <rect class="hd-amber" x="250" y="175" width="369" height="14"/><rect class="lv-amber" x="619" y="175" width="31" height="14"/>
+  <rect class="hd-amber" x="250" y="200" width="400" height="14"/><rect class="lv-amber" x="650" y="200" width="35" height="14"/>
+  <rect class="hd-teal" x="250" y="225" width="320" height="14"/><rect class="lv-teal" x="570" y="225" width="80" height="14"/>
+  <rect class="hd-teal" x="250" y="250" width="400" height="14"/>
+  <rect class="hd-purple" x="250" y="275" width="600" height="14"/>
+  <text class="t-purple b" x="858" y="286" font-size="11">km</text>
+  <line class="ln-mu" x1="250" y1="300" x2="850" y2="300"/>
+  <g font-size="10.5" text-anchor="middle">
+    <text class="mu" x="250" y="316">1</text><text class="mu" x="345" y="316">3</text><text class="mu" x="390" y="316">5</text>
+    <text class="mu" x="450" y="316">10</text><text class="mu" x="545" y="316">30</text><text class="mu" x="590" y="316">50</text>
+    <text class="mu" x="650" y="316">100</text><text class="mu" x="745" y="316">300</text><text class="mu" x="850" y="316">1000</text>
+  </g>
+  </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> Comprimentos típicos por tipo de ligação. A escala é comprimida: cada marca vale cerca de três vezes a anterior. São valores práticos, e não especificação: o alcance real depende da qualidade do cabo e do equipamento nas duas pontas.</figcaption>
+  </figure>
+
+  <h3>Quando o cabo comum não alcança</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Solução</th><th style="width:34%">Como funciona</th><th style="width:16%">Alcance típico</th><th>Cuidados</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cabo HDMI ativo</strong></td><td>Tem um pequeno circuito em uma das pontas, que reforça o sinal.</td><td>De 10 a 25 m</td><td>Tem sentido certo: as pontas são marcadas como origem (<em>source</em>) e tela (<em>display</em>, <em>TV</em>).</td></tr>
+        <tr><td><strong>Cabo HDMI óptico</strong></td><td>Converte o sinal em luz dentro do próprio cabo, que leva fibra por dentro.</td><td>De 10 a 100 m, conforme o fabricante</td><td>Também tem sentido certo. Não dobre em ângulo fechado e não pise.</td></tr>
+        <tr><td><strong>Converter para SDI</strong></td><td>Um conversor HDMI → SDI perto da origem, cabo coaxial, e outro conversor SDI → HDMI no destino, se ele não tiver entrada SDI.</td><td>Os do SDI: de 70 a 100 m em 1080p</td><td>Cada conversor precisa de alimentação. Conteúdo protegido não passa.</td></tr>
+        <tr><td><strong>Extensor HDBaseT</strong></td><td>Um transmissor e um receptor levam o HDMI por um cabo de rede, ligado direto de um ao outro.</td><td>De 40 a 100 m, conforme a classe do extensor, a resolução e o cabo</td><td>Não passa por switch de rede. Use cabo de cobre inteiro, sem emenda, de categoria 6 ou melhor.</td></tr>
+        <tr><td><strong>Fibra óptica</strong></td><td>Um par de conversores transforma SDI ou HDMI em luz e de volta.</td><td>Centenas de metros a quilômetros</td><td>Conectores limpos e protegidos. A fibra não conduz eletricidade: isola os aparelhos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Há extensores de HDMI por cabo de rede que não são HDBaseT. Cada fabricante usa um método próprio: transmissor e receptor têm de ser do mesmo par, e parte deles comprime a imagem e acrescenta atraso. Teste no formato e no comprimento reais antes de contar com eles.</p>
+  <p>Emendas contam. Cada adaptador e cada emenda fêmea-fêmea tira um pouco do sinal: dois cabos HDMI de 5 m emendados são piores que um cabo de 10 m. No SDI, uma emenda com BNC de 75 ohms bem-feito custa pouco, mas várias emendas encurtam o alcance.</p>
+
+  <h3>O cabo certo para cada trecho</h3>
+  <ul>
+    <li><strong>Até 5 m, entre aparelhos vizinhos:</strong> o cabo nativo do aparelho, HDMI ou SDI.</li>
+    <li><strong>De 5 a 10 m:</strong> HDMI só com cabo de boa qualidade e testado no formato real. SDI sem preocupação.</li>
+    <li><strong>De 10 a 100 m:</strong> SDI, HDBaseT ou cabo HDMI óptico. É o caso da câmera no fundo da sala e do projetor no teto.</li>
+    <li><strong>Acima de 100 m, ou entre prédios:</strong> fibra ou rede.</li>
+    <li><strong>Para o computador:</strong> placa de captura com cabo USB curto, ou rede.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Segurança: cabos, energia e altura</h4>
+    <p>Cabo esticado no chão derruba gente e câmera: passe pelas bordas, prenda com fita própria ou passa-cabos nas áreas de circulação e deixe folga nas pontas. Aparelhos ligados em tomadas distantes podem ter diferença de tensão entre si e queimar portas HDMI: confira se estão no mesmo circuito e aterrados, e na dúvida ligue o cabo com os dois desligados. Nunca olhe para a ponta de uma fibra ligada: a luz é invisível e pode ferir o olho. Passar cabos pelo teto ou por estruturas é trabalho em altura e pede pessoa habilitada e equipamento de proteção. A parte de energia e de segurança da montagem está no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="conversores">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Conversores, scalers e captura</h2>
+  <p>Entre a origem e o destino costumam entrar pequenas caixas. Elas se parecem por fora e fazem trabalhos bem diferentes. Saber o que cada uma faz, e o que não faz, evita a compra errada e o diagnóstico errado.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Quatro aparelhos, com o que entra e o que sai. Conversor de interface: entra HDMI em 1080p59,94 e sai SDI no mesmo formato; troca só o cabo. Scaler: entra HDMI em 1920 por 1200 a 60 hertz e sai 1080p59,94; troca resolução e taxa. Distribuidor: uma entrada vira duas ou mais saídas iguais. Placa de captura: entra HDMI ou SDI e sai USB, que o computador vê como webcam.">
+  <defs><marker id="sv6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+  <g font-size="10.5"><text class="mono mu" x="18" y="22">ENTRA</text><text class="mono mu" x="254" y="22">APARELHO</text><text class="mono mu" x="490" y="22">SAI</text><text class="mono mu" x="686" y="22">O QUE ELE FAZ</text></g>
+
+  <rect class="bx" x="18" y="32" width="196" height="50"/>
+  <text class="b" x="116" y="53" font-size="12" text-anchor="middle">HDMI</text><text class="mu" x="116" y="70" font-size="11" text-anchor="middle">1080p59,94</text>
+  <line class="ln" x1="216" y1="57" x2="250" y2="57" marker-end="url(#sv6)"/>
+  <rect class="hd-blue" x="254" y="32" width="196" height="50"/>
+  <text class="on b" x="352" y="53" font-size="12" text-anchor="middle">Conversor de interface</text><text class="on" x="352" y="70" font-size="11" text-anchor="middle">HDMI → SDI</text>
+  <line class="ln" x1="452" y1="57" x2="486" y2="57" marker-end="url(#sv6)"/>
+  <rect class="bx" x="490" y="32" width="180" height="50"/>
+  <text class="b" x="580" y="53" font-size="12" text-anchor="middle">SDI</text><text class="mu" x="580" y="70" font-size="11" text-anchor="middle">1080p59,94</text>
+  <text x="686" y="53" font-size="11">Troca o conector e o cabo.</text><text class="mu" x="686" y="70" font-size="11">O formato continua igual.</text>
+
+  <rect class="bx" x="18" y="96" width="196" height="50"/>
+  <text class="b" x="116" y="117" font-size="12" text-anchor="middle">HDMI</text><text class="mu" x="116" y="134" font-size="11" text-anchor="middle">1920 × 1200 a 60 Hz</text>
+  <line class="ln" x1="216" y1="121" x2="250" y2="121" marker-end="url(#sv6)"/>
+  <rect class="hd-amber" x="254" y="96" width="196" height="50"/>
+  <text class="on b" x="352" y="117" font-size="12" text-anchor="middle">Scaler</text><text class="on" x="352" y="134" font-size="11" text-anchor="middle">conversor de formato</text>
+  <line class="ln" x1="452" y1="121" x2="486" y2="121" marker-end="url(#sv6)"/>
+  <rect class="bx" x="490" y="96" width="180" height="50"/>
+  <text class="b" x="580" y="117" font-size="12" text-anchor="middle">HDMI</text><text class="mu" x="580" y="134" font-size="11" text-anchor="middle">1080p59,94</text>
+  <text x="686" y="117" font-size="11">Troca a resolução e a taxa</text><text x="686" y="134" font-size="11">de quadros.</text>
+
+  <rect class="bx" x="18" y="160" width="196" height="50"/>
+  <text class="b" x="116" y="181" font-size="12" text-anchor="middle">HDMI</text><text class="mu" x="116" y="198" font-size="11" text-anchor="middle">1080p59,94</text>
+  <line class="ln" x1="216" y1="185" x2="250" y2="185" marker-end="url(#sv6)"/>
+  <rect class="hd-teal" x="254" y="160" width="196" height="50"/>
+  <text class="on b" x="352" y="181" font-size="12" text-anchor="middle">Distribuidor (splitter)</text><text class="on" x="352" y="198" font-size="11" text-anchor="middle">1 entrada, 2 ou mais saídas</text>
+  <line class="ln" x1="452" y1="185" x2="486" y2="185" marker-end="url(#sv6)"/>
+  <rect class="bx" x="490" y="160" width="180" height="50"/>
+  <text class="b" x="580" y="181" font-size="12" text-anchor="middle">2 × HDMI</text><text class="mu" x="580" y="198" font-size="11" text-anchor="middle">1080p59,94 em cada saída</text>
+  <text x="686" y="181" font-size="11">Copia o sinal para vários</text><text x="686" y="198" font-size="11">destinos. Não muda o formato.</text>
+
+  <rect class="bx" x="18" y="224" width="196" height="50"/>
+  <text class="b" x="116" y="245" font-size="12" text-anchor="middle">HDMI ou SDI</text><text class="mu" x="116" y="262" font-size="11" text-anchor="middle">1080p59,94</text>
+  <line class="ln" x1="216" y1="249" x2="250" y2="249" marker-end="url(#sv6)"/>
+  <rect class="hd-purple" x="254" y="224" width="196" height="50"/>
+  <text class="on b" x="352" y="245" font-size="12" text-anchor="middle">Placa de captura</text><text class="on" x="352" y="262" font-size="11" text-anchor="middle">vídeo → USB</text>
+  <line class="ln" x1="452" y1="249" x2="486" y2="249" marker-end="url(#sv6)"/>
+  <rect class="bx" x="490" y="224" width="180" height="50"/>
+  <text class="b" x="580" y="245" font-size="12" text-anchor="middle">USB</text><text class="mu" x="580" y="262" font-size="11" text-anchor="middle">aparece como webcam</text>
+  <text x="686" y="245" font-size="11">Leva o vídeo para dentro</text><text x="686" y="262" font-size="11">do computador.</text>
+  </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> Quatro caixas parecidas, quatro trabalhos. O erro mais comum é esperar que um conversor de interface mude o formato: ele não muda.</figcaption>
+  </figure>
+
+  <h3>Conversor de interface</h3>
+  <p>Troca o tipo de ligação: HDMI para SDI, SDI para HDMI, para fibra. O formato que entra é o que sai: se a câmera envia 1080i59,94, o switcher que espera 1080p59,94 continua preto. A maioria tem um só sentido: o de HDMI para SDI não faz o caminho contrário.</p>
+
+  <h3>Scaler</h3>
+  <p>É o conversor de formato: recebe uma resolução e uma taxa e entrega as que você escolher. Resolve a origem que não pode ser configurada, como o notebook de um palestrante visitante. Três limites: aumentar a resolução não cria detalhe; converter entre famílias de taxa (de 50 para 59,94) deixa pequenos trancos; e todo scaler acrescenta atraso. Quando puder, ajuste a origem em vez de converter.</p>
+
+  <h3>Distribuidor, seletor e matriz</h3>
+  <p>O <strong>distribuidor</strong> (<em>splitter</em>) copia uma entrada para duas ou mais saídas: o mesmo programa para o projetor e para a TV do palco. O <strong>seletor</strong> (<em>switch</em> HDMI) faz o contrário: escolhe uma entre várias origens para uma saída. A <strong>matriz</strong> combina os dois. Nenhum deles muda o formato, salvo os modelos com scaler embutido. Não existe “cabo em Y” de vídeo digital: dividir o sinal pede um aparelho alimentado. No SDI, muitos equipamentos têm uma saída de passagem (<em>loop</em>), que entrega uma cópia regenerada do que entrou e dispensa o distribuidor.</p>
+
+  <h3>Placa de captura</h3>
+  <p>Leva HDMI ou SDI para o computador, pela porta USB ou por uma placa interna. É por ela que o programa do switcher chega ao computador da transmissão. Confira na especificação os formatos de entrada, o formato máximo que ela entrega ao computador (muitos modelos simples recebem 1080p a 60 e entregam 30) e a porta USB exigida. Placas de captura não aceitam conteúdo com HDCP. O switcher e o uso do programa estão no estudo <a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>.</p>
+
+  <p>Toda caixa no caminho pede alimentação (sem ela, o trecho fica preto), fixação e uma etiqueta com o sentido. E toda caixa acrescenta um ponto de falha e algum atraso: quase nenhum em um conversor de interface, de um a alguns quadros em scalers, e mais em caminhos por rede e por software. No telão, atrasos somados de alguns quadros já aparecem nos gestos e na boca de quem fala: prefira o caminho mais curto. Na transmissão, o acerto é atrasar o áudio, como mostra o estudo <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="conversa">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>EDID, HDCP e áudio embutido</h2>
+  <p>No HDMI, a origem e o destino conversam antes de a imagem passar. Essa conversa é automática e, quando dá certo, ninguém percebe que ela existe. Quando falha, produz os problemas mais confusos do vídeo: o computador que só oferece uma resolução baixa, a tela que fica preta só com um certo conteúdo, o som que some ao ligar um cabo.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 312" role="img" aria-label="Sequência da conversa entre a origem, à esquerda, e o destino, à direita, em uma ligação HDMI. Primeiro, o destino avisa a presença. Segundo, o destino envia o EDID: aceito 1080p a 59,94 e a 60, 720p e som estéreo. Terceiro, a origem escolhe um formato da lista e começa a enviar. Quarto, só com conteúdo protegido, a origem pergunta pelo HDCP se o destino é autorizado: se sim, a imagem aparece; se não, tela preta ou aviso. No SDI não há essa conversa.">
+  <defs><marker id="sv7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+  <rect class="bx-blue" x="18" y="20" width="160" height="46"/>
+  <text class="b" x="98" y="40" font-size="12.5" text-anchor="middle">Origem</text>
+  <text class="mu" x="98" y="57" font-size="11" text-anchor="middle">computador, câmera</text>
+  <rect class="bx-amber" x="722" y="20" width="160" height="46"/>
+  <text class="b" x="802" y="40" font-size="12.5" text-anchor="middle">Destino</text>
+  <text class="mu" x="802" y="57" font-size="11" text-anchor="middle">TV, projetor, switcher</text>
+  <line class="ref" x1="98" y1="66" x2="98" y2="262"/><line class="ref" x1="802" y1="66" x2="802" y2="262"/>
+
+  <text x="450" y="94" font-size="11.5" text-anchor="middle"><tspan class="b">1. Presença:</tspan> “há um destino ligado neste cabo”</text>
+  <line class="ln" x1="798" y1="102" x2="104" y2="102" marker-end="url(#sv7)"/>
+  <text x="450" y="140" font-size="11.5" text-anchor="middle"><tspan class="b">2. EDID:</tspan> “aceito 1080p a 59,94 e a 60, 720p e som estéreo”</text>
+  <line class="ln" x1="798" y1="148" x2="104" y2="148" marker-end="url(#sv7)"/>
+  <text x="450" y="186" font-size="11.5" text-anchor="middle"><tspan class="b">3. Escolha:</tspan> a origem escolhe um formato da lista e começa a enviar</text>
+  <line class="ln" x1="102" y1="194" x2="796" y2="194" marker-end="url(#sv7)"/>
+  <text x="450" y="232" font-size="11.5" text-anchor="middle"><tspan class="b">4. HDCP,</tspan> só com conteúdo protegido: “você é um destino autorizado?”</text>
+  <line class="ln" x1="102" y1="238" x2="796" y2="238" marker-end="url(#sv7)"/>
+  <line class="ln" x1="798" y1="252" x2="104" y2="252" marker-end="url(#sv7)"/>
+  <text class="t-good b" x="300" y="272" font-size="11.5" text-anchor="middle">sim: a imagem aparece</text>
+  <text class="t-bad b" x="600" y="272" font-size="11.5" text-anchor="middle">não: tela preta ou aviso</text>
+  <text class="mu" x="450" y="298" font-size="11" text-anchor="middle">No SDI não há essa conversa: a origem envia o formato configurado, e o destino aceita ou não.</text>
+  </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> A conversa do HDMI, em esquema. Ela se repete cada vez que um cabo é ligado ou um aparelho é religado, e é por isso que a ordem de ligar pode mudar o resultado.</figcaption>
+  </figure>
+
+  <h3>EDID: o que o destino aceita</h3>
+  <p>O EDID é uma pequena ficha gravada em toda tela, projetor e entrada HDMI, com as resoluções e as taxas que o aparelho aceita e a que ele prefere. A origem lê a ficha ao detectar o cabo e escolhe o formato de saída: é assim que o computador “descobre sozinho” a resolução do projetor. A entrada de um switcher ou de uma placa de captura também tem a sua ficha.</p>
+  <p>O EDID atrapalha em quatro situações típicas:</p>
+  <ul>
+    <li><strong>Cabo longo, extensor ou adaptador que não repassa a ficha.</strong> Sem ler o EDID, a origem cai para um formato básico, como 1024 × 768 ou 640 × 480, ou não envia nada.</li>
+    <li><strong>Distribuidor com telas diferentes.</strong> A origem recebe uma ficha só. Conforme o distribuidor, é a da primeira saída ou a mais limitada entre todas. Uma TV antiga em uma das saídas pode rebaixar o formato para todas.</li>
+    <li><strong>Ficha lida na hora errada.</strong> Se a origem foi ligada antes do destino, pode ter ficado com um formato básico. Desligar e religar o cabo na origem força uma nova leitura.</li>
+    <li><strong>Preferência que não é a sua.</strong> O destino aceita 1080p a 59,94 e a 60, e o computador escolhe 60. Ajuste à mão nas configurações de vídeo do computador: resolução e frequência.</li>
+  </ul>
+  <p>Para instalações fixas existe o emulador de EDID: uma pequena peça que guarda uma ficha fixa e a apresenta à origem, não importa o que esteja ligado depois. Muitos distribuidores e extensores têm chaves com a mesma função. No SDI, nada disso existe: quem define o formato é o menu da origem.</p>
+
+  <h3>HDCP: a proteção contra cópia</h3>
+  <p>O HDCP é a proteção de conteúdo das ligações HDMI: a origem embaralha o sinal e só entrega a chave a um destino autorizado. Tocadores de disco, aparelhos de TV por assinatura e de streaming e consoles usam essa proteção. Computadores, tablets e celulares a ativam ao tocar conteúdo protegido de serviços de filmes e séries, e alguns a ativam sempre que o destino a aceita.</p>
+  <p>TVs e projetores são destinos autorizados. Switchers, placas de captura, gravadores e conversores para SDI não são: o SDI não carrega HDCP. O resultado é tela preta, imagem que pisca ou mensagem de erro, com cabo e formato perfeitos.</p>
+  <ul>
+    <li>Câmeras não aplicam HDCP na saída de vídeo ao vivo.</li>
+    <li>Um computador mostrando slides, letras ou um arquivo de vídeo próprio em geral não aplica.</li>
+    <li>Alguns consoles e aparelhos têm, no menu, a opção de desligar o HDCP para os conteúdos que não o exigem.</li>
+    <li>Se a origem funciona ligada direto na TV e fica preta ao passar pelo switcher, pela captura ou pelo conversor, suspeite do HDCP.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>A proteção existe por causa de direitos autorais. Não procure aparelhos para contorná-la. Se o evento precisa exibir um vídeo, use um arquivo que a organização tem o direito de exibir, tocado por um computador. A exibição pública e a transmissão de obras protegidas dependem de autorização, como lembra o estudo <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>.</p>
+  </div>
+
+  <h3>Áudio embutido</h3>
+  <p>HDMI, SDI e NDI levam o áudio no mesmo cabo do vídeo: é o áudio embutido (<em>embedded</em>). Isso simplifica a ligação e cria três armadilhas.</p>
+  <ul>
+    <li><strong>O som do computador muda de saída.</strong> Ao detectar um cabo HDMI, muitos computadores passam a mandar o som por ele, e a saída de fone, ligada à mesa de som, fica muda. Escolha a saída de áudio nas configurações de som do computador, e confira de novo sempre que religar o cabo.</li>
+    <li><strong>O áudio pode se perder na conversão.</strong> Conversores, scalers e placas de captura simples às vezes repassam só dois canais, ou nenhum. Alguns têm entrada e saída de áudio analógico para embutir e extrair o som.</li>
+    <li><strong>Áudio e vídeo saem de sincronia.</strong> O vídeo atrasa a cada processamento, e o áudio que seguiu por outro caminho chega antes.</li>
+  </ul>
+  <p>Em evento ao vivo, o som das caixas e da transmissão vem da mesa de som, e não do áudio embutido das câmeras. O áudio embutido serve bem para entregar ao codificador o programa já com o som da mesa. O caminho do áudio da transmissão está no estudo <a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>, e a ligação do computador à mesa, no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>O trabalho começa com um desenho. O <strong>diagrama de sinal</strong> mostra cada aparelho como uma caixa e cada cabo como uma linha, com a interface e o comprimento escritos em cima. Ele serve para planejar, para comprar o cabo certo e, no dia do problema, para saber por onde o sinal deveria passar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 318" role="img" aria-label="Diagrama de sinal de uma igreja, padrão 1080p59,94. Quatro origens ligadas ao switcher: câmera 1, no fundo, por SDI de 40 metros; câmera 2, na lateral, por HDMI, conversor e SDI de 15 metros; câmera 3, no palco, por HDMI de 3 metros; computador das letras por HDMI de 2 metros. Três destinos: projetor por HDBaseT de 35 metros; TV de retorno por HDMI óptico de 20 metros; computador da transmissão por SDI de 2 metros e placa de captura USB.">
+  <defs>
+    <marker id="sv8a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah f-amber" d="M0 0 L10 5 L0 10 z"/></marker>
+    <marker id="sv8b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah f-blue" d="M0 0 L10 5 L0 10 z"/></marker>
+    <marker id="sv8c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah f-teal" d="M0 0 L10 5 L0 10 z"/></marker>
+  </defs>
+  <text class="mono mu" x="18" y="26" font-size="10.5">PADRÃO DO SISTEMA: 1080p59,94 EM TODOS OS TRECHOS</text>
+
+  <rect class="bx" x="18" y="44" width="160" height="44"/>
+  <text class="b" x="98" y="63" font-size="12" text-anchor="middle">Câmera 1</text><text class="mu" x="98" y="79" font-size="10.5" text-anchor="middle">fundo da igreja</text>
+  <rect class="bx" x="18" y="104" width="160" height="44"/>
+  <text class="b" x="98" y="123" font-size="12" text-anchor="middle">Câmera 2</text><text class="mu" x="98" y="139" font-size="10.5" text-anchor="middle">lateral</text>
+  <rect class="bx" x="18" y="164" width="160" height="44"/>
+  <text class="b" x="98" y="183" font-size="12" text-anchor="middle">Câmera 3</text><text class="mu" x="98" y="199" font-size="10.5" text-anchor="middle">palco</text>
+  <rect class="bx" x="18" y="224" width="160" height="44"/>
+  <text class="b" x="98" y="243" font-size="12" text-anchor="middle">Computador</text><text class="mu" x="98" y="259" font-size="10.5" text-anchor="middle">letras e vídeos</text>
+
+  <rect class="bx-ink" x="390" y="44" width="120" height="224"/>
+  <text class="t-ground b" x="450" y="152" font-size="13" text-anchor="middle">Switcher</text>
+  <text class="t-ground" x="450" y="170" font-size="10.5" text-anchor="middle">mesa de corte</text>
+
+  <line class="s-amber" x1="180" y1="66" x2="386" y2="66" marker-end="url(#sv8a)"/>
+  <text class="t-amber b" x="283" y="58" font-size="11" text-anchor="middle">SDI · 40 m</text>
+  <line class="s-amber" x1="180" y1="126" x2="386" y2="126" marker-end="url(#sv8a)"/>
+  <text class="t-amber b" x="283" y="118" font-size="11" text-anchor="middle">HDMI → conversor → SDI · 15 m</text>
+  <line class="s-blue" x1="180" y1="186" x2="386" y2="186" marker-end="url(#sv8b)"/>
+  <text class="t-blue b" x="283" y="178" font-size="11" text-anchor="middle">HDMI · 3 m</text>
+  <line class="s-blue" x1="180" y1="246" x2="386" y2="246" marker-end="url(#sv8b)"/>
+  <text class="t-blue b" x="283" y="238" font-size="11" text-anchor="middle">HDMI · 2 m</text>
+
+  <rect class="bx" x="722" y="44" width="160" height="44"/>
+  <text class="b" x="802" y="63" font-size="12" text-anchor="middle">Projetor</text><text class="mu" x="802" y="79" font-size="10.5" text-anchor="middle">telão da igreja</text>
+  <rect class="bx" x="722" y="134" width="160" height="44"/>
+  <text class="b" x="802" y="153" font-size="12" text-anchor="middle">TV de retorno</text><text class="mu" x="802" y="169" font-size="10.5" text-anchor="middle">no palco</text>
+  <rect class="bx" x="722" y="224" width="160" height="44"/>
+  <text class="b" x="802" y="243" font-size="12" text-anchor="middle">Computador</text><text class="mu" x="802" y="259" font-size="10.5" text-anchor="middle">da transmissão</text>
+
+  <line class="s-teal" x1="512" y1="66" x2="718" y2="66" marker-end="url(#sv8c)"/>
+  <text class="t-teal b" x="615" y="58" font-size="11" text-anchor="middle">HDBaseT · 35 m</text>
+  <line class="s-blue" x1="512" y1="156" x2="718" y2="156" marker-end="url(#sv8b)"/>
+  <text class="t-blue b" x="615" y="148" font-size="11" text-anchor="middle">HDMI óptico · 20 m</text>
+  <line class="s-amber" x1="512" y1="246" x2="718" y2="246" marker-end="url(#sv8a)"/>
+  <text class="t-amber b" x="615" y="238" font-size="11" text-anchor="middle">SDI · 2 m + captura USB</text>
+
+  <line class="s-amber" x1="18" y1="298" x2="48" y2="298"/><text x="56" y="302" font-size="11">SDI (coaxial, BNC)</text>
+  <line class="s-blue" x1="230" y1="298" x2="260" y2="298"/><text x="268" y="302" font-size="11">HDMI</text>
+  <line class="s-teal" x1="360" y1="298" x2="390" y2="298"/><text x="398" y="302" font-size="11">HDBaseT (cabo de rede, ponto a ponto)</text>
+  </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> Diagrama de sinal de um sistema com três câmeras. Cada linha traz a interface e o comprimento. Na planilha de apoio, cada linha do desenho vira uma linha do mapa de sinais.</figcaption>
+  </figure>
+
+  <ol class="steps">
+    <li><h4>Desenhe o diagrama de sinal</h4><p>Origens, destinos e o que fica no meio. Meça cada trecho pelo caminho real do cabo, com subidas, contornos e folgas, e não em linha reta.</p></li>
+    <li><h4>Defina o padrão do sistema <span class="k blue w">HD</span></h4><p>Resolução, varredura e taxa de quadros que todos os aparelhos aceitam, como no módulo 2. Anote no alto do mapa de sinais.</p></li>
+    <li><h4>Escolha a interface de cada trecho <span class="k amber w">SDI</span></h4><p>Pela distância e pelas portas: cabo nativo nos trechos curtos; SDI, HDBaseT, cabo óptico ou fibra nos longos. Veja os alertas do mapa de sinais.</p></li>
+    <li><h4>Configure cada origem no padrão</h4><p>Na câmera, o formato da saída (HDMI ou SDI) é um ajuste separado do formato de gravação. Desligue as informações na tela (<em>display</em>, <em>info</em>, saída limpa), para os ícones não irem ao telão. No computador, ajuste resolução e frequência.</p></li>
+    <li><h4>Passe e prenda os cabos</h4><p>Longos primeiro. Respeite o sentido dos cabos ativos e ópticos, trave os BNC, alivie a tensão dos HDMI e identifique as duas pontas com o nome do trecho.</p></li>
+    <li><h4>Alimente os conversores e os extensores</h4><p>Cada caixa com a sua fonte, presa, e a luz de energia acesa. A luz de sinal, quando existe, só acende se a caixa reconhece o formato que chega.</p></li>
+    <li><h4>Ligue na ordem: destinos, meio, origens</h4><p>Telas e projetor, depois switcher e conversores, por último câmeras e computadores. Assim cada origem encontra o destino pronto para a conversa do HDMI.</p></li>
+    <li><h4>Confira entrada por entrada</h4><p>No switcher, cada origem aparece no formato padrão? Em cada destino, a imagem está inteira, sem cortes, barras inesperadas ou esticada?</p></li>
+    <li><h4>Teste o áudio embutido e as mídias</h4><p>Toque cada vídeo que será exibido, pelo caminho real, e ouça o som onde ele deve sair. Confira a saída de áudio do computador.</p></li>
+    <li><h4>Deixe rodando e mexa nos cabos</h4><p>Dez minutos ligados mostram os defeitos intermitentes. Mexa de leve em cada conector: se a imagem pisca, troque o cabo agora. Separe um cabo curto testado e um conversor de reserva.</p></li>
+  </ol>
+
+  <h3>Se aparecer “sem sinal”</h3>
+  <p>Não troque tudo ao mesmo tempo. Siga o caminho do sinal, uma pergunta e uma mudança por vez. A planilha de apoio traz o roteiro em dez perguntas; a figura mostra o raciocínio.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 250" role="img" aria-label="Roteiro de diagnóstico com quatro perguntas, da esquerda para a direita. Destino ligado e na entrada certa? Se não, ligue e escolha a entrada. Origem ligada e com saída ativa? Se não, ative a saída. Cabos firmes, no sentido certo, e conversores ligados? Se não, refaça as ligações. Formato no padrão e fonte sem HDCP? Se não, ajuste a origem ou troque o conteúdo. Se tudo for sim, ligue a origem direto em um monitor por um cabo curto: se aparecer, o defeito está no cabo longo, no conversor ou no extensor; se não, na origem.">
+  <defs><marker id="sv9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+  <text class="mono mu" x="18" y="22" font-size="10.5">COMECE PELA ESQUERDA</text>
+
+  <rect class="bx" x="18" y="34" width="150" height="84"/>
+  <text x="28" y="62" font-size="11">O destino está ligado</text>
+  <text x="28" y="79" font-size="11">e na entrada certa?</text>
+  <line class="ln" x1="170" y1="76" x2="190" y2="76" marker-end="url(#sv9)"/>
+  <text class="mu" x="180" y="68" font-size="10.5" text-anchor="middle">sim</text>
+  <line class="ln" x1="93" y1="120" x2="93" y2="146" marker-end="url(#sv9)"/>
+  <text class="mu" x="101" y="137" font-size="10.5">não</text>
+  <rect class="bx-slate" x="18" y="150" width="150" height="78"/>
+  <text class="b" x="28" y="174" font-size="11.5">Ligue o destino.</text>
+  <text x="28" y="192" font-size="11">Escolha a entrada em</text>
+  <text x="28" y="209" font-size="11">que o cabo está.</text>
+
+  <rect class="bx" x="194" y="34" width="150" height="84"/>
+  <text x="204" y="62" font-size="11">A origem está ligada</text>
+  <text x="204" y="79" font-size="11">e com a saída ativa?</text>
+  <line class="ln" x1="346" y1="76" x2="366" y2="76" marker-end="url(#sv9)"/>
+  <text class="mu" x="356" y="68" font-size="10.5" text-anchor="middle">sim</text>
+  <line class="ln" x1="269" y1="120" x2="269" y2="146" marker-end="url(#sv9)"/>
+  <text class="mu" x="277" y="137" font-size="10.5">não</text>
+  <rect class="bx-blue" x="194" y="150" width="150" height="78"/>
+  <text class="b" x="204" y="174" font-size="11.5">Ative a saída.</text>
+  <text x="204" y="192" font-size="11">No computador, use</text>
+  <text x="204" y="209" font-size="11">estender ou duplicar.</text>
+
+  <rect class="bx" x="370" y="34" width="150" height="84"/>
+  <text x="380" y="62" font-size="11">Cabos firmes, no</text>
+  <text x="380" y="79" font-size="11">sentido certo, e</text>
+  <text x="380" y="96" font-size="11">conversores ligados?</text>
+  <line class="ln" x1="522" y1="76" x2="542" y2="76" marker-end="url(#sv9)"/>
+  <text class="mu" x="532" y="68" font-size="10.5" text-anchor="middle">sim</text>
+  <line class="ln" x1="445" y1="120" x2="445" y2="146" marker-end="url(#sv9)"/>
+  <text class="mu" x="453" y="137" font-size="10.5">não</text>
+  <rect class="bx-amber" x="370" y="150" width="150" height="78"/>
+  <text class="b" x="380" y="174" font-size="11.5">Refaça as ligações.</text>
+  <text x="380" y="192" font-size="11">Encaixe até o fim e</text>
+  <text x="380" y="209" font-size="11">ligue as fontes.</text>
+
+  <rect class="bx" x="546" y="34" width="150" height="84"/>
+  <text x="556" y="62" font-size="11">O formato é o padrão</text>
+  <text x="556" y="79" font-size="11">do sistema, e a fonte</text>
+  <text x="556" y="96" font-size="11">não tem HDCP?</text>
+  <line class="ln" x1="698" y1="76" x2="718" y2="76" marker-end="url(#sv9)"/>
+  <text class="mu" x="708" y="68" font-size="10.5" text-anchor="middle">sim</text>
+  <line class="ln" x1="621" y1="120" x2="621" y2="146" marker-end="url(#sv9)"/>
+  <text class="mu" x="629" y="137" font-size="10.5">não</text>
+  <rect class="bx-purple" x="546" y="150" width="150" height="78"/>
+  <text class="b" x="556" y="174" font-size="11.5">Ajuste a origem.</text>
+  <text x="556" y="192" font-size="11">Conteúdo protegido</text>
+  <text x="556" y="209" font-size="11">não passa: troque-o.</text>
+
+  <rect class="bx-ink" x="722" y="34" width="160" height="194"/>
+  <text class="t-ground b" x="734" y="58" font-size="12">Divida o caminho.</text>
+  <text class="t-ground" x="734" y="80" font-size="11">Origem direto em um</text>
+  <text class="t-ground" x="734" y="96" font-size="11">monitor, por um cabo</text>
+  <text class="t-ground" x="734" y="112" font-size="11">curto e testado.</text>
+  <text class="t-ground b" x="734" y="136" font-size="11">Apareceu:</text>
+  <text class="t-ground" x="734" y="154" font-size="11">o defeito está no cabo</text>
+  <text class="t-ground" x="734" y="170" font-size="11">longo, no conversor</text>
+  <text class="t-ground" x="734" y="186" font-size="11">ou no extensor.</text>
+  <text class="t-ground b" x="734" y="206" font-size="11">Não apareceu:</text>
+  <text class="t-ground" x="734" y="221" font-size="11">o defeito está na origem.</text>
+  </svg>
+    </div>
+    <figcaption><b>Figura 9.</b> Roteiro para o “sem sinal”. Cada “não” aponta a correção. Depois de corrigir, teste antes de seguir. O método geral de dividir a cadeia ao meio está no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>.</figcaption>
+  </figure>
+
+  <p>A tabela de sintomas e causas prováveis (imagem que pisca, preto só com um conteúdo, resolução baixa, movimento aos trancos, imagem sem som) está na aba Referência da planilha de apoio, para consulta no evento.</p>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. O primeiro está preenchido na planilha de apoio.</p>
+
+  <h3>Exemplo 1. O mapa de sinais de uma igreja com três câmeras</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares. Três câmeras, um computador de letras, um switcher sem conversor nas entradas, projetor, TV de retorno e computador de transmissão. Padrão do sistema: 1080p59,94.</dd></div>
+    <div><dt>Sintoma</dt><dd>A câmera 2 pisca e chuvisca. A câmera 3 e o computador das letras ficam pretos no switcher.</dd></div>
+    <div><dt>Causa</dt><dd>Um cabo HDMI passivo de 15 m na câmera 2. Câmera 3 em 1080i59,94 e computador em 1080p60, com o switcher em 1080p59,94.</dd></div>
+    <div><dt>O que foi feito</dt><dd>O mapa de sinais foi preenchido trecho por trecho. Os alertas indicaram os três problemas e um cabo USB no limite.</dd></div>
+    <div><dt>Resultado</dt><dd>Todas as entradas estáveis, depois de um conversor para SDI e de dois ajustes de menu.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:21%">Origem</th><th style="width:12%">Formato</th><th style="width:13%">Ligação</th><th class="n" style="width:8%">Metros</th><th style="width:13%">Situação</th><th>O que foi feito</th></tr></thead>
+      <tbody>
+        <tr><td>Câmera 1 (fundo)</td><td class="num">1080p59,94</td><td>SDI</td><td class="num n">40</td><td class="teal">OK</td><td>Nada. O limite recomendado para esse formato é de 70 m.</td></tr>
+        <tr><td>Câmera 2 (lateral)</td><td class="num">1080p59,94</td><td>HDMI passivo</td><td class="num n">15</td><td class="amber">Comprimento</td><td>Conversor HDMI → SDI preso ao tripé e cabo coaxial de 15 m até o switcher.</td></tr>
+        <tr><td>Câmera 3 (palco)</td><td class="num">1080i59,94</td><td>HDMI passivo</td><td class="num n">3</td><td class="amber">Formato</td><td>Saída HDMI da câmera mudada para 1080p59,94 no menu.</td></tr>
+        <tr><td>Computador das letras</td><td class="num">1080p60</td><td>HDMI passivo</td><td class="num n">2</td><td class="amber">Formato</td><td>Frequência da saída mudada de 60 para 59,94 Hz nas configurações de vídeo.</td></tr>
+        <tr><td>Notebook de visitante</td><td>Outro</td><td>HDMI passivo</td><td class="num n">5</td><td class="teal">OK</td><td>Entra por um scaler, que entrega 1080p59,94. A planilha marca o formato como “Convertido”.</td></tr>
+        <tr><td>Placa de captura</td><td class="num">1080p59,94</td><td>USB</td><td class="num n">3</td><td class="amber">No limite</td><td>Cabo trocado por um de 1 m, com o computador ao lado do switcher.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> Os três defeitos pareciam iguais e tinham causas diferentes. O da câmera 2 era da linha: o cabo. Os da câmera 3 e do computador eram do idioma: o formato. Trocar o cabo da câmera 3 não teria resolvido nada, e a diferença entre 60 e 59,94 bastou para o switcher recusar o computador.</p>
+
+  <h3>Exemplo 2. O vídeo que aparece na TV e não aparece no telão</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Formatura em auditório de escola. A organização quer exibir um filme curto a partir de um aparelho de streaming, ligado por HDMI ao switcher, que alimenta o telão e a gravação.</dd></div>
+    <div><dt>Sintoma</dt><dd>A entrada do switcher fica preta. O mesmo aparelho, com o mesmo cabo, funciona ligado direto em uma TV.</dd></div>
+    <div><dt>Causa</dt><dd>HDCP. O aparelho protege a saída, e o switcher não é um destino autorizado.</dd></div>
+    <div><dt>O que foi feito</dt><dd>A organização forneceu o arquivo do vídeo, produzido por ela mesma. O arquivo foi tocado pelo computador de mídia, já ligado ao switcher.</dd></div>
+    <div><dt>Resultado</dt><dd>Vídeo exibido no telão e incluído na gravação, com o som pelo caminho já testado.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> Imagem na TV e preto no switcher, com o mesmo cabo, apontam para a proteção, e não para o cabo nem para o formato. A solução foi trocar a fonte do conteúdo, e não contornar a proteção. Pedir as mídias com antecedência, para testar no caminho real, evita a surpresa.</p>
+
+  <h3>Exemplo 3. O vídeo da palestra saiu sem som</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Palestra em auditório. Notebook ligado ao projetor por HDMI, e a saída de fone do notebook ligada à mesa de som por uma direct box.</dd></div>
+    <div><dt>Sintoma</dt><dd>No teste da manhã, o som do notebook saía nas caixas. Na hora da palestra, o vídeo tocou com imagem e sem som.</dd></div>
+    <div><dt>Causa</dt><dd>O cabo HDMI foi religado pouco antes da palestra. O notebook passou a mandar o áudio pelo HDMI, para o projetor, que estava com o volume fechado.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Nas configurações de som do notebook, a saída voltou a ser a de fone. O operador passou a conferir esse ajuste depois de qualquer religação.</dd></div>
+    <div><dt>Resultado</dt><dd>Som de volta à mesa, pelo canal já ajustado.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> Nada estava quebrado. O computador obedeceu à conversa do HDMI: encontrou um destino que aceita áudio e mudou a saída sozinho. O ganho do canal do computador na mesa segue o estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Cada origem em um formato</h4><p>Uma câmera em 1080i, outra em 1080p a 30, o computador em 60. Algumas entradas ficam pretas, e outras são convertidas com perda.</p><p class="fix"><b>Correção:</b> defina o padrão do sistema e configure a saída de cada origem nele.</p></div>
+    <div><h4>Tratar 60 e 59,94 como a mesma coisa</h4><p>O computador envia 60 Hz exatos para um switcher em 59,94, e a entrada fica preta ou dá um tranco de tempos em tempos.</p><p class="fix"><b>Correção:</b> escolha a mesma taxa nos dois lados. No computador, ela fica nas configurações avançadas de vídeo.</p></div>
+    <div><h4>Cabo HDMI comum em trecho longo</h4><p>Quinze ou vinte metros de cabo passivo, ou dois cabos emendados. Funciona no teste e pisca no evento.</p><p class="fix"><b>Correção:</b> acima de 10 m, use SDI, HDBaseT, cabo óptico ou fibra.</p></div>
+    <div><h4>Cabo ativo ou óptico invertido</h4><p>O cabo novo “veio com defeito”: não passa imagem nenhuma. A ponta marcada para a tela está na origem.</p><p class="fix"><b>Correção:</b> leia as marcas das pontas antes de passar o cabo pelo teto ou pelo piso.</p></div>
+    <div><h4>Conversor sem energia</h4><p>A fonte soltou, ou o conversor foi ligado em uma porta USB que desliga com o aparelho.</p><p class="fix"><b>Correção:</b> fonte própria, presa. Olhe a luz de energia e a luz de sinal antes de procurar outro defeito.</p></div>
+    <div><h4>Esperar que o conversor mude o formato</h4><p>O conversor HDMI → SDI é instalado, e a entrada continua preta, porque o formato da origem ainda é o errado.</p><p class="fix"><b>Correção:</b> o conversor de interface só troca o cabo. Para trocar o formato, ajuste a origem ou use um scaler.</p></div>
+    <div><h4>Contar com conteúdo protegido</h4><p>O vídeo do evento vem de um serviço de streaming ou de um disco, e só se descobre a tela preta na hora.</p><p class="fix"><b>Correção:</b> peça as mídias antes, em arquivo que possa ser exibido, e teste pelo caminho real.</p></div>
+    <div><h4>Deixar o computador escolher sozinho</h4><p>O notebook escolhe uma resolução 16:10 ou uma resolução baixa, e a imagem sai com barras, esticada ou borrada.</p><p class="fix"><b>Correção:</b> ajuste à mão: 1920 × 1080, na taxa do sistema, em tela estendida ou duplicada conforme o uso.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>Este estudo trata do caminho da imagem depois que ela sai da câmera ou do computador, até quem corta, projeta e transmite.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Exposicao/treinamento-exposicao.html">Exposição: íris, obturador e ganho</a>: a taxa de quadros da câmera, o obturador e a cintilação.</li>
+        <li><a href="../Lentes-Foco-e-Cor/treinamento-lentes-foco-e-cor.html">Lentes, foco e cor</a>: a imagem que a câmera forma antes de virar sinal.</li>
+        <li><a href="../Enquadramento-e-Movimento/treinamento-enquadramento-e-movimento.html">Enquadramento e movimento de câmera</a>: as posições de câmera, que definem o comprimento de cada cabo.</li>
+        <li><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>: o cuidado com cabos e a ligação do áudio do computador à mesa.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Corte-ao-Vivo/treinamento-corte-ao-vivo.html">Corte ao vivo e direção de imagem</a>: o switcher recebe todas as origens no mesmo formato.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: o programa chega ao codificador pela placa de captura, e o áudio é sincronizado lá.</li>
+        <li><a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>: o sinal chega ao projetor ou ao painel na resolução e na proporção certas.</li>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>: o método de diagnóstico, a energia, o inventário e o kit de emergência.</li>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>: o nível do áudio do computador que chega à mesa.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira na montagem, antes do ensaio. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>O padrão do sistema (resolução, varredura e taxa de quadros) está definido e anotado.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>O diagrama de sinal está desenhado, e o mapa de sinais tem o comprimento de cada trecho.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>Cada câmera e cada computador está configurado para enviar o padrão do sistema.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>Nenhum trecho passa do comprimento recomendado: os longos usam SDI, extensor, cabo óptico ou fibra.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>Os cabos ativos e ópticos estão no sentido certo, com a ponta de origem na origem.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>Os conectores BNC estão travados, os HDMI têm alívio de tensão, e os cabos no chão estão presos.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>Cada conversor, extensor e distribuidor está alimentado, com a fonte presa e a luz de sinal acesa.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>A saída de cada computador está em 1920 × 1080, na taxa do sistema, estendida ou duplicada conforme o uso.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>Cada entrada do switcher mostra imagem estável por dez minutos, sem piscar nem chuviscar.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>Cada destino mostra a imagem inteira, sem cortes, sem barras inesperadas e sem esticar.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>O áudio embutido chega aonde deve, e o som do computador sai pela saída prevista.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>As mídias do evento foram testadas no caminho real, e há um cabo curto testado e um conversor de reserva.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Onde está a causa?</h3>
+  <p>Cada frase descreve um problema de vídeo. Escolha a causa mais provável: <strong>F</strong>, formato; <strong>C</strong>, cabo ou distância; <strong>H</strong>, HDCP; <strong>E</strong>, EDID.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"F": "Formato", "C": "Cabo ou distância", "H": "HDCP", "E": "EDID"},
+ "itens": [
+  {"t": "A câmera nova veio configurada em 1080p a 50 quadros. O switcher está em 1080p59,94 e não tem conversor nas entradas. A entrada fica preta.", "a": "F", "w": "A câmera está em outra família de taxa de quadros. Ajuste a saída dela para o padrão do sistema."},
+  {"t": "Um cabo HDMI comum de 20 m liga a câmera do fundo ao switcher. A imagem aparece, pisca e mostra pontos brilhantes.", "a": "C", "w": "É o sinal no limite. Cabo passivo desse comprimento não é confiável: use SDI, cabo óptico ou extensor."},
+  {"t": "Um aparelho de streaming mostra imagem ligado direto na TV. Passando pelo conversor HDMI → SDI, a tela fica preta.", "a": "H", "w": "O aparelho protege a saída, e o SDI não carrega HDCP. Troque a fonte do conteúdo."},
+  {"t": "Ligado ao projetor por um extensor, o notebook só oferece 1024 × 768. Ligado direto, oferece 1920 × 1080.", "a": "E", "w": "O extensor não está repassando a ficha do projetor, e o notebook caiu para um formato básico."},
+  {"t": "Com um cabo coaxial fino de 90 m, a câmera funciona em 1080i. Ao mudar para 1080p59,94, a imagem cai.", "a": "C", "w": "O 1080p59,94 tem o dobro dos dados e alcança menos no mesmo cabo. Use cabo de bitola cheia, encurte o trecho ou use fibra."},
+  {"t": "O vídeo do computador aparece no telão, mas o movimento dá um pequeno tranco a cada poucos segundos. A saída está em 50 Hz, e o sistema, em 59,94.", "a": "F", "w": "Famílias de taxa diferentes: a conversão repete ou descarta quadros. Iguale a taxa da origem."},
+  {"t": "Um filme em disco aparece no projetor quando o tocador está ligado direto. Passando pela placa de captura, só há tela preta.", "a": "H", "w": "Discos comerciais são protegidos, e placas de captura não são destinos autorizados."},
+  {"t": "O computador foi ligado antes do projetor e ficou em resolução baixa. Depois de tirar e recolocar o cabo, passou a oferecer 1080p.", "a": "E", "w": "A ficha do destino foi lida na hora errada. Religar o cabo forçou uma nova leitura."},
+  {"t": "Um cabo HDMI óptico novo, de 30 m, não passa imagem nenhuma. A ponta marcada “display” está no computador.", "a": "C", "w": "Cabo óptico tem sentido certo. Inverta as pontas."},
+  {"t": "Duas câmeras em 1080p59,94 aparecem no switcher. A terceira, igual às outras, mas em 1080p29,97, fica preta.", "a": "F", "w": "O switcher sem conversor nas entradas só aceita o formato exato. Ajuste a terceira câmera."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: leia, mude e mapeie</h3>
+  <p>Você vai precisar de um computador com saída HDMI, uma TV ou um monitor, um cabo HDMI curto e a planilha de apoio. Se tiver, separe também uma câmera, um conversor ou extensor e uma placa de captura.</p>
+  <ol>
+    <li>Ligue o computador à TV. Anote a resolução e a frequência que o computador escolheu sozinho e o formato que a TV diz receber, no menu de informações. Os dois batem?</li>
+    <li>Mude a frequência da saída para outra opção oferecida (59,94, 50, 30). Veja o que a TV informa a cada mudança. Volte ao valor inicial.</li>
+    <li>Mude a resolução para outra proporção, como 1280 × 800 ou 1024 × 768, e veja como a TV preenche a tela. Volte para 1920 × 1080.</li>
+    <li>Toque um vídeo com som. Nas configurações de som do computador, alterne a saída entre o HDMI e o fone, e note por onde o som sai em cada caso.</li>
+    <li>Desligue o cabo, espere dez segundos e religue. Confira de novo a resolução, a frequência e a saída de som: alguma voltou sozinha ao ajuste anterior?</li>
+    <li>Se tiver uma câmera, procure no menu o formato da saída HDMI ou SDI e a opção de saída limpa. Anote as opções de formato que ela oferece.</li>
+    <li>Na aba “Mapa de sinais”, escolha o padrão do sistema e registre cada trecho do seu sistema, com o comprimento medido. Leia os alertas.</li>
+    <li>Na aba “Inventário”, registre os cabos e os conversores, com a data e o resultado do teste de cada um.</li>
+  </ol>
+  <p>Depois, peça a alguém que mude um ajuste ou solte uma fonte sem você ver, e ache a causa com a aba “Diagnóstico”.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Sinais-de-Video-modelo.xlsx">Sinais-de-Video-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Mapa de sinais</strong></td><td>Registro de até 20 trechos: origem, formato enviado, tipo de ligação, comprimento e destino. No alto ficam o padrão do sistema e os limites de comprimento, que podem ser trocados.</td><td>Classe do formato, limite recomendado, alerta de formato diferente do padrão, alerta de comprimento, situação e o que fazer.</td></tr>
+        <tr><td><strong>Inventário</strong></td><td>Cabos, conversores, extensores e placas de captura, com comprimento, capacidade, fonte e teste.</td><td>Dias desde o teste, situação (OK, Testar, Testar de novo, Falta fonte, Retirar) e totais.</td></tr>
+        <tr><td><strong>Diagnóstico</strong></td><td>O roteiro do “sem sinal” em dez perguntas, para responder na ordem, e um registro das ocorrências.</td><td>O primeiro item com resposta “Não” e a correção indicada.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Tabela de formatos, interfaces, comprimentos típicos e sintomas.</td><td>Nada. A tabela de formatos é consultada pelas outras abas.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Mapa</strong></td><td>Os dez trechos do exemplo 1, antes das correções, e o que foi ajustado.</td><td>Os mesmos resultados da aba Mapa de sinais.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Os limites de comprimento do alto do mapa são pontos de partida conservadores. Troque-os pelos valores do manual dos seus cabos e extensores, ou pelo que você comprovou em teste.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Áudio embutido</dt><dd>Som que viaja no mesmo cabo do vídeo, em HDMI, SDI ou rede.</dd></div>
+    <div><dt>BNC</dt><dd>Conector do cabo coaxial usado no SDI. Trava com um quarto de volta.</dd></div>
+    <div><dt>Conversor de interface</dt><dd>Aparelho que troca o tipo de ligação, como HDMI para SDI, sem mudar o formato.</dd></div>
+    <div><dt>EDID</dt><dd>Ficha gravada no destino, com os formatos que ele aceita. A origem a lê pelo cabo HDMI.</dd></div>
+    <div><dt>Entrelaçado (i)</dt><dd>Varredura em que cada envio traz metade das linhas: um campo ímpar, depois um campo par.</dd></div>
+    <div><dt>HDBaseT</dt><dd>Padrão de extensores que levam HDMI por cabo de rede, ponto a ponto, sem passar por switch.</dd></div>
+    <div><dt>HDCP</dt><dd>Proteção contra cópia das ligações HDMI. Só libera a imagem para destinos autorizados.</dd></div>
+    <div><dt>HDMI</dt><dd>Interface de vídeo e áudio de TVs, projetores, computadores e câmeras. Para ligações curtas.</dd></div>
+    <div><dt>NDI</dt><dd>Tecnologia que leva vídeo e áudio comprimidos pela rede local.</dd></div>
+    <div><dt>Placa de captura</dt><dd>Aparelho que leva um sinal HDMI ou SDI para dentro do computador, em geral por USB.</dd></div>
+    <div><dt>Progressivo (p)</dt><dd>Varredura em que cada quadro traz todas as linhas da imagem.</dd></div>
+    <div><dt>Proporção de tela</dt><dd>Relação entre a largura e a altura da imagem: 16:9, 16:10, 4:3.</dd></div>
+    <div><dt>Resolução</dt><dd>Quantidade de pontos da imagem, em largura por altura: 1920 × 1080, por exemplo.</dd></div>
+    <div><dt>Scaler</dt><dd>Conversor de formato. Muda a resolução e a taxa de quadros de um sinal.</dd></div>
+    <div><dt>SDI</dt><dd>Interface profissional de vídeo por cabo coaxial de 75 ohms, com trava e longo alcance.</dd></div>
+    <div><dt>Taxa de quadros</dt><dd>Quantidade de imagens por segundo: 29,97, 59,94, 25, 50.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>

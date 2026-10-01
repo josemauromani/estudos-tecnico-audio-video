@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ganho e fader: a estrutura de ganho</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --ground:#F3F6F7; --surface:#FFFFFF; --sunk:#E9EEF0; --ink:#16242E; --muted:#566672; --rule:#D3DBE0;
+  --accent:#2B5C8A;
+  --blue:#2B5C8A; --blue-tint:#DCE8F3;
+  --amber:#A96A12; --amber-tint:#F6E8CF;
+  --teal:#1E7B73; --teal-tint:#D9EEEB;
+  --purple:#7A4A9A; --purple-tint:#E9DEF1;
+  --red:#B0413E; --red-tint:#F5DEDC;
+  --slate:#5B6B76; --slate-tint:#E3E8EB;
+  --on-hue:#FFFFFF;
+  --good:#1F7A4D; --good-tint:#DDF1E5;
+  --bad:#B0413E; --bad-tint:#F5DEDC;
+  --display:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+    --accent:#86B7E3;
+    --blue:#86B7E3; --blue-tint:#1B2F42;
+    --amber:#E2AC4F; --amber-tint:#3A2C12;
+    --teal:#5FC6BA; --teal-tint:#15332F;
+    --purple:#C09ADB; --purple-tint:#2E2139;
+    --red:#EC8E89; --red-tint:#3D1F1E;
+    --slate:#9BABB6; --slate-tint:#26333B;
+    --on-hue:#0F171C;
+    --good:#6FCF9B; --good-tint:#163326;
+    --bad:#EC8E89; --bad-tint:#3D1F1E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0F171C; --surface:#172229; --sunk:#1E2B33; --ink:#E4EAED; --muted:#9BABB6; --rule:#2B3A44;
+  --accent:#86B7E3;
+  --blue:#86B7E3; --blue-tint:#1B2F42;
+  --amber:#E2AC4F; --amber-tint:#3A2C12;
+  --teal:#5FC6BA; --teal-tint:#15332F;
+  --purple:#C09ADB; --purple-tint:#2E2139;
+  --red:#EC8E89; --red-tint:#3D1F1E;
+  --slate:#9BABB6; --slate-tint:#26333B;
+  --on-hue:#0F171C;
+  --good:#6FCF9B; --good-tint:#163326;
+  --bad:#EC8E89; --bad-tint:#3D1F1E;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.65 var(--body);-webkit-text-size-adjust:100%}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.page{max-width:1180px;margin-inline:auto;padding-inline:20px;padding-block:36px 80px}
+
+/* Cabeçalho */
+.mast{display:flex;flex-direction:column;gap:18px;padding-bottom:32px;border-bottom:1px solid var(--rule)}
+.tiles{display:flex;gap:6px}
+.tiles span{width:44px;height:44px;display:grid;place-items:center;font:700 24px/1 var(--display);color:var(--on-hue)}
+h1{font:700 clamp(2.3rem,6vw,3.6rem)/1.02 var(--display);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.lead{font-size:1.15rem;line-height:1.55;max-width:62ch;margin:0;color:var(--ink)}
+.meta{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px 22px;font:400 .8rem/1.4 var(--mono);color:var(--muted);margin:0;padding:0;list-style:none}
+
+/* Estrutura */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;padding-top:32px}
+.toc{font-size:.92rem}
+.toc h2{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.toc ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 20px;counter-reset:toc}
+.toc li{counter-increment:toc}
+.toc a{display:flex;gap:10px;padding:5px 0;color:var(--ink);text-decoration:none;line-height:1.35}
+.toc a::before{content:counter(toc,decimal-leading-zero);font:400 .75rem/1.7 var(--mono);color:var(--muted)}
+.toc a:hover{color:var(--accent);text-decoration:underline}
+@media (min-width:1020px){
+  .layout{grid-template-columns:200px minmax(0,1fr);gap:64px}
+  .toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start}
+  .toc ol{grid-template-columns:1fr}
+}
+main{display:flex;flex-direction:column;gap:72px;min-width:0}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
+.eyebrow{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+h2{font:700 clamp(1.7rem,4vw,2.2rem)/1.1 var(--display);margin:0;text-wrap:balance}
+h3{font:600 1.3rem/1.2 var(--display);margin:12px 0 0;text-wrap:balance}
+h4{font:600 .95rem/1.3 var(--body);margin:0}
+p{margin:0}
+section > p, section > ul, section > ol, section > h3{max-width:68ch}
+ul,ol{margin:0;padding-left:1.25em;display:flex;flex-direction:column;gap:6px}
+strong{font-weight:600}
+code{font:400 .88em var(--mono);background:var(--sunk);padding:1px 5px;border-radius:3px}
+
+/* Letras coloridas no texto */
+.k{display:inline-grid;place-items:center;width:1.45em;height:1.45em;font:700 .85em/1 var(--display);color:var(--on-hue);vertical-align:.05em}
+
+/* Figuras */
+figure{margin:0;display:flex;flex-direction:column;gap:10px;position:relative}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.scroll svg{display:block;width:100%;min-width:820px;height:auto;color:var(--ink)}
+figcaption{font-size:.86rem;line-height:1.5;color:var(--muted);max-width:72ch}
+figcaption b{color:var(--ink);font-weight:600}
+svg text{font-family:var(--body);fill:var(--ink)}
+svg .disp{font-family:var(--display);font-weight:700}
+svg .mono{font-family:var(--mono);letter-spacing:.08em}
+svg .on{fill:var(--on-hue)}
+svg .mu{fill:var(--muted)}
+svg .b{font-weight:600}
+svg .ln{stroke:var(--ink);stroke-width:1.5;fill:none}
+svg .ln-mu{stroke:var(--muted);stroke-width:1.5;fill:none}
+svg .ln-bold{stroke:var(--ink);stroke-width:3;fill:none;stroke-linejoin:round;stroke-linecap:round}
+svg .dash{stroke-dasharray:5 4}
+svg .ah{fill:var(--ink)} svg .ah-mu{fill:var(--muted)}
+svg .bx{fill:var(--surface);stroke:var(--rule);stroke-width:1.5}
+svg .bx-ink{fill:var(--ink);stroke:var(--ink)}
+svg .t-ground{fill:var(--ground)}
+svg .bx-out{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 4}
+svg .gap{stroke:var(--surface);stroke-width:4}
+svg .gap2{stroke:var(--surface);stroke-width:2}
+svg .hub{fill:var(--surface)}
+
+/* Gráfico */
+svg .grid{stroke:var(--rule);stroke-width:1}
+svg .hit{fill:transparent;cursor:crosshair;outline:none}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--ground);padding:6px 10px;font-size:.78rem;line-height:1.4;transform:translate(-50%,calc(-100% - 14px));white-space:nowrap;z-index:2}
+.tip b{display:block;font:600 1.05rem/1.2 var(--body)}
+details.data{font-size:.88rem}
+details.data summary{cursor:pointer;font:400 .82rem var(--mono);color:var(--muted);padding:4px 0}
+details.data .tbl{margin-top:8px}
+details.data table{min-width:420px}
+
+/* Tabelas */
+.tbl{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:780px;font-size:.88rem;line-height:1.4}
+th,td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+tr:last-child > td{border-bottom:0}
+thead th{font:600 .8rem/1.3 var(--body);background:var(--sunk)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-family:var(--mono);font-size:.82rem}
+
+/* Cores: blue, amber, teal, purple, red, slate */
+.tiles .blue, .k.blue{background:var(--blue)} .tiles span.w, .k.w{width:auto;padding:0 8px}
+svg .bx-blue{fill:var(--blue-tint);stroke:var(--blue);stroke-width:1.5} svg .hd-blue, svg .f-blue{fill:var(--blue)} svg .lv-blue{fill:var(--blue);fill-opacity:.36} svg .s-blue{stroke:var(--blue);stroke-width:2;fill:none} svg .t-blue{fill:var(--blue)}
+th.blue{background:var(--blue);color:var(--on-hue)} td.blue{background:var(--blue-tint)}
+.tiles .amber, .k.amber{background:var(--amber)}
+svg .bx-amber{fill:var(--amber-tint);stroke:var(--amber);stroke-width:1.5} svg .hd-amber, svg .f-amber{fill:var(--amber)} svg .lv-amber{fill:var(--amber);fill-opacity:.36} svg .s-amber{stroke:var(--amber);stroke-width:2;fill:none} svg .t-amber{fill:var(--amber)}
+th.amber{background:var(--amber);color:var(--on-hue)} td.amber{background:var(--amber-tint)}
+.tiles .teal, .k.teal{background:var(--teal)}
+svg .bx-teal{fill:var(--teal-tint);stroke:var(--teal);stroke-width:1.5} svg .hd-teal, svg .f-teal{fill:var(--teal)} svg .lv-teal{fill:var(--teal);fill-opacity:.36} svg .s-teal{stroke:var(--teal);stroke-width:2;fill:none} svg .t-teal{fill:var(--teal)}
+th.teal{background:var(--teal);color:var(--on-hue)} td.teal{background:var(--teal-tint)}
+.tiles .purple, .k.purple{background:var(--purple)}
+svg .bx-purple{fill:var(--purple-tint);stroke:var(--purple);stroke-width:1.5} svg .hd-purple, svg .f-purple{fill:var(--purple)} svg .lv-purple{fill:var(--purple);fill-opacity:.36} svg .s-purple{stroke:var(--purple);stroke-width:2;fill:none} svg .t-purple{fill:var(--purple)}
+th.purple{background:var(--purple);color:var(--on-hue)} td.purple{background:var(--purple-tint)}
+.tiles .red, .k.red{background:var(--red)}
+svg .bx-red{fill:var(--red-tint);stroke:var(--red);stroke-width:1.5} svg .hd-red, svg .f-red{fill:var(--red)} svg .lv-red{fill:var(--red);fill-opacity:.36} svg .s-red{stroke:var(--red);stroke-width:2;fill:none} svg .t-red{fill:var(--red)}
+th.red{background:var(--red);color:var(--on-hue)} td.red{background:var(--red-tint)}
+.tiles .slate, .k.slate{background:var(--slate)}
+svg .bx-slate{fill:var(--slate-tint);stroke:var(--slate);stroke-width:1.5} svg .hd-slate, svg .f-slate{fill:var(--slate)} svg .lv-slate{fill:var(--slate);fill-opacity:.36} svg .s-slate{stroke:var(--slate);stroke-width:2;fill:none} svg .t-slate{fill:var(--slate)}
+th.slate{background:var(--slate);color:var(--on-hue)} td.slate{background:var(--slate-tint)}
+svg .bar{fill:var(--accent)}
+svg .ref{stroke:var(--muted);stroke-width:1;stroke-dasharray:4 3}
+svg .s-ink{stroke:var(--ink);stroke-width:2;fill:none}
+/* tela de projeção: sempre escura com letra clara, nos dois temas */
+svg .scr{fill:#0B1116;stroke:#0B1116} svg .scr-tx{fill:#F3F6F7}
+svg .f-sunk{fill:var(--sunk)} svg .f-surface{fill:var(--surface)} svg .f-ink{fill:var(--ink)}
+svg .t-good{fill:var(--good)} svg .t-bad{fill:var(--bad)}
+svg .f-good{fill:var(--good)} svg .f-bad{fill:var(--bad)} svg .s-good{stroke:var(--good);stroke-width:2;fill:none} svg .s-bad{stroke:var(--bad);stroke-width:2;fill:none}
+td.n, th.n{text-align:center}
+td small{display:block;color:var(--muted);font-size:.8rem}
+
+/* Vídeo do tutorial */
+.video{display:grid;grid-template-columns:minmax(0,210px) minmax(0,1fr);gap:20px;align-items:start;background:var(--surface);border:1px solid var(--rule);padding:18px}
+.video video{width:100%;height:auto;display:block;background:#000}
+.video div{display:flex;flex-direction:column;gap:8px;font-size:.93rem}
+@media (max-width:640px){.video{grid-template-columns:1fr}}
+
+/* Voltar ao painel */
+.back{font:500 .78rem var(--mono);text-decoration:none;color:var(--muted)}
+.back:hover{color:var(--accent)}
+
+/* Ficha da matriz (acima de cada exemplo) */
+.ficha{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:0;border:1px solid var(--rule);background:var(--surface)}
+.ficha div{padding:12px 14px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:0 -1px -1px 0}
+.ficha dt{font:500 .68rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ficha dd{margin:0;font-size:.9rem;line-height:1.4}
+dl{margin:0}
+
+/* Blocos */
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.box{background:var(--surface);border:1px solid var(--rule);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.box h4{font:600 1.1rem/1.2 var(--display)}
+.box ul{font-size:.93rem}
+.note{background:var(--sunk);padding:16px 20px;max-width:72ch;font-size:.94rem;display:flex;flex-direction:column;gap:6px}
+.note h4{font:500 .72rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* Passo a passo */
+.steps{list-style:none;padding:0;counter-reset:st;gap:0;max-width:none;border-top:1px solid var(--rule)}
+.steps li{counter-increment:st;display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:counter(st);font:700 1.7rem/1 var(--display);color:var(--muted);grid-row:span 2}
+.steps h4{font:600 1.1rem/1.25 var(--display)}
+.steps p{font-size:.95rem;max-width:64ch;grid-column:2}
+
+/* Erros comuns */
+.errs{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.errs div{padding:16px 16px 16px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
+.errs h4{font:600 1.05rem/1.25 var(--display)}
+.errs p{font-size:.92rem}
+.errs .fix{color:var(--muted)}
+.errs .fix b{color:var(--ink);font-weight:600}
+
+/* Checklist */
+.check{list-style:none;padding:0;gap:0;max-width:none;border:1px solid var(--rule);background:var(--surface)}
+.check li{border-bottom:1px solid var(--rule)}
+.check li:last-child{border-bottom:0}
+.check label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;padding:11px 16px;cursor:pointer;font-size:.94rem;align-items:start}
+.check input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--teal)}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;font:400 .82rem var(--mono);color:var(--muted)}
+.bar b{color:var(--ink);font-weight:500}
+
+/* Exercício */
+.quiz{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule);background:var(--surface)}
+.q{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:14px 16px;border-bottom:1px solid var(--rule)}
+.q:last-child{border-bottom:0}
+@media (min-width:720px){.q{grid-template-columns:minmax(0,1fr) auto;align-items:center}}
+.q p{font-size:.95rem}
+.q .why{grid-column:1/-1;font-size:.86rem;color:var(--muted)}
+.q .why b{font-weight:600}
+.q .why.ok b{color:var(--good)} .q .why.no b{color:var(--bad)}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts button{min-width:40px;height:40px;padding:0 10px;border:1.5px solid var(--rule);background:var(--surface);color:var(--ink);font:700 1.1rem/1 var(--display);cursor:pointer;border-radius:0}
+.opts button:hover:not(:disabled){border-color:var(--ink)}
+.opts button:disabled{cursor:default;opacity:.45}
+.opts button.right{background:var(--good-tint);border-color:var(--good);color:var(--good);opacity:1}
+.opts button.wrong{background:var(--bad-tint);border-color:var(--bad);color:var(--bad);opacity:1}
+.btn{border:1.5px solid var(--ink);background:transparent;color:var(--ink);font:500 .82rem var(--mono);padding:7px 14px;cursor:pointer;border-radius:0}
+.btn:hover{background:var(--ink);color:var(--ground)}
+
+/* Glossário */
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0 40px;border-top:1px solid var(--rule)}
+.gloss div{padding:12px 0;border-bottom:1px solid var(--rule)}
+.gloss dt{font:600 1.02rem/1.3 var(--display)}
+.gloss dd{margin:2px 0 0;font-size:.9rem;color:var(--muted)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:.84rem;color:var(--muted);max-width:72ch}
+</style>
+</head>
+<body>
+<div class="page" lang="pt-BR" data-estudo="ganho">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="amber">G</span><span class="teal">F</span></div>
+  <h1>Ganho e fader: a estrutura de ganho</h1>
+  <p class="lead">Um guia de estudo para dar a cada canal o ganho certo, mixar com os faders e manter o sinal longe do ruído e da distorção, do microfone até a caixa.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">Ganho, fader e volume</a></li>
+    <li><a href="#pre">O pré-amplificador</a></li>
+    <li><a href="#janela">Ruído, folga e clip</a></li>
+    <li><a href="#medidores">Medidores e PFL</a></li>
+    <li><a href="#cadeia">Ganho unitário e a cadeia</a></li>
+    <li><a href="#efeitos">O que o ganho muda na mesa</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>Ganho, fader e volume</h2>
+  <p>No canal da mesa de som há dois controles que parecem fazer a mesma coisa: o botão de ganho (<em>gain</em>), no alto, e o fader, embaixo. Os dois deixam o som mais forte ou mais fraco. Mas eles ficam em pontos diferentes do caminho do sinal e têm trabalhos diferentes.</p>
+  <p>O <strong>ganho</strong> <span class="k amber">G</span> fica na entrada. Ele ajusta quanto o pré-amplificador aumenta o sinal fraco que vem do microfone, para que esse sinal chegue ao resto da mesa no nível em que ela trabalha bem. O <strong>fader</strong> <span class="k teal">F</span> vem depois. Ele decide quanto desse sinal, já preparado, vai para a mistura. O <strong>volume</strong> é o que o público ouve na sala: o resultado do ganho, do fader, do master, do amplificador, da caixa e da distância.</p>
+  <p>Pense em uma caixa d'água. O ganho é o registro de entrada, que recebe a água da rua. A caixa tem um limite ideal: com pouca água, falta pressão; com água demais, transborda. O fader é a torneira ligada à caixa. Ele decide quanto dessa água você usa. Abrir mais a torneira não enche a caixa, e fechar a torneira não impede a caixa de transbordar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 320" role="img" aria-label="A analogia da caixa d'água, em duas linhas. Na linha de cima: a água da rua chega fraca, passa pelo registro de entrada, que define quanto entra, e enche a caixa d'água até o limite ideal; acima dele a caixa transborda. Da caixa, a água sai pela torneira, que define quanto sai, e vira a água em uso. Na linha de baixo, o equivalente no canal da mesa: o microfone entrega um sinal fraco; o ganho define quanto o pré aumenta; o nível no canal aparece no medidor e na luz de clip; o fader define quanto vai à mistura; e a mistura é o volume da sala.">
+        <defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="28" font-size="10.5">NA CAIXA D'ÁGUA</text>
+        <rect class="bx" x="18" y="52" width="130" height="56"/>
+        <text class="b" x="83" y="76" font-size="12.5" text-anchor="middle">Água da rua</text>
+        <text class="mu" x="83" y="94" font-size="11" text-anchor="middle">chega fraca</text>
+        <line class="ln" x1="150" y1="80" x2="196" y2="80" marker-end="url(#ar1)"/>
+        <rect class="hd-amber" x="200" y="52" width="150" height="56"/>
+        <text class="on b" x="275" y="76" font-size="12.5" text-anchor="middle">Registro de entrada</text>
+        <text class="on" x="275" y="94" font-size="11" text-anchor="middle">quanto entra</text>
+        <line class="ln" x1="352" y1="80" x2="396" y2="80" marker-end="url(#ar1)"/>
+
+        <rect class="bx" x="400" y="40" width="150" height="160"/>
+        <rect class="lv-red" x="400" y="40" width="150" height="22"/>
+        <text class="t-red b" x="475" y="56" font-size="11" text-anchor="middle">transborda</text>
+        <rect class="lv-blue" x="400" y="100" width="150" height="100"/>
+        <line class="ln dash" x1="400" y1="100" x2="550" y2="100"/>
+        <text class="mu" x="475" y="92" font-size="11" text-anchor="middle">limite ideal</text>
+        <text class="b" x="475" y="146" font-size="12.5" text-anchor="middle">Caixa d'água</text>
+        <text x="475" y="164" font-size="11" text-anchor="middle">cheia na medida</text>
+
+        <line class="ln" x1="552" y1="172" x2="596" y2="172" marker-end="url(#ar1)"/>
+        <rect class="hd-teal" x="600" y="144" width="130" height="56"/>
+        <text class="on b" x="665" y="168" font-size="12.5" text-anchor="middle">Torneira</text>
+        <text class="on" x="665" y="186" font-size="11" text-anchor="middle">quanto sai</text>
+        <line class="ln" x1="732" y1="172" x2="766" y2="172" marker-end="url(#ar1)"/>
+        <rect class="bx" x="770" y="144" width="112" height="56"/>
+        <text class="b" x="826" y="168" font-size="12.5" text-anchor="middle">Água em uso</text>
+        <text class="mu" x="826" y="186" font-size="11" text-anchor="middle">o que você usa</text>
+
+        <text class="mono mu" x="18" y="234" font-size="10.5">NO CANAL DA MESA</text>
+        <rect class="bx" x="18" y="246" width="130" height="56"/>
+        <text class="b" x="83" y="270" font-size="12.5" text-anchor="middle">Microfone</text>
+        <text class="mu" x="83" y="288" font-size="11" text-anchor="middle">sinal fraco</text>
+        <line class="ln" x1="150" y1="274" x2="196" y2="274" marker-end="url(#ar1)"/>
+        <rect class="hd-amber" x="200" y="246" width="150" height="56"/>
+        <text class="on b" x="275" y="270" font-size="12.5" text-anchor="middle">Ganho</text>
+        <text class="on" x="275" y="288" font-size="11" text-anchor="middle">quanto o pré aumenta</text>
+        <line class="ln" x1="352" y1="274" x2="396" y2="274" marker-end="url(#ar1)"/>
+        <rect class="bx" x="400" y="246" width="150" height="56"/>
+        <text class="b" x="475" y="270" font-size="12.5" text-anchor="middle">Nível no canal</text>
+        <text class="mu" x="475" y="288" font-size="11" text-anchor="middle">medidor e luz de clip</text>
+        <line class="ln" x1="552" y1="274" x2="596" y2="274" marker-end="url(#ar1)"/>
+        <rect class="hd-teal" x="600" y="246" width="130" height="56"/>
+        <text class="on b" x="665" y="270" font-size="12.5" text-anchor="middle">Fader</text>
+        <text class="on" x="665" y="288" font-size="10.5" text-anchor="middle">quanto vai à mistura</text>
+        <line class="ln" x1="732" y1="274" x2="766" y2="274" marker-end="url(#ar1)"/>
+        <rect class="bx" x="770" y="246" width="112" height="56"/>
+        <text class="b" x="826" y="270" font-size="12.5" text-anchor="middle">Mistura</text>
+        <text class="mu" x="826" y="288" font-size="11" text-anchor="middle">o volume da sala</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> O ganho é o registro de entrada da caixa d'água, e o fader é a torneira. O registro enche a caixa até o limite ideal. A torneira só decide quanto da água que já está na caixa será usado.</figcaption>
+  </figure>
+
+  <div class="video">
+    <video controls preload="metadata" src="../docs/tutoriais/audio/AQOI3QxrfV1vMrEH_dlkVhoNcAx8x_GgAk8yhTEXuuWLt2KZTyoD0Tq6I6cTxUJYMhCHPa5UzgNjgo.mp4"></video>
+    <div><h4>Vídeo: Ganho não é volume</h4><p>Em pouco mais de um minuto, o vídeo mostra a analogia da caixa d'água, o que acontece com ganho de menos e com ganho demais, e os três passos para ajustar um canal: ouvir no PFL, pedir o volume real e levar o ganho até a faixa de trabalho. Este estudo parte daí e segue até o amplificador.</p></div>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:14%"></th><th class="amber" style="width:29%">Ganho</th><th class="teal" style="width:29%">Fader</th><th>Volume</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Onde fica</strong></td><td>Na entrada do canal, antes de tudo.</td><td>No fim do canal, depois do equalizador.</td><td>Não é um botão da mesa. É o som na sala.</td></tr>
+        <tr><td><strong>O que decide</strong></td><td>Com que nível o sinal entra na mesa.</td><td>Quanto do canal vai para a mistura.</td><td>Quanto o público ouve.</td></tr>
+        <tr><td><strong>Quando se ajusta</strong></td><td>Na passagem de som, uma vez por canal.</td><td>O tempo todo, durante o evento.</td><td>Na passagem, pelo master e pelo nível das caixas.</td></tr>
+        <tr><td><strong>Como se confere</strong></td><td>Pelo medidor, com o PFL.</td><td>Pelo ouvido, na mistura.</td><td>Pelo ouvido e pelo medidor de nível sonoro.</td></tr>
+        <tr><td><strong>Se estiver errado</strong></td><td>Ruído, falta de curso no fader ou distorção.</td><td>Mistura desequilibrada.</td><td>Som fraco ou alto demais para a sala.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>Ganho prepara o sinal. Fader faz a mistura. Se você está girando o ganho para deixar uma voz mais alta ou mais baixa na sala, está usando o controle errado.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="pre">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>O pré-amplificador</h2>
+  <p>O sinal que sai de um microfone é muito fraco: alguns milésimos de volt. A mesa trabalha com um sinal centenas de vezes maior, o nível de linha. Quem faz essa ponte é o pré-amplificador, ou só “pré”, o primeiro circuito de cada canal. O botão de ganho define quanto o pré aumenta o sinal. Em geral ele vai de 0 a 60 dB, e em algumas mesas a escala começa abaixo de zero.</p>
+  <p>Cada fonte chega com um nível diferente. Uma fala tranquila em microfone dinâmico entrega muito menos sinal do que um bumbo com o microfone colado na pele. Por isso cada canal pede um ganho diferente, e não existe “posição certa” do botão. Existe leitura certa no medidor. Os tipos de nível (microfone, instrumento, linha) estão no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>, e a unidade dBu, no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 280" role="img" aria-label="Gráfico do nível de quatro tipos de fonte na entrada da mesa, em dBu, e do ganho que o pré aplica para levar cada uma ao nível nominal de mais 4 dBu. Fala em microfone dinâmico: de menos 55 a menos 40 dBu, ganho de 45 a 60 dB. Canto perto do microfone dinâmico: de menos 40 a menos 25 dBu, ganho de 30 a 45 dB. Bumbo, caixa e amplificador com microfone colado na fonte: de menos 20 a 0 dBu, ganho de 5 a 25 dB, às vezes com pad. Fontes de linha, como teclado e computador: de menos 10 a mais 4 dBu, ganho de 0 a 15 dB, com pad se entrarem pela entrada de microfone. Acima de mais 20 dBu, aproximadamente, fica a zona de clip.">
+        <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah f-amber" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="lv-red" x="790" y="30" width="60" height="196"/>
+        <text class="t-red b" x="820" y="48" font-size="11.5" text-anchor="middle">clip</text>
+        <line class="ref" x1="694" y1="30" x2="694" y2="226"/>
+        <text class="b" x="694" y="22" font-size="11" text-anchor="middle">nível nominal da mesa: +4 dBu</text>
+
+        <text class="b" x="18" y="55" font-size="12">Fala em microfone dinâmico</text>
+        <text class="mu" x="18" y="70" font-size="10.5">a um palmo da boca</text>
+        <rect class="bx-slate" x="340" y="44" width="90" height="24"/>
+        <line class="s-amber" x1="434" y1="56" x2="690" y2="56" marker-end="url(#ar2)"/>
+        <text class="t-amber b" x="562" y="50" font-size="11" text-anchor="middle">ganho de 45 a 60 dB</text>
+
+        <text class="b" x="18" y="103" font-size="12">Canto perto do microfone</text>
+        <text class="mu" x="18" y="118" font-size="10.5">dinâmico, voz forte</text>
+        <rect class="bx-slate" x="430" y="92" width="90" height="24"/>
+        <line class="s-amber" x1="524" y1="104" x2="690" y2="104" marker-end="url(#ar2)"/>
+        <text class="t-amber b" x="607" y="98" font-size="11" text-anchor="middle">ganho de 30 a 45 dB</text>
+
+        <text class="b" x="18" y="151" font-size="12">Bumbo, caixa, amplificador</text>
+        <text class="mu" x="18" y="166" font-size="10.5">microfone colado na fonte</text>
+        <rect class="bx-slate" x="550" y="140" width="120" height="24"/>
+        <text class="t-amber b" x="540" y="156" font-size="11" text-anchor="end">ganho de 5 a 25 dB, às vezes com pad</text>
+
+        <text class="b" x="18" y="199" font-size="12">Linha: teclado, computador</text>
+        <text class="mu" x="18" y="214" font-size="10.5">saída de linha de aparelhos</text>
+        <rect class="bx-slate" x="610" y="188" width="84" height="24"/>
+        <text class="t-amber b" x="600" y="204" font-size="11" text-anchor="end">ganho de 0 a 15 dB; com pad na entrada de microfone</text>
+
+        <line class="ln-mu" x1="250" y1="226" x2="850" y2="226"/>
+        <g class="ln-mu" stroke-width="1">
+          <line x1="250" y1="226" x2="250" y2="232"/><line x1="310" y1="226" x2="310" y2="232"/><line x1="370" y1="226" x2="370" y2="232"/>
+          <line x1="430" y1="226" x2="430" y2="232"/><line x1="490" y1="226" x2="490" y2="232"/><line x1="550" y1="226" x2="550" y2="232"/>
+          <line x1="610" y1="226" x2="610" y2="232"/><line x1="670" y1="226" x2="670" y2="232"/><line x1="730" y1="226" x2="730" y2="232"/>
+          <line x1="790" y1="226" x2="790" y2="232"/><line x1="850" y1="226" x2="850" y2="232"/>
+        </g>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="250" y="246">−70</text><text class="mu" x="310" y="246">−60</text><text class="mu" x="370" y="246">−50</text>
+          <text class="mu" x="430" y="246">−40</text><text class="mu" x="490" y="246">−30</text><text class="mu" x="550" y="246">−20</text>
+          <text class="mu" x="610" y="246">−10</text><text class="mu" x="670" y="246">0</text><text class="mu" x="730" y="246">+10</text>
+          <text class="mu" x="790" y="246">+20</text><text class="mu" x="850" y="246">+30</text>
+        </g>
+        <text class="mu" x="550" y="266" font-size="11" text-anchor="middle">nível do sinal que chega à entrada da mesa, em dBu</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> Quanto mais fraca a fonte, mais ganho ela pede para chegar ao nível nominal. As faixas são típicas e variam com o microfone, com a distância e com a força de quem canta ou toca. O ponto de clip depende da mesa: em geral fica entre +18 e +24 dBu.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:30%">Fonte</th><th style="width:18%">Nível típico na entrada</th><th style="width:17%">Ganho para começar</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Fala em microfone dinâmico (púlpito, palestra)</td><td class="num">−55 a −40 dBu</td><td class="num">45 a 60 dB</td><td>É a fonte que mais pede ganho. Microfone perto da boca reduz o ganho necessário.</td></tr>
+        <tr><td>Canto perto do microfone dinâmico</td><td class="num">−40 a −25 dBu</td><td class="num">30 a 45 dB</td><td>Ajuste com o trecho mais forte da música.</td></tr>
+        <tr><td>Microfone condensador na mesma fonte</td><td>10 a 20 dB acima do dinâmico</td><td>10 a 20 dB a menos</td><td>Depende muito da distância: um coral captado de longe volta a pedir ganho alto.</td></tr>
+        <tr><td>Bumbo, caixa, amplificador de guitarra</td><td class="num">−20 a 0 dBu</td><td class="num">5 a 25 dB</td><td>Se passar da faixa com o ganho no mínimo, ligue o pad.</td></tr>
+        <tr><td>Violão ou baixo por direct box (DI)</td><td class="num">−40 a −20 dBu</td><td class="num">20 a 40 dB</td><td>A DI entrega nível de microfone. Instrumento com captação ativa chega mais forte.</td></tr>
+        <tr><td>Teclado, computador, tocador (linha)</td><td class="num">−10 a +4 dBu</td><td class="num">0 a 15 dB</td><td>Use a entrada de linha. Na entrada de microfone, use DI ou pad.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Use a tabela só para saber se o canal está perto do esperado. Um microfone de voz que pede 10 dB de ganho, ou um teclado que pede 50 dB, indicam outra coisa errada: chave na posição errada, cabo com defeito, pad esquecido, volume do instrumento fechado.</p>
+
+  <h3>Pad: o redutor antes do pré</h3>
+  <p>O pad é uma chave que reduz o sinal <em>antes</em> do pré, em geral em 20 dB (há mesas com 10 a 26 dB). Ele existe para fontes fortes demais: se o canal chega ao clip com o ganho no mínimo, o botão de ganho não tem mais o que fazer, porque o sinal já entra grande demais. Ligue o pad e ajuste o ganho de novo. Não deixe o pad ligado em canal que não precisa: você terá de repor os mesmos 20 dB no ganho, e o canal fica um pouco mais ruidoso. Feche o canal (mute) antes de mexer na chave, porque ela pode dar um estalo.</p>
+
+  <h3>Chave mic/linha e entradas combinadas</h3>
+  <p>Muitas mesas têm duas entradas por canal: XLR para microfone e P10 para linha. A entrada de linha já reduz o sinal antes do pré, como um pad embutido. Em algumas mesas a escolha é por uma chave mic/linha; em outras, o conector combinado (combo) decide: o XLR vai para o pré de microfone e o P10 entra como linha. Confira o manual da sua mesa. Fonte de linha ligada na entrada de microfone, sem pad, é uma das causas mais comuns de distorção que “não sai” por nada.</p>
+
+  <h3>Trim digital</h3>
+  <p>Nas mesas digitais existe um segundo ajuste, o trim digital. Ele age depois que o sinal já foi convertido em números. O trim serve para acertar o nível de fontes que já chegam digitais (retorno de efeito, reprodução por USB, áudio em rede) e para compensar o ganho quando duas mesas dividem o mesmo pré. Ele não substitui o ganho: se o pré ou o conversor já cortaram os picos, baixar o trim só deixa a distorção mais baixa. E, se o sinal entrou fraco, o trim sobe junto o ruído que veio com ele.</p>
+
+  <div class="note">
+    <h4>Valores de referência</h4>
+    <p>Os níveis e os ganhos deste módulo são faixas típicas, para servir de ponto de partida. Confira o manual do seu equipamento: a escala do botão de ganho, o valor do pad e o nível máximo de entrada mudam de uma mesa para outra.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="janela">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Ruído, folga e clip</h2>
+  <p>Todo equipamento de áudio tem um piso e um teto. O piso é o <strong>ruído de fundo</strong>: um chiado pequeno e constante que cada circuito produz, mesmo sem sinal. O teto é o <strong>clip</strong>: o maior nível que o circuito consegue entregar. Acima dele, os picos da onda são cortados, e o som distorce. Entre os dois fica a janela em que o sinal pode trabalhar.</p>
+  <p>O <strong>nível nominal</strong> é o ponto dessa janela para o qual o equipamento foi projetado: longe do ruído e com espaço acima. Esse espaço entre o nível nominal e o clip é a <strong>folga</strong> (<em>headroom</em>). Ela existe porque o som não é constante: uma sílaba forte, uma batida de caixa ou um grito passam muito da média. A distância entre o sinal e o ruído é a <strong>relação sinal-ruído</strong>: quanto maior, mais limpo o som.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 318" role="img" aria-label="Três colunas mostram a janela entre o ruído, embaixo, e o clip, em cima. Na primeira, ganho baixo: o sinal fica colado no ruído e sobra uma folga que ninguém usa; para ouvir, o operador aumenta depois, e o ruído das etapas sobe junto. Na segunda, ganho certo: o sinal fica longe do ruído e com folga para os picos mais fortes. Na terceira, ganho alto demais: os picos passam do clip e são cortados; é uma distorção que nenhum fader conserta.">
+        <text class="b" x="60" y="24" font-size="13.5">Ganho baixo</text>
+        <rect class="bx" x="60" y="70" width="110" height="190"/>
+        <rect class="lv-slate" x="60" y="228" width="110" height="32"/>
+        <text class="mu" x="115" y="248" font-size="10.5" text-anchor="middle">ruído</text>
+        <line class="s-bad" x1="52" y1="70" x2="178" y2="70"/>
+        <text class="t-red b" x="46" y="74" font-size="11" text-anchor="end">clip</text>
+        <rect class="lv-amber" x="85" y="190" width="60" height="38"/>
+        <path class="ln-mu" stroke-width="1" d="M178 78 H186 M182 78 V186 M178 186 H186"/>
+        <text class="mu" x="192" y="136" font-size="11">folga sem uso</text>
+        <text class="b" x="192" y="213" font-size="11">sinal</text>
+        <text x="24" y="286" font-size="11.5">Para ouvir, você aumenta depois:</text>
+        <text x="24" y="302" font-size="11.5">o ruído das etapas sobe junto.</text>
+
+        <text class="b" x="350" y="24" font-size="13.5">Ganho certo</text>
+        <rect class="bx" x="350" y="70" width="110" height="190"/>
+        <rect class="lv-slate" x="350" y="228" width="110" height="32"/>
+        <text class="mu" x="405" y="248" font-size="10.5" text-anchor="middle">ruído</text>
+        <line class="s-bad" x1="342" y1="70" x2="468" y2="70"/>
+        <text class="t-red b" x="336" y="74" font-size="11" text-anchor="end">clip</text>
+        <rect class="lv-amber" x="375" y="114" width="60" height="60"/>
+        <path class="ln-mu" stroke-width="1" d="M468 78 H476 M472 78 V110 M468 110 H476"/>
+        <text class="mu" x="482" y="98" font-size="11">folga (headroom)</text>
+        <text class="b" x="482" y="148" font-size="11">sinal</text>
+        <path class="ln-mu" stroke-width="1" d="M468 178 H476 M472 178 V224 M468 224 H476"/>
+        <text class="mu" x="482" y="205" font-size="11">distância do ruído</text>
+        <text x="314" y="286" font-size="11.5">Longe do ruído e com folga</text>
+        <text x="314" y="302" font-size="11.5">para os picos mais fortes.</text>
+
+        <text class="b" x="640" y="24" font-size="13.5">Ganho alto demais</text>
+        <rect class="bx" x="640" y="70" width="110" height="190"/>
+        <rect class="lv-slate" x="640" y="228" width="110" height="32"/>
+        <text class="mu" x="695" y="248" font-size="10.5" text-anchor="middle">ruído</text>
+        <rect class="lv-amber" x="665" y="70" width="60" height="64"/>
+        <rect class="lv-red" x="665" y="44" width="60" height="26"/>
+        <line class="s-bad" x1="632" y1="70" x2="758" y2="70"/>
+        <text class="t-red b" x="626" y="74" font-size="11" text-anchor="end">clip</text>
+        <text class="t-red b" x="772" y="61" font-size="11">picos cortados</text>
+        <text class="b" x="772" y="106" font-size="11">sinal</text>
+        <text x="604" y="286" font-size="11.5">O pré corta os picos: distorção</text>
+        <text x="604" y="302" font-size="11.5">que nenhum fader conserta.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> A janela entre o ruído e o clip. O ganho posiciona o sinal dentro dela. Os desenhos são um esquema: na prática, a janela de uma mesa tem cerca de 100 dB de altura.</figcaption>
+  </figure>
+
+  <div class="pair">
+    <div class="box">
+      <h4>Ganho de menos</h4>
+      <ul>
+        <li>O sinal sai fraco do pré, e você compensa depois: fader no topo, master no topo, caixa aberta no máximo.</li>
+        <li>Cada etapa depois do pré tem o seu ruído. Ao aumentar depois, você aumenta esse ruído junto com a voz.</li>
+        <li>O fader fica sem curso para subir.</li>
+        <li>Os envios para o retorno saem fracos, e o compressor do canal não chega a atuar.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Ganho demais</h4>
+      <ul>
+        <li>Os picos passam do teto do pré e são cortados. A distorção entra no sinal ali e segue para todos os destinos.</li>
+        <li>Baixar o fader não conserta: só deixa a distorção mais baixa.</li>
+        <li>O fader trabalha lá embaixo, onde um toque muda muito.</li>
+        <li>Os retornos em auxiliar pré-fader recebem sinal demais, e a margem antes da microfonia diminui.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Média e pico</h3>
+  <p>Um sinal de voz ou de música tem dois níveis para observar. A <strong>média</strong> é onde o medidor passa a maior parte do tempo, e tem a ver com o quanto o som parece forte. O <strong>pico</strong> é o ponto mais alto que ele alcança por um instante. A diferença entre os dois é o fator de crista. Um teclado com som sustentado tem picos poucos dB acima da média. Uma voz tem picos de 10 a 15 dB acima. Um bumbo ou uma caixa têm picos 20 dB acima da média, ou mais. Por isso o ajuste de ganho olha para os dois: a média perto do nível nominal e os picos abaixo do teto. Em fontes percussivas, quem manda é o pico.</p>
+
+  <h3>Analógico e digital</h3>
+  <p>Em um circuito analógico, a distorção costuma crescer aos poucos quando o sinal se aproxima do teto. Em um sistema digital, o corte é seco: até 0 dBFS o sinal está limpo, e acima disso ele é cortado de uma vez, com um som áspero. Em compensação, as mesas digitais atuais têm o piso de ruído muito baixo. Na dúvida, em mesa digital, prefira ficar alguns dB abaixo do alvo a arriscar o clip: sinal um pouco baixo quase não custa nada, e sinal clipado não tem conserto.</p>
+
+  <div class="note">
+    <h4>O ganho não aproxima o microfone</h4>
+    <p>O ganho aumenta tudo o que o microfone capta: a voz, o ar-condicionado, a bateria ao lado e o som das caixas. Ele não muda a proporção entre a voz e o resto. Quem melhora essa proporção é a posição do microfone, assunto do estudo <a href="../Microfones/treinamento-microfones.html">Microfones</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="medidores">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Medidores e PFL</h2>
+  <p>Ganho se ajusta com os olhos no medidor e os ouvidos no fone. O medidor mostra em que ponto da janela o sinal está. Há dois tipos de escala, e é preciso saber qual é a da sua mesa.</p>
+  <p>O medidor <strong>analógico</strong> usa a escala do VU. Pode ser um ponteiro ou, nas mesas atuais, uma coluna de LEDs. O 0 da escala é o nível nominal: em equipamento profissional, 0 VU corresponde a +4 dBu (algumas mesas usam outra referência; confira o manual). Acima do 0 ainda há folga, e por isso é normal o sinal passar um pouco dele. O ponteiro do VU é lento: mostra a média e não acompanha os picos rápidos.</p>
+  <p>O medidor <strong>digital</strong> usa a escala dBFS, decibéis em relação ao fundo de escala. O 0 dBFS é o máximo que o sistema representa: não existe nível acima dele, e tudo o que tenta passar é cortado. Por isso, na escala digital, todas as leituras são negativas, e o nível nominal fica bem abaixo do topo: em −18 ou −20 dBFS, conforme o fabricante. O medidor digital é rápido e mostra os picos. Os três tipos de decibel (dB SPL, dBu, dBFS) estão explicados no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 272" role="img" aria-label="Duas escalas de medidor alinhadas por uma régua de tensão em dBu. Em cima, o medidor analógico com escala VU, de menos 20 a mais 10, mais o LED de pico. Embaixo, o medidor digital em dBFS, de menos 50 a 0. Uma linha vertical liga o 0 VU, os mais 4 dBu e os menos 18 dBFS: é o nível nominal. No analógico, o ponteiro ou os LEDs ficam em torno do 0 e o LED de pico deve ficar apagado. No digital, a média fica por volta de menos 18 dBFS, os picos vão até menos 6 dBFS e o 0 dBFS é o clip.">
+        <text class="mu" x="630" y="26" font-size="11" text-anchor="middle">ponteiro ou LEDs em torno do 0</text>
+        <text class="mu" x="878" y="26" font-size="11" text-anchor="end">deve ficar apagado</text>
+        <text class="b" x="18" y="56" font-size="13">Analógico</text>
+        <text class="mu" x="18" y="73" font-size="11">escala VU: o 0 é o nível nominal</text>
+        <rect class="bx" x="390" y="44" width="480" height="26"/>
+        <rect class="f-good" style="fill-opacity:.4" x="390" y="44" width="240" height="26"/>
+        <rect class="lv-amber" x="630" y="44" width="120" height="26"/>
+        <rect class="lv-red" x="750" y="44" width="120" height="26"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="390" y="88">−20</text><text class="mu" x="510" y="88">−10</text><text class="mu" x="570" y="88">−5</text>
+          <text class="b" x="630" y="88">0</text><text class="mu" x="666" y="88">+3</text><text class="mu" x="702" y="88">+6</text>
+          <text class="mu" x="750" y="88">+10</text><text class="t-red b" x="840" y="88">LED de pico</text>
+        </g>
+
+        <text class="mu" x="18" y="132" font-size="11">Tensão, em dBu</text>
+        <line class="ln-mu" x1="150" y1="128" x2="870" y2="128"/>
+        <g class="ln-mu" stroke-width="1">
+          <line x1="222" y1="124" x2="222" y2="132"/><line x1="342" y1="124" x2="342" y2="132"/><line x1="462" y1="124" x2="462" y2="132"/>
+          <line x1="582" y1="124" x2="582" y2="132"/><line x1="702" y1="124" x2="702" y2="132"/><line x1="822" y1="124" x2="822" y2="132"/>
+        </g>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="222" y="148">−30</text><text class="mu" x="342" y="148">−20</text><text class="mu" x="462" y="148">−10</text>
+          <text class="mu" x="582" y="148">0</text><text class="b" x="643" y="148" text-anchor="start">+4 dBu</text><text class="mu" x="702" y="148" text-anchor="start">+10</text><text class="mu" x="822" y="148">+20</text>
+        </g>
+        <line class="ref" x1="630" y1="36" x2="630" y2="74"/><line class="ref" x1="630" y1="94" x2="630" y2="216"/>
+
+        <text class="b" x="18" y="198" font-size="13">Digital</text>
+        <text class="mu" x="18" y="215" font-size="11">escala dBFS: o 0 é o teto</text>
+        <rect class="bx" x="150" y="186" width="696" height="26"/>
+        <rect class="f-good" style="fill-opacity:.4" x="150" y="186" width="480" height="26"/>
+        <rect class="lv-amber" x="630" y="186" width="144" height="26"/>
+        <rect class="lv-red" x="774" y="186" width="72" height="26"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="246" y="230">−50</text><text class="mu" x="366" y="230">−40</text><text class="mu" x="486" y="230">−30</text>
+          <text class="mu" x="558" y="230">−24</text><text class="b" x="630" y="230">−18</text><text class="mu" x="702" y="230">−12</text>
+          <text class="b" x="774" y="230">−6</text><text class="b" x="846" y="230">0</text>
+        </g>
+        <g font-size="11" text-anchor="middle">
+          <text class="b" x="630" y="254">média por aqui</text><text class="b" x="760" y="254">picos até aqui</text><text class="t-red b" x="846" y="254">clip</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> As duas escalas, alinhadas pelo nível nominal. Neste exemplo, 0 VU = +4 dBu = −18 dBFS, um alinhamento comum; em algumas mesas o nível nominal fica em −20 dBFS. As escalas não se comparam ponto a ponto: o VU mostra a média, e o medidor digital mostra os picos.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Medidor</th><th style="width:26%">Média da voz ou da música</th><th style="width:26%">Picos mais fortes</th><th>Sinal de que passou</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Digital (dBFS)</strong></td><td>Perto de −18 dBFS</td><td>Até perto de −6 dBFS</td><td>Luz de clip ou leitura em 0 dBFS</td></tr>
+        <tr><td><strong>Analógico (escala VU, ponteiro ou LEDs)</strong></td><td>Em torno de 0</td><td>Passando do 0 só nos trechos fortes, até perto de +6</td><td>LED de pico (peak, clip, OL) aceso</td></tr>
+        <tr><td><strong>Só dois LEDs por canal</strong></td><td>LED de sinal (verde) aceso quase o tempo todo</td><td>LED de pico (vermelho) apagado no trecho mais forte</td><td>LED de pico aceso</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Esses números são ponto de partida, comuns em mesas digitais e analógicas, e não uma norma. O LED de pico do canal costuma acender um pouco antes do clip de verdade (em muitas mesas, de 3 a 6 dB antes). Um piscar isolado no golpe mais forte da música ainda não é distorção, mas é o aviso de que a folga acabou: baixe o ganho um pouco.</p>
+
+  <h3>PFL: ler o canal antes do fader</h3>
+  <p>O botão PFL (<em>pre-fader listen</em>, escuta antes do fader), que em muitas mesas se chama solo, manda o sinal do canal para o fone e para o medidor de solo, tirado antes do fader. Com ele você lê e ouve o canal mesmo com o fader fechado, sem que nada saia nas caixas. É a ferramenta do ajuste de ganho.</p>
+  <ul>
+    <li>Nas mesas analógicas, ao apertar um PFL, o medidor principal passa a mostrar esse canal. Com mais de um PFL apertado, ele mostra a soma: use um por vez.</li>
+    <li>Nas mesas digitais, cada canal costuma ter o próprio medidor de entrada, e o PFL serve mais para ouvir.</li>
+    <li>Em muitas mesas, o PFL é tirado depois do equalizador. Um realce forte no EQ muda a leitura: acerte o ganho com o EQ plano e confira de novo depois de equalizar.</li>
+    <li>Solte o PFL quando terminar. PFL esquecido faz o medidor principal mostrar um canal, e não a mistura.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Ponto de atenção</h4>
+    <p>Algumas mesas têm o modo “solo in place”, que cala todos os outros canais na saída principal quando você aperta o solo. Em evento ao vivo, isso derruba o som da sala. Confira no manual qual é o modo de solo da sua mesa e deixe em PFL. Cuide também do volume do fone: comece baixo e suba aos poucos.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="cadeia">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Ganho unitário e a cadeia</h2>
+  <p>A escala do fader tem uma marca de 0 dB, às vezes escrita “U”. É o <strong>ganho unitário</strong>: nessa posição o fader não aumenta nem diminui o sinal, só o deixa passar como chegou. Abaixo do 0, ele atenua. Acima, ainda pode aumentar um pouco: +10 dB na maioria das mesas.</p>
+  <p>A escala do fader não é uniforme. Perto do 0, um centímetro de curso muda poucos decibéis, e o ajuste é fino. Lá embaixo, o mesmo centímetro muda 10 dB ou mais. Por isso a posição do fader denuncia o ganho: com o ganho certo, os faders dos canais em uso ficam perto do 0, na região em que você consegue mixar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="Três faders com a escala de mais 10 dB no topo a menos infinito embaixo. As marcas são mais espaçadas perto do 0 e mais apertadas embaixo. No primeiro, com o ganho certo, o fader fica perto do 0 dB: há ajuste fino e curso para subir e para descer. No segundo, com ganho alto demais, o fader fica lá embaixo: um toque muda muito, e o pré pode estar em clip. No terceiro, com ganho baixo, o fader fica no topo: acabou o curso e não dá para subir mais a voz. Uma faixa marca a região de trabalho do fader, de menos 10 a mais 5 dB.">
+        <g font-size="10.5" text-anchor="end">
+          <text class="mu" x="58" y="48">+10</text><text class="mu" x="58" y="70">+5</text><text class="b" x="58" y="92">0</text>
+          <text class="mu" x="58" y="116">−5</text><text class="mu" x="58" y="140">−10</text><text class="mu" x="58" y="172">−20</text>
+          <text class="mu" x="58" y="198">−30</text><text class="mu" x="58" y="218">−40</text><text class="mu" x="58" y="236">−60</text><text class="mu" x="58" y="254">−∞</text>
+        </g>
+        <path class="ln-mu" stroke-width="1" d="M64 44 H74 M64 66 H74 M64 88 H74 M64 112 H74 M64 136 H74 M64 168 H74 M64 194 H74 M64 214 H74 M64 232 H74 M64 250 H74"/>
+        <rect class="lv-teal" style="fill-opacity:.2" x="64" y="66" width="52" height="70"/>
+        <rect class="bx" x="87" y="40" width="6" height="214"/>
+        <rect class="hd-teal" x="70" y="79" width="40" height="18"/>
+        <text class="b" x="130" y="60" font-size="13">Ganho certo</text>
+        <text x="130" y="82" font-size="11.5">Fader perto do 0 dB.</text>
+        <text class="mu" x="130" y="98" font-size="11.5">Ajuste fino, com curso</text>
+        <text class="mu" x="130" y="114" font-size="11.5">para subir e para descer.</text>
+
+        <g font-size="10.5" text-anchor="end">
+          <text class="mu" x="348" y="48">+10</text><text class="mu" x="348" y="70">+5</text><text class="b" x="348" y="92">0</text>
+          <text class="mu" x="348" y="116">−5</text><text class="mu" x="348" y="140">−10</text><text class="mu" x="348" y="172">−20</text>
+          <text class="mu" x="348" y="198">−30</text><text class="mu" x="348" y="218">−40</text><text class="mu" x="348" y="236">−60</text><text class="mu" x="348" y="254">−∞</text>
+        </g>
+        <path class="ln-mu" stroke-width="1" d="M354 44 H364 M354 66 H364 M354 88 H364 M354 112 H364 M354 136 H364 M354 168 H364 M354 194 H364 M354 214 H364 M354 232 H364 M354 250 H364"/>
+        <rect class="lv-teal" style="fill-opacity:.2" x="354" y="66" width="52" height="70"/>
+        <rect class="bx" x="377" y="40" width="6" height="214"/>
+        <rect class="hd-teal" x="360" y="195" width="40" height="18"/>
+        <text class="b" x="420" y="60" font-size="13">Ganho alto demais</text>
+        <text x="420" y="82" font-size="11.5">Fader lá embaixo.</text>
+        <text class="mu" x="420" y="98" font-size="11.5">Um toque muda muito, e o</text>
+        <text class="mu" x="420" y="114" font-size="11.5">pré pode estar em clip.</text>
+
+        <g font-size="10.5" text-anchor="end">
+          <text class="mu" x="638" y="48">+10</text><text class="mu" x="638" y="70">+5</text><text class="b" x="638" y="92">0</text>
+          <text class="mu" x="638" y="116">−5</text><text class="mu" x="638" y="140">−10</text><text class="mu" x="638" y="172">−20</text>
+          <text class="mu" x="638" y="198">−30</text><text class="mu" x="638" y="218">−40</text><text class="mu" x="638" y="236">−60</text><text class="mu" x="638" y="254">−∞</text>
+        </g>
+        <path class="ln-mu" stroke-width="1" d="M644 44 H654 M644 66 H654 M644 88 H654 M644 112 H654 M644 136 H654 M644 168 H654 M644 194 H654 M644 214 H654 M644 232 H654 M644 250 H654"/>
+        <rect class="lv-teal" style="fill-opacity:.2" x="644" y="66" width="52" height="70"/>
+        <rect class="bx" x="667" y="40" width="6" height="214"/>
+        <rect class="hd-teal" x="650" y="35" width="40" height="18"/>
+        <text class="b" x="710" y="60" font-size="13">Ganho baixo</text>
+        <text x="710" y="82" font-size="11.5">Fader no topo.</text>
+        <text class="mu" x="710" y="98" font-size="11.5">Acabou o curso: não dá</text>
+        <text class="mu" x="710" y="114" font-size="11.5">para subir mais a voz.</text>
+
+        <rect class="lv-teal" style="fill-opacity:.2" x="130" y="268" width="16" height="16"/>
+        <text class="mu" x="154" y="280" font-size="11">região de trabalho do fader: de −10 a +5 dB, como regra prática</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> A posição do fader mostra se o ganho está certo. Fader no topo ou lá embaixo, para o canal soar na medida, é sinal de que o problema está no começo do canal.</figcaption>
+  </figure>
+
+  <h3>Estrutura de ganho: cada etapa no seu nível</h3>
+  <p>Depois do canal, o sinal ainda passa pelo grupo (se houver), pelo master, pelo processador (se houver) e pelo amplificador ou pela caixa ativa. Cada uma dessas etapas tem a sua janela entre o ruído e o clip. <strong>Estrutura de ganho</strong> é manter o sinal perto do nível nominal em todas elas, da entrada à saída, sem compensar em uma etapa o erro de outra. As etapas da mesa estão no estudo <a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 290" role="img" aria-label="Diagrama de nível ao longo da cadeia: pré, fader do canal, grupo, master e amplificador ou caixa ativa. Três linhas saem do nível do microfone. Na cadeia certa, o pré leva o sinal ao nível nominal e ele segue nesse nível por todas as etapas; a caixa só define o volume da sala. Com ganho baixo, o sinal anda perto do ruído próprio das etapas, e a caixa, aberta no máximo, amplifica os dois. Com ganho alto demais, o pré corta os picos no clip; os faders baixam o nível, mas a distorção continua.">
+        <defs><marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <rect class="hd-amber" x="18" y="28" width="96" height="44"/>
+        <text class="on b" x="66" y="47" font-size="11.5" text-anchor="middle">Pré</text><text class="on" x="66" y="62" font-size="10.5" text-anchor="middle">ganho</text>
+        <line class="ln" x1="116" y1="50" x2="131" y2="50" marker-end="url(#ar6)"/>
+        <rect class="hd-teal" x="134" y="28" width="96" height="44"/>
+        <text class="on b" x="182" y="47" font-size="11.5" text-anchor="middle">Fader</text><text class="on" x="182" y="62" font-size="10.5" text-anchor="middle">do canal</text>
+        <line class="ln" x1="232" y1="50" x2="247" y2="50" marker-end="url(#ar6)"/>
+        <rect class="bx" x="250" y="28" width="96" height="44"/>
+        <text class="b" x="298" y="47" font-size="11.5" text-anchor="middle">Grupo</text><text class="mu" x="298" y="62" font-size="10.5" text-anchor="middle">se houver</text>
+        <line class="ln" x1="348" y1="50" x2="363" y2="50" marker-end="url(#ar6)"/>
+        <rect class="bx" x="366" y="28" width="96" height="44"/>
+        <text class="b" x="414" y="47" font-size="11.5" text-anchor="middle">Master</text><text class="mu" x="414" y="62" font-size="10.5" text-anchor="middle">saída da mesa</text>
+        <line class="ln" x1="464" y1="50" x2="479" y2="50" marker-end="url(#ar6)"/>
+        <rect class="bx" x="482" y="28" width="96" height="44"/>
+        <text class="b" x="530" y="47" font-size="11.5" text-anchor="middle">Amplificador</text><text class="mu" x="530" y="62" font-size="10.5" text-anchor="middle">ou caixa ativa</text>
+
+        <line class="s-bad dash" x1="18" y1="112" x2="578" y2="112" stroke-width="1.5"/>
+        <text class="t-red b" x="574" y="106" font-size="10.5" text-anchor="end">clip</text>
+        <line class="ref" x1="18" y1="170" x2="578" y2="170"/>
+        <text class="mu" x="574" y="163" font-size="10.5" text-anchor="end">nível nominal</text>
+        <rect class="lv-slate" x="18" y="250" width="560" height="20"/>
+        <text class="mu" x="26" y="264" font-size="10.5">ruído próprio das etapas</text>
+        <text class="mu" x="24" y="243" font-size="10.5">microfone</text>
+
+        <path class="s-slate dash" d="M18 226 L66 214 L182 204 H298 L414 196 L530 170"/>
+        <path class="s-bad" d="M18 226 L52 112 H80 L182 178 H530"/>
+        <path class="s-good" stroke-width="2.5" d="M18 226 L66 170 H578"/>
+
+        <line class="s-good" stroke-width="2.5" x1="604" y1="106" x2="634" y2="106"/>
+        <text class="b" x="642" y="110" font-size="12">Cadeia certa</text>
+        <text class="mu" x="604" y="128" font-size="11">Nível nominal em todas as etapas.</text>
+        <text class="mu" x="604" y="143" font-size="11">A caixa só define o volume da sala.</text>
+        <line class="s-slate dash" x1="604" y1="170" x2="634" y2="170"/>
+        <text class="b" x="642" y="174" font-size="12">Ganho baixo</text>
+        <text class="mu" x="604" y="192" font-size="11">O sinal anda perto do ruído. A caixa,</text>
+        <text class="mu" x="604" y="207" font-size="11">aberta no máximo, amplifica os dois.</text>
+        <line class="s-bad" x1="604" y1="234" x2="634" y2="234"/>
+        <text class="b" x="642" y="238" font-size="12">Ganho alto demais</text>
+        <text class="mu" x="604" y="256" font-size="11">O pré corta os picos. Os faders baixam</text>
+        <text class="mu" x="604" y="271" font-size="11">o nível, mas a distorção continua.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> O nível do sinal ao longo da cadeia, em esquema. As três situações podem dar o mesmo volume na sala. A diferença está no que chega junto com o som: ruído, no ganho baixo; distorção, no ganho alto demais.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Etapa</th><th style="width:30%">Onde deixar</th><th>O que conferir</th></tr></thead>
+      <tbody>
+        <tr><td><span class="k amber">G</span> Pré do canal</td><td>Ganho ajustado pelo medidor, no PFL.</td><td>Média perto do nominal, picos abaixo do teto, luz de clip apagada.</td></tr>
+        <tr><td><span class="k teal">F</span> Fader do canal</td><td>Perto de 0 dB para as fontes principais. As de apoio ficam mais abaixo.</td><td>Se o canal só soa bem com o fader no topo ou lá embaixo, volte ao ganho.</td></tr>
+        <tr><td>Grupo (subgrupo)</td><td>Em 0 dB.</td><td>O grupo soma vários canais: se o medidor dele passar do teto, baixe os faders dos canais.</td></tr>
+        <tr><td>Master</td><td>Em 0 dB, ou perto disso.</td><td>Medidor principal com média perto do nominal nos trechos fortes, sem chegar ao vermelho.</td></tr>
+        <tr><td>Processador (se houver)</td><td>Entrada e saída em ganho unitário, salvo ajuste feito por quem calibrou o sistema.</td><td>Luzes de clip da entrada e da saída apagadas.</td></tr>
+        <tr><td>Amplificador ou caixa ativa</td><td>No ponto que dá o volume certo na sala com a mesa no nível nominal.</td><td>Luz de limite ou de clip piscando só de vez em quando, nunca acesa direto.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>A soma dos canais</h3>
+  <p>O master recebe a soma de todos os canais abertos. Duas fontes parecidas, no mesmo nível, somam cerca de 3 dB a mais do que uma só. Com uma banda inteira, a soma passa bem do nível de cada canal. Por isso é normal que, com muitos canais abertos, os faders fiquem um pouco abaixo de 0 dB. Se o medidor do master chegar ao vermelho, a correção é nos faders dos canais ou no master. Os ganhos ficam como estão.</p>
+
+  <h3>O último controle: amplificador ou caixa ativa</h3>
+  <p>O controle de nível do amplificador ou da caixa ativa fecha a cadeia. Ele deve ser ajustado com a mesa já no nível nominal. O procedimento básico:</p>
+  <ol>
+    <li>Na caixa ativa, confira se a chave de entrada está em linha (<em>line</em>), e não em microfone.</li>
+    <li>Comece com o controle de nível da caixa ou do amplificador fechado.</li>
+    <li>Com o master em 0 dB, toque o trecho mais forte do programa, com o medidor da mesa no nível nominal.</li>
+    <li>Abra a caixa ou o amplificador devagar, até o volume certo para a sala.</li>
+  </ol>
+  <p>Se o master precisa ficar em −20 ou −30 dB para o volume ficar confortável, a caixa está aberta demais: ela amplifica também o ruído da mesa, e o master perde o ajuste fino. Feche a caixa e traga o master de volta para perto do 0. Se a caixa chega ao máximo, ou a luz de limite fica acesa, e ainda falta volume, o sistema é pequeno para a sala. Empurrar a mesa para o vermelho não resolve. A escolha e a proteção das caixas estão no estudo <a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>.</p>
+
+  <div class="note">
+    <h4>Segurança: volume alto</h4>
+    <p>Um sistema aberto de repente, ou um cabo ligado com a caixa aberta, produz um estouro que pode ferir a audição de quem está perto e queimar alto-falantes. Abra o nível sempre devagar, avise quem está no palco antes de testar, feche o master antes de ligar ou desligar qualquer cabo e nunca ajuste o sistema com o ouvido perto da caixa. Os limites de exposição ao som estão no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="efeitos">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>O que o ganho muda na mesa</h2>
+  <p>O ganho é o primeiro controle do canal. Tudo o que vem depois recebe o que ele entrega. Quando você gira o ganho, não muda só o som da frente: muda o nível em todos os pontos do canal e em todas as saídas que partem dele.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 318" role="img" aria-label="Diagrama do canal. O microfone entra no ganho do pré, passa pelo filtro e pelo equalizador e pelo compressor e gate. Dali o sinal se divide em três: sobe para o auxiliar pré-fader, que alimenta o retorno do músico; desce para o PFL e o medidor do canal; e segue para o fader. Depois do fader, o sinal vai para o master e as caixas, que são o som da frente, e para o auxiliar pós-fader, que alimenta o efeito. O equalizador, o compressor, o auxiliar pré-fader, o retorno, o PFL e o medidor mudam quando se mexe no ganho. O master, as caixas e o auxiliar pós-fader mudam com o ganho e também com o fader.">
+        <defs><marker id="ar7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="30" font-size="10.5">TUDO O QUE VEM DEPOIS DO GANHO</text>
+        <text class="mono mu" x="18" y="46" font-size="10.5">RECEBE O QUE ELE ENTREGA</text>
+
+        <rect class="bx" x="18" y="128" width="92" height="44"/>
+        <text class="b" x="64" y="154" font-size="12" text-anchor="middle">Microfone</text>
+        <line class="ln" x1="112" y1="150" x2="130" y2="150" marker-end="url(#ar7)"/>
+        <rect class="hd-amber" x="134" y="128" width="100" height="44"/>
+        <text class="on b" x="184" y="147" font-size="12.5" text-anchor="middle">Ganho</text>
+        <text class="on" x="184" y="163" font-size="10.5" text-anchor="middle">pré</text>
+        <line class="ln" x1="236" y1="150" x2="264" y2="150" marker-end="url(#ar7)"/>
+        <rect class="bx-amber" x="268" y="128" width="92" height="44"/>
+        <text class="b" x="314" y="154" font-size="12" text-anchor="middle">Filtro e EQ</text>
+        <line class="ln" x1="362" y1="150" x2="380" y2="150" marker-end="url(#ar7)"/>
+        <rect class="bx-amber" x="384" y="128" width="110" height="44"/>
+        <text class="b" x="439" y="147" font-size="12" text-anchor="middle">Compressor</text>
+        <text class="mu" x="439" y="163" font-size="10.5" text-anchor="middle">e gate</text>
+
+        <line class="ln" x1="496" y1="150" x2="556" y2="150" marker-end="url(#ar7)"/>
+        <path class="ln" d="M520 150 V60 H556" marker-end="url(#ar7)"/>
+        <path class="ln" d="M520 150 V240 H536" marker-end="url(#ar7)"/>
+        <circle class="f-ink" cx="520" cy="150" r="3.5"/>
+
+        <rect class="bx-amber" x="560" y="38" width="130" height="44"/>
+        <text class="b" x="625" y="64" font-size="11.5" text-anchor="middle">Auxiliar pré-fader</text>
+        <line class="ln" x1="692" y1="60" x2="726" y2="60" marker-end="url(#ar7)"/>
+        <rect class="bx-amber" x="730" y="38" width="152" height="44"/>
+        <text class="b" x="806" y="64" font-size="11.5" text-anchor="middle">Retorno do músico</text>
+
+        <rect class="hd-teal" x="560" y="128" width="100" height="44"/>
+        <text class="on b" x="610" y="155" font-size="12.5" text-anchor="middle">Fader</text>
+        <line class="ln" x1="662" y1="150" x2="726" y2="150" marker-end="url(#ar7)"/>
+        <path class="ln" d="M700 150 V240 H726" marker-end="url(#ar7)"/>
+        <circle class="f-ink" cx="700" cy="150" r="3.5"/>
+        <rect class="bx-teal" x="730" y="128" width="152" height="44"/>
+        <text class="b" x="806" y="147" font-size="11.5" text-anchor="middle">Master e caixas</text>
+        <text class="mu" x="806" y="163" font-size="10.5" text-anchor="middle">o som da frente</text>
+
+        <rect class="bx-amber" x="540" y="218" width="130" height="44"/>
+        <text class="b" x="605" y="237" font-size="11.5" text-anchor="middle">PFL e medidor</text>
+        <text class="mu" x="605" y="253" font-size="10.5" text-anchor="middle">do canal</text>
+        <rect class="bx-teal" x="730" y="218" width="152" height="44"/>
+        <text class="b" x="806" y="237" font-size="11.5" text-anchor="middle">Auxiliar pós-fader</text>
+        <text class="mu" x="806" y="253" font-size="10.5" text-anchor="middle">efeito (reverb)</text>
+
+        <rect class="bx-amber" x="18" y="284" width="16" height="16"/>
+        <text x="42" y="296" font-size="11.5">muda quando você mexe no ganho</text>
+        <rect class="bx-teal" x="270" y="284" width="16" height="16"/>
+        <text x="294" y="296" font-size="11.5">muda com o ganho e também com o fader</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> O ganho alimenta todos os destinos do canal. O fader só atua no que sai depois dele. A ordem exata dos blocos varia: veja o diagrama de blocos da sua mesa.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:26%">Destino</th><th style="width:36%">O que acontece se você subir o ganho</th><th>Consequência</th></tr></thead>
+      <tbody>
+        <tr><td>Retorno em auxiliar pré-fader</td><td>O canal sobe no retorno de todos os músicos, na mesma medida.</td><td>A mistura de retorno desanda, e o retorno pode apitar.</td></tr>
+        <tr><td>Compressor e gate do canal</td><td>O sinal passa mais acima do ponto de atuação (threshold).</td><td>O compressor aperta mais, e o gate abre com sons que antes barrava.</td></tr>
+        <tr><td>Gravação e transmissão em saída pré-fader</td><td>O canal sobe na gravação e na transmissão.</td><td>A mistura que vai para a internet muda sem que ninguém perceba na sala.</td></tr>
+        <tr><td>Som da frente e efeitos</td><td>O canal sobe na sala e no envio de efeito.</td><td>É o único efeito que o operador costuma querer, e é o trabalho do fader.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Daí vem a regra de operação: o ganho é ajustado na passagem de som, antes dos retornos, e fica quieto durante o evento. Se uma voz precisa aparecer mais na sala, use o fader. Se o ganho precisar mesmo de correção com o evento em andamento, porque o canal está em clip, corrija em passos pequenos e compense o fader e o envio do retorno. Os auxiliares e a montagem dos retornos estão no estudo <a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>, e o compressor, no estudo <a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>.</p>
+
+  <h3>Ganho e microfonia</h3>
+  <p>A microfonia depende do ganho total do ciclo: pré, equalizador, fader, master, amplificador, caixa e a volta pelo ar até o microfone. Para as caixas da frente, 6 dB a mais no ganho com 6 dB a menos no fader dão no mesmo: o ciclo não mudou. Para o retorno ligado em auxiliar pré-fader, não há fader no caminho: cada decibel a mais no ganho é um decibel a mais no retorno, mais perto do apito.</p>
+  <p>Por isso “baixar o ganho para não dar microfonia” funciona pela razão errada: você só baixou o volume. O caminho certo é ajustar o ganho pelo medidor e controlar o volume de cada destino no controle dele, o fader para a frente e o envio do auxiliar para o retorno. As medidas contra o apito estão no estudo <a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>.</p>
+
+  <div class="note">
+    <h4>Duas mesas, um pré</h4>
+    <p>Em sistemas com caixa de palco digital dividida entre a mesa da frente e a mesa de retorno ou de transmissão, o pré é um só. Quem mexe no ganho muda o nível nas duas mesas. Combine quem é o dono do ganho, e use o trim digital ou a compensação de ganho da mesa para os ajustes da segunda.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>O ajuste de ganho é a primeira etapa da passagem de som, antes do equalizador, dos retornos e da mistura. Faça um canal por vez, na ordem da mesa. Com prática, cada canal leva menos de um minuto.</p>
+  <ol class="steps">
+    <li><h4>Prepare a mesa</h4><p>Faders dos canais e master embaixo, ganhos no mínimo, pads desligados, equalizador plano, compressor e gate desligados, nenhum PFL apertado. A rotina completa de zerar a mesa está no estudo <a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>.</p></li>
+    <li><h4>Confira a entrada de cada fonte</h4><p>Microfone na entrada de microfone, teclado e computador na entrada de linha ou por direct box. Ligue a alimentação phantom só nos canais que precisam dela, com o canal fechado. Os cuidados estão no estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>.</p></li>
+    <li><h4>Aperte o PFL do canal</h4><p>Um canal por vez, com o fone no ouvido e os olhos no medidor. O fader do canal continua fechado: nada sai nas caixas.</p></li>
+    <li><h4>Peça o volume real</h4><p>A cantora canta o trecho mais forte da música. O pastor fala como na pregação, e não “alô, som, testando”. O baterista toca como vai tocar no evento. Ganho ajustado com a fonte tímida estoura na hora do evento.</p></li>
+    <li><h4>Suba o ganho <span class="k amber">G</span> até a faixa de trabalho</h4><p>Gire devagar, olhando o medidor. Em mesa digital: média perto de −18 dBFS e picos até perto de −6 dBFS. Em medidor com escala VU: em torno de 0, passando um pouco nos trechos fortes. A luz de clip fica apagada no trecho mais forte.</p></li>
+    <li><h4>Se passar com o ganho no mínimo, reduza antes do pré</h4><p>Ligue o pad, mude a fonte para a entrada de linha ou peça para baixar um pouco o volume do instrumento. Depois ajuste o ganho de novo.</p></li>
+    <li><h4>Ouça o canal no fone</h4><p>O medidor mostra o nível, e o ouvido mostra a qualidade. Chiado, zumbido ou distorção com a leitura certa indicam problema antes da mesa: microfone, cabo, direct box, receptor sem fio ou a própria fonte.</p></li>
+    <li><h4>Anote e passe ao próximo</h4><p>Registre o ganho, o pad e as leituras de média e de pico na planilha. Solte o PFL e repita no canal seguinte.</p></li>
+    <li><h4>Monte a mistura com os faders <span class="k teal">F</span></h4><p>Master em 0 dB. Suba os faders e equilibre. Os canais principais devem ficar perto de 0 dB. A ordem da passagem e a construção da mistura estão no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p></li>
+    <li><h4>Ajuste o nível do sistema e deixe o ganho quieto</h4><p>Com a mistura no nível nominal, acerte o volume da sala no amplificador ou na caixa ativa, como no módulo 5. Monte os retornos. Daí em diante, o ganho só muda se um canal entrar em clip.</p></li>
+  </ol>
+
+  <h3>Se distorcer durante o evento</h3>
+  <p>A distorção nasce em um ponto da cadeia, e baixar o controle errado não a remove. Procure da entrada para a saída: a primeira luz vermelha que você encontrar é onde está o problema.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 246" role="img" aria-label="Roteiro de quatro perguntas, da esquerda para a direita, para achar onde o som está distorcendo. Primeira: a luz de clip do canal acende, ou o PFL chega ao topo do medidor? Se sim, baixe o ganho; se já está no mínimo, ligue o pad. Se não, segunda pergunta: o canal está certo, mas o medidor do master chega ao vermelho? Se sim, baixe os faders, dos canais ou do master; o ganho fica como está. Se não, terceira pergunta: a mesa está certa, mas a luz de limite da caixa ou do amplificador acende? Se sim, baixe o master: o sistema chegou ao limite dele. Se não, quarta pergunta: nenhuma luz acende, e o som distorce assim mesmo? Se sim, procure antes da mesa: fonte, microfone, direct box, receptor sem fio, cabo.">
+        <defs><marker id="ar8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="22" font-size="10.5">COMECE PELA ESQUERDA</text>
+
+        <rect class="bx" x="18" y="34" width="192" height="84"/>
+        <text x="30" y="60" font-size="11.5">A luz de clip do canal</text>
+        <text x="30" y="77" font-size="11.5">acende, ou o PFL chega</text>
+        <text x="30" y="94" font-size="11.5">ao topo do medidor?</text>
+        <line class="ln" x1="212" y1="76" x2="234" y2="76" marker-end="url(#ar8)"/>
+        <text class="mu" x="224" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="114" y1="120" x2="114" y2="146" marker-end="url(#ar8)"/>
+        <text class="mu" x="122" y="137" font-size="10.5">sim</text>
+        <rect class="bx-amber" x="18" y="150" width="192" height="78"/>
+        <text class="b" x="30" y="174" font-size="12">Baixe o ganho.</text>
+        <text x="30" y="192" font-size="11.5">Se já está no mínimo,</text>
+        <text x="30" y="209" font-size="11.5">ligue o pad.</text>
+
+        <rect class="bx" x="238" y="34" width="192" height="84"/>
+        <text x="250" y="60" font-size="11.5">O canal está certo, mas</text>
+        <text x="250" y="77" font-size="11.5">o medidor do master</text>
+        <text x="250" y="94" font-size="11.5">chega ao vermelho?</text>
+        <line class="ln" x1="432" y1="76" x2="454" y2="76" marker-end="url(#ar8)"/>
+        <text class="mu" x="444" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="334" y1="120" x2="334" y2="146" marker-end="url(#ar8)"/>
+        <text class="mu" x="342" y="137" font-size="10.5">sim</text>
+        <rect class="bx-teal" x="238" y="150" width="192" height="78"/>
+        <text class="b" x="250" y="174" font-size="12">Baixe os faders.</text>
+        <text x="250" y="192" font-size="11.5">Dos canais ou do master.</text>
+        <text x="250" y="209" font-size="11.5">O ganho fica como está.</text>
+
+        <rect class="bx" x="458" y="34" width="192" height="84"/>
+        <text x="470" y="60" font-size="11.5">A mesa está certa, mas a</text>
+        <text x="470" y="77" font-size="11.5">luz de limite da caixa ou</text>
+        <text x="470" y="94" font-size="11.5">do amplificador acende?</text>
+        <line class="ln" x1="652" y1="76" x2="674" y2="76" marker-end="url(#ar8)"/>
+        <text class="mu" x="664" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="554" y1="120" x2="554" y2="146" marker-end="url(#ar8)"/>
+        <text class="mu" x="562" y="137" font-size="10.5">sim</text>
+        <rect class="bx-slate" x="458" y="150" width="192" height="78"/>
+        <text class="b" x="470" y="174" font-size="12">Baixe o master.</text>
+        <text x="470" y="192" font-size="11.5">O sistema chegou ao</text>
+        <text x="470" y="209" font-size="11.5">limite dele.</text>
+
+        <rect class="bx" x="678" y="34" width="192" height="84"/>
+        <text x="690" y="60" font-size="11.5">Nenhuma luz acende, e o</text>
+        <text x="690" y="77" font-size="11.5">som distorce assim</text>
+        <text x="690" y="94" font-size="11.5">mesmo?</text>
+        <line class="ln" x1="774" y1="120" x2="774" y2="146" marker-end="url(#ar8)"/>
+        <text class="mu" x="782" y="137" font-size="10.5">sim</text>
+        <rect class="bx-purple" x="678" y="150" width="192" height="78"/>
+        <text class="b" x="690" y="174" font-size="12">Procure antes da mesa:</text>
+        <text x="690" y="192" font-size="11.5">fonte, microfone, DI,</text>
+        <text x="690" y="209" font-size="11.5">receptor sem fio, cabo.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> Onde está a distorção. Cada resposta “sim” aponta o controle que resolve. Se nada acende na mesa nem no sistema, desconfie também de um alto-falante danificado: compare com outra caixa.</figcaption>
+  </figure>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. Os dois primeiros estão preenchidos na planilha de apoio.</p>
+
+  <h3>Exemplo 1. A passagem de som de um culto, canal por canal</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, mesa digital, doze canais: vozes, violão, baixo, teclado, bateria, computador e púlpito.</dd></div>
+    <div><dt>Sintoma</dt><dd>O teclado distorce mesmo com o fader baixo. A voz do pastor só aparece com o fader no topo.</dd></div>
+    <div><dt>Causa</dt><dd>Os ganhos foram deixados “todos na mesma posição” no domingo anterior, sem leitura no medidor.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Leitura de cada canal no PFL, com a fonte no volume real, e registro na planilha.</dd></div>
+    <div><dt>Resultado</dt><dd>Seis canais já estavam na faixa. Seis foram corrigidos antes de montar os retornos.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Canal</th><th class="n" style="width:9%">Ganho</th><th class="n" style="width:9%">Média</th><th class="n" style="width:9%">Pico</th><th style="width:11%">Situação</th><th>O que foi feito</th></tr></thead>
+      <tbody>
+        <tr><td>Voz do pastor (mic de mão)</td><td class="num n">20 dB</td><td class="num n">−31</td><td class="num n">−19</td><td class="amber">Baixo</td><td>Ganho para 33 dB. A leitura foi a −18 e −6, e o fader voltou do topo para perto de 0 dB.</td></tr>
+        <tr><td>Voz de apoio 2</td><td class="num n">46 dB</td><td class="num n">−10</td><td class="num n">−1</td><td class="amber">Alto</td><td>Ganho para 38 dB. O fader, que trabalhava perto de −10 dB, voltou para perto de 0 dB.</td></tr>
+        <tr><td>Teclado, canais E e D</td><td class="num n">5 dB</td><td class="num n">−6</td><td class="num n">0</td><td class="red">Clip</td><td>O ganho já estava no mínimo. Pad ligado e volume do teclado em três quartos. Nova leitura: −19 e −9.</td></tr>
+        <tr><td>Caixa da bateria</td><td class="num n">22 dB</td><td class="num n">−26</td><td class="num n">−2</td><td class="amber">Alto</td><td>A média parecia baixa, mas o pico estava quase no teto. Ganho para 18 dB.</td></tr>
+        <tr><td>Microfone do púlpito</td><td class="num n">30 dB</td><td class="num n">−27</td><td class="num n">−14</td><td class="amber">Baixo</td><td>Ganho para 38 dB.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> As leituras estão em dBFS. No teclado, o botão de ganho não resolvia porque o sinal já chegava grande demais ao pré: a correção foi antes dele. Na caixa da bateria, a média de −26 dBFS sugeria subir o ganho, mas o pico de −2 dBFS mandava baixar: em fonte percussiva, quem manda é o pico. E, como os ganhos mudaram, os retornos foram montados só depois.</p>
+
+  <h3>Exemplo 2. Chiado nas caixas em uma formatura</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Auditório de escola, mesa analógica pequena, duas caixas ativas em tripés, um microfone dinâmico com fio.</dd></div>
+    <div><dt>Sintoma</dt><dd>Nos silêncios, ouve-se um chiado contínuo nas caixas. O volume da fala está bom.</dd></div>
+    <div><dt>Causa</dt><dd>Ganho do canal baixo “para não apitar”, master em −5 dB e caixas ativas com o controle no máximo. A mesa entregava um sinal mais de 20 dB abaixo do nominal, e as caixas compensavam.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Ganho de 15 para 29 dB, lido no PFL com o orador falando forte. Master em 0 dB. Caixas fechadas até o volume da sala voltar ao que era.</dd></div>
+    <div><dt>Resultado</dt><dd>Mesmo volume na sala, com as caixas bem menos abertas. O chiado deixou de ser ouvido da plateia.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> O medidor da mesa tem escala VU. Antes, a leitura no PFL era de −20 na média e −8 nos picos. O ganho subiu 14 dB, e não 20, porque os picos chegaram a +6: essa fala tinha picos fortes, e o teto mandou. O volume da sala não mudou, porque o que o ganho e o master acrescentaram a caixa tirou. O que mudou foi o ruído: a caixa, menos aberta, deixou de amplificar tanto o ruído da saída da mesa. A margem antes da microfonia ficou igual, porque o ganho total do ciclo é o mesmo.</p>
+
+  <h3>Exemplo 3. O retorno que apitou no meio do louvor</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, banda com retornos de chão em auxiliares pré-fader.</dd></div>
+    <div><dt>Sintoma</dt><dd>A voz da cantora estava baixa na sala. O operador subiu o canal, e o retorno dela começou a apitar. A voz também ficou “amassada”.</dd></div>
+    <div><dt>Causa</dt><dd>O operador subiu 8 dB no ganho, e não no fader. O envio pré-fader para o retorno subiu os mesmos 8 dB, e o compressor passou a atuar muito mais.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Ganho de volta à posição anotada na passagem. Fader da voz subido de −5 para +2 dB.</dd></div>
+    <div><dt>Resultado</dt><dd>A voz apareceu na sala. O retorno e o compressor voltaram ao que eram.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> A anotação do ganho feita na passagem permitiu voltar ao ponto certo em segundos. Sem ela, o operador teria de adivinhar. O fader mudou só o que precisava mudar: o som da frente.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Usar o ganho como volume</h4><p>O operador gira o ganho durante o evento para subir ou baixar um canal na sala.</p><p class="fix"><b>Correção:</b> ganho se ajusta na passagem. Durante o evento, o volume do canal é no fader.</p></div>
+    <div><h4>Ajustar com a fonte tímida</h4><p>O ganho é acertado com “alô, som”, e o canal entra em clip quando a pessoa canta ou prega de verdade.</p><p class="fix"><b>Correção:</b> peça o trecho mais forte, no volume real do evento.</p></div>
+    <div><h4>Copiar a posição do botão</h4><p>Todos os ganhos “às 12 horas”, ou iguais aos da semana passada, sem olhar o medidor.</p><p class="fix"><b>Correção:</b> cada fonte pede um ganho. O que se repete é a leitura no medidor, e não a posição do botão.</p></div>
+    <div><h4>Baixar o fader para tirar a distorção</h4><p>O canal distorce, o operador baixa o fader, e a distorção continua, só mais baixa.</p><p class="fix"><b>Correção:</b> a distorção nasceu antes do fader. Baixe o ganho ou ligue o pad.</p></div>
+    <div><h4>Ganho baixo por medo da microfonia</h4><p>Ganhos lá embaixo, faders e master no topo, caixas no máximo. O sistema chia e apita do mesmo jeito.</p><p class="fix"><b>Correção:</b> ganho pelo medidor. O volume que causa o apito se controla no fader, no envio do retorno e na posição do microfone.</p></div>
+    <div><h4>Pad esquecido, ou pad em tudo</h4><p>O canal pede ganho quase no máximo e chia, porque o pad ficou ligado desde o evento anterior.</p><p class="fix"><b>Correção:</b> pad só quando o canal passa da faixa com o ganho no mínimo. Confira os pads ao zerar a mesa.</p></div>
+    <div><h4>Master lá embaixo e caixa no máximo</h4><p>O master trabalha em −30 dB, sem ajuste fino, e as caixas chiam nos silêncios.</p><p class="fix"><b>Correção:</b> feche o amplificador ou a caixa ativa e traga o master para perto de 0 dB.</p></div>
+    <div><h4>Ler o medidor errado</h4><p>O operador ajusta o ganho olhando o medidor principal sem o PFL, ou com dois PFL apertados.</p><p class="fix"><b>Correção:</b> um PFL por vez, ou o medidor de entrada do próprio canal. Solte o PFL ao terminar.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>O ajuste de ganho fica entre a ligação do sistema e a mixagem. Ele depende do que vem antes (a fonte, o microfone, o cabo) e prepara tudo o que vem depois.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>: o decibel e as unidades dB SPL, dBu e dBFS.</li>
+        <li><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>: nível de microfone, de instrumento e de linha, direct box e phantom.</li>
+        <li><a href="../Microfones/treinamento-microfones.html">Microfones</a>: tipo e posição do microfone, que definem o nível que chega ao pré.</li>
+        <li><a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>: os controles do canal, os barramentos e o diagrama de blocos.</li>
+        <li><a href="../Microfones-sem-Fio/treinamento-microfones-sem-fio.html">Microfones sem fio</a>: o ganho do transmissor e o nível de saída do receptor, ajustados antes do ganho da mesa.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Equalizacao/treinamento-equalizacao.html">Equalização</a>: o EQ trabalha sobre um sinal limpo e no nível certo.</li>
+        <li><a href="../Dinamica-e-Efeitos/treinamento-dinamica-e-efeitos.html">Dinâmica e efeitos</a>: o ponto de atuação do compressor depende do nível que o ganho entrega.</li>
+        <li><a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>: os envios pré-fader partem do nível definido pelo ganho.</li>
+        <li><a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>: o ganho é uma das parcelas do ciclo que apita.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: o ganho é a primeira etapa da passagem.</li>
+        <li><a href="../Caixas-e-Amplificacao/treinamento-caixas-e-amplificacao.html">Caixas, amplificação e PA</a>: o nível do amplificador e o limitador fecham a cadeia.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: o nível do áudio enviado ao codificador segue a mesma lógica de folga.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira na passagem de som, antes de montar os retornos. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>A mesa foi zerada: faders e master embaixo, ganhos no mínimo, nenhum PFL apertado.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>Cada fonte está na entrada certa: microfone, linha ou direct box.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>O pad está ligado só nos canais que precisam dele.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>O ganho de cada canal foi ajustado pelo medidor, com o PFL, um canal por vez.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>A leitura foi feita com a fonte no volume real do evento, no trecho mais forte.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>A média de cada canal está perto do nível nominal (−18 dBFS ou 0 VU).</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>Os picos ficam abaixo do teto (perto de −6 dBFS), e a luz de clip não acende.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>O ganho, o pad e as leituras de cada canal estão anotados.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>Os faders dos canais principais trabalham perto de 0 dB.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>O master e os grupos estão perto de 0 dB, e o medidor principal não chega ao vermelho.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>O nível do amplificador ou da caixa ativa foi ajustado com a mesa no nível nominal, e a luz de limite não fica acesa.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>Os retornos foram montados depois do ganho, e o ganho não muda durante o evento.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Qual controle resolve?</h3>
+  <p>Cada frase descreve uma situação na mesa. Escolha o controle em que você mexeria primeiro: <strong>G</strong>, ganho; <strong>F</strong>, fader; <strong>P</strong>, pad; <strong>A</strong>, nível do amplificador ou da caixa ativa.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"G": "Ganho", "F": "Fader", "P": "Pad", "A": "Amplificador ou caixa ativa"},
+ "itens": [
+  {"t": "Na passagem, com a cantora cantando forte, o medidor do canal marca média de −30 dBFS.", "a": "G", "w": "O sinal está entrando fraco. Suba o ganho até a média chegar perto de −18 dBFS."},
+  {"t": "No meio do louvor, o violão está baixo na sala. O medidor do canal está na faixa certa.", "a": "F", "w": "O sinal está bem preparado. Falta só mais violão na mistura: é trabalho do fader."},
+  {"t": "O teclado acende a luz de clip do canal com o ganho no mínimo.", "a": "P", "w": "O sinal chega grande demais ao pré. O pad reduz antes dele; depois, ajuste o ganho de novo."},
+  {"t": "Para o volume da sala ficar confortável, o master precisa ficar em −30 dB, e as caixas chiam nos silêncios.", "a": "A", "w": "As caixas estão abertas demais. Feche o nível delas e traga o master para perto de 0 dB."},
+  {"t": "Na passagem, a voz distorce na frente e no retorno, e o LED de pico do canal pisca nas frases fortes.", "a": "G", "w": "O pré está cortando os picos. Baixe o ganho; o fader não conserta essa distorção."},
+  {"t": "Na oração, o pastor fala mais baixo e a voz some na sala. Na passagem, a leitura do canal estava certa.", "a": "F", "w": "O ganho foi ajustado para a pregação e fica como está. Acompanhe a mudança com o fader."},
+  {"t": "O microfone do bumbo, bem perto da pele, satura a entrada mesmo com o ganho todo fechado.", "a": "P", "w": "Fonte forte demais para a entrada: ligue o pad e refaça o ajuste de ganho."},
+  {"t": "Os canais estão na faixa, o master está em 0 dB com o medidor no nível nominal, e o som ainda está baixo para a sala.", "a": "A", "w": "A mesa já está entregando o nível certo. Abra o amplificador ou a caixa; se já está no máximo, falta sistema."},
+  {"t": "Trocaram o microfone dinâmico do canal por um condensador, e a leitura subiu 12 dB.", "a": "G", "w": "A fonte mudou, então o ganho muda. Refaça o ajuste pelo medidor."},
+  {"t": "Duas vozes têm a mesma leitura no medidor, mas uma delas faz o solo e precisa aparecer mais.", "a": "F", "w": "Quem aparece mais na mistura é decisão do fader. Os ganhos já estão certos."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: ache o piso, a faixa e o teto</h3>
+  <p>Você vai precisar de uma mesa, um microfone dinâmico com cabo, um fone e a planilha de apoio. Deixe as caixas desligadas ou o master fechado, e o fone em volume baixo.</p>
+  <ol>
+    <li>Zere o canal: ganho no mínimo, pad desligado, EQ plano, fader fechado. Aperte o PFL.</li>
+    <li>Fale a um palmo do microfone, no volume de uma leitura em público. Suba o ganho até a faixa de trabalho. Anote o ganho, a média e o pico na aba “Ganho por canal”.</li>
+    <li>Afaste o microfone para dois palmos e fale igual. Anote a nova leitura. Quanto caiu? A resposta esperada está no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>, na parte sobre distância.</li>
+    <li>Volte a um palmo. Suba o ganho uns 15 dB acima do ponto certo e fale forte, até a luz de clip acender. Ouça a distorção no fone. Agora baixe o volume do fone: a distorção continua lá.</li>
+    <li>Baixe o ganho uns 25 dB abaixo do ponto certo. Suba o volume do fone até ouvir a voz na mesma altura de antes. Ouça o ruído que veio junto. Baixe o fone antes de seguir.</li>
+    <li>Volte ao ponto certo. Ligue o pad e veja quanto a leitura cai. Esse é o valor do pad da sua mesa. Desligue o pad.</li>
+    <li>Ligue as caixas e preencha a aba “Cadeia de ganho” com as posições e as leituras do seu sistema. Veja o que a planilha aponta.</li>
+  </ol>
+  <p>Depois, repita o passo 2 com outra pessoa falando. Compare os ganhos: a diferença entre duas vozes costuma ser maior do que se imagina.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Ganho-e-Fader-modelo.xlsx">Ganho-e-Fader-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Aba</th><th>Para que serve</th><th style="width:38%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Ganho por canal</strong></td><td>Registro de até 24 canais: fonte, entrada, pad, ganho e as leituras de média e de pico no PFL.</td><td>Fator de crista, folga até o clip, ajuste sugerido, ganho sugerido e situação do canal (OK, Baixo, Alto ou Clip).</td></tr>
+        <tr><td><strong>Cadeia de ganho</strong></td><td>Posição dos controles e leituras em seis etapas, do pré ao amplificador ou à caixa ativa.</td><td>Situação de cada etapa, soma dos faders e leitura da cadeia.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Faixas de leitura por tipo de medidor, ganho de partida por fonte e posição dos controles.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Ganho</strong></td><td>Os doze canais do exemplo 1, com as leituras da passagem de som e o que foi ajustado.</td><td>Os mesmos resultados da aba Ganho por canal.</td></tr>
+        <tr><td><strong>Exemplo - Cadeia</strong></td><td>A cadeia do exemplo 2, antes da correção, e o que foi ajustado.</td><td>Os mesmos resultados da aba Cadeia de ganho.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Os alvos de média e de pico ficam no alto de cada aba de trabalho e podem ser trocados: os valores iniciais são os de uma mesa digital, e a própria aba indica os de um medidor com escala VU.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Clip (saturação)</dt><dd>Corte dos picos do sinal quando ele passa do nível máximo de um circuito. Soa como distorção.</dd></div>
+    <div><dt>dBFS</dt><dd>Decibéis em relação ao fundo de escala digital. O 0 dBFS é o máximo; as leituras são negativas.</dd></div>
+    <div><dt>Estrutura de ganho</dt><dd>Ajuste de cada etapa da cadeia para que o sinal passe por todas perto do nível nominal.</dd></div>
+    <div><dt>Fader</dt><dd>Controle deslizante que define quanto do canal, do grupo ou da mistura segue adiante.</dd></div>
+    <div><dt>Fator de crista</dt><dd>Diferença, em dB, entre o pico e a média de um sinal. É grande em fontes percussivas.</dd></div>
+    <div><dt>Folga (headroom)</dt><dd>Espaço, em dB, entre o nível em que o sinal trabalha e o clip.</dd></div>
+    <div><dt>Ganho (gain)</dt><dd>Quanto o pré-amplificador aumenta o sinal de entrada do canal.</dd></div>
+    <div><dt>Ganho unitário</dt><dd>Posição em que o controle não aumenta nem diminui o sinal: a marca de 0 dB do fader.</dd></div>
+    <div><dt>Nível nominal</dt><dd>Nível de trabalho para o qual o equipamento foi projetado: 0 VU, ou perto de −18 dBFS em muitas mesas digitais.</dd></div>
+    <div><dt>Pad</dt><dd>Chave que reduz o sinal antes do pré, em geral em 20 dB, para fontes fortes demais.</dd></div>
+    <div><dt>PFL</dt><dd>Escuta antes do fader (pre-fader listen). Leva o canal ao fone e ao medidor, mesmo com o fader fechado.</dd></div>
+    <div><dt>Pré-amplificador</dt><dd>Primeiro circuito do canal. Leva o sinal de microfone ao nível de trabalho da mesa.</dd></div>
+    <div><dt>Relação sinal-ruído</dt><dd>Distância, em dB, entre o nível do sinal e o do ruído de fundo. Quanto maior, mais limpo o som.</dd></div>
+    <div><dt>Ruído de fundo</dt><dd>Chiado pequeno e constante que cada circuito produz, mesmo sem sinal.</dd></div>
+    <div><dt>Trim digital</dt><dd>Ajuste de nível feito depois da conversão para digital. Não substitui o ganho do pré.</dd></div>
+    <div><dt>VU</dt><dd>Escala de medidor analógico em que o 0 é o nível nominal. Mostra a média do sinal, e não os picos.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento.</footer>
+</div>
+
+<script>
+(function () {
+  var page = document.querySelector('.page');
+  var NOME = page.getAttribute('data-estudo') || 'estudo';
+  function read(key) { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { return null; } }
+  function write(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+
+  /* ---------- Checklist ---------- */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+  var count = document.getElementById('ck-count');
+  var total = document.getElementById('ck-total');
+  if (boxes.length && count) {
+    var CK = 'av-' + NOME + '-checklist';
+    var saved = read(CK) || {};
+    if (total) { total.textContent = boxes.length; }
+    var refreshChecks = function () {
+      var n = 0, state = {};
+      boxes.forEach(function (b, i) { if (b.checked) { n++; } state[b.id || i] = b.checked; });
+      count.textContent = n;
+      return state;
+    };
+    boxes.forEach(function (b, i) {
+      if (saved[b.id || i]) { b.checked = true; }
+      b.addEventListener('change', function () { write(CK, refreshChecks()); });
+    });
+    refreshChecks();
+    var ckReset = document.getElementById('ck-reset');
+    if (ckReset) {
+      ckReset.addEventListener('click', function () {
+        boxes.forEach(function (b) { b.checked = false; });
+        write(CK, refreshChecks());
+      });
+    }
+  }
+
+  /* ---------- Exercício ---------- */
+  /* Os dados vêm do bloco JSON de id quiz-data:
+     { "opcoes": {"A": "Nome da opção A", ...}, "itens": [ {"t": "frase", "a": "A", "w": "por quê"} ] } */
+  var quiz = document.getElementById('quiz');
+  var dataEl = document.getElementById('quiz-data');
+  if (quiz && dataEl) {
+    var data = JSON.parse(dataEl.textContent);
+    var NAMES = data.opcoes, ITEMS = data.itens, KEYS = Object.keys(NAMES);
+    var score = document.getElementById('qz-score');
+    var done = document.getElementById('qz-done');
+    document.getElementById('qz-total').textContent = ITEMS.length;
+    var hits = 0, answered = 0;
+    var render = function () {
+      hits = 0; answered = 0; score.textContent = 0; done.textContent = 0;
+      quiz.textContent = '';
+      ITEMS.forEach(function (item, idx) {
+        var row = document.createElement('div'); row.className = 'q';
+        var p = document.createElement('p'); p.textContent = (idx + 1) + '. ' + item.t;
+        var opts = document.createElement('div'); opts.className = 'opts';
+        opts.setAttribute('role', 'group'); opts.setAttribute('aria-label', 'Resposta do item ' + (idx + 1));
+        var why = document.createElement('p'); why.className = 'why'; why.hidden = true;
+        KEYS.forEach(function (k) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.textContent = k;
+          b.setAttribute('aria-label', NAMES[k]); b.title = NAMES[k];
+          b.addEventListener('click', function () {
+            var ok = k === item.a;
+            Array.prototype.forEach.call(opts.children, function (o) {
+              o.disabled = true;
+              if (o.textContent === item.a) { o.className = 'right'; }
+            });
+            if (!ok) { b.className = 'wrong'; }
+            var lead = document.createElement('b');
+            lead.textContent = (ok ? 'Certo. ' : 'A resposta é ' + item.a + (NAMES[item.a] !== item.a ? ', ' + NAMES[item.a] : '') + '. ');
+            why.textContent = ''; why.appendChild(lead); why.appendChild(document.createTextNode(item.w));
+            why.className = 'why ' + (ok ? 'ok' : 'no'); why.hidden = false;
+            answered++; if (ok) { hits++; }
+            score.textContent = hits; done.textContent = answered;
+          });
+          opts.appendChild(b);
+        });
+        row.appendChild(p); row.appendChild(opts); row.appendChild(why);
+        quiz.appendChild(row);
+      });
+    };
+    render();
+    document.getElementById('qz-reset').addEventListener('click', render);
+  }
+})();
+</script>
+</body>
+</html>

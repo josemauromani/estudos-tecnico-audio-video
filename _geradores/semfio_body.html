@@ -1,0 +1,952 @@
+<div class="page" lang="pt-BR" data-estudo="semfio">
+
+<header class="mast">
+  <a class="back" href="../index.html">← Painel dos estudos</a>
+  <div class="tiles" aria-hidden="true"><span class="purple w">RF</span></div>
+  <h1>Microfones sem fio</h1>
+  <p class="lead">Um guia de estudo para escolher as frequências, posicionar as antenas, ajustar o transmissor e cuidar das pilhas, de modo que o microfone sem fio atravesse o evento sem falhas, chiados nem quedas.</p>
+  <ul class="meta">
+    <li>Treinamento autoinstrucional</li>
+    <li>13 módulos</li>
+    <li>Leitura de cerca de 45 minutos</li>
+    <li>3 exemplos resolvidos e 2 exercícios</li>
+  </ul>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sumário">
+  <h2>Sumário</h2>
+  <ol>
+    <li><a href="#o-que-e">O que é um sistema sem fio</a></li>
+    <li><a href="#faixas">Faixas e tecnologias</a></li>
+    <li><a href="#coordenacao">Frequência, grupo e canal</a></li>
+    <li><a href="#antenas">Antenas e posição</a></li>
+    <li><a href="#ajustes">Squelch, ganho e pilhas</a></li>
+    <li><a href="#interferencia">Fontes de interferência</a></li>
+    <li><a href="#passo">Passo a passo</a></li>
+    <li><a href="#exemplos">Exemplos resolvidos</a></li>
+    <li><a href="#erros">Erros comuns</a></li>
+    <li><a href="#ligacoes">Ligação com os outros estudos</a></li>
+    <li><a href="#checklist-sec">Checklist</a></li>
+    <li><a href="#pratique">Pratique</a></li>
+    <li><a href="#planilha">A planilha de apoio</a></li>
+    <li><a href="#glossario">Glossário</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============================ MÓDULO 1 ============================ -->
+<section id="o-que-e">
+  <p class="eyebrow">Módulo 1</p>
+  <h2>O que é um sistema sem fio</h2>
+  <p>Um microfone sem fio troca o cabo por um enlace de rádio. O <strong>transmissor</strong> fica com a pessoa: recebe o som da cápsula, transforma-o em ondas de rádio e as envia pela antena. O <strong>receptor</strong> fica perto da mesa ou do palco: capta as ondas, recupera o som e o entrega à mesa por um cabo comum. A sigla <span class="k purple w">RF</span>, de radiofrequência, é o nome dessa parte de rádio do sistema.</p>
+  <p>Pense em uma emissora de rádio particular. Cada transmissor é uma emissora pequena, que só toca uma voz, e cada receptor é um rádio sintonizado nela. Vale o que você já viveu no rádio do carro: duas emissoras na mesma frequência se atrapalham; no túnel, o som falha; longe da emissora, entra chiado.</p>
+  <p>Aqui, <strong>frequência</strong> é a do rádio, medida em megahertz (MHz), e não a do som, que está no estudo <a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>. Ela não muda o timbre da voz: só define em que “estação” o microfone fala.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 300" role="img" aria-label="O caminho do som em um sistema sem fio: a voz entra no transmissor (cápsula, ganho de áudio, rádio, antena e pilhas), que envia ondas de rádio, uma frequência por microfone, ao receptor (duas antenas, sintonia e squelch), que entrega o áudio à mesa por cabo. Embaixo, onde cada trecho falha: no transmissor, pilha fraca, ganho errado, antena coberta pela mão ou pelo corpo; no ar, distância, obstáculos, outra emissão na mesma frequência e reflexos que se cancelam; no receptor, antena mal posicionada, frequência diferente da do transmissor e saída no nível errado.">
+        <defs>
+          <marker id="sf1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker>
+          <marker id="sf1p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah f-purple" d="M0 0 L10 5 L0 10 z"/></marker>
+        </defs>
+        <rect class="bx" x="18" y="70" width="96" height="60"/>
+        <text class="b" x="66" y="96" font-size="12.5" text-anchor="middle">Voz</text>
+        <text class="mu" x="66" y="114" font-size="10.5" text-anchor="middle">ou instrumento</text>
+        <line class="ln" x1="116" y1="100" x2="136" y2="100" marker-end="url(#sf1)"/>
+
+        <rect class="bx-purple" x="140" y="40" width="210" height="120"/>
+        <rect class="hd-purple" x="140" y="40" width="210" height="28"/>
+        <text class="on b" x="245" y="59" font-size="12.5" text-anchor="middle">Transmissor</text>
+        <text x="152" y="90" font-size="11.5">cápsula do microfone</text>
+        <text x="152" y="108" font-size="11.5">ganho de áudio</text>
+        <text x="152" y="126" font-size="11.5">rádio, antena e pilhas</text>
+        <text class="mu" x="152" y="146" font-size="10.5">de mão ou de cinto (bodypack)</text>
+
+        <path class="s-purple" d="M364 86 Q376 100 364 114"/>
+        <path class="s-purple" d="M376 78 Q394 100 376 122"/>
+        <path class="s-purple" d="M388 70 Q412 100 388 130"/>
+        <line class="s-purple dash" x1="412" y1="100" x2="544" y2="100" marker-end="url(#sf1p)"/>
+        <text class="t-purple b" x="478" y="62" font-size="12" text-anchor="middle">ondas de rádio</text>
+        <text class="mu" x="478" y="128" font-size="10.5" text-anchor="middle">uma frequência</text>
+        <text class="mu" x="478" y="143" font-size="10.5" text-anchor="middle">por microfone</text>
+
+        <rect class="bx-teal" x="550" y="40" width="210" height="120"/>
+        <rect class="hd-teal" x="550" y="40" width="210" height="28"/>
+        <text class="on b" x="655" y="59" font-size="12.5" text-anchor="middle">Receptor</text>
+        <text x="562" y="90" font-size="11.5">duas antenas (A e B)</text>
+        <text x="562" y="108" font-size="11.5">sintonia e squelch</text>
+        <text x="562" y="126" font-size="11.5">saída de áudio</text>
+        <text class="mu" x="562" y="146" font-size="10.5">ligado à mesa por cabo</text>
+        <line class="ln" x1="762" y1="100" x2="786" y2="100" marker-end="url(#sf1)"/>
+        <rect class="bx" x="790" y="70" width="92" height="60"/>
+        <text class="b" x="836" y="96" font-size="12.5" text-anchor="middle">Mesa</text>
+        <text class="mu" x="836" y="114" font-size="10.5" text-anchor="middle">de som</text>
+
+        <text class="mono mu" x="18" y="204" font-size="10.5">ONDE COSTUMA</text>
+        <text class="mono mu" x="18" y="220" font-size="10.5">FALHAR</text>
+        <line class="ref" x1="245" y1="160" x2="245" y2="186"/>
+        <line class="ref" x1="450" y1="150" x2="450" y2="186"/>
+        <line class="ref" x1="655" y1="160" x2="655" y2="186"/>
+        <rect class="bx" x="140" y="186" width="210" height="96"/>
+        <text x="152" y="208" font-size="11">pilha fraca</text>
+        <text x="152" y="226" font-size="11">ganho de áudio errado</text>
+        <text x="152" y="244" font-size="11">antena coberta pela mão</text>
+        <text x="152" y="262" font-size="11">ou pelo corpo</text>
+        <rect class="bx" x="362" y="186" width="176" height="96"/>
+        <text x="374" y="208" font-size="11">distância e obstáculos</text>
+        <text x="374" y="226" font-size="11">outra emissão na mesma</text>
+        <text x="374" y="244" font-size="11">frequência</text>
+        <text x="374" y="262" font-size="11">reflexos que se cancelam</text>
+        <rect class="bx" x="550" y="186" width="210" height="96"/>
+        <text x="562" y="208" font-size="11">antena mal posicionada</text>
+        <text x="562" y="226" font-size="11">frequência diferente da</text>
+        <text x="562" y="244" font-size="11">do transmissor</text>
+        <text x="562" y="262" font-size="11">saída no nível errado</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 1.</b> O sistema sem fio é um cabo trocado por rádio. O som passa por três trechos, e cada um tem as suas falhas típicas. Saber em qual trecho a falha nasce é metade do diagnóstico.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Parte</th><th style="width:38%">O que faz</th><th>O que você ajusta nela</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Transmissor de mão</strong></td><td>Microfone e transmissor no mesmo corpo, com a antena em geral na base.</td><td>Frequência (ou grupo e canal), ganho de áudio, trava, pilhas.</td></tr>
+        <tr><td><strong>Transmissor de cinto (bodypack)</strong></td><td>Caixa presa à roupa, ligada por cabo fino a uma lapela, a um headset ou a um instrumento.</td><td>Os mesmos, mais a escolha entre microfone e instrumento, quando existe.</td></tr>
+        <tr><td><strong>Receptor</strong></td><td>Capta o rádio com duas antenas e entrega o áudio à mesa.</td><td>Frequência, squelch, saída (mic ou linha), posição das antenas.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A escolha entre microfone de mão, lapela e headset, e a posição de cada um, estão no estudo <a href="../Microfones/treinamento-microfones.html">Microfones</a>. Este estudo cuida do trecho de rádio.</p>
+
+  <div class="note">
+    <h4>Regra prática</h4>
+    <p>O cabo quase nunca falha; o rádio pode falhar. Use sem fio para quem precisa andar: o pregador, o cantor, o apresentador. Para quem fica parado (púlpito fixo, coral, instrumentos), o microfone com fio é mais seguro, mais barato e não gasta pilha.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 2 ============================ -->
+<section id="faixas">
+  <p class="eyebrow">Módulo 2</p>
+  <h2>Faixas e tecnologias</h2>
+  <p>O espectro de rádio é uma “estrada” compartilhada por TV, telefonia, Wi-Fi, rádios de comunicação e microfones. Cada sistema sem fio trabalha em um trecho dela, a sua <strong>faixa</strong>, que define o alcance, o tamanho das antenas, quantos sistemas funcionam juntos e quem são os vizinhos que podem atrapalhar.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 250" role="img" aria-label="Régua do espectro de rádio, fora de escala, com a frequência crescendo da esquerda para a direita. VHF, de 174 a 216 megahertz: sistemas simples, com poucas frequências e mais ruído elétrico; onda de cerca de 1,5 metro. UHF, de 470 a 698 megahertz: a faixa mais usada, que divide o espaço com os canais de TV digital; onda de cerca de 0,5 metro. Faixa de 700 megahertz, de 698 a 806: não use, é da telefonia móvel. Faixa de 2,4 gigahertz, de 2.400 a 2.483 megahertz: divide o espaço com Wi-Fi e Bluetooth; onda de cerca de 12 centímetros.">
+        <text class="mono mu" x="18" y="26" font-size="10.5">ESQUEMA FORA DE ESCALA</text>
+        <text class="mu" x="882" y="26" font-size="11" text-anchor="end">frequência cada vez mais alta →</text>
+        <line class="ln-mu" x1="18" y1="104" x2="882" y2="104"/>
+        <rect class="bx-slate" x="60" y="52" width="130" height="52"/>
+        <text class="b" x="125" y="74" font-size="13" text-anchor="middle">VHF</text>
+        <text class="mu" x="125" y="92" font-size="10.5" text-anchor="middle">174 a 216 MHz</text>
+        <rect class="bx-purple" x="290" y="52" width="290" height="52"/>
+        <text class="b" x="435" y="74" font-size="13" text-anchor="middle">UHF</text>
+        <text class="mu" x="435" y="92" font-size="10.5" text-anchor="middle">470 a 698 MHz</text>
+        <rect class="bx-red" x="580" y="52" width="100" height="52"/>
+        <text class="t-red b" x="630" y="74" font-size="12" text-anchor="middle">700 MHz</text>
+        <text class="mu" x="630" y="92" font-size="10.5" text-anchor="middle">698 a 806 MHz</text>
+        <rect class="bx-blue" x="752" y="52" width="130" height="52"/>
+        <text class="b" x="817" y="74" font-size="13" text-anchor="middle">2,4 GHz</text>
+        <text class="mu" x="817" y="92" font-size="10.5" text-anchor="middle">2.400 a 2.483 MHz</text>
+
+        <text x="125" y="130" font-size="11" text-anchor="middle">Sistemas simples,</text>
+        <text x="125" y="146" font-size="11" text-anchor="middle">poucas frequências,</text>
+        <text x="125" y="162" font-size="11" text-anchor="middle">mais ruído elétrico.</text>
+        <text x="435" y="130" font-size="11" text-anchor="middle">A faixa mais usada.</text>
+        <text x="435" y="146" font-size="11" text-anchor="middle">Divide o espaço com os</text>
+        <text x="435" y="162" font-size="11" text-anchor="middle">canais de TV digital.</text>
+        <text class="t-red b" x="630" y="130" font-size="11" text-anchor="middle">Não use:</text>
+        <text class="t-red" x="630" y="146" font-size="11" text-anchor="middle">é da telefonia</text>
+        <text class="t-red" x="630" y="162" font-size="11" text-anchor="middle">móvel.</text>
+        <text x="817" y="130" font-size="11" text-anchor="middle">Divide o espaço</text>
+        <text x="817" y="146" font-size="11" text-anchor="middle">com Wi-Fi e</text>
+        <text x="817" y="162" font-size="11" text-anchor="middle">Bluetooth.</text>
+
+        <line class="grid" x1="18" y1="182" x2="882" y2="182"/>
+        <text class="mono mu" x="18" y="206" font-size="10.5">TAMANHO DA ONDA</text>
+        <text class="b" x="125" y="230" font-size="11.5" text-anchor="middle">cerca de 1,5 m</text>
+        <text class="b" x="435" y="230" font-size="11.5" text-anchor="middle">cerca de 0,5 m</text>
+        <text class="b" x="817" y="230" font-size="11.5" text-anchor="middle">cerca de 12 cm</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 2.</b> As faixas em que os microfones sem fio trabalham. Quanto mais alta a frequência, menor a onda: a antena fica menor, mas o corpo e as paredes barram mais o sinal. Os limites são os mais comuns; o seu equipamento cobre só um pedaço de uma dessas faixas.</figcaption>
+  </figure>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:11%">Faixa</th><th style="width:17%">Frequências típicas</th><th style="width:32%">Pontos fortes</th><th>Cuidados</th></tr></thead>
+      <tbody>
+        <tr><td><strong>VHF</strong></td><td class="num">174 a 216 MHz</td><td>Custo baixo. A onda longa contorna melhor os obstáculos.</td><td>Poucas frequências, muitas vezes uma só, fixa. Mais ruído elétrico. Poucos sistemas juntos.</td></tr>
+        <tr><td><strong>UHF</strong></td><td class="num">470 a 698 MHz</td><td>Muitas frequências, antenas pequenas, mais sistemas juntos. É a faixa profissional.</td><td>Divide o espaço com a TV digital. As frequências livres mudam de cidade para cidade.</td></tr>
+        <tr><td><strong>2,4 GHz</strong></td><td class="num">2.400 a 2.483,5 MHz</td><td>Procura o canal sozinho, é sempre digital e é liberado em quase todo o mundo.</td><td>Divide o espaço com Wi-Fi e Bluetooth. Alcance menor. Em geral, de 4 a 8 sistemas juntos; o manual dá o número.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Há também sistemas em 1,9 GHz e em 5 GHz, menos comuns, com a mesma lógica dos de 2,4 GHz.</p>
+
+  <h3>Analógico e digital</h3>
+  <p>“Digital” não é uma faixa. É o modo como o som viaja no rádio, e existe tanto em UHF como em 2,4 GHz.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>Sistema analógico</h4>
+      <ul>
+        <li>O som modula o rádio diretamente, como em uma emissora de FM.</li>
+        <li>O transmissor comprime a dinâmica e o receptor a expande de volta (compansor): os dois têm de ser da mesma linha.</li>
+        <li>Quando o sinal enfraquece, o som piora aos poucos: chiado, depois estalos e rajadas. Há aviso antes da queda.</li>
+        <li>Sem atraso perceptível.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Sistema digital</h4>
+      <ul>
+        <li>O som vira números antes de ir ao rádio. Sem compansor, fica mais fiel.</li>
+        <li>Enquanto o receptor entende os dados, o som é limpo. Quando deixa de entender, corta de uma vez, sem aviso.</li>
+        <li>Atraso de poucos milissegundos, conforme o modelo. Somado ao da mesa digital, pode incomodar quem usa retorno no ouvido.</li>
+        <li>Muitos modelos cabem em maior número no mesmo trecho de espectro.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>A regulamentação muda, e muda de lugar para lugar</h3>
+  <p>Quem define que faixas um microfone sem fio pode usar, e com que potência, é o órgão regulador de telecomunicações de cada país; no Brasil, a Anatel. As regras mudam: a faixa de 700 MHz era usada por muitos microfones e hoje pertence à telefonia móvel. Um sistema antigo dessa faixa sofre interferência dos celulares, atrapalha a rede e não deve ser usado. Em geral, os microfones usam o espectro como convidados: não podem atrapalhar os serviços principais, como a TV, e não têm proteção contra eles.</p>
+  <ul>
+    <li>Antes de comprar ou de usar um sistema, confira a regulamentação vigente no seu local e se o equipamento é homologado no país. Importado por conta própria pode trabalhar em faixa proibida aqui, mesmo sendo novo.</li>
+    <li>Em outra cidade, o plano de frequências é refeito. Em outro país, a própria faixa pode não ser permitida.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Valores de referência</h4>
+    <p>Os limites de faixa deste módulo são os mais comuns. O que vale para o seu sistema é a etiqueta e o manual; para o seu local, a regulamentação vigente.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 3 ============================ -->
+<section id="coordenacao">
+  <p class="eyebrow">Módulo 3</p>
+  <h2>Frequência, grupo e canal</h2>
+  <p>A regra básica: <strong>cada transmissor em uma frequência, e o receptor dele na mesma</strong>. Dois transmissores na mesma frequência se atropelam. Transmissor e receptor em frequências diferentes não se falam.</p>
+
+  <h3>A banda do aparelho</h3>
+  <p>Nenhum sistema cobre a faixa de UHF inteira. Cada modelo é vendido em versões que cobrem um pedaço dela, a <strong>banda</strong> ou faixa de sintonia, identificada por um código na etiqueta. Transmissor e receptor só funcionam juntos se forem da mesma banda: confira o código ao comprar uma peça de reposição.</p>
+
+  <h3>Grupo e canal</h3>
+  <p>Os fabricantes gravam listas prontas no aparelho. O <strong>canal</strong> é uma frequência da lista. O <strong>grupo</strong> é um conjunto de canais que o fabricante calculou para funcionarem juntos, sem que um atrapalhe o outro. Daí a regra de uso:</p>
+  <ul>
+    <li>Todos os sistemas da mesma linha e da mesma banda ficam no <strong>mesmo grupo</strong>, cada um em um <strong>canal diferente</strong>.</li>
+    <li>Misturar grupos desfaz o cálculo: o canal 3 do grupo 1 pode atrapalhar o canal 5 do grupo 2.</li>
+    <li>Grupos de linhas ou de marcas diferentes não combinam. O “grupo 1” de um fabricante não tem relação com o “grupo 1” de outro.</li>
+    <li>Sistemas baratos de frequência fixa não têm escolha: confira na etiqueta se as frequências dos seus aparelhos são diferentes e compatíveis antes de comprar o segundo.</li>
+  </ul>
+
+  <h3>Varredura (scan): ouvir antes de falar</h3>
+  <p>Na varredura, o receptor percorre a sua banda e mede o que já existe no ar: os canais de TV digital, os microfones do vizinho e o ruído dos equipamentos do próprio evento. No fim, indica um canal livre ou, na varredura de grupo, o grupo com mais canais livres.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 262" role="img" aria-label="Trecho de UHF de 506 a 548 megahertz, em canais de TV de 6 megahertz, do 20 ao 26. Os canais 21, 22 e 25 têm TV digital ocupando o bloco inteiro; 20, 23, 24 e 26 estão livres. Seis microfones ficam nos canais 23 e 24, com espaçamento desigual. Um microfone dentro do canal 22 tem alcance curto e falhas.">
+        <text class="mono mu" x="18" y="24" font-size="10.5">O QUE A VARREDURA ENXERGA</text>
+        <rect class="lv-slate" x="150" y="84" width="240" height="116"/>
+        <rect class="lv-slate" x="630" y="84" width="120" height="116"/>
+        <text class="b" x="250" y="106" font-size="11.5" text-anchor="middle">TV digital: 6 MHz por canal</text>
+        <text class="b" x="690" y="106" font-size="11.5" text-anchor="middle">TV digital</text>
+        <text class="t-good b" x="90" y="150" font-size="11.5" text-anchor="middle">livre</text>
+        <text class="t-good b" x="810" y="150" font-size="11.5" text-anchor="middle">livre</text>
+
+        <text class="t-good b" x="510" y="98" font-size="11.5" text-anchor="middle">livres: aqui ficam os microfones</text>
+        <path class="s-good" stroke-width="1.5" d="M396 112 V106 H624 V112"/>
+        <g class="s-purple" stroke-width="3">
+          <line x1="402" y1="200" x2="402" y2="128"/><line x1="417" y1="200" x2="417" y2="128"/><line x1="440" y1="200" x2="440" y2="128"/>
+          <line x1="488" y1="200" x2="488" y2="128"/><line x1="532" y1="200" x2="532" y2="128"/><line x1="591" y1="200" x2="591" y2="128"/>
+        </g>
+        <line class="s-bad" stroke-width="3" x1="368" y1="200" x2="368" y2="128"/>
+        <line class="ref" x1="368" y1="70" x2="368" y2="126"/>
+        <text class="t-red b" x="368" y="48" font-size="11" text-anchor="middle">dentro do canal de TV:</text>
+        <text class="t-red b" x="368" y="63" font-size="11" text-anchor="middle">alcance curto e falhas</text>
+
+        <line class="ln-mu" x1="30" y1="200" x2="870" y2="200"/>
+        <path class="ln-mu" stroke-width="1" d="M30 200 V206 M150 200 V206 M270 200 V206 M390 200 V206 M510 200 V206 M630 200 V206 M750 200 V206 M870 200 V206"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="30" y="220">506</text><text class="mu" x="150" y="220">512</text><text class="mu" x="270" y="220">518</text><text class="mu" x="390" y="220">524</text>
+          <text class="mu" x="510" y="220">530</text><text class="mu" x="630" y="220">536</text><text class="mu" x="750" y="220">542</text><text class="mu" x="870" y="220">548</text>
+        </g>
+        <g font-size="11" text-anchor="middle">
+          <text x="90" y="238">canal 20</text><text x="210" y="238">canal 21</text><text x="330" y="238">canal 22</text><text x="450" y="238">canal 23</text>
+          <text x="570" y="238">canal 24</text><text x="690" y="238">canal 25</text><text x="810" y="238">canal 26</text>
+        </g>
+        <text class="mu" x="870" y="254" font-size="10.5" text-anchor="end">frequência, em MHz, e canal físico de TV</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 3.</b> Um trecho de UHF, como exemplo. Cada canal de TV digital ocupa um bloco inteiro de 6 MHz. Os microfones entram nos canais de TV que estão livres na sua cidade. Os canais ocupados deste desenho são ilustrativos.</figcaption>
+  </figure>
+
+  <p>Para a varredura mostrar a verdade:</p>
+  <ul>
+    <li><strong>No local e perto da hora do evento.</strong> A TV não muda, mas os vizinhos mudam: outra igreja, uma equipe de reportagem.</li>
+    <li><strong>Com os seus transmissores desligados.</strong> Ligado, o seu transmissor faz o receptor ver a própria frequência como ocupada.</li>
+    <li><strong>Com todo o resto ligado.</strong> Telão de LED, luzes, computadores e retorno sem fio produzem ruído de rádio. É melhor que o receptor os veja agora.</li>
+    <li><strong>Um sistema por vez.</strong> Em receptores que não conversam entre si, faça a varredura no primeiro, sincronize e deixe o transmissor dele ligado; o segundo já verá essa frequência ocupada. Repita até o último.</li>
+  </ul>
+
+  <h3>Sincronização (sync)</h3>
+  <p>Escolhida a frequência no receptor, falta passá-la ao transmissor. Na maioria dos sistemas atuais isso se faz por infravermelho: aproxime a janela do transmissor da janela do receptor e aperte o botão de sincronização. Nos mais simples, o ajuste é manual. Sincronize um por vez, com os outros transmissores longe, e confira: o RF do receptor sobe quando o transmissor liga, e os dois mostram o mesmo grupo e canal.</p>
+
+  <h3>Intermodulação: as frequências que ninguém escolheu</h3>
+  <p>Quando dois ou mais transmissores estão ligados, eles se combinam nos circuitos dos transmissores e dos receptores e geram frequências novas, os <strong>produtos de intermodulação</strong>. Se um produto cai em cima da frequência de um terceiro microfone, o receptor dele recebe um “transmissor fantasma”: ruído, perda de alcance e quedas.</p>
+  <p>Os produtos mais fortes são os de terceira ordem de dois transmissores. Para as frequências A e B, eles ficam em 2 × A − B e em 2 × B − A: a distância entre A e B se repete para cada lado.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 274" role="img" aria-label="Três microfones: A em 500,000 megahertz, B em 500,500 e C em 501,000, com o mesmo espaçamento de 0,5 megahertz. A e B criam produtos de intermodulação em 499,500 (2 × A − B) e em 501,000 (2 × B − A): o segundo cai exatamente em cima de C.">
+        <text class="mono mu" x="18" y="24" font-size="10.5">DOIS TRANSMISSORES LIGADOS CRIAM FREQUÊNCIAS NOVAS</text>
+        <line class="ln-mu" x1="60" y1="190" x2="840" y2="190"/>
+        <rect class="lv-red" x="180" y="140" width="20" height="50"/>
+        <rect class="lv-red" x="705" y="140" width="20" height="50"/>
+        <line class="s-purple" stroke-width="3" x1="365" y1="190" x2="365" y2="74"/>
+        <line class="s-purple" stroke-width="3" x1="540" y1="190" x2="540" y2="74"/>
+        <line class="s-amber" stroke-width="3" x1="715" y1="190" x2="715" y2="74"/>
+        <text class="b" x="365" y="62" font-size="12" text-anchor="middle">Microfone A</text>
+        <text class="b" x="540" y="62" font-size="12" text-anchor="middle">Microfone B</text>
+        <text class="b" x="715" y="62" font-size="12" text-anchor="middle">Microfone C</text>
+        <text class="t-red b" x="190" y="112" font-size="11" text-anchor="middle">produto</text>
+        <text class="t-red" x="190" y="128" font-size="11" text-anchor="middle">2 × A − B</text>
+        <text class="t-red b" x="736" y="112" font-size="11">produto 2 × B − A:</text>
+        <text class="t-red" x="736" y="128" font-size="11">cai em cima de C</text>
+        <g font-size="11" text-anchor="middle">
+          <text class="mu" x="190" y="208">499,500</text><text x="365" y="208">500,000</text><text x="540" y="208">500,500</text><text x="715" y="208">501,000</text>
+        </g>
+        <path class="ln-mu" stroke-width="1" d="M190 222 V228 H365 V222 M365 228 H540 V222 M540 228 H715 V222"/>
+        <g font-size="10.5" text-anchor="middle">
+          <text class="mu" x="277" y="244">0,5 MHz</text><text class="mu" x="452" y="244">0,5 MHz</text><text class="mu" x="627" y="244">0,5 MHz</text>
+        </g>
+        <text x="60" y="264" font-size="11.5">Espaçamento igual é a armadilha: a distância entre A e B se repete para cada lado e acerta C.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 4.</b> Dois transmissores criam um produto de cada lado, à mesma distância que os separa. Frequências escolhidas “de meio em meio megahertz” parecem organizadas, mas são o pior plano possível: todo produto cai em cima de um microfone.</figcaption>
+  </figure>
+
+  <p>Com três ou mais transmissores aparecem também produtos de três frequências (A + B − C), e a conta cresce depressa: com oito microfones há centenas de produtos. Os grupos do fabricante e os programas de coordenação fazem essa conta por você; a planilha deste estudo confere os produtos de dois transmissores. A intermodulação fica mais forte com transmissores ligados amontoados, como na bandeja antes do evento, e com transmissor muito perto das antenas: mantenha uns 3 metros ou mais entre eles.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:30%">Regra de coordenação</th><th style="width:24%">Valor de partida</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Distância entre duas frequências</td><td>0,3 a 0,4 MHz ou mais</td><td>Para sistemas analógicos. Muitos digitais aceitam menos. O manual do sistema dá o mínimo.</td></tr>
+        <tr><td>Distância entre uma frequência e um produto 2 × A − B</td><td>0,1 MHz ou mais</td><td>Receptores melhores toleram produtos mais próximos.</td></tr>
+        <tr><td>Canal de TV digital ativo</td><td>Fora do bloco inteiro de 6 MHz</td><td>Vale o canal físico, de RF, e não o número que a TV mostra na tela.</td></tr>
+        <tr><td>Linhas ou marcas misturadas</td><td>Conta feita por programa ou pela planilha</td><td>Os grupos não combinam entre si. Confira com todos os transmissores ligados.</td></tr>
+        <tr><td>Retorno sem fio (in-ear)</td><td>Bloco próprio, a alguns MHz dos microfones</td><td>Fica ligado o tempo todo e entra no mesmo plano. Veja <a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Quantos sistemas cabem? Como ordem de grandeza, em um canal de TV livre (6 MHz) cabem de 6 a 8 sistemas analógicos coordenados, e mais em sistemas digitais. O máximo por banda está no manual.</p>
+
+  <div class="note">
+    <h4>Onde achar os canais de TV da sua cidade</h4>
+    <p>A varredura mostra os blocos ocupados, e a lista dos canais em operação em cada município é informação pública do órgão regulador. Use o <strong>canal físico</strong>: o número que a TV mostra na tela (o canal virtual, como 5.1) quase nunca é o canal em que a emissora transmite.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 4 ============================ -->
+<section id="antenas">
+  <p class="eyebrow">Módulo 4</p>
+  <h2>Antenas e posição</h2>
+  <p>A potência de um transmissor de microfone é pequena: em geral de 10 a 50 miliwatts, uma fração da de um celular. O sistema funciona porque o receptor é muito sensível, e por isso o caminho entre as duas antenas decide tudo. A maior parte das falhas de RF em igrejas e auditórios não é de frequência: é de antena no lugar errado.</p>
+
+  <h3>Linha de visada</h3>
+  <p>As ondas de UHF e de 2,4 GHz andam quase em linha reta, como a luz. Vidro, madeira e tecido deixam passar boa parte do sinal; metal reflete; o corpo humano, quase todo água, absorve. Daí a regra de ouro, a <strong>linha de visada</strong>: se a antena do receptor “enxerga” o transmissor, o sinal chega.</p>
+  <ul>
+    <li>Um bodypack nas costas, com a pessoa de frente para o receptor, tem o corpo inteiro no caminho.</li>
+    <li>A mão na base do microfone cobre a antena do transmissor de mão e pode derrubar o alcance a uma fração do normal.</li>
+    <li>Uma plateia de pé é uma parede de água: antenas acima das cabeças, a 2 metros de altura ou mais.</li>
+    <li>Receptor em rack de metal fechado está dentro de uma gaiola. As antenas precisam sair dali.</li>
+  </ul>
+
+  <h3>Diversidade: por que são duas antenas</h3>
+  <p>Em ambiente fechado, o rádio chega ao receptor pelo caminho direto e pelos refletidos nas paredes, no teto e no metal, com atrasos diferentes. Em certos pontos, a onda direta e a refletida chegam em oposição e se cancelam. É o <strong>ponto surdo</strong> (<em>dropout</em>): o sinal some por um instante, mesmo com o transmissor a poucos metros.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 296" role="img" aria-label="O transmissor envia o rádio à antena A por dois caminhos: a onda direta e a onda refletida em uma superfície, que chega atrasada. Na antena A, as duas se cancelam: ponto surdo. Na antena B, a meio metro, o sinal é bom. O receptor com diversidade usa a antena melhor. O ponto surdo muda de lugar quando a pessoa anda.">
+        <defs><marker id="sf5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="ah f-purple" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="24" font-size="10.5">POR QUE O RECEPTOR TEM DUAS ANTENAS</text>
+        <rect class="f-sunk" x="130" y="48" width="380" height="12"/>
+        <text class="mu" x="524" y="58" font-size="10.5">superfície que reflete: parede, teto, vidro, metal</text>
+
+        <circle class="bx-purple" cx="70" cy="190" r="14"/>
+        <text x="70" y="226" font-size="11" text-anchor="middle">transmissor</text>
+        <line class="s-purple" x1="86" y1="189" x2="552" y2="181" marker-end="url(#sf5)"/>
+        <path class="s-purple dash" d="M80 176 L320 60 L552 170" marker-end="url(#sf5)"/>
+        <text class="t-purple b" x="300" y="206" font-size="11" text-anchor="middle">onda direta</text>
+        <text class="t-purple b" x="320" y="106" font-size="11" text-anchor="middle">onda refletida:</text>
+        <text class="t-purple" x="320" y="122" font-size="11" text-anchor="middle">chega atrasada</text>
+
+        <line class="ln-bold" x1="560" y1="150" x2="560" y2="230"/>
+        <line class="ln-bold" x1="720" y1="150" x2="720" y2="230"/>
+        <text class="b" x="584" y="118" font-size="11.5" text-anchor="middle">antena A</text>
+        <text class="t-bad b" x="584" y="134" font-size="11" text-anchor="middle">as ondas se cancelam</text>
+        <text class="b" x="744" y="118" font-size="11.5" text-anchor="middle">antena B</text>
+        <text class="t-good b" x="744" y="134" font-size="11" text-anchor="middle">sinal bom</text>
+        <rect class="bx-teal" x="520" y="230" width="240" height="48"/>
+        <text class="b" x="640" y="250" font-size="12" text-anchor="middle">Receptor com diversidade</text>
+        <text class="mu" x="640" y="267" font-size="10.5" text-anchor="middle">usa a antena que está melhor</text>
+
+        <text x="18" y="262" font-size="11.5">O ponto surdo muda de lugar quando a pessoa anda:</text>
+        <text x="18" y="278" font-size="11.5">por isso a falha vem e some em um passo.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 5.</b> O ponto surdo nasce do encontro da onda direta com a refletida. É muito improvável que as duas antenas, em lugares diferentes, estejam em um ponto surdo ao mesmo tempo. A diversidade só funciona se as antenas estiverem de fato em posições diferentes.</figcaption>
+  </figure>
+
+  <p>O receptor com <strong>diversidade</strong> (<em>diversity</em>) tem duas antenas e escolhe, a cada instante, a que recebe melhor. Para isso dar certo:</p>
+  <ul>
+    <li>Antenas de vareta no receptor ficam em V, cada uma inclinada cerca de 45° para fora, em posições e ângulos diferentes.</li>
+    <li>Sem encostar uma na outra, em metal ou em parede: um palmo livre em volta.</li>
+    <li>Antenas remotas afastadas entre si pelo menos 30 a 50 cm; um metro ou mais é melhor.</li>
+    <li>Os indicadores A e B devem alternar enquanto a pessoa anda. Se só um acende, a outra antena está solta, quebrada ou mal posicionada.</li>
+  </ul>
+
+  <h3>Perto do palco, à vista, e nem tão perto</h3>
+  <p>O alcance do manual, de 50 a 100 metros, vale em campo aberto. Em sala cheia, conte com bem menos e planeje até uns 30 metros com visada. Perto demais também é ruim: a menos de 3 metros, o transmissor pode saturar o receptor e piorar a intermodulação.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 346" role="img" aria-label="Duas plantas da mesma sala, vistas de cima. À esquerda, o receptor fica no rack ao lado da mesa de som, e o rádio percorre 25 metros por dentro do público: as antenas ficam atrás de metal e de gente, e o sinal falha. À direita, o receptor fica na lateral do palco, com as antenas no alto, a 6 metros do microfone e com visada livre, e um cabo de áudio leva o som à mesa.">
+        <defs><marker id="sf6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="b" x="18" y="28" font-size="13">Receptor longe e escondido</text>
+        <rect class="bx" x="18" y="40" width="410" height="256"/>
+        <rect class="f-sunk" x="38" y="52" width="370" height="56"/>
+        <text class="mu" x="50" y="70" font-size="10.5">palco</text>
+        <circle class="bx-purple" cx="223" cy="84" r="9"/>
+        <text x="238" y="88" font-size="11">microfone</text>
+        <rect class="lv-slate" x="68" y="136" width="186" height="90"/>
+        <text class="mu" x="80" y="154" font-size="10.5">plateia</text>
+        <line class="s-bad dash" x1="226" y1="94" x2="282" y2="248"/>
+        <text class="t-bad b" x="276" y="176" font-size="11">25 m por dentro</text>
+        <text class="t-bad b" x="276" y="191" font-size="11">do público</text>
+        <rect class="bx" x="140" y="248" width="110" height="38"/>
+        <text x="195" y="271" font-size="11" text-anchor="middle">mesa de som</text>
+        <rect class="bx-red" x="268" y="252" width="30" height="30"/>
+        <text class="b" x="306" y="264" font-size="11">receptor</text>
+        <text class="mu" x="306" y="279" font-size="10.5">dentro do rack</text>
+        <text x="18" y="318" font-size="11.5">As antenas ficam atrás de metal e de gente:</text>
+        <text x="18" y="334" font-size="11.5">o sinal chega fraco e falha.</text>
+
+        <text class="b" x="472" y="28" font-size="13">Receptor perto e à vista</text>
+        <rect class="bx" x="472" y="40" width="410" height="256"/>
+        <rect class="f-sunk" x="492" y="52" width="370" height="56"/>
+        <text class="mu" x="504" y="70" font-size="10.5">palco</text>
+        <circle class="bx-purple" cx="657" cy="84" r="9"/>
+        <text x="596" y="88" font-size="11">microfone</text>
+        <rect class="lv-slate" x="522" y="136" width="186" height="90"/>
+        <text class="mu" x="534" y="154" font-size="10.5">plateia</text>
+        <rect class="bx-teal" x="806" y="116" width="30" height="30"/>
+        <line class="s-good" x1="667" y1="87" x2="804" y2="126"/>
+        <text class="t-good b" x="728" y="130" font-size="11">6 m, com</text>
+        <text class="t-good b" x="728" y="145" font-size="11">visada livre</text>
+        <text class="b" x="728" y="176" font-size="11">receptor na lateral</text>
+        <text class="mu" x="728" y="191" font-size="10.5">do palco, com as</text>
+        <text class="mu" x="728" y="205" font-size="10.5">antenas no alto</text>
+        <rect class="bx" x="594" y="248" width="110" height="38"/>
+        <text x="649" y="271" font-size="11" text-anchor="middle">mesa de som</text>
+        <path class="ln" d="M836 131 H866 V267 H708" marker-end="url(#sf6)"/>
+        <text class="mu" x="858" y="258" font-size="10.5" text-anchor="end">cabo de áudio</text>
+        <text x="472" y="318" font-size="11.5">O rádio percorre poucos metros, sem obstáculo.</text>
+        <text x="472" y="334" font-size="11.5">Quem percorre a distância é o cabo de áudio.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 6.</b> A mesma sala, vista de cima. Levar o receptor para perto do palco e trazer o som por cabo de áudio balanceado quase sempre resolve mais do que trocar de frequência ou de equipamento.</figcaption>
+  </figure>
+
+  <h3>Antenas remotas, cabos e distribuidor</h3>
+  <p>Quando o receptor precisa ficar longe ou dentro de um rack, as antenas saem dele: para a frente do rack, com o kit de montagem frontal, ou para pedestais, ligadas por cabo coaxial.</p>
+  <ul>
+    <li><strong>O cabo de antena perde sinal.</strong> Use coaxial de 50 ohms, do tipo indicado pelo fabricante. Em UHF, um cabo fino comum (tipo RG-58) perde de 0,3 a 0,5 dB por metro, conforme a frequência; cabos grossos, de baixa perda, de 0,1 a 0,2 dB por metro. Perder 6 dB no cabo equivale, em campo aberto, a dobrar a distância até o microfone. É melhor esticar o cabo de áudio do que o de antena.</li>
+    <li><strong>Antena direcional</strong> (a “pá”, ou log-periódica) capta mais de frente que de trás. Aponte para a área de uso. Ajuda a compensar o cabo, mas não faz milagre sem visada.</li>
+    <li><strong>O distribuidor de antenas</strong> (<em>splitter</em> ativo) reparte um par de antenas entre quatro ou mais receptores e, em geral, também os alimenta. Acaba com a “floresta” de varetas no rack, em que umas antenas atrapalham as outras. Com três receptores ou mais juntos, é o caminho certo.</li>
+    <li><strong>Amplificador de antena</strong> só serve para compensar a perda de um cabo longo. Sem necessidade, amplifica também o ruído e pode saturar o receptor.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Segurança: antena no alto</h4>
+    <p>Pedestal alto pede base firme e cabo preso, fora da passagem. Para fixar antena em treliça ou parede alta, use escada adequada, com outra pessoa segurando, e cabo de segurança. A rotina de trabalho em altura está no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 5 ============================ -->
+<section id="ajustes">
+  <p class="eyebrow">Módulo 5</p>
+  <h2>Squelch, ganho e pilhas</h2>
+  <p>Com a frequência escolhida e as antenas no lugar, sobram os ajustes do dia a dia: o painel do receptor, o squelch, o ganho do transmissor, a saída do receptor e a energia.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 256" role="img" aria-label="Painel de um receptor, em esquema. Medidor de RF: o rádio que chega; com o transmissor desligado, tem de zerar. Medidor de AF: o áudio que chega; o último segmento é o pico. Indicadores A e B: a antena em uso, que deve alternar. Visor: frequência 538,425 megahertz, grupo e canal, iguais aos do transmissor. Indicador de pilha do transmissor, em alguns sistemas. Botões de scan e sync, que procuram um canal livre e o copiam para o transmissor por infravermelho. Nível de saída: mic ou linha, como a mesa pede.">
+        <text class="b" x="456" y="24" font-size="11.5" text-anchor="middle">A e B: qual antena está em uso</text>
+        <text class="mu" x="456" y="40" font-size="11" text-anchor="middle">Devem alternar enquanto a pessoa anda.</text>
+        <line class="ref" x1="456" y1="46" x2="456" y2="82"/>
+
+        <rect class="bx" x="250" y="60" width="400" height="140"/>
+        <rect class="f-sunk" x="264" y="74" width="220" height="112"/>
+        <text class="mono" x="274" y="96" font-size="10.5">RF</text>
+        <g class="f-purple"><rect x="300" y="87" width="12" height="10"/><rect x="315" y="87" width="12" height="10"/><rect x="330" y="87" width="12" height="10"/><rect x="345" y="87" width="12" height="10"/><rect x="360" y="87" width="12" height="10"/><rect x="375" y="87" width="12" height="10"/></g>
+        <rect class="bx" x="390" y="87" width="12" height="10"/><rect class="bx" x="405" y="87" width="12" height="10"/>
+        <text class="mono" x="274" y="116" font-size="10.5">AF</text>
+        <g class="f-blue"><rect x="300" y="107" width="12" height="10"/><rect x="315" y="107" width="12" height="10"/><rect x="330" y="107" width="12" height="10"/><rect x="345" y="107" width="12" height="10"/><rect x="360" y="107" width="12" height="10"/></g>
+        <rect class="bx" x="375" y="107" width="12" height="10"/><rect class="bx" x="390" y="107" width="12" height="10"/><rect class="bx-red" x="405" y="107" width="12" height="10"/>
+        <rect class="hd-teal" x="436" y="84" width="18" height="18"/>
+        <text class="on b" x="445" y="97" font-size="11" text-anchor="middle">A</text>
+        <rect class="bx" x="458" y="84" width="18" height="18"/>
+        <text class="mu" x="467" y="97" font-size="11" text-anchor="middle">B</text>
+        <text class="b" x="274" y="148" font-size="14">538,425 MHz</text>
+        <text class="mu" x="274" y="172" font-size="11">G 03 · C 07</text>
+        <rect class="bx" x="420" y="158" width="38" height="16"/>
+        <rect class="f-ink" x="458" y="163" width="4" height="6"/>
+        <rect class="f-good" x="424" y="162" width="8" height="8"/><rect class="f-good" x="435" y="162" width="8" height="8"/>
+
+        <rect class="bx" x="500" y="80" width="60" height="26"/>
+        <text x="530" y="97" font-size="11" text-anchor="middle">scan</text>
+        <rect class="bx" x="572" y="80" width="60" height="26"/>
+        <text x="602" y="97" font-size="11" text-anchor="middle">sync</text>
+        <rect class="f-ink" x="500" y="124" width="60" height="14"/>
+        <text class="mu" x="500" y="156" font-size="10.5">infravermelho</text>
+        <circle class="bx" cx="606" cy="152" r="22"/>
+        <line class="ln" x1="606" y1="152" x2="618" y2="138"/>
+
+        <text class="b" x="18" y="86" font-size="11.5">RF: o rádio que chega</text>
+        <text class="mu" x="18" y="101" font-size="11">Transmissor desligado: tem de zerar.</text>
+        <line class="ref" x1="232" y1="90" x2="270" y2="92"/>
+        <text class="b" x="18" y="128" font-size="11.5">AF: o áudio que chega</text>
+        <text class="mu" x="18" y="143" font-size="11">O último segmento é o pico.</text>
+        <line class="ref" x1="180" y1="128" x2="270" y2="113"/>
+        <text class="b" x="18" y="170" font-size="11.5">Frequência, grupo e canal</text>
+        <text class="mu" x="18" y="185" font-size="11">Iguais aos do transmissor.</text>
+        <line class="ref" x1="186" y1="166" x2="270" y2="152"/>
+
+        <text class="b" x="664" y="86" font-size="11.5">Scan e sync</text>
+        <text class="mu" x="664" y="101" font-size="11">Procuram um canal livre e o</text>
+        <text class="mu" x="664" y="115" font-size="11">copiam para o transmissor.</text>
+        <line class="ref" x1="636" y1="92" x2="660" y2="88"/>
+        <text class="b" x="664" y="150" font-size="11.5">Nível de saída</text>
+        <text class="mu" x="664" y="165" font-size="11">Mic ou linha: como a mesa pede.</text>
+        <line class="ref" x1="630" y1="150" x2="660" y2="148"/>
+
+        <line class="ref" x1="440" y1="176" x2="440" y2="214"/>
+        <text class="b" x="440" y="230" font-size="11.5" text-anchor="middle">Pilha do transmissor</text>
+        <text class="mu" x="440" y="245" font-size="11" text-anchor="middle">Aparece só em alguns sistemas.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 7.</b> O painel de um receptor, em esquema. Os nomes e a disposição mudam de um modelo para outro, mas as informações são estas. RF diz se o rádio chega; AF diz se o som chega no nível certo.</figcaption>
+  </figure>
+
+  <h3>Squelch: a porta que fecha o ruído</h3>
+  <p>Sem sinal de rádio, um receptor de FM entrega ruído forte, como o rádio de carro fora de estação. O <strong>squelch</strong> é a porta que fecha a saída de áudio quando o rádio que chega está abaixo de um limiar. Squelch mais alto protege mais contra ruído, mas encurta o alcance: o microfone corta antes. Squelch mais baixo dá mais alcance, mas uma interferência pode abrir a porta e soltar ruído nas caixas. O ajuste de fábrica serve para a maioria dos casos. Se o receptor solta ruído com o transmissor desligado, a correção quase sempre é trocar de frequência, e não subir o squelch.</p>
+
+  <h3>Tom piloto: a senha do transmissor</h3>
+  <p>Muitos sistemas analógicos somam ao som um tom inaudível: o <strong>tom piloto</strong>. O receptor só abre o áudio quando recebe rádio <em>e</em> o tom do seu transmissor, como uma senha: outra emissão sem o tom não abre a porta. O tom também evita o estalo ao ligar e desligar. Nos digitais, um código de identificação faz esse papel. Deixe a função ligada, sabendo que ela não livra a frequência da interferência: o alcance continua menor enquanto o outro sinal estiver lá.</p>
+
+  <h3>Ganho de áudio do transmissor</h3>
+  <p>O transmissor tem o seu próprio ganho de áudio, às vezes chamado de sensibilidade: o primeiro ganho da cadeia. Baixo, deixa o som perto do ruído do enlace. Alto, faz o transmissor limitar e distorcer antes de o som virar rádio, e nada depois conserta.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 254" role="img" aria-label="Três leituras do medidor de áudio do receptor. Ganho do transmissor baixo: dois segmentos acesos, chiado ao fundo, a mesa precisa de ganho demais. Ganho certo: mais da metade acesa, pico apagado. Ganho alto: pico aceso, o transmissor distorce antes do rádio. Embaixo, a ordem do ajuste: ganho do transmissor, saída do receptor em mic ou linha, ganho do canal da mesa pelo PFL.">
+        <defs><marker id="sf8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="b" x="18" y="28" font-size="13">Ganho baixo</text>
+        <g class="f-blue"><rect x="18" y="42" width="24" height="16"/><rect x="46" y="42" width="24" height="16"/></g>
+        <g class="bx"><rect x="74" y="42" width="24" height="16"/><rect x="102" y="42" width="24" height="16"/><rect x="130" y="42" width="24" height="16"/><rect x="158" y="42" width="24" height="16"/><rect x="186" y="42" width="24" height="16"/><rect x="214" y="42" width="24" height="16"/></g>
+        <text class="mono mu" x="18" y="76" font-size="10.5">AF</text>
+        <text class="mu" x="238" y="76" font-size="10.5" text-anchor="end">pico</text>
+        <text x="18" y="100" font-size="11.5">Chiado ao fundo, e a mesa</text>
+        <text x="18" y="116" font-size="11.5">precisa de ganho demais.</text>
+
+        <text class="b" x="318" y="28" font-size="13">Ganho certo</text>
+        <g class="f-blue"><rect x="318" y="42" width="24" height="16"/><rect x="346" y="42" width="24" height="16"/><rect x="374" y="42" width="24" height="16"/><rect x="402" y="42" width="24" height="16"/><rect x="430" y="42" width="24" height="16"/><rect x="458" y="42" width="24" height="16"/></g>
+        <g class="bx"><rect x="486" y="42" width="24" height="16"/><rect x="514" y="42" width="24" height="16"/></g>
+        <text class="mono mu" x="318" y="76" font-size="10.5">AF</text>
+        <text class="mu" x="538" y="76" font-size="10.5" text-anchor="end">pico</text>
+        <text x="318" y="100" font-size="11.5">A voz forte acende mais da</text>
+        <text x="318" y="116" font-size="11.5">metade, e o pico fica apagado.</text>
+
+        <text class="b" x="618" y="28" font-size="13">Ganho alto demais</text>
+        <g class="f-blue"><rect x="618" y="42" width="24" height="16"/><rect x="646" y="42" width="24" height="16"/><rect x="674" y="42" width="24" height="16"/><rect x="702" y="42" width="24" height="16"/><rect x="730" y="42" width="24" height="16"/><rect x="758" y="42" width="24" height="16"/><rect x="786" y="42" width="24" height="16"/></g>
+        <rect class="f-bad" x="814" y="42" width="24" height="16"/>
+        <text class="mono mu" x="618" y="76" font-size="10.5">AF</text>
+        <text class="t-bad b" x="838" y="76" font-size="10.5" text-anchor="end">pico aceso</text>
+        <text x="618" y="100" font-size="11.5">O transmissor distorce antes do</text>
+        <text x="618" y="116" font-size="11.5">rádio: a mesa não conserta.</text>
+
+        <line class="grid" x1="18" y1="140" x2="882" y2="140"/>
+        <text class="mono mu" x="18" y="164" font-size="10.5">A ORDEM DO AJUSTE</text>
+        <rect class="hd-purple" x="18" y="178" width="250" height="56"/>
+        <text class="on b" x="30" y="202" font-size="12">1. Ganho do transmissor</text>
+        <text class="on" x="30" y="220" font-size="10.5">com a voz mais forte do evento</text>
+        <line class="ln" x1="270" y1="206" x2="314" y2="206" marker-end="url(#sf8)"/>
+        <rect class="bx-teal" x="318" y="178" width="250" height="56"/>
+        <text class="b" x="330" y="202" font-size="12">2. Saída do receptor</text>
+        <text class="mu" x="330" y="220" font-size="10.5">mic ou linha, igual à entrada da mesa</text>
+        <line class="ln" x1="570" y1="206" x2="614" y2="206" marker-end="url(#sf8)"/>
+        <rect class="bx" x="618" y="178" width="264" height="56"/>
+        <text class="b" x="630" y="202" font-size="12">3. Ganho do canal da mesa</text>
+        <text class="mu" x="630" y="220" font-size="10.5">pelo medidor, com o PFL</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 8.</b> O medidor de áudio do receptor mostra se o ganho do transmissor está certo. O sistema sem fio acrescenta dois ajustes antes do ganho da mesa, e os três são feitos nessa ordem.</figcaption>
+  </figure>
+
+  <ul>
+    <li><strong>Ajuste com a voz real.</strong> Peça o trecho mais forte: a pregação, e não “alô, som”. Suba o ganho do transmissor até a voz forte acender boa parte do medidor de AF, com o pico apagado ou piscando raramente.</li>
+    <li><strong>Cada fonte pede um ganho.</strong> Uma lapela, longe da boca, pede mais ganho que um microfone de mão cantado de perto. Um instrumento no bodypack pede a posição de instrumento ou um ganho bem menor.</li>
+    <li><strong>Saída do receptor.</strong> A saída XLR costuma ter nível de microfone e vai à entrada de microfone. Em linha, vá à entrada de linha. Linha na entrada de microfone distorce; o contrário chia. Veja o estudo <a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>.</li>
+    <li><strong>Depois, o ganho da mesa,</strong> como em qualquer canal, conforme o estudo <a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>.</li>
+  </ul>
+  <p>O botão de <strong>mudo</strong> (<em>mute</em>) do transmissor corta o som e mantém o rádio ligado: o receptor continua preso ao seu transmissor, sem brecha para ruído. É melhor do que desligar. A <strong>trava</strong> (<em>lock</em>) impede mudar a frequência ou desligar sem querer. Em evento, transmissor ligado e travado, e canal fechado na mesa.</p>
+
+  <h3>Pilhas e baterias</h3>
+  <p>A pilha é a causa mais comum de microfone que “morre” no meio do evento, e a mais fácil de evitar. O transmissor gasta energia o tempo todo em que está ligado, no mudo ou não.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:21%">Tipo</th><th style="width:22%">Autonomia típica</th><th style="width:22%">Medidor do transmissor</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Alcalina AA</strong> (1,5 V)</td><td>6 a 14 horas, conforme o transmissor</td><td>Confiável: a tensão cai aos poucos.</td><td>Nova a cada evento importante; as usadas ficam para os ensaios.</td></tr>
+        <tr><td><strong>NiMH recarregável AA</strong> (1,2 V)</td><td>Parecida quando nova. Cai com a idade.</td><td>Marca menos que a carga real e cai de repente no fim.</td><td>Escolha o tipo de pilha no menu, se houver. Pares da mesma idade.</td></tr>
+        <tr><td><strong>Bateria de lítio do fabricante</strong></td><td>8 horas ou mais</td><td>Preciso, muitas vezes em horas.</td><td>Só com o carregador do sistema. Carregue na véspera.</td></tr>
+        <tr><td><strong>9 V</strong> (transmissores antigos)</td><td>4 a 8 horas com alcalina</td><td>Confiável com alcalina.</td><td>A recarregável de 9 V dura bem menos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul>
+    <li>Saiba, para cada transmissor, quantas horas ele dura com carga completa e quantas já foram usadas. A planilha faz a conta.</li>
+    <li>Planeje com margem: a carga restante deve cobrir uma vez e meia o tempo ligado, contando a passagem de som. É regra prática deste material.</li>
+    <li>Não misture pilha nova com usada, nem tipos diferentes. Tire as pilhas do transmissor que vai ficar guardado.</li>
+    <li>Recarregável velha dura menos que o manual diz. Meça a autonomia real em um ensaio: ligue com carga completa e anote quando desliga.</li>
+  </ul>
+
+  <div class="note">
+    <h4>Segurança: pilhas e ruído repentino</h4>
+    <p>Nunca recarregue pilha alcalina, e não use bateria de lítio estufada, amassada ou quente: há risco de vazamento e de fogo. Descarte em ponto de coleta. Um receptor que perde o transmissor pode soltar uma rajada de ruído forte, que fere a audição de quem usa fone: feche o canal antes de trocar a pilha ou de desligar o transmissor.</p>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 6 ============================ -->
+<section id="interferencia">
+  <p class="eyebrow">Módulo 6</p>
+  <h2>Fontes de interferência</h2>
+  <p>Interferência é qualquer sinal de rádio na frequência do seu microfone que não venha do seu transmissor. Ela não precisa ser mais forte que o microfone: basta elevar o “piso” de ruído do receptor. O efeito mais comum é a perda de alcance: o microfone que funcionava a 30 metros passa a falhar a 10.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:21%">Fonte</th><th style="width:36%">Como atrapalha</th><th>O que fazer</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TV digital</strong></td><td>Ocupa blocos inteiros de 6 MHz em UHF, o tempo todo, com sinal forte.</td><td>Use só os canais de TV livres na sua cidade. Refaça o plano em outra cidade.</td></tr>
+        <tr><td><strong>Telão e iluminação de LED</strong></td><td>Painéis, processadores de vídeo e fontes produzem ruído de rádio em banda larga, forte a curta distância.</td><td>Receptores e antenas a 1 ou 2 metros, no mínimo, nunca atrás do painel. Varredura com o telão ligado. Veja <a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>.</td></tr>
+        <tr><td><strong>Computadores, mesas digitais, fontes</strong></td><td>O mesmo ruído, em menor escala.</td><td>Não empilhe o receptor sobre eles. Afaste as antenas.</td></tr>
+        <tr><td><strong>Wi-Fi e Bluetooth</strong></td><td>Dividem a faixa de 2,4 GHz com os microfones dessa faixa.</td><td>Receptor a 2 ou 3 metros dos roteadores. Se puder, Wi-Fi da equipe em 5 GHz.</td></tr>
+        <tr><td><strong>Outros sistemas sem fio</strong></td><td>O microfone da igreja vizinha, a equipe visitante, o retorno sem fio, os rádios de comunicação.</td><td>Varredura no dia e um plano único para tudo o que transmite no evento.</td></tr>
+        <tr><td><strong>Os seus transmissores</strong></td><td>Intermodulação e frequências próximas demais.</td><td>Mesmo grupo, canais diferentes. Teste com todos ligados.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Do sintoma à causa</h3>
+  <p>O painel do receptor separa os problemas de rádio dos problemas de áudio. Olhe primeiro o medidor de RF e só depois procure a causa.</p>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 900 246" role="img" aria-label="Roteiro de quatro perguntas para achar a causa de uma falha no sem fio. Com o transmissor desligado, o receptor ainda mostra RF? Sim: interferência; refaça a varredura e troque de canal. Não: a falha aparece quando outro transmissor é ligado? Sim: coordenação, frequências próximas ou intermodulação. Não: o RF cai quando a pessoa anda, vira de costas ou se afasta? Sim: antena e posição; dê visada e aproxime o receptor. Não: o RF está cheio, mas o som chia, distorce ou some? Sim: áudio ou pilha.">
+        <defs><marker id="sf9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="ah" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <text class="mono mu" x="18" y="22" font-size="10.5">COMECE PELA ESQUERDA</text>
+
+        <rect class="bx" x="18" y="34" width="192" height="84"/>
+        <text x="30" y="60" font-size="11.5">Com o transmissor</text>
+        <text x="30" y="77" font-size="11.5">desligado, o receptor</text>
+        <text x="30" y="94" font-size="11.5">ainda mostra RF?</text>
+        <line class="ln" x1="212" y1="76" x2="234" y2="76" marker-end="url(#sf9)"/>
+        <text class="mu" x="224" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="114" y1="120" x2="114" y2="146" marker-end="url(#sf9)"/>
+        <text class="mu" x="122" y="137" font-size="10.5">sim</text>
+        <rect class="bx-red" x="18" y="150" width="192" height="78"/>
+        <text class="b" x="30" y="174" font-size="12">Interferência.</text>
+        <text x="30" y="192" font-size="11.5">Refaça a varredura e</text>
+        <text x="30" y="209" font-size="11.5">troque de canal.</text>
+
+        <rect class="bx" x="238" y="34" width="192" height="84"/>
+        <text x="250" y="60" font-size="11.5">A falha aparece quando</text>
+        <text x="250" y="77" font-size="11.5">outro transmissor é</text>
+        <text x="250" y="94" font-size="11.5">ligado?</text>
+        <line class="ln" x1="432" y1="76" x2="454" y2="76" marker-end="url(#sf9)"/>
+        <text class="mu" x="444" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="334" y1="120" x2="334" y2="146" marker-end="url(#sf9)"/>
+        <text class="mu" x="342" y="137" font-size="10.5">sim</text>
+        <rect class="bx-purple" x="238" y="150" width="192" height="78"/>
+        <text class="b" x="250" y="174" font-size="12">Coordenação.</text>
+        <text x="250" y="192" font-size="11.5">Frequências próximas ou</text>
+        <text x="250" y="209" font-size="11.5">intermodulação.</text>
+
+        <rect class="bx" x="458" y="34" width="192" height="84"/>
+        <text x="470" y="60" font-size="11.5">O RF cai quando a</text>
+        <text x="470" y="77" font-size="11.5">pessoa anda, vira de</text>
+        <text x="470" y="94" font-size="11.5">costas ou se afasta?</text>
+        <line class="ln" x1="652" y1="76" x2="674" y2="76" marker-end="url(#sf9)"/>
+        <text class="mu" x="664" y="68" font-size="10.5" text-anchor="middle">não</text>
+        <line class="ln" x1="554" y1="120" x2="554" y2="146" marker-end="url(#sf9)"/>
+        <text class="mu" x="562" y="137" font-size="10.5">sim</text>
+        <rect class="bx-teal" x="458" y="150" width="192" height="78"/>
+        <text class="b" x="470" y="174" font-size="12">Antena e posição.</text>
+        <text x="470" y="192" font-size="11.5">Dê visada e aproxime</text>
+        <text x="470" y="209" font-size="11.5">o receptor do palco.</text>
+
+        <rect class="bx" x="678" y="34" width="192" height="84"/>
+        <text x="690" y="60" font-size="11.5">O RF está cheio, mas o</text>
+        <text x="690" y="77" font-size="11.5">som chia, distorce ou</text>
+        <text x="690" y="94" font-size="11.5">some?</text>
+        <line class="ln" x1="774" y1="120" x2="774" y2="146" marker-end="url(#sf9)"/>
+        <text class="mu" x="782" y="137" font-size="10.5">sim</text>
+        <rect class="bx-amber" x="678" y="150" width="192" height="78"/>
+        <text class="b" x="690" y="174" font-size="12">Áudio ou pilha.</text>
+        <text x="690" y="192" font-size="11.5">Pilha, ganho, cabo da</text>
+        <text x="690" y="209" font-size="11.5">lapela, saída do receptor.</text>
+      </svg>
+    </div>
+    <figcaption><b>Figura 9.</b> Onde está a falha. As três primeiras perguntas são de rádio, e a resposta aparece no medidor de RF. A quarta é de áudio e de energia: o rádio está bem, e o problema viaja dentro dele.</figcaption>
+  </figure>
+
+  <p>Estalos e cortes quando a pessoa mexe o corpo, com o RF cheio, costumam ser mau contato no cabo da lapela ou do headset: troque o microfone e prenda o cabo com folga. A tabela de sintomas está na aba Referência da planilha. E o apito quando o pregador caminha para a frente das caixas não é falha de rádio: é assunto do estudo <a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 7 ============================ -->
+<section id="passo">
+  <p class="eyebrow">Módulo 7</p>
+  <h2>Passo a passo</h2>
+  <p>A rotina abaixo é para o dia do evento, a partir da montagem. Com o sistema já instalado e o plano de frequências anotado, os passos 3 a 5 viram uma conferência rápida. Não os pule: o que estava livre na semana passada pode não estar hoje.</p>
+  <ol class="steps">
+    <li><h4>Cuide da energia na véspera</h4><p>Baterias no carregador, pilhas novas separadas, uma reserva por transmissor. Anote as horas de uso na planilha e troque o que ela mandar.</p></li>
+    <li><h4>Posicione receptores e antenas</h4><p>Perto do palco, à vista da área de uso, acima das cabeças, longe de telão, computadores e roteadores. Antenas em V, fora do rack. Som à mesa por cabo de áudio.</p></li>
+    <li><h4>Faça a varredura com os transmissores desligados</h4><p>Ligue os receptores e tudo o que estará ligado no evento: telão, luz, vídeo, retorno sem fio. Nenhum receptor deve mostrar RF. Faça a varredura e escolha o grupo com mais canais livres.</p></li>
+    <li><h4>Distribua os canais e sincronize</h4><p>Mesmo grupo, um canal por sistema, um transmissor por vez. Anote sistema, usuário, grupo, canal e frequência na planilha e veja se ela aponta alerta.</p></li>
+    <li><h4>Ligue todos e desligue um de cada vez</h4><p>Com todos ligados, no palco e afastados entre si, desligue o primeiro: o receptor dele deve ficar sem RF. Se mostra sinal, os outros criam um produto nessa frequência: troque o canal. Repita com o seguinte.</p></li>
+    <li><h4>Ajuste o áudio, na ordem</h4><p>Ganho do transmissor com a voz mais forte, sem acender o pico. Saída do receptor de acordo com a entrada da mesa. Por último, o ganho do canal.</p></li>
+    <li><h4>Faça o teste de caminhada</h4><p>Uma pessoa anda por toda a área de uso falando sem parar, vira de costas e cobre o transmissor com o corpo. Outra olha o RF e os indicadores A e B e ouve no fone. Marque onde falha e corrija as antenas.</p></li>
+    <li><h4>Identifique e trave</h4><p>Nome do usuário no transmissor e no canal da mesa. Trava ligada. Mostre a quem vai usar onde fica o mudo e peça para não desligar.</p></li>
+    <li><h4>Deixe o plano B pronto</h4><p>Microfone com fio ligado, testado e fechado na mesa, a um passo de quem fala, e pilhas reservas ao lado da mesa.</p></li>
+    <li><h4>Durante o evento, olhe o painel</h4><p>Confira de tempos em tempos o RF e a pilha de cada sistema. Canal fechado quando o microfone não está em uso. No fim, baterias no carregador e horas anotadas.</p></li>
+  </ol>
+
+  <h3>O plano B com fio</h3>
+  <p>Nenhum cuidado garante o rádio em todas as situações: um carro de reportagem para na rua, a pilha tem defeito, o transmissor cai. O que garante o evento é um caminho que não depende de rádio.</p>
+  <ul>
+    <li><strong>Microfone com fio pronto,</strong> no púlpito ou ao lado, com cabo que chegue a quem fala, ganho ajustado e canal fechado. Para usar, basta abrir o fader.</li>
+    <li><strong>Um responsável</strong> perto do palco, que sabe que levar o microfone é tarefa dele e conhece o sinal combinado com o operador.</li>
+    <li><strong>Um segundo sem fio, se houver,</strong> em outra frequência do plano, ligado e fechado. Resolve a pilha que acabou, mas não a interferência que derruba a faixa inteira.</li>
+  </ul>
+  <p>A lista do material de emergência e o roteiro de quem faz o quê estão no estudo <a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>. O lugar do teste dos microfones na ordem da passagem está no estudo <a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>.</p>
+</section>
+
+<!-- ============================ MÓDULO 8 ============================ -->
+<section id="exemplos">
+  <p class="eyebrow">Módulo 8</p>
+  <h2>Exemplos resolvidos</h2>
+  <p>Três situações comuns. Os cenários e os números são ilustrativos e foram criados para este treinamento. O primeiro está preenchido na planilha de apoio.</p>
+
+  <h3>Exemplo 1. Seis microfones “organizados” de meio em meio megahertz</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Igreja de 200 lugares, seis sistemas UHF de duas linhas, com frequências digitadas à mão anos atrás.</dd></div>
+    <div><dt>Sintoma</dt><dd>Com um ou dois microfones, tudo funciona. Com os seis ligados, chiados e quedas. O do dirigente sempre teve alcance curto.</dd></div>
+    <div><dt>Causa</dt><dd>Espaçamento igual, duas frequências a 0,15 MHz e uma em canal de TV ativo.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Plano na planilha, varredura e novo plano em canais de TV livres, com espaçamento desigual.</dd></div>
+    <div><dt>Resultado</dt><dd>Seis sistemas sem alerta. Cada receptor fica sem RF quando o seu transmissor é desligado.</dd></div>
+  </dl>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:21%">Sistema</th><th class="n" style="width:11%">Antes (MHz)</th><th style="width:12%">Situação</th><th>O que a planilha apontou</th><th class="n" style="width:12%">Depois (MHz)</th></tr></thead>
+      <tbody>
+        <tr><td>1. Pastor (headset)</td><td class="num n">530,000</td><td class="amber">Intermod.</td><td>Produto de 2 e 3: 2 × 530,500 − 531,000 = 530,000.</td><td class="num n">534,850</td></tr>
+        <tr><td>2. Cantora</td><td class="num n">530,500</td><td class="amber">Intermod.</td><td>Produto de 3 e 4.</td><td class="num n">535,575</td></tr>
+        <tr><td>3. Voz de apoio 1</td><td class="num n">531,000</td><td class="amber">Intermod.</td><td>Produto de 2 e 1.</td><td class="num n">536,000</td></tr>
+        <tr><td>4. Voz de apoio 2</td><td class="num n">531,500</td><td class="red">Próxima</td><td>A 0,150 MHz do sistema 6 (mínimo: 0,35).</td><td class="num n">536,575</td></tr>
+        <tr><td>5. Dirigente do louvor</td><td class="num n">520,300</td><td class="amber">TV</td><td>No canal de TV 22 (518 a 524 MHz), ativo.</td><td class="num n">537,475</td></tr>
+        <tr><td>6. Reserva e avisos</td><td class="num n">531,650</td><td class="red">Próxima</td><td>A 0,150 MHz do sistema 4.</td><td class="num n">537,950</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>O que observar.</strong> Nenhuma frequência se repetia, e por isso o plano parecia certo. O defeito só aparecia com vários transmissores ligados, que é quando a intermodulação existe. O novo plano usa os canais de TV 24 e 25, livres na varredura, com distâncias desiguais: 0,725, 0,425, 0,575, 0,900 e 0,475 MHz. Com duas linhas, os grupos de fábrica não serviam para todos: a conta foi feita na planilha e confirmada desligando um transmissor de cada vez. No equipamento real, cada frequência precisa existir na banda e no passo de sintonia do aparelho.</p>
+
+  <h3>Exemplo 2. O microfone que falha quando o orador desce do palco</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Formatura no auditório de uma escola. Um microfone de mão UHF. O receptor fica no rack de metal ao lado da mesa, no fundo da sala, a 25 metros do palco.</dd></div>
+    <div><dt>Sintoma</dt><dd>No ensaio, com a sala vazia, funcionou. Com o auditório cheio e as pessoas de pé, o som corta quando o orador anda ou desce à plateia.</dd></div>
+    <div><dt>Causa</dt><dd>Antenas dentro do rack, na altura da cintura, atrás do público. O medidor de RF mostrava um ou dois segmentos, e só o indicador A acendia.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Receptor levado para a lateral do palco, sobre um móvel a 2 metros de altura, com as antenas em V. Som levado à mesa por um cabo de microfone de 30 metros.</dd></div>
+    <div><dt>Resultado</dt><dd>RF quase cheio em todo o auditório, indicadores A e B alternando, nenhuma falha no teste de caminhada.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> A frequência estava certa, e trocá-la não resolveria nada. O teste com a sala vazia enganou: o público muda o caminho do rádio. A distância caiu de 25 para cerca de 6 metros, com visada, e o cabo de áudio balanceado percorre 30 metros sem perda que se note. O indicador B apagado era uma pista: a segunda antena estava encostada no metal do rack.</p>
+
+  <h3>Exemplo 3. A lapela que morreu aos 50 minutos de pregação</h3>
+  <dl class="ficha">
+    <div><dt>Cenário</dt><dd>Culto de domingo. Transmissor de cinto com lapela e duas pilhas NiMH com três anos de uso.</dd></div>
+    <div><dt>Sintoma</dt><dd>O indicador mostrava dois de três traços no começo. Aos 50 minutos de pregação, o som sumiu de uma vez.</dd></div>
+    <div><dt>Causa</dt><dd>Pilhas usadas no ensaio de quinta e não recarregadas. O medidor, feito para alcalina, não mostra bem a carga da NiMH, que cai de repente no fim.</dd></div>
+    <div><dt>O que foi feito</dt><dd>Na hora: o auxiliar levou ao pastor o microfone com fio do púlpito, e o operador abriu o canal. Depois: controle de horas na planilha e teste da autonomia real.</dd></div>
+    <div><dt>Resultado</dt><dd>Menos de dez segundos sem som. O teste mostrou 4 horas e meia de autonomia, e não as 8 do manual. As pilhas foram trocadas.</dd></div>
+  </dl>
+  <p><strong>O que observar.</strong> O transmissor ficou ligado 2 horas no ensaio e mais 2 horas e meia no domingo antes de parar. A planilha teria avisado: autonomia de 4,5 horas, 2 já usadas, 2,5 restantes, para 3 horas de evento. A folga é negativa, e a situação fica em Trocar. A falha não virou desastre porque o plano B estava montado e tinha dono.</p>
+</section>
+
+<!-- ============================ MÓDULO 9 ============================ -->
+<section id="erros">
+  <p class="eyebrow">Módulo 9</p>
+  <h2>Erros comuns</h2>
+  <div class="errs">
+    <div><h4>Escolher as frequências “no olho”</h4><p>Frequências de meio em meio megahertz, ou um sistema em cada grupo.</p><p class="fix"><b>Correção:</b> mesmo grupo, canais diferentes. Com linhas misturadas, confira o plano na planilha.</p></div>
+    <div><h4>Varredura com os transmissores ligados</h4><p>O receptor vê os próprios microfones como ocupação e descarta os melhores canais.</p><p class="fix"><b>Correção:</b> transmissores desligados e todo o resto ligado; depois, um sistema por vez.</p></div>
+    <div><h4>Esconder o receptor</h4><p>Receptor no rack fechado, embaixo da mesa ou atrás do telão, com as antenas dobradas.</p><p class="fix"><b>Correção:</b> antenas no alto, em V, à vista da área de uso. Se preciso, receptor no palco e som por cabo.</p></div>
+    <div><h4>Confiar na pilha “que ainda tem carga”</h4><p>A pilha do domingo passado volta ao palco e apaga no meio do evento.</p><p class="fix"><b>Correção:</b> pilha nova ou carga completa a cada evento, horas anotadas e reserva ao lado da mesa.</p></div>
+    <div><h4>Deixar o ganho do transmissor como veio</h4><p>A lapela chia, ou a voz forte distorce, e o operador procura o defeito na mesa.</p><p class="fix"><b>Correção:</b> ganho do transmissor com a voz real, pelo medidor de AF, antes do ganho da mesa.</p></div>
+    <div><h4>Testar com a sala vazia e parado</h4><p>No evento, a pessoa anda, e o público fica no caminho.</p><p class="fix"><b>Correção:</b> teste de caminhada por toda a área de uso, com o corpo entre o transmissor e as antenas.</p></div>
+    <div><h4>Usar equipamento da faixa errada</h4><p>Sistema antigo ou importado por conta própria na faixa da telefonia ou em faixa não permitida.</p><p class="fix"><b>Correção:</b> confira a banda na etiqueta, a regulamentação vigente e a homologação.</p></div>
+    <div><h4>Não ter plano B</h4><p>O único microfone do pregador é sem fio. Quando falha, o evento para.</p><p class="fix"><b>Correção:</b> microfone com fio ligado, testado e fechado na mesa, com um responsável.</p></div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 10 ============================ -->
+<section id="ligacoes">
+  <p class="eyebrow">Módulo 10</p>
+  <h2>Ligação com os outros estudos</h2>
+  <p>O sistema sem fio substitui um cabo. Tudo o que vale para o microfone e para o canal continua valendo. O que este estudo acrescenta é o trecho de rádio no meio do caminho.</p>
+  <div class="pair">
+    <div class="box">
+      <h4>De onde este estudo recebe</h4>
+      <ul>
+        <li><a href="../Som-e-Sinal/treinamento-som-e-sinal.html">Som, frequência e decibel</a>: o decibel e a regra da distância.</li>
+        <li><a href="../Cabos-e-Conexoes/treinamento-cabos-e-conexoes.html">Cabos, conectores e níveis de sinal</a>: nível de microfone e de linha e o cabo balanceado até a mesa.</li>
+        <li><a href="../Microfones/treinamento-microfones.html">Microfones</a>: lapela, headset, microfone de mão e a posição em relação à boca.</li>
+        <li><a href="../Mesa-de-Som/treinamento-mesa-de-som.html">A mesa de som e o caminho do sinal</a>: o canal que recebe o receptor.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>Para quem este estudo entrega</h4>
+      <ul>
+        <li><a href="../Ganho-e-Fader/treinamento-ganho-e-fader.html">Ganho e fader</a>: o ganho da mesa vem depois do ganho do transmissor.</li>
+        <li><a href="../Microfonia/treinamento-microfonia.html">Microfonia</a>: o microfone sem fio pode passar na frente das caixas.</li>
+        <li><a href="../Monitores-e-Retornos/treinamento-monitores-e-retornos.html">Monitores e retornos</a>: o in-ear sem fio entra no mesmo plano de frequências.</li>
+        <li><a href="../Passagem-de-Som/treinamento-passagem-de-som.html">Passagem de som e mixagem ao vivo</a>: o teste de RF faz parte da conferência de linhas.</li>
+        <li><a href="../Projecao-e-Midia/treinamento-projecao-e-midia.html">Projeção, telão e mídia</a>: o telão de LED é fonte de ruído de rádio.</li>
+        <li><a href="../Transmissao-ao-Vivo/treinamento-transmissao-ao-vivo.html">Transmissão ao vivo</a>: a queda do microfone vai ao ar, e o Wi-Fi disputa os 2,4 GHz.</li>
+        <li><a href="../Operacao-do-Evento/treinamento-operacao-do-evento.html">Operação do evento</a>: pilhas, reservas e microfone com fio no kit de emergência.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MÓDULO 11 ============================ -->
+<section id="checklist-sec">
+  <p class="eyebrow">Módulo 11</p>
+  <h2>Checklist</h2>
+  <p>Confira na montagem, antes de abrir as portas. As marcações ficam salvas neste navegador.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox" id="ck1"><span>Todos os transmissores têm pilhas novas ou baterias com carga completa, e há reservas ao lado da mesa.</span></label></li>
+    <li><label><input type="checkbox" id="ck2"><span>Os receptores estão perto do palco, com as antenas à vista da área de uso e fora de rack fechado.</span></label></li>
+    <li><label><input type="checkbox" id="ck3"><span>As antenas estão em V, sem encostar em metal nem uma na outra, longe de telão de LED, computador e roteador.</span></label></li>
+    <li><label><input type="checkbox" id="ck4"><span>A varredura foi feita com os transmissores desligados e com telão, luz e demais equipamentos ligados.</span></label></li>
+    <li><label><input type="checkbox" id="ck5"><span>Os sistemas da mesma linha usam o mesmo grupo, cada um em um canal diferente.</span></label></li>
+    <li><label><input type="checkbox" id="ck6"><span>Nenhuma frequência se repete, fica perto demais de outra ou cai em canal de TV ativo: a planilha não mostra alerta.</span></label></li>
+    <li><label><input type="checkbox" id="ck7"><span>Cada transmissor foi sincronizado com o seu receptor e identificado com o nome de quem usa.</span></label></li>
+    <li><label><input type="checkbox" id="ck8"><span>Com todos ligados, desligar um transmissor de cada vez deixa o receptor dele sem RF.</span></label></li>
+    <li><label><input type="checkbox" id="ck9"><span>O ganho de cada transmissor foi ajustado com a voz mais forte do evento, sem acender o pico.</span></label></li>
+    <li><label><input type="checkbox" id="ck10"><span>A saída do receptor (mic ou linha) combina com a entrada da mesa, e o ganho do canal foi ajustado.</span></label></li>
+    <li><label><input type="checkbox" id="ck11"><span>O teste de caminhada cobriu toda a área de uso, sem falhas.</span></label></li>
+    <li><label><input type="checkbox" id="ck12"><span>Há um microfone com fio ligado, testado e fechado na mesa, e a equipe sabe quem o leva ao palco.</span></label></li>
+  </ul>
+  <div class="bar"><span><b id="ck-count">0</b> de <b id="ck-total">12</b> itens marcados</span><button class="btn" id="ck-reset" type="button">Limpar marcações</button></div>
+</section>
+
+<!-- ============================ MÓDULO 12 ============================ -->
+<section id="pratique">
+  <p class="eyebrow">Módulo 12</p>
+  <h2>Pratique</h2>
+  <h3>Exercício 1. Onde está a causa?</h3>
+  <p>Cada frase descreve uma falha em um microfone sem fio. Escolha onde você procuraria primeiro: <strong>F</strong>, frequência e coordenação; <strong>A</strong>, antena e posição; <strong>G</strong>, ganho de áudio e nível de saída; <strong>P</strong>, pilha.</p>
+  <div class="quiz" id="quiz"></div>
+  <div class="bar"><span>Acertos: <b id="qz-score">0</b> de <b id="qz-total">10</b></span><span>Respondidos: <b id="qz-done">0</b></span><button class="btn" id="qz-reset" type="button">Recomeçar</button></div>
+  <script type="application/json" id="quiz-data">
+{"opcoes": {"F": "Frequência e coordenação", "A": "Antena e posição", "G": "Ganho de áudio e nível de saída", "P": "Pilha"},
+ "itens": [
+  {"t": "Com o transmissor desligado, o medidor de RF do receptor mostra três segmentos, e às vezes sai ruído nas caixas.", "a": "F", "w": "Há outra emissão nessa frequência. Refaça a varredura e troque de canal."},
+  {"t": "O som corta por um instante sempre que o pregador vira de costas para o fundo da sala, onde está o receptor.", "a": "A", "w": "O corpo ficou entre o transmissor e as antenas. Dê visada: receptor perto do palco, antenas no alto."},
+  {"t": "O RF está cheio, mas a voz distorce nas frases fortes, e a luz de pico do receptor acende.", "a": "G", "w": "O ganho do transmissor está alto. Baixe até o pico apagar e refaça o ganho da mesa."},
+  {"t": "O microfone funcionou bem na passagem e no louvor e sumiu de uma vez depois de duas horas ligado.", "a": "P", "w": "Queda total depois de um tempo de uso é pilha, até prova em contrário. Controle as horas e troque antes."},
+  {"t": "O microfone 3 chia e falha, mas só quando os microfones 1 e 2 estão ligados ao mesmo tempo.", "a": "F", "w": "É intermodulação: o produto de 1 e 2 cai na frequência do 3. Ponha os três no mesmo grupo."},
+  {"t": "O receptor fica dentro do rack, e só o indicador da antena A acende; o microfone falha além de dez metros.", "a": "A", "w": "As antenas estão dentro de uma caixa de metal, e uma delas nem recebe. Tire as antenas do rack."},
+  {"t": "A lapela tem um chiado de fundo constante. O RF está cheio, e o medidor de áudio do receptor mal acende.", "a": "G", "w": "O ganho do transmissor está baixo, e o som viaja perto do ruído do enlace. Suba o ganho do transmissor."},
+  {"t": "Na igreja o sistema funciona bem. Levado a um evento em outra cidade, tem alcance de poucos metros em qualquer posição.", "a": "F", "w": "Na outra cidade, a frequência deve estar dentro de um canal de TV ativo. Faça a varredura no local."},
+  {"t": "Com a sala vazia não houve falha. Com o público de pé, o microfone corta quando o cantor vai para a ponta do palco.", "a": "A", "w": "O público virou obstáculo. Antenas acima das cabeças e mais perto do palco."},
+  {"t": "O indicador do transmissor com pilhas recarregáveis mostrava dois traços no início; no meio da palestra, o som acabou.", "a": "P", "w": "O medidor não mostra bem a carga da recarregável. Use carga completa a cada evento e anote as horas."}
+ ]}
+  </script>
+
+  <h3>Exercício 2. Na bancada: conheça o seu sistema</h3>
+  <p>Você vai precisar de um sistema sem fio, de um segundo sistema, se houver, de um fone ligado à mesa e da planilha. Faça com as caixas fechadas.</p>
+  <ol>
+    <li>Leia as etiquetas do transmissor e do receptor. A banda e a faixa são iguais? A faixa é permitida no seu local?</li>
+    <li>Com o transmissor desligado, ligue o receptor. O RF está vazio? Faça a varredura e anote grupo, canal e frequência na aba “Plano de frequências”.</li>
+    <li>Sincronize o transmissor. Ligue e desligue algumas vezes, olhando o RF e ouvindo no fone: há estalo ao desligar?</li>
+    <li>Fale forte e ajuste o ganho do transmissor até o pico de áudio do receptor quase acender. Anote a posição. Depois, o ganho da mesa.</li>
+    <li>Ande pela sala falando, com outra pessoa olhando o painel. Cubra a antena com a mão, vire de costas, saia pela porta. Anote onde o RF cai e se A e B alternam, na aba “Teste de RF”.</li>
+    <li>Dobre uma antena do receptor para baixo, ou encoste-a em metal, e repita a caminhada. Compare. Volte ao V.</li>
+    <li>Com um segundo sistema: ponha os dois na mesma frequência por um instante e ouça. Depois, mesmo grupo e canais diferentes, e digite as duas frequências na planilha.</li>
+    <li>Preencha a aba “Pilhas e baterias”. Em um ensaio, meça a autonomia real: ligue com carga completa e anote quando o transmissor desliga.</li>
+  </ol>
+  <p>Guarde as anotações: o plano que funcionou, os pontos em que o sinal caiu e a autonomia real das pilhas são o ponto de partida do próximo evento.</p>
+</section>
+
+<!-- ============================ MÓDULO 13 ============================ -->
+<section id="planilha">
+  <p class="eyebrow">Módulo 13</p>
+  <h2>A planilha de apoio</h2>
+  <p>Este treinamento acompanha o arquivo <a href="Microfones-sem-Fio-modelo.xlsx">Microfones-sem-Fio-modelo.xlsx</a>, que fica na mesma pasta. As células em amarelo-claro são para preenchimento. As células cinza são calculadas.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Aba</th><th>Para que serve</th><th style="width:40%">O que ela calcula</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instruções</strong></td><td>Legenda de cores, ordem de preenchimento e regras do modelo.</td><td>Nada. É só leitura.</td></tr>
+        <tr><td><strong>Plano de frequências</strong></td><td>Até 16 sistemas: receptor, usuário, tipo de transmissor, faixa, grupo, canal e frequência. No alto, os canais de TV ativos na cidade.</td><td>Canal de TV em que cada frequência cai, distância até a frequência mais próxima, produtos de intermodulação por perto e a situação: OK, Repetida, Próxima, TV, Telefonia ou Intermod.</td></tr>
+        <tr><td><strong>Teste de RF</strong></td><td>Os cinco testes de cada sistema do plano, respondidos com Sim ou Não.</td><td>Situação de cada sistema (OK, Interferência, Intermod., Antena, Falha, Ganho alto) e o que fazer.</td></tr>
+        <tr><td><strong>Pilhas e baterias</strong></td><td>Tipo de pilha, autonomia e horas já usadas de cada transmissor.</td><td>Carga restante, folga para as horas do evento, situação (OK, Atenção, Trocar) e a quantidade de pilhas a separar.</td></tr>
+        <tr><td><strong>Referência</strong></td><td>Faixas, valores de partida da coordenação, antenas, pilhas e tabela de sintomas.</td><td>Nada. É para consulta rápida.</td></tr>
+        <tr><td><strong>Checklist</strong></td><td>Os mesmos 12 itens do módulo 11, com situação Sim, Parcial ou Não.</td><td>Percentual atendido e situação.</td></tr>
+        <tr><td><strong>Exemplo - Plano</strong></td><td>Os seis sistemas do exemplo 1, com as frequências antigas, e o que foi ajustado.</td><td>Os mesmos resultados da aba Plano de frequências.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>A distância mínima, a margem de intermodulação e a faixa a evitar ficam no alto da aba do plano e podem ser trocadas pelos valores do seu manual. A conferência é um primeiro filtro: não substitui os grupos do fabricante, o programa de coordenação nem o teste com todos os transmissores ligados.</p>
+</section>
+
+<!-- ============================ GLOSSÁRIO ============================ -->
+<section id="glossario">
+  <p class="eyebrow">Referência</p>
+  <h2>Glossário</h2>
+  <dl class="gloss">
+    <div><dt>Banda (faixa de sintonia)</dt><dd>Pedaço da faixa de UHF que um aparelho cobre. Transmissor e receptor têm de ser da mesma banda.</dd></div>
+    <div><dt>Bodypack</dt><dd>Transmissor de cinto, ligado por cabo a uma lapela, a um headset ou a um instrumento.</dd></div>
+    <div><dt>Canal</dt><dd>Uma frequência da lista gravada no aparelho. Cada sistema usa um canal diferente.</dd></div>
+    <div><dt>Canal físico de TV</dt><dd>Bloco de 6 MHz em que a emissora de fato transmite. Não é o número que aparece na tela.</dd></div>
+    <div><dt>Diversidade (diversity)</dt><dd>Recepção com duas antenas, em que o receptor usa a que está melhor a cada instante.</dd></div>
+    <div><dt>Grupo</dt><dd>Conjunto de canais que o fabricante calculou para funcionarem juntos sem intermodulação.</dd></div>
+    <div><dt>Intermodulação</dt><dd>Criação de frequências novas pela combinação de dois ou mais transmissores ligados.</dd></div>
+    <div><dt>Linha de visada</dt><dd>Caminho livre, em linha reta, entre a antena do transmissor e a do receptor.</dd></div>
+    <div><dt>Ponto surdo (dropout)</dt><dd>Lugar em que a onda direta e a refletida se cancelam, e o sinal some por um instante.</dd></div>
+    <div><dt>RF</dt><dd>Radiofrequência. A parte de rádio do sistema e, no painel, o medidor da força do sinal recebido.</dd></div>
+    <div><dt>Sincronização (sync)</dt><dd>Cópia da frequência do receptor para o transmissor, em geral por infravermelho.</dd></div>
+    <div><dt>Squelch</dt><dd>Porta que fecha o áudio do receptor quando o sinal de rádio está abaixo de um limiar.</dd></div>
+    <div><dt>Tom piloto</dt><dd>Tom inaudível enviado pelo transmissor. O receptor só abre o áudio quando o recebe.</dd></div>
+    <div><dt>Varredura (scan)</dt><dd>Função em que o receptor mede o que já existe no ar e indica as frequências livres.</dd></div>
+  </dl>
+</section>
+
+</main>
+</div>
+
+<footer>Material de estudo. Os exemplos e os valores são ilustrativos e servem de ponto de partida. Confira sempre o manual do seu equipamento e a regulamentação vigente no seu local.</footer>

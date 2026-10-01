@@ -1,0 +1,12 @@
+# ambiente e arquivos temporários do Python
+_geradores/.venv/
+__pycache__/
+*.pyc
+
+# arquivos de bloqueio do Excel e do LibreOffice
+~$*
+.~lock.*#
+
+# vínculo local com a Vercel
+.vercel
+.env*
